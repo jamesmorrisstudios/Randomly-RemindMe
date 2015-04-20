@@ -27,12 +27,14 @@ import jamesmorrisstudios.com.randremind.R;
  *
  * Created by James on 4/20/2015.
  */
-public class MainActivity extends BaseActivity {
+public final class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loadMainListFragment();
     }
 
 
@@ -51,7 +53,7 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_help) {
             return true;
         }
 

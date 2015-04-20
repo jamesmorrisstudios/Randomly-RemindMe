@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -31,7 +32,10 @@ import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
  *
  * Created by James on 4/20/2015.
  */
-public class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends ActionBarActivity implements
+        MainListFragment.OnFragmentInteractionListener,
+        HelpFragment.OnFragmentInteractionListener,
+        AddReminderFragment.OnFragmentInteractionListener {
 
     protected final HelpFragment getHelpFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -91,4 +95,8 @@ public class BaseActivity extends ActionBarActivity {
         return fragment.isAdded() && !fragment.isDetached() && !fragment.isRemoving();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

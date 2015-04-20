@@ -29,7 +29,7 @@ import jamesmorrisstudios.com.randremind.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainListFragment extends Fragment {
+public final class MainListFragment extends Fragment {
     public static final String TAG = "MainListFragment";
 
 
