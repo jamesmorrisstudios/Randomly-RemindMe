@@ -17,7 +17,6 @@
 package jamesmorrisstudios.com.randremind.fragments;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,17 +24,26 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.materialdesign.views.ButtonFloat;
+import com.squareup.otto.Subscribe;
 import com.tonicartos.superslim.LayoutManager;
+
+import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderContainer;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.utilities.Bus;
 import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
@@ -48,7 +56,6 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ReminderAdapter mAdapter = null;
     private TextView noDataText;
-    private ButtonFloat addNewButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,25 +66,50 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                mListener.onHelpClicked();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Bus.register(this);
         View view = inflater.inflate(R.layout.fragment_main_list, container, false);
-        addNewButton = (ButtonFloat) view.findViewById(R.id.buttonAddNew);
+        ButtonFloat addNewButton = (ButtonFloat) view.findViewById(R.id.buttonAddNew);
         addNewButton.setBackgroundColor(getResources().getColor(R.color.primaryColorAccent));
+        addNewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onAddNewClicked();
+            }
+        });
         noDataText = (TextView) view.findViewById(R.id.empty_view);
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (!isRefreshing) {
                     //Force a refresh on reminder data
                     isRefreshing = true;
-                    //TODO load the saved reminders
+                    ReminderList.getInstance().loadData(true);
                 }
             }
         });
@@ -111,7 +143,28 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         mAdapter.setMarginsFixed(mAreMarginsFixed);
         mAdapter.setHeaderDisplay(mHeaderDisplay);
         mViews.setAdapter(mAdapter);
-        //TODO load the data to display
+        ReminderList.getInstance().loadData(false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Bus.unregister(this);
+    }
+
+    @Subscribe
+    public final void onEvent(Bus.Event event) {
+        switch(event) {
+            case DATA_LOAD_PASS:
+                applyItems();
+                endRefresh();
+                break;
+            case DATA_LOAD_FAIL:
+                Utils.toastLong(getResources().getString(R.string.data_load_fail));
+                showNoDataText();
+                endRefresh();
+                break;
+        }
     }
 
     /**
@@ -119,10 +172,15 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
      */
     private void applyItems() {
         if(mAdapter != null) {
-            //TODO
-
-
+            ArrayList<ReminderItem> data = ReminderList.getInstance().getData();
+            if(data.isEmpty()) {
+                showNoDataText();
+            } else {
+                //TODO
+                hideNoDataText();
+            }
         }
+        showNoDataText();
     }
 
     /**
@@ -175,7 +233,8 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
      * activity.
      */
     public interface OnFragmentInteractionListener {
-        //TODO add to this
+        void onAddNewClicked();
+        void onHelpClicked();
     }
 
     /**

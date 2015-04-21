@@ -14,19 +14,155 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.jamesmorrisstudios.materialdesign.views.ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    tools:context=".MainActivityFragment"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivityFragment">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <!-- How To Use  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/help_how_to_use_header"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white80"
+            android:textSize="@dimen/header_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white15" />
+
+        <com.jamesmorrisstudios.materialdesign.views.ButtonFlat
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:id="@+id/howToUseRead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/item_size"
+            android:background="@color/white80"
+            android:text="@string/help_how_to_use_read" />
+
+        <com.jamesmorrisstudios.materialdesign.views.ButtonFlat
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:id="@+id/howToUseWatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/item_size"
+            android:background="@color/white80"
+            android:text="@string/help_how_to_use_watch" />
+
+        <!-- About  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/help_about"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white80"
+            android:textSize="@dimen/header_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white15" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/help_studio"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white80"
+            android:textSize="@dimen/item_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:autoLink="web|email"
+            android:gravity="center_horizontal"
+            android:text="@string/help_studio_email"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white80"
+            android:textColorLink="@color/primaryColorAccent"
+            android:textSize="@dimen/item_size" />
+
+        <!-- Social Media badges -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_twitter"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_twitter"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:id="@+id/btn_gplus"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_gplus"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:id="@+id/btn_fb"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_fb"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
+
+        <com.jamesmorrisstudios.materialdesign.views.ButtonFlat
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:id="@+id/helpLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/item_size"
+            android:background="@color/white80"
+            android:text="@string/help_license" />
+
+        <TextView
+            android:id="@+id/versionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="24dp"
+            android:gravity="bottom|left"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white80"
+            android:textSize="@dimen/item_small_size" />
+
+    </LinearLayout>
+
+</com.jamesmorrisstudios.materialdesign.views.ScrollView>

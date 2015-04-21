@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (c) 2015.  James Morris Studios
   ~
@@ -14,15 +15,18 @@
   ~ limitations under the License.
   -->
 
-<resources>
-  <!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
-
-
-  <dimen name="data_margin">6dp</dimen>
-  <dimen name="header_size">21sp</dimen>
-  <dimen name="item_size">18sp</dimen>
-  <dimen name="item_small_size">15sp</dimen>
-
-</resources>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <item
+        android:id="@+id/action_cancel"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:title="Cancel"
+        android:icon="@drawable/ic_clear_white_24dp"/>
+    <item
+        android:id="@+id/action_delete"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:title="Delete"
+        android:icon="@drawable/ic_delete_white_24dp"/>
+</menu>

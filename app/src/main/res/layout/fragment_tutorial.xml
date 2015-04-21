@@ -14,15 +14,15 @@
   ~ limitations under the License.
   -->
 
-<resources>
-  <!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jamesmorrisstudios.com.randremind.fragments.TutorialFragment">
 
+  <TextView
+      android:textSize="@dimen/header_size"
+      android:text="@string/todo"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
 
-  <dimen name="data_margin">6dp</dimen>
-  <dimen name="header_size">21sp</dimen>
-  <dimen name="item_size">18sp</dimen>
-  <dimen name="item_small_size">15sp</dimen>
-
-</resources>
+</FrameLayout>

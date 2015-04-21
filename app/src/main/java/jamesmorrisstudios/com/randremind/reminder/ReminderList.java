@@ -16,8 +16,32 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import java.util.ArrayList;
+
+import jamesmorrisstudios.com.randremind.utilities.Bus;
+
 /**
  * Created by James on 4/20/2015.
  */
-public class ReminderList {
+public final class ReminderList {
+    private static ReminderList instance = null;
+    private ArrayList<ReminderItem> data = new ArrayList<>();
+
+    private ReminderList() {}
+
+    public static ReminderList getInstance() {
+        if(instance == null) {
+            instance = new ReminderList();
+        }
+        return instance;
+    }
+
+    public final void loadData(boolean forceRefresh) {
+        Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
+    }
+
+    public final ArrayList<ReminderItem> getData() {
+        return data;
+    }
+
 }

@@ -17,6 +17,8 @@
 package jamesmorrisstudios.com.randremind.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,36 +27,61 @@ import jamesmorrisstudios.com.randremind.R;
 /**
  * Created by James on 4/20/2015.
  */
-public final class MainActivity extends BaseActivity {
+public final class MainActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadMainListFragment();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //Listen for changes in the back stack
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
+        //Handle when activity is recreated like on orientation Change
+        shouldDisplayHomeUp();
+
+        if(!isFragmentDisplayed()) {
+            loadMainListFragment();
+        }
     }
 
+    @Override
+    public void onBackStackChanged() {
+        shouldDisplayHomeUp();
+    }
+
+    public void shouldDisplayHomeUp(){
+        //Enable Up button only  if there are entries in the back stack
+        boolean canback = getSupportFragmentManager().getBackStackEntryCount()>0;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(canback);
+    }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onSupportNavigateUp() {
+        //This method is called when the up button is pressed. Just the pop back stack.
+        getSupportFragmentManager().popBackStack();
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onAddNewClicked() {
+        loadAddReminderFragment();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_help) {
-            return true;
-        }
+    @Override
+    public void onHelpClicked() {
+        loadHelpFragment();
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    public void onLicenseClicked() {
+        loadLicenseFragment();
+    }
+
+    @Override
+    public void onTutorialClicked() {
+        loadTutorialFragment();
     }
 }

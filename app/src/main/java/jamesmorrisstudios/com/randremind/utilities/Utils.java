@@ -16,6 +16,8 @@
 
 package jamesmorrisstudios.com.randremind.utilities;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -142,6 +144,22 @@ public class Utils {
         } else {
             src.getViewTreeObserver().removeGlobalOnLayoutListener(victim);
         }
+    }
+
+    /**
+     * Gets the formatted version string of the app in the format 1.2.3
+     *
+     * @return The formatted version string
+     */
+    public static String getVersionName() {
+        PackageInfo pInfo;
+        try {
+            pInfo = App.getContext().getPackageManager().getPackageInfo(App.getContext().getPackageName(), 0);
+            return pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            //Ignore faults
+        }
+        return "";
     }
 
 }
