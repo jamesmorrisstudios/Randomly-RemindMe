@@ -23,8 +23,6 @@ import android.view.MenuItem;
 import jamesmorrisstudios.com.randremind.R;
 
 /**
- *
- *
  * Created by James on 4/20/2015.
  */
 public final class MainActivity extends BaseActivity {

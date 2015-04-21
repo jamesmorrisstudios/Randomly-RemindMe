@@ -28,8 +28,6 @@ import jamesmorrisstudios.com.randremind.fragments.HelpFragment;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
 
 /**
- *
- *
  * Created by James on 4/20/2015.
  */
 public abstract class BaseActivity extends ActionBarActivity implements

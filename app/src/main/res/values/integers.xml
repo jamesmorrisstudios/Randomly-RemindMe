@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Start aligned and sticky. -->
+    <integer name="default_header_display">1</integer>
+
+</resources>

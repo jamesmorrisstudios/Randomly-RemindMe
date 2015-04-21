@@ -14,16 +14,48 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jamesmorrisstudios.com.randremind.fragments.MainListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test" />
+    <!-- Recycler View for the reminder list -->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
 
-</FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!-- No data text -->
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:textColor="@color/white80"
+        android:text="@string/main_list_no_data" />
+
+    <!-- Add reminder floating action button -->
+    <com.jamesmorrisstudios.materialdesign.views.ButtonFloat
+        android:id="@+id/buttonAddNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
+        android:background="@color/primaryColorAccent"
+        materialdesign:animate="true"
+        materialdesign:iconDrawable="@drawable/ic_add_white_24dp" />
+
+</RelativeLayout>

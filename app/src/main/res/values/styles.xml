@@ -28,6 +28,7 @@
     </style>
 
     !-- Theme for the toolbars in the app-->
+
     <style name="ThemeOverlay.toolbar" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/primaryColorDark</item>
         <item name="android:textColor">@color/white80</item>

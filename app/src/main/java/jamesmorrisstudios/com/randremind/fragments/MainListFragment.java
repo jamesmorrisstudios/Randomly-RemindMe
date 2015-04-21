@@ -19,48 +19,38 @@ package jamesmorrisstudios.com.randremind.fragments;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.TextView;
+
+import com.jamesmorrisstudios.materialdesign.views.ButtonFloat;
+import com.tonicartos.superslim.LayoutManager;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.listAdapters.ReminderAdapter;
+import jamesmorrisstudios.com.randremind.listAdapters.ReminderContainer;
+import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public final class MainListFragment extends Fragment {
+public final class MainListFragment extends Fragment implements ReminderAdapter.ReminderItemClickListener {
     public static final String TAG = "MainListFragment";
 
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private boolean isRefreshing = false;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ReminderAdapter mAdapter = null;
+    private TextView noDataText;
+    private ButtonFloat addNewButton;
 
     private OnFragmentInteractionListener mListener;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainListFragment newInstance(String param1, String param2) {
-        MainListFragment fragment = new MainListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public MainListFragment() {
         // Required empty public constructor
@@ -69,24 +59,91 @@ public final class MainListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_list, container, false);
+        addNewButton = (ButtonFloat) view.findViewById(R.id.buttonAddNew);
+        addNewButton.setBackgroundColor(getResources().getColor(R.color.primaryColorAccent));
+        noDataText = (TextView) view.findViewById(R.id.empty_view);
+        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!isRefreshing) {
+                    //Force a refresh on reminder data
+                    isRefreshing = true;
+                    //TODO load the saved reminders
+                }
+            }
+        });
+        mSwipeRefreshLayout.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        Utils.removeGlobalLayoutListener(mSwipeRefreshLayout, this);
+                        if (isRefreshing) {
+                            mSwipeRefreshLayout.setRefreshing(true);
+                        }
+                    }
+                });
+        isRefreshing = true;
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    /**
+     * View creation done
+     * @param view This fragments main view
+     * @param savedInstanceState Saved instance state
+     */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        int mHeaderDisplay = getResources().getInteger(R.integer.default_header_display);
+        boolean mAreMarginsFixed = getResources().getBoolean(R.bool.default_margins_fixed);
+        ViewHolder mViews = new ViewHolder(view);
+        mViews.initViews(new LayoutManager(getActivity()));
+        mAdapter = new ReminderAdapter(mHeaderDisplay, this);
+        mAdapter.setMarginsFixed(mAreMarginsFixed);
+        mAdapter.setHeaderDisplay(mHeaderDisplay);
+        mViews.setAdapter(mAdapter);
+        //TODO load the data to display
+    }
+
+    /**
+     * Apply reminder items to this view
+     */
+    private void applyItems() {
+        if(mAdapter != null) {
+            //TODO
+
+
         }
+    }
+
+    /**
+     * Finish up a refresh and hide the spinner
+     */
+        private void endRefresh () {
+            mSwipeRefreshLayout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    isRefreshing = false;
+                }
+            }, 500);
+    }
+
+    private void showNoDataText() {
+        noDataText.setVisibility(View.VISIBLE);
+    }
+
+    private void hideNoDataText() {
+        noDataText.setVisibility(View.GONE);
     }
 
     @Override
@@ -106,19 +163,38 @@ public final class MainListFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void itemClicked(ReminderContainer item) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        //TODO add to this
+    }
+
+    /**
+     * View holder class
+     */
+    private static class ViewHolder {
+        private final RecyclerView mRecyclerView;
+
+        public ViewHolder(View view) {
+            mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        }
+
+        public void initViews(LayoutManager lm) {
+            mRecyclerView.setLayoutManager(lm);
+        }
+
+        public void setAdapter(RecyclerView.Adapter<?> adapter) {
+            mRecyclerView.setAdapter(adapter);
+        }
     }
 
 }

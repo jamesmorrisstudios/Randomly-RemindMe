@@ -16,8 +16,132 @@
 
 package jamesmorrisstudios.com.randremind.utilities;
 
+import android.content.res.Configuration;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.Toast;
+
+import jamesmorrisstudios.com.randremind.application.App;
+
 /**
+ * Basic utility class for this project.
+ *
  * Created by James on 4/20/2015.
  */
 public class Utils {
+
+    /**
+     * Device orientations
+     */
+    public enum Orientation {
+        UNDEFINED, PORTRAIT, LANDSCAPE
+    }
+
+    /**
+     * Android defined screen size categories
+     */
+    public enum ScreenSize {
+        SMALL, NORMAL, LARGE, XLARGE, UNDEFINED
+    }
+
+    /**
+     * Displays a popup toast for a short time
+     * @param text Text to display
+     */
+    public static void toastShort(String text) {
+        Toast.makeText(App.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Displays a popup toast for a long time
+     * @param text Text to display
+     */
+    public static void toastLong(String text) {
+        Toast.makeText(App.getContext(), text, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Converts a dip value into a pixel value
+     * Usually you want to use getDipInt unless you are performing additional calculations with the result.
+     *
+     * @param dp Dip value
+     * @return Pixel value
+     */
+    public static float getDip(int dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, App.getContext().getResources().getDisplayMetrics());
+    }
+
+    /**
+     * Converts a dip value into a pixel value rounded to the nearest int
+     * This is typically the desired choice as pixels are only in ints
+     *
+     * @param dip Dip value
+     * @return Pixel value
+     */
+    public static int getDipInt(int dip) {
+        return Math.round(getDip(dip));
+    }
+
+    /**
+     * Gets the current device orientation.
+     * There are some reports that this may return the wrong result on some devices
+     * but I have not found any yet. I may update this will a fallback screensize check
+     *
+     * @return The device orientation
+     */
+    @NonNull
+    public static Orientation getOrientation() {
+        switch (App.getContext().getResources().getConfiguration().orientation) {
+            case Configuration.ORIENTATION_UNDEFINED:
+                return Orientation.UNDEFINED;
+            case Configuration.ORIENTATION_PORTRAIT:
+                return Orientation.PORTRAIT;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                return Orientation.LANDSCAPE;
+            default:
+                return Orientation.UNDEFINED;
+        }
+    }
+
+    /**
+     * Gets the screen size bucket category
+     *
+     * @return The screensize
+     */
+    @NonNull
+    public static ScreenSize getScreenSize() {
+        int screenLayout = App.getContext().getResources().getConfiguration().screenLayout;
+        screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
+        switch (screenLayout) {
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                return ScreenSize.SMALL;
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                return ScreenSize.NORMAL;
+            case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                return ScreenSize.LARGE;
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                return ScreenSize.XLARGE;
+            default:
+                return ScreenSize.UNDEFINED;
+        }
+    }
+
+    /**
+     * Backwards compatible method of removing the global layout listener
+     *
+     * @param src    The view to remove from
+     * @param victim The global layout listener to remove
+     */
+    @SuppressWarnings("deprecation")
+    public static void removeGlobalLayoutListener(@NonNull View src, @NonNull ViewTreeObserver.OnGlobalLayoutListener victim) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            src.getViewTreeObserver().removeOnGlobalLayoutListener(victim);
+        } else {
+            src.getViewTreeObserver().removeGlobalOnLayoutListener(victim);
+        }
+    }
+
 }
