@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
@@ -17,9 +19,7 @@ import com.jamesmorrisstudios.materialdesign.R;
 import com.jamesmorrisstudios.materialdesign.utils.Utils;
 
 public abstract class Button extends CustomView {
-
 	final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";
-
 	// Complete in child class
 	int minWidth;
 	int minHeight;
@@ -31,7 +31,7 @@ public abstract class Button extends CustomView {
 	boolean clickAfterRipple = true;
 	int backgroundColor = Color.parseColor("#1E88E5");
 
-	public Button(Context context, AttributeSet attrs) {
+	public Button(@NonNull Context context, @NonNull AttributeSet attrs) {
 		super(context, attrs);
 		setDefaultProperties();
 		clickAfterRipple = attrs.getAttributeBooleanValue(MATERIALDESIGNXML,"animate", true);
@@ -49,10 +49,9 @@ public abstract class Button extends CustomView {
 		setBackgroundResource(background);
 		setBackgroundColor(backgroundColor);
 	}
-	
 
 	// Set atributtes of XML to View
-	abstract protected void setAttributes(AttributeSet attrs);
+	abstract protected void setAttributes(@NonNull AttributeSet attrs);
 
 	// ### RIPPLE EFFECT ###
 
@@ -60,7 +59,7 @@ public abstract class Button extends CustomView {
 	float radius = -1;
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(@NonNull MotionEvent event) {
 		invalidate();
 		if (isEnabled()) {
 			isLastTouch = true;
@@ -109,11 +108,12 @@ public abstract class Button extends CustomView {
 	}
 
 	@Override
-	public boolean onInterceptTouchEvent(MotionEvent ev) {
+	public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
 		// super.onInterceptTouchEvent(ev);
 		return true;
 	}
 
+	@NonNull
 	public Bitmap makeCircle() {
 		Bitmap output = Bitmap.createBitmap(
 				getWidth() - Utils.dpToPx(6, getResources()), getHeight()
@@ -152,7 +152,7 @@ public abstract class Button extends CustomView {
 	}
 
 	@Override
-	public void setOnClickListener(OnClickListener l) {
+	public void setOnClickListener(@Nullable OnClickListener l) {
 		onClickListener = l;
 	}
 
@@ -172,6 +172,7 @@ public abstract class Button extends CustomView {
 		}
 	}
 
+	@Nullable
 	abstract public TextView getTextView();
 
 	public void setRippleSpeed(float rippleSpeed) {

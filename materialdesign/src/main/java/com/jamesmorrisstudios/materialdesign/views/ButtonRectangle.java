@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class ButtonRectangle extends Button {
 	
 	
 	// Set atributtes of XML to View
-	protected void setAttributes(AttributeSet attrs){
+	protected void setAttributes(@NonNull AttributeSet attrs){
 		
 		//Set background Color
 		// Color by resource

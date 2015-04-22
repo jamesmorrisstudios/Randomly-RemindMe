@@ -2,6 +2,8 @@ package com.jamesmorrisstudios.materialdesign.widgets;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -16,8 +18,7 @@ import com.jamesmorrisstudios.materialdesign.R;
 import com.jamesmorrisstudios.materialdesign.views.ButtonFlat;
 
 
-public class Dialog extends android.app.Dialog{
-	
+public final class Dialog extends android.app.Dialog{
 	Context context;
 	View view;
 	View backView;
@@ -33,27 +34,26 @@ public class Dialog extends android.app.Dialog{
 	
 	View.OnClickListener onAcceptButtonClickListener;
 	View.OnClickListener onCancelButtonClickListener;
-	
-	
-	public Dialog(Context context,String title, String message) {
+
+	public Dialog(@NonNull Context context,@NonNull String title, @NonNull String message) {
 		super(context, android.R.style.Theme_Translucent);
 		this.context = context;// init Context
 		this.message = message;
 		this.title = title;
 	}
 	
-	public void addCancelButton(String buttonCancelText){
+	public void addCancelButton(@NonNull String buttonCancelText){
 		this.buttonCancelText = buttonCancelText;
 	}
 	
-	public void addCancelButton(String buttonCancelText, View.OnClickListener onCancelButtonClickListener){
+	public void addCancelButton(@NonNull String buttonCancelText, @NonNull View.OnClickListener onCancelButtonClickListener){
 		this.buttonCancelText = buttonCancelText;
 		this.onCancelButtonClickListener = onCancelButtonClickListener;
 	}
 	
 	
 	@Override
-	  protected void onCreate(Bundle savedInstanceState) {
+	  protected void onCreate(@Nullable Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.dialog);
@@ -63,7 +63,7 @@ public class Dialog extends android.app.Dialog{
 		backView.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+			public boolean onTouch(@NonNull View v, @NonNull MotionEvent event) {
 				if (event.getX() < view.getLeft() 
 						|| event.getX() >view.getRight()
 						|| event.getY() > view.getBottom() 
@@ -83,7 +83,7 @@ public class Dialog extends android.app.Dialog{
 	    this.buttonAccept = (ButtonFlat) findViewById(R.id.button_accept);
 	    buttonAccept.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(@NonNull View v) {
 				dismiss();
 				if(onAcceptButtonClickListener != null)
 			    	onAcceptButtonClickListener.onClick(v);
@@ -97,7 +97,7 @@ public class Dialog extends android.app.Dialog{
 	    	buttonCancel.setOnClickListener(new View.OnClickListener() {
 	    		
 				@Override
-				public void onClick(View v) {
+				public void onClick(@NonNull View v) {
 					dismiss();	
 					if(onCancelButtonClickListener != null)
 				    	onCancelButtonClickListener.onClick(v);
@@ -117,28 +117,31 @@ public class Dialog extends android.app.Dialog{
 	
 	// GETERS & SETTERS
 
+	@Nullable
 	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(@Nullable String message) {
 		this.message = message;
 		messageTextView.setText(message);
 	}
 
+	@Nullable
 	public TextView getMessageTextView() {
 		return messageTextView;
 	}
 
-	public void setMessageTextView(TextView messageTextView) {
+	public void setMessageTextView(@Nullable TextView messageTextView) {
 		this.messageTextView = messageTextView;
 	}
 
+	@Nullable
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(@Nullable String title) {
 		this.title = title;
 		if(title == null)
 			titleTextView.setVisibility(View.GONE);
@@ -148,27 +151,30 @@ public class Dialog extends android.app.Dialog{
 		}
 	}
 
+	@Nullable
 	public TextView getTitleTextView() {
 		return titleTextView;
 	}
 
-	public void setTitleTextView(TextView titleTextView) {
+	public void setTitleTextView(@Nullable TextView titleTextView) {
 		this.titleTextView = titleTextView;
 	}
 
+	@Nullable
 	public ButtonFlat getButtonAccept() {
 		return buttonAccept;
 	}
 
-	public void setButtonAccept(ButtonFlat buttonAccept) {
+	public void setButtonAccept(@Nullable ButtonFlat buttonAccept) {
 		this.buttonAccept = buttonAccept;
 	}
 
+	@Nullable
 	public ButtonFlat getButtonCancel() {
 		return buttonCancel;
 	}
 
-	public void setButtonCancel(ButtonFlat buttonCancel) {
+	public void setButtonCancel(@Nullable ButtonFlat buttonCancel) {
 		this.buttonCancel = buttonCancel;
 	}
 

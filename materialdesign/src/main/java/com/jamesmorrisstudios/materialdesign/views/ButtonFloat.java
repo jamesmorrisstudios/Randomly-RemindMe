@@ -10,6 +10,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
@@ -66,7 +67,7 @@ public class ButtonFloat extends Button{
 	
 	
 	// Set atributtes of XML to View
-	protected void setAttributes(AttributeSet attrs){
+	protected void setAttributes(@NonNull AttributeSet attrs){
 		//Set background Color
 		// Color by resource
 		int bacgroundColor = attrs.getAttributeResourceValue(ANDROIDXML,"background",-1);

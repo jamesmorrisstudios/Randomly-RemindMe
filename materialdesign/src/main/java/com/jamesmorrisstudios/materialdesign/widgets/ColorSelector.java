@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -18,18 +20,15 @@ import android.widget.RelativeLayout;
 import com.jamesmorrisstudios.materialdesign.R;
 import com.jamesmorrisstudios.materialdesign.views.Slider;
 
-public class ColorSelector extends android.app.Dialog implements Slider.OnValueChangedListener {
-	
+public final class ColorSelector extends android.app.Dialog implements Slider.OnValueChangedListener {
 	int color = Color.BLACK;
 	Context context;
 	View colorView;
 	View view, backView;//background
-	
 	OnColorSelectedListener onColorSelectedListener;
 	Slider red, green, blue;
-	
 
-	public ColorSelector(Context context,Integer color, OnColorSelectedListener onColorSelectedListener) {
+	public ColorSelector(@NonNull Context context, @Nullable Integer color, @NonNull OnColorSelectedListener onColorSelectedListener) {
 		super(context, android.R.style.Theme_Translucent);
 		this.context = context;
 		this.onColorSelectedListener = onColorSelectedListener;
@@ -38,7 +37,7 @@ public class ColorSelector extends android.app.Dialog implements Slider.OnValueC
 		setOnDismissListener(new OnDismissListener() {
 			
 			@Override
-			public void onDismiss(DialogInterface dialog) {
+			public void onDismiss(@NonNull DialogInterface dialog) {
 				if(ColorSelector.this.onColorSelectedListener != null)
 					ColorSelector.this.onColorSelectedListener.onColorSelected(ColorSelector.this.color);
 			}
@@ -48,7 +47,7 @@ public class ColorSelector extends android.app.Dialog implements Slider.OnValueC
 
 	
 	@Override
-	  protected void onCreate(Bundle savedInstanceState) {
+	  protected void onCreate(@Nullable Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.color_selector);
@@ -58,7 +57,7 @@ public class ColorSelector extends android.app.Dialog implements Slider.OnValueC
 		backView.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+			public boolean onTouch(@NonNull View v, @NonNull MotionEvent event) {
 				if (event.getX() < view.getLeft() || event.getX() >view.getRight()
 						|| event.getY() > view.getBottom() || event.getY() < view.getTop()) {
 					dismiss();
@@ -105,7 +104,7 @@ public class ColorSelector extends android.app.Dialog implements Slider.OnValueC
 		view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.dialog_main_show_amination));
 		backView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.dialog_root_show_amin));
 	}
-	
+
 	@Override
 	public void onValueChanged(int value) {
 		color = Color.rgb(red.getValue(), green.getValue(), blue.getValue());

@@ -2,6 +2,8 @@ package com.jamesmorrisstudios.materialdesign.widgets;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -15,8 +17,7 @@ import android.widget.TextView;
 import com.jamesmorrisstudios.materialdesign.R;
 import com.jamesmorrisstudios.materialdesign.views.ProgressBarCircularIndeterminate;
 
-public class ProgressDialog extends android.app.Dialog{
-	
+public final class ProgressDialog extends android.app.Dialog{
 	Context context;
 	View view;
 	View backView;
@@ -25,13 +26,13 @@ public class ProgressDialog extends android.app.Dialog{
 	
 	int progressColor = -1;
 	
-	public ProgressDialog(Context context,String title) {
+	public ProgressDialog(@NonNull Context context, @NonNull String title) {
 		super(context, android.R.style.Theme_Translucent);
 		this.title = title;
 		this.context = context;
 	}
 	
-	public ProgressDialog(Context context,String title, int progressColor) {
+	public ProgressDialog(@NonNull Context context, @NonNull String title, int progressColor) {
 		super(context, android.R.style.Theme_Translucent);
 		this.title = title;
 		this.progressColor = progressColor;
@@ -39,7 +40,7 @@ public class ProgressDialog extends android.app.Dialog{
 	}
 	
 	@Override
-	  protected void onCreate(Bundle savedInstanceState) {
+	  protected void onCreate(@Nullable Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.progress_dialog);
@@ -81,11 +82,12 @@ public class ProgressDialog extends android.app.Dialog{
 	
 	// GETERS & SETTERS
 
+	@Nullable
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(@Nullable String title) {
 		this.title = title;
 		if(title == null)
 			titleTextView.setVisibility(View.GONE);
@@ -95,11 +97,12 @@ public class ProgressDialog extends android.app.Dialog{
 		}
 	}
 
+	@Nullable
 	public TextView getTitleTextView() {
 		return titleTextView;
 	}
 
-	public void setTitleTextView(TextView titleTextView) {
+	public void setTitleTextView(@Nullable TextView titleTextView) {
 		this.titleTextView = titleTextView;
 	}
 
@@ -132,7 +135,5 @@ public class ProgressDialog extends android.app.Dialog{
 		view.startAnimation(anim);
 		backView.startAnimation(backAnim);
 	}
-	
-	
 
 }

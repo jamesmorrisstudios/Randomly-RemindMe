@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class ButtonFlat extends Button {
 	}
 
 	@Override
-	protected void setAttributes(AttributeSet attrs) {
+	protected void setAttributes(@NonNull AttributeSet attrs) {
 		// Set text button
 		String text = null;
 		int textResource = attrs.getAttributeResourceValue(ANDROIDXML,"text",-1);

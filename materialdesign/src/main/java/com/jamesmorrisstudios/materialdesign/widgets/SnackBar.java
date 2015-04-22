@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,8 +20,7 @@ import android.widget.TextView;
 import com.jamesmorrisstudios.materialdesign.R;
 import com.jamesmorrisstudios.materialdesign.views.ButtonFlat;
 
-public class SnackBar extends Dialog{
-	
+public final class SnackBar extends Dialog{
 	String text;
 	float textSize = 14;//Roboto Regular 14sp 
 	String buttonText;
@@ -36,7 +37,7 @@ public class SnackBar extends Dialog{
 	private int mTimer = 3 * 1000;
 	
 	// With action button
-	public SnackBar(Activity activity, String text, String buttonText, View.OnClickListener onClickListener) {
+	public SnackBar(@NonNull Activity activity, @NonNull String text, @NonNull String buttonText, @NonNull View.OnClickListener onClickListener) {
 		super(activity, android.R.style.Theme_Translucent);
 		this.activity = activity;
 		this.text = text;
@@ -45,14 +46,14 @@ public class SnackBar extends Dialog{
 	}
 	
 	// Only text
-	public SnackBar(Activity activity, String text) {
+	public SnackBar(@NonNull Activity activity, @NonNull String text) {
 		super(activity, android.R.style.Theme_Translucent);
 		this.activity = activity;
 		this.text = text;
 	}
 	
 	@Override
-	  protected void onCreate(Bundle savedInstanceState) {
+	  protected void onCreate(@Nullable Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    setContentView(R.layout.snackbar);
@@ -69,7 +70,7 @@ public class SnackBar extends Dialog{
 			button.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
-				public void onClick(View v) {
+				public void onClick(@NonNull View v) {
 					dismiss();
 					onClickListener.onClick(v);
 				}
@@ -80,7 +81,7 @@ public class SnackBar extends Dialog{
 	}
 	
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(@NonNull MotionEvent event) {
 		return activity.dispatchTouchEvent(event);
 	}
 	
@@ -115,7 +116,7 @@ public class SnackBar extends Dialog{
 	Handler handler = new Handler(new Handler.Callback() {
 		
 		@Override
-		public boolean handleMessage(Message msg) {
+		public boolean handleMessage(@NonNull Message msg) {
 			 if(onHideListener != null) {
 				 onHideListener.onHide();
 			 }
@@ -149,7 +150,7 @@ public class SnackBar extends Dialog{
 	}
 	
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
 		// TODO 自动生成的方法存根
 		 if (keyCode == KeyEvent.KEYCODE_BACK )  {
 			 dismiss();
@@ -206,7 +207,7 @@ public class SnackBar extends Dialog{
 		public void onHide();
 	}
 	
-	public void setOnhideListener(OnHideListener onHideListener){
+	public void setOnhideListener(@NonNull OnHideListener onHideListener){
 		this.onHideListener = onHideListener;
 	}
 }
