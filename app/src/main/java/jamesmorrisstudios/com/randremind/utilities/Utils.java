@@ -25,9 +25,11 @@ import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import jamesmorrisstudios.com.randremind.application.App;
+import jamesmorrisstudios.com.randremind.reminder.TimeItem;
 
 /**
  * Basic utility class for this project.
@@ -191,6 +193,21 @@ public final class Utils {
             return hour - 12;
         } else {
             return 12;
+        }
+    }
+
+    public static void setTime(TextView hour, TextView minute, TextView am, TextView pm, TimeItem item) {
+        hour.setText(item.getHourInTimeFormatString());
+        minute.setText(item.getMinuteString());
+        if(item.is24Hour()) {
+            am.setVisibility(View.GONE);
+            pm.setVisibility(View.GONE);
+        } else if(item.isAM()) {
+            am.setVisibility(View.VISIBLE);
+            pm.setVisibility(View.INVISIBLE);
+        } else {
+            am.setVisibility(View.INVISIBLE);
+            pm.setVisibility(View.VISIBLE);
         }
     }
 

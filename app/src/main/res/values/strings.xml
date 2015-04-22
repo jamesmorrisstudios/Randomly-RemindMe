@@ -59,4 +59,8 @@
     <string name="am">AM</string>
     <string name="pm">PM</string>
 
+    <string name="title_hint">Short Name</string>
+    <string name="title_enable">Enable Reminder</string>
+
+
 </resources>

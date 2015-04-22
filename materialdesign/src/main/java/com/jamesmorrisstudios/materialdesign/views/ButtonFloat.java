@@ -99,7 +99,7 @@ public class ButtonFloat extends Button{
 		if(iconResource != -1)
 			drawableIcon = getResources().getDrawable(iconResource);
 		final boolean animate = attrs.getAttributeBooleanValue(MATERIALDESIGNXML,"animate", false);
-			post(new Runnable() {
+			postDelayed(new Runnable() {
 				
 				@Override
 				public void run() {
@@ -110,7 +110,7 @@ public class ButtonFloat extends Button{
 						show();
 					}
 				}
-			});
+			}, 25);
 					
 	}
 		
@@ -188,12 +188,10 @@ public class ButtonFloat extends Button{
 	}
 	
 	public void hide(){
-		
 		ObjectAnimator animator = ObjectAnimator.ofFloat(ButtonFloat.this, "y", hidePosition);
 		animator.setInterpolator(new BounceInterpolator());
 		animator.setDuration(1000);
 		animator.start();
-		
 		isShow = false;
 	}
 	

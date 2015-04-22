@@ -47,6 +47,8 @@
     <color name="primaryColorAccent">#FF5252</color>
     <!-- Red A200 at 80% opacity  -->
     <color name="primaryColorAccentText">#CCFF5252</color>
+    <!-- Red A200 at 20% opacity  -->
+    <color name="primaryColorAccentTextHint">#33FF5252</color>
     <!-- Blue 700 at 80% opacity -->
     <color name="primaryColorDarkText">#CC1976D2</color>
     <!-- Blue 900 -->
@@ -57,5 +59,9 @@
     <color name="white80">#CCFFFFFF</color>
     <!-- white 15% opacity used for dividers -->
     <color name="white15">#26FFFFFF</color>
+
+
+    <color name="mdtp_accent_color">@color/primaryColorAccent</color>
+    <color name="mdtp_accent_color_dark">@color/primaryColorDark</color>
 
 </resources>

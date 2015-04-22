@@ -158,6 +158,7 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
      */
     @Override
     public void goBackFromNewReminder() {
+        getSupportFragmentManager().popBackStack();
         loadMainListFragment();
     }
 

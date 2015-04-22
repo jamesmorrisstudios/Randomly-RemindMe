@@ -71,7 +71,7 @@
             android:text="@string/dash"
             android:textColor="@color/primaryColorDarkText"
             android:textSize="30sp"
-            android:id="@+id/reminder_dash"
+            android:id="@+id/timing_dash"
             android:layout_below="@+id/reminder_title_text"
             android:layout_toRightOf="@+id/reminder_time_start" />
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             layout="@layout/time_display"
             android:layout_below="@+id/reminder_title_text"
-            android:layout_toRightOf="@+id/reminder_dash"/>
+            android:layout_toRightOf="@+id/timing_dash"/>
 
     </RelativeLayout>
 

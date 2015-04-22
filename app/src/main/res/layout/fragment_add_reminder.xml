@@ -14,163 +14,232 @@
   ~ limitations under the License.
   -->
 
-<com.jamesmorrisstudios.materialdesign.views.ScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="jamesmorrisstudios.com.randremind.fragments.AddReminderFragment">
 
-    <LinearLayout
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+    <com.jamesmorrisstudios.materialdesign.views.ScrollView
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Title -->
-        <android.support.v7.widget.CardView
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            card_view:cardBackgroundColor="@color/cardBackground"
-            card_view:cardCornerRadius="4dp"
-            card_view:cardUseCompatPadding="true">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
+            <!-- Title -->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dip">
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                card_view:cardBackgroundColor="@color/cardBackground"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardUseCompatPadding="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_title"
-                    android:textColor="@color/primaryColorDark"
-                    android:textSize="@dimen/header_size" />
+                    android:padding="8dip">
+
+                    <TextView
+                        android:id="@+id/titleHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/edit_title"
+                        android:textColor="@color/primaryColorDark"
+                        android:textSize="@dimen/header_size" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/titleEnabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/titleHeader"
+                        android:textColor="@color/primaryColorAccentText"/>
+
+                    <EditText
+                        android:id="@+id/titleText"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/titleHeader"
+                        android:layout_toLeftOf="@+id/titleEnabled"
+                        android:textSize="@dimen/item_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textColor="@color/primaryColorAccentText"
+                        android:inputType="textAutoCorrect"
+                        android:textColorHint="@color/primaryColorAccentTextHint"
+                        android:hint="@string/title_hint"/>
 
 
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-        <!-- Timing -->
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            card_view:cardBackgroundColor="@color/cardBackground"
-            card_view:cardCornerRadius="4dp"
-            card_view:cardUseCompatPadding="true">
-
-            <RelativeLayout
+            <!-- Timing -->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dip">
+                android:layout_marginBottom="5dp"
+                card_view:cardBackgroundColor="@color/cardBackground"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardUseCompatPadding="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_timing"
-                    android:textColor="@color/primaryColorDark"
-                    android:textSize="@dimen/header_size" />
+                    android:padding="8dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/edit_timing"
+                        android:textColor="@color/primaryColorDark"
+                        android:textSize="@dimen/header_size"
+                        android:id="@+id/timingHeader" />
+
+                    <LinearLayout
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/timingHeader"
+                        android:id="@+id/timing_times"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <include
+                            android:id="@+id/timing_start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            layout="@layout/time_display" />
+
+                        <TextView
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dash"
+                            android:textColor="@color/primaryColorDarkText"
+                            android:textSize="30sp"
+                            android:id="@+id/timing_dash"/>
+
+                        <include
+                            android:id="@+id/timing_end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            layout="@layout/time_display"/>
+
+                    </LinearLayout>
 
 
 
-            </RelativeLayout>
+                    <Spinner
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner"
+                        android:layout_alignTop="@+id/timing_times"
+                        android:layout_centerHorizontal="true" />
 
-        </android.support.v7.widget.CardView>
+                </RelativeLayout>
 
-        <!-- Repeat -->
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            card_view:cardBackgroundColor="@color/cardBackground"
-            card_view:cardCornerRadius="4dp"
-            card_view:cardUseCompatPadding="true">
+            </android.support.v7.widget.CardView>
 
-            <RelativeLayout
+            <!-- Repeat -->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dip">
+                android:layout_marginBottom="5dp"
+                card_view:cardBackgroundColor="@color/cardBackground"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardUseCompatPadding="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_repeat"
-                    android:textColor="@color/primaryColorDark"
-                    android:textSize="@dimen/header_size" />
+                    android:padding="8dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/edit_repeat"
+                        android:textColor="@color/primaryColorDark"
+                        android:textSize="@dimen/header_size" />
 
 
+                </RelativeLayout>
 
-            </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
-
-        <!-- Alert -->
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            card_view:cardBackgroundColor="@color/cardBackground"
-            card_view:cardCornerRadius="4dp"
-            card_view:cardUseCompatPadding="true">
-
-            <RelativeLayout
+            <!-- Alert -->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dip">
+                android:layout_marginBottom="5dp"
+                card_view:cardBackgroundColor="@color/cardBackground"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardUseCompatPadding="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_alert"
-                    android:textColor="@color/primaryColorDark"
-                    android:textSize="@dimen/header_size" />
+                    android:padding="8dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/edit_alert"
+                        android:textColor="@color/primaryColorDark"
+                        android:textSize="@dimen/header_size" />
 
 
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-        <!-- Message -->
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            card_view:cardBackgroundColor="@color/cardBackground"
-            card_view:cardCornerRadius="4dp"
-            card_view:cardUseCompatPadding="true">
-
-            <RelativeLayout
+            <!-- Message -->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dip">
+                android:layout_marginBottom="5dp"
+                card_view:cardBackgroundColor="@color/cardBackground"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardUseCompatPadding="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_message"
-                    android:textColor="@color/primaryColorDark"
-                    android:textSize="@dimen/header_size" />
+                    android:padding="8dip">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/edit_message"
+                        android:textColor="@color/primaryColorDark"
+                        android:textSize="@dimen/header_size" />
 
 
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-    </LinearLayout>
+        </LinearLayout>
 
-</com.jamesmorrisstudios.materialdesign.views.ScrollView>
+    </com.jamesmorrisstudios.materialdesign.views.ScrollView>
+
+</FrameLayout>

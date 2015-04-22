@@ -16,11 +16,17 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
@@ -251,6 +257,33 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void onBackPressed() {
         backPressed();
         super.onBackPressed();
+    }
+
+    @Override
+    public void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                hideKeyboard();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void createTimePickerDialog(TimePickerDialog.OnTimeSetListener listener, int hour, int minute, boolean is24Hour) {
+        TimePickerDialog time = new TimePickerDialog();
+        time.initialize(listener, hour, minute, is24Hour);
+        time.show(getFragmentManager(), "TimePickerDialog");
     }
 
 }

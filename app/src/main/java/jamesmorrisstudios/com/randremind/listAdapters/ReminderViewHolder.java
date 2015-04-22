@@ -85,8 +85,8 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
         } else {
             //Non header
             this.title.setText(reminder.item.title);
-            setTime(startHour, startMinute, startAM, startPM, reminder.item.startTime);
-            setTime(endHour, endMinute, endAM, endPM, reminder.item.endTime);
+            Utils.setTime(startHour, startMinute, startAM, startPM, reminder.item.startTime);
+            Utils.setTime(endHour, endMinute, endAM, endPM, reminder.item.endTime);
             enabled.setOnCheckedChangeListener(null);
             enabled.setChecked(reminder.item.enabled);
             enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -95,21 +95,6 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
                     reminder.item.enabled = isChecked;
                 }
             });
-        }
-    }
-
-    private void setTime(TextView hour, TextView minute, TextView am, TextView pm, TimeItem item) {
-        hour.setText(item.getHourInTimeFormatString());
-        minute.setText(item.getMinuteString());
-        if(item.is24Hour()) {
-            am.setVisibility(View.INVISIBLE);
-            pm.setVisibility(View.INVISIBLE);
-        } else if(item.isAM()) {
-            am.setVisibility(View.VISIBLE);
-            pm.setVisibility(View.INVISIBLE);
-        } else {
-            am.setVisibility(View.INVISIBLE);
-            pm.setVisibility(View.VISIBLE);
         }
     }
 

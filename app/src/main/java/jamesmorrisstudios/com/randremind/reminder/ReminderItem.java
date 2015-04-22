@@ -22,6 +22,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * Individual reminder item that contains all needed items to be a reminder
@@ -29,6 +30,8 @@ import java.util.Arrays;
  * Created by James on 4/20/2015.
  */
 public final class ReminderItem {
+    @SerializedName("uniqueName")
+    public final String uniqueName;
     //Title
     @SerializedName("title")
     public String title;
@@ -75,26 +78,28 @@ public final class ReminderItem {
      * Creates a new reminder item with all the default values set
      */
     public ReminderItem() {
+        //Unique name
+        this.uniqueName = getUniqueName();
         //Title
-        title = "New Reminder";
-        enabled = true;
+        this.title = "";
+        this.enabled = true;
         //Timing
-        startTime = new TimeItem(9, 0);
-        endTime = new TimeItem(20, 0);
-        numberPerDay = 6;
-        distribution = Distribution.PART_RANDOM;
+        this.startTime = new TimeItem(9, 0);
+        this.endTime = new TimeItem(20, 0);
+        this.numberPerDay = 6;
+        this.distribution = Distribution.PART_RANDOM;
         //Repeat
-        daysToRun = new boolean[] {true, true, true, true, true, true, true};
+        this.daysToRun = new boolean[] {true, true, true, true, true, true, true};
         //Alert Type
-        notification = true;
-        alarm = false;
+        this.notification = true;
+        this.alarm = false;
         //Messages
-        messages = new ArrayList<>();
-        messages.add(title);
-        messageOrder = MessageOrder.RANDOM;
+        this.messages = new ArrayList<>();
+        this.messages.add(title);
+        this.messageOrder = MessageOrder.RANDOM;
         //Generated values
-        alertTimes = new ArrayList<>();
-        currentMessage = 0;
+        this.alertTimes = new ArrayList<>();
+        this.currentMessage = 0;
     }
 
     /**
@@ -118,6 +123,7 @@ public final class ReminderItem {
                         @NonNull Distribution distribution, @NonNull boolean[] daysToRun, boolean notification, boolean alarm,
                         boolean vibrate, @NonNull ArrayList<String> messages, @NonNull MessageOrder messageOrder,
                         @NonNull ArrayList<TimeItem> alertTimes, int currentMessage) {
+        this.uniqueName = getUniqueName();
         this.title = title;
         this.enabled = enabled;
         this.startTime = startTime.copy();
@@ -147,21 +153,14 @@ public final class ReminderItem {
     public boolean equals (Object obj){
         if(obj != null && obj instanceof ReminderItem) {
             ReminderItem item = (ReminderItem) obj;
-            return this.title.equals(item.title)
-                    && this.enabled == item.enabled
-                    && this.startTime.equals(item.startTime)
-                    && this.endTime.equals(item.endTime)
-                    && this.numberPerDay == item.numberPerDay
-                    && this.distribution.equals(item.distribution)
-                    && Arrays.equals(this.daysToRun, item.daysToRun)
-                    && this.notification == item.notification
-                    && this.alarm == item.alarm
-                    && this.vibrate == item.vibrate
-                    && this.messages.equals(item.messages)
-                    && this.messageOrder.equals(item.messageOrder);
+            return this.uniqueName.equals(item.uniqueName);
         } else {
             return false;
         }
+    }
+
+    private static String getUniqueName() {
+        return UUID.randomUUID().toString();
     }
 
 }
