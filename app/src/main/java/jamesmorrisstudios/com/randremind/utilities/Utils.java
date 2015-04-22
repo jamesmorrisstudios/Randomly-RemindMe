@@ -33,7 +33,7 @@ import jamesmorrisstudios.com.randremind.application.App;
  *
  * Created by James on 4/20/2015.
  */
-public class Utils {
+public final class Utils {
 
     /**
      * Device orientations

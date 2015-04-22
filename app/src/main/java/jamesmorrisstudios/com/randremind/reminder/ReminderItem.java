@@ -27,7 +27,7 @@ import java.util.ArrayList;
  *
  * Created by James on 4/20/2015.
  */
-public class ReminderItem {
+public final class ReminderItem {
     //Title
     @SerializedName("title")
     public String title;

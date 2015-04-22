@@ -25,7 +25,7 @@ import android.util.Log;
  * <p/>
  * Created by James on 9/16/2014.
  */
-public class Bus {
+public final class Bus {
     public static final String TAG = "Bus";
     /**
      * The actual otto bus system. Nothing beyond this class has direct access to it

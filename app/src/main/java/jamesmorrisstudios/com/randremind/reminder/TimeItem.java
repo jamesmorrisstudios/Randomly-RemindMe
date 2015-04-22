@@ -23,7 +23,7 @@ import android.support.annotation.NonNull;
  *
  * Created by James on 4/21/2015.
  */
-public class TimeItem {
+public final class TimeItem {
     public int hour;
     public int minute;
 
