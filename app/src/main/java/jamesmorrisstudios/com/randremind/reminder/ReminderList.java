@@ -132,6 +132,18 @@ public final class ReminderList {
         return data;
     }
 
+    public final void setCurrentReminder(ReminderItem item) {
+        int index = 0;
+        for(ReminderItem itemInt : data) {
+            if(itemInt.equals(item)) {
+                this.currentIndex = index;
+                this.currentItem = data.get(currentIndex).copy();
+                return;
+            }
+            index++;
+        }
+    }
+
     public final void setCurrentReminder(int currentIndex) {
         this.currentIndex = currentIndex;
         this.currentItem = data.get(currentIndex).copy();

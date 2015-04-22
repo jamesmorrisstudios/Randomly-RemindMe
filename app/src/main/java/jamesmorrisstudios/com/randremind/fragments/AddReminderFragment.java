@@ -45,9 +45,6 @@ public final class AddReminderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        if(!ReminderList.getInstance().hasCurrentReminder()) {
-            ReminderList.getInstance().createNewReminder();
-        }
     }
 
     @Override
@@ -74,7 +71,9 @@ public final class AddReminderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_reminder, container, false);
-        ReminderList.getInstance().createNewReminder();
+        if(!ReminderList.getInstance().hasCurrentReminder()) {
+            ReminderList.getInstance().createNewReminder();
+        }
         return view;
     }
 

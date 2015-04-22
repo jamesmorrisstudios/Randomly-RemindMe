@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Individual reminder item that contains all needed items to be a reminder
@@ -140,6 +141,27 @@ public final class ReminderItem {
     public final ReminderItem copy() {
         return new ReminderItem(title, enabled, startTime, endTime, numberPerDay, distribution,
                 daysToRun, notification, alarm, vibrate, messages, messageOrder, alertTimes, currentMessage);
+    }
+
+    @Override
+    public boolean equals (Object obj){
+        if(obj != null && obj instanceof ReminderItem) {
+            ReminderItem item = (ReminderItem) obj;
+            return this.title.equals(item.title)
+                    && this.enabled == item.enabled
+                    && this.startTime.equals(item.startTime)
+                    && this.endTime.equals(item.endTime)
+                    && this.numberPerDay == item.numberPerDay
+                    && this.distribution.equals(item.distribution)
+                    && Arrays.equals(this.daysToRun, item.daysToRun)
+                    && this.notification == item.notification
+                    && this.alarm == item.alarm
+                    && this.vibrate == item.vibrate
+                    && this.messages.equals(item.messages)
+                    && this.messageOrder.equals(item.messageOrder);
+        } else {
+            return false;
+        }
     }
 
 }

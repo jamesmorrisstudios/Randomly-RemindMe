@@ -34,15 +34,54 @@
         android:layout_height="match_parent"
         android:padding="8dip">
 
+        <!-- Enable Switch -->
+        <android.support.v7.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/reminder_enabled" />
+
         <!-- reminder title/name -->
         <TextView
             android:id="@+id/reminder_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:textColor="@color/primaryColorDark"
-            android:textSize="15sp" />
+            android:singleLine="true"
+            android:textSize="15sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/reminder_enabled" />
 
+        <include
+            android:id="@+id/reminder_time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/time_display"
+            android:layout_below="@+id/reminder_title_text"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dash"
+            android:textColor="@color/primaryColorDarkText"
+            android:textSize="30sp"
+            android:id="@+id/reminder_dash"
+            android:layout_below="@+id/reminder_title_text"
+            android:layout_toRightOf="@+id/reminder_time_start" />
+
+        <include
+            android:id="@+id/reminder_time_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/time_display"
+            android:layout_below="@+id/reminder_title_text"
+            android:layout_toRightOf="@+id/reminder_dash"/>
 
     </RelativeLayout>
 

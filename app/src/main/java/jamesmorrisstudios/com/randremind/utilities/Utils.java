@@ -21,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -161,6 +162,36 @@ public final class Utils {
             //Ignore faults
         }
         return "";
+    }
+
+    /**
+     * @return True if the user preference is 24 hour time
+     */
+    public static boolean is24HourTime() {
+        return DateFormat.is24HourFormat(App.getContext());
+    }
+
+    /**
+     * @param hour Hour in 24 hour (calendar form)
+     * @return True if am, false if pm
+     */
+    public static boolean isAM(int hour) {
+        return hour < 12;
+    }
+
+    /**
+     * Converts the 24 hour calendar form to the user preferred style
+     * @param hour Hour in 24 hour (calendar form)
+     * @return Hour in the user preferred style
+     */
+    public static int getHourInTimeFormat(int hour) {
+        if(is24HourTime() || hour <= 12 && hour >= 1) {
+            return hour;
+        } else if(hour >= 13) {
+            return hour - 12;
+        } else {
+            return 12;
+        }
     }
 
 }

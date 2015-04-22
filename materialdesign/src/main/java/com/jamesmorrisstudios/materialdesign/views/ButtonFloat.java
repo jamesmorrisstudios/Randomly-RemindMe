@@ -182,7 +182,7 @@ public class ButtonFloat extends Button{
 	public void show(){
 		ObjectAnimator animator = ObjectAnimator.ofFloat(ButtonFloat.this, "y", showPosition);
 		animator.setInterpolator(new BounceInterpolator());
-		animator.setDuration(1500);
+		animator.setDuration(1000);
 		animator.start();
 		isShow = true;
 	}
@@ -191,7 +191,7 @@ public class ButtonFloat extends Button{
 		
 		ObjectAnimator animator = ObjectAnimator.ofFloat(ButtonFloat.this, "y", hidePosition);
 		animator.setInterpolator(new BounceInterpolator());
-		animator.setDuration(1500);
+		animator.setDuration(1000);
 		animator.start();
 		
 		isShow = false;

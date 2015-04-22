@@ -18,8 +18,10 @@ package jamesmorrisstudios.com.randremind.reminder;
 
 import android.support.annotation.NonNull;
 
+import jamesmorrisstudios.com.randremind.utilities.Utils;
+
 /**
- * Time item for scheduling
+ * Time item for scheduling. This assumes 24 hour time. Adjust to AM, PM as needed
  *
  * Created by James on 4/21/2015.
  */
@@ -41,7 +43,38 @@ public final class TimeItem {
      * @return A copy of this object
      */
     @NonNull
-    public TimeItem copy() {
+    public final TimeItem copy() {
         return new TimeItem(this.hour, this.minute);
     }
+
+    public final boolean is24Hour() {
+        return Utils.is24HourTime();
+    }
+
+    public final boolean isAM() {
+        return Utils.isAM(hour);
+    }
+
+    public final int getHourInTimeFormat() {
+        return Utils.getHourInTimeFormat(hour);
+    }
+
+    public final String getHourInTimeFormatString() {
+        return Integer.toString(Utils.getHourInTimeFormat(hour));
+    }
+
+    public final String getMinuteString() {
+        return String.format("%02d", minute);
+    }
+
+    @Override
+    public final boolean equals (Object obj){
+        if(obj != null && obj instanceof TimeItem) {
+            TimeItem item = (TimeItem) obj;
+            return this.hour == item.hour && this.minute == item.minute;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -110,7 +110,7 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         // Inflate the layout for this fragment
         Bus.register(this);
         View view = inflater.inflate(R.layout.fragment_main_list, container, false);
-        ButtonFloat addNewButton = (ButtonFloat) view.findViewById(R.id.buttonAddNew);
+        final ButtonFloat addNewButton = (ButtonFloat) view.findViewById(R.id.buttonAddNew);
         addNewButton.setBackgroundColor(getResources().getColor(R.color.primaryColorAccent));
         addNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,18 +121,19 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         noDataText = (TextView) view.findViewById(R.id.empty_view);
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColorAccent);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onRefresh() {
-                if (!isRefreshing) {
-                    //Force a refresh on reminder data
-                    isRefreshing = true;
-                    ReminderList.getInstance().loadData(true);
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy > 0) {
+                    addNewButton.hide();
+                } else if(dy <0) {
+                    addNewButton.show();
                 }
             }
         });
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColorAccent);
         mSwipeRefreshLayout.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
@@ -143,6 +144,7 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
                         }
                     }
                 });
+        mSwipeRefreshLayout.setEnabled(false);
         isRefreshing = true;
         return view;
     }
@@ -272,7 +274,8 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
      */
     @Override
     public void itemClicked(ReminderContainer item) {
-
+        ReminderList.getInstance().setCurrentReminder(item.item);
+        mListener.onEditClicked();
     }
 
     /**
@@ -282,6 +285,11 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
      * activity.
      */
     public interface OnFragmentInteractionListener {
+
+        /**
+         *
+         */
+        void onEditClicked();
 
         /**
          *

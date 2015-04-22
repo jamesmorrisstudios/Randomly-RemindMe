@@ -238,14 +238,18 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 || (existsLicenseFragment() && isFragmentUIActive(getLicenseFragment()));
     }
 
+    protected final void backPressed() {
+        if(isFragmentUIActive(getAddReminderFragment())) {
+            getAddReminderFragment().onBack();
+        }
+    }
+
     /**
      * Signal to fragments that need it that the use clicked back and is leaving them
      */
     @Override
     public void onBackPressed() {
-        if(isFragmentUIActive(getAddReminderFragment())) {
-            getAddReminderFragment().onBack();
-        }
+        backPressed();
         super.onBackPressed();
     }
 

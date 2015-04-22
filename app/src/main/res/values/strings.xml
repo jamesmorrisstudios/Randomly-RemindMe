@@ -52,4 +52,11 @@
     <string name="edit_alert">Alert</string>
     <string name="edit_message">Message</string>
 
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="colon">:</string>
+    <string name="dash">-</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+
 </resources>

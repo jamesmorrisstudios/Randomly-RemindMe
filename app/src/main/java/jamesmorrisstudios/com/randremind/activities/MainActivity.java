@@ -109,7 +109,16 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
     @Override
     public boolean onSupportNavigateUp() {
         getSupportFragmentManager().popBackStack();
+        backPressed();
         return true;
+    }
+
+    /**
+     * Edit button clicked
+     */
+    @Override
+    public void onEditClicked() {
+        loadAddReminderFragment();
     }
 
     /**

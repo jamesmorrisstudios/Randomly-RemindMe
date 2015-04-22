@@ -20,10 +20,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.reminder.TimeItem;
+import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
  * Reminder view holder for use in RecyclerView
@@ -36,7 +40,8 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
     //Header
     private TextView headerTitle;
     //Not Header
-    private TextView title;
+    private TextView title, startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
+    private SwitchCompat enabled;
 
     /**
      * Constructor
@@ -55,6 +60,17 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
             CardView topLayout = (CardView) view.findViewById(R.id.reminder_card);
             title = (TextView) view.findViewById(R.id.reminder_title_text);
             topLayout.setOnClickListener(this);
+            enabled = (SwitchCompat) view.findViewById(R.id.reminder_enabled);
+            View startTop = view.findViewById(R.id.reminder_time_start);
+            startHour = (TextView) startTop.findViewById(R.id.time_hour);
+            startMinute = (TextView) startTop.findViewById(R.id.time_minute);
+            startAM = (TextView) startTop.findViewById(R.id.time_am);
+            startPM = (TextView) startTop.findViewById(R.id.time_pm);
+            View endTop = view.findViewById(R.id.reminder_time_end);
+            endHour = (TextView) endTop.findViewById(R.id.time_hour);
+            endMinute = (TextView) endTop.findViewById(R.id.time_minute);
+            endAM = (TextView) endTop.findViewById(R.id.time_am);
+            endPM = (TextView) endTop.findViewById(R.id.time_pm);
         }
     }
 
@@ -62,13 +78,38 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
      * Binds the given data to this view.
      * @param reminder Data to bind
      */
-    public void bindItem(@NonNull ReminderContainer reminder) {
+    public void bindItem(@NonNull final ReminderContainer reminder) {
         if(isHeader) {
             //Header only
             this.headerTitle.setText(reminder.headerTitle);
         } else {
-            //Common non header
+            //Non header
             this.title.setText(reminder.item.title);
+            setTime(startHour, startMinute, startAM, startPM, reminder.item.startTime);
+            setTime(endHour, endMinute, endAM, endPM, reminder.item.endTime);
+            enabled.setOnCheckedChangeListener(null);
+            enabled.setChecked(reminder.item.enabled);
+            enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    reminder.item.enabled = isChecked;
+                }
+            });
+        }
+    }
+
+    private void setTime(TextView hour, TextView minute, TextView am, TextView pm, TimeItem item) {
+        hour.setText(item.getHourInTimeFormatString());
+        minute.setText(item.getMinuteString());
+        if(item.is24Hour()) {
+            am.setVisibility(View.INVISIBLE);
+            pm.setVisibility(View.INVISIBLE);
+        } else if(item.isAM()) {
+            am.setVisibility(View.VISIBLE);
+            pm.setVisibility(View.INVISIBLE);
+        } else {
+            am.setVisibility(View.INVISIBLE);
+            pm.setVisibility(View.VISIBLE);
         }
     }
 
