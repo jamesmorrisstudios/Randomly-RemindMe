@@ -176,7 +176,12 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
             if(data.isEmpty()) {
                 showNoDataText();
             } else {
-                //TODO
+                ArrayList<ReminderContainer> reminders = new ArrayList<>();
+                reminders.add(new ReminderContainer("Reminders"));
+                for(ReminderItem item : data) {
+                    reminders.add(new ReminderContainer(item));
+                }
+                mAdapter.setItems(reminders);
                 hideNoDataText();
             }
         }

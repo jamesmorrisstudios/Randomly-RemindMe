@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -57,20 +58,22 @@ public final class AddReminderFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-
+                //Delete current reminder
+                //Go back
                 break;
             case R.id.action_cancel:
-
+                //Clear current reminder
+                //Go back
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_reminder, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_add_reminder, container, false);
+        ReminderList.getInstance().createNewReminder();
+        return view;
     }
 
     @Override

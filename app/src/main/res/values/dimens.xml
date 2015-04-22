@@ -22,6 +22,7 @@
 
   <dimen name="data_margin">6dp</dimen>
   <dimen name="header_size">21sp</dimen>
+  <dimen name="header_small_size">18sp</dimen>
   <dimen name="item_size">18sp</dimen>
   <dimen name="item_small_size">15sp</dimen>
 

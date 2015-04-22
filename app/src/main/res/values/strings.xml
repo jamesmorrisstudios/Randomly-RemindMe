@@ -46,5 +46,10 @@
     <string name="license_1_link_license">http://www.apache.org/licenses/LICENSE-2.0</string>
 
 
+    <string name="edit_title">Title</string>
+    <string name="edit_timing">Timing</string>
+    <string name="edit_repeat">Repeat</string>
+    <string name="edit_alert">Alert</string>
+    <string name="edit_message">Message</string>
 
 </resources>
