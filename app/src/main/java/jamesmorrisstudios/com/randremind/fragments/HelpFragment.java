@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,36 +39,57 @@ import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * Help Fragment that displays help and about options for the app.
+ * Several sub pages with listener callbacks to the main activity.
  */
 public final class HelpFragment extends Fragment {
     public static final String TAG = "HelpFragment";
-
     private OnFragmentInteractionListener mListener;
 
-    public HelpFragment() {
-    }
+    /**
+     * Required empty constructor
+     */
+    public HelpFragment() {}
 
+    /**
+     * @param savedInstanceState Saved instance state
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
+    /**
+     * Create the options menu
+     * @param menu Menu
+     * @param inflater Inflater
+     */
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_help, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * No items in the menu so ignore any clicks
+     * @param item Item clicked
+     * @return True if consumed
+     */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Create the view
+     * @param inflater Inflater object
+     * @param container Container view
+     * @param savedInstanceState Saved instance state
+     * @return This fragments top view
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_help, container, false);
         ButtonFlat readHow = (ButtonFlat) view.findViewById(R.id.howToUseRead);
         ButtonFlat watchHow = (ButtonFlat) view.findViewById(R.id.howToUseWatch);
@@ -116,8 +139,12 @@ public final class HelpFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Attach to the activity
+     * @param activity Activity to attach
+     */
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
@@ -127,6 +154,9 @@ public final class HelpFragment extends Fragment {
         }
     }
 
+    /**
+     * Detach from activity
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -140,7 +170,15 @@ public final class HelpFragment extends Fragment {
      * activity.
      */
     public interface OnFragmentInteractionListener {
+
+        /**
+         * License fragment button clicked
+         */
         void onLicenseClicked();
+
+        /**
+         * Tutorial fragment button clicked
+         */
         void onTutorialClicked();
     }
 }

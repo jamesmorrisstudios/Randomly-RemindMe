@@ -86,7 +86,7 @@ public class Bus {
     }
 
     /**
-     * Game Events
+     * Events
      */
     public enum Event {
         DATA_LOAD_PASS,

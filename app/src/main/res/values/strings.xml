@@ -17,7 +17,7 @@
 <resources>
     <string name="todo">TODO Coming Soon</string>
 
-    <string name="app_name">Randomly Remind</string>
+    <string name="app_name">Randomly RemindMe</string>
     <string name="action_help">Help and Feedback</string>
     <string name="action_settings">Settings</string>
 

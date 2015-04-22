@@ -53,7 +53,7 @@ public class Utils {
      * Displays a popup toast for a short time
      * @param text Text to display
      */
-    public static void toastShort(String text) {
+    public static void toastShort(@NonNull String text) {
         Toast.makeText(App.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
@@ -61,7 +61,7 @@ public class Utils {
      * Displays a popup toast for a long time
      * @param text Text to display
      */
-    public static void toastLong(String text) {
+    public static void toastLong(@NonNull String text) {
         Toast.makeText(App.getContext(), text, Toast.LENGTH_LONG).show();
     }
 
@@ -151,6 +151,7 @@ public class Utils {
      *
      * @return The formatted version string
      */
+    @NonNull
     public static String getVersionName() {
         PackageInfo pInfo;
         try {

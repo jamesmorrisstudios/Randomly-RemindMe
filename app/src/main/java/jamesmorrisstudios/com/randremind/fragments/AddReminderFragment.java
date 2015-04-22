@@ -35,7 +35,6 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
  */
 public final class AddReminderFragment extends Fragment {
     public static final String TAG = "AddReminderFragment";
-
     private OnFragmentInteractionListener mListener;
 
     public AddReminderFragment() {
@@ -61,12 +60,12 @@ public final class AddReminderFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                //Delete current reminder
-                //Go back
+                ReminderList.getInstance().deleteCurrentReminder();
+                mListener.goBackFromNewReminder();
                 break;
             case R.id.action_cancel:
-                //Clear current reminder
-                //Go back
+                ReminderList.getInstance().clearCurrentReminder();
+                mListener.goBackFromNewReminder();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -94,6 +93,9 @@ public final class AddReminderFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public final void onBack() {
         ReminderList.getInstance().saveCurrentReminder();
         ReminderList.getInstance().clearCurrentReminder();
     }
@@ -105,8 +107,7 @@ public final class AddReminderFragment extends Fragment {
      * activity.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        void goBackFromNewReminder();
     }
 
 }

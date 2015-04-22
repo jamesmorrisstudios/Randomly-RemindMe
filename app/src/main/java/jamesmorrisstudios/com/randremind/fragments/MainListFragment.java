@@ -47,36 +47,49 @@ import jamesmorrisstudios.com.randremind.utilities.Bus;
 import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
- * A placeholder fragment containing a simple view.
+ * The primary list fragment showing all existing reminders
  */
 public final class MainListFragment extends Fragment implements ReminderAdapter.ReminderItemClickListener {
     public static final String TAG = "MainListFragment";
-
     private boolean isRefreshing = false;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ReminderAdapter mAdapter = null;
     private TextView noDataText;
-
     private OnFragmentInteractionListener mListener;
 
-    public MainListFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Required empty public constructor
+     */
+    public MainListFragment() {}
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
+    /**
+     *
+     * @param menu
+     * @param inflater
+     */
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_help:
                 mListener.onHelpClicked();
@@ -85,8 +98,15 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Bus.register(this);
         View view = inflater.inflate(R.layout.fragment_main_list, container, false);
@@ -146,12 +166,19 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         ReminderList.getInstance().loadData(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         Bus.unregister(this);
     }
 
+    /**
+     *
+     * @param event
+     */
     @Subscribe
     public final void onEvent(Bus.Event event) {
         switch(event) {
@@ -177,7 +204,6 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
                 showNoDataText();
             } else {
                 ArrayList<ReminderContainer> reminders = new ArrayList<>();
-                reminders.add(new ReminderContainer("Reminders"));
                 for(ReminderItem item : data) {
                     reminders.add(new ReminderContainer(item));
                 }
@@ -192,24 +218,34 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     /**
      * Finish up a refresh and hide the spinner
      */
-        private void endRefresh () {
-            mSwipeRefreshLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    isRefreshing = false;
-                }
-            }, 500);
+    private void endRefresh () {
+        mSwipeRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+                isRefreshing = false;
+            }
+        }, 500);
     }
 
+    /**
+     *
+     */
     private void showNoDataText() {
         noDataText.setVisibility(View.VISIBLE);
     }
 
+    /**
+     *
+     */
     private void hideNoDataText() {
         noDataText.setVisibility(View.GONE);
     }
 
+    /**
+     *
+     * @param activity
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -221,12 +257,19 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    /**
+     *
+     * @param item
+     */
     @Override
     public void itemClicked(ReminderContainer item) {
 
@@ -239,7 +282,15 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
      * activity.
      */
     public interface OnFragmentInteractionListener {
+
+        /**
+         *
+         */
         void onAddNewClicked();
+
+        /**
+         *
+         */
         void onHelpClicked();
     }
 
@@ -249,14 +300,26 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     private static class ViewHolder {
         private final RecyclerView mRecyclerView;
 
+        /**
+         *
+         * @param view
+         */
         public ViewHolder(View view) {
             mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         }
 
+        /**
+         *
+         * @param lm
+         */
         public void initViews(LayoutManager lm) {
             mRecyclerView.setLayoutManager(lm);
         }
 
+        /**
+         *
+         * @param adapter
+         */
         public void setAdapter(RecyclerView.Adapter<?> adapter) {
             mRecyclerView.setAdapter(adapter);
         }

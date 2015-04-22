@@ -21,7 +21,7 @@ import android.support.annotation.NonNull;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 
 /**
- * Container for achievement items in the achievemnt fragment
+ * Container for reminder item that abstracts it for use in the recyclerView
  *
  * Created by James on 3/31/2015.
  */

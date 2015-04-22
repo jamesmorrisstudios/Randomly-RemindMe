@@ -16,6 +16,8 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.support.annotation.NonNull;
+
 /**
  * Time item for scheduling
  *
@@ -25,11 +27,20 @@ public class TimeItem {
     public int hour;
     public int minute;
 
+    /**
+     * Constructor
+     * @param hour Starting hour
+     * @param minute Starting minute
+     */
     public TimeItem(int hour, int minute) {
         this.hour = hour;
         this.minute = minute;
     }
 
+    /**
+     * @return A copy of this object
+     */
+    @NonNull
     public TimeItem copy() {
         return new TimeItem(this.hour, this.minute);
     }

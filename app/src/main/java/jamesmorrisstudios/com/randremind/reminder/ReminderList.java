@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -35,20 +36,32 @@ import jamesmorrisstudios.com.randremind.utilities.Bus;
 import jamesmorrisstudios.com.randremind.utilities.FileWriter;
 
 /**
+ * Reminder list control class. Add, remove, save, delete reminders
+ *
  * Created by James on 4/20/2015.
  */
 public final class ReminderList {
+    //Constants
     private static final String TAG = "ReminderList";
     private static final String saveName = "SAVEDATA";
     private static final String stringType = "UTF-8";
+    //Reminder singleton instance
     private static ReminderList instance = null;
+    //Reminder List
     @SerializedName("data")
     private ArrayList<ReminderItem> data = new ArrayList<>();
+    //The currently selected reminder as a copy
     private int currentIndex = -1;
     private ReminderItem currentItem;
 
+    /**
+     * Required private constructor to maintain singleton
+     */
     private ReminderList() {}
 
+    /**
+     * @return The singleton instance of the reminderList
+     */
     public static ReminderList getInstance() {
         if(instance == null) {
             instance = new ReminderList();
@@ -56,25 +69,55 @@ public final class ReminderList {
         return instance;
     }
 
+    /**
+     * Loads the reminder list from disk. If already loaded it posts instantly
+     * subscribe to Event.DATA_LOAD_PASS and Event.DATA_LOAD_FAIL for callbacks
+     * @param forceRefresh True to force reload from disk
+     */
     public final void loadData(boolean forceRefresh) {
         if(!forceRefresh && hasReminders()) {
             Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
         } else {
-            if (loadFromFile()) {
-                Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
-            } else {
-                Bus.postEvent(Bus.Event.DATA_LOAD_FAIL);
-            }
+            AsyncTask<Void, Void, Boolean> taskLoad = new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(Void... params) {
+                    return loadFromFile();
+                }
+
+                @Override
+                protected void onPostExecute(Boolean value) {
+                    if(value) {
+                        Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
+                    } else {
+                        Bus.postEvent(Bus.Event.DATA_LOAD_FAIL);
+                    }
+                }
+            };
+            taskLoad.execute();
         }
     }
 
+    /**
+     *
+     */
     public final void saveData() {
         if(hasReminders()) {
-            if (saveToFile()) {
-                Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
-            } else {
-                Bus.postEvent(Bus.Event.DATA_SAVE_FAIL);
-            }
+            AsyncTask<Void, Void, Boolean> taskSave = new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(Void... params) {
+                    return saveToFile();
+                }
+
+                @Override
+                protected void onPostExecute(Boolean value) {
+                    if(value) {
+                        Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
+                    } else {
+                        Bus.postEvent(Bus.Event.DATA_SAVE_FAIL);
+                    }
+                }
+            };
+            taskSave.execute();
         } else {
             Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
         }

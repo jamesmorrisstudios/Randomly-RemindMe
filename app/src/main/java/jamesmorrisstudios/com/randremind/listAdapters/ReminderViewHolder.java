@@ -26,7 +26,7 @@ import android.widget.TextView;
 import jamesmorrisstudios.com.randremind.R;
 
 /**
- * Achievement view holder for use in RecyclerView
+ * Reminder view holder for use in RecyclerView
  */
 public final class ReminderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     //Type of view. header or normal
@@ -39,7 +39,7 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
     private TextView title;
 
     /**
-     * COnstructor
+     * Constructor
      * @param view Parent view
      * @param isHeader True if header item, false for normal
      * @param mListener Click listener. Null if none desired

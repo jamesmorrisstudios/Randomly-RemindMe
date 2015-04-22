@@ -16,11 +16,15 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
 /**
+ * Individual reminder item that contains all needed items to be a reminder
+ *
  * Created by James on 4/20/2015.
  */
 public class ReminderItem {
@@ -92,10 +96,27 @@ public class ReminderItem {
         currentMessage = 0;
     }
 
-    public ReminderItem(String title, boolean enabled, TimeItem startTime, TimeItem endTime, int numberPerDay,
-                        Distribution distribution, boolean[] daysToRun, boolean notification, boolean alarm,
-                        boolean vibrate, ArrayList<String> messages, MessageOrder messageOrder,
-                        ArrayList<TimeItem> alertTimes, int currentMessage) {
+    /**
+     * Creates a reminderItem with all the specified values
+     * @param title Title
+     * @param enabled True to enable this reminder
+     * @param startTime Start time object
+     * @param endTime End time object
+     * @param numberPerDay Number per day
+     * @param distribution Distribution
+     * @param daysToRun Days to run
+     * @param notification True to enable notification
+     * @param alarm True to enable alarm
+     * @param vibrate True to enable vibrate
+     * @param messages List of messages to display
+     * @param messageOrder Message ordering
+     * @param alertTimes List of calculated alert times
+     * @param currentMessage Current message index
+     */
+    public ReminderItem(@NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
+                        @NonNull Distribution distribution, @NonNull boolean[] daysToRun, boolean notification, boolean alarm,
+                        boolean vibrate, @NonNull ArrayList<String> messages, @NonNull MessageOrder messageOrder,
+                        @NonNull ArrayList<TimeItem> alertTimes, int currentMessage) {
         this.title = title;
         this.enabled = enabled;
         this.startTime = startTime.copy();
@@ -106,12 +127,16 @@ public class ReminderItem {
         this.notification = notification;
         this.alarm = alarm;
         this.vibrate = vibrate;
-        this.messages = (ArrayList<String>) messages.clone();
+        this.messages = (ArrayList<String>) messages.clone(); //Ignore
         this.messageOrder = messageOrder;
-        this.alertTimes = (ArrayList<TimeItem>) alertTimes.clone();
+        this.alertTimes = (ArrayList<TimeItem>) alertTimes.clone(); //Ignore
         this.currentMessage = currentMessage;
     }
 
+    /**
+     * @return A deep copy of this item
+     */
+    @NonNull
     public final ReminderItem copy() {
         return new ReminderItem(title, enabled, startTime, endTime, numberPerDay, distribution,
                 daysToRun, notification, alarm, vibrate, messages, messageOrder, alertTimes, currentMessage);

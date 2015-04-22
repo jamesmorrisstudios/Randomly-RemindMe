@@ -31,11 +31,10 @@ import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
- * Achievements adapter class to manage the recyclerView
+ * Reminder adapter class to manage the recyclerView
  */
 public final class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
     public static final String TAG = "ReminderAdapter";
-
     private static final int VIEW_TYPE_HEADER = 0x01;
     private static final int VIEW_TYPE_CONTENT = 0x00;
     private ReminderItemClickListener mListener;
@@ -73,7 +72,7 @@ public final class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHold
      * Creates a view holder for one of the item views
      * @param parent Parent view
      * @param viewType Type of view
-     * @return The achievement view holder
+     * @return The reminder view holder
      */
     @Override
     public ReminderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -95,7 +94,7 @@ public final class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHold
     }
 
     /**
-     * Achievement click interface
+     * Reminder click interface
      */
     public interface ReminderItemClickListener {
          void itemClicked(ReminderContainer item);
@@ -264,7 +263,7 @@ public final class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHold
          * Constructor
          * @param sectionManager Section manager
          * @param sectionFirstPosition First position in section
-         * @param reminder Achievement line item data
+         * @param reminder Reminder line item data
          */
         public LineItem(int sectionManager, int sectionFirstPosition, @NonNull ReminderContainer reminder) {
             this.sectionManager = sectionManager;

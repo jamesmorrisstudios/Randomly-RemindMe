@@ -17,6 +17,8 @@
 package jamesmorrisstudios.com.randremind.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,25 +27,35 @@ import android.view.ViewGroup;
 import jamesmorrisstudios.com.randremind.R;
 
 /**
- *
- *
+ * Tutorial fragment.
+ * Does nothing beyond display a tutorial list that is all managed by the xml
+ * Keeps the same menu as the help fragment.
  */
 public final class TutorialFragment extends Fragment {
     public static final String TAG = "TutorialFragment";
 
-    public TutorialFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Required empty public constructor
+     */
+    public TutorialFragment() {}
 
+    /**
+     * @param savedInstanceState Saved instance state
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Create view
+     * @param inflater Inflater object
+     * @param container Container view
+     * @param savedInstanceState Saved instance state
+     * @return The top view for this fragment
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tutorial, container, false);
     }
 

@@ -17,93 +17,139 @@
 package jamesmorrisstudios.com.randremind.activities;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
+ * Primary activity.
+ * Handles navigation and lifecycle control.
+ *
  * Created by James on 4/20/2015.
  */
 public final class MainActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener {
 
+    /**
+     * Create this activity
+     * @param savedInstanceState Saved instance state
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //Listen for changes in the back stack
         getSupportFragmentManager().addOnBackStackChangedListener(this);
-        //Handle when activity is recreated like on orientation Change
         shouldDisplayHomeUp();
-
         if(!isFragmentDisplayed()) {
             loadMainListFragment();
         }
     }
 
+    /**
+     * Activity start
+     */
     @Override
     public void onStart() {
         super.onStart();
     }
 
+    /**
+     * Activity resume
+     */
     @Override
     public void onResume() {
         super.onResume();
     }
 
+    /**
+     * Activity pause
+     */
     @Override
     public void onPause() {
         super.onPause();
     }
 
+    /**
+     * Activity stop
+     */
     @Override
     public void onStop() {
         super.onStop();
         ReminderList.getInstance().saveData();
     }
 
+    /**
+     * Fragment backstack changed.
+     */
     @Override
     public void onBackStackChanged() {
         shouldDisplayHomeUp();
     }
 
+    /**
+     * Check if we are at the top page and show the up button as needed
+     */
     public void shouldDisplayHomeUp(){
-        //Enable Up button only  if there are entries in the back stack
         boolean canback = getSupportFragmentManager().getBackStackEntryCount()>0;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(canback);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(canback);
+        }
     }
 
+    /**
+     * The up button was pressed so pop one off the backstack
+     * @return Always true
+     */
     @Override
     public boolean onSupportNavigateUp() {
-        //This method is called when the up button is pressed. Just the pop back stack.
         getSupportFragmentManager().popBackStack();
         return true;
     }
 
+    /**
+     * Add new button clicked
+     */
     @Override
     public void onAddNewClicked() {
         loadAddReminderFragment();
     }
 
+    /**
+     * Help button clicked
+     */
     @Override
     public void onHelpClicked() {
         loadHelpFragment();
     }
 
+    /**
+     * License button clicked
+     */
     @Override
     public void onLicenseClicked() {
         loadLicenseFragment();
     }
 
+    /**
+     * Tutorial button clicked
+     */
     @Override
     public void onTutorialClicked() {
         loadTutorialFragment();
     }
+
+    /**
+     * Back from new reminder
+     */
+    @Override
+    public void goBackFromNewReminder() {
+        loadMainListFragment();
+    }
+
 }
