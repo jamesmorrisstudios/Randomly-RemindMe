@@ -90,7 +90,9 @@ public class Bus {
      */
     public enum Event {
         DATA_LOAD_PASS,
-        DATA_LOAD_FAIL
+        DATA_LOAD_FAIL,
+        DATA_SAVE_PASS,
+        DATA_SAVE_FAIL
     }
 
 }

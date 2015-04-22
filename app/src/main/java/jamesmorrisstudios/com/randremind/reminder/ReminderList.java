@@ -19,14 +19,26 @@ package jamesmorrisstudios.com.randremind.reminder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.utilities.Bus;
+import jamesmorrisstudios.com.randremind.utilities.FileWriter;
 
 /**
  * Created by James on 4/20/2015.
  */
 public final class ReminderList {
+    private static final String TAG = "ReminderList";
+    private static final String saveName = "SAVEDATA";
+    private static final String stringType = "UTF-8";
     private static ReminderList instance = null;
     private ArrayList<ReminderItem> data = new ArrayList<>();
     private int currentIndex = -1;
@@ -42,7 +54,27 @@ public final class ReminderList {
     }
 
     public final void loadData(boolean forceRefresh) {
-        Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
+        if(!forceRefresh && hasReminders()) {
+            Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
+        } else {
+            if (loadFromFile()) {
+                Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
+            } else {
+                Bus.postEvent(Bus.Event.DATA_LOAD_FAIL);
+            }
+        }
+    }
+
+    public final void saveData() {
+        if(saveToFile()) {
+            Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
+        } else {
+            Bus.postEvent(Bus.Event.DATA_SAVE_FAIL);
+        }
+    }
+
+    public final boolean hasReminders() {
+        return !data.isEmpty();
     }
 
     @NonNull
@@ -92,49 +124,46 @@ public final class ReminderList {
         return currentItem;
     }
 
-    private void saveToFile() {
-
+    private boolean saveToFile() {
+        byte[] bytes = serializeSave();
+        return bytes != null && FileWriter.writeFile(saveName, bytes, false);
     }
 
-    private void loadFromFile() {
-
+    private boolean loadFromFile() {
+        byte[] bytes = FileWriter.readFile(saveName, false);
+        return bytes != null && deserializeSave(bytes);
     }
 
+    @Nullable
+    private byte[] serializeSave() {
+        JSONObject retVal1 = new JSONObject();
+        try {
+            retVal1.put(ReminderList.TAG, new Gson().toJsonTree(data).getAsJsonObject());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return retVal1.toString().getBytes(Charset.forName(stringType));
+    }
 
-    /*
-    //Load the JSON byte array back into gamestate
-    public final boolean loadGameDataBytes(byte[] bytes, Enum callback, boolean isUpdate) {
-        gameState = getGameState(bytes);
-        if (gameState == null) {
+    private boolean deserializeSave(@NonNull byte[] bytes) {
+        String st;
+        try {
+            st = new String(bytes, stringType);
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+            return false;
+        }
+        try {
+            JSONObject obj = new JSONObject(st);
+            data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderList>>() {
+            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
             return false;
         }
         return true;
     }
 
-    //Helper function to load JSON byte array
-    private GameState getGameState(byte[] bytes) {
-        if (bytes == null) {
-            return null;
-        }
-        String st = null;
-        try {
-            st = new String(bytes, Constants.STRING_TYPE);
-            v("Save Game String: " + st);
-        } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
-            return null;
-        }
-        GameState gameState = null;
-        try {
-            //st = ApplicationTop.getContext().getResources().getString(R.string.force_match);
-            JSONObject obj = new JSONObject(st);
-            gameState = new Gson().fromJson(obj.get(GameState.TAG).toString(), new TypeToken<GameState>() {
-            }.getType());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return gameState;
-    }
-     */
 
 }

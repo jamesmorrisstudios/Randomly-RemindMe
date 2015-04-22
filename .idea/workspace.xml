@@ -22,32 +22,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e373aaa4-6238-4a19-a7c2-48f42daa7288" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/FileWriter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/TimeItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_22_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/randRemind.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_1_0.xml" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\.idea\libraries\appcompat_v7_22_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\.idea\libraries\support_annotations_22_0_0.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Programming\randRemind\.idea\libraries\cardview_v7_22_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/cardview_v7_22_1_0.xml" />
-      <change type="MOVED" beforePath="C:\Programming\randRemind\.idea\libraries\recyclerview_v7_22_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_22_1_0.xml" />
-      <change type="MOVED" beforePath="C:\Programming\randRemind\.idea\libraries\support_v4_22_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_22_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/MainListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/MainListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Bus.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Bus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materialdesign/build.gradle" afterPath="$PROJECT_DIR$/materialdesign/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materialdesign/materialdesign.iml" afterPath="$PROJECT_DIR$/materialdesign/materialdesign.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RandRemind.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -206,29 +182,17 @@
       <file leaf-file-name="ReminderList.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4062864">
-              <caret line="110" column="20" selection-start-line="110" selection-start-column="20" selection-end-line="110" selection-end-column="20" />
+            <state vertical-scroll-proportion="2.6915019">
+              <caret line="164" column="20" selection-start-line="164" selection-start-column="20" selection-end-line="164" selection-end-column="20" />
               <folding>
-                <element signature="e#1351#1352#0" expanded="true" />
-                <element signature="e#1406#1407#0" expanded="true" />
-                <element signature="e#1473#1474#0" expanded="true" />
-                <element signature="e#1500#1501#0" expanded="true" />
-                <element signature="e#2460#2461#0" expanded="true" />
-                <element signature="e#2502#2503#0" expanded="true" />
-                <element signature="e#2570#2571#0" expanded="true" />
-                <element signature="e#2604#2605#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReminderItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="112" column="5" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2347#2348#0" expanded="true" />
+                <element signature="e#2385#2386#0" expanded="true" />
+                <element signature="e#2452#2453#0" expanded="true" />
+                <element signature="e#2479#2480#0" expanded="true" />
+                <element signature="e#3439#3440#0" expanded="true" />
+                <element signature="e#3481#3482#0" expanded="true" />
+                <element signature="e#3549#3550#0" expanded="true" />
+                <element signature="e#3583#3584#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2992,7 +2956,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_help.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Bus.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/licenseFragment.java" />
@@ -3021,6 +2984,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/MainListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Bus.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" />
       </list>
     </option>
@@ -3242,6 +3206,10 @@
               <option name="myItemId" value="randremind" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utilities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3342,6 +3310,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="fragments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randremind" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3709,7 +3707,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1683" height="1040" extended-state="1" />
+    <frame x="0" y="0" width="1683" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -3896,13 +3894,6 @@
         <state vertical-scroll-proportion="0.7441077">
           <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Bus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4249127">
-          <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -4164,16 +4155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="112" column="5" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39580908">
@@ -4203,19 +4184,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Bus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84167635">
+          <caret line="94" column="22" selection-start-line="94" selection-start-column="22" selection-end-line="94" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.782305">
+          <caret line="112" column="5" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4062864">
-          <caret line="110" column="20" selection-start-line="110" selection-start-column="20" selection-end-line="110" selection-end-column="20" />
+        <state vertical-scroll-proportion="2.6915019">
+          <caret line="164" column="20" selection-start-line="164" selection-start-column="20" selection-end-line="164" selection-end-column="20" />
           <folding>
-            <element signature="e#1351#1352#0" expanded="true" />
-            <element signature="e#1406#1407#0" expanded="true" />
-            <element signature="e#1473#1474#0" expanded="true" />
-            <element signature="e#1500#1501#0" expanded="true" />
-            <element signature="e#2460#2461#0" expanded="true" />
-            <element signature="e#2502#2503#0" expanded="true" />
-            <element signature="e#2570#2571#0" expanded="true" />
-            <element signature="e#2604#2605#0" expanded="true" />
+            <element signature="e#2347#2348#0" expanded="true" />
+            <element signature="e#2385#2386#0" expanded="true" />
+            <element signature="e#2452#2453#0" expanded="true" />
+            <element signature="e#2479#2480#0" expanded="true" />
+            <element signature="e#3439#3440#0" expanded="true" />
+            <element signature="e#3481#3482#0" expanded="true" />
+            <element signature="e#3549#3550#0" expanded="true" />
+            <element signature="e#3583#3584#0" expanded="true" />
           </folding>
         </state>
       </provider>
