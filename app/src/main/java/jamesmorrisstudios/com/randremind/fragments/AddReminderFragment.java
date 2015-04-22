@@ -46,6 +46,9 @@ public final class AddReminderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        if(!ReminderList.getInstance().hasCurrentReminder()) {
+            ReminderList.getInstance().createNewReminder();
+        }
     }
 
     @Override
@@ -91,6 +94,8 @@ public final class AddReminderFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        ReminderList.getInstance().saveCurrentReminder();
+        ReminderList.getInstance().clearCurrentReminder();
     }
 
     /**

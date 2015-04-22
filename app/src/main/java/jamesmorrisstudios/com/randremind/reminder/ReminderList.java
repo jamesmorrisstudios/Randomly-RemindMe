@@ -20,6 +20,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -40,6 +42,7 @@ public final class ReminderList {
     private static final String saveName = "SAVEDATA";
     private static final String stringType = "UTF-8";
     private static ReminderList instance = null;
+    @SerializedName("data")
     private ArrayList<ReminderItem> data = new ArrayList<>();
     private int currentIndex = -1;
     private ReminderItem currentItem;
@@ -66,10 +69,14 @@ public final class ReminderList {
     }
 
     public final void saveData() {
-        if(saveToFile()) {
-            Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
+        if(hasReminders()) {
+            if (saveToFile()) {
+                Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
+            } else {
+                Bus.postEvent(Bus.Event.DATA_SAVE_FAIL);
+            }
         } else {
-            Bus.postEvent(Bus.Event.DATA_SAVE_FAIL);
+            Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
         }
     }
 
@@ -107,12 +114,12 @@ public final class ReminderList {
     public final void saveCurrentReminder() {
         if(currentIndex == -1) {
             //New Item so add to end
-            currentIndex = data.size();
             data.add(currentItem);
         } else {
             //Existing item so copy over the original
             data.set(currentIndex, currentItem.copy());
         }
+        saveToFile();
     }
 
     public final boolean hasCurrentReminder() {
@@ -130,6 +137,9 @@ public final class ReminderList {
     }
 
     private boolean loadFromFile() {
+        if(!FileWriter.doesFileExist(saveName, false)) {
+            return true;
+        }
         byte[] bytes = FileWriter.readFile(saveName, false);
         return bytes != null && deserializeSave(bytes);
     }
@@ -138,7 +148,7 @@ public final class ReminderList {
     private byte[] serializeSave() {
         JSONObject retVal1 = new JSONObject();
         try {
-            retVal1.put(ReminderList.TAG, new Gson().toJsonTree(data).getAsJsonObject());
+            retVal1.put(ReminderList.TAG, new Gson().toJsonTree(data));
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
@@ -156,7 +166,7 @@ public final class ReminderList {
         }
         try {
             JSONObject obj = new JSONObject(st);
-            data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderList>>() {
+            data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderItem>>() {
             }.getType());
         } catch (JSONException e) {
             e.printStackTrace();

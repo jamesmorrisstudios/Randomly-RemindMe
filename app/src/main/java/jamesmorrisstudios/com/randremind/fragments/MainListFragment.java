@@ -184,8 +184,9 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
                 mAdapter.setItems(reminders);
                 hideNoDataText();
             }
+        } else {
+            showNoDataText();
         }
-        showNoDataText();
     }
 
     /**

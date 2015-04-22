@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
  * Created by James on 4/20/2015.
@@ -45,6 +46,27 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
         if(!isFragmentDisplayed()) {
             loadMainListFragment();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ReminderList.getInstance().saveData();
     }
 
     @Override
