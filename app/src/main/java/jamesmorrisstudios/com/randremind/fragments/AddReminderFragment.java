@@ -19,6 +19,8 @@ package jamesmorrisstudios.com.randremind.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,13 +30,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
+import com.jamesmorrisstudios.materialdesign.views.Slider;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -48,10 +56,11 @@ public final class AddReminderFragment extends Fragment {
     public static final String TAG = "AddReminderFragment";
     private OnFragmentInteractionListener mListener;
 
-    private EditText titleText;
+    private AppCompatEditText titleText;
     private SwitchCompat titleEnable;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private View startTimeTop, endTimeTop;
+    private AppCompatSpinner timeSpinner, distributionSpinner;
 
     public AddReminderFragment() {
         // Required empty public constructor
@@ -88,7 +97,7 @@ public final class AddReminderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_reminder, container, false);
         //Get all the views
-        titleText = (EditText) view.findViewById(R.id.titleText);
+        titleText = (AppCompatEditText) view.findViewById(R.id.titleText);
         titleEnable = (SwitchCompat) view.findViewById(R.id.titleEnabled);
         startTimeTop = view.findViewById(R.id.timing_start);
         startHour = (TextView) startTimeTop.findViewById(R.id.time_hour);
@@ -100,6 +109,8 @@ public final class AddReminderFragment extends Fragment {
         endMinute = (TextView) endTimeTop.findViewById(R.id.time_minute);
         endAM = (TextView) endTimeTop.findViewById(R.id.time_am);
         endPM = (TextView) endTimeTop.findViewById(R.id.time_pm);
+        timeSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_times_spinner);
+        distributionSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_distribution_spinner);
         //Create a reminder if one isn't already set
         if(!ReminderList.getInstance().hasCurrentReminder()) {
             ReminderList.getInstance().createNewReminder();
@@ -133,7 +144,7 @@ public final class AddReminderFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-                if(currentReminder == null) {
+                if (currentReminder == null) {
                     return;
                 }
                 currentReminder.enabled = isChecked;
@@ -155,11 +166,26 @@ public final class AddReminderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-                if(currentReminder == null) {
+                if (currentReminder == null) {
                     return;
                 }
                 mListener.createTimePickerDialog(timeEndListener, currentReminder.endTime.hour,
                         currentReminder.endTime.minute, currentReminder.endTime.is24Hour());
+            }
+        });
+        timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
+                if (currentReminder == null) {
+                    return;
+                }
+                currentReminder.numberPerDay = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -167,26 +193,38 @@ public final class AddReminderFragment extends Fragment {
     private TimePickerDialog.OnTimeSetListener timeStartListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
-            ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-            if (currentReminder == null) {
+            ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+            if (remind == null) {
                 return;
             }
-            currentReminder.startTime.hour = hourOfDay;
-            currentReminder.startTime.minute = minute;
-            Utils.setTime(startHour, startMinute, startAM, startPM, currentReminder.startTime);
+            int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (hourOfDay * 60 + minute);
+            if(diffMinutes >= 0) {
+                remind.startTime.hour = hourOfDay;
+                remind.startTime.minute = minute;
+                Utils.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
+                generateNumberTimePerDay();
+            } else {
+                Utils.toastShort(getResources().getString(R.string.error_time_difference_start));
+            }
         }
     };
 
     private TimePickerDialog.OnTimeSetListener timeEndListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
-            ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-            if (currentReminder == null) {
+            ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+            if (remind == null) {
                 return;
             }
-            currentReminder.endTime.hour = hourOfDay;
-            currentReminder.endTime.minute = minute;
-            Utils.setTime(endHour, endMinute, endAM, endPM, currentReminder.endTime);
+            int diffMinutes = (hourOfDay * 60 + minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
+            if(diffMinutes >= 0) {
+                remind.endTime.hour = hourOfDay;
+                remind.endTime.minute = minute;
+                Utils.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
+                generateNumberTimePerDay();
+            } else {
+                Utils.toastShort(getResources().getString(R.string.error_time_difference_end));
+            }
         }
     };
 
@@ -214,6 +252,7 @@ public final class AddReminderFragment extends Fragment {
     private void destroyListeners() {
         titleEnable.setOnCheckedChangeListener(null);
         titleText.removeTextChangedListener(titleTextListener);
+        timeSpinner.setOnItemSelectedListener(null);
     }
 
     private void populateData() {
@@ -225,6 +264,42 @@ public final class AddReminderFragment extends Fragment {
         titleEnable.setChecked(currentReminder.enabled);
         Utils.setTime(startHour, startMinute, startAM, startPM, currentReminder.startTime);
         Utils.setTime(endHour, endMinute, endAM, endPM, currentReminder.endTime);
+        generateNumberTimePerDay();
+        setupDistributionSpinner();
+    }
+
+    private void setupDistributionSpinner() {
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if(remind == null) {
+            return;
+        }
+        List<String> list = new ArrayList<>();
+        list.add(getString(R.string.distribution_even));
+        list.add(getString(R.string.distribution_part_random));
+        list.add(getString(R.string.distribution_most_random));
+        list.add(getString(R.string.distribution_full_random));
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, list);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        distributionSpinner.setAdapter(spinnerArrayAdapter);
+        distributionSpinner.setSelection(remind.distribution.ordinal());
+    }
+
+    private void generateNumberTimePerDay() {
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if(remind == null) {
+            return;
+        }
+        int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
+        int max = Math.max(diffMinutes / 30, 1);
+        remind.numberPerDay = Math.min(remind.numberPerDay, max);
+        List<String> perDayList = new ArrayList<>();
+        for(int i=0; i<max; i++) {
+            perDayList.add(Integer.toString(i+1));
+        }
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, perDayList);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        timeSpinner.setAdapter(spinnerArrayAdapter);
+        timeSpinner.setSelection(remind.numberPerDay-1);
     }
 
     public final void onBack() {

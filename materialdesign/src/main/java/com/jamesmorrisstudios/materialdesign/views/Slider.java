@@ -35,6 +35,7 @@ public class Slider extends CustomView {
     private boolean press               = false;
     private boolean showNumberIndicator = false;
     private int     value               = 0;
+    private String[] textIndicator = null;
 
     public Slider(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -104,6 +105,15 @@ public class Slider extends CustomView {
         this.showNumberIndicator = showNumberIndicator;
         numberIndicator = (showNumberIndicator) ? new NumberIndicator(
                 getContext()) : null;
+    }
+
+    public void setTextIndicator(String[] textIndicator) {
+        this.textIndicator = textIndicator;
+        if(textIndicator != null) {
+            setShowNumberIndicator(true);
+            setValue(0);
+            setMax(textIndicator.length-1);
+        }
     }
 
     @Override
@@ -376,12 +386,13 @@ public class Slider extends CustomView {
                 animate = false;
             if (animate == false) {
                 numberIndicator.numberIndicator.setX(
-                                (ball.getX()
-                                        + Utils.getRelativeLeft((View) ball
-                                        .getParent()) + ball.getWidth() / 2)
-                                        - size);
+                        (ball.getX()
+                                + Utils.getRelativeLeft((View) ball
+                                .getParent()) + ball.getWidth() / 2)
+                                - size);
                 numberIndicator.numberIndicator.setY(y - size);
-                numberIndicator.numberIndicator.setText(value + "");
+                numberIndicator.numberIndicator.setText(textIndicator[value]);
+                //numberIndicator.numberIndicator.setText(value + "");
             }
 
             invalidate();

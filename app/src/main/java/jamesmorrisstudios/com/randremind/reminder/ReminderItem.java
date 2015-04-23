@@ -47,6 +47,8 @@ public final class ReminderItem {
     @SerializedName("distribution")
     public Distribution distribution;
     //Repeat
+    @SerializedName("repeat")
+    public boolean repeat;
     @SerializedName("daysToRun")
     public boolean[] daysToRun; //Sunday -> Saturday
     //Alert Type
@@ -89,6 +91,7 @@ public final class ReminderItem {
         this.numberPerDay = 6;
         this.distribution = Distribution.PART_RANDOM;
         //Repeat
+        this.repeat = true;
         this.daysToRun = new boolean[] {true, true, true, true, true, true, true};
         //Alert Type
         this.notification = true;
@@ -120,7 +123,7 @@ public final class ReminderItem {
      * @param currentMessage Current message index
      */
     public ReminderItem(@NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
-                        @NonNull Distribution distribution, @NonNull boolean[] daysToRun, boolean notification, boolean alarm,
+                        @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun, boolean notification, boolean alarm,
                         boolean vibrate, @NonNull ArrayList<String> messages, @NonNull MessageOrder messageOrder,
                         @NonNull ArrayList<TimeItem> alertTimes, int currentMessage) {
         this.uniqueName = getUniqueName();
@@ -130,6 +133,7 @@ public final class ReminderItem {
         this.endTime = endTime;
         this.numberPerDay = numberPerDay;
         this.distribution = distribution;
+        this.repeat = repeat;
         this.daysToRun = daysToRun.clone();
         this.notification = notification;
         this.alarm = alarm;
@@ -146,7 +150,7 @@ public final class ReminderItem {
     @NonNull
     public final ReminderItem copy() {
         return new ReminderItem(title, enabled, startTime, endTime, numberPerDay, distribution,
-                daysToRun, notification, alarm, vibrate, messages, messageOrder, alertTimes, currentMessage);
+                repeat, daysToRun, notification, alarm, vibrate, messages, messageOrder, alertTimes, currentMessage);
     }
 
     @Override

@@ -25,10 +25,13 @@
         <!-- Set the backgrounds so we don't redraw them -->
         <item name="android:windowBackground">@color/background</item>
         <item name="android:colorBackground">@color/background</item>
+
+        <item name="android:textSelectHandle">@drawable/text_select_handle_middle_mtrl</item>
+        <item name="android:textSelectHandleLeft">@drawable/text_select_handle_left_mtrl</item>
+        <item name="android:textSelectHandleRight">@drawable/text_select_handle_right_mtrl</item>
     </style>
 
     !-- Theme for the toolbars in the app-->
-
     <style name="ThemeOverlay.toolbar" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/primaryColorDark</item>
         <item name="android:textColor">@color/white80</item>
@@ -51,6 +54,8 @@
     <color name="primaryColorAccentTextHint">#33FF5252</color>
     <!-- Blue 700 at 80% opacity -->
     <color name="primaryColorDarkText">#CC1976D2</color>
+    <!-- Blue 700 at 20% opacity -->
+    <color name="primaryColorDarkTextHint">#331976D2</color>
     <!-- Blue 900 -->
     <color name="background">#0D47A1</color>
     <!-- A slight offwhite -->
