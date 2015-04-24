@@ -56,21 +56,31 @@ public final class Notifier {
 
     /**
      * Builds and displays a notification with the given parameters
-     * TODO finish this
      * @param text Text to display
      * @param notificationTone Notification tone. Null to have none
      * @param vibrate True to enable vibrate
      * @param id Id to associate notification with. These should be unique to the reminderItem
      */
     private void buildNotification(@NonNull String text, @Nullable Uri notificationTone, boolean vibrate, int id) {
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(App.getContext())
-                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                        .setDefaults(Notification.DEFAULT_VIBRATE|Notification.DEFAULT_LIGHTS)
-                        .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle(App.getContext().getString(R.string.app_name))
-                        .setContentText(text);
-
+        int defaults = Notification.DEFAULT_LIGHTS;
+        if(vibrate) {
+            defaults |= Notification.DEFAULT_VIBRATE;
+        }
+        NotificationCompat.Builder mBuilder;
+        if(notificationTone == null) {
+            mBuilder = new NotificationCompat.Builder(App.getContext())
+                            .setDefaults(defaults)
+                            .setSmallIcon(R.drawable.notification_icon)
+                            .setContentTitle(App.getContext().getString(R.string.app_name))
+                            .setContentText(text);
+        } else {
+            mBuilder = new NotificationCompat.Builder(App.getContext())
+                            .setSound(notificationTone)
+                            .setDefaults(defaults)
+                            .setSmallIcon(R.drawable.notification_icon)
+                            .setContentTitle(App.getContext().getString(R.string.app_name))
+                            .setContentText(text);
+        }
         // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr = (NotificationManager) App.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         // Builds the notification and issues it.
@@ -80,7 +90,6 @@ public final class Notifier {
     /**
      * Gets a list of reminder items that are due to have a notification shown and builds and shows them.
      * If none are ready to be shown it does nothing
-     * TODO create unique ids
      */
     public final void postNextNotification() {
         ReminderList.getInstance().loadDataSync();
@@ -91,7 +100,7 @@ public final class Notifier {
             if(title == null || title.isEmpty()) {
                 title = App.getContext().getString(R.string.default_title);
             }
-            buildNotification(title, item.notificationTone, item.notificationVibrate, id);
+            buildNotification(title, item.notificationTone, item.notificationVibrate, item.notificationId);
             id++;
         }
     }

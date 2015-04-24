@@ -70,6 +70,7 @@
     <string name="title_enable">Enable Reminder</string>
     <string name="vibrate_enable">Enable Vibrate</string>
     <string name="sound_set">Sound:</string>
+    <string name="sound_none">None</string>
 
     <string name="repeat_enable">Repeat Enable</string>
     <string name="alarm_enable">Alarm Enable</string>

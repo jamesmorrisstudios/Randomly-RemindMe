@@ -19,7 +19,6 @@ package jamesmorrisstudios.com.randremind.reminder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -36,8 +35,11 @@ import jamesmorrisstudios.com.randremind.application.App;
  * Created by James on 4/20/2015.
  */
 public final class ReminderItem {
+    //Unique data
     @SerializedName("uniqueName")
     public final String uniqueName;
+    @SerializedName("notificationId")
+    public int notificationId;
     //Title
     @SerializedName("title")
     public String title;
@@ -76,6 +78,7 @@ public final class ReminderItem {
     @SerializedName("alarmVibrate")
     public boolean alarmVibrate;
     //Generated data
+    @SerializedName("alertTimes")
     public ArrayList<TimeItem> alertTimes;
 
     /**
@@ -91,6 +94,7 @@ public final class ReminderItem {
     public ReminderItem() {
         //Unique name
         this.uniqueName = getUniqueName();
+        this.notificationId = getNotifictionId();
         //Title
         this.title = "";
         this.enabled = true;
@@ -105,12 +109,12 @@ public final class ReminderItem {
         //Notifications
         this.notification = true;
         this.notificationTone = null;
-        this.notificationToneName = "None";
+        this.notificationToneName = App.getContext().getString(R.string.sound_none);
         this.notificationVibrate = false;
         //Alarms
         this.alarm = false;
         this.alarmTone = null;
-        this.alarmToneName = "None";
+        this.alarmToneName = App.getContext().getString(R.string.sound_none);
         this.alarmVibrate = false;
         //Generated values
         this.alertTimes = new ArrayList<>();
@@ -134,11 +138,12 @@ public final class ReminderItem {
      * @param alarmVibrate True to enable vibrate with the alarm
      * @param alertTimes List of calculated alert times
      */
-    public ReminderItem(@NonNull String uniqueName, @NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
+    public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
                         @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun,
                         boolean notification, Uri notificationTone, String notificationToneName, boolean notificationVibrate,
                         boolean alarm, Uri alarmTone, String alarmToneName, boolean alarmVibrate, @NonNull ArrayList<TimeItem> alertTimes) {
         this.uniqueName = uniqueName;
+        this.notificationId = notificationId;
         this.title = title;
         this.enabled = enabled;
         this.startTime = startTime.copy();
@@ -163,9 +168,9 @@ public final class ReminderItem {
      */
     @NonNull
     public final ReminderItem copy() {
-        return new ReminderItem(uniqueName, title, enabled, startTime, endTime, numberPerDay, distribution,
-                repeat, daysToRun, notification, notificationTone, notificationToneName, notificationVibrate,
-                alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
+        return new ReminderItem(uniqueName, notificationId, title, enabled, startTime, endTime, numberPerDay,
+                distribution, repeat, daysToRun, notification, notificationTone, notificationToneName,
+                notificationVibrate, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
     }
 
     /**
@@ -259,6 +264,14 @@ public final class ReminderItem {
         int hour = totalMinutes / 60;
         int minutes = totalMinutes % 60;
         return new TimeItem(hour, minutes);
+    }
+
+    /**
+     * Truncates the UUID for a unique id
+     * @return A unique notification id
+     */
+    private static int getNotifictionId() {
+        return (int)UUID.randomUUID().getMostSignificantBits();
     }
 
     /**

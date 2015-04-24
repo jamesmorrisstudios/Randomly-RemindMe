@@ -282,24 +282,51 @@
                 android:id="@+id/notificationContainer"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/notification_enabled"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_marginRight="4dp"
-                    android:textSize="@dimen/item_size"
-                    android:text="@string/sound_set"
+                <LinearLayout
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_marginLeft="4dp"
-                    android:id="@+id/notificationSound"
-                    android:textSize="@dimen/item_size"
-                    android:text="Test sound"
+                    <TextView
+                        android:layout_marginRight="4dp"
+                        android:textSize="@dimen/item_size"
+                        android:text="@string/sound_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_marginLeft="4dp"
+                        android:id="@+id/notificationSound"
+                        android:textSize="@dimen/item_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_marginRight="4dp"
+                        android:textSize="@dimen/item_size"
+                        android:text="@string/vibrate_enable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/notification_vibrate_enabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

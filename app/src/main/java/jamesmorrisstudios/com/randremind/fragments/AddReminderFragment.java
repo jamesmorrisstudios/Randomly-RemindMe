@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.application.App;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.utilities.AnimatorControl;
@@ -68,7 +69,7 @@ public final class AddReminderFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     //Views
     private AppCompatEditText titleText;
-    private SwitchCompat titleEnable, notificationEnable, alarmEnable, repeatEnable;
+    private SwitchCompat titleEnable, notificationEnable, alarmEnable, repeatEnable, notificationVibrateEnable;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound;
     private View startTimeTop, endTimeTop;
     private AppCompatSpinner timeSpinner, distributionSpinner;
@@ -177,6 +178,7 @@ public final class AddReminderFragment extends Fragment {
         daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
         notificationContainer = (LinearLayout) view.findViewById(R.id.notificationContainer);
         notificationSound = (TextView) view.findViewById(R.id.notificationSound);
+        notificationVibrateEnable = (SwitchCompat) view.findViewById(R.id.notification_vibrate_enabled);
         //alarmEnable = (SwitchCompat) view.findViewById(R.id.alarm_enabled); //TODO
         dayButtons[0] = (ButtonCircleFlat) view.findViewById(R.id.daySun);
         dayButtons[1] = (ButtonCircleFlat) view.findViewById(R.id.dayMon);
@@ -414,6 +416,16 @@ public final class AddReminderFragment extends Fragment {
                 startActivityForResult(intent, NOTIFICATION_RESULT);
             }
         });
+        notificationVibrateEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                remind.notificationVibrate = isChecked;
+            }
+        });
     }
 
     /**
@@ -455,10 +467,8 @@ public final class AddReminderFragment extends Fragment {
         }
         if (remind.notification) {
             showView(notificationContainer);
-            //notificationContainer.setVisibility(View.VISIBLE);
         } else {
             hideView(notificationContainer);
-            //notificationContainer.setVisibility(View.GONE);
         }
         notificationSound.setText(remind.notificationToneName);
     }
@@ -473,10 +483,8 @@ public final class AddReminderFragment extends Fragment {
         }
         if(remind.repeat) {
             showView(daysContainer);
-            //daysContainer.setVisibility(View.VISIBLE);
         } else {
             hideView(daysContainer);
-            //daysContainer.setVisibility(View.GONE);
         }
         for(int i=0; i<remind.daysToRun.length; i++) {
             setDayOfWeek(i, remind.daysToRun[i]);
@@ -552,6 +560,10 @@ public final class AddReminderFragment extends Fragment {
                 Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), uri);
                 remind.notificationToneName = ringtone.getTitle(getActivity());
                 notificationSound.setText(remind.notificationToneName);
+            } else {
+                remind.notificationTone = null;
+                remind.notificationToneName = App.getContext().getString(R.string.sound_none);
+                notificationSound.setText(remind.notificationToneName);
             }
         }
     }
@@ -584,6 +596,10 @@ public final class AddReminderFragment extends Fragment {
         }
     }
 
+    /**
+     * Animates a view to hidden state
+     * @param view The view to hide
+     */
     private void hideView(final View view) {
         ObjectAnimator anim = AnimatorControl.alpha(view, 1.0f, 0.0f, 500, 0);
         anim.addListener(new Animator.AnimatorListener() {
@@ -610,6 +626,10 @@ public final class AddReminderFragment extends Fragment {
         anim.start();
     }
 
+    /**
+     * Animates a view to shown state
+     * @param view The view to show
+     */
     private void showView(final View view) {
         ObjectAnimator anim = AnimatorControl.alpha(view, 0.0f, 1.0f, 500, 0);
         anim.addListener(new Animator.AnimatorListener() {
