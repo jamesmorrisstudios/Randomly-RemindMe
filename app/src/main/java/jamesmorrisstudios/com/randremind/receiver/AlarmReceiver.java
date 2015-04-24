@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,15 +28,24 @@ import jamesmorrisstudios.com.randremind.reminder.Notifier;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
-public class AlarmReceiver extends BroadcastReceiver {
+/**
+ * Alarm receiver class.
+ * This class manages all alarm wakes for this app.
+ */
+public final class AlarmReceiver extends BroadcastReceiver {
+
+    /**
+     * Empty constructor
+     */
     public AlarmReceiver() {}
 
+    /**
+     * Receive an alarm from one of our wake settings
+     * @param context Context
+     * @param intent Intent
+     */
     @Override
-    public void onReceive(Context context, Intent intent) {
-        if(intent == null) {
-            return;
-        }
-
+    public void onReceive(@NonNull Context context, @NonNull Intent intent) {
         //Get our wakelock
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
@@ -66,6 +76,9 @@ public class AlarmReceiver extends BroadcastReceiver {
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
         }
+
+        ReminderList.getInstance().saveDataSync(); //TODO might need to make a service for this...
+
         //Release the wakelock
         wl.release();
     }

@@ -69,6 +69,10 @@ public final class ReminderList {
         return instance;
     }
 
+    /**
+     * Loads the reminder list data on the calling thread instead of an asynctask
+     * @return True if successful
+     */
     public final boolean loadDataSync() {
         return loadFromFile();
     }
@@ -102,7 +106,16 @@ public final class ReminderList {
     }
 
     /**
-     *
+     * Saves the reminder list data on the calling thread instead of an asynctask
+     * @return True if successful
+     */
+    public final boolean saveDataSync() {
+        return saveToFile();
+    }
+
+    /**
+     * Saves the reminderItem data back to disk with an asynctask
+     * Subscribe to Event.DATA_SAVE_PASS and Event.DATA_SAVE_FAIL for completion events
      */
     public final void saveData() {
         if(hasReminders()) {
@@ -127,16 +140,26 @@ public final class ReminderList {
         }
     }
 
+    /**
+     * @return True if reminders exist
+     */
     public final boolean hasReminders() {
         return !data.isEmpty();
     }
 
+    /**
+     * Get the reminders. This will be an empty list if you have not already loaded them.
+     * @return The list of reminders
+     */
     @NonNull
     public final ArrayList<ReminderItem> getData() {
         return data;
     }
 
-    public final void setCurrentReminder(ReminderItem item) {
+    /**
+     * @param item Reminder item to set to
+     */
+    public final void setCurrentReminder(@NonNull ReminderItem item) {
         int index = 0;
         for(ReminderItem itemInt : data) {
             if(itemInt.equals(item)) {
@@ -148,16 +171,18 @@ public final class ReminderList {
         }
     }
 
-    public final void setCurrentReminder(int currentIndex) {
-        this.currentIndex = currentIndex;
-        this.currentItem = data.get(currentIndex).copy();
-    }
-
+    /**
+     * Clears the currently set reminder. If not saved any changes to it will be lost
+     */
     public final void clearCurrentReminder() {
         this.currentIndex = -1;
         this.currentItem = null;
     }
 
+    /**
+     * Deletes the current reminder from the list.
+     * Clears it from the currently set
+     */
     public final void deleteCurrentReminder() {
         if(currentIndex != -1) {
             data.remove(currentIndex);
@@ -165,14 +190,22 @@ public final class ReminderList {
         clearCurrentReminder();
     }
 
+    /**
+     * Create a new reminder with default values and set it to current
+     */
     public final void createNewReminder() {
         currentIndex = -1;
         currentItem = new ReminderItem();
     }
 
+    /**
+     * Saves the current reminder back to the list.
+     * If its a new reminder it is added to the end of the list
+     * The current reminder is NOT cleared
+     */
     public final void saveCurrentReminder() {
         currentItem.updateAlertTimes();
-        trimWakesToCurrent();
+        trimWakeToCurrent(currentItem);
         if(currentIndex == -1) {
             //New Item so add to end
             data.add(currentItem);
@@ -183,33 +216,66 @@ public final class ReminderList {
         saveToFile();
     }
 
+    /**
+     * @return True if a current reminder is set
+     */
     public final boolean hasCurrentReminder() {
         return currentItem != null;
     }
 
+    /**
+     * @return The current reminder, null if none
+     */
     @Nullable
     public final ReminderItem getCurrentReminder() {
         return currentItem;
     }
 
+    /**
+     * Updates all reminders wake times
+     */
     public final void recalculateWakes() {
         for(ReminderItem item : data) {
             item.updateAlertTimes();
         }
     }
 
+    /**
+     * Trim the alert times of all reminder items so all at current or past times are removed
+     */
     public final void trimWakesToCurrent() {
         recalculateWakes();
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         for(ReminderItem item : data) {
-            while(!item.alertTimes.isEmpty() && timeBefore(item.alertTimes.get(0), timeNow)) {
-                item.alertTimes.remove(0);
-            }
+            trimWakeToCurrent(item, timeNow);
         }
     }
 
+    /**
+     * Trim the alert times of the specified reminder item so all at current or past times are removed
+     */
+    private void trimWakeToCurrent(@NonNull ReminderItem item) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        trimWakeToCurrent(item, timeNow);
+    }
+
+    /**
+     * Trim the alert times of the specified reminder item so all at current or past times are removed
+     */
+    private void trimWakeToCurrent(@NonNull ReminderItem item, @NonNull TimeItem timeNow) {
+        while(!item.alertTimes.isEmpty() && timeBefore(item.alertTimes.get(0), timeNow)) {
+            item.alertTimes.remove(0);
+        }
+    }
+
+    /**
+     * @return Return list of all reminder items that have a wake time that is current or past.
+     */
+    @NonNull
     public final ArrayList<ReminderItem> getCurrentWakes() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -226,12 +292,21 @@ public final class ReminderList {
         return items;
     }
 
+    /**
+     * @return The current day of the week
+     */
     private int getDayOfWeek() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
+    /**
+     * Check that the current time is within the given bounds
+     * @param start Start time
+     * @param end End time
+     * @return True if within
+     */
     private boolean timeInBounds(TimeItem start, TimeItem end) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -240,7 +315,6 @@ public final class ReminderList {
     }
 
     /**
-     *
      * @return The time item of the next wake in this cycle. Null if no more today
      */
     @Nullable
@@ -258,18 +332,28 @@ public final class ReminderList {
         return time;
     }
 
+    /**
+     * @param newTime New time
+     * @param oldTime Old time
+     * @return True if new time is before or equal to old time
+     */
     private boolean timeBefore(TimeItem newTime, TimeItem oldTime) {
-        if((newTime.hour * 60 + newTime.minute) - (oldTime.hour * 60 + oldTime.minute) > 0) {
-            return false;
-        }
-        return true;
+        return (newTime.hour * 60 + newTime.minute) - (oldTime.hour * 60 + oldTime.minute) <= 0;
     }
 
+    /**
+     * Saves the reminder list to file
+     * @return True if successful
+     */
     private boolean saveToFile() {
         byte[] bytes = serializeSave();
         return bytes != null && FileWriter.writeFile(saveName, bytes, false);
     }
 
+    /**
+     * Loads the reminder list from file
+     * @return True if successful
+     */
     private boolean loadFromFile() {
         if(!FileWriter.doesFileExist(saveName, false)) {
             return true;
@@ -278,6 +362,10 @@ public final class ReminderList {
         return bytes != null && deserializeSave(bytes);
     }
 
+    /**
+     * Serializes the reminder list
+     * @return The byte array of the save. Null on error
+     */
     @Nullable
     private byte[] serializeSave() {
         JSONObject retVal1 = new JSONObject();
@@ -290,6 +378,11 @@ public final class ReminderList {
         return retVal1.toString().getBytes(Charset.forName(stringType));
     }
 
+    /**
+     * Deserialize the reminder list
+     * @param bytes Byte array for the save
+     * @return True on success
+     */
     private boolean deserializeSave(@NonNull byte[] bytes) {
         String st;
         try {

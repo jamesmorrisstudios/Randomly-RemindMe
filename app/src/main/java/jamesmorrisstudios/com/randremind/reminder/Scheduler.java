@@ -20,6 +20,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
@@ -27,10 +28,13 @@ import jamesmorrisstudios.com.randremind.application.App;
 import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
 
 /**
+ * Reminder wake scheduler class.
+ * This class is responsible for setting all new wake alarms with the android system.
+ * It can also cancel unused alarms if needed
+ *
  * Created by James on 4/23/2015.
  */
-public class Scheduler {
-    //Scheduler singleton instance
+public final class Scheduler {
     private static Scheduler instance = null;
 
     /**
@@ -41,6 +45,7 @@ public class Scheduler {
     /**
      * @return The singleton instance of the Scheduler
      */
+    @NonNull
     public static Scheduler getInstance() {
         if(instance == null) {
             instance = new Scheduler();
@@ -48,6 +53,10 @@ public class Scheduler {
         return instance;
     }
 
+    /**
+     * Cancels the next scheduled wake.
+     * Does not cancel the midnight update alarm
+     */
     public final void cancelNextWake() {
         AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(App.getContext(), AlarmReceiver.class);
@@ -55,15 +64,32 @@ public class Scheduler {
         am.cancel(pi);
     }
 
+    /**
+     * Cancels the midnight update alarm
+     */
+    public final void cancelMidnightAlarm() {
+        AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(App.getContext(), AlarmReceiver.class);
+        i.putExtra("REPEAT", true);
+        PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 1, i, 0);
+        am.cancel(pi);
+    }
+
+    /**
+     * Schedule the next wake we have in this days cycle.
+     */
     public final void scheduleNextWake() {
-        //Schedule the next wake we have in this days cycle.
         TimeItem time = ReminderList.getInstance().getNextWake();
         if(time != null) {
             scheduleWake(time);
         }
     }
 
-    private void scheduleWake(TimeItem time) {
+    /**
+     * Schedules the next app wake time
+     * @param time Time to schedule for
+     */
+    private void scheduleWake(@NonNull TimeItem time) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, time.hour);
@@ -74,6 +100,9 @@ public class Scheduler {
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 
+    /**
+     * Schedules the repeating midnight timer
+     */
     public final void scheduleRepeatingMidnight() {
         AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(App.getContext(), AlarmReceiver.class);

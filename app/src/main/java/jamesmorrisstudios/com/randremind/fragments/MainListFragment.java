@@ -63,8 +63,7 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     public MainListFragment() {}
 
     /**
-     *
-     * @param savedInstanceState
+     * @param savedInstanceState Saved instance state
      */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,9 +72,8 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
-     * @param menu
-     * @param inflater
+     * @param menu Menu
+     * @param inflater Inflate
      */
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -84,9 +82,8 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
-     * @param item
-     * @return
+     * @param item Selected item
+     * @return True if action consumed
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -99,11 +96,10 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater Inflater
+     * @param container Root container
+     * @param savedInstanceState Saved instance state
+     * @return This fragments top view
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -114,7 +110,7 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         addNewButton.setBackgroundColor(getResources().getColor(R.color.primaryColorAccent));
         addNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(@NonNull View v) {
                 mListener.onAddNewClicked();
             }
         });
@@ -123,7 +119,7 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if(dy > 0) {
                     addNewButton.hide();
@@ -169,7 +165,7 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
+     * On view being destroyed
      */
     @Override
     public void onDestroyView() {
@@ -178,11 +174,10 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
-     * @param event
+     * @param event Event listener
      */
     @Subscribe
-    public final void onEvent(Bus.Event event) {
+    public final void onEvent(@NonNull Bus.Event event) {
         switch(event) {
             case DATA_LOAD_PASS:
                 applyItems();
@@ -231,25 +226,25 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
+     * Show the no data text display
      */
     private void showNoDataText() {
         noDataText.setVisibility(View.VISIBLE);
     }
 
     /**
-     *
+     * Hide the no data text display
      */
     private void hideNoDataText() {
         noDataText.setVisibility(View.GONE);
     }
 
     /**
-     *
-     * @param activity
+     * Attach to the activity
+     * @param activity Activity to attach to
      */
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
@@ -260,7 +255,7 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
+     * Detach from activity
      */
     @Override
     public void onDetach() {
@@ -269,11 +264,10 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     }
 
     /**
-     *
-     * @param item
+     * @param item Clicked reminder item
      */
     @Override
-    public void itemClicked(ReminderContainer item) {
+    public void itemClicked(@NonNull ReminderContainer item) {
         ReminderList.getInstance().setCurrentReminder(item.item);
         mListener.onEditClicked();
     }
@@ -287,17 +281,17 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
     public interface OnFragmentInteractionListener {
 
         /**
-         *
+         * Edit clicked
          */
         void onEditClicked();
 
         /**
-         *
+         * Add new clicker
          */
         void onAddNewClicked();
 
         /**
-         *
+         * Help clicked
          */
         void onHelpClicked();
     }
@@ -309,26 +303,25 @@ public final class MainListFragment extends Fragment implements ReminderAdapter.
         private final RecyclerView mRecyclerView;
 
         /**
-         *
-         * @param view
+         * Constructor
+         * @param view View to set
          */
-        public ViewHolder(View view) {
+        public ViewHolder(@NonNull View view) {
             mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         }
 
         /**
-         *
-         * @param lm
+         * @param lm Set with layout manager
          */
-        public void initViews(LayoutManager lm) {
+        public void initViews(@NonNull LayoutManager lm) {
             mRecyclerView.setLayoutManager(lm);
         }
 
         /**
-         *
-         * @param adapter
+         * Set the adapter
+         * @param adapter Adapter
          */
-        public void setAdapter(RecyclerView.Adapter<?> adapter) {
+        public void setAdapter(@NonNull RecyclerView.Adapter<?> adapter) {
             mRecyclerView.setAdapter(adapter);
         }
     }

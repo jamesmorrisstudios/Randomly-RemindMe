@@ -21,6 +21,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import java.util.ArrayList;
@@ -29,10 +31,12 @@ import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.application.App;
 
 /**
+ * Notification handler class.
+ * This generates and displays notifications given a list of reminder items
+ *
  * Created by James on 4/24/2015.
  */
-public class Notifier {
-    //Scheduler singleton instance
+public final class Notifier {
     private static Notifier instance = null;
 
     /**
@@ -41,7 +45,7 @@ public class Notifier {
     private Notifier() {}
 
     /**
-     * @return The singleton instance of the Scheduler
+     * @return The singleton instance of the Notifier
      */
     public static Notifier getInstance() {
         if(instance == null) {
@@ -50,13 +54,21 @@ public class Notifier {
         return instance;
     }
 
-    private void buildNotification(String text, Uri notificationTone, boolean vibrate, int id) {
+    /**
+     * Builds and displays a notification with the given parameters
+     * TODO finish this
+     * @param text Text to display
+     * @param notificationTone Notification tone. Null to have none
+     * @param vibrate True to enable vibrate
+     * @param id Id to associate notification with. These should be unique to the reminderItem
+     */
+    private void buildNotification(@NonNull String text, @Nullable Uri notificationTone, boolean vibrate, int id) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(App.getContext())
                         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                         .setDefaults(Notification.DEFAULT_VIBRATE|Notification.DEFAULT_LIGHTS)
                         .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle("Randomly RemindMe")
+                        .setContentTitle(App.getContext().getString(R.string.app_name))
                         .setContentText(text);
 
         // Gets an instance of the NotificationManager service
@@ -65,7 +77,13 @@ public class Notifier {
         mNotifyMgr.notify(id, mBuilder.build());
     }
 
+    /**
+     * Gets a list of reminder items that are due to have a notification shown and builds and shows them.
+     * If none are ready to be shown it does nothing
+     * TODO create unique ids
+     */
     public final void postNextNotification() {
+
         ReminderList.getInstance().loadDataSync();
         ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
         int id = 0;

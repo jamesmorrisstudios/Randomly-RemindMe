@@ -245,6 +245,9 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 || (existsLicenseFragment() && isFragmentUIActive(getLicenseFragment()));
     }
 
+    /**
+     * Call this when back was pressed
+     */
     protected final void backPressed() {
         if(isFragmentUIActive(getAddReminderFragment())) {
             getAddReminderFragment().onBack();
@@ -260,6 +263,9 @@ public abstract class BaseActivity extends AppCompatActivity implements
         super.onBackPressed();
     }
 
+    /**
+     * Hides the keyboards if visible
+     */
     @Override
     public void hideKeyboard() {
         // Check if no view has focus:
@@ -270,8 +276,13 @@ public abstract class BaseActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Detect if button press on the toolbar
+     * @param item Menu item clicked
+     * @return True if consumed.
+     */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 hideKeyboard();
@@ -280,8 +291,15 @@ public abstract class BaseActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Create a time picker dialog
+     * @param listener Return listener
+     * @param hour Start hour
+     * @param minute Start minute
+     * @param is24Hour True if 24 hour mode
+     */
     @Override
-    public void createTimePickerDialog(TimePickerDialog.OnTimeSetListener listener, int hour, int minute, boolean is24Hour) {
+    public void createTimePickerDialog(@NonNull TimePickerDialog.OnTimeSetListener listener, int hour, int minute, boolean is24Hour) {
         TimePickerDialog time = new TimePickerDialog();
         time.initialize(listener, hour, minute, is24Hour);
         time.show(getFragmentManager(), "TimePickerDialog");

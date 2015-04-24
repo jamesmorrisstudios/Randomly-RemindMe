@@ -18,12 +18,12 @@ package jamesmorrisstudios.com.randremind.reminder;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
@@ -75,6 +75,9 @@ public final class ReminderItem {
     //Generated data
     public ArrayList<TimeItem> alertTimes;
 
+    /**
+     * Timing distribution
+     */
     public enum Distribution {
         EVEN, PART_RANDOM, MOST_RANDOM, FULL_RANDOM
     }
@@ -128,11 +131,11 @@ public final class ReminderItem {
      * @param alarmVibrate True to enable vibrate with the alarm
      * @param alertTimes List of calculated alert times
      */
-    public ReminderItem(@NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
+    public ReminderItem(@NonNull String uniqueName, @NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
                         @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun,
                         boolean notification, Uri notificationTone, String notificationToneName, boolean notificationVibrate,
                         boolean alarm, Uri alarmTone, String alarmToneName, boolean alarmVibrate, @NonNull ArrayList<TimeItem> alertTimes) {
-        this.uniqueName = getUniqueName();
+        this.uniqueName = uniqueName;
         this.title = title;
         this.enabled = enabled;
         this.startTime = startTime.copy();
@@ -157,13 +160,17 @@ public final class ReminderItem {
      */
     @NonNull
     public final ReminderItem copy() {
-        return new ReminderItem(title, enabled, startTime, endTime, numberPerDay, distribution,
+        return new ReminderItem(uniqueName, title, enabled, startTime, endTime, numberPerDay, distribution,
                 repeat, daysToRun, notification, notificationTone, notificationToneName, notificationVibrate,
                 alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
     }
 
+    /**
+     * @param obj Object to compare to
+     * @return True if equal based on unique id.
+     */
     @Override
-    public boolean equals (Object obj){
+    public boolean equals (@Nullable Object obj){
         if(obj != null && obj instanceof ReminderItem) {
             ReminderItem item = (ReminderItem) obj;
             return this.uniqueName.equals(item.uniqueName);
@@ -202,6 +209,13 @@ public final class ReminderItem {
         }
     }
 
+    /**
+     * Creates a distribution of values from offset to diff+offset
+     * @param diff Total range of values
+     * @param offset Offset amount to shift the entire range
+     * @param wiggle Percent of space between items to allow randomization
+     * @param numberItems Number of items to generate
+     */
     private void generateEvenishSplit(int diff, int offset, float wiggle, int numberItems) {
         Random rand = new Random();
         int itemSplit = Math.round((diff * 1.0f) / numberItems);
@@ -212,29 +226,43 @@ public final class ReminderItem {
                 values[i] = Math.min(Math.max(values[i], values[i-1] + 30), diff);
             }
         }
-        for(int i=0; i<values.length; i++) {
-            alertTimes.add(minutesToTimeItem(values[i] + offset));
+        for (int value : values) {
+            alertTimes.add(minutesToTimeItem(value + offset));
         }
     }
 
     /**
-     *
      * @return The difference in minutes
      */
     private int getDiffMinutes() {
         return timeToMinutes(endTime) - timeToMinutes(startTime);
     }
 
-    private int timeToMinutes(TimeItem time) {
+    /**
+     * Converts a time item to minutes value
+     * @param time Time item
+     * @return Value in minutes
+     */
+    private int timeToMinutes(@NonNull TimeItem time) {
         return time.hour * 60 + time.minute;
     }
 
+    /**
+     * Converts minutes to time item
+     * @param totalMinutes Minutes
+     * @return Time item
+     */
     private TimeItem minutesToTimeItem(int totalMinutes) {
         int hour = totalMinutes / 60;
         int minutes = totalMinutes % 60;
         return new TimeItem(hour, minutes);
     }
 
+    /**
+     * Generates a unique name for the reminder
+     * @return Unique name
+     */
+    @NonNull
     private static String getUniqueName() {
         return UUID.randomUUID().toString();
     }

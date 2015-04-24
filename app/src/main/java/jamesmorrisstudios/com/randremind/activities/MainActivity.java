@@ -23,7 +23,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.reminder.Notifier;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
@@ -58,6 +57,9 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
     @Override
     public void onStart() {
         super.onStart();
+        //Ensure that the repeating alarm is active.
+        Scheduler.getInstance().cancelMidnightAlarm();
+        Scheduler.getInstance().scheduleRepeatingMidnight();
     }
 
     /**

@@ -196,7 +196,16 @@ public final class Utils {
         }
     }
 
-    public static void setTime(TextView hour, TextView minute, TextView am, TextView pm, TimeItem item) {
+    /**
+     * Sets the time in the given text views.
+     * Very specialized helper function
+     * @param hour Hour textView
+     * @param minute Minute textView
+     * @param am AM text view
+     * @param pm PM textView
+     * @param item Time item
+     */
+    public static void setTime(@NonNull TextView hour, @NonNull TextView minute, @NonNull TextView am, @NonNull TextView pm, @NonNull TimeItem item) {
         hour.setText(item.getHourInTimeFormatString());
         minute.setText(item.getMinuteString());
         if(item.is24Hour()) {

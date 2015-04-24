@@ -22,6 +22,8 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
@@ -69,7 +71,6 @@ public final class AddReminderFragment extends Fragment {
     private AppCompatSpinner timeSpinner, distributionSpinner;
     private ButtonCircleFlat[] dayButtons = new ButtonCircleFlat[7];
     private LinearLayout daysContainer, notificationContainer;
-
     //Listeners
     private TextWatcher titleTextWatcher;
 
@@ -83,7 +84,7 @@ public final class AddReminderFragment extends Fragment {
      * @param savedInstanceState Saved instance state
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -92,7 +93,7 @@ public final class AddReminderFragment extends Fragment {
      * @param activity Activity to attach to
      */
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;
@@ -117,7 +118,7 @@ public final class AddReminderFragment extends Fragment {
      * @param inflater Inflater
      */
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_add_new, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -128,7 +129,7 @@ public final class AddReminderFragment extends Fragment {
      * @return True if action consumed
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
                 ReminderList.getInstance().deleteCurrentReminder();
@@ -151,7 +152,7 @@ public final class AddReminderFragment extends Fragment {
      * @return This fragments top view
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_reminder, container, false);
         //Get all the views
         titleText = (AppCompatEditText) view.findViewById(R.id.titleText);
@@ -212,7 +213,7 @@ public final class AddReminderFragment extends Fragment {
         //Enable
         titleEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
                 if (currentReminder == null) {
                     return;
@@ -233,7 +234,7 @@ public final class AddReminderFragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(@NonNull Editable s) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
                 if (currentReminder == null) {
                     return;
@@ -251,7 +252,7 @@ public final class AddReminderFragment extends Fragment {
         //Time start
         final TimePickerDialog.OnTimeSetListener timeStartListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
+            public void onTimeSet(@NonNull RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
                 ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                 if (remind == null) {
                     return;
@@ -269,7 +270,7 @@ public final class AddReminderFragment extends Fragment {
         };
         startTimeTop.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(@NonNull View v) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
                 if (currentReminder == null) {
                     return;
@@ -281,7 +282,7 @@ public final class AddReminderFragment extends Fragment {
         //Time End
         final TimePickerDialog.OnTimeSetListener timeEndListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
+            public void onTimeSet(@NonNull RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
                 ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                 if (remind == null) {
                     return;
@@ -299,7 +300,7 @@ public final class AddReminderFragment extends Fragment {
         };
         endTimeTop.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(@NonNull View v) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
                 if (currentReminder == null) {
                     return;
@@ -311,7 +312,7 @@ public final class AddReminderFragment extends Fragment {
         //Times per day
         timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(@NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
                 if (currentReminder == null) {
                     return;
@@ -327,7 +328,7 @@ public final class AddReminderFragment extends Fragment {
         //Distribution
         distributionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(@NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
                 if (currentReminder == null) {
                     return;
@@ -349,7 +350,7 @@ public final class AddReminderFragment extends Fragment {
         //Repeat Enable
         repeatEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                 if (remind == null) {
                     return;
@@ -367,7 +368,7 @@ public final class AddReminderFragment extends Fragment {
             final int index = i;
             dayButtons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(@NonNull View v) {
                     ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                     if(remind == null) {
                         return;
@@ -385,9 +386,9 @@ public final class AddReminderFragment extends Fragment {
     private void notificationListeners() {
         notificationEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                if(remind == null) {
+                if (remind == null) {
                     return;
                 }
                 remind.notification = isChecked;
@@ -400,7 +401,7 @@ public final class AddReminderFragment extends Fragment {
         });
         notificationSound.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(@NonNull View v) {
                 Uri defaultUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
@@ -441,6 +442,9 @@ public final class AddReminderFragment extends Fragment {
         setNotification();
     }
 
+    /**
+     * Set the notification category data
+     */
     private void setNotification() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
         if(remind == null) {
@@ -454,6 +458,9 @@ public final class AddReminderFragment extends Fragment {
         notificationSound.setText(remind.notificationToneName);
     }
 
+    /**
+     * Set the days of week category data
+     */
     private void setDaysOfWeek() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
         if(remind == null) {
@@ -469,6 +476,9 @@ public final class AddReminderFragment extends Fragment {
         }
     }
 
+    /**
+     * Set the distribution spinner
+     */
     private void setupDistributionSpinner() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
         if(remind == null) {
@@ -485,6 +495,9 @@ public final class AddReminderFragment extends Fragment {
         distributionSpinner.setSelection(remind.distribution.ordinal());
     }
 
+    /**
+     * Generates how many per day are allowed given the start and end times
+     */
     private void generateNumberTimePerDay() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
         if(remind == null) {
@@ -520,7 +533,7 @@ public final class AddReminderFragment extends Fragment {
      * @param intent
      */
     @Override
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+    public void onActivityResult(final int requestCode, final int resultCode, @NonNull final Intent intent) {
         if (resultCode == Activity.RESULT_OK && requestCode == 5) {
             Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
             ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
@@ -571,8 +584,24 @@ public final class AddReminderFragment extends Fragment {
      * activity.
      */
     public interface OnFragmentInteractionListener {
+
+        /**
+         * Go back from this reminder
+         */
         void goBackFromNewReminder();
+
+        /**
+         * Hides the keyboard
+         */
         void hideKeyboard();
+
+        /**
+         * Build a new time picker dialog
+         * @param listener Return listener
+         * @param hour Start hour
+         * @param minute Start minute
+         * @param is24Hour True if 24 hour mode
+         */
         void createTimePickerDialog(TimePickerDialog.OnTimeSetListener listener, int hour, int minute, boolean is24Hour);
     }
 

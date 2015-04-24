@@ -139,11 +139,13 @@ public class ButtonCircleFlat extends Button {
 		textButton.setTextColor(color);
 	}
 
+	@NonNull
 	@Override
 	public TextView getTextView() {
 		return textButton;
 	}
-	
+
+	@NonNull
 	public String getText(){
         	return textButton.getText().toString();
  	}
