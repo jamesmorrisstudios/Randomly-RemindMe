@@ -18,11 +18,13 @@ package jamesmorrisstudios.com.randremind.reminder;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -70,7 +72,6 @@ public final class ReminderItem {
     public String alarmToneName;
     @SerializedName("alarmVibrate")
     public boolean alarmVibrate;
-    //TODO alarm tone and notification tone
     //Generated data
     public ArrayList<TimeItem> alertTimes;
 
@@ -169,6 +170,69 @@ public final class ReminderItem {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Generate new alert times given the current parameters
+     */
+    public final void updateAlertTimes() {
+        this.alertTimes.clear();
+        int diff = getDiffMinutes();
+        int startOffset = timeToMinutes(startTime);
+
+        //If even, partRandom, or mostRandom start with an even distribution with some wiggle room
+        float wiggle = 0;
+        switch(distribution) {
+            case EVEN:
+                wiggle = 0;
+                generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
+                break;
+            case PART_RANDOM:
+                wiggle = 0.35f;
+                generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
+                break;
+            case MOST_RANDOM:
+                wiggle = 0.75f;
+                generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
+                break;
+            case FULL_RANDOM: //TODO make this more random
+                wiggle = 1.0f;
+                generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
+                break;
+        }
+    }
+
+    private void generateEvenishSplit(int diff, int offset, float wiggle, int numberItems) {
+        Random rand = new Random();
+        int itemSplit = Math.round((diff * 1.0f) / numberItems);
+        int[] values = new int[numberItems];
+        for(int i=0; i<values.length; i++) {
+            values[i] = Math.round((i * 1.0f) / (numberItems) * diff) + itemSplit/2 + Math.round((itemSplit * wiggle) * (rand.nextFloat() - 0.5f) );
+            if(i > 0) {
+                values[i] = Math.min(Math.max(values[i], values[i-1] + 30), diff);
+            }
+        }
+        for(int i=0; i<values.length; i++) {
+            alertTimes.add(minutesToTimeItem(values[i] + offset));
+        }
+    }
+
+    /**
+     *
+     * @return The difference in minutes
+     */
+    private int getDiffMinutes() {
+        return timeToMinutes(endTime) - timeToMinutes(startTime);
+    }
+
+    private int timeToMinutes(TimeItem time) {
+        return time.hour * 60 + time.minute;
+    }
+
+    private TimeItem minutesToTimeItem(int totalMinutes) {
+        int hour = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+        return new TimeItem(hour, minutes);
     }
 
     private static String getUniqueName() {

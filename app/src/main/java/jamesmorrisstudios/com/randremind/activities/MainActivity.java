@@ -23,7 +23,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.reminder.Notifier;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
 /**
  * Primary activity.
@@ -81,6 +83,8 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
     public void onStop() {
         super.onStop();
         ReminderList.getInstance().saveData();
+        Scheduler.getInstance().cancelNextWake();
+        Scheduler.getInstance().scheduleNextWake();
     }
 
     /**

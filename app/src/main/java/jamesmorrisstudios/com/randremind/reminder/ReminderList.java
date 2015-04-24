@@ -21,7 +21,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,6 +30,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import jamesmorrisstudios.com.randremind.utilities.Bus;
 import jamesmorrisstudios.com.randremind.utilities.FileWriter;
@@ -67,6 +67,10 @@ public final class ReminderList {
             instance = new ReminderList();
         }
         return instance;
+    }
+
+    public final boolean loadDataSync() {
+        return loadFromFile();
     }
 
     /**
@@ -167,6 +171,8 @@ public final class ReminderList {
     }
 
     public final void saveCurrentReminder() {
+        currentItem.updateAlertTimes();
+        trimWakesToCurrent();
         if(currentIndex == -1) {
             //New Item so add to end
             data.add(currentItem);
@@ -184,6 +190,79 @@ public final class ReminderList {
     @Nullable
     public final ReminderItem getCurrentReminder() {
         return currentItem;
+    }
+
+    public final void recalculateWakes() {
+        for(ReminderItem item : data) {
+            item.updateAlertTimes();
+        }
+    }
+
+    public final void trimWakesToCurrent() {
+        recalculateWakes();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        for(ReminderItem item : data) {
+            while(!item.alertTimes.isEmpty() && timeBefore(item.alertTimes.get(0), timeNow)) {
+                item.alertTimes.remove(0);
+            }
+        }
+    }
+
+    public final ArrayList<ReminderItem> getCurrentWakes() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        ArrayList<ReminderItem> items = new ArrayList<>();
+        for(ReminderItem item : data) {
+            if(item.enabled && item.daysToRun[getDayOfWeek()] && timeInBounds(item.startTime, item.endTime)) {
+                if(!item.alertTimes.isEmpty() && timeBefore(item.alertTimes.get(0), timeNow)) {
+                    items.add(item);
+                }
+            }
+        }
+        trimWakesToCurrent();
+        return items;
+    }
+
+    private int getDayOfWeek() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        return calendar.get(Calendar.DAY_OF_WEEK);
+    }
+
+    private boolean timeInBounds(TimeItem start, TimeItem end) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        return timeBefore(start, timeNow) && timeBefore(timeNow, end);
+    }
+
+    /**
+     *
+     * @return The time item of the next wake in this cycle. Null if no more today
+     */
+    @Nullable
+    public final TimeItem getNextWake() {
+        TimeItem time = null;
+        //Schedule the next wake we have in this days cycle if any
+        for(ReminderItem item : data) {
+            if(item.alertTimes.isEmpty()) {
+                continue;
+            }
+            if(time == null || timeBefore(item.alertTimes.get(0), time)) {
+                time = item.alertTimes.get(0);
+            }
+        }
+        return time;
+    }
+
+    private boolean timeBefore(TimeItem newTime, TimeItem oldTime) {
+        if((newTime.hour * 60 + newTime.minute) - (oldTime.hour * 60 + oldTime.minute) > 0) {
+            return false;
+        }
+        return true;
     }
 
     private boolean saveToFile() {
@@ -229,6 +308,5 @@ public final class ReminderList {
         }
         return true;
     }
-
 
 }
