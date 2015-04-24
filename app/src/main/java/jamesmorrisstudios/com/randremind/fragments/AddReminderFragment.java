@@ -16,6 +16,8 @@
 
 package jamesmorrisstudios.com.randremind.fragments;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.Ringtone;
@@ -52,6 +54,7 @@ import java.util.List;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.utilities.AnimatorControl;
 import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
@@ -451,9 +454,11 @@ public final class AddReminderFragment extends Fragment {
             return;
         }
         if (remind.notification) {
-            notificationContainer.setVisibility(View.VISIBLE);
+            showView(notificationContainer);
+            //notificationContainer.setVisibility(View.VISIBLE);
         } else {
-            notificationContainer.setVisibility(View.GONE);
+            hideView(notificationContainer);
+            //notificationContainer.setVisibility(View.GONE);
         }
         notificationSound.setText(remind.notificationToneName);
     }
@@ -467,9 +472,11 @@ public final class AddReminderFragment extends Fragment {
             return;
         }
         if(remind.repeat) {
-            daysContainer.setVisibility(View.VISIBLE);
+            showView(daysContainer);
+            //daysContainer.setVisibility(View.VISIBLE);
         } else {
-            daysContainer.setVisibility(View.GONE);
+            hideView(daysContainer);
+            //daysContainer.setVisibility(View.GONE);
         }
         for(int i=0; i<remind.daysToRun.length; i++) {
             setDayOfWeek(i, remind.daysToRun[i]);
@@ -575,6 +582,58 @@ public final class AddReminderFragment extends Fragment {
         } else {
             dayButton.getTextView().setTextColor(getResources().getColor(R.color.white80));
         }
+    }
+
+    private void hideView(final View view) {
+        ObjectAnimator anim = AnimatorControl.alpha(view, 1.0f, 0.0f, 500, 0);
+        anim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        anim.start();
+    }
+
+    private void showView(final View view) {
+        ObjectAnimator anim = AnimatorControl.alpha(view, 0.0f, 1.0f, 500, 0);
+        anim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        anim.start();
     }
 
     /**

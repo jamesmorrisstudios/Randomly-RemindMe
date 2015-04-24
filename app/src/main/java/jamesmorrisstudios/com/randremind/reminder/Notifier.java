@@ -83,12 +83,15 @@ public final class Notifier {
      * TODO create unique ids
      */
     public final void postNextNotification() {
-
         ReminderList.getInstance().loadDataSync();
         ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
         int id = 0;
         for(ReminderItem item : items) {
-            buildNotification(item.title, item.notificationTone, item.notificationVibrate, id);
+            String title = item.title;
+            if(title == null || title.isEmpty()) {
+                title = App.getContext().getString(R.string.default_title);
+            }
+            buildNotification(title, item.notificationTone, item.notificationVibrate, id);
             id++;
         }
     }

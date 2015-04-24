@@ -53,8 +53,7 @@
     <string name="edit_notification">Notification</string>
     <string name="edit_message">Message</string>
 
-    <string name="start">Start</string>
-    <string name="end">End</string>
+    <string name="default_title">Default Title</string>
     <string name="colon">:</string>
     <string name="dash">-</string>
     <string name="am">AM</string>

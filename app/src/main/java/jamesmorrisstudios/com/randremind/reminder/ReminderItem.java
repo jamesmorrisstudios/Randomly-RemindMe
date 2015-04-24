@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
+import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.application.App;
+
 /**
  * Individual reminder item that contains all needed items to be a reminder
  *
