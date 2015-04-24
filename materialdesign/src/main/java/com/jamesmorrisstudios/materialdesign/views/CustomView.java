@@ -48,4 +48,8 @@ public abstract class CustomView extends RelativeLayout{
 		if(animation)
 			invalidate();
 	}
+
+	protected final void setBackgroundColorOriginal(int color) {
+		super.setBackgroundColor(color);
+	}
 }

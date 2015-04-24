@@ -17,6 +17,9 @@
 package jamesmorrisstudios.com.randremind.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
@@ -33,11 +36,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jamesmorrisstudios.materialdesign.views.Slider;
+import com.jamesmorrisstudios.materialdesign.views.ButtonCircleFlat;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -57,14 +59,17 @@ public final class AddReminderFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private AppCompatEditText titleText;
-    private SwitchCompat titleEnable;
+    private SwitchCompat titleEnable, notificationEnable, alarmEnable, repeatEnable;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private View startTimeTop, endTimeTop;
     private AppCompatSpinner timeSpinner, distributionSpinner;
+    private ButtonCircleFlat[] dayButtons;
+    private LinearLayout daysContainer;
 
-    public AddReminderFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Required empty public constructor
+     */
+    public AddReminderFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +116,27 @@ public final class AddReminderFragment extends Fragment {
         endPM = (TextView) endTimeTop.findViewById(R.id.time_pm);
         timeSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_times_spinner);
         distributionSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_distribution_spinner);
+        notificationEnable = (SwitchCompat) view.findViewById(R.id.notification_enabled);
+        alarmEnable = (SwitchCompat) view.findViewById(R.id.alarm_enabled);
+        repeatEnable = (SwitchCompat) view.findViewById(R.id.repeat_enabled);
+        daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
+
+        dayButtons = new ButtonCircleFlat[7];
+        dayButtons[0] = (ButtonCircleFlat) view.findViewById(R.id.daySun);
+        dayButtons[1] = (ButtonCircleFlat) view.findViewById(R.id.dayMon);
+        dayButtons[2] = (ButtonCircleFlat) view.findViewById(R.id.dayTue);
+        dayButtons[3] = (ButtonCircleFlat) view.findViewById(R.id.dayWed);
+        dayButtons[4] = (ButtonCircleFlat) view.findViewById(R.id.dayThu);
+        dayButtons[5] = (ButtonCircleFlat) view.findViewById(R.id.dayFri);
+        dayButtons[6] = (ButtonCircleFlat) view.findViewById(R.id.daySat);
+        dayButtons[0].getTextView().setText("S");
+        dayButtons[1].getTextView().setText("M");
+        dayButtons[2].getTextView().setText("T");
+        dayButtons[3].getTextView().setText("W");
+        dayButtons[4].getTextView().setText("T");
+        dayButtons[5].getTextView().setText("F");
+        dayButtons[6].getTextView().setText("S");
+
         //Create a reminder if one isn't already set
         if(!ReminderList.getInstance().hasCurrentReminder()) {
             ReminderList.getInstance().createNewReminder();
@@ -188,6 +214,43 @@ public final class AddReminderFragment extends Fragment {
 
             }
         });
+        notificationEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Uri defaultUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone");
+                //intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, defaultUri);
+                startActivityForResult(intent, 5);
+            }
+        });
+        for(int i=0; i<dayButtons.length; i++) {
+            final int index = i;
+            dayButtons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(dayButtons[index].isActivated()) {
+                        turnOffDayOfWeek(index);
+                    } else {
+                        turnOnDayOfWeek(index);
+                    }
+                }
+            });
+        }
+        repeatEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    daysContainer.setVisibility(View.VISIBLE);
+                } else {
+                    daysContainer.setVisibility(View.GONE);
+                }
+            }
+        });
+
     }
 
     private TimePickerDialog.OnTimeSetListener timeStartListener = new TimePickerDialog.OnTimeSetListener() {
@@ -242,7 +305,7 @@ public final class AddReminderFragment extends Fragment {
         @Override
         public void afterTextChanged(Editable s) {
             ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-            if(currentReminder == null) {
+            if (currentReminder == null) {
                 return;
             }
             currentReminder.title = s.toString();
@@ -278,7 +341,7 @@ public final class AddReminderFragment extends Fragment {
         list.add(getString(R.string.distribution_part_random));
         list.add(getString(R.string.distribution_most_random));
         list.add(getString(R.string.distribution_full_random));
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, list);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         distributionSpinner.setAdapter(spinnerArrayAdapter);
         distributionSpinner.setSelection(remind.distribution.ordinal());
@@ -306,6 +369,34 @@ public final class AddReminderFragment extends Fragment {
         destroyListeners();
         ReminderList.getInstance().saveCurrentReminder();
         ReminderList.getInstance().clearCurrentReminder();
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 5) {
+            Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+
+            if (uri != null)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+
+    private void turnOffDayOfWeek(int dayIndex) {
+        final ButtonCircleFlat dayButton = dayButtons[dayIndex];
+        dayButton.setActivated(false);
+        dayButton.getTextView().setTextColor(getResources().getColor(R.color.white80));
+    }
+
+    private void turnOnDayOfWeek(int dayIndex) {
+        final ButtonCircleFlat dayButton = dayButtons[dayIndex];
+        dayButton.setActivated(true);
+        dayButton.getTextView().setTextColor(getResources().getColor(R.color.primaryColorDark));
     }
 
     /**

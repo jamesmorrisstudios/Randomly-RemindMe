@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
@@ -51,29 +52,30 @@ public final class ReminderItem {
     public boolean repeat;
     @SerializedName("daysToRun")
     public boolean[] daysToRun; //Sunday -> Saturday
-    //Alert Type
+    //Notifications
     @SerializedName("notification")
     public boolean notification;
+    @SerializedName("notificationTone")
+    public Uri notificationTone;
+    @SerializedName("notificationToneName")
+    public String notificationToneName;
+    @SerializedName("notificationVibrate")
+    public boolean notificationVibrate;
+    //Alarms
     @SerializedName("alarm")
     public boolean alarm;
-    @SerializedName("vibrate")
-    public boolean vibrate;
+    @SerializedName("alarmTone")
+    public Uri alarmTone;
+    @SerializedName("alarmToneName")
+    public String alarmToneName;
+    @SerializedName("alarmVibrate")
+    public boolean alarmVibrate;
     //TODO alarm tone and notification tone
-    //Messages
-    @SerializedName("messages")
-    public ArrayList<String> messages;
-    @SerializedName("messageOrder")
-    public MessageOrder messageOrder;
     //Generated data
     public ArrayList<TimeItem> alertTimes;
-    public int currentMessage;
 
     public enum Distribution {
         EVEN, PART_RANDOM, MOST_RANDOM, FULL_RANDOM
-    }
-
-    public enum MessageOrder {
-        RANDOM, INCREMENT
     }
 
     /**
@@ -93,20 +95,21 @@ public final class ReminderItem {
         //Repeat
         this.repeat = true;
         this.daysToRun = new boolean[] {true, true, true, true, true, true, true};
-        //Alert Type
+        //Notifications
         this.notification = true;
+        this.notificationTone = null;
+        this.notificationToneName = "None";
+        this.notificationVibrate = false;
+        //Alarms
         this.alarm = false;
-        //Messages
-        this.messages = new ArrayList<>();
-        this.messages.add(title);
-        this.messageOrder = MessageOrder.RANDOM;
+        this.alarmTone = null;
+        this.alarmToneName = "None";
+        this.alarmVibrate = false;
         //Generated values
         this.alertTimes = new ArrayList<>();
-        this.currentMessage = 0;
     }
 
     /**
-     * Creates a reminderItem with all the specified values
      * @param title Title
      * @param enabled True to enable this reminder
      * @param startTime Start time object
@@ -115,17 +118,19 @@ public final class ReminderItem {
      * @param distribution Distribution
      * @param daysToRun Days to run
      * @param notification True to enable notification
+     * @param notificationTone The uri of the desired notification tone
+     * @param notificationToneName The readable name of the notification tone
+     * @param notificationVibrate True to enable vibrate with the notification
      * @param alarm True to enable alarm
-     * @param vibrate True to enable vibrate
-     * @param messages List of messages to display
-     * @param messageOrder Message ordering
+     * @param alarmTone The uri of the desired alarm tone
+     * @param alarmToneName The readable name of the alarm tone
+     * @param alarmVibrate True to enable vibrate with the alarm
      * @param alertTimes List of calculated alert times
-     * @param currentMessage Current message index
      */
     public ReminderItem(@NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
-                        @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun, boolean notification, boolean alarm,
-                        boolean vibrate, @NonNull ArrayList<String> messages, @NonNull MessageOrder messageOrder,
-                        @NonNull ArrayList<TimeItem> alertTimes, int currentMessage) {
+                        @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun,
+                        boolean notification, Uri notificationTone, String notificationToneName, boolean notificationVibrate,
+                        boolean alarm, Uri alarmTone, String alarmToneName, boolean alarmVibrate, @NonNull ArrayList<TimeItem> alertTimes) {
         this.uniqueName = getUniqueName();
         this.title = title;
         this.enabled = enabled;
@@ -136,12 +141,14 @@ public final class ReminderItem {
         this.repeat = repeat;
         this.daysToRun = daysToRun.clone();
         this.notification = notification;
+        this.notificationTone = notificationTone;
+        this.notificationToneName = notificationToneName;
+        this.notificationVibrate = notificationVibrate;
         this.alarm = alarm;
-        this.vibrate = vibrate;
-        this.messages = (ArrayList<String>) messages.clone(); //Ignore
-        this.messageOrder = messageOrder;
+        this.alarmTone = alarmTone;
+        this.alarmToneName = alarmToneName;
+        this.alarmVibrate = alarmVibrate;
         this.alertTimes = (ArrayList<TimeItem>) alertTimes.clone(); //Ignore
-        this.currentMessage = currentMessage;
     }
 
     /**
@@ -150,7 +157,8 @@ public final class ReminderItem {
     @NonNull
     public final ReminderItem copy() {
         return new ReminderItem(title, enabled, startTime, endTime, numberPerDay, distribution,
-                repeat, daysToRun, notification, alarm, vibrate, messages, messageOrder, alertTimes, currentMessage);
+                repeat, daysToRun, notification, notificationTone, notificationToneName, notificationVibrate,
+                alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
     }
 
     @Override

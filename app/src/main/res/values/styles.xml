@@ -69,4 +69,5 @@
     <color name="mdtp_accent_color">@color/primaryColorAccent</color>
     <color name="mdtp_accent_color_dark">@color/primaryColorDark</color>
 
+
 </resources>

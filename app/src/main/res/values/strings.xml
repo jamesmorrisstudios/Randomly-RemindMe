@@ -49,7 +49,8 @@
     <string name="edit_title">Title</string>
     <string name="edit_timing">Timing</string>
     <string name="edit_repeat">Repeat</string>
-    <string name="edit_alert">Alert</string>
+    <string name="edit_alarm">Alarm</string>
+    <string name="edit_notification">Notification</string>
     <string name="edit_message">Message</string>
 
     <string name="start">Start</string>
@@ -59,15 +60,25 @@
     <string name="am">AM</string>
     <string name="pm">PM</string>
 
+    <string name="message_order">Message Order</string>
+    <string name="message_order_random">Random</string>
+    <string name="message_order_increment">Increment</string>
+
     <string name="distribution_even">Evenly</string>
     <string name="distribution_part_random">Partly Random</string>
     <string name="distribution_most_random">Mostly Random</string>
     <string name="distribution_full_random">Fully Random</string>
 
-    <string name="alerts_per_day">Alerts Per Day</string>
+    <string name="alerts_per_day">Reminders Per Day</string>
     <string name="distribution">Distribution</string>
     <string name="title_hint">Short Name</string>
     <string name="title_enable">Enable Reminder</string>
+    <string name="vibrate_enable">Enable Vibrate</string>
+    <string name="sound_set">Sound</string>
+
+    <string name="repeat_enable">Repeat Enable</string>
+    <string name="alarm_enable">Alarm Enable</string>
+    <string name="notification_enable">Notification Enable</string>
 
     <string name="error_time_difference_start">You can\'t set your start time after your end time</string>
     <string name="error_time_difference_end">You can\'t set your end time before your start time</string>

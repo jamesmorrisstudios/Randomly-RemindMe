@@ -17,6 +17,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jamesmorrisstudios.com.randremind">
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
         android:name="jamesmorrisstudios.com.randremind.application.App"
         android:allowBackup="true"
