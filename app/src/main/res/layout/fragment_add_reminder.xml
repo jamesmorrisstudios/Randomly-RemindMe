@@ -277,11 +277,36 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/notification_header"/>
 
+            <LinearLayout
+                android:layout_margin="4dp"
+                android:id="@+id/notificationContainer"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/notification_enabled"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_marginRight="4dp"
+                    android:textSize="@dimen/item_size"
+                    android:text="@string/sound_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginLeft="4dp"
+                    android:id="@+id/notificationSound"
+                    android:textSize="@dimen/item_size"
+                    android:text="Test sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </RelativeLayout>
 
         <!-- Alarm -->
+        <!--
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -304,7 +329,7 @@
                 android:layout_below="@+id/alarm_header"/>
 
         </RelativeLayout>
-
+-->
     </LinearLayout>
 
 </com.jamesmorrisstudios.materialdesign.views.ScrollView>

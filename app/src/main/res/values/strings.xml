@@ -60,10 +60,6 @@
     <string name="am">AM</string>
     <string name="pm">PM</string>
 
-    <string name="message_order">Message Order</string>
-    <string name="message_order_random">Random</string>
-    <string name="message_order_increment">Increment</string>
-
     <string name="distribution_even">Evenly</string>
     <string name="distribution_part_random">Partly Random</string>
     <string name="distribution_most_random">Mostly Random</string>
@@ -74,7 +70,7 @@
     <string name="title_hint">Short Name</string>
     <string name="title_enable">Enable Reminder</string>
     <string name="vibrate_enable">Enable Vibrate</string>
-    <string name="sound_set">Sound</string>
+    <string name="sound_set">Sound:</string>
 
     <string name="repeat_enable">Repeat Enable</string>
     <string name="alarm_enable">Alarm Enable</string>

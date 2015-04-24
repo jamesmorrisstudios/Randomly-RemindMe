@@ -22,20 +22,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e373aaa4-6238-4a19-a7c2-48f42daa7288" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/ButtonCircleFlat.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/color/bg_day_tint_color.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_button.xml" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\DayCheckBox.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/ButtonFlat.java" afterPath="$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/ButtonFlat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/CustomView.java" afterPath="$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/CustomView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RandRemind.iws" />
@@ -143,62 +132,7 @@
     <favorites_list name="RandRemind" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.52">
-              <caret line="75" column="57" selection-start-line="75" selection-start-column="57" selection-end-line="75" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_add_reminder.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.0">
-              <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
-              <folding>
-                <element signature="n#RelativeLayout#0;n#LinearLayout#0;n#com.jamesmorrisstudios.materialdesign.views.ScrollView#0;n#!!top" expanded="false" />
-                <element signature="n#RelativeLayout#1;n#LinearLayout#0;n#com.jamesmorrisstudios.materialdesign.views.ScrollView#0;n#!!top" expanded="false" />
-                <element signature="n#RelativeLayout#4;n#LinearLayout#0;n#com.jamesmorrisstudios.materialdesign.views.ScrollView#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddReminderFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7513043">
-              <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#onCreate#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#onCreateView#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#onAttach#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#onDetach#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#addListeners#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="e#10454#10833#0" expanded="true" />
-                <element signature="e#10832#10833#0" expanded="true" />
-                <element signature="e#11822#12653#0" expanded="true" />
-                <element signature="e#12652#12653#0" expanded="true" />
-                <element signature="class#12704:13262" expanded="false" />
-                <element signature="method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#populateData#0;class#AddReminderFragment#0" expanded="false" />
-                <element signature="method#setupDistributionSpinner#0;class#AddReminderFragment#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -2990,8 +2924,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/day_button.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
       </list>
     </option>
@@ -3834,13 +3768,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="0" width="1774" height="1040" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23190045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22737557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25791857" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -3849,7 +3783,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16742082" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32126698" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29411766" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995832" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24948454" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3992,36 +3926,6 @@
             <element signature="e#1345#1346#0" expanded="false" />
             <element signature="e#1773#1774#0" expanded="false" />
             <element signature="e#1825#1826#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2591415">
-          <caret line="175" column="9" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
-          <folding>
-            <element signature="docComment;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#ReminderList#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#getInstance#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#getInstance#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#loadData#0;class#ReminderList#0" expanded="false" />
-            <element signature="class#2677:3199" expanded="false" />
-            <element signature="method#onPostExecute#0;class#2677:3199" expanded="false" />
-            <element signature="docComment;method#saveData#0;class#ReminderList#0" expanded="false" />
-            <element signature="class#3395:3915" expanded="false" />
-            <element signature="method#onPostExecute#0;class#3395:3915" expanded="false" />
-            <element signature="e#4076#4077#0" expanded="true" />
-            <element signature="e#4114#4115#0" expanded="true" />
-            <element signature="e#4181#4182#0" expanded="true" />
-            <element signature="e#4208#4209#0" expanded="true" />
-            <element signature="e#5502#5503#0" expanded="true" />
-            <element signature="e#5544#5545#0" expanded="true" />
-            <element signature="method#saveToFile#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#loadFromFile#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#serializeSave#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#deserializeSave#0;class#ReminderList#0" expanded="false" />
-            <element signature="class#6838:6890" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4237,14 +4141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/CheckBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.1716418">
-          <caret line="145" column="20" selection-start-line="145" selection-start-column="20" selection-end-line="145" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/ButtonFloatSmall.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3552239">
@@ -4408,11 +4304,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.52">
-          <caret line="75" column="57" selection-start-line="75" selection-start-column="57" selection-end-line="75" selection-end-column="57" />
-          <folding />
+        <state vertical-scroll-proportion="0.3237082">
+          <caret line="163" column="32" selection-start-line="163" selection-start-column="32" selection-end-line="163" selection-end-column="32" />
+          <folding>
+            <element signature="docComment;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#ReminderList#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getInstance#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#getInstance#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#loadData#0;class#ReminderList#0" expanded="false" />
+            <element signature="class#2677:3199" expanded="false" />
+            <element signature="method#onPostExecute#0;class#2677:3199" expanded="false" />
+            <element signature="docComment;method#saveData#0;class#ReminderList#0" expanded="false" />
+            <element signature="class#3395:3915" expanded="false" />
+            <element signature="method#onPostExecute#0;class#3395:3915" expanded="false" />
+            <element signature="method#saveToFile#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#loadFromFile#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#serializeSave#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#deserializeSave#0;class#ReminderList#0" expanded="false" />
+            <element signature="class#6838:6890" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4421,38 +4333,86 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.0">
-          <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.793103">
+          <caret line="293" column="59" selection-start-line="293" selection-start-column="59" selection-end-line="293" selection-end-column="59" />
           <folding>
             <element signature="n#RelativeLayout#0;n#LinearLayout#0;n#com.jamesmorrisstudios.materialdesign.views.ScrollView#0;n#!!top" expanded="false" />
+            <element signature="e#1635#1655#0" expanded="true" />
+            <element signature="e#1740#1760#0" expanded="true" />
+            <element signature="e#2472#2490#0" expanded="true" />
+            <element signature="e#2859#2879#0" expanded="true" />
             <element signature="n#RelativeLayout#1;n#LinearLayout#0;n#com.jamesmorrisstudios.materialdesign.views.ScrollView#0;n#!!top" expanded="false" />
-            <element signature="n#RelativeLayout#4;n#LinearLayout#0;n#com.jamesmorrisstudios.materialdesign.views.ScrollView#0;n#!!top" expanded="false" />
+            <element signature="e#3301#3322#0" expanded="true" />
+            <element signature="e#3407#3427#0" expanded="true" />
+            <element signature="e#4430#4444#0" expanded="true" />
+            <element signature="e#5521#5545#0" expanded="true" />
+            <element signature="e#6668#6690#0" expanded="true" />
+            <element signature="e#7575#7596#0" expanded="true" />
+            <element signature="e#7681#7701#0" expanded="true" />
+            <element signature="e#10860#10887#0" expanded="true" />
+            <element signature="e#10972#10992#0" expanded="true" />
+            <element signature="e#11849#11867#0" expanded="true" />
+            <element signature="e#11901#11920#0" expanded="true" />
+            <element signature="e#12209#12227#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/materialdesign/src/main/java/com/jamesmorrisstudios/materialdesign/views/CheckBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.412354">
+          <caret line="145" column="20" selection-start-line="145" selection-start-column="20" selection-end-line="145" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7513043">
-          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8013356">
+          <caret line="536" column="5" selection-start-line="536" selection-start-column="5" selection-end-line="536" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#onCreate#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#onAttach#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#onDetach#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#onCreateOptionsMenu#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#onOptionsItemSelected#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#onCreateView#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#onAttach#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#onDetach#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#addListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="e#10454#10833#0" expanded="true" />
-            <element signature="e#10832#10833#0" expanded="true" />
-            <element signature="e#11822#12653#0" expanded="true" />
-            <element signature="e#12652#12653#0" expanded="true" />
-            <element signature="class#12704:13262" expanded="false" />
-            <element signature="method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#populateData#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#setupDistributionSpinner#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#setupViewWithReminder#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="e#8324#8747#0" expanded="true" />
+            <element signature="e#8746#8747#0" expanded="true" />
+            <element signature="method#addTimeSetListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="e#9680#10591#0" expanded="true" />
+            <element signature="e#10485#10547#0" expanded="true" />
+            <element signature="e#10590#10591#0" expanded="true" />
+            <element signature="e#10633#11135#0" expanded="true" />
+            <element signature="e#11134#11135#0" expanded="true" />
+            <element signature="e#11224#12123#0" expanded="true" />
+            <element signature="e#12019#12079#0" expanded="true" />
+            <element signature="e#12122#12123#0" expanded="true" />
+            <element signature="e#12163#12657#0" expanded="true" />
+            <element signature="e#12656#12657#0" expanded="true" />
+            <element signature="method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="e#14099#14693#0" expanded="true" />
+            <element signature="e#14692#14693#0" expanded="true" />
+            <element signature="e#15503#16118#0" expanded="true" />
+            <element signature="e#16117#16118#0" expanded="true" />
+            <element signature="e#16166#16909#0" expanded="true" />
+            <element signature="e#16908#16909#0" expanded="true" />
+            <element signature="e#19061#19098#0" expanded="true" />
+            <element signature="e#19118#19162#0" expanded="true" />
+            <element signature="e#19182#19226#0" expanded="true" />
+            <element signature="e#19246#19290#0" expanded="true" />
+            <element signature="method#generateNumberTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5557491">
+          <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
