@@ -100,7 +100,7 @@ public final class Notifier {
             if(title == null || title.isEmpty()) {
                 title = App.getContext().getString(R.string.default_title);
             }
-            buildNotification(title, item.notificationTone, item.notificationVibrate, item.notificationId);
+            buildNotification(title, item.getNotificationTone(), item.notificationVibrate, item.notificationId);
             id++;
         }
     }

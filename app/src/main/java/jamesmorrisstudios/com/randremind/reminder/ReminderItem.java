@@ -62,8 +62,8 @@ public final class ReminderItem {
     //Notifications
     @SerializedName("notification")
     public boolean notification;
-    @SerializedName("notificationTone")
-    public Uri notificationTone;
+    @SerializedName("notificationToneString")
+    public String notificationTone;
     @SerializedName("notificationToneName")
     public String notificationToneName;
     @SerializedName("notificationVibrate")
@@ -71,8 +71,8 @@ public final class ReminderItem {
     //Alarms
     @SerializedName("alarm")
     public boolean alarm;
-    @SerializedName("alarmTone")
-    public Uri alarmTone;
+    @SerializedName("alarmToneString")
+    public String alarmTone;
     @SerializedName("alarmToneName")
     public String alarmToneName;
     @SerializedName("alarmVibrate")
@@ -140,8 +140,8 @@ public final class ReminderItem {
      */
     public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
                         @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun,
-                        boolean notification, Uri notificationTone, String notificationToneName, boolean notificationVibrate,
-                        boolean alarm, Uri alarmTone, String alarmToneName, boolean alarmVibrate, @NonNull ArrayList<TimeItem> alertTimes) {
+                        boolean notification, String notificationTone, String notificationToneName, boolean notificationVibrate,
+                        boolean alarm, String alarmTone, String alarmToneName, boolean alarmVibrate, @NonNull ArrayList<TimeItem> alertTimes) {
         this.uniqueName = uniqueName;
         this.notificationId = notificationId;
         this.title = title;
@@ -171,6 +171,26 @@ public final class ReminderItem {
         return new ReminderItem(uniqueName, notificationId, title, enabled, startTime, endTime, numberPerDay,
                 distribution, repeat, daysToRun, notification, notificationTone, notificationToneName,
                 notificationVibrate, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
+    }
+
+    /**
+     * @return The notification tone as a Uri
+     */
+    public final Uri getNotificationTone() {
+        if(notificationTone == null) {
+            return null;
+        }
+        return Uri.parse(notificationTone);
+    }
+
+    /**
+     * @return The alarm tone as a Uri
+     */
+    public final Uri getAlarmTone() {
+        if(alarmTone == null) {
+            return null;
+        }
+        return Uri.parse(alarmTone);
     }
 
     /**

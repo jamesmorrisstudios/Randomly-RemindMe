@@ -371,8 +371,7 @@ public final class ReminderList {
         JSONObject retVal1 = new JSONObject();
         try {
             retVal1.put(ReminderList.TAG, new Gson().toJsonTree(data));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             return null;
         }
         return retVal1.toString().getBytes(Charset.forName(stringType));
@@ -387,16 +386,13 @@ public final class ReminderList {
         String st;
         try {
             st = new String(bytes, stringType);
-        } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
+        } catch (Exception e1) {
             return false;
         }
         try {
             JSONObject obj = new JSONObject(st);
-            data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderItem>>() {
-            }.getType());
-        } catch (JSONException e) {
-            e.printStackTrace();
+            data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderItem>>() {}.getType());
+        } catch (Exception e) {
             return false;
         }
         return true;

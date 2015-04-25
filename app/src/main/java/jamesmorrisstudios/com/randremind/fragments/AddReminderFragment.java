@@ -543,9 +543,9 @@ public final class AddReminderFragment extends Fragment {
     /**
      * Activity callback result for popup actions.
      * TODO eventually replace all called activities with native designs
-     * @param requestCode
-     * @param resultCode
-     * @param intent
+     * @param requestCode Request code
+     * @param resultCode Result code status
+     * @param intent Result intent
      */
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, @NonNull final Intent intent) {
@@ -556,7 +556,7 @@ public final class AddReminderFragment extends Fragment {
                 return;
             }
             if (uri != null) {
-                remind.notificationTone = uri;
+                remind.notificationTone = uri.getPath();
                 Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), uri);
                 remind.notificationToneName = ringtone.getTitle(getActivity());
                 notificationSound.setText(remind.notificationToneName);
