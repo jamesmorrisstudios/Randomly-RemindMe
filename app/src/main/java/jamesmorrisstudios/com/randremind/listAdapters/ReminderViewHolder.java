@@ -26,6 +26,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.application.App;
 import jamesmorrisstudios.com.randremind.reminder.TimeItem;
 import jamesmorrisstudios.com.randremind.utilities.Utils;
 
@@ -84,7 +85,11 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
             this.headerTitle.setText(reminder.headerTitle);
         } else {
             //Non header
-            this.title.setText(reminder.item.title);
+            String title = reminder.item.title;
+            if(title == null || title.isEmpty()) {
+                title = App.getContext().getString(R.string.default_title);
+            }
+            this.title.setText(title);
             Utils.setTime(startHour, startMinute, startAM, startPM, reminder.item.startTime);
             Utils.setTime(endHour, endMinute, endAM, endPM, reminder.item.endTime);
             enabled.setOnCheckedChangeListener(null);

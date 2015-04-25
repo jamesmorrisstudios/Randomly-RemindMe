@@ -44,6 +44,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jamesmorrisstudios.materialdesign.views.ButtonCircleFlat;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -136,12 +137,32 @@ public final class AddReminderFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                ReminderList.getInstance().deleteCurrentReminder();
-                mListener.goBackFromNewReminder();
+                mListener.createPromptDialog(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        ReminderList.getInstance().deleteCurrentReminder();
+                        mListener.goBackFromNewReminder();
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+
+                    }
+                });
                 break;
             case R.id.action_cancel:
-                ReminderList.getInstance().clearCurrentReminder();
-                mListener.goBackFromNewReminder();
+                mListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        ReminderList.getInstance().clearCurrentReminder();
+                        mListener.goBackFromNewReminder();
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+
+                    }
+                });
                 break;
             case R.id.action_preview:
                 ReminderList.getInstance().previewCurrent();
@@ -685,7 +706,15 @@ public final class AddReminderFragment extends Fragment {
          * @param minute Start minute
          * @param is24Hour True if 24 hour mode
          */
-        void createTimePickerDialog(TimePickerDialog.OnTimeSetListener listener, int hour, int minute, boolean is24Hour);
+        void createTimePickerDialog(@NonNull TimePickerDialog.OnTimeSetListener listener, int hour, int minute, boolean is24Hour);
+
+        /**
+         * Build a ok/cancel prompt
+         * @param title Title of the prompt
+         * @param content Content text
+         * @param callback Callback listener
+         */
+        void createPromptDialog(@NonNull String title, @NonNull String content, MaterialDialog.ButtonCallback callback);
     }
 
 }

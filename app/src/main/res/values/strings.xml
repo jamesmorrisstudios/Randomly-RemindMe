@@ -53,6 +53,13 @@
     <string name="edit_notification">Notification</string>
     <string name="edit_message">Message</string>
 
+    <string name="agree">OK</string>
+    <string name="disagree">Cancel</string>
+    <string name="delete_prompt_title">Delete Reminder</string>
+    <string name="delete_prompt_content">Are you sure you want to delete this reminder?</string>
+    <string name="cancel_prompt_title">Discard Changes</string>
+    <string name="cancel_prompt_content">Are you sure you want to discard your changes?</string>
+
     <string name="default_title">Default Title</string>
     <string name="colon">:</string>
     <string name="dash">-</string>

@@ -24,8 +24,8 @@ android {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 4
+        versionName "0.0.4"
     }
     buildTypes {
         release {
@@ -45,5 +45,6 @@ dependencies {
     compile 'com.squareup:otto:1.3.6'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.wdullaer:materialdatetimepicker:1.2.2'
+    compile 'com.afollestad:material-dialogs:0.7.2.7'
     compile project(':materialdesign')
 }

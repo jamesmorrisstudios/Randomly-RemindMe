@@ -29,6 +29,12 @@
         <item name="android:textSelectHandle">@drawable/text_select_handle_middle_mtrl</item>
         <item name="android:textSelectHandleLeft">@drawable/text_select_handle_left_mtrl</item>
         <item name="android:textSelectHandleRight">@drawable/text_select_handle_right_mtrl</item>
+
+        <item name="md_dark_theme">false</item>
+        <item name="md_background_color">@color/cardBackground</item>
+        <item name="md_title_color">@color/primaryColorDarkText</item>
+        <item name="md_content_color">@color/primaryColorDarkText</item>
+
     </style>
 
     !-- Theme for the toolbars in the app-->

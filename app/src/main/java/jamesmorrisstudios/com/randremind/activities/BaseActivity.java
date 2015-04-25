@@ -17,6 +17,7 @@
 package jamesmorrisstudios.com.randremind.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import jamesmorrisstudios.com.randremind.R;
@@ -303,6 +305,16 @@ public abstract class BaseActivity extends AppCompatActivity implements
         TimePickerDialog time = new TimePickerDialog();
         time.initialize(listener, hour, minute, is24Hour);
         time.show(getFragmentManager(), "TimePickerDialog");
+    }
+
+    public void createPromptDialog(@NonNull String title, @NonNull String content, MaterialDialog.ButtonCallback callback) {
+        new MaterialDialog.Builder(this)
+                .title(title)
+                .content(content)
+                .callback(callback)
+                .positiveText(R.string.agree)
+                .negativeText(R.string.disagree)
+                .show();
     }
 
 }
