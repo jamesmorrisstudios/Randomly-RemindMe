@@ -39,8 +39,8 @@ public class ButtonCircleFlat extends Button {
 	}
 
 	protected void setDefaultProperties(){
-		minHeight = 36;
-		minWidth = 36;
+		minHeight = 30;
+		minWidth = 30;
 		rippleSize = 3;
 		// Min size
 		setMinimumHeight(Utils.dpToPx(minHeight, getResources()));

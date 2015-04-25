@@ -302,7 +302,7 @@ public final class ReminderList {
     private int getDayOfWeek() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        return calendar.get(Calendar.DAY_OF_WEEK);
+        return calendar.get(Calendar.DAY_OF_WEEK) - 1; //These are indexed starting at 1
     }
 
     /**
