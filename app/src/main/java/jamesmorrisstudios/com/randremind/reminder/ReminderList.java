@@ -251,6 +251,7 @@ public final class ReminderList {
         recalculateWakes();
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         for(ReminderItem item : data) {
             trimWakeToCurrent(item, timeNow);
@@ -263,6 +264,7 @@ public final class ReminderList {
     private void trimWakeToCurrent(@NonNull ReminderItem item) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         trimWakeToCurrent(item, timeNow);
     }
@@ -283,6 +285,7 @@ public final class ReminderList {
     public final ArrayList<ReminderItem> getCurrentWakes() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         ArrayList<ReminderItem> items = new ArrayList<>();
         for(ReminderItem item : data) {
@@ -302,6 +305,7 @@ public final class ReminderList {
     private int getDayOfWeek() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         return calendar.get(Calendar.DAY_OF_WEEK) - 1; //These are indexed starting at 1
     }
 
@@ -314,6 +318,7 @@ public final class ReminderList {
     private boolean timeInBounds(TimeItem start, TimeItem end) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         return timeBefore(start, timeNow) && timeBefore(timeNow, end);
     }
