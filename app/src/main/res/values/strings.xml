@@ -1,0 +1,81 @@
+<!--
+  ~ Copyright (c) 2015.  James Morris Studios
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~         http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="todo">TODO Coming Soon</string>
+
+    <string name="app_name">Randomly RemindMe</string>
+    <string name="action_help">Help and Feedback</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="main_list_no_data">You have no reminders yet.\nClick the + button to add a new reminder.</string>
+    <string name="data_load_fail">ERROR: Failed to load reminder list</string>
+
+    <string name="help_how_to_use_header">How To Use</string>
+    <string name="help_how_to_use_read">Read How</string>
+    <string name="help_how_to_use_watch">Watch How</string>
+
+    <string name="help_about">About</string>
+    <string name="help_studio">James Morris Studios</string>
+    <string name="help_studio_email">james.morris.studios@gmail.com</string>
+    <string name="help_license">Open Source Licenses</string>
+
+    <string name="help_twitter">https://twitter.com/J_M_Studios</string>
+    <string name="help_gPlus">https://plus.google.com/116342052026616674911</string>
+    <string name="help_fb">https://www.facebook.com/j.morris.studios</string>
+
+    <string name="license_0_title">James Morris Studios</string>
+    <string name="license_0_link_site">https://github.com/morris-james/randRemind</string>
+    <string name="license_0_link_license">http://www.apache.org/licenses/LICENSE-2.0</string>
+
+    <string name="license_1_title">Navasmdc</string>
+    <string name="license_1_link_site">https://github.com/navasmdc/MaterialDesignLibrary</string>
+    <string name="license_1_link_license">http://www.apache.org/licenses/LICENSE-2.0</string>
+
+
+    <string name="edit_title">Title</string>
+    <string name="edit_timing">Timing</string>
+    <string name="edit_repeat">Repeat</string>
+    <string name="edit_alarm">Alarm</string>
+    <string name="edit_notification">Notification</string>
+    <string name="edit_message">Message</string>
+
+    <string name="default_title">Default Title</string>
+    <string name="colon">:</string>
+    <string name="dash">-</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+
+    <string name="distribution_even">Evenly</string>
+    <string name="distribution_part_random">Partly Random</string>
+    <string name="distribution_most_random">Mostly Random</string>
+    <string name="distribution_full_random">Fully Random</string>
+
+    <string name="alerts_per_day">Reminders Per Day</string>
+    <string name="distribution">Distribution</string>
+    <string name="title_hint">Short Name</string>
+    <string name="title_enable">Enable Reminder</string>
+    <string name="vibrate_enable">Enable Vibrate</string>
+    <string name="sound_set">Sound:</string>
+    <string name="sound_none">None</string>
+
+    <string name="repeat_enable">Repeat Enable</string>
+    <string name="alarm_enable">Alarm Enable</string>
+    <string name="notification_enable">Notification Enable</string>
+
+    <string name="error_time_difference_start">You can\'t set your start time after your end time</string>
+    <string name="error_time_difference_end">You can\'t set your end time before your start time</string>
+</resources>

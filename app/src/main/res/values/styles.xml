@@ -1,0 +1,73 @@
+<!--
+  ~ Copyright (c) 2015.  James Morris Studios
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~         http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Set primary coloring in the app -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="colorAccent">@color/primaryColorAccent</item>
+        <!-- Set the backgrounds so we don't redraw them -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
+
+        <item name="android:textSelectHandle">@drawable/text_select_handle_middle_mtrl</item>
+        <item name="android:textSelectHandleLeft">@drawable/text_select_handle_left_mtrl</item>
+        <item name="android:textSelectHandleRight">@drawable/text_select_handle_right_mtrl</item>
+    </style>
+
+    !-- Theme for the toolbars in the app-->
+    <style name="ThemeOverlay.toolbar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/primaryColorDark</item>
+        <item name="android:textColor">@color/white80</item>
+    </style>
+
+    <!-- Card view theme -->
+    <style name="Theme.cardView" parent="Theme.AppCompat">
+        <item name="android:textColorSecondary">@color/primaryColorDarkText</item>
+    </style>
+
+    <!-- Blue 500 -->
+    <color name="primaryColor">#2196F3</color>
+    <!-- Blue 700 -->
+    <color name="primaryColorDark">#1976D2</color>
+    <!-- Red A200 -->
+    <color name="primaryColorAccent">#FF5252</color>
+    <!-- Red A200 at 80% opacity  -->
+    <color name="primaryColorAccentText">#CCFF5252</color>
+    <!-- Red A200 at 20% opacity  -->
+    <color name="primaryColorAccentTextHint">#33FF5252</color>
+    <!-- Blue 700 at 80% opacity -->
+    <color name="primaryColorDarkText">#CC1976D2</color>
+    <!-- Blue 700 at 20% opacity -->
+    <color name="primaryColorDarkTextHint">#331976D2</color>
+    <!-- Blue 900 -->
+    <color name="background">#0D47A1</color>
+    <!-- A slight offwhite -->
+    <color name="cardBackground">#EEEEEE</color>
+    <!-- White 80% opacity used for main text -->
+    <color name="white80">#CCFFFFFF</color>
+    <!-- white 15% opacity used for dividers -->
+    <color name="white15">#26FFFFFF</color>
+
+
+    <color name="mdtp_accent_color">@color/primaryColorAccent</color>
+    <color name="mdtp_accent_color_dark">@color/primaryColorDark</color>
+
+
+</resources>
