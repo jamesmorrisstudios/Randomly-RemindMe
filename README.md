@@ -4,13 +4,20 @@ This app is currently in Beta.
 
 Do you have trouble drinking enough water during the day? Maybe you want a reminder to step away from the computer for a bit. This app will let you set any number of custom reminders that will remind you throughout the day for just that and a whole lot more. If you only want the reminders on week days then select only those days.
 
-Custom each reminder independently with these options
+Customize each reminder independently with these options
+
 • Notification text
+
 • Notification tone
+
 • Vibrate or not
+
 • Start and end times in the day
+
 • How many notifications during the day
+
 • What days of the week to run
+
 • How to distribute the reminders (Evenly all the way to fully random)
 
 Additional features are on the way
