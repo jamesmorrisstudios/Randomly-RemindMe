@@ -110,7 +110,7 @@ public class ButtonFloat extends Button{
 						show();
 					}
 				}
-			}, 25);
+			}, 50);
 					
 	}
 		

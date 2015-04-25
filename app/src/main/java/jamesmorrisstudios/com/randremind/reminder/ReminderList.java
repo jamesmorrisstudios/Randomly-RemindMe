@@ -198,6 +198,10 @@ public final class ReminderList {
         currentItem = new ReminderItem();
     }
 
+    public final void previewCurrent() {
+        Notifier.getInstance().notifyInstantly(currentItem);
+    }
+
     /**
      * Saves the current reminder back to the list.
      * If its a new reminder it is added to the end of the list
@@ -206,9 +210,6 @@ public final class ReminderList {
     public final void saveCurrentReminder() {
         currentItem.updateAlertTimes();
         trimWakeToCurrent(currentItem);
-
-        Notifier.getInstance().notifyInstantly(currentItem); //TODO testing
-
         if(currentIndex == -1) {
             //New Item so add to end
             data.add(currentItem);

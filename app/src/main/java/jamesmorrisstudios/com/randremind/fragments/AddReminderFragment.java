@@ -143,6 +143,9 @@ public final class AddReminderFragment extends Fragment {
                 ReminderList.getInstance().clearCurrentReminder();
                 mListener.goBackFromNewReminder();
                 break;
+            case R.id.action_preview:
+                ReminderList.getInstance().previewCurrent();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
