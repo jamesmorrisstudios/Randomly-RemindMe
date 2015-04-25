@@ -19,6 +19,7 @@ package jamesmorrisstudios.com.randremind.reminder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -254,8 +255,10 @@ public final class ReminderItem {
                 values[i] = Math.min(Math.max(values[i], values[i-1] + 30), diff);
             }
         }
+
         for (int value : values) {
             alertTimes.add(minutesToTimeItem(value + offset));
+            Log.v(title, alertTimes.get(alertTimes.size()-1).getHourInTimeFormatString()+":"+alertTimes.get(alertTimes.size()-1).getMinuteString());
         }
     }
 

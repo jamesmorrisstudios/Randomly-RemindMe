@@ -206,6 +206,9 @@ public final class ReminderList {
     public final void saveCurrentReminder() {
         currentItem.updateAlertTimes();
         trimWakeToCurrent(currentItem);
+
+        Notifier.getInstance().notifyInstantly(currentItem); //TODO testing
+
         if(currentIndex == -1) {
             //New Item so add to end
             data.add(currentItem);

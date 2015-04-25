@@ -24,8 +24,10 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.application.App;
@@ -62,6 +64,11 @@ public final class Notifier {
      * @param id Id to associate notification with. These should be unique to the reminderItem
      */
     private void buildNotification(@NonNull String text, @Nullable Uri notificationTone, boolean vibrate, int id) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        Log.v("Notification shown", text+" "+timeNow.getHourInTimeFormatString()+":"+timeNow.getMinuteString());
+
         int defaults = Notification.DEFAULT_LIGHTS;
         if(vibrate) {
             defaults |= Notification.DEFAULT_VIBRATE;
@@ -87,6 +94,14 @@ public final class Notifier {
         mNotifyMgr.notify(id, mBuilder.build());
     }
 
+    public final void notifyInstantly(ReminderItem item) {
+        String title = item.title;
+        if(title == null || title.isEmpty()) {
+            title = App.getContext().getString(R.string.default_title);
+        }
+        buildNotification(title, item.getNotificationTone(), item.notificationVibrate, item.notificationId);
+    }
+
     /**
      * Gets a list of reminder items that are due to have a notification shown and builds and shows them.
      * If none are ready to be shown it does nothing
@@ -94,14 +109,12 @@ public final class Notifier {
     public final void postNextNotification() {
         ReminderList.getInstance().loadDataSync();
         ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
-        int id = 0;
         for(ReminderItem item : items) {
             String title = item.title;
             if(title == null || title.isEmpty()) {
                 title = App.getContext().getString(R.string.default_title);
             }
             buildNotification(title, item.getNotificationTone(), item.notificationVibrate, item.notificationId);
-            id++;
         }
     }
 }

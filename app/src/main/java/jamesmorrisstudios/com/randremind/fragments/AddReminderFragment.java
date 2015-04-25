@@ -454,6 +454,7 @@ public final class AddReminderFragment extends Fragment {
         repeatEnable.setChecked(remind.repeat);
         setDaysOfWeek();
         notificationEnable.setChecked(remind.notification);
+        notificationVibrateEnable.setChecked(remind.notificationVibrate);
         setNotification();
     }
 
@@ -556,7 +557,7 @@ public final class AddReminderFragment extends Fragment {
                 return;
             }
             if (uri != null) {
-                remind.notificationTone = uri.getPath();
+                remind.notificationTone = uri.toString();
                 Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), uri);
                 remind.notificationToneName = ringtone.getTitle(getActivity());
                 notificationSound.setText(remind.notificationToneName);
