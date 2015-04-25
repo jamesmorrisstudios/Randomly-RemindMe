@@ -2,6 +2,17 @@
 
 This app is currently in Beta.
 
+If you want to try the beta out without having to compile it yourself it is available on the play store
+once you opt into the beta.
+
+
+Join This https://plus.google.com/communities/105206368108124765493
+
+Opt in here https://play.google.com/apps/testing/jamesmorrisstudios.com.randremind
+
+Download here https://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind
+
+
 Do you have trouble drinking enough water during the day? Maybe you want a reminder to step away from the computer for a bit. This app will let you set any number of custom reminders that will remind you throughout the day for just that and a whole lot more. If you only want the reminders on week days then select only those days.
 
 Customize each reminder independently with these options
