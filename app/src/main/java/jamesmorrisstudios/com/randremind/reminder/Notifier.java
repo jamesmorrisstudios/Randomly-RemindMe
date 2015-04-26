@@ -19,6 +19,7 @@ package jamesmorrisstudios.com.randremind.reminder;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -58,36 +59,46 @@ public final class Notifier {
 
     /**
      * Builds and displays a notification with the given parameters
-     * @param text Text to display
+     * @param title Text to display
      * @param notificationTone Notification tone. Null to have none
      * @param vibrate True to enable vibrate
      * @param id Id to associate notification with. These should be unique to the reminderItem
      */
-    private void buildNotification(@NonNull String text, @Nullable Uri notificationTone, boolean vibrate, int id) {
+    private void buildNotification(@NonNull String title, @NonNull String content, @Nullable Uri notificationTone, boolean vibrate, boolean highPriority, boolean led, int ledColor, int id) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
-        Log.v("Notification shown", text+" "+timeNow.getHourInTimeFormatString()+":"+timeNow.getMinuteString());
+        Log.v("Notification shown", title+" "+timeNow.getHourInTimeFormatString()+":"+timeNow.getMinuteString());
 
-        int defaults = Notification.DEFAULT_LIGHTS;
+        int defaults = 0;
         if(vibrate) {
-            defaults |= Notification.DEFAULT_VIBRATE;
+            defaults |= NotificationCompat.DEFAULT_VIBRATE;
         }
+        int priority = NotificationCompat.PRIORITY_DEFAULT;
+        if(highPriority) {
+            priority = NotificationCompat.PRIORITY_HIGH;
+        }
+
+        NotificationCompat.InboxStyle expandStyle = new NotificationCompat.InboxStyle();
+        expandStyle.setBigContentTitle(title);
+        expandStyle.setSummaryText(content);
+
         NotificationCompat.Builder mBuilder;
-        if(notificationTone == null) {
-            mBuilder = new NotificationCompat.Builder(App.getContext())
-                            .setDefaults(defaults)
-                            .setSmallIcon(R.drawable.notification_icon)
-                            .setContentTitle(App.getContext().getString(R.string.app_name))
-                            .setContentText(text);
-        } else {
-            mBuilder = new NotificationCompat.Builder(App.getContext())
-                            .setSound(notificationTone)
-                            .setDefaults(defaults)
-                            .setSmallIcon(R.drawable.notification_icon)
-                            .setContentTitle(App.getContext().getString(R.string.app_name))
-                            .setContentText(text);
+        mBuilder = new NotificationCompat.Builder(App.getContext())
+                .setDefaults(defaults)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentTitle(title)
+                .setPriority(priority)
+                .setStyle(expandStyle)
+                .setContentText(content);
+
+        if(notificationTone != null) {
+            mBuilder.setSound(notificationTone);
         }
+        if(led) {
+            mBuilder.setLights(ledColor, 1000, 1500);
+        }
+
         // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr = (NotificationManager) App.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         // Builds the notification and issues it.
@@ -99,7 +110,12 @@ public final class Notifier {
         if(title == null || title.isEmpty()) {
             title = App.getContext().getString(R.string.default_title);
         }
-        buildNotification(title, item.getNotificationTone(), item.notificationVibrate, item.notificationId);
+        String content = item.content;
+        if(content == null || content.isEmpty()) {
+            content = App.getContext().getString(R.string.default_content);
+        }
+        buildNotification(title, content, item.getNotificationTone(), item.notificationVibrate, item.notificationHighPriority,
+                item.notificationLED, item.notificationLEDColor, item.notificationId);
     }
 
     /**
@@ -114,7 +130,12 @@ public final class Notifier {
             if(title == null || title.isEmpty()) {
                 title = App.getContext().getString(R.string.default_title);
             }
-            buildNotification(title, item.getNotificationTone(), item.notificationVibrate, item.notificationId);
+            String content = item.content;
+            if(content == null || content.isEmpty()) {
+                content = App.getContext().getString(R.string.default_content);
+            }
+            buildNotification(title, content, item.getNotificationTone(), item.notificationVibrate, item.notificationHighPriority,
+                    item.notificationLED, item.notificationLEDColor, item.notificationId);
         }
     }
 }

@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -46,30 +47,43 @@ public final class ReminderItem {
     public String title;
     @SerializedName("enabled")
     public boolean enabled;
+    //Content
+    @SerializedName("content")
+    public String content;
     //Timing
     @SerializedName("startTime")
     public TimeItem startTime;
     @SerializedName("endTime")
     public TimeItem endTime;
+    @SerializedName("singleTime")
+    public TimeItem singleTime;
     @SerializedName("numberPerDay")
     public int numberPerDay;
     @SerializedName("distribution")
     public Distribution distribution;
+    @SerializedName("rangeTiming")
+    public boolean rangeTiming = true;
     //Repeat
     @SerializedName("repeat")
-    public boolean repeat;
+    public boolean repeat = true;
     @SerializedName("daysToRun")
     public boolean[] daysToRun; //Sunday -> Saturday
     //Notifications
     @SerializedName("notification")
-    public boolean notification;
+    public boolean notification = true;
     @SerializedName("notificationToneString")
     public String notificationTone;
     @SerializedName("notificationToneName")
     public String notificationToneName;
     @SerializedName("notificationVibrate")
     public boolean notificationVibrate;
-    //Alarms
+    @SerializedName("notificationLED")
+    public boolean notificationLED = true;
+    @SerializedName("notificationLEDColorInt")
+    public int notificationLEDColor = Color.BLUE;
+    @SerializedName("notificationHighPriority")
+    public boolean notificationHighPriority = false;
+    //Alarms TODO
     @SerializedName("alarm")
     public boolean alarm;
     @SerializedName("alarmToneString")
@@ -99,24 +113,31 @@ public final class ReminderItem {
         //Title
         this.title = "";
         this.enabled = true;
+        //Content
+        this.content = "";
         //Timing
         this.startTime = new TimeItem(9, 0);
         this.endTime = new TimeItem(20, 0);
+        this.singleTime = new TimeItem(13, 0);
         this.numberPerDay = 6;
         this.distribution = Distribution.PART_RANDOM;
+        this.rangeTiming = true;
         //Repeat
-        this.repeat = true;
+        this.repeat = true; //unused
         this.daysToRun = new boolean[] {true, true, true, true, true, true, true};
         //Notifications
-        this.notification = true;
+        this.notification = true; //unused
         this.notificationTone = null;
         this.notificationToneName = App.getContext().getString(R.string.sound_none);
         this.notificationVibrate = false;
+        this.notificationLED = true;
+        this.notificationLEDColor = Color.BLUE;
+        this.notificationHighPriority = false;
         //Alarms
-        this.alarm = false;
-        this.alarmTone = null;
-        this.alarmToneName = App.getContext().getString(R.string.sound_none);
-        this.alarmVibrate = false;
+        this.alarm = false; //unused
+        this.alarmTone = null; //unused
+        this.alarmToneName = App.getContext().getString(R.string.sound_none); //unused
+        this.alarmVibrate = false; //unused
         //Generated values
         this.alertTimes = new ArrayList<>();
     }
@@ -139,24 +160,31 @@ public final class ReminderItem {
      * @param alarmVibrate True to enable vibrate with the alarm
      * @param alertTimes List of calculated alert times
      */
-    public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
-                        @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun,
-                        boolean notification, String notificationTone, String notificationToneName, boolean notificationVibrate,
+    public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, @NonNull String content,
+                        boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, @NonNull TimeItem singleTime, int numberPerDay,
+                        @NonNull Distribution distribution, boolean rangeTiming, boolean repeat, @NonNull boolean[] daysToRun,
+                        boolean notification, String notificationTone, String notificationToneName, boolean notificationVibrate, boolean notificationLED, int notificationLEDColor, boolean notificationHighPriority,
                         boolean alarm, String alarmTone, String alarmToneName, boolean alarmVibrate, @NonNull ArrayList<TimeItem> alertTimes) {
         this.uniqueName = uniqueName;
         this.notificationId = notificationId;
         this.title = title;
+        this.content = content;
         this.enabled = enabled;
         this.startTime = startTime.copy();
         this.endTime = endTime;
+        this.singleTime = singleTime;
         this.numberPerDay = numberPerDay;
         this.distribution = distribution;
+        this.rangeTiming = rangeTiming;
         this.repeat = repeat;
         this.daysToRun = daysToRun.clone();
         this.notification = notification;
         this.notificationTone = notificationTone;
         this.notificationToneName = notificationToneName;
         this.notificationVibrate = notificationVibrate;
+        this.notificationLED = notificationLED;
+        this.notificationLEDColor = notificationLEDColor;
+        this.notificationHighPriority = notificationHighPriority;
         this.alarm = alarm;
         this.alarmTone = alarmTone;
         this.alarmToneName = alarmToneName;
@@ -169,9 +197,9 @@ public final class ReminderItem {
      */
     @NonNull
     public final ReminderItem copy() {
-        return new ReminderItem(uniqueName, notificationId, title, enabled, startTime, endTime, numberPerDay,
-                distribution, repeat, daysToRun, notification, notificationTone, notificationToneName,
-                notificationVibrate, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
+        return new ReminderItem(uniqueName, notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
+                distribution, rangeTiming, repeat, daysToRun, notification, notificationTone, notificationToneName,
+                notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
     }
 
     /**

@@ -20,7 +20,7 @@
             android:paddingTop="18dp"
             android:visibility="invisible" >
 
-            <com.gc.materialdesign.views.ButtonFlat
+            <com.jamesmorrisstudios.materialdesign.views.ButtonFlat
                 android:id="@+id/buttonflat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

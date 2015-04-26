@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jamesmorrisstudios.materialdesign.widgets.ColorSelector;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import jamesmorrisstudios.com.randremind.R;
@@ -307,6 +308,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
         time.show(getFragmentManager(), "TimePickerDialog");
     }
 
+    @Override
     public void createPromptDialog(@NonNull String title, @NonNull String content, MaterialDialog.ButtonCallback callback) {
         new MaterialDialog.Builder(this)
                 .title(title)
@@ -315,6 +317,12 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 .positiveText(R.string.agree)
                 .negativeText(R.string.disagree)
                 .show();
+    }
+
+    @Override
+    public void createColorPickerDialog(int intialColor, ColorSelector.OnColorSelectedListener onColorSelectedListener) {
+        ColorSelector colorSelector = new ColorSelector(this, intialColor, onColorSelectedListener);
+        colorSelector.show();
     }
 
 }

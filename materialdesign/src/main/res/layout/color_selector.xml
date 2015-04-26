@@ -41,7 +41,7 @@
                     android:text="R"
                     android:textColor="#4D4D4D" />
 
-                <com.gc.materialdesign.views.Slider
+                <com.jamesmorrisstudios.materialdesign.views.Slider
                     android:id="@+id/red"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                     android:text="G"
                     android:textColor="#4D4D4D" />
 
-                <com.gc.materialdesign.views.Slider
+                <com.jamesmorrisstudios.materialdesign.views.Slider
                     android:id="@+id/green"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                     android:text="B"
                     android:textColor="#4D4D4D" />
 
-                <com.gc.materialdesign.views.Slider
+                <com.jamesmorrisstudios.materialdesign.views.Slider
                     android:id="@+id/blue"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

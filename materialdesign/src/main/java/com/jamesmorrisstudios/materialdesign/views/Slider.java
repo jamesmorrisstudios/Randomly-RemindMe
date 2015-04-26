@@ -391,8 +391,8 @@ public class Slider extends CustomView {
                                 .getParent()) + ball.getWidth() / 2)
                                 - size);
                 numberIndicator.numberIndicator.setY(y - size);
-                numberIndicator.numberIndicator.setText(textIndicator[value]);
-                //numberIndicator.numberIndicator.setText(value + "");
+                //numberIndicator.numberIndicator.setText(textIndicator[value]);
+                numberIndicator.numberIndicator.setText(value + "");
             }
 
             invalidate();
