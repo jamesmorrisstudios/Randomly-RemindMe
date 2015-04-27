@@ -79,9 +79,9 @@ public final class Notifier {
             priority = NotificationCompat.PRIORITY_HIGH;
         }
 
-        NotificationCompat.InboxStyle expandStyle = new NotificationCompat.InboxStyle();
+        NotificationCompat.BigTextStyle expandStyle = new NotificationCompat.BigTextStyle();
         expandStyle.setBigContentTitle(title);
-        expandStyle.setSummaryText(content);
+        expandStyle.bigText(content);
 
         NotificationCompat.Builder mBuilder;
         mBuilder = new NotificationCompat.Builder(App.getContext())
