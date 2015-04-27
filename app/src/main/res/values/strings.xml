@@ -98,4 +98,5 @@
     <string name="reminder_cancel">Canceled Changes</string>
     <string name="reminder_delete">Reminder Deleted</string>
     <string name="reminder_save">Your Changes Have Been Saved</string>
+    <string name="reminder_duplicate">Reminder duplicated</string>
 </resources>

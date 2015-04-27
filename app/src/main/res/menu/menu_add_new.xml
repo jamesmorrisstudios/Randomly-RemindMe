@@ -36,4 +36,10 @@
         app:showAsAction="never"
         android:title="Preview"/>
 
+    <item
+        android:id="@+id/action_duplicate"
+        android:orderInCategory="4"
+        app:showAsAction="never"
+        android:title="Duplicate"/>
+
 </menu>

@@ -181,6 +181,10 @@ public final class AddReminderFragment extends Fragment {
             case R.id.action_preview:
                 ReminderList.getInstance().previewCurrent();
                 break;
+            case R.id.action_duplicate:
+                Utils.toastShort(getString(R.string.reminder_duplicate));
+                ReminderList.getInstance().duplicateReminder();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

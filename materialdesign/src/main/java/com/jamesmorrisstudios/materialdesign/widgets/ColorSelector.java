@@ -18,6 +18,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
 import com.jamesmorrisstudios.materialdesign.R;
+import com.jamesmorrisstudios.materialdesign.views.ButtonFlat;
 import com.jamesmorrisstudios.materialdesign.views.Slider;
 
 public final class ColorSelector extends android.app.Dialog implements Slider.OnValueChangedListener {
@@ -27,6 +28,8 @@ public final class ColorSelector extends android.app.Dialog implements Slider.On
 	View view, backView;//background
 	OnColorSelectedListener onColorSelectedListener;
 	Slider red, green, blue;
+	private boolean accepted = false;
+	private ButtonFlat btnCancel, btnAccept;
 
 	public ColorSelector(@NonNull Context context, @Nullable Integer color, @NonNull OnColorSelectedListener onColorSelectedListener) {
 		super(context, android.R.style.Theme_Translucent);
@@ -38,20 +41,34 @@ public final class ColorSelector extends android.app.Dialog implements Slider.On
 			
 			@Override
 			public void onDismiss(@NonNull DialogInterface dialog) {
-				if(ColorSelector.this.onColorSelectedListener != null)
+				if(ColorSelector.this.onColorSelectedListener != null && accepted)
 					ColorSelector.this.onColorSelectedListener.onColorSelected(ColorSelector.this.color);
 			}
 		});
 	}
-	
-
 	
 	@Override
 	  protected void onCreate(@Nullable Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.color_selector);
-	    
+
+		btnAccept = (ButtonFlat) findViewById(R.id.button_accept);
+		btnAccept.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				accepted = true;
+				dismiss();
+			}
+		});
+		btnCancel = (ButtonFlat) findViewById(R.id.button_cancel);
+		btnCancel.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				accepted = false;
+				dismiss();
+			}
+		});
 	    view = (LinearLayout)findViewById(R.id.contentSelector);
 		backView = (RelativeLayout)findViewById(R.id.rootSelector);
 		backView.setOnTouchListener(new OnTouchListener() {
@@ -60,6 +77,7 @@ public final class ColorSelector extends android.app.Dialog implements Slider.On
 			public boolean onTouch(@NonNull View v, @NonNull MotionEvent event) {
 				if (event.getX() < view.getLeft() || event.getX() >view.getRight()
 						|| event.getY() > view.getBottom() || event.getY() < view.getTop()) {
+					accepted = false;
 					dismiss();
 				}
 				return false;
@@ -74,7 +92,7 @@ public final class ColorSelector extends android.app.Dialog implements Slider.On
 			@Override
 			public void run() {
 				LinearLayout.LayoutParams params = (LayoutParams) colorView.getLayoutParams();
-				params.height = colorView.getWidth();
+				params.height = colorView.getWidth()/2;
 				colorView.setLayoutParams(params);
 			}
 		});
@@ -114,7 +132,7 @@ public final class ColorSelector extends android.app.Dialog implements Slider.On
 	
 	// Event that execute when color selector is closed
 	public interface OnColorSelectedListener{
-		public void onColorSelected(int color);
+		void onColorSelected(int color);
 	}
 		
 	@Override

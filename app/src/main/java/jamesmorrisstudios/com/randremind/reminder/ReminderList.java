@@ -220,6 +220,13 @@ public final class ReminderList {
         saveToFile();
     }
 
+    public final void duplicateReminder() {
+        currentItem.updateAlertTimes();
+        trimWakeToCurrent(currentItem);
+        data.add(currentItem.copy());
+        saveToFile();
+    }
+
     /**
      * @return True if a current reminder is set
      */
