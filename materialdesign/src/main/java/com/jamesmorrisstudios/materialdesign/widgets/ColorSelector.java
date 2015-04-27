@@ -86,16 +86,6 @@ public final class ColorSelector extends android.app.Dialog implements Slider.On
 
 	    colorView = findViewById(R.id.viewColor);
 	    colorView.setBackgroundColor(color);
-	    // Resize ColorView
-	    colorView.post(new Runnable() {
-			
-			@Override
-			public void run() {
-				LinearLayout.LayoutParams params = (LayoutParams) colorView.getLayoutParams();
-				params.height = colorView.getWidth()/2;
-				colorView.setLayoutParams(params);
-			}
-		});
 	    
 	    
 	    // Configure Sliders
