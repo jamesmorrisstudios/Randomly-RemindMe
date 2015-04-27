@@ -24,10 +24,8 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -198,6 +196,9 @@ public final class ReminderList {
         currentItem = new ReminderItem();
     }
 
+    /**
+     * Displays a notification preview of the current item
+     */
     public final void previewCurrent() {
         Notifier.getInstance().notifyInstantly(currentItem);
     }
@@ -220,6 +221,11 @@ public final class ReminderList {
         saveToFile();
     }
 
+    /**
+     * Duplicates the currently selected reminder item
+     * and moves the new item to the end of the list.
+     * The current item stays selected
+     */
     public final void duplicateReminder() {
         currentItem.updateAlertTimes();
         trimWakeToCurrent(currentItem);
@@ -256,10 +262,7 @@ public final class ReminderList {
      */
     public final void trimWakesToCurrent() {
         recalculateWakes();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        TimeItem timeNow = getTimeNow();
         for(ReminderItem item : data) {
             trimWakeToCurrent(item, timeNow);
         }
@@ -269,10 +272,7 @@ public final class ReminderList {
      * Trim the alert times of the specified reminder item so all at current or past times are removed
      */
     private void trimWakeToCurrent(@NonNull ReminderItem item) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        TimeItem timeNow = getTimeNow();
         trimWakeToCurrent(item, timeNow);
     }
 
@@ -280,7 +280,7 @@ public final class ReminderList {
      * Trim the alert times of the specified reminder item so all at current or past times are removed
      */
     private void trimWakeToCurrent(@NonNull ReminderItem item, @NonNull TimeItem timeNow) {
-        while(!item.alertTimes.isEmpty() && timeBefore(item.alertTimes.get(0), timeNow)) {
+        while(!item.alertTimes.isEmpty() && timeBeforeOrEqual(item.alertTimes.get(0), timeNow)) {
             item.alertTimes.remove(0);
         }
     }
@@ -290,14 +290,11 @@ public final class ReminderList {
      */
     @NonNull
     public final ArrayList<ReminderItem> getCurrentWakes() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        TimeItem timeNow = getTimeNow();
         ArrayList<ReminderItem> items = new ArrayList<>();
         for(ReminderItem item : data) {
-            if(item.enabled && item.daysToRun[getDayOfWeek()] && timeInBounds(item.startTime, item.endTime)) {
-                if(!item.alertTimes.isEmpty() && timeBefore(item.alertTimes.get(0), timeNow)) {
+            if(item.enabled && item.daysToRun[getDayOfWeek()] && (timeInBounds(item.startTime, item.endTime) || !item.rangeTiming)) {
+                if(!item.alertTimes.isEmpty() && timeBeforeOrEqual(item.alertTimes.get(0), timeNow)) {
                     items.add(item);
                 }
             }
@@ -322,12 +319,21 @@ public final class ReminderList {
      * @param end End time
      * @return True if within
      */
-    private boolean timeInBounds(TimeItem start, TimeItem end) {
+    private boolean timeInBounds(@NonNull TimeItem start, @NonNull TimeItem end) {
+        TimeItem timeNow = getTimeNow();
+        return timeBeforeOrEqual(start, timeNow) && timeBeforeOrEqual(timeNow, end);
+    }
+
+    /**
+     * Gets the current time as a time item
+     * @return Current time
+     */
+    @NonNull
+    private TimeItem getTimeNow() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
-        return timeBefore(start, timeNow) && timeBefore(timeNow, end);
+        return new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
     }
 
     /**
@@ -341,7 +347,7 @@ public final class ReminderList {
             if(item.alertTimes.isEmpty()) {
                 continue;
             }
-            if(time == null || timeBefore(item.alertTimes.get(0), time)) {
+            if(time == null || timeBeforeOrEqual(item.alertTimes.get(0), time)) {
                 time = item.alertTimes.get(0);
             }
         }
@@ -353,7 +359,7 @@ public final class ReminderList {
      * @param oldTime Old time
      * @return True if new time is before or equal to old time
      */
-    private boolean timeBefore(TimeItem newTime, TimeItem oldTime) {
+    private boolean timeBeforeOrEqual(@NonNull TimeItem newTime, @NonNull TimeItem oldTime) {
         return (newTime.hour * 60 + newTime.minute) - (oldTime.hour * 60 + oldTime.minute) <= 0;
     }
 

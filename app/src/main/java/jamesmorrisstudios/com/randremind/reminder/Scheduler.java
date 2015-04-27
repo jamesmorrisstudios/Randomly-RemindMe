@@ -61,6 +61,7 @@ public final class Scheduler {
         AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(App.getContext(), AlarmReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 0, i, 0);
+        i.putExtra("REMINDER_WAKE", true);
         am.cancel(pi);
     }
 
@@ -96,6 +97,7 @@ public final class Scheduler {
         calendar.set(Calendar.MINUTE, time.minute);
         AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(App.getContext(), AlarmReceiver.class);
+        i.putExtra("REMINDER_WAKE", true);
         PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 0, i, 0);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }

@@ -43,6 +43,7 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
     //Not Header
     private TextView title, startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private SwitchCompat enabled;
+    private View dash, endTop;
 
     /**
      * Constructor
@@ -67,11 +68,12 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
             startMinute = (TextView) startTop.findViewById(R.id.time_minute);
             startAM = (TextView) startTop.findViewById(R.id.time_am);
             startPM = (TextView) startTop.findViewById(R.id.time_pm);
-            View endTop = view.findViewById(R.id.reminder_time_end);
+            endTop = view.findViewById(R.id.reminder_time_end);
             endHour = (TextView) endTop.findViewById(R.id.time_hour);
             endMinute = (TextView) endTop.findViewById(R.id.time_minute);
             endAM = (TextView) endTop.findViewById(R.id.time_am);
             endPM = (TextView) endTop.findViewById(R.id.time_pm);
+            dash = view.findViewById(R.id.timing_dash);
         }
     }
 
@@ -90,8 +92,16 @@ public final class ReminderViewHolder extends RecyclerView.ViewHolder implements
                 title = App.getContext().getString(R.string.default_title);
             }
             this.title.setText(title);
-            Utils.setTime(startHour, startMinute, startAM, startPM, reminder.item.startTime);
-            Utils.setTime(endHour, endMinute, endAM, endPM, reminder.item.endTime);
+            if(reminder.item.rangeTiming) {
+                Utils.setTime(startHour, startMinute, startAM, startPM, reminder.item.startTime);
+                Utils.setTime(endHour, endMinute, endAM, endPM, reminder.item.endTime);
+                endTop.setVisibility(View.VISIBLE);
+                dash.setVisibility(View.VISIBLE);
+            } else {
+                Utils.setTime(startHour, startMinute, startAM, startPM, reminder.item.singleTime);
+                endTop.setVisibility(View.GONE);
+                dash.setVisibility(View.GONE);
+            }
             enabled.setOnCheckedChangeListener(null);
             enabled.setChecked(reminder.item.enabled);
             enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

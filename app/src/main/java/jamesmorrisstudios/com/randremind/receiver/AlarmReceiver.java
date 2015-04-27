@@ -48,10 +48,10 @@ public final class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
         //Get our wakelock
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Randomly RemindMe Wake For Reminder");
         wl.acquire();
 
-        ReminderList.getInstance().loadDataSync(); //TODO might need to make a service for this...
+        ReminderList.getInstance().loadDataSync();
 
         if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             Log.v("ALARM RECEIVER", "Device just woke");
@@ -69,7 +69,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
             Notifier.getInstance().postNextNotification();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
-        } else {
+        } else if(intent.getExtras().containsKey("REMINDER_WAKE")){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
             Notifier.getInstance().postNextNotification();
@@ -77,7 +77,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
             Scheduler.getInstance().scheduleNextWake();
         }
 
-        ReminderList.getInstance().saveDataSync(); //TODO might need to make a service for this...
+        ReminderList.getInstance().saveDataSync();
 
         //Release the wakelock
         wl.release();

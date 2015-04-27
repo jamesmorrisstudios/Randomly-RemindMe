@@ -241,6 +241,10 @@ public final class ReminderItem {
      */
     public final void updateAlertTimes() {
         this.alertTimes.clear();
+        if(!rangeTiming) {
+            this.alertTimes.add(singleTime);
+            return;
+        }
         int diff = getDiffMinutes();
         int startOffset = timeToMinutes(startTime);
 
@@ -259,7 +263,7 @@ public final class ReminderItem {
                 wiggle = 0.75f;
                 generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
                 break;
-            case FULL_RANDOM: //TODO make this more random
+            case FULL_RANDOM: //Depreciated option
                 wiggle = 1.0f;
                 generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
                 break;
@@ -280,10 +284,9 @@ public final class ReminderItem {
         for(int i=0; i<values.length; i++) {
             values[i] = Math.round((i * 1.0f) / (numberItems) * diff) + itemSplit/2 + Math.round((itemSplit * wiggle) * (rand.nextFloat() - 0.5f) );
             if(i > 0) {
-                values[i] = Math.min(Math.max(values[i], values[i-1] + 30), diff);
+                values[i] = Math.min(Math.max(values[i], values[i-1] + 5), diff);
             }
         }
-
         for (int value : values) {
             alertTimes.add(minutesToTimeItem(value + offset));
             Log.v(title, alertTimes.get(alertTimes.size()-1).getHourInTimeFormatString()+":"+alertTimes.get(alertTimes.size()-1).getMinuteString());

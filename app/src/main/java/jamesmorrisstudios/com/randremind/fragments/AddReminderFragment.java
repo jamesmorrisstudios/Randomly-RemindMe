@@ -554,7 +554,10 @@ public final class AddReminderFragment extends Fragment {
                 if (remind == null) {
                     return;
                 }
-                Uri defaultUri = Uri.parse(remind.notificationTone);
+                Uri defaultUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                if(remind.notificationTone != null) {
+                    defaultUri = Uri.parse(remind.notificationTone);
+                }
                 Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Notification");
@@ -727,11 +730,11 @@ public final class AddReminderFragment extends Fragment {
         list.add(getString(R.string.distribution_even));
         list.add(getString(R.string.distribution_part_random));
         list.add(getString(R.string.distribution_most_random));
-        list.add(getString(R.string.distribution_full_random));
+       // list.add(getString(R.string.distribution_full_random));
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, list);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         distributionSpinner.setAdapter(spinnerArrayAdapter);
-        distributionSpinner.setSelection(remind.distribution.ordinal());
+        distributionSpinner.setSelection(Math.min(remind.distribution.ordinal(), 2)); //Restrict to the now less options
     }
 
     /**
@@ -743,7 +746,7 @@ public final class AddReminderFragment extends Fragment {
             return;
         }
         int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
-        int max = Math.max(diffMinutes / 30, 1);
+        int max = Math.max(diffMinutes / 10, 1);
         remind.numberPerDay = Math.min(remind.numberPerDay, max);
         List<String> perDayList = new ArrayList<>();
         for(int i=0; i<max; i++) {
