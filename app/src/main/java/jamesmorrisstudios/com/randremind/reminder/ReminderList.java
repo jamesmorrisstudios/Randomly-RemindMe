@@ -32,6 +32,7 @@ import java.util.Calendar;
 
 import jamesmorrisstudios.com.randremind.utilities.Bus;
 import jamesmorrisstudios.com.randremind.utilities.FileWriter;
+import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
  * Reminder list control class. Add, remove, save, delete reminders
@@ -261,8 +262,7 @@ public final class ReminderList {
      * Trim the alert times of all reminder items so all at current or past times are removed
      */
     public final void trimWakesToCurrent() {
-        recalculateWakes();
-        TimeItem timeNow = getTimeNow();
+        TimeItem timeNow = Utils.getTimeNow();
         for(ReminderItem item : data) {
             trimWakeToCurrent(item, timeNow);
         }
@@ -272,7 +272,7 @@ public final class ReminderList {
      * Trim the alert times of the specified reminder item so all at current or past times are removed
      */
     private void trimWakeToCurrent(@NonNull ReminderItem item) {
-        TimeItem timeNow = getTimeNow();
+        TimeItem timeNow = Utils.getTimeNow();
         trimWakeToCurrent(item, timeNow);
     }
 
@@ -290,7 +290,7 @@ public final class ReminderList {
      */
     @NonNull
     public final ArrayList<ReminderItem> getCurrentWakes() {
-        TimeItem timeNow = getTimeNow();
+        TimeItem timeNow = Utils.getTimeNow();
         ArrayList<ReminderItem> items = new ArrayList<>();
         for(ReminderItem item : data) {
             if(item.enabled && item.daysToRun[getDayOfWeek()] && (timeInBounds(item.startTime, item.endTime) || !item.rangeTiming)) {
@@ -320,20 +320,8 @@ public final class ReminderList {
      * @return True if within
      */
     private boolean timeInBounds(@NonNull TimeItem start, @NonNull TimeItem end) {
-        TimeItem timeNow = getTimeNow();
+        TimeItem timeNow = Utils.getTimeNow();
         return timeBeforeOrEqual(start, timeNow) && timeBeforeOrEqual(timeNow, end);
-    }
-
-    /**
-     * Gets the current time as a time item
-     * @return Current time
-     */
-    @NonNull
-    private TimeItem getTimeNow() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        return new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
     }
 
     /**

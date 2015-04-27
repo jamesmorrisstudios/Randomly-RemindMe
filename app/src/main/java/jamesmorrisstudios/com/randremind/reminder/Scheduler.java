@@ -21,6 +21,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -95,6 +96,7 @@ public final class Scheduler {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, time.hour);
         calendar.set(Calendar.MINUTE, time.minute);
+        Log.v("SCHEDULER", "Alarm Set For: " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
         AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(App.getContext(), AlarmReceiver.class);
         i.putExtra("REMINDER_WAKE", true);
@@ -106,13 +108,14 @@ public final class Scheduler {
      * Schedules the repeating midnight timer
      */
     public final void scheduleRepeatingMidnight() {
+        Log.v("SCHEDULER", "Repeating midnight alarm set");
         AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(App.getContext(), AlarmReceiver.class);
         i.putExtra("REPEAT", true);
         PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 1, i, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 24);
         calendar.set(Calendar.MINUTE, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pi); //Every 24 hours
     }

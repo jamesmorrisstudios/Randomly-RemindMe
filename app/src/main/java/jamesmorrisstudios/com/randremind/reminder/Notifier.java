@@ -32,6 +32,7 @@ import java.util.Calendar;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.application.App;
+import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
  * Notification handler class.
@@ -65,9 +66,7 @@ public final class Notifier {
      * @param id Id to associate notification with. These should be unique to the reminderItem
      */
     private void buildNotification(@NonNull String title, @NonNull String content, @Nullable Uri notificationTone, boolean vibrate, boolean highPriority, boolean led, int ledColor, int id) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        TimeItem timeNow = new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        TimeItem timeNow = Utils.getTimeNow();
         Log.v("Notification shown", title+" "+timeNow.getHourInTimeFormatString()+":"+timeNow.getMinuteString());
 
         int defaults = 0;
@@ -123,7 +122,7 @@ public final class Notifier {
      * If none are ready to be shown it does nothing
      */
     public final void postNextNotification() {
-        ReminderList.getInstance().loadDataSync();
+        //ReminderList.getInstance().loadDataSync();
         ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
         for(ReminderItem item : items) {
             String title = item.title;

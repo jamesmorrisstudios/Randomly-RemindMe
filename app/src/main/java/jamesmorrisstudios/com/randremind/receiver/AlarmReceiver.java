@@ -27,6 +27,8 @@ import android.widget.Toast;
 import jamesmorrisstudios.com.randremind.reminder.Notifier;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
+import jamesmorrisstudios.com.randremind.reminder.TimeItem;
+import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
  * Alarm receiver class.
@@ -53,11 +55,16 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
         ReminderList.getInstance().loadDataSync();
 
+        TimeItem timeNow = Utils.getTimeNow();
+        Log.v("ALARM RECEIVER", "Woke At: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
+
         if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             Log.v("ALARM RECEIVER", "Device just woke");
             //Set up our midnight recalculate wake
             Scheduler.getInstance().scheduleRepeatingMidnight();
-            //Make sure our wakes are cleaned up as we don't know how long we were off for
+
+            //Make sure our wakes are recalculated and cleaned up as we don't know how long we were off for
+            ReminderList.getInstance().recalculateWakes();
             ReminderList.getInstance().trimWakesToCurrent();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
@@ -76,6 +83,8 @@ public final class AlarmReceiver extends BroadcastReceiver {
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
         }
+
+        Log.v("ALARM RECEIVER", "Completed Wake: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
 
         ReminderList.getInstance().saveDataSync();
 

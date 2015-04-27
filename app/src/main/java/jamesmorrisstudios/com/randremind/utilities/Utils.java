@@ -28,6 +28,8 @@ import android.view.ViewTreeObserver;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 import jamesmorrisstudios.com.randremind.application.App;
 import jamesmorrisstudios.com.randremind.reminder.TimeItem;
 
@@ -218,6 +220,18 @@ public final class Utils {
             am.setVisibility(View.INVISIBLE);
             pm.setVisibility(View.VISIBLE);
         }
+    }
+
+    /**
+     * Gets the current time as a time item
+     * @return Current time
+     */
+    @NonNull
+    public static TimeItem getTimeNow() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+        return new TimeItem(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
     }
 
 }
