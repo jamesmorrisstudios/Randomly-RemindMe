@@ -23,9 +23,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
+
 import java.util.Calendar;
 
-import jamesmorrisstudios.com.randremind.application.App;
 import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
 
 /**
@@ -59,9 +61,9 @@ public final class Scheduler {
      * Does not cancel the midnight update alarm
      */
     public final void cancelNextWake() {
-        AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(App.getContext(), AlarmReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 0, i, 0);
+        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
         i.putExtra("REMINDER_WAKE", true);
         am.cancel(pi);
     }
@@ -70,10 +72,10 @@ public final class Scheduler {
      * Cancels the midnight update alarm
      */
     public final void cancelMidnightAlarm() {
-        AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(App.getContext(), AlarmReceiver.class);
+        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.putExtra("REPEAT", true);
-        PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 1, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         am.cancel(pi);
     }
 
@@ -97,10 +99,10 @@ public final class Scheduler {
         calendar.set(Calendar.HOUR_OF_DAY, time.hour);
         calendar.set(Calendar.MINUTE, time.minute);
         Log.v("SCHEDULER", "Alarm Set For: " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
-        AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(App.getContext(), AlarmReceiver.class);
+        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.putExtra("REMINDER_WAKE", true);
-        PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 0, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 
@@ -109,10 +111,10 @@ public final class Scheduler {
      */
     public final void scheduleRepeatingMidnight() {
         Log.v("SCHEDULER", "Repeating midnight alarm set");
-        AlarmManager am=(AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(App.getContext(), AlarmReceiver.class);
+        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.putExtra("REPEAT", true);
-        PendingIntent pi = PendingIntent.getBroadcast(App.getContext(), 1, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 23);

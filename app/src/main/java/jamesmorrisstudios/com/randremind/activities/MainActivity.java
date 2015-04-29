@@ -16,14 +16,16 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import jamesmorrisstudios.com.randremind.R;
+import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
+import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
+import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
+
+import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
+import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
@@ -33,24 +35,8 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
  *
  * Created by James on 4/20/2015.
  */
-public final class MainActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener {
-
-    /**
-     * Create this activity
-     * @param savedInstanceState Saved instance state
-     */
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
-        shouldDisplayHomeUp();
-        if(!isFragmentDisplayed()) {
-            loadMainListFragment();
-        }
-    }
+public final class MainActivity extends BaseLauncherActivity implements
+        MainListFragment.OnFragmentInteractionListener {
 
     /**
      * Activity start
@@ -65,22 +51,6 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
     }
 
     /**
-     * Activity resume
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    /**
-     * Activity pause
-     */
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    /**
      * Activity stop
      */
     @Override
@@ -90,36 +60,6 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
         ReminderList.getInstance().saveData();
         Scheduler.getInstance().cancelNextWake();
         Scheduler.getInstance().scheduleNextWake();
-    }
-
-    /**
-     * Fragment backstack changed.
-     */
-    @Override
-    public void onBackStackChanged() {
-        shouldDisplayHomeUp();
-    }
-
-    /**
-     * Check if we are at the top page and show the up button as needed
-     */
-    public void shouldDisplayHomeUp(){
-        boolean canback = getSupportFragmentManager().getBackStackEntryCount()>0;
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(canback);
-        }
-    }
-
-    /**
-     * The up button was pressed so pop one off the backstack
-     * @return Always true
-     */
-    @Override
-    public boolean onSupportNavigateUp() {
-        getSupportFragmentManager().popBackStack();
-        backPressed();
-        return true;
     }
 
     /**
@@ -138,37 +78,39 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
         loadAddReminderFragment();
     }
 
-    /**
-     * Help button clicked
-     */
     @Override
-    public void onHelpClicked() {
-        loadHelpFragment();
+    @NonNull
+    protected BaseFragment getMainFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MainListFragment fragment = (MainListFragment) fragmentManager.findFragmentByTag(BaseMainFragment.TAG);
+        if (fragment == null) {
+            fragment = new MainListFragment();
+        }
+        return fragment;
     }
 
     /**
-     * License button clicked
+     * Gets the tutorial fragment from the fragment manager.
+     * Creates the fragment if it does not exist yet.
+     * @return The fragment
      */
-    @Override
-    public void onLicenseClicked() {
-        loadLicenseFragment();
+    @NonNull
+    protected final AddReminderFragment getAddReminderFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddReminderFragment fragment = (AddReminderFragment) fragmentManager.findFragmentByTag(AddReminderFragment.TAG);
+        if (fragment == null) {
+            fragment = new AddReminderFragment();
+        }
+        return fragment;
     }
 
     /**
-     * Tutorial button clicked
+     * Loads the tutorial fragment into the main view
      */
-    @Override
-    public void onTutorialClicked() {
-        loadTutorialFragment();
-    }
-
-    /**
-     * Back from new reminder
-     */
-    @Override
-    public void goBackFromNewReminder() {
-        getSupportFragmentManager().popBackStack();
-        loadMainListFragment();
+    protected final void loadAddReminderFragment() {
+        AddReminderFragment fragment = getAddReminderFragment();
+        loadFragment(fragment, AddReminderFragment.TAG, true);
+        getSupportFragmentManager().executePendingTransactions();
     }
 
 }

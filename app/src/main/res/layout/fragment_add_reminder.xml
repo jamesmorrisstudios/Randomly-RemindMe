@@ -14,25 +14,24 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jamesmorrisstudios.com.randremind.fragments.AddReminderFragment">
 
-    <com.jamesmorrisstudios.materialdesign.views.ScrollView
+    <com.jamesmorrisstudios.materialuilibrary.controls.ScrollView
         android:id="@+id/scrollPane"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
             <!-- Title -->
             <RelativeLayout
@@ -54,23 +53,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/titleHeader"/>
+                    android:layout_below="@+id/titleHeader" />
 
                 <android.support.v7.widget.AppCompatEditText
-                    android:layout_margin="4dp"
-                    android:gravity="center"
                     android:id="@+id/titleText"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/titleHeader"
-                    android:layout_toLeftOf="@+id/titleEnabled"
-                    android:textSize="@dimen/item_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/titleHeader"
+                    android:layout_margin="4dp"
+                    android:layout_toLeftOf="@+id/titleEnabled"
+                    android:gravity="center"
+                    android:hint="@string/title_hint"
+                    android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
                     android:singleLine="true"
                     android:textColor="@color/white80"
-                    android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
                     android:textColorHint="@color/white15"
-                    android:hint="@string/title_hint"/>
+                    android:textSize="@dimen/item_size" />
 
             </RelativeLayout>
 
@@ -90,22 +89,22 @@
                     android:textSize="@dimen/header_size" />
 
                 <android.support.v7.widget.AppCompatEditText
-                    android:layout_margin="4dp"
-                    android:gravity="center"
                     android:id="@+id/contentText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/contentHeader"
-                    android:textSize="@dimen/item_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="false"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:hint="@string/content_hint"
+                    android:inputType="textMultiLine|textAutoCorrect|textCapSentences|textAutoComplete"
                     android:lines="5"
                     android:minLines="3"
+                    android:singleLine="false"
                     android:textColor="@color/white80"
-                    android:inputType="textMultiLine|textAutoCorrect|textCapSentences|textAutoComplete"
                     android:textColorHint="@color/white15"
-                    android:hint="@string/content_hint"/>
+                    android:textSize="@dimen/item_size" />
 
             </RelativeLayout>
 
@@ -116,141 +115,141 @@
                 android:padding="8dip">
 
                 <TextView
+                    android:id="@+id/timingHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_timing"
                     android:textColor="@color/white80"
-                    android:textSize="@dimen/header_size"
-                    android:id="@+id/timingHeader" />
+                    android:textSize="@dimen/header_size" />
 
                 <LinearLayout
-                    android:layout_margin="4dp"
                     android:id="@+id/timing_range_picker"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/timingHeader"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timingHeader"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/timing_specific"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/timing_range"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                 </LinearLayout>
 
                 <!-- Pick Specific start time -->
                 <LinearLayout
-                    android:layout_margin="4dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/timing_range_picker"
                     android:id="@+id/timing_times_specific"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_range_picker"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
                     <include
                         android:id="@+id/timing_single"
+                        layout="@layout/time_display"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        layout="@layout/time_display" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
                 <!-- Pick start and end times -->
                 <LinearLayout
-                    android:layout_margin="4dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/timing_range_picker"
                     android:id="@+id/timing_times"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_range_picker"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
                     <include
                         android:id="@+id/timing_start"
+                        layout="@layout/time_display"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        layout="@layout/time_display" />
+                        android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:text="@string/dash"
                         android:textColor="@color/white80"
-                        android:textSize="30sp"/>
+                        android:textSize="30sp" />
 
                     <include
                         android:id="@+id/timing_end"
+                        layout="@layout/time_display"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        layout="@layout/time_display"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
                 <!-- Times per day -->
                 <LinearLayout
-                    android:layout_margin="4dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/timing_times"
                     android:id="@+id/timing_times_per_day"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_times"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="@string/alerts_per_day"
                         android:textColor="@color/white80"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
 
                     <android.support.v7.widget.AppCompatSpinner
-                        android:minWidth="50dp"
+                        android:id="@+id/timing_times_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/timing_times_spinner" />
+                        android:minWidth="50dp" />
 
                 </LinearLayout>
 
                 <!-- Distribution -->
                 <LinearLayout
-                    android:layout_margin="4dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/timing_times_per_day"
                     android:id="@+id/timing_distribution"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_times_per_day"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="@string/distribution"
                         android:textColor="@color/white80"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
 
                     <android.support.v7.widget.AppCompatSpinner
-                        android:minWidth="50dp"
+                        android:id="@+id/timing_distribution_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/timing_distribution_spinner" />
+                        android:minWidth="50dp" />
 
                 </LinearLayout>
 
@@ -273,60 +272,60 @@
 
                 <LinearLayout
                     android:id="@+id/daysContainer"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/repeat_header"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/repeat_header"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/daySun"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/dayMon"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/dayTue"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/dayWed"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/dayThu"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/dayFri"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                     <include
-                        android:layout_margin="4dp"
                         android:id="@+id/daySat"
+                        layout="@layout/day_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        layout="@layout/day_button" />
+                        android:layout_margin="4dp" />
 
                 </LinearLayout>
 
@@ -348,113 +347,113 @@
                     android:textSize="@dimen/header_size" />
 
                 <LinearLayout
-                    android:layout_margin="8dp"
                     android:id="@+id/notificationContainer"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/notification_header"
-                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/notification_header"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
 
                     <!-- Sound picker -->
                     <LinearLayout
-                        android:layout_margin="4dp"
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:orientation="horizontal">
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
-                            android:textSize="@dimen/item_size"
                             android:text="@string/sound_set"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:textSize="@dimen/item_size" />
 
                         <TextView
-                            android:layout_marginLeft="4dp"
                             android:id="@+id/notificationSound"
-                            android:textSize="@dimen/item_size"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textSize="@dimen/item_size" />
 
                     </LinearLayout>
 
                     <!-- Vibrate -->
                     <LinearLayout
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_marginRight="4dp"
-                            android:textSize="@dimen/item_size"
-                            android:text="@string/vibrate_enable"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/vibrate_enable"
+                            android:textSize="@dimen/item_size" />
 
                         <android.support.v7.widget.SwitchCompat
                             android:id="@+id/notification_vibrate_enabled"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
                     <!-- High Priority -->
                     <LinearLayout
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_marginRight="4dp"
-                            android:textSize="@dimen/item_size"
-                            android:text="@string/high_priority_enable"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/high_priority_enable"
+                            android:textSize="@dimen/item_size" />
 
                         <android.support.v7.widget.SwitchCompat
                             android:id="@+id/notification_high_priority_enabled"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
                     <!-- LED -->
                     <LinearLayout
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_marginRight="4dp"
-                            android:textSize="@dimen/item_size"
-                            android:text="@string/led_enable"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/led_enable"
+                            android:textSize="@dimen/item_size" />
 
                         <android.support.v7.widget.SwitchCompat
                             android:id="@+id/notification_led_enabled"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
                     <!-- LED Color -->
                     <LinearLayout
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_marginRight="4dp"
-                            android:textSize="@dimen/item_size"
-                            android:text="@string/led_color"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/led_color"
+                            android:textSize="@dimen/item_size" />
 
                         <View
                             android:id="@+id/notification_led_color"
@@ -494,10 +493,10 @@
     -->
         </LinearLayout>
 
-    </com.jamesmorrisstudios.materialdesign.views.ScrollView>
+    </com.jamesmorrisstudios.materialuilibrary.controls.ScrollView>
 
     <!-- Add reminder floating action button -->
-    <com.jamesmorrisstudios.materialdesign.views.ButtonFloat
+    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonFloat
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -505,8 +504,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="24dp"
         android:background="@color/primaryColorAccent"
-        materialdesign:rippleSpeed="30"
         materialdesign:animate="true"
-        materialdesign:iconDrawable="@drawable/ic_save_white_24dp" />
+        materialdesign:iconDrawable="@drawable/ic_save_white_24dp"
+        materialdesign:rippleSpeed="30" />
 
 </RelativeLayout>

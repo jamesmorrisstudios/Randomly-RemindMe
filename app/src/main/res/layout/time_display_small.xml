@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015.  James Morris Studios
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,65 +15,65 @@
   -->
 
 <RelativeLayout
-    android:background="@color/cardBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/cardBackground"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/primaryColorDark"
-        android:textSize="20sp"
         android:id="@+id/time_hour"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/primaryColorDark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/time_colon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/time_hour"
         android:text="@string/colon"
         android:textColor="@color/primaryColorDark"
-        android:textSize="20sp"
-        android:id="@+id/time_colon"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/time_hour" />
+        android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/time_minute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryColorDark"
-        android:textSize="20sp"
-        android:id="@+id/time_minute"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/time_colon"/>
+        android:layout_toRightOf="@+id/time_colon"
+        android:textColor="@color/primaryColorDark"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:id="@+id/time_am_pm"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/time_minute"
-        android:layout_toEndOf="@+id/time_minute"
-        android:orientation="vertical"
-        android:layout_marginLeft="2dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="2dp"
+        android:layout_toEndOf="@+id/time_minute"
+        android:layout_toRightOf="@+id/time_minute"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/time_pm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pm"
             android:textColor="@color/primaryColorDark"
-            android:textSize="7sp"
-            android:id="@+id/time_pm" />
+            android:textSize="7sp" />
 
         <TextView
+            android:id="@+id/time_am"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/am"
             android:textColor="@color/primaryColorDark"
-            android:textSize="7sp"
-            android:id="@+id/time_am" />
+            android:textSize="7sp" />
 
     </LinearLayout>
 

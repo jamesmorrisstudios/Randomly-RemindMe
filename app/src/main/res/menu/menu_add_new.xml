@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015.  James Morris Studios
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,30 +15,30 @@
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
-    <item
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <reminder
         android:id="@+id/action_cancel"
+        android:icon="@drawable/ic_clear_white_24dp"
         android:orderInCategory="1"
-        app:showAsAction="always"
         android:title="Cancel"
-        android:icon="@drawable/ic_clear_white_24dp"/>
-    <item
+        app:showAsAction="ifRoom" />
+    <reminder
         android:id="@+id/action_delete"
+        android:icon="@drawable/ic_delete_white_24dp"
         android:orderInCategory="2"
-        app:showAsAction="always"
         android:title="Delete"
-        android:icon="@drawable/ic_delete_white_24dp"/>
+        app:showAsAction="ifRoom" />
 
-    <item
+    <reminder
         android:id="@+id/action_preview"
         android:orderInCategory="3"
-        app:showAsAction="never"
-        android:title="Preview"/>
+        android:title="Preview"
+        app:showAsAction="never" />
 
-    <item
+    <reminder
         android:id="@+id/action_duplicate"
         android:orderInCategory="4"
-        app:showAsAction="never"
-        android:title="Duplicate"/>
+        android:title="Duplicate"
+        app:showAsAction="never" />
 
 </menu>

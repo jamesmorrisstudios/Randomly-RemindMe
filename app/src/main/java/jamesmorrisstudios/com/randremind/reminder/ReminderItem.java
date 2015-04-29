@@ -23,16 +23,17 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.application.App;
 
 /**
- * Individual reminder item that contains all needed items to be a reminder
+ * Individual reminder reminder that contains all needed items to be a reminder
  *
  * Created by James on 4/20/2015.
  */
@@ -104,7 +105,7 @@ public final class ReminderItem {
     }
 
     /**
-     * Creates a new reminder item with all the default values set
+     * Creates a new reminder reminder with all the default values set
      */
     public ReminderItem() {
         //Unique name
@@ -128,7 +129,7 @@ public final class ReminderItem {
         //Notifications
         this.notification = true; //unused
         this.notificationTone = null;
-        this.notificationToneName = App.getContext().getString(R.string.sound_none);
+        this.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
         this.notificationVibrate = false;
         this.notificationLED = true;
         this.notificationLEDColor = Color.BLUE;
@@ -136,7 +137,7 @@ public final class ReminderItem {
         //Alarms
         this.alarm = false; //unused
         this.alarmTone = null; //unused
-        this.alarmToneName = App.getContext().getString(R.string.sound_none); //unused
+        this.alarmToneName = AppUtil.getContext().getString(R.string.sound_none); //unused
         this.alarmVibrate = false; //unused
         //Generated values
         this.alertTimes = new ArrayList<>();
@@ -193,7 +194,7 @@ public final class ReminderItem {
     }
 
     /**
-     * @return A deep copy of this item
+     * @return A deep copy of this reminder
      */
     @NonNull
     public final ReminderItem copy() {
@@ -301,8 +302,8 @@ public final class ReminderItem {
     }
 
     /**
-     * Converts a time item to minutes value
-     * @param time Time item
+     * Converts a time reminder to minutes value
+     * @param time Time reminder
      * @return Value in minutes
      */
     private int timeToMinutes(@NonNull TimeItem time) {
@@ -310,9 +311,9 @@ public final class ReminderItem {
     }
 
     /**
-     * Converts minutes to time item
+     * Converts minutes to time reminder
      * @param totalMinutes Minutes
-     * @return Time item
+     * @return Time reminder
      */
     private TimeItem minutesToTimeItem(int totalMinutes) {
         int hour = totalMinutes / 60;

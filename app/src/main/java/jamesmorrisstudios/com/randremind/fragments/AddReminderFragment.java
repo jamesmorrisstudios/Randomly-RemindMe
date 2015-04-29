@@ -45,33 +45,34 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.jamesmorrisstudios.materialdesign.views.ButtonCircleFlat;
-import com.jamesmorrisstudios.materialdesign.views.ButtonFloat;
-import com.jamesmorrisstudios.materialdesign.views.ScrollView;
-import com.jamesmorrisstudios.materialdesign.widgets.ColorSelector;
-import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
+import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.materialuilibrary.controls.ButtonFloat;
+import com.jamesmorrisstudios.materialuilibrary.controls.ScrollView;
+import com.jamesmorrisstudios.materialuilibrary.dialogs.ColorSelector;
+import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
+import com.jamesmorrisstudios.materialuilibrary.dialogs.time.RadialPickerLayout;
+import com.jamesmorrisstudios.materialuilibrary.dialogs.time.TimePickerDialog;
+import com.jamesmorrisstudios.utilitieslibrary.Utils;
+import com.jamesmorrisstudios.utilitieslibrary.animator.AnimatorControl;
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.application.App;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
-import jamesmorrisstudios.com.randremind.utilities.AnimatorControl;
-import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
  * Add and edit reminder fragment.
- * Controls the views and controls needed to modify an already created reminder item.
+ * Controls the views and controls needed to modify an already created reminder reminder.
  * If no reminder has been set this fragment creates a new one and modifies it.
  */
-public final class AddReminderFragment extends Fragment {
+public final class AddReminderFragment extends BaseFragment {
     public static final String TAG = "AddReminderFragment";
     private static final int NOTIFICATION_RESULT = 5;
-    private OnFragmentInteractionListener mListener;
     //Views
     private AppCompatEditText titleText, contentText;
     private SwitchCompat titleEnable, notificationVibrateEnable, ledEnable, highPriorityEnable;
@@ -105,29 +106,6 @@ public final class AddReminderFragment extends Fragment {
     }
 
     /**
-     * @param activity Activity to attach to
-     */
-    @Override
-    public void onAttach(@NonNull Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    /**
-     * Detach from activity
-     */
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
      * Setup the toolbar options menu
      * @param menu Menu
      * @param inflater Inflater
@@ -140,19 +118,19 @@ public final class AddReminderFragment extends Fragment {
 
     /**
      * Handle toolbar menu button clicks
-     * @param item Selected item
+     * @param item Selected reminder
      * @return True if action consumed
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                mListener.createPromptDialog(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new MaterialDialog.ButtonCallback() {
+                dialogListener.createPromptDialog(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         destroyListeners();
                         ReminderList.getInstance().deleteCurrentReminder();
-                        mListener.goBackFromNewReminder();
+                        utilListener.goBackFromFragment();
                         Utils.toastShort(getString(R.string.reminder_delete));
                     }
 
@@ -163,12 +141,12 @@ public final class AddReminderFragment extends Fragment {
                 });
                 break;
             case R.id.action_cancel:
-                mListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new MaterialDialog.ButtonCallback() {
+                dialogListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         destroyListeners();
                         ReminderList.getInstance().clearCurrentReminder();
-                        mListener.goBackFromNewReminder();
+                        utilListener.goBackFromFragment();
                         Utils.toastShort(getString(R.string.reminder_cancel));
                     }
 
@@ -251,8 +229,8 @@ public final class AddReminderFragment extends Fragment {
     }
 
     /**
-     * Init this fragments views with the actual data for the current reminder item.
-     * if no reminder item exists it creates one with default values
+     * Init this fragments views with the actual data for the current reminder reminder.
+     * if no reminder reminder exists it creates one with default values
      */
     private void setupViewWithReminder() {
         //Create a reminder if one isn't already set
@@ -414,7 +392,7 @@ public final class AddReminderFragment extends Fragment {
                 }
                 remind.singleTime.hour = hourOfDay;
                 remind.singleTime.minute = minute;
-                Utils.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
+                UtilsTime.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
             }
         };
         singleTimeTop.setOnClickListener(new View.OnClickListener() {
@@ -424,7 +402,7 @@ public final class AddReminderFragment extends Fragment {
                 if (currentReminder == null) {
                     return;
                 }
-                mListener.createTimePickerDialog(timeSingleListener, currentReminder.singleTime.hour,
+                dialogListener.createTimePickerDialog(timeSingleListener, currentReminder.singleTime.hour,
                         currentReminder.singleTime.minute, currentReminder.singleTime.is24Hour());
             }
         });
@@ -440,7 +418,7 @@ public final class AddReminderFragment extends Fragment {
                 if(diffMinutes >= 0) {
                     remind.startTime.hour = hourOfDay;
                     remind.startTime.minute = minute;
-                    Utils.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
+                    UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
                     generateNumberTimePerDay();
                 } else {
                     Utils.toastShort(getResources().getString(R.string.error_time_difference_start));
@@ -454,7 +432,7 @@ public final class AddReminderFragment extends Fragment {
                 if (currentReminder == null) {
                     return;
                 }
-                mListener.createTimePickerDialog(timeStartListener, currentReminder.startTime.hour,
+                dialogListener.createTimePickerDialog(timeStartListener, currentReminder.startTime.hour,
                         currentReminder.startTime.minute, currentReminder.startTime.is24Hour());
             }
         });
@@ -470,7 +448,7 @@ public final class AddReminderFragment extends Fragment {
                 if(diffMinutes >= 0) {
                     remind.endTime.hour = hourOfDay;
                     remind.endTime.minute = minute;
-                    Utils.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
+                    UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
                     generateNumberTimePerDay();
                 } else {
                     Utils.toastShort(getResources().getString(R.string.error_time_difference_end));
@@ -484,7 +462,7 @@ public final class AddReminderFragment extends Fragment {
                 if (currentReminder == null) {
                     return;
                 }
-                mListener.createTimePickerDialog(timeEndListener, currentReminder.endTime.hour,
+                dialogListener.createTimePickerDialog(timeEndListener, currentReminder.endTime.hour,
                         currentReminder.endTime.minute, currentReminder.endTime.is24Hour());
             }
         });
@@ -603,7 +581,7 @@ public final class AddReminderFragment extends Fragment {
                 if (remind == null) {
                     return;
                 }
-                mListener.createColorPickerDialog(remind.notificationLEDColor, new ColorSelector.OnColorSelectedListener() {
+                dialogListener.createColorPickerDialog(remind.notificationLEDColor, new ColorSelector.OnColorSelectedListener() {
                     @Override
                     public void onColorSelected(int color) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
@@ -623,7 +601,7 @@ public final class AddReminderFragment extends Fragment {
             @Override
             public void onScrollChanged() {
                 int scrollY = scrollPane.getScrollY();
-                if(Math.abs(scrollY - scrollPosition) > 75) {
+                if (Math.abs(scrollY - scrollPosition) > 75) {
                     if (scrollY < scrollPosition) {
                         saveButton.show();
                     } else {
@@ -639,11 +617,7 @@ public final class AddReminderFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                destroyListeners();
-                ReminderList.getInstance().saveCurrentReminder();
-                ReminderList.getInstance().clearCurrentReminder();
-                mListener.goBackFromNewReminder();
-                Utils.toastShort(getString(R.string.reminder_save));
+                utilListener.goBackFromFragment();
             }
         });
     }
@@ -672,9 +646,9 @@ public final class AddReminderFragment extends Fragment {
         timingSpecific.setText(getString(R.string.timing_specific));
         timingRange.setText(getString(R.string.timing_range));
         ledColor.setBackgroundColor(remind.notificationLEDColor);
-        Utils.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
-        Utils.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
-        Utils.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
+        UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
+        UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
+        UtilsTime.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
         generateNumberTimePerDay();
         setupDistributionSpinner();
         setDaysOfWeek();
@@ -759,13 +733,16 @@ public final class AddReminderFragment extends Fragment {
     }
 
     /**
-     * Save the reminder item and prepare to leave the fragment
+     * Save the reminder reminder and prepare to leave the fragment
      */
+    @Override
     public final void onBack() {
-        Utils.toastShort(getString(R.string.reminder_save));
-        destroyListeners();
-        ReminderList.getInstance().saveCurrentReminder();
-        ReminderList.getInstance().clearCurrentReminder();
+        if(ReminderList.getInstance().hasCurrentReminder()) {
+            Utils.toastShort(getString(R.string.reminder_save));
+            destroyListeners();
+            ReminderList.getInstance().saveCurrentReminder();
+            ReminderList.getInstance().clearCurrentReminder();
+        }
     }
 
     /**
@@ -790,7 +767,7 @@ public final class AddReminderFragment extends Fragment {
                 notificationSound.setText(remind.notificationToneName);
             } else {
                 remind.notificationTone = null;
-                remind.notificationToneName = App.getContext().getString(R.string.sound_none);
+                remind.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
                 notificationSound.setText(remind.notificationToneName);
             }
         }
@@ -810,7 +787,7 @@ public final class AddReminderFragment extends Fragment {
     }
 
     /**
-     * Set the active state of the day of week item
+     * Set the active state of the day of week reminder
      * @param dayIndex Index for the day
      * @param active True to enable
      */
@@ -882,44 +859,6 @@ public final class AddReminderFragment extends Fragment {
             }
         });
         anim.start();
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     */
-    public interface OnFragmentInteractionListener {
-
-        /**
-         * Go back from this reminder
-         */
-        void goBackFromNewReminder();
-
-        /**
-         * Hides the keyboard
-         */
-        void hideKeyboard();
-
-        /**
-         * Build a new time picker dialog
-         * @param listener Return listener
-         * @param hour Start hour
-         * @param minute Start minute
-         * @param is24Hour True if 24 hour mode
-         */
-        void createTimePickerDialog(@NonNull TimePickerDialog.OnTimeSetListener listener, int hour, int minute, boolean is24Hour);
-
-        /**
-         * Build a ok/cancel prompt
-         * @param title Title of the prompt
-         * @param content Content text
-         * @param callback Callback listener
-         */
-        void createPromptDialog(@NonNull String title, @NonNull String content, MaterialDialog.ButtonCallback callback);
-
-        void createColorPickerDialog(int intialColor, ColorSelector.OnColorSelectedListener onColorSelectedListener);
     }
 
 }

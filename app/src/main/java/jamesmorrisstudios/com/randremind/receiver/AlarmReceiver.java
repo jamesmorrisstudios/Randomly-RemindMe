@@ -22,13 +22,18 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
-import jamesmorrisstudios.com.randremind.reminder.Notifier;
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+
+import java.util.ArrayList;
+
+import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
-import jamesmorrisstudios.com.randremind.reminder.TimeItem;
-import jamesmorrisstudios.com.randremind.utilities.Utils;
 
 /**
  * Alarm receiver class.
@@ -55,7 +60,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
         ReminderList.getInstance().loadDataSync();
 
-        TimeItem timeNow = Utils.getTimeNow();
+        TimeItem timeNow = UtilsTime.getTimeNow();
         Log.v("ALARM RECEIVER", "Woke At: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
 
         if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
@@ -73,13 +78,13 @@ public final class AlarmReceiver extends BroadcastReceiver {
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
             //Post a notification if we have one (likely don't)
-            Notifier.getInstance().postNextNotification();
+            postNextNotification();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
         } else if(intent.getExtras().containsKey("REMINDER_WAKE")){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
-            Notifier.getInstance().postNextNotification();
+            postNextNotification();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
         }
@@ -90,6 +95,22 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
         //Release the wakelock
         wl.release();
+    }
+
+    private void postNextNotification() {
+        ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
+        for(ReminderItem item : items) {
+            String title = item.title;
+            if(title == null || title.isEmpty()) {
+                title = AppUtil.getContext().getString(R.string.default_title);
+            }
+            String content = item.content;
+            if(content == null || content.isEmpty()) {
+                content = AppUtil.getContext().getString(R.string.default_content);
+            }
+            Notifier.buildNotification(title, content, item.getNotificationTone(), R.drawable.notification_icon, item.notificationVibrate,
+                    item.notificationHighPriority, item.notificationLED, item.notificationLEDColor, item.notificationId);
+        }
     }
 
 }

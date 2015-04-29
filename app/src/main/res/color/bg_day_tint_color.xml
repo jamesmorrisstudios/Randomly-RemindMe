@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015.  James Morris Studios
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +15,6 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_activated="true" android:color="@color/white80" />
-    <item android:color="@android:color/transparent" />
+    <reminder android:color="@color/white80" android:state_activated="true" />
+    <reminder android:color="@android:color/transparent" />
 </selector>

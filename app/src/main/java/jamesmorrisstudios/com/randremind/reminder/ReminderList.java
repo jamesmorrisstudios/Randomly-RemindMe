@@ -19,10 +19,19 @@ package jamesmorrisstudios.com.randremind.reminder;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import com.jamesmorrisstudios.utilitieslibrary.Bus;
+import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
+import com.jamesmorrisstudios.utilitieslibrary.Serializer;
+import com.jamesmorrisstudios.utilitieslibrary.Utils;
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import org.json.JSONObject;
 
@@ -30,9 +39,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import jamesmorrisstudios.com.randremind.utilities.Bus;
-import jamesmorrisstudios.com.randremind.utilities.FileWriter;
-import jamesmorrisstudios.com.randremind.utilities.Utils;
+import jamesmorrisstudios.com.randremind.R;
 
 /**
  * Reminder list control class. Add, remove, save, delete reminders
@@ -47,8 +54,7 @@ public final class ReminderList {
     //Reminder singleton instance
     private static ReminderList instance = null;
     //Reminder List
-    @SerializedName("data")
-    private ArrayList<ReminderItem> data = new ArrayList<>();
+    private Reminders reminders = new Reminders();
     //The currently selected reminder as a copy
     private int currentIndex = -1;
     private ReminderItem currentItem;
@@ -69,6 +75,25 @@ public final class ReminderList {
     }
 
     /**
+     * Events to post
+     *
+     * @param event Enum to post
+     */
+    private static void postReminderListEvent(@NonNull ReminderListEvent event) {
+        Bus.postEnum(event);
+    }
+
+    /**
+     * Events
+     */
+    public enum ReminderListEvent {
+        DATA_LOAD_PASS,
+        DATA_LOAD_FAIL,
+        DATA_SAVE_PASS,
+        DATA_SAVE_FAIL
+    }
+
+    /**
      * Loads the reminder list data on the calling thread instead of an asynctask
      * @return True if successful
      */
@@ -83,7 +108,7 @@ public final class ReminderList {
      */
     public final void loadData(boolean forceRefresh) {
         if(!forceRefresh && hasReminders()) {
-            Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
+            ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_PASS);
         } else {
             AsyncTask<Void, Void, Boolean> taskLoad = new AsyncTask<Void, Void, Boolean>() {
                 @Override
@@ -94,9 +119,9 @@ public final class ReminderList {
                 @Override
                 protected void onPostExecute(Boolean value) {
                     if(value) {
-                        Bus.postEvent(Bus.Event.DATA_LOAD_PASS);
+                        ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_PASS);
                     } else {
-                        Bus.postEvent(Bus.Event.DATA_LOAD_FAIL);
+                        ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_FAIL);
                     }
                 }
             };
@@ -127,15 +152,15 @@ public final class ReminderList {
                 @Override
                 protected void onPostExecute(Boolean value) {
                     if(value) {
-                        Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
+                        ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_PASS);
                     } else {
-                        Bus.postEvent(Bus.Event.DATA_SAVE_FAIL);
+                        ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_FAIL);
                     }
                 }
             };
             taskSave.execute();
         } else {
-            Bus.postEvent(Bus.Event.DATA_SAVE_PASS);
+            ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_PASS);
         }
     }
 
@@ -143,7 +168,7 @@ public final class ReminderList {
      * @return True if reminders exist
      */
     public final boolean hasReminders() {
-        return !data.isEmpty();
+        return !reminders.data.isEmpty();
     }
 
     /**
@@ -152,18 +177,18 @@ public final class ReminderList {
      */
     @NonNull
     public final ArrayList<ReminderItem> getData() {
-        return data;
+        return reminders.data;
     }
 
     /**
-     * @param item Reminder item to set to
+     * @param item Reminder reminder to set to
      */
     public final void setCurrentReminder(@NonNull ReminderItem item) {
         int index = 0;
-        for(ReminderItem itemInt : data) {
+        for(ReminderItem itemInt : reminders.data) {
             if(itemInt.equals(item)) {
                 this.currentIndex = index;
-                this.currentItem = data.get(currentIndex).copy();
+                this.currentItem = reminders.data.get(currentIndex).copy();
                 return;
             }
             index++;
@@ -184,7 +209,7 @@ public final class ReminderList {
      */
     public final void deleteCurrentReminder() {
         if(currentIndex != -1) {
-            data.remove(currentIndex);
+            reminders.data.remove(currentIndex);
         }
         clearCurrentReminder();
     }
@@ -198,10 +223,23 @@ public final class ReminderList {
     }
 
     /**
-     * Displays a notification preview of the current item
+     * Displays a notification preview of the current reminder
      */
     public final void previewCurrent() {
-        Notifier.getInstance().notifyInstantly(currentItem);
+        ReminderItem item = getCurrentReminder();
+        if(item == null) {
+            return;
+        }
+        String title = item.title;
+        if(title == null || title.isEmpty()) {
+            title = AppUtil.getContext().getString(R.string.default_title);
+        }
+        String content = item.content;
+        if(content == null || content.isEmpty()) {
+            content = AppUtil.getContext().getString(R.string.default_content);
+        }
+        Notifier.buildNotification(title, content, item.getNotificationTone(), R.drawable.notification_icon, item.notificationVibrate,
+                item.notificationHighPriority, item.notificationLED, item.notificationLEDColor, item.notificationId);
     }
 
     /**
@@ -214,23 +252,23 @@ public final class ReminderList {
         trimWakeToCurrent(currentItem);
         if(currentIndex == -1) {
             //New Item so add to end
-            data.add(currentItem);
+            reminders.data.add(currentItem);
         } else {
-            //Existing item so copy over the original
-            data.set(currentIndex, currentItem.copy());
+            //Existing reminder so copy over the original
+            reminders.data.set(currentIndex, currentItem.copy());
         }
         saveToFile();
     }
 
     /**
-     * Duplicates the currently selected reminder item
-     * and moves the new item to the end of the list.
-     * The current item stays selected
+     * Duplicates the currently selected reminder reminder
+     * and moves the new reminder to the end of the list.
+     * The current reminder stays selected
      */
     public final void duplicateReminder() {
         currentItem.updateAlertTimes();
         trimWakeToCurrent(currentItem);
-        data.add(currentItem.copy());
+        reminders.data.add(currentItem.copy());
         saveToFile();
     }
 
@@ -253,7 +291,7 @@ public final class ReminderList {
      * Updates all reminders wake times
      */
     public final void recalculateWakes() {
-        for(ReminderItem item : data) {
+        for(ReminderItem item : reminders.data) {
             item.updateAlertTimes();
         }
     }
@@ -262,22 +300,22 @@ public final class ReminderList {
      * Trim the alert times of all reminder items so all at current or past times are removed
      */
     public final void trimWakesToCurrent() {
-        TimeItem timeNow = Utils.getTimeNow();
-        for(ReminderItem item : data) {
+        TimeItem timeNow = UtilsTime.getTimeNow();
+        for(ReminderItem item : reminders.data) {
             trimWakeToCurrent(item, timeNow);
         }
     }
 
     /**
-     * Trim the alert times of the specified reminder item so all at current or past times are removed
+     * Trim the alert times of the specified reminder reminder so all at current or past times are removed
      */
     private void trimWakeToCurrent(@NonNull ReminderItem item) {
-        TimeItem timeNow = Utils.getTimeNow();
+        TimeItem timeNow = UtilsTime.getTimeNow();
         trimWakeToCurrent(item, timeNow);
     }
 
     /**
-     * Trim the alert times of the specified reminder item so all at current or past times are removed
+     * Trim the alert times of the specified reminder reminder so all at current or past times are removed
      */
     private void trimWakeToCurrent(@NonNull ReminderItem item, @NonNull TimeItem timeNow) {
         while(!item.alertTimes.isEmpty() && timeBeforeOrEqual(item.alertTimes.get(0), timeNow)) {
@@ -290,9 +328,9 @@ public final class ReminderList {
      */
     @NonNull
     public final ArrayList<ReminderItem> getCurrentWakes() {
-        TimeItem timeNow = Utils.getTimeNow();
+        TimeItem timeNow = UtilsTime.getTimeNow();
         ArrayList<ReminderItem> items = new ArrayList<>();
-        for(ReminderItem item : data) {
+        for(ReminderItem item : reminders.data) {
             if(item.enabled && item.daysToRun[getDayOfWeek()] && (timeInBounds(item.startTime, item.endTime) || !item.rangeTiming)) {
                 if(!item.alertTimes.isEmpty() && timeBeforeOrEqual(item.alertTimes.get(0), timeNow)) {
                     items.add(item);
@@ -320,18 +358,18 @@ public final class ReminderList {
      * @return True if within
      */
     private boolean timeInBounds(@NonNull TimeItem start, @NonNull TimeItem end) {
-        TimeItem timeNow = Utils.getTimeNow();
+        TimeItem timeNow = UtilsTime.getTimeNow();
         return timeBeforeOrEqual(start, timeNow) && timeBeforeOrEqual(timeNow, end);
     }
 
     /**
-     * @return The time item of the next wake in this cycle. Null if no more today
+     * @return The time reminder of the next wake in this cycle. Null if no more today
      */
     @Nullable
     public final TimeItem getNextWake() {
         TimeItem time = null;
         //Schedule the next wake we have in this days cycle if any
-        for(ReminderItem item : data) {
+        for(ReminderItem item : reminders.data) {
             if(item.alertTimes.isEmpty()) {
                 continue;
             }
@@ -356,7 +394,7 @@ public final class ReminderList {
      * @return True if successful
      */
     private boolean saveToFile() {
-        byte[] bytes = serializeSave();
+        byte[] bytes = Serializer.serializeClass(reminders);
         return bytes != null && FileWriter.writeFile(saveName, bytes, false);
     }
 
@@ -373,26 +411,19 @@ public final class ReminderList {
     }
 
     /**
-     * Serializes the reminder list
-     * @return The byte array of the save. Null on error
-     */
-    @Nullable
-    private byte[] serializeSave() {
-        JSONObject retVal1 = new JSONObject();
-        try {
-            retVal1.put(ReminderList.TAG, new Gson().toJsonTree(data));
-        } catch (Exception e) {
-            return null;
-        }
-        return retVal1.toString().getBytes(Charset.forName(stringType));
-    }
-
-    /**
      * Deserialize the reminder list
      * @param bytes Byte array for the save
      * @return True on success
      */
     private boolean deserializeSave(@NonNull byte[] bytes) {
+        //New Method
+        reminders = Serializer.deserializeClass(bytes, Reminders.class);
+        if(reminders != null && reminders.data != null && !reminders.data.isEmpty()) {
+            Log.v("Test", "test");
+            return true;
+        }
+        //On failure of new method use old method
+        //TODO when beta ends remove this fallback code and just return false;
         String st;
         try {
             st = new String(bytes, stringType);
@@ -401,7 +432,7 @@ public final class ReminderList {
         }
         try {
             JSONObject obj = new JSONObject(st);
-            data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderItem>>() {}.getType());
+            reminders.data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderItem>>() {}.getType());
         } catch (Exception e) {
             return false;
         }
