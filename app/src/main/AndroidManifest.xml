@@ -43,6 +43,8 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED"/>
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED"/>
             </intent-filter>
         </receiver>
     </application>

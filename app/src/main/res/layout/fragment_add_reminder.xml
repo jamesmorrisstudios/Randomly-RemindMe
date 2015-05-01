@@ -15,13 +15,12 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jamesmorrisstudios.com.randremind.fragments.AddReminderFragment">
 
-    <com.jamesmorrisstudios.materialuilibrary.controls.ScrollView
+    <ScrollView
         android:id="@+id/scrollPane"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -45,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_title"
-                    android:textColor="@color/white80"
+                    android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
                 <android.support.v7.widget.SwitchCompat
@@ -67,8 +66,8 @@
                     android:hint="@string/title_hint"
                     android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
                     android:singleLine="true"
-                    android:textColor="@color/white80"
-                    android:textColorHint="@color/white15"
+                    android:textColor="@color/textLightMain"
+                    android:textColorHint="@color/textLightDisabled"
                     android:textSize="@dimen/item_size" />
 
             </RelativeLayout>
@@ -85,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_content"
-                    android:textColor="@color/white80"
+                    android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
                 <android.support.v7.widget.AppCompatEditText
@@ -102,8 +101,8 @@
                     android:lines="5"
                     android:minLines="3"
                     android:singleLine="false"
-                    android:textColor="@color/white80"
-                    android:textColorHint="@color/white15"
+                    android:textColor="@color/textLightMain"
+                    android:textColorHint="@color/textLightDisabled"
                     android:textSize="@dimen/item_size" />
 
             </RelativeLayout>
@@ -120,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_timing"
-                    android:textColor="@color/white80"
+                    android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
                 <LinearLayout
@@ -132,16 +131,18 @@
                     android:layout_margin="4dp"
                     android:orientation="horizontal">
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_specific"
-                        layout="@layout/day_button"
+                        android:padding="2dp"
+                        android:background="@color/iconLight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp" />
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_range"
-                        layout="@layout/day_button"
+                        android:padding="2dp"
+                        android:background="@color/iconLight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp" />
@@ -188,7 +189,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/dash"
-                        android:textColor="@color/white80"
+                        android:textColor="@color/textLightMain"
                         android:textSize="30sp" />
 
                     <include
@@ -215,7 +216,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/alerts_per_day"
-                        android:textColor="@color/white80"
+                        android:textColor="@color/textLightMain"
                         android:textSize="20sp" />
 
                     <android.support.v7.widget.AppCompatSpinner
@@ -242,7 +243,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/distribution"
-                        android:textColor="@color/white80"
+                        android:textColor="@color/textLightMain"
                         android:textSize="20sp" />
 
                     <android.support.v7.widget.AppCompatSpinner
@@ -267,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_repeat"
-                    android:textColor="@color/white80"
+                    android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
                 <LinearLayout
@@ -275,56 +276,64 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/repeat_header"
+                    android:minWidth="300dp"
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal">
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/daySun"
-                        layout="@layout/day_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
                         android:layout_margin="4dp" />
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayMon"
-                        layout="@layout/day_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
                         android:layout_margin="4dp" />
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayTue"
-                        layout="@layout/day_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
                         android:layout_margin="4dp" />
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayWed"
-                        layout="@layout/day_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
                         android:layout_margin="4dp" />
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayThu"
-                        layout="@layout/day_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
                         android:layout_margin="4dp" />
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayFri"
-                        layout="@layout/day_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
                         android:layout_margin="4dp" />
 
-                    <include
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/daySat"
-                        layout="@layout/day_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
                         android:layout_margin="4dp" />
 
                 </LinearLayout>
@@ -343,7 +352,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_notification"
-                    android:textColor="@color/white80"
+                    android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
                 <LinearLayout
@@ -357,6 +366,8 @@
 
                     <!-- Sound picker -->
                     <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -378,43 +389,25 @@
 
                     </LinearLayout>
 
-                    <!-- Vibrate -->
+                    <!-- Vibrate and priority -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="4dp"
-                            android:text="@string/vibrate_enable"
-                            android:textSize="@dimen/item_size" />
-
-                        <android.support.v7.widget.SwitchCompat
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:layout_marginRight="8dp"
                             android:id="@+id/notification_vibrate_enabled"
+                            android:text="@string/vibrate_enable"
+                            android:textSize="@dimen/item_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                    </LinearLayout>
-
-                    <!-- High Priority -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="4dp"
-                            android:text="@string/high_priority_enable"
-                            android:textSize="@dimen/item_size" />
-
-                        <android.support.v7.widget.SwitchCompat
+                        <android.support.v7.widget.AppCompatCheckBox
                             android:id="@+id/notification_high_priority_enabled"
+                            android:text="@string/high_priority_enable"
+                            android:textSize="@dimen/item_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -427,26 +420,13 @@
                         android:layout_margin="8dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="4dp"
-                            android:text="@string/led_enable"
-                            android:textSize="@dimen/item_size" />
-
-                        <android.support.v7.widget.SwitchCompat
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:layout_marginRight="8dp"
                             android:id="@+id/notification_led_enabled"
+                            android:text="@string/led_enable"
+                            android:textSize="@dimen/item_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <!-- LED Color -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -456,9 +436,10 @@
                             android:textSize="@dimen/item_size" />
 
                         <View
+                            android:layout_gravity="center_vertical"
                             android:id="@+id/notification_led_color"
                             android:layout_width="50dp"
-                            android:layout_height="20dp" />
+                            android:layout_height="25dp" />
 
                     </LinearLayout>
 
@@ -466,46 +447,8 @@
 
             </RelativeLayout>
 
-            <!-- Alarm -->
-            <!--
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dip">
-
-                <TextView
-                    android:id="@+id/alarm_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_alarm"
-                    android:textColor="@color/white80"
-                    android:textSize="@dimen/header_size" />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/alarm_enabled"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/alarm_header"/>
-
-            </RelativeLayout>
-    -->
         </LinearLayout>
 
-    </com.jamesmorrisstudios.materialuilibrary.controls.ScrollView>
-
-    <!-- Add reminder floating action button -->
-    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonFloat
-        android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="24dp"
-        android:background="@color/primaryColorAccent"
-        materialdesign:animate="true"
-        materialdesign:iconDrawable="@drawable/ic_save_white_24dp"
-        materialdesign:rippleSpeed="30" />
+    </ScrollView>
 
 </RelativeLayout>

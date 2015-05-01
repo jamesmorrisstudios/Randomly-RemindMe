@@ -16,6 +16,8 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,6 +31,7 @@ import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -40,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
 
 /**
  * Reminder list control class. Add, remove, save, delete reminders
@@ -58,6 +62,9 @@ public final class ReminderList {
     //The currently selected reminder as a copy
     private int currentIndex = -1;
     private ReminderItem currentItem;
+
+    AsyncTask<Void, Void, Boolean> taskLoad = null;
+    AsyncTask<Void, Void, Boolean> taskSave = null;
 
     /**
      * Required private constructor to maintain singleton
@@ -98,7 +105,11 @@ public final class ReminderList {
      * @return True if successful
      */
     public final boolean loadDataSync() {
-        return loadFromFile();
+        boolean status = loadFromFile();
+        if(status) {
+            validateSaveData();
+        }
+        return status;
     }
 
     /**
@@ -110,7 +121,7 @@ public final class ReminderList {
         if(!forceRefresh && hasReminders()) {
             ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_PASS);
         } else {
-            AsyncTask<Void, Void, Boolean> taskLoad = new AsyncTask<Void, Void, Boolean>() {
+            taskLoad = new AsyncTask<Void, Void, Boolean>() {
                 @Override
                 protected Boolean doInBackground(Void... params) {
                     return loadFromFile();
@@ -119,14 +130,20 @@ public final class ReminderList {
                 @Override
                 protected void onPostExecute(Boolean value) {
                     if(value) {
+                        validateSaveData();
                         ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_PASS);
                     } else {
                         ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_FAIL);
                     }
+                    taskLoad = null;
                 }
             };
             taskLoad.execute();
         }
+    }
+
+    public final boolean isLoadInProgress() {
+        return taskLoad != null;
     }
 
     /**
@@ -142,26 +159,27 @@ public final class ReminderList {
      * Subscribe to Event.DATA_SAVE_PASS and Event.DATA_SAVE_FAIL for completion events
      */
     public final void saveData() {
-        if(hasReminders()) {
-            AsyncTask<Void, Void, Boolean> taskSave = new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(Void... params) {
-                    return saveToFile();
-                }
+        taskSave = new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                return saveToFile();
+            }
 
-                @Override
-                protected void onPostExecute(Boolean value) {
-                    if(value) {
-                        ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_PASS);
-                    } else {
-                        ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_FAIL);
-                    }
+            @Override
+            protected void onPostExecute(Boolean value) {
+                if(value) {
+                    ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_PASS);
+                } else {
+                    ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_FAIL);
                 }
-            };
-            taskSave.execute();
-        } else {
-            ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_PASS);
-        }
+                taskSave = null;
+            }
+        };
+        taskSave.execute();
+    }
+
+    public final boolean isSaveInProgress() {
+        return taskSave != null;
     }
 
     /**
@@ -193,6 +211,16 @@ public final class ReminderList {
             }
             index++;
         }
+    }
+
+    @Nullable
+    public final ReminderItem getReminder(String uniqueName) {
+        for(ReminderItem item : reminders.data) {
+            if(item.uniqueName.equals(uniqueName)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
@@ -238,8 +266,32 @@ public final class ReminderList {
         if(content == null || content.isEmpty()) {
             content = AppUtil.getContext().getString(R.string.default_content);
         }
-        Notifier.buildNotification(title, content, item.getNotificationTone(), R.drawable.notification_icon, item.notificationVibrate,
-                item.notificationHighPriority, item.notificationLED, item.notificationLEDColor, item.notificationId);
+
+        NotificationContent notif = new NotificationContent(title, content, item.getNotificationTone(), R.drawable.notification_icon,
+                AppUtil.getContext().getResources().getColor(R.color.accent), item.notificationId);
+        if(item.notificationVibrate) {
+            notif.enableVibrate();
+        }
+        if(item.notificationHighPriority) {
+            notif.enableHighPriority();
+        }
+        if(item.notificationLED) {
+            notif.enableLed(item.notificationLEDColor);
+        }
+
+        Intent intentClicked = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
+        intentClicked.putExtra("PREVIEW", true);
+        PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
+        notif.addContentIntent(pClicked);
+
+        Intent intentCancel = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
+        intentCancel.putExtra("PREVIEW", true);
+        PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
+        notif.addDeleteIntent(pCanceled);
+
+        Notifier.buildNotification(notif);
     }
 
     /**
@@ -268,7 +320,7 @@ public final class ReminderList {
     public final void duplicateReminder() {
         currentItem.updateAlertTimes();
         trimWakeToCurrent(currentItem);
-        reminders.data.add(currentItem.copy());
+        reminders.data.add(currentItem.duplicate());
         saveToFile();
     }
 
@@ -390,6 +442,24 @@ public final class ReminderList {
     }
 
     /**
+     * This is to fix a bug where duplicated reminders had the same unique name.
+     */
+    private void validateSaveData() {
+        if(reminders.data == null || reminders.data.isEmpty() || reminders.data.size() < 2) {
+            return;
+        }
+        for(int i=0; i<reminders.data.size(); i++) {
+            ReminderItem firstItem = reminders.data.get(i);
+            for(int j=i+1; j<reminders.data.size(); j++) {
+                ReminderItem secondItem = reminders.data.get(j);
+                if(firstItem.uniqueName.equals(secondItem.uniqueName)) {
+                    secondItem.uniqueName = ReminderItem.getUniqueName();
+                }
+            }
+        }
+    }
+
+    /**
      * Saves the reminder list to file
      * @return True if successful
      */
@@ -418,7 +488,7 @@ public final class ReminderList {
     private boolean deserializeSave(@NonNull byte[] bytes) {
         //New Method
         reminders = Serializer.deserializeClass(bytes, Reminders.class);
-        if(reminders != null && reminders.data != null && !reminders.data.isEmpty()) {
+        if(reminders != null && reminders.data != null) {
             Log.v("Test", "test");
             return true;
         }

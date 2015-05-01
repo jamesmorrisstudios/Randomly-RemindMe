@@ -25,9 +25,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainRecycleListFragment;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleAdapter;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContainer;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.squareup.otto.Subscribe;
@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderContainer;
-import jamesmorrisstudios.com.randremind.listAdapters.ReminderListItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -47,6 +46,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 public final class MainListFragment extends BaseMainRecycleListFragment {
     public static final String TAG = "MainListFragment";
     private OnFragmentInteractionListener mListener;
+    private boolean loadAfterSave = false;
 
     /**
      * Required empty public constructor
@@ -71,6 +71,19 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         return super.onCreateView(inflater,container,savedInstanceState);
     }
 
+    /**
+     * View creation done
+     * @param view This fragments main view
+     * @param savedInstanceState Saved instance state
+     */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setFabEnable(true);
+        setFabIcon(R.drawable.ic_add_white_24dp);
+        setNoDataText(getString(R.string.main_list_no_data));
+    }
+
     @Override
     protected BaseRecycleAdapter getAdapter(int i, @NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
         return new ReminderAdapter(i, onItemClickListener);
@@ -78,13 +91,22 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
 
     @Override
     protected void startDataLoad() {
-        ReminderList.getInstance().loadData(false);
+        if(!ReminderList.getInstance().isSaveInProgress()) {
+            ReminderList.getInstance().loadData(false);
+        } else {
+            loadAfterSave = true;
+        }
     }
 
     @Override
     protected void itemClicked(BaseRecycleItem baseRecycleItem) {
-        ReminderList.getInstance().setCurrentReminder(((ReminderListItem)baseRecycleItem).reminder);
-        mListener.onEditClicked();
+        ReminderList.getInstance().setCurrentReminder((ReminderItem) baseRecycleItem);
+        mListener.onReminderItemClicked();
+    }
+
+    @Override
+    protected void fabClicked() {
+        mListener.onAddNewClicked();
     }
 
     /**
@@ -109,6 +131,18 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
                 Utils.toastLong(getResources().getString(R.string.data_load_fail));
                 applyItems();
                 break;
+            case DATA_SAVE_PASS:
+                if(loadAfterSave) {
+                    ReminderList.getInstance().loadData(false);
+                    loadAfterSave = false;
+                }
+                break;
+            case DATA_SAVE_FAIL:
+                if(loadAfterSave) {
+                    ReminderList.getInstance().loadData(false);
+                    loadAfterSave = false;
+                }
+                break;
         }
     }
 
@@ -122,11 +156,12 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         } else {
             ArrayList<BaseRecycleContainer> reminders = new ArrayList<>();
             for(ReminderItem item : data) {
-                reminders.add(new ReminderContainer(new ReminderListItem(item)));
+                reminders.add(new ReminderContainer(item));
             }
             applyData(reminders);
         }
     }
+
     /**
      * Attach to the activity
      * @param activity Activity to attach to
@@ -162,7 +197,7 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         /**
          * Edit clicked
          */
-        void onEditClicked();
+        void onReminderItemClicked();
 
         /**
          * Add new clicker

@@ -23,6 +23,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 
@@ -37,10 +38,10 @@ import jamesmorrisstudios.com.randremind.R;
  *
  * Created by James on 4/20/2015.
  */
-public final class ReminderItem {
+public final class ReminderItem extends BaseRecycleItem {
     //Unique data
     @SerializedName("uniqueName")
-    public final String uniqueName;
+    public String uniqueName;
     @SerializedName("notificationId")
     public int notificationId;
     //Title
@@ -204,6 +205,16 @@ public final class ReminderItem {
     }
 
     /**
+    * @return A deep copy of this reminder but with a new unique name
+    */
+    @NonNull
+    public final ReminderItem duplicate() {
+        return new ReminderItem(getUniqueName(), notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
+                distribution, rangeTiming, repeat, daysToRun, notification, notificationTone, notificationToneName,
+                notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
+    }
+
+    /**
      * @return The notification tone as a Uri
      */
     public final Uri getNotificationTone() {
@@ -321,6 +332,14 @@ public final class ReminderItem {
         return new TimeItem(hour, minutes);
     }
 
+    public final void logReminderShown() {
+        //TODO
+    }
+
+    public final void logReminderClicked() {
+        //TODO
+    }
+
     /**
      * Truncates the UUID for a unique id
      * @return A unique notification id
@@ -334,7 +353,7 @@ public final class ReminderItem {
      * @return Unique name
      */
     @NonNull
-    private static String getUniqueName() {
+    public static String getUniqueName() {
         return UUID.randomUUID().toString();
     }
 

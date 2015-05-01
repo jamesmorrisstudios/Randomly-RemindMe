@@ -16,7 +16,9 @@
 
 <resources>
 
-    <!-- Use the base app theme -->
+    <!-- Use the base app theme
+          Override only what we want to change
+     -->
 
 
 </resources>

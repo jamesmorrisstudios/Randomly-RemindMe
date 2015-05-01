@@ -26,6 +26,7 @@ import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
+import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
@@ -36,7 +37,8 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
  * Created by James on 4/20/2015.
  */
 public final class MainActivity extends BaseLauncherActivity implements
-        MainListFragment.OnFragmentInteractionListener {
+        MainListFragment.OnFragmentInteractionListener,
+        SummaryFragment.OnSummaryListener {
 
     /**
      * Activity start
@@ -63,11 +65,11 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     /**
-     * Edit button clicked
+     * Reminder item clicked
      */
     @Override
-    public void onEditClicked() {
-        loadAddReminderFragment();
+    public void onReminderItemClicked() {
+        loadSummaryFragment();
     }
 
     /**
@@ -75,6 +77,15 @@ public final class MainActivity extends BaseLauncherActivity implements
      */
     @Override
     public void onAddNewClicked() {
+        loadSummaryFragment();
+        loadAddReminderFragment();
+    }
+
+    /**
+     * Edit button clicked
+     */
+    @Override
+    public void onEditClicked() {
         loadAddReminderFragment();
     }
 
@@ -90,7 +101,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     /**
-     * Gets the tutorial fragment from the fragment manager.
+     * Gets the add reminder fragment from the fragment manager.
      * Creates the fragment if it does not exist yet.
      * @return The fragment
      */
@@ -105,11 +116,35 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     /**
-     * Loads the tutorial fragment into the main view
+     * Loads the add reminder fragment into the main view
      */
     protected final void loadAddReminderFragment() {
         AddReminderFragment fragment = getAddReminderFragment();
         loadFragment(fragment, AddReminderFragment.TAG, true);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+
+    /**
+     * Gets the summary fragment from the fragment manager.
+     * Creates the fragment if it does not exist yet.
+     * @return The fragment
+     */
+    @NonNull
+    protected final SummaryFragment getSummaryFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SummaryFragment fragment = (SummaryFragment) fragmentManager.findFragmentByTag(SummaryFragment.TAG);
+        if (fragment == null) {
+            fragment = new SummaryFragment();
+        }
+        return fragment;
+    }
+
+    /**
+     * Loads the summary fragment into the main view
+     */
+    protected final void loadSummaryFragment() {
+        SummaryFragment fragment = getSummaryFragment();
+        loadFragment(fragment, SummaryFragment.TAG, true);
         getSupportFragmentManager().executePendingTransactions();
     }
 

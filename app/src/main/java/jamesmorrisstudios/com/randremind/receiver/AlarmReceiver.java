@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.receiver;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -67,13 +70,12 @@ public final class AlarmReceiver extends BroadcastReceiver {
             Log.v("ALARM RECEIVER", "Device just woke");
             //Set up our midnight recalculate wake
             Scheduler.getInstance().scheduleRepeatingMidnight();
-
             //Make sure our wakes are recalculated and cleaned up as we don't know how long we were off for
             ReminderList.getInstance().recalculateWakes();
             ReminderList.getInstance().trimWakesToCurrent();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
-        } else if(intent.getExtras().containsKey("REPEAT")){
+        } else if(intent.getExtras() != null && intent.getExtras().containsKey("REPEAT")){
             Log.v("ALARM RECEIVER", "Midnight update");
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
@@ -81,12 +83,22 @@ public final class AlarmReceiver extends BroadcastReceiver {
             postNextNotification();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
-        } else if(intent.getExtras().containsKey("REMINDER_WAKE")){
+        } else if(intent.getExtras() != null && intent.getExtras().containsKey("REMINDER_WAKE")){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
             postNextNotification();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED")) {
+            Log.v("ALARM RECEIVER", "Hmm this is a notification click");
+            if(intent.getExtras() != null && !intent.getExtras().containsKey("PREVIEW") && intent.getExtras().containsKey("NAME")) {
+                logClicked(intent.getExtras().getString("NAME"));
+            }
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED")) {
+            Log.v("ALARM RECEIVER", "Hmm this is a notification cancel");
+            if(intent.getExtras() != null && !intent.getExtras().containsKey("PREVIEW") && intent.getExtras().containsKey("NAME")) {
+                logDeleted(intent.getExtras().getString("NAME"));
+            }
         }
 
         Log.v("ALARM RECEIVER", "Completed Wake: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
@@ -97,9 +109,23 @@ public final class AlarmReceiver extends BroadcastReceiver {
         wl.release();
     }
 
+    private void logClicked(String name) {
+        ReminderItem item = ReminderList.getInstance().getReminder(name);
+        if(item == null) {
+            return;
+        }
+        item.logReminderClicked();
+    }
+
+    private void logDeleted(String name) {
+        //Do nothing?...
+    }
+
     private void postNextNotification() {
         ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
         for(ReminderItem item : items) {
+            item.logReminderShown();
+
             String title = item.title;
             if(title == null || title.isEmpty()) {
                 title = AppUtil.getContext().getString(R.string.default_title);
@@ -108,8 +134,34 @@ public final class AlarmReceiver extends BroadcastReceiver {
             if(content == null || content.isEmpty()) {
                 content = AppUtil.getContext().getString(R.string.default_content);
             }
-            Notifier.buildNotification(title, content, item.getNotificationTone(), R.drawable.notification_icon, item.notificationVibrate,
-                    item.notificationHighPriority, item.notificationLED, item.notificationLEDColor, item.notificationId);
+
+            NotificationContent notif = new NotificationContent(title, content, item.getNotificationTone(), R.drawable.notification_icon,
+                    AppUtil.getContext().getResources().getColor(R.color.accent), item.notificationId);
+            if(item.notificationVibrate) {
+                notif.enableVibrate();
+            }
+            if(item.notificationHighPriority) {
+                notif.enableHighPriority();
+            }
+            if(item.notificationLED) {
+                notif.enableLed(item.notificationLEDColor);
+            }
+
+            Intent intentClicked = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+            intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
+            intentClicked.putExtra("NAME", item.uniqueName);
+            PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
+            notif.addContentIntent(pClicked);
+
+            Intent intentCancel = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+            intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
+            intentCancel.putExtra("NAME", item.uniqueName);
+            PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
+            notif.addDeleteIntent(pCanceled);
+
+            notif.addAction(new NotificationAction(R.drawable.notification_icon, "Acknowledge", pClicked));
+
+            Notifier.buildNotification(notif);
         }
     }
 

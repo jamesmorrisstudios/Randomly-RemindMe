@@ -26,7 +26,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.SwitchCompat;
@@ -43,12 +43,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.materialuilibrary.controls.ButtonFloat;
-import com.jamesmorrisstudios.materialuilibrary.controls.ScrollView;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.ColorSelector;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.time.RadialPickerLayout;
@@ -75,7 +74,8 @@ public final class AddReminderFragment extends BaseFragment {
     private static final int NOTIFICATION_RESULT = 5;
     //Views
     private AppCompatEditText titleText, contentText;
-    private SwitchCompat titleEnable, notificationVibrateEnable, ledEnable, highPriorityEnable;
+    private SwitchCompat titleEnable;
+    private AppCompatCheckBox notificationVibrateEnable, ledEnable, highPriorityEnable;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound,
             singleHour, singleMinute, singleAM, singlePM;
     private View startTimeTop, endTimeTop, singleTimeTop, ledColor;
@@ -84,7 +84,6 @@ public final class AddReminderFragment extends BaseFragment {
     private LinearLayout daysContainer, notificationContainer;
     private ScrollView scrollPane;
     private int scrollPosition = 0;
-    private ButtonFloat saveButton;
     private ButtonCircleFlat timingSpecific, timingRange;
     private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
     //Listeners
@@ -124,22 +123,6 @@ public final class AddReminderFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_delete:
-                dialogListener.createPromptDialog(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new MaterialDialog.ButtonCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        destroyListeners();
-                        ReminderList.getInstance().deleteCurrentReminder();
-                        utilListener.goBackFromFragment();
-                        Utils.toastShort(getString(R.string.reminder_delete));
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-
-                    }
-                });
-                break;
             case R.id.action_cancel:
                 dialogListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new MaterialDialog.ButtonCallback() {
                     @Override
@@ -158,10 +141,6 @@ public final class AddReminderFragment extends BaseFragment {
                 break;
             case R.id.action_preview:
                 ReminderList.getInstance().previewCurrent();
-                break;
-            case R.id.action_duplicate:
-                Utils.toastShort(getString(R.string.reminder_duplicate));
-                ReminderList.getInstance().duplicateReminder();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -202,13 +181,12 @@ public final class AddReminderFragment extends BaseFragment {
         daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
         notificationContainer = (LinearLayout) view.findViewById(R.id.notificationContainer);
         notificationSound = (TextView) view.findViewById(R.id.notificationSound);
-        notificationVibrateEnable = (SwitchCompat) view.findViewById(R.id.notification_vibrate_enabled);
-        ledEnable = (SwitchCompat) view.findViewById(R.id.notification_led_enabled);
+        notificationVibrateEnable = (AppCompatCheckBox) view.findViewById(R.id.notification_vibrate_enabled);
+        ledEnable = (AppCompatCheckBox) view.findViewById(R.id.notification_led_enabled);
         ledColor = view.findViewById(R.id.notification_led_color);
-        highPriorityEnable = (SwitchCompat) view.findViewById(R.id.notification_high_priority_enabled);
+        highPriorityEnable = (AppCompatCheckBox) view.findViewById(R.id.notification_high_priority_enabled);
         scrollPane = (ScrollView) view.findViewById(R.id.scrollPane);
         scrollPosition = scrollPane.getScrollY();
-        saveButton = (ButtonFloat) view.findViewById(R.id.buttonSave);
         dayButtons[0] = (ButtonCircleFlat) view.findViewById(R.id.daySun);
         dayButtons[1] = (ButtonCircleFlat) view.findViewById(R.id.dayMon);
         dayButtons[2] = (ButtonCircleFlat) view.findViewById(R.id.dayTue);
@@ -226,6 +204,18 @@ public final class AddReminderFragment extends BaseFragment {
         //Now setup everything with actual data
         setupViewWithReminder();
         return view;
+    }
+
+    /**
+     * View creation done
+     * @param view This fragments main view
+     * @param savedInstanceState Saved instance state
+     */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setFabEnable(true);
+        setFabIcon(R.drawable.ic_save_white_24dp);
     }
 
     /**
@@ -247,7 +237,6 @@ public final class AddReminderFragment extends BaseFragment {
         repeatDaysListener();
         notificationListeners();
         scrollPaneListener();
-        saveButtonListener();
     }
 
     private void addTimingTypeListener() {
@@ -305,11 +294,11 @@ public final class AddReminderFragment extends BaseFragment {
             showView(timingSingleTime);
         }
         if(remind.rangeTiming) {
-            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.white80));
-            timingRange.getTextView().setTextColor(getResources().getColor(R.color.primaryColorDark));
+            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
+            timingRange.getTextView().setTextColor(getResources().getColor(R.color.primaryDark));
         } else {
-            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.primaryColorDark));
-            timingRange.getTextView().setTextColor(getResources().getColor(R.color.white80));
+            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.primaryDark));
+            timingRange.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
         }
 
     }
@@ -603,9 +592,9 @@ public final class AddReminderFragment extends BaseFragment {
                 int scrollY = scrollPane.getScrollY();
                 if (Math.abs(scrollY - scrollPosition) > 75) {
                     if (scrollY < scrollPosition) {
-                        saveButton.show();
+                        showFab();
                     } else {
-                        saveButton.hide();
+                        hideFab();
                     }
                     scrollPosition = scrollY;
                 }
@@ -613,13 +602,9 @@ public final class AddReminderFragment extends BaseFragment {
         });
     }
 
-    private void saveButtonListener() {
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                utilListener.goBackFromFragment();
-            }
-        });
+    @Override
+    protected void fabClicked() {
+        utilListener.goBackFromFragment();
     }
 
     /**
@@ -741,8 +726,9 @@ public final class AddReminderFragment extends BaseFragment {
             Utils.toastShort(getString(R.string.reminder_save));
             destroyListeners();
             ReminderList.getInstance().saveCurrentReminder();
-            ReminderList.getInstance().clearCurrentReminder();
+            ReminderList.getInstance().saveData();
         }
+        utilListener.hideKeyboard();
     }
 
     /**
@@ -795,9 +781,9 @@ public final class AddReminderFragment extends BaseFragment {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActivated(active);
         if(active) {
-            dayButton.getTextView().setTextColor(getResources().getColor(R.color.primaryColorDark));
+            dayButton.getTextView().setTextColor(getResources().getColor(R.color.primary));
         } else {
-            dayButton.getTextView().setTextColor(getResources().getColor(R.color.white80));
+            dayButton.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
         }
     }
 

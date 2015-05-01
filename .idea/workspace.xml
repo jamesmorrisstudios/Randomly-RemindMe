@@ -10,120 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a47070ce-a684-4114-8a6f-5dce455393d9" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Programming\randRemind\.idea\copyright\Apache_2_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\activities\BaseActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\application\App.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\fragments\HelpFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\fragments\licenseFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\fragments\tutorialFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\reminder\Notifier.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\reminder\TimeItem.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\utilities\AnimatorControl.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\utilities\Bus.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\utilities\FileWriter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\utilities\Utils.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-hdpi\btn_fb.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-hdpi\btn_gplus.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-hdpi\btn_twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-hdpi\text_select_handle_left_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-hdpi\text_select_handle_middle_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-hdpi\text_select_handle_right_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-mdpi\btn_fb.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-mdpi\btn_gplus.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-mdpi\btn_twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-mdpi\text_select_handle_left_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-mdpi\text_select_handle_middle_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-mdpi\text_select_handle_right_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xhdpi\btn_fb.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xhdpi\btn_gplus.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xhdpi\btn_twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xhdpi\text_select_handle_left_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xhdpi\text_select_handle_middle_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xhdpi\text_select_handle_right_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\btn_fb.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\btn_gplus.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\btn_twitter.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\text_select_handle_left_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\text_select_handle_middle_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\text_select_handle_right_mtrl.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\layout\activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\layout\fragment_help.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\layout\fragment_license.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\layout\fragment_main_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\layout\fragment_tutorial.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\menu\menu_help.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\menu\menu_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\mipmap-xxhdpi\ic_action_back.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\values\bools.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\values\integers.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\materialdesign.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\proguard-rules.pro" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\androidTest\java\com\jamesmorrisstudios\materialdesign\ApplicationTest.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\utils\Utils.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\Button.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ButtonCIrcleFlat.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ButtonFlat.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ButtonFloat.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ButtonFloatSmall.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ButtonIcon.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ButtonRectangle.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\Card.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\CheckBox.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\CustomView.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\LayoutRipple.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ProgressBarCircularIndeterminate.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ProgressBarDeterminate.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ProgressBarIndeterminate.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ProgressBarIndeterminateDeterminate.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\ScrollView.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\Slider.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\views\Switch.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\widgets\ColorSelector.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\widgets\Dialog.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\widgets\ProgressDialog.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\java\com\jamesmorrisstudios\materialdesign\widgets\SnackBar.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\anim\dialog_main_hide_amination.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\anim\dialog_main_show_amination.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\anim\dialog_root_hide_amin.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\anim\dialog_root_show_amin.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\anim\progress_indeterminate_animation.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\anim\snackbar_hide_animation.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\anim\snackbar_show_animation.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-hdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-hdpi\sprite_check.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-ldpi\sprite_check.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-mdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-mdpi\sprite_check.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-xhdpi\dialog_background.9.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-xhdpi\float_button1_shadowp.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-xhdpi\float_button_shadow1.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-xhdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-xhdpi\ic_reloj_max.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-xhdpi\sprite_check.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable-xxhdpi\sprite_check.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_button.9.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_button_float.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_button_rectangle.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_checkbox.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_checkbox_check.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_checkbox_uncheck.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_progress.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_switch_ball_uncheck.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\background_transparent.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\shadow_down.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\drawable\shadow_right.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\layout-land\color_selector.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\layout\color_selector.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\layout\dialog.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\layout\number_indicator_spinner.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\layout\progress_dialog.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\layout\snackbar.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\values\attributes.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\values\colors.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\materialdesign\src\main\res\values\strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\java\jamesmorrisstudios\com\randremind\listAdapters\ReminderListItem.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\color\bg_day_tint_color.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\layout\day_button.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\values-w820dp\dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\values\dimens.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -134,25 +25,15 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderViewHolder.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderViewHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Scheduler.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Scheduler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/color/bg_day_tint_color.xml" afterPath="$PROJECT_DIR$/app/src/main/res/color/bg_day_tint_color.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/day_button.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/day_button.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/reminder_header_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/reminder_header_item.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/reminder_line_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/reminder_line_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/time_display.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/time_display.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/time_display_small.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/time_display_small.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="randRemind.iws" />
@@ -172,7 +53,20 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="randRemind" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+            </PATH>
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -180,12 +74,98 @@
     <favorites_list name="randRemind" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="AlarmReceiver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="123" column="4" selection-start-line="123" selection-start-column="4" selection-end-line="123" selection-end-column="4" />
+              <folding>
+                <element signature="method#postNextNotification#0;class#AlarmReceiver#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReminderItem.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5756241">
+              <caret line="339" column="14" selection-start-line="339" selection-start-column="14" selection-end-line="339" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#13102#0" expanded="true" />
+                <element signature="e#4352#4403#0" expanded="true" />
+                <element signature="e#4702#4753#0" expanded="true" />
+                <element signature="method#getAlarmTone#0;class#ReminderItem#0" expanded="false" />
+                <element signature="method#equals#0;class#ReminderItem#0" expanded="false" />
+                <element signature="method#updateAlertTimes#0;class#ReminderItem#0" expanded="false" />
+                <element signature="method#generateEvenishSplit#0;class#ReminderItem#0" expanded="false" />
+                <element signature="e#11933#11934#0" expanded="true" />
+                <element signature="e#12005#12006#0" expanded="true" />
+                <element signature="e#12192#12193#0" expanded="true" />
+                <element signature="e#12243#12244#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReminderList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+              <folding>
+                <element signature="docComment;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#ReminderList#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#getInstance#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
+                <element signature="class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#loadDataSync#0;class#ReminderList#0" expanded="false" />
+                <element signature="e#4724#4725#0" expanded="true" />
+                <element signature="e#4763#4764#0" expanded="true" />
+                <element signature="e#4938#4939#0" expanded="true" />
+                <element signature="e#4973#4974#0" expanded="true" />
+                <element signature="docComment;method#hasReminders#0;class#ReminderList#0" expanded="false" />
+                <element signature="e#5981#5982#0" expanded="true" />
+                <element signature="e#6029#6030#0" expanded="true" />
+                <element signature="docComment;method#getData#0;class#ReminderList#0" expanded="false" />
+                <element signature="e#6239#6240#0" expanded="true" />
+                <element signature="e#6276#6277#0" expanded="true" />
+                <element signature="docComment;method#setCurrentReminder#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#deleteCurrentReminder#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#createNewReminder#0;class#ReminderList#0" expanded="false" />
+                <element signature="method#previewCurrent#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#saveCurrentReminder#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#duplicateReminder#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#hasCurrentReminder#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#getCurrentReminder#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
+                <element signature="method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#trimWakesToCurrent#0;class#ReminderList#0" expanded="false" />
+                <element signature="method#trimWakesToCurrent#0;class#ReminderList#0" expanded="false" />
+                <element signature="method#trimWakeToCurrent#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#getCurrentWakes#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#getDayOfWeek#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#timeInBounds#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#getNextWake#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#timeBeforeOrEqual#0;class#ReminderList#0" expanded="false" />
+                <element signature="method#saveToFile#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#loadFromFile#0;class#ReminderList#0" expanded="false" />
+                <element signature="method#loadFromFile#0;class#ReminderList#0" expanded="false" />
+                <element signature="docComment;method#deserializeSave#0;class#ReminderList#0" expanded="false" />
+                <element signature="method#deserializeSave#0;class#ReminderList#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -769,76 +749,76 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.2.0/gradle-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.2.0/gradle-1.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/1.2.0/gradle-core-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/1.2.0/gradle-core-1.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint/24.2.0/lint-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint/24.2.0/lint-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.2.0/builder-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.2.0/builder-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/1.2.0/7df9306aaf2a2b8eff1e1601588b3a06d6e374e9/gradle-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/1.2.0/416ed6b84f702d8751d7d403033ea7308199b22f/gradle-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-core/1.2.0/ed43ed2f98beef567c1745de444df714086620f9/gradle-core-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-core/1.2.0/975ec5be63a61cc9190968499742fcca160d24c7/gradle-core-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/1.2.0/d2493c3cec1fa8da3ef8dc4585ae516dac925e84/builder-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/1.2.0/45565403bd3f9369bc97c860ffe1205d87e40ab3/builder-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/24.2.0/5eea60efd8bac1a5990ecee693ba25676c170e23/lint-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/24.2.0/b9c89729cc8e9c79b95846dd5b42927eed428bb/lint-24.2.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-checks/24.2.0/lint-checks-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-checks/24.2.0/lint-checks-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/24.2.0/manifest-merger-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/24.2.0/manifest-merger-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/24.2.0/sdk-common-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/24.2.0/sdk-common-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/1.2.0/45e3993ac8422c5d964fa3acf7fa41d5e099695a/builder-model-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/1.2.0/7e4d02a9d9978c3f1a3b323c95d83da63c3fb4a7/builder-model-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/1.2.0/84f1fb9efc0aa1bcfcdc6879df062ba64eed9b73/builder-test-api-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/1.2.0/3222fa63474b8e69ac1a79f5d7714c3678eb7ed5/builder-test-api-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/24.2.0/d79a71c6c9f269e74e3e5cd7b41a56b097134e8/sdklib-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/24.2.0/e4d47816f423e2c406939c0556af58b19c7acbc5/sdklib-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/24.2.0/349f8959949c0d95a4d1627c76d61adb55bf1f63/sdk-common-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/24.2.0/239eb1699f02ee1544b098ec2355955ed75ff403/sdk-common-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/24.2.0/7acc4fbe849dc02b859be43567d759fd04dc1077/common-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/24.2.0/dd1b3c948ec3daa53d67104c3a9b6b5fdc02afb7/common-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/24.2.0/46fd83160f9a3100295a7dd43eef3ff59de3f394/manifest-merger-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/24.2.0/2a65380b2f2ee0a024da552495ad838a6ed2b5d2/manifest-merger-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/24.2.0/aac0220466bd569ec3fb8594a3890514e2975d8a/ddmlib-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/24.2.0/bf7eaccc57d13bc5f5e6cd2fc709eb41afe5360b/ddmlib-24.2.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/24.2.0/common-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/24.2.0/common-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/24.2.0/ddmlib-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/24.2.0/ddmlib-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/24.2.0/sdklib-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/24.2.0/sdklib-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.2.0/builder-model-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.2.0/builder-model-1.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/1.2.0/builder-test-api-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/1.2.0/builder-test-api-1.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/24.2.0/dcc39b4a60f24f10d94efab4ea99d43852d6871/lint-checks-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/24.2.0/6306ef64aa17caffd11743c92e4048eefe4a8ec9/lint-checks-24.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.1/proguard-base-5.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.1/proguard-base-5.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-api/24.2.0/lint-api-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-api/24.2.0/lint-api-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/24.2.0/annotations-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/24.2.0/annotations-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/24.2.0/layoutlib-api-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/24.2.0/layoutlib-api-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/24.2.0/dvlib-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/24.2.0/dvlib-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/24.2.0/f7d7360c0c3a370baf56ee9e48a5c136e29d2c6/annotations-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/24.2.0/e8696aaa3071fb5ac79f49505699349ba03ef4b5/annotations-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/24.2.0/4d1becca6436f658af6bacef363d477612dd4346/layoutlib-api-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/24.2.0/99cba0052611bdc372fa0cbc9b63e1ff2d9cc390/layoutlib-api-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/24.2.0/8900abae2d50d0b38ec05b88b586e2391bb88ab1/dvlib-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/24.2.0/6b89a55181ec5f438a8a97ae64613e8de478ee8d/dvlib-24.2.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.2.0/9444623169c49bce69d3960a4fbfb1630630ffe4/lint-api-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.2.0/17da3e1393e9af229da3b08184291de72fff241c/lint-api-24.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$" />
@@ -850,76 +830,76 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.2.0/gradle-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.2.0/gradle-1.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/1.2.0/gradle-core-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/1.2.0/gradle-core-1.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint/24.2.0/lint-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint/24.2.0/lint-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.2.0/builder-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.2.0/builder-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/1.2.0/7df9306aaf2a2b8eff1e1601588b3a06d6e374e9/gradle-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/1.2.0/416ed6b84f702d8751d7d403033ea7308199b22f/gradle-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-core/1.2.0/ed43ed2f98beef567c1745de444df714086620f9/gradle-core-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-core/1.2.0/975ec5be63a61cc9190968499742fcca160d24c7/gradle-core-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/1.2.0/d2493c3cec1fa8da3ef8dc4585ae516dac925e84/builder-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/1.2.0/45565403bd3f9369bc97c860ffe1205d87e40ab3/builder-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/24.2.0/5eea60efd8bac1a5990ecee693ba25676c170e23/lint-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/24.2.0/b9c89729cc8e9c79b95846dd5b42927eed428bb/lint-24.2.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.1/proguard-gradle-5.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-checks/24.2.0/lint-checks-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-checks/24.2.0/lint-checks-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/24.2.0/manifest-merger-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/24.2.0/manifest-merger-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/24.2.0/sdk-common-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/24.2.0/sdk-common-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/1.2.0/45e3993ac8422c5d964fa3acf7fa41d5e099695a/builder-model-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/1.2.0/7e4d02a9d9978c3f1a3b323c95d83da63c3fb4a7/builder-model-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/1.2.0/84f1fb9efc0aa1bcfcdc6879df062ba64eed9b73/builder-test-api-1.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/1.2.0/3222fa63474b8e69ac1a79f5d7714c3678eb7ed5/builder-test-api-1.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/24.2.0/d79a71c6c9f269e74e3e5cd7b41a56b097134e8/sdklib-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/24.2.0/e4d47816f423e2c406939c0556af58b19c7acbc5/sdklib-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/24.2.0/349f8959949c0d95a4d1627c76d61adb55bf1f63/sdk-common-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/24.2.0/239eb1699f02ee1544b098ec2355955ed75ff403/sdk-common-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/24.2.0/7acc4fbe849dc02b859be43567d759fd04dc1077/common-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/24.2.0/dd1b3c948ec3daa53d67104c3a9b6b5fdc02afb7/common-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/24.2.0/46fd83160f9a3100295a7dd43eef3ff59de3f394/manifest-merger-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/24.2.0/2a65380b2f2ee0a024da552495ad838a6ed2b5d2/manifest-merger-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/24.2.0/aac0220466bd569ec3fb8594a3890514e2975d8a/ddmlib-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/24.2.0/bf7eaccc57d13bc5f5e6cd2fc709eb41afe5360b/ddmlib-24.2.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/24.2.0/common-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/24.2.0/common-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/24.2.0/ddmlib-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/24.2.0/ddmlib-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/24.2.0/sdklib-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/24.2.0/sdklib-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.2.0/builder-model-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.2.0/builder-model-1.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.48/bcpkix-jdk15on-1.48.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/1.2.0/builder-test-api-1.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/1.2.0/builder-test-api-1.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.0.3/asm-5.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/24.2.0/dcc39b4a60f24f10d94efab4ea99d43852d6871/lint-checks-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/24.2.0/6306ef64aa17caffd11743c92e4048eefe4a8ec9/lint-checks-24.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.1/proguard-base-5.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.1/proguard-base-5.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-api/24.2.0/lint-api-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-api/24.2.0/lint-api-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/24.2.0/annotations-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/24.2.0/annotations-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/24.2.0/layoutlib-api-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/24.2.0/layoutlib-api-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/24.2.0/dvlib-24.2.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/24.2.0/dvlib-24.2.0.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/24.2.0/f7d7360c0c3a370baf56ee9e48a5c136e29d2c6/annotations-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/24.2.0/e8696aaa3071fb5ac79f49505699349ba03ef4b5/annotations-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/24.2.0/4d1becca6436f658af6bacef363d477612dd4346/layoutlib-api-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/24.2.0/99cba0052611bdc372fa0cbc9b63e1ff2d9cc390/layoutlib-api-24.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/24.2.0/8900abae2d50d0b38ec05b88b586e2391bb88ab1/dvlib-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/24.2.0/6b89a55181ec5f438a8a97ae64613e8de478ee8d/dvlib-24.2.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/17.0/guava-17.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.2.0/9444623169c49bce69d3960a4fbfb1630630ffe4/lint-api-24.2.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/24.2.0/17da3e1393e9af229da3b08184291de72fff241c/lint-api-24.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
                             <option value="$MAVEN_REPOSITORY$/com/jamesmorrisstudios/appbaselibrary/1.0/appbaselibrary-1.0.aar" />
                             <option value="$MAVEN_REPOSITORY$/com/jamesmorrisstudios/materialuilibrary/1.0/materialuilibrary-1.0.aar" />
                             <option value="$PROJECT_DIR$/../android/sdk/extras/android/m2repository/com/android/support/support-v4/22.1.1/support-v4-22.1.1.aar" />
@@ -1398,42 +1378,52 @@
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/utilities/Bus.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Scheduler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Notifier.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml" />
         <option value="$PROJECT_DIR$/materialuilibrary/src/main/java/com/jamesmorrisstudios/materialuilibrary/floatingactionbutton/FloatingActionButton.java" />
         <option value="$PROJECT_DIR$/materialuilibrary/src/main/java/com/jamesmorrisstudios/materialuilibrary/floatingactionbutton/FloatingActionsMenu.java" />
         <option value="$PROJECT_DIR$/materialuilibrary/src/main/java/com/jamesmorrisstudios/materialuilibrary/floatingactionbutton/AddFloatingActionButton.java" />
         <option value="$PROJECT_DIR$/materialuilibrary/src/main/res/values/attrs.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/BaseActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/HelpFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/day_button.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_help.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Reminders.java" />
         <option value="$PROJECT_DIR$/appbasslibrary/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/appbasslibrary/build.gradle" />
         <option value="$PROJECT_DIR$/settings.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/bools.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/integers.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values-w820dp/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/Item.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/tutorial.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderListItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderViewHolder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderContainer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderViewHolder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/reminder_header_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/reminder_line_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/time_display_small.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/time_display.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/color/bg_day_tint_color.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/day_button.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_summary.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/licenses.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_summary.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/SummaryFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/MainListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
       </list>
     </option>
   </component>
@@ -1469,9 +1459,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
@@ -1493,6 +1482,82 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1619,8 +1684,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1641,7 +1721,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Programming\randRemind\app\src\main\res\menu" />
       <recent name="C:\Programming\randRemind\materialuilibrary\src\main\java\com\jamesmorrisstudios\materialuilibrary\floatingactionbutton" />
+    </key>
+    <key name="android.template.packageName">
+      <recent name="jamesmorrisstudios.com.randremind.fragments" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.app">
@@ -1857,25 +1941,25 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19888888" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43333334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40444446" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30222222" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20333333" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21555555" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1884,12 +1968,20 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="16" />
+      <option name="time" value="55" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1898,16 +1990,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#3056#3057#0" expanded="false" />
-            <element signature="e#3093#3094#0" expanded="false" />
-            <element signature="e#4390#4391#0" expanded="false" />
-            <element signature="e#4425#4426#0" expanded="false" />
-            <element signature="e#5801#5802#0" expanded="false" />
-            <element signature="e#5838#5839#0" expanded="false" />
-            <element signature="e#9094#9095#0" expanded="false" />
-            <element signature="e#9128#9129#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1923,16 +2006,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="424" column="13" selection-start-line="424" selection-start-column="13" selection-end-line="424" selection-end-column="13" />
-          <folding>
-            <element signature="e#3056#3057#0" expanded="false" />
-            <element signature="e#3093#3094#0" expanded="false" />
-            <element signature="e#4390#4391#0" expanded="false" />
-            <element signature="e#4425#4426#0" expanded="false" />
-            <element signature="e#5801#5802#0" expanded="false" />
-            <element signature="e#5838#5839#0" expanded="false" />
-            <element signature="e#9094#9095#0" expanded="false" />
-            <element signature="e#9128#9129#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1940,16 +2014,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/color/bg_day_tint_color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47710487">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1962,58 +2027,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/day_button.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6054131">
-          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reminder_line_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2037038">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/time_display.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0584046">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/time_display_small.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0584046">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2054,77 +2067,241 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29371428">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.627087">
-          <caret line="115" column="1" selection-start-line="115" selection-start-column="1" selection-end-line="115" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.2">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Reminders.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12615955">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reminder_header_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.896552">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reminder_line_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.724138">
+          <caret line="77" column="47" selection-start-line="77" selection-start-column="47" selection-end-line="77" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/time_display_small.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.034483">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/time_display.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1446541">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4607046">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.3167702">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-w820dp/dimens.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/tutorial.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5067751">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5298103">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.65993786">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79937303">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.12116317">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47577092">
+          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.310345">
+          <caret line="109" column="27" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
+          <folding>
+            <element signature="n#RelativeLayout#1;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/licenses.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4992658">
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_summary.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31595093">
+          <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+          <folding>
+            <element signature="e#1166#1186#0" expanded="false" />
+            <element signature="e#1285#1305#0" expanded="false" />
+            <element signature="e#2148#2168#0" expanded="false" />
+            <element signature="e#2920#2942#0" expanded="false" />
+            <element signature="e#3041#3061#0" expanded="false" />
+            <element signature="e#3560#3582#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_summary.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15124816">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4493392">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/MainListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3039#3076#0" expanded="true" />
+            <element signature="e#3788#3789#0" expanded="true" />
+            <element signature="e#3831#3832#0" expanded="true" />
+            <element signature="e#4329#4378#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45227605">
+          <caret line="85" column="7" selection-start-line="85" selection-start-column="7" selection-end-line="85" selection-end-column="7" />
+          <folding>
+            <element signature="e#2650#2651#0" expanded="true" />
+            <element signature="e#2691#2692#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderViewHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45668134">
+          <caret line="91" column="34" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+          <folding>
+            <element signature="method#initItem#0;class#ReminderViewHolder#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/SummaryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4728341">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <folding>
+            <element signature="e#2211#2250#0" expanded="false" />
+            <element signature="e#2252#2293#0" expanded="false" />
+            <element signature="e#2670#2705#0" expanded="false" />
+            <element signature="e#3208#3250#0" expanded="false" />
+            <element signature="e#3252#3296#0" expanded="false" />
+            <element signature="e#3475#3513#0" expanded="false" />
+            <element signature="e#4700#5254#0" expanded="false" />
+            <element signature="e#5253#5254#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.25">
-          <caret line="597" column="0" selection-start-line="597" selection-start-column="0" selection-end-line="597" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.41116005">
+          <caret line="719" column="4" selection-start-line="719" selection-start-column="4" selection-end-line="719" selection-end-column="4" />
           <folding>
-            <element signature="method#onOptionsItemSelected#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreate#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#addTimingTypeListener#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#setTimingType#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#addContentListeners#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#addTimeSetListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#notificationListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#scrollPaneListener#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#saveButtonListener#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#populateData#0;class#AddReminderFragment#0" expanded="false" />
             <element signature="method#setNotification#0;class#AddReminderFragment#0" expanded="false" />
@@ -2135,128 +2312,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19653179">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17485714">
-          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-          <folding>
-            <element signature="e#2005#2006#0" expanded="true" />
-            <element signature="e#2057#2058#0" expanded="true" />
-            <element signature="e#2107#2108#0" expanded="true" />
-            <element signature="e#2157#2158#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reminder_header_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20512821">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderViewHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0563583">
-          <caret line="87" column="46" selection-start-line="87" selection-start-column="46" selection-end-line="87" selection-end-column="46" />
-          <folding>
-            <element signature="method#initItem#0;class#ReminderViewHolder#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
-          <folding>
-            <element signature="n#LinearLayout#0;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#com.jamesmorrisstudios.materialuilibrary.controls.ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#LinearLayout#1;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#com.jamesmorrisstudios.materialuilibrary.controls.ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#LinearLayout#2;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#com.jamesmorrisstudios.materialuilibrary.controls.ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderListItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3684971">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#382#383#0" expanded="true" />
-            <element signature="e#422#423#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/MainListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.64224136">
-          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2913#2914#0" expanded="true" />
-            <element signature="e#2971#2972#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Scheduler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48994252">
-          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5521292">
+          <caret line="81" column="4" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6106322">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#ReminderList#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getInstance#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
+            <element signature="class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#loadDataSync#0;class#ReminderList#0" expanded="false" />
+            <element signature="e#4724#4725#0" expanded="true" />
+            <element signature="e#4763#4764#0" expanded="true" />
+            <element signature="e#4938#4939#0" expanded="true" />
+            <element signature="e#4973#4974#0" expanded="true" />
+            <element signature="docComment;method#hasReminders#0;class#ReminderList#0" expanded="false" />
+            <element signature="e#5981#5982#0" expanded="true" />
+            <element signature="e#6029#6030#0" expanded="true" />
+            <element signature="docComment;method#getData#0;class#ReminderList#0" expanded="false" />
+            <element signature="e#6239#6240#0" expanded="true" />
+            <element signature="e#6276#6277#0" expanded="true" />
+            <element signature="docComment;method#setCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#deleteCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#createNewReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#previewCurrent#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#saveCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#duplicateReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#hasCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#trimWakesToCurrent#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#trimWakesToCurrent#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#trimWakeToCurrent#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getCurrentWakes#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getDayOfWeek#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#timeInBounds#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getNextWake#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#timeBeforeOrEqual#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#saveToFile#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#loadFromFile#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#loadFromFile#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#deserializeSave#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#deserializeSave#0;class#ReminderList#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="123" column="4" selection-start-line="123" selection-start-column="4" selection-end-line="123" selection-end-column="4" />
+          <folding>
+            <element signature="method#postNextNotification#0;class#AlarmReceiver#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34195402">
-          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6824713">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5756241">
+          <caret line="339" column="14" selection-start-line="339" selection-start-column="14" selection-end-line="339" selection-end-column="14" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#13102#0" expanded="true" />
+            <element signature="e#4352#4403#0" expanded="true" />
+            <element signature="e#4702#4753#0" expanded="true" />
+            <element signature="method#getAlarmTone#0;class#ReminderItem#0" expanded="false" />
+            <element signature="method#equals#0;class#ReminderItem#0" expanded="false" />
+            <element signature="method#updateAlertTimes#0;class#ReminderItem#0" expanded="false" />
+            <element signature="method#generateEvenishSplit#0;class#ReminderItem#0" expanded="false" />
+            <element signature="e#11933#11934#0" expanded="true" />
+            <element signature="e#12005#12006#0" expanded="true" />
+            <element signature="e#12192#12193#0" expanded="true" />
+            <element signature="e#12243#12244#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33045977">
-          <caret line="209" column="22" selection-start-line="209" selection-start-column="22" selection-end-line="209" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>

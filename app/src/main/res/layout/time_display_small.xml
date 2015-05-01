@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/cardBackground"
+    android:background="@color/primaryLight"
     android:orientation="vertical">
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:textColor="@color/primaryColorDark"
+        android:textColor="@color/textDarkSecondary"
         android:textSize="20sp" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/time_hour"
         android:text="@string/colon"
-        android:textColor="@color/primaryColorDark"
+        android:textColor="@color/textDarkSecondary"
         android:textSize="20sp" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/time_colon"
-        android:textColor="@color/primaryColorDark"
+        android:textColor="@color/textDarkSecondary"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pm"
-            android:textColor="@color/primaryColorDark"
+            android:textColor="@color/textDarkSecondary"
             android:textSize="7sp" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/am"
-            android:textColor="@color/primaryColorDark"
+            android:textColor="@color/textDarkSecondary"
             android:textSize="7sp" />
 
     </LinearLayout>

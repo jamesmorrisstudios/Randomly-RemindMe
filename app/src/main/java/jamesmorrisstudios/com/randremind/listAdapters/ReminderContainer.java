@@ -18,8 +18,10 @@ package jamesmorrisstudios.com.randremind.listAdapters;
 
 import android.support.annotation.NonNull;
 
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleHeaderItem;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContainer;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleHeaderItem;
+
+import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 
 /**
  * Container for reminder reminder that abstracts it for use in the recyclerView
@@ -27,7 +29,7 @@ import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleHeaderItem;
  * Created by James on 3/31/2015.
  */
 public final class ReminderContainer extends BaseRecycleContainer {
-    private final ReminderListItem item;
+    private final ReminderItem item;
     private final BaseRecycleHeaderItem headerItem;
 
     public ReminderContainer(@NonNull BaseRecycleHeaderItem headerItem) {
@@ -36,7 +38,7 @@ public final class ReminderContainer extends BaseRecycleContainer {
         this.headerItem = headerItem;
     }
 
-    public ReminderContainer(@NonNull ReminderListItem item) {
+    public ReminderContainer(@NonNull ReminderItem item) {
         super(false);
         this.item = item;
         this.headerItem = null;
@@ -48,7 +50,7 @@ public final class ReminderContainer extends BaseRecycleContainer {
     }
 
     @Override
-    public ReminderListItem getItem() {
+    public ReminderItem getItem() {
         return item;
     }
 }

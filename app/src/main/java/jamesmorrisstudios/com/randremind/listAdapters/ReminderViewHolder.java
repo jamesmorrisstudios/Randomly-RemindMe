@@ -24,13 +24,14 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleHeaderItem;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleHeaderItem;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 
 /**
  * Reminder view holder for use in RecyclerView
@@ -82,29 +83,29 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
 
     @Override
     protected void bindItem(BaseRecycleItem baseRecycleItem) {
-        final ReminderListItem reminder = (ReminderListItem) baseRecycleItem;
+        final ReminderItem reminder = (ReminderItem) baseRecycleItem;
 
-        String title = reminder.reminder.title;
+        String title = reminder.title;
         if(title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
         }
         this.title.setText(title);
-        if(reminder.reminder.rangeTiming) {
-            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.reminder.startTime);
-            UtilsTime.setTime(endHour, endMinute, endAM, endPM, reminder.reminder.endTime);
+        if(reminder.rangeTiming) {
+            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.startTime);
+            UtilsTime.setTime(endHour, endMinute, endAM, endPM, reminder.endTime);
             endTop.setVisibility(View.VISIBLE);
             dash.setVisibility(View.VISIBLE);
         } else {
-            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.reminder.singleTime);
+            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.singleTime);
             endTop.setVisibility(View.GONE);
             dash.setVisibility(View.GONE);
         }
         enabled.setOnCheckedChangeListener(null);
-        enabled.setChecked(reminder.reminder.enabled);
+        enabled.setChecked(reminder.enabled);
         enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                reminder.reminder.enabled = isChecked;
+                reminder.enabled = isChecked;
             }
         });
     }
