@@ -16,6 +16,9 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -39,6 +42,24 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 public final class MainActivity extends BaseLauncherActivity implements
         MainListFragment.OnFragmentInteractionListener,
         SummaryFragment.OnSummaryListener {
+
+    @Override
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        Intent intent = getIntent();
+        if(intent == null) {
+            return;
+        }
+        Bundle extras = intent.getExtras();
+        if(extras == null) {
+            return;
+        }
+        if(extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
+            Log.v("Main Activity", "Intent received to go to reminder");
+            ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
+            loadSummaryFragment();
+        }
+    }
 
     /**
      * Activity start
@@ -77,8 +98,14 @@ public final class MainActivity extends BaseLauncherActivity implements
      */
     @Override
     public void onAddNewClicked() {
+        ReminderList.getInstance().createNewReminder();
         loadSummaryFragment();
         loadAddReminderFragment();
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        Log.v("Main Activity", "Intent received");
     }
 
     /**

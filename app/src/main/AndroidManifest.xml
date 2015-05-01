@@ -32,7 +32,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -45,6 +44,8 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED"/>
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED"/>
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS"/>
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE"/>
             </intent-filter>
         </receiver>
     </application>

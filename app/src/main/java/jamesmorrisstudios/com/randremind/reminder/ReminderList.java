@@ -31,6 +31,7 @@ import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
@@ -213,8 +214,20 @@ public final class ReminderList {
         }
     }
 
+    public final void setCurrentReminder(@NonNull String uniqueName) {
+        int index = 0;
+        for(ReminderItem itemInt : reminders.data) {
+            if(itemInt.uniqueName.equals(uniqueName)) {
+                this.currentIndex = index;
+                this.currentItem = reminders.data.get(currentIndex).copy();
+                return;
+            }
+            index++;
+        }
+    }
+
     @Nullable
-    public final ReminderItem getReminder(String uniqueName) {
+    public final ReminderItem getReminder(@NonNull String uniqueName) {
         for(ReminderItem item : reminders.data) {
             if(item.uniqueName.equals(uniqueName)) {
                 return item;
@@ -258,40 +271,8 @@ public final class ReminderList {
         if(item == null) {
             return;
         }
-        String title = item.title;
-        if(title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.default_title);
-        }
-        String content = item.content;
-        if(content == null || content.isEmpty()) {
-            content = AppUtil.getContext().getString(R.string.default_content);
-        }
 
-        NotificationContent notif = new NotificationContent(title, content, item.getNotificationTone(), R.drawable.notification_icon,
-                AppUtil.getContext().getResources().getColor(R.color.accent), item.notificationId);
-        if(item.notificationVibrate) {
-            notif.enableVibrate();
-        }
-        if(item.notificationHighPriority) {
-            notif.enableHighPriority();
-        }
-        if(item.notificationLED) {
-            notif.enableLed(item.notificationLEDColor);
-        }
-
-        Intent intentClicked = new Intent(AppUtil.getContext(), AlarmReceiver.class);
-        intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
-        intentClicked.putExtra("PREVIEW", true);
-        PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
-        notif.addContentIntent(pClicked);
-
-        Intent intentCancel = new Intent(AppUtil.getContext(), AlarmReceiver.class);
-        intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
-        intentCancel.putExtra("PREVIEW", true);
-        PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
-        notif.addDeleteIntent(pCanceled);
-
-        Notifier.buildNotification(notif);
+        Notifier.buildNotification(item.getNotification(true));
     }
 
     /**
@@ -489,7 +470,7 @@ public final class ReminderList {
         //New Method
         reminders = Serializer.deserializeClass(bytes, Reminders.class);
         if(reminders != null && reminders.data != null) {
-            Log.v("Test", "test");
+            Log.v("ReminderList", "Deserialize save pass");
             return true;
         }
         //On failure of new method use old method

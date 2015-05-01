@@ -67,7 +67,6 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 /**
  * Add and edit reminder fragment.
  * Controls the views and controls needed to modify an already created reminder reminder.
- * If no reminder has been set this fragment creates a new one and modifies it.
  */
 public final class AddReminderFragment extends BaseFragment {
     public static final String TAG = "AddReminderFragment";
@@ -223,10 +222,6 @@ public final class AddReminderFragment extends BaseFragment {
      * if no reminder reminder exists it creates one with default values
      */
     private void setupViewWithReminder() {
-        //Create a reminder if one isn't already set
-        if(!ReminderList.getInstance().hasCurrentReminder()) {
-            ReminderList.getInstance().createNewReminder();
-        }
         //Populate the views with reminder data
         populateData();
         //Add listeners

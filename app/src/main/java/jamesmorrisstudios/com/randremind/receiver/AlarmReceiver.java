@@ -34,6 +34,7 @@ import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.activities.MainActivity;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
@@ -90,14 +91,24 @@ public final class AlarmReceiver extends BroadcastReceiver {
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED")) {
-            Log.v("ALARM RECEIVER", "Hmm this is a notification click");
-            if(intent.getExtras() != null && !intent.getExtras().containsKey("PREVIEW") && intent.getExtras().containsKey("NAME")) {
-                logClicked(intent.getExtras().getString("NAME"));
+            Log.v("ALARM RECEIVER", "notification click");
+            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
+                logClicked(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"), context);
             }
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED")) {
-            Log.v("ALARM RECEIVER", "Hmm this is a notification cancel");
-            if(intent.getExtras() != null && !intent.getExtras().containsKey("PREVIEW") && intent.getExtras().containsKey("NAME")) {
-                logDeleted(intent.getExtras().getString("NAME"));
+            Log.v("ALARM RECEIVER", "notification delete");
+            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
+                logDeleted(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"));
+            }
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS")) {
+            Log.v("ALARM RECEIVER", "notification dismiss");
+            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
+                logDismiss(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"));
+            }
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE")) {
+            Log.v("ALARM RECEIVER", "notification acknowledge");
+            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
+                logAck(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"));
             }
         }
 
@@ -109,59 +120,52 @@ public final class AlarmReceiver extends BroadcastReceiver {
         wl.release();
     }
 
-    private void logClicked(String name) {
+    private void logClicked(String name, boolean preview, Context context) {
         ReminderItem item = ReminderList.getInstance().getReminder(name);
         if(item == null) {
             return;
         }
-        item.logReminderClicked();
+        Log.v("ALARM RECEIVER", "log clicked: Preview: "+preview);
+        if(!preview) {
+            Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
+            intent.putExtra("NAME", name);
+            intent.putExtra("REMINDER", true);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
     }
 
-    private void logDeleted(String name) {
+    private void logDeleted(String name, boolean preview) {
         //Do nothing?...
+    }
+
+    private void logDismiss(String name, boolean preview) {
+        ReminderItem item = ReminderList.getInstance().getReminder(name);
+        if(item == null) {
+            return;
+        }
+        Notifier.dismissNotification(item.notificationId);
+        //if(!preview) {
+            //Do nothing?...
+        //}
+    }
+
+    private void logAck(String name, boolean preview) {
+        ReminderItem item = ReminderList.getInstance().getReminder(name);
+        if(item == null) {
+            return;
+        }
+        Notifier.dismissNotification(item.notificationId);
+        if(!preview) {
+            item.logReminderClicked();
+        }
     }
 
     private void postNextNotification() {
         ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
         for(ReminderItem item : items) {
             item.logReminderShown();
-
-            String title = item.title;
-            if(title == null || title.isEmpty()) {
-                title = AppUtil.getContext().getString(R.string.default_title);
-            }
-            String content = item.content;
-            if(content == null || content.isEmpty()) {
-                content = AppUtil.getContext().getString(R.string.default_content);
-            }
-
-            NotificationContent notif = new NotificationContent(title, content, item.getNotificationTone(), R.drawable.notification_icon,
-                    AppUtil.getContext().getResources().getColor(R.color.accent), item.notificationId);
-            if(item.notificationVibrate) {
-                notif.enableVibrate();
-            }
-            if(item.notificationHighPriority) {
-                notif.enableHighPriority();
-            }
-            if(item.notificationLED) {
-                notif.enableLed(item.notificationLEDColor);
-            }
-
-            Intent intentClicked = new Intent(AppUtil.getContext(), AlarmReceiver.class);
-            intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
-            intentClicked.putExtra("NAME", item.uniqueName);
-            PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
-            notif.addContentIntent(pClicked);
-
-            Intent intentCancel = new Intent(AppUtil.getContext(), AlarmReceiver.class);
-            intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
-            intentCancel.putExtra("NAME", item.uniqueName);
-            PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
-            notif.addDeleteIntent(pCanceled);
-
-            notif.addAction(new NotificationAction(R.drawable.notification_icon, "Acknowledge", pClicked));
-
-            Notifier.buildNotification(notif);
+            Notifier.buildNotification(item.getNotification(false));
         }
     }
 
