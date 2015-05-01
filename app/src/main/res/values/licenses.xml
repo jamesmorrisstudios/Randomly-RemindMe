@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="help_license_code_item_0">
+        <item name="title">Icon Designer: Chad Brewer</item>
+        <item name="link_site">chad.design@gmail.com</item>
+        <item name="link_license">http://www.apache.org/licenses/LICENSE-2.0</item>
+    </string-array>
+
+    <string-array name="help_license_code_item_1">
+        <item name="title">App Designer: James Morris Studios</item>
+        <item name="link_site">https://github.com/morris-james/Randomly-RemindMe</item>
+        <item name="link_license">http://www.apache.org/licenses/LICENSE-2.0</item>
+    </string-array>
+
+    <array name="help_license">
+        <item>@array/help_license_code_item_0</item>
+        <item>@array/help_license_code_item_1</item>
+    </array>
+
+</resources>

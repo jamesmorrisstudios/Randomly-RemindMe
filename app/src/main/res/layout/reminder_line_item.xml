@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015.  James Morris Studios
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,7 @@
   ~ limitations under the License.
   -->
 
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/reminder_card"
     android:layout_width="match_parent"
@@ -24,7 +22,7 @@
     android:layout_margin="5dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
-    card_view:cardBackgroundColor="@color/cardBackground"
+    card_view:cardBackgroundColor="@color/primaryLight"
     card_view:cardCornerRadius="4dp"
     card_view:cardUseCompatPadding="true">
 
@@ -36,52 +34,52 @@
 
         <!-- Enable Switch -->
         <android.support.v7.widget.SwitchCompat
+            android:id="@+id/reminder_enabled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/reminder_enabled" />
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
 
         <!-- reminder title/name -->
         <TextView
             android:id="@+id/reminder_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/primaryColorDark"
-            android:singleLine="true"
-            android:textSize="22sp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/reminder_enabled" />
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/reminder_enabled"
+            android:singleLine="true"
+            android:textColor="@color/textDarkMain"
+            android:textSize="22sp" />
 
         <include
             android:id="@+id/reminder_time_start"
+            layout="@layout/time_display_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            layout="@layout/time_display_small"
-            android:layout_below="@+id/reminder_title_text"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/reminder_title_text" />
 
         <TextView
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
+            android:id="@+id/timing_dash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dash"
-            android:textColor="@color/primaryColorDarkText"
-            android:textSize="20sp"
-            android:id="@+id/timing_dash"
             android:layout_below="@+id/reminder_title_text"
-            android:layout_toRightOf="@+id/reminder_time_start" />
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_toRightOf="@+id/reminder_time_start"
+            android:text="@string/dash"
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="20sp" />
 
         <include
             android:id="@+id/reminder_time_end"
+            layout="@layout/time_display_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            layout="@layout/time_display_small"
             android:layout_below="@+id/reminder_title_text"
-            android:layout_toRightOf="@+id/timing_dash"/>
+            android:layout_toRightOf="@+id/timing_dash" />
 
     </RelativeLayout>
 

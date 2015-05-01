@@ -16,13 +16,20 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
-import jamesmorrisstudios.com.randremind.R;
+import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
+import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
+import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
+
+import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
+import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
+import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
@@ -32,22 +39,25 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
  *
  * Created by James on 4/20/2015.
  */
-public final class MainActivity extends BaseActivity implements FragmentManager.OnBackStackChangedListener {
+public final class MainActivity extends BaseLauncherActivity implements
+        MainListFragment.OnFragmentInteractionListener,
+        SummaryFragment.OnSummaryListener {
 
-    /**
-     * Create this activity
-     * @param savedInstanceState Saved instance state
-     */
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
-        shouldDisplayHomeUp();
-        if(!isFragmentDisplayed()) {
-            loadMainListFragment();
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        Intent intent = getIntent();
+        if(intent == null) {
+            return;
+        }
+        Bundle extras = intent.getExtras();
+        if(extras == null) {
+            return;
+        }
+        if(extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
+            Log.v("Main Activity", "Intent received to go to reminder");
+            ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
+            loadSummaryFragment();
         }
     }
 
@@ -57,25 +67,10 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
     @Override
     public void onStart() {
         super.onStart();
+        Log.v("Main Activity", "On Start");
         //Ensure that the repeating alarm is active.
         Scheduler.getInstance().cancelMidnightAlarm();
         Scheduler.getInstance().scheduleRepeatingMidnight();
-    }
-
-    /**
-     * Activity resume
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    /**
-     * Activity pause
-     */
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     /**
@@ -84,39 +79,33 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
     @Override
     public void onStop() {
         super.onStop();
+        Log.v("Main Activity", "On Stop");
         ReminderList.getInstance().saveData();
         Scheduler.getInstance().cancelNextWake();
         Scheduler.getInstance().scheduleNextWake();
     }
 
     /**
-     * Fragment backstack changed.
+     * Reminder item clicked
      */
     @Override
-    public void onBackStackChanged() {
-        shouldDisplayHomeUp();
+    public void onReminderItemClicked() {
+        loadSummaryFragment();
     }
 
     /**
-     * Check if we are at the top page and show the up button as needed
-     */
-    public void shouldDisplayHomeUp(){
-        boolean canback = getSupportFragmentManager().getBackStackEntryCount()>0;
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(canback);
-        }
-    }
-
-    /**
-     * The up button was pressed so pop one off the backstack
-     * @return Always true
+     * Add new button clicked
      */
     @Override
-    public boolean onSupportNavigateUp() {
-        getSupportFragmentManager().popBackStack();
-        backPressed();
-        return true;
+    public void onAddNewClicked() {
+        ReminderList.getInstance().createNewReminder();
+        loadSummaryFragment();
+        loadAddReminderFragment();
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        Log.v("Main Activity", "Intent received");
     }
 
     /**
@@ -127,45 +116,63 @@ public final class MainActivity extends BaseActivity implements FragmentManager.
         loadAddReminderFragment();
     }
 
-    /**
-     * Add new button clicked
-     */
     @Override
-    public void onAddNewClicked() {
-        loadAddReminderFragment();
+    @NonNull
+    protected BaseFragment getMainFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MainListFragment fragment = (MainListFragment) fragmentManager.findFragmentByTag(BaseMainFragment.TAG);
+        if (fragment == null) {
+            fragment = new MainListFragment();
+        }
+        return fragment;
     }
 
     /**
-     * Help button clicked
+     * Gets the add reminder fragment from the fragment manager.
+     * Creates the fragment if it does not exist yet.
+     * @return The fragment
      */
-    @Override
-    public void onHelpClicked() {
-        loadHelpFragment();
+    @NonNull
+    protected final AddReminderFragment getAddReminderFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddReminderFragment fragment = (AddReminderFragment) fragmentManager.findFragmentByTag(AddReminderFragment.TAG);
+        if (fragment == null) {
+            fragment = new AddReminderFragment();
+        }
+        return fragment;
     }
 
     /**
-     * License button clicked
+     * Loads the add reminder fragment into the main view
      */
-    @Override
-    public void onLicenseClicked() {
-        loadLicenseFragment();
+    protected final void loadAddReminderFragment() {
+        AddReminderFragment fragment = getAddReminderFragment();
+        loadFragment(fragment, AddReminderFragment.TAG, true);
+        getSupportFragmentManager().executePendingTransactions();
     }
 
     /**
-     * Tutorial button clicked
+     * Gets the summary fragment from the fragment manager.
+     * Creates the fragment if it does not exist yet.
+     * @return The fragment
      */
-    @Override
-    public void onTutorialClicked() {
-        loadTutorialFragment();
+    @NonNull
+    protected final SummaryFragment getSummaryFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SummaryFragment fragment = (SummaryFragment) fragmentManager.findFragmentByTag(SummaryFragment.TAG);
+        if (fragment == null) {
+            fragment = new SummaryFragment();
+        }
+        return fragment;
     }
 
     /**
-     * Back from new reminder
+     * Loads the summary fragment into the main view
      */
-    @Override
-    public void goBackFromNewReminder() {
-        getSupportFragmentManager().popBackStack();
-        loadMainListFragment();
+    protected final void loadSummaryFragment() {
+        SummaryFragment fragment = getSummaryFragment();
+        loadFragment(fragment, SummaryFragment.TAG, true);
+        getSupportFragmentManager().executePendingTransactions();
     }
 
 }

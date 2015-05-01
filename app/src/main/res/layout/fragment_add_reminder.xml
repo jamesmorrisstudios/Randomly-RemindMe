@@ -14,349 +14,441 @@
   ~ limitations under the License.
   -->
 
-<com.jamesmorrisstudios.materialdesign.views.ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="jamesmorrisstudios.com.randremind.fragments.AddReminderFragment">
 
-    <LinearLayout
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:orientation="vertical"
+    <ScrollView
+        android:id="@+id/scrollPane"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Title -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dip">
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/titleHeader"
+            <!-- Title -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/edit_title"
-                android:textColor="@color/white80"
-                android:textSize="@dimen/header_size" />
-
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/titleEnabled"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/titleHeader"/>
-
-            <android.support.v7.widget.AppCompatEditText
-                android:layout_margin="4dp"
-                android:gravity="center"
-                android:id="@+id/titleText"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/titleHeader"
-                android:layout_toLeftOf="@+id/titleEnabled"
-                android:textSize="@dimen/item_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textColor="@color/white80"
-                android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
-                android:textColorHint="@color/white15"
-                android:hint="@string/title_hint"/>
-
-        </RelativeLayout>
-
-        <!-- Timing -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dip">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/edit_timing"
-                android:textColor="@color/white80"
-                android:textSize="@dimen/header_size"
-                android:id="@+id/timingHeader" />
-
-            <!-- Pick start and end times -->
-            <LinearLayout
-                android:layout_margin="4dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/timingHeader"
-                android:id="@+id/timing_times"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <include
-                    android:id="@+id/timing_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    layout="@layout/time_display" />
+                android:padding="8dip">
 
                 <TextView
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
+                    android:id="@+id/titleHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/edit_title"
+                    android:textColor="@color/textLightMain"
+                    android:textSize="@dimen/header_size" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/titleEnabled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dash"
-                    android:textColor="@color/white80"
-                    android:textSize="30sp"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/titleHeader" />
 
-                <include
-                    android:id="@+id/timing_end"
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    layout="@layout/time_display"/>
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/titleHeader"
+                    android:layout_margin="4dp"
+                    android:layout_toLeftOf="@+id/titleEnabled"
+                    android:gravity="center"
+                    android:hint="@string/title_hint"
+                    android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
+                    android:singleLine="true"
+                    android:textColor="@color/textLightMain"
+                    android:textColorHint="@color/textLightDisabled"
+                    android:textSize="@dimen/item_size" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <!-- Times per day -->
-            <LinearLayout
-                android:layout_margin="4dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/timing_times"
-                android:id="@+id/timing_times_per_day"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/alerts_per_day"
-                    android:textColor="@color/white80"
-                    android:textSize="20sp"/>
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:minWidth="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/timing_times_spinner" />
-
-            </LinearLayout>
-
-            <!-- Distribution -->
-            <LinearLayout
-                android:layout_margin="4dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/timing_times_per_day"
-                android:id="@+id/timing_distribution"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/distribution"
-                    android:textColor="@color/white80"
-                    android:textSize="20sp"/>
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:minWidth="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/timing_distribution_spinner" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <!-- Repeat -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dip">
-
-            <TextView
-                android:id="@+id/repeat_header"
+            <!-- Content -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/edit_repeat"
-                android:textColor="@color/white80"
-                android:textSize="@dimen/header_size" />
+                android:padding="8dip">
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/repeat_enabled"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/repeat_header"/>
-
-            <LinearLayout
-                android:id="@+id/daysContainer"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/repeat_enabled"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <include
-                    android:layout_margin="4dp"
-                    android:id="@+id/daySun"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/contentHeader"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/day_button" />
+                    android:layout_alignParentTop="true"
+                    android:text="@string/edit_content"
+                    android:textColor="@color/textLightMain"
+                    android:textSize="@dimen/header_size" />
 
-                <include
-                    android:layout_margin="4dp"
-                    android:id="@+id/dayMon"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/contentText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    layout="@layout/day_button" />
-
-                <include
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/contentHeader"
                     android:layout_margin="4dp"
-                    android:id="@+id/dayTue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    layout="@layout/day_button" />
+                    android:gravity="center"
+                    android:hint="@string/content_hint"
+                    android:inputType="textMultiLine|textAutoCorrect|textCapSentences|textAutoComplete"
+                    android:lines="5"
+                    android:minLines="3"
+                    android:singleLine="false"
+                    android:textColor="@color/textLightMain"
+                    android:textColorHint="@color/textLightDisabled"
+                    android:textSize="@dimen/item_size" />
 
-                <include
-                    android:layout_margin="4dp"
-                    android:id="@+id/dayWed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    layout="@layout/day_button" />
+            </RelativeLayout>
 
-                <include
-                    android:layout_margin="4dp"
-                    android:id="@+id/dayThu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    layout="@layout/day_button" />
-
-                <include
-                    android:layout_margin="4dp"
-                    android:id="@+id/dayFri"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    layout="@layout/day_button" />
-
-                <include
-                    android:layout_margin="4dp"
-                    android:id="@+id/daySat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    layout="@layout/day_button" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <!-- Notification -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dip">
-
-            <TextView
-                android:id="@+id/notification_header"
+            <!-- Timing -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/edit_notification"
-                android:textColor="@color/white80"
-                android:textSize="@dimen/header_size" />
+                android:padding="8dip">
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/notification_enabled"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/notification_header"/>
-
-            <LinearLayout
-                android:layout_margin="4dp"
-                android:id="@+id/notificationContainer"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/notification_enabled"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/timingHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/edit_timing"
+                    android:textColor="@color/textLightMain"
+                    android:textSize="@dimen/header_size" />
 
                 <LinearLayout
-                    android:layout_margin="4dp"
-                    android:orientation="horizontal"
+                    android:id="@+id/timing_range_picker"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timingHeader"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_marginRight="4dp"
-                        android:textSize="@dimen/item_size"
-                        android:text="@string/sound_set"
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/timing_specific"
+                        android:padding="2dp"
+                        android:background="@color/iconLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp" />
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/timing_range"
+                        android:padding="2dp"
+                        android:background="@color/iconLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp" />
+
+                </LinearLayout>
+
+                <!-- Pick Specific start time -->
+                <LinearLayout
+                    android:id="@+id/timing_times_specific"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_range_picker"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
+
+                    <include
+                        android:id="@+id/timing_single"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!-- Pick start and end times -->
+                <LinearLayout
+                    android:id="@+id/timing_times"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_range_picker"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
+
+                    <include
+                        android:id="@+id/timing_start"
+                        layout="@layout/time_display"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:id="@+id/notificationSound"
-                        android:textSize="@dimen/item_size"
+                        android:layout_marginRight="4dp"
+                        android:text="@string/dash"
+                        android:textColor="@color/textLightMain"
+                        android:textSize="30sp" />
+
+                    <include
+                        android:id="@+id/timing_end"
+                        layout="@layout/time_display"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
+                <!-- Times per day -->
                 <LinearLayout
-                    android:layout_margin="4dp"
-                    android:orientation="horizontal"
+                    android:id="@+id/timing_times_per_day"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_times"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
-                        android:textSize="@dimen/item_size"
-                        android:text="@string/vibrate_enable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:text="@string/alerts_per_day"
+                        android:textColor="@color/textLightMain"
+                        android:textSize="20sp" />
 
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/notification_vibrate_enabled"
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/timing_times_spinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:minWidth="50dp" />
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <!-- Distribution -->
+                <LinearLayout
+                    android:id="@+id/timing_distribution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/timing_times_per_day"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
 
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:text="@string/distribution"
+                        android:textColor="@color/textLightMain"
+                        android:textSize="20sp" />
 
-        <!-- Alarm -->
-        <!--
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dip">
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/timing_distribution_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="50dp" />
 
-            <TextView
-                android:id="@+id/alarm_header"
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- Repeat -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/edit_alarm"
-                android:textColor="@color/white80"
-                android:textSize="@dimen/header_size" />
+                android:padding="8dip">
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/alarm_enabled"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/repeat_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/edit_repeat"
+                    android:textColor="@color/textLightMain"
+                    android:textSize="@dimen/header_size" />
+
+                <LinearLayout
+                    android:id="@+id/daysContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/repeat_header"
+                    android:minWidth="300dp"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/daySun"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="4dp" />
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/dayMon"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="4dp" />
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/dayTue"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="4dp" />
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/dayWed"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="4dp" />
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/dayThu"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="4dp" />
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/dayFri"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="4dp" />
+
+                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                        android:id="@+id/daySat"
+                        android:background="@color/iconLight"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="4dp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- Notification -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/alarm_header"/>
+                android:padding="8dip">
 
-        </RelativeLayout>
--->
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/notification_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/edit_notification"
+                    android:textColor="@color/textLightMain"
+                    android:textSize="@dimen/header_size" />
 
-</com.jamesmorrisstudios.materialdesign.views.ScrollView>
+                <LinearLayout
+                    android:id="@+id/notificationContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/notification_header"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <!-- Sound picker -->
+                    <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/sound_set"
+                            android:textSize="@dimen/item_size" />
+
+                        <TextView
+                            android:id="@+id/notificationSound"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textSize="@dimen/item_size" />
+
+                    </LinearLayout>
+
+                    <!-- Vibrate and priority -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:layout_marginRight="8dp"
+                            android:id="@+id/notification_vibrate_enabled"
+                            android:text="@string/vibrate_enable"
+                            android:textSize="@dimen/item_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/notification_high_priority_enabled"
+                            android:text="@string/high_priority_enable"
+                            android:textSize="@dimen/item_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <!-- LED -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:layout_marginRight="8dp"
+                            android:id="@+id/notification_led_enabled"
+                            android:text="@string/led_enable"
+                            android:textSize="@dimen/item_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/led_color"
+                            android:textSize="@dimen/item_size" />
+
+                        <View
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/notification_led_color"
+                            android:layout_width="50dp"
+                            android:layout_height="25dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

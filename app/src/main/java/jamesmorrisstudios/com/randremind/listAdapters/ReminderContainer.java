@@ -18,41 +18,39 @@ package jamesmorrisstudios.com.randremind.listAdapters;
 
 import android.support.annotation.NonNull;
 
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContainer;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleHeaderItem;
+
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 
 /**
- * Container for reminder item that abstracts it for use in the recyclerView
+ * Container for reminder reminder that abstracts it for use in the recyclerView
  *
  * Created by James on 3/31/2015.
  */
-public final class ReminderContainer {
-    //General
-    public final boolean isHeader;
+public final class ReminderContainer extends BaseRecycleContainer {
+    private final ReminderItem item;
+    private final BaseRecycleHeaderItem headerItem;
 
-    //If Header
-    public final String headerTitle;
-
-    //Not header data
-    public final ReminderItem item;
-
-    /**
-     * Constructor for header
-     * @param headerTitle Title
-     */
-    public ReminderContainer(@NonNull String headerTitle) {
-        this.isHeader = true;
-        this.headerTitle = headerTitle;
+    public ReminderContainer(@NonNull BaseRecycleHeaderItem headerItem) {
+        super(true);
         this.item = null;
+        this.headerItem = headerItem;
     }
 
-    /**
-     * Constructor for normal item
-     * @param item achievement item
-     */
     public ReminderContainer(@NonNull ReminderItem item) {
-        this.isHeader = false;
+        super(false);
         this.item = item;
-        this.headerTitle = null;
+        this.headerItem = null;
     }
 
+    @Override
+    public BaseRecycleHeaderItem getHeaderItem() {
+        return headerItem;
+    }
+
+    @Override
+    public ReminderItem getItem() {
+        return item;
+    }
 }

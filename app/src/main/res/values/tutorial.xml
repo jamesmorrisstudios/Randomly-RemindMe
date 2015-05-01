@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Override to define your help tutorial -->
+    <array name="help_tutorial">
+        <item>@array/help_tutorial_item_0</item>
+    </array>
+
+    <!-- Item demo for help tutorial -->
+    <array name="help_tutorial_item_0">
+        <item name="header">@string/help_objective_header</item>
+        <item name="text">@string/help_objective</item>
+    </array>
+
+    <!--
+     <array name="help_tutorial_item_0">
+        <item name="header">@string/help_objective_header</item>
+        <item name="text">@string/help_objective</item>
+        <item name="image">@drawable/studio_icon</item>
+    </array>
+    -->
+
+    <string name="help_objective_header">TODO</string>
+    <string name="help_objective">TODO</string>
+
+</resources>

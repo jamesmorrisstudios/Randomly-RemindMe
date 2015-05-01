@@ -16,29 +16,40 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
+import com.jamesmorrisstudios.utilitieslibrary.Serializer;
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.application.App;
+import jamesmorrisstudios.com.randremind.activities.MainActivity;
+import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
 
 /**
- * Individual reminder item that contains all needed items to be a reminder
- *
+ * Individual reminder reminder that contains all needed items to be a reminder
+ * <p/>
  * Created by James on 4/20/2015.
  */
-public final class ReminderItem {
+public final class ReminderItem extends BaseRecycleItem {
     //Unique data
     @SerializedName("uniqueName")
-    public final String uniqueName;
+    public String uniqueName;
     @SerializedName("notificationId")
     public int notificationId;
     //Title
@@ -46,30 +57,43 @@ public final class ReminderItem {
     public String title;
     @SerializedName("enabled")
     public boolean enabled;
+    //Content
+    @SerializedName("content")
+    public String content;
     //Timing
     @SerializedName("startTime")
     public TimeItem startTime;
     @SerializedName("endTime")
     public TimeItem endTime;
+    @SerializedName("singleTime")
+    public TimeItem singleTime;
     @SerializedName("numberPerDay")
     public int numberPerDay;
     @SerializedName("distribution")
     public Distribution distribution;
+    @SerializedName("rangeTiming")
+    public boolean rangeTiming = true;
     //Repeat
     @SerializedName("repeat")
-    public boolean repeat;
+    public boolean repeat = true;
     @SerializedName("daysToRun")
     public boolean[] daysToRun; //Sunday -> Saturday
     //Notifications
     @SerializedName("notification")
-    public boolean notification;
+    public boolean notification = true;
     @SerializedName("notificationToneString")
     public String notificationTone;
     @SerializedName("notificationToneName")
     public String notificationToneName;
     @SerializedName("notificationVibrate")
     public boolean notificationVibrate;
-    //Alarms
+    @SerializedName("notificationLED")
+    public boolean notificationLED = true;
+    @SerializedName("notificationLEDColorInt")
+    public int notificationLEDColor = Color.BLUE;
+    @SerializedName("notificationHighPriority")
+    public boolean notificationHighPriority = false;
+    //Alarms TODO
     @SerializedName("alarm")
     public boolean alarm;
     @SerializedName("alarmToneString")
@@ -81,16 +105,11 @@ public final class ReminderItem {
     //Generated data
     @SerializedName("alertTimes")
     public ArrayList<TimeItem> alertTimes;
+    //Do Not Serialize This
+    public transient ReminderLog reminderLog;
 
     /**
-     * Timing distribution
-     */
-    public enum Distribution {
-        EVEN, PART_RANDOM, MOST_RANDOM, FULL_RANDOM
-    }
-
-    /**
-     * Creates a new reminder item with all the default values set
+     * Creates a new reminder reminder with all the default values set
      */
     public ReminderItem() {
         //Unique name
@@ -99,64 +118,78 @@ public final class ReminderItem {
         //Title
         this.title = "";
         this.enabled = true;
+        //Content
+        this.content = "";
         //Timing
         this.startTime = new TimeItem(9, 0);
         this.endTime = new TimeItem(20, 0);
+        this.singleTime = new TimeItem(13, 0);
         this.numberPerDay = 6;
         this.distribution = Distribution.PART_RANDOM;
+        this.rangeTiming = true;
         //Repeat
-        this.repeat = true;
-        this.daysToRun = new boolean[] {true, true, true, true, true, true, true};
+        this.repeat = true; //unused
+        this.daysToRun = new boolean[]{true, true, true, true, true, true, true};
         //Notifications
-        this.notification = true;
+        this.notification = true; //unused
         this.notificationTone = null;
-        this.notificationToneName = App.getContext().getString(R.string.sound_none);
+        this.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
         this.notificationVibrate = false;
+        this.notificationLED = true;
+        this.notificationLEDColor = Color.BLUE;
+        this.notificationHighPriority = false;
         //Alarms
-        this.alarm = false;
-        this.alarmTone = null;
-        this.alarmToneName = App.getContext().getString(R.string.sound_none);
-        this.alarmVibrate = false;
+        this.alarm = false; //unused
+        this.alarmTone = null; //unused
+        this.alarmToneName = AppUtil.getContext().getString(R.string.sound_none); //unused
+        this.alarmVibrate = false; //unused
         //Generated values
         this.alertTimes = new ArrayList<>();
     }
 
     /**
-     * @param title Title
-     * @param enabled True to enable this reminder
-     * @param startTime Start time object
-     * @param endTime End time object
-     * @param numberPerDay Number per day
-     * @param distribution Distribution
-     * @param daysToRun Days to run
-     * @param notification True to enable notification
-     * @param notificationTone The uri of the desired notification tone
+     * @param title                Title
+     * @param enabled              True to enable this reminder
+     * @param startTime            Start time object
+     * @param endTime              End time object
+     * @param numberPerDay         Number per day
+     * @param distribution         Distribution
+     * @param daysToRun            Days to run
+     * @param notification         True to enable notification
+     * @param notificationTone     The uri of the desired notification tone
      * @param notificationToneName The readable name of the notification tone
-     * @param notificationVibrate True to enable vibrate with the notification
-     * @param alarm True to enable alarm
-     * @param alarmTone The uri of the desired alarm tone
-     * @param alarmToneName The readable name of the alarm tone
-     * @param alarmVibrate True to enable vibrate with the alarm
-     * @param alertTimes List of calculated alert times
+     * @param notificationVibrate  True to enable vibrate with the notification
+     * @param alarm                True to enable alarm
+     * @param alarmTone            The uri of the desired alarm tone
+     * @param alarmToneName        The readable name of the alarm tone
+     * @param alarmVibrate         True to enable vibrate with the alarm
+     * @param alertTimes           List of calculated alert times
      */
-    public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, int numberPerDay,
-                        @NonNull Distribution distribution, boolean repeat, @NonNull boolean[] daysToRun,
-                        boolean notification, String notificationTone, String notificationToneName, boolean notificationVibrate,
+    public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, @NonNull String content,
+                        boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, @NonNull TimeItem singleTime, int numberPerDay,
+                        @NonNull Distribution distribution, boolean rangeTiming, boolean repeat, @NonNull boolean[] daysToRun,
+                        boolean notification, String notificationTone, String notificationToneName, boolean notificationVibrate, boolean notificationLED, int notificationLEDColor, boolean notificationHighPriority,
                         boolean alarm, String alarmTone, String alarmToneName, boolean alarmVibrate, @NonNull ArrayList<TimeItem> alertTimes) {
         this.uniqueName = uniqueName;
         this.notificationId = notificationId;
         this.title = title;
+        this.content = content;
         this.enabled = enabled;
         this.startTime = startTime.copy();
         this.endTime = endTime;
+        this.singleTime = singleTime;
         this.numberPerDay = numberPerDay;
         this.distribution = distribution;
+        this.rangeTiming = rangeTiming;
         this.repeat = repeat;
         this.daysToRun = daysToRun.clone();
         this.notification = notification;
         this.notificationTone = notificationTone;
         this.notificationToneName = notificationToneName;
         this.notificationVibrate = notificationVibrate;
+        this.notificationLED = notificationLED;
+        this.notificationLEDColor = notificationLEDColor;
+        this.notificationHighPriority = notificationHighPriority;
         this.alarm = alarm;
         this.alarmTone = alarmTone;
         this.alarmToneName = alarmToneName;
@@ -165,20 +198,49 @@ public final class ReminderItem {
     }
 
     /**
-     * @return A deep copy of this item
+     * Truncates the UUID for a unique id
+     *
+     * @return A unique notification id
+     */
+    private static int getNotifictionId() {
+        return (int) UUID.randomUUID().getMostSignificantBits();
+    }
+
+    /**
+     * Generates a unique name for the reminder
+     *
+     * @return Unique name
+     */
+    @NonNull
+    public static String getUniqueName() {
+        return UUID.randomUUID().toString();
+    }
+
+    /**
+     * @return A deep copy of this reminder
      */
     @NonNull
     public final ReminderItem copy() {
-        return new ReminderItem(uniqueName, notificationId, title, enabled, startTime, endTime, numberPerDay,
-                distribution, repeat, daysToRun, notification, notificationTone, notificationToneName,
-                notificationVibrate, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
+        return new ReminderItem(uniqueName, notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
+                distribution, rangeTiming, repeat, daysToRun, notification, notificationTone, notificationToneName,
+                notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
+    }
+
+    /**
+     * @return A deep copy of this reminder but with a new unique name
+     */
+    @NonNull
+    public final ReminderItem duplicate() {
+        return new ReminderItem(getUniqueName(), notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
+                distribution, rangeTiming, repeat, daysToRun, notification, notificationTone, notificationToneName,
+                notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority, alarm, alarmTone, alarmToneName, alarmVibrate, alertTimes);
     }
 
     /**
      * @return The notification tone as a Uri
      */
     public final Uri getNotificationTone() {
-        if(notificationTone == null) {
+        if (notificationTone == null) {
             return null;
         }
         return Uri.parse(notificationTone);
@@ -188,7 +250,7 @@ public final class ReminderItem {
      * @return The alarm tone as a Uri
      */
     public final Uri getAlarmTone() {
-        if(alarmTone == null) {
+        if (alarmTone == null) {
             return null;
         }
         return Uri.parse(alarmTone);
@@ -199,8 +261,8 @@ public final class ReminderItem {
      * @return True if equal based on unique id.
      */
     @Override
-    public boolean equals (@Nullable Object obj){
-        if(obj != null && obj instanceof ReminderItem) {
+    public boolean equals(@Nullable Object obj) {
+        if (obj != null && obj instanceof ReminderItem) {
             ReminderItem item = (ReminderItem) obj;
             return this.uniqueName.equals(item.uniqueName);
         } else {
@@ -213,12 +275,16 @@ public final class ReminderItem {
      */
     public final void updateAlertTimes() {
         this.alertTimes.clear();
+        if (!rangeTiming) {
+            this.alertTimes.add(singleTime);
+            return;
+        }
         int diff = getDiffMinutes();
         int startOffset = timeToMinutes(startTime);
 
         //If even, partRandom, or mostRandom start with an even distribution with some wiggle room
         float wiggle = 0;
-        switch(distribution) {
+        switch (distribution) {
             case EVEN:
                 wiggle = 0;
                 generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
@@ -231,7 +297,7 @@ public final class ReminderItem {
                 wiggle = 0.75f;
                 generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
                 break;
-            case FULL_RANDOM: //TODO make this more random
+            case FULL_RANDOM: //Depreciated option
                 wiggle = 1.0f;
                 generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
                 break;
@@ -240,25 +306,25 @@ public final class ReminderItem {
 
     /**
      * Creates a distribution of values from offset to diff+offset
-     * @param diff Total range of values
-     * @param offset Offset amount to shift the entire range
-     * @param wiggle Percent of space between items to allow randomization
+     *
+     * @param diff        Total range of values
+     * @param offset      Offset amount to shift the entire range
+     * @param wiggle      Percent of space between items to allow randomization
      * @param numberItems Number of items to generate
      */
     private void generateEvenishSplit(int diff, int offset, float wiggle, int numberItems) {
         Random rand = new Random();
         int itemSplit = Math.round((diff * 1.0f) / numberItems);
         int[] values = new int[numberItems];
-        for(int i=0; i<values.length; i++) {
-            values[i] = Math.round((i * 1.0f) / (numberItems) * diff) + itemSplit/2 + Math.round((itemSplit * wiggle) * (rand.nextFloat() - 0.5f) );
-            if(i > 0) {
-                values[i] = Math.min(Math.max(values[i], values[i-1] + 30), diff);
+        for (int i = 0; i < values.length; i++) {
+            values[i] = Math.round((i * 1.0f) / (numberItems) * diff) + itemSplit / 2 + Math.round((itemSplit * wiggle) * (rand.nextFloat() - 0.5f));
+            if (i > 0) {
+                values[i] = Math.min(Math.max(values[i], values[i - 1] + 5), diff);
             }
         }
-
         for (int value : values) {
             alertTimes.add(minutesToTimeItem(value + offset));
-            Log.v(title, alertTimes.get(alertTimes.size()-1).getHourInTimeFormatString()+":"+alertTimes.get(alertTimes.size()-1).getMinuteString());
+            Log.v(title, alertTimes.get(alertTimes.size() - 1).getHourInTimeFormatString() + ":" + alertTimes.get(alertTimes.size() - 1).getMinuteString());
         }
     }
 
@@ -270,8 +336,9 @@ public final class ReminderItem {
     }
 
     /**
-     * Converts a time item to minutes value
-     * @param time Time item
+     * Converts a time reminder to minutes value
+     *
+     * @param time Time reminder
      * @return Value in minutes
      */
     private int timeToMinutes(@NonNull TimeItem time) {
@@ -279,9 +346,10 @@ public final class ReminderItem {
     }
 
     /**
-     * Converts minutes to time item
+     * Converts minutes to time reminder
+     *
      * @param totalMinutes Minutes
-     * @return Time item
+     * @return Time reminder
      */
     private TimeItem minutesToTimeItem(int totalMinutes) {
         int hour = totalMinutes / 60;
@@ -289,21 +357,104 @@ public final class ReminderItem {
         return new TimeItem(hour, minutes);
     }
 
-    /**
-     * Truncates the UUID for a unique id
-     * @return A unique notification id
-     */
-    private static int getNotifictionId() {
-        return (int)UUID.randomUUID().getMostSignificantBits();
+    public final void logReminderShown() {
+        //TODO
+    }
+
+    public final void logReminderClicked() {
+        //TODO
+    }
+
+    public final NotificationContent getNotification(boolean preview) {
+        String title = this.title;
+        if(title == null || title.isEmpty()) {
+            title = AppUtil.getContext().getString(R.string.default_title);
+        }
+        String content = this.content;
+        if(content == null || content.isEmpty()) {
+            content = AppUtil.getContext().getString(R.string.default_content);
+        }
+
+        NotificationContent notif = new NotificationContent(title, content, this.getNotificationTone(), R.drawable.notification_icon,
+                AppUtil.getContext().getResources().getColor(R.color.accent), this.notificationId);
+        if(this.notificationVibrate) {
+            notif.enableVibrate();
+        }
+        if(this.notificationHighPriority) {
+            notif.enableHighPriority();
+        }
+        if(this.notificationLED) {
+            notif.enableLed(this.notificationLEDColor);
+        }
+
+        Intent intentClicked = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
+        intentClicked.putExtra("NAME", this.uniqueName);
+
+        Intent intentCancel = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
+        intentCancel.putExtra("NAME", this.uniqueName);
+
+        Intent intentDismiss = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        intentDismiss.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS");
+        intentDismiss.putExtra("NAME", this.uniqueName);
+
+        Intent intentAck = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
+        intentAck.putExtra("NAME", this.uniqueName);
+
+        if(preview) {
+            intentClicked.putExtra("PREVIEW", true);
+            intentCancel.putExtra("PREVIEW", true);
+            intentDismiss.putExtra("PREVIEW", true);
+            intentAck.putExtra("PREVIEW", true);
+        }
+
+        PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pDismiss = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentDismiss, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pAck = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentAck, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        notif.addContentIntent(pClicked);
+        notif.addDeleteIntent(pCanceled);
+        notif.addAction(new NotificationAction(0, "Dismiss", pDismiss));
+        notif.addAction(new NotificationAction(0, "Acknowledge", pAck));
+
+        return notif;
     }
 
     /**
-     * Generates a unique name for the reminder
-     * @return Unique name
+     * Saves the reminder log to file
+     *
+     * @return True if successful
      */
-    @NonNull
-    private static String getUniqueName() {
-        return UUID.randomUUID().toString();
+    private boolean saveToFile() {
+        byte[] bytes = Serializer.serializeClass(reminderLog);
+        return bytes != null && FileWriter.writeFile("LOG" + uniqueName, bytes, false);
+    }
+
+    /**
+     * Loads the reminder log from file
+     *
+     * @return True if successful
+     */
+    private boolean loadFromFile() {
+        if (!FileWriter.doesFileExist("LOG" + uniqueName, false)) {
+            return true;
+        }
+        byte[] bytes = FileWriter.readFile("LOG" + uniqueName, false);
+        if (bytes == null) {
+            return false;
+        }
+        reminderLog = Serializer.deserializeClass(bytes, ReminderLog.class);
+        return reminderLog != null;
+    }
+
+    /**
+     * Timing distribution
+     */
+    public enum Distribution {
+        EVEN, PART_RANDOM, MOST_RANDOM, FULL_RANDOM
     }
 
 }
