@@ -5,6 +5,7 @@ This app is currently in Beta.
 If you want to try the beta out without having to compile it yourself it is available on the play store
 once you opt into the beta.
 
+Screenshots http://imgur.com/a/CyRPR
 
 Join This https://plus.google.com/communities/105206368108124765493
 
@@ -32,6 +33,12 @@ Customize each reminder independently with these options
 • How to distribute the reminders (Evenly all the way to fully random)
 
 Additional features are on the way
+
+# Usage
+This project requires https://github.com/morris-james/UtilitiesLibrary and https://github.com/morris-james/materialuilibrary and https://github.com/morris-james/appbaselibrary
+
+Make sure you follow the build instructions on all the dependencies first.
+Then use Android Studio to build the project.
 
 # License
 Copyright (c) 2015.  James Morris Studios
