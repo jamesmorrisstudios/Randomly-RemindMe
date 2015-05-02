@@ -71,19 +71,6 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         return super.onCreateView(inflater,container,savedInstanceState);
     }
 
-    /**
-     * View creation done
-     * @param view This fragments main view
-     * @param savedInstanceState Saved instance state
-     */
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setFabEnable(true);
-        setFabIcon(R.drawable.ic_add_white_24dp);
-        setNoDataText(getString(R.string.main_list_no_data));
-    }
-
     @Override
     protected BaseRecycleAdapter getAdapter(int i, @NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
         return new ReminderAdapter(i, onItemClickListener);
@@ -102,6 +89,13 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     protected void itemClicked(BaseRecycleItem baseRecycleItem) {
         ReminderList.getInstance().setCurrentReminder((ReminderItem) baseRecycleItem);
         mListener.onReminderItemClicked();
+    }
+
+    @Override
+    protected void afterViewCreated() {
+        setFabEnable(true);
+        setFabIcon(R.drawable.ic_add_white_24dp);
+        setNoDataText(getString(R.string.main_list_no_data));
     }
 
     @Override

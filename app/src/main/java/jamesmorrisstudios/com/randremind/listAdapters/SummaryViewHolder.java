@@ -22,12 +22,10 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHolder;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
@@ -37,13 +35,12 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 /**
  * Reminder view holder for use in RecyclerView
  */
-public final class ReminderViewHolder extends BaseRecycleViewHolder {
-    //Not Header
-    private CardView topLayout;
+public final class SummaryViewHolder extends BaseRecycleViewHolder {
+    //Header
     private TextView title, startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private SwitchCompat enabled;
     private View dash, endTop;
-    private ImageButton dropDownButton;
+
 
     /**
      * Constructor
@@ -51,18 +48,13 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
      * @param isHeader True if header reminder, false for normal
      * @param mListener Click listener. Null if none desired
      */
-    public ReminderViewHolder(@NonNull View view, boolean isHeader, @Nullable cardClickListener mListener) {
+    public SummaryViewHolder(@NonNull View view, boolean isHeader, @Nullable cardClickListener mListener) {
         super(view, isHeader, mListener);
     }
 
     @Override
     protected void initHeader(View view) {
-
-    }
-
-    @Override
-    protected void initItem(View view) {
-        topLayout = (CardView) view.findViewById(R.id.reminder_card);
+        CardView topLayout = (CardView) view.findViewById(R.id.reminder_card);
         title = (TextView) view.findViewById(R.id.reminder_title_text);
         topLayout.setOnClickListener(this);
         enabled = (SwitchCompat) view.findViewById(R.id.reminder_enabled);
@@ -77,16 +69,15 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         endAM = (TextView) endTop.findViewById(R.id.time_am);
         endPM = (TextView) endTop.findViewById(R.id.time_pm);
         dash = view.findViewById(R.id.timing_dash);
-        dropDownButton = (ImageButton) view.findViewById(R.id.reminder_drop_down);
+    }
+
+    @Override
+    protected void initItem(View view) {
+
     }
 
     @Override
     protected void bindHeader(BaseRecycleItem baseRecycleItem, boolean expanded) {
-
-    }
-
-    @Override
-    protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
 
         String title = reminder.title;
@@ -112,17 +103,11 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
                 reminder.enabled = isChecked;
             }
         });
-        if(expanded) {
-            topLayout.setMinimumHeight(Utils.getDipInt(200));
-        } else {
-            topLayout.setMinimumHeight(Utils.getDipInt(1));
-        }
-        dropDownButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setExpanded(!isExpanded);
-            }
-        });
+    }
+
+    @Override
+    protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
+
     }
 
 }

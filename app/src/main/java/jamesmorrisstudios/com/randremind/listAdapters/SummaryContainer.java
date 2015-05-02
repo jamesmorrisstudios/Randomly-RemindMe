@@ -28,29 +28,29 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
  *
  * Created by James on 3/31/2015.
  */
-public final class ReminderContainer extends BaseRecycleContainer {
-    private final ReminderItem item;
-    private final BaseRecycleItem headerItem;
+public final class SummaryContainer extends BaseRecycleContainer {
+    private final BaseRecycleItem item;
+    private final ReminderItem headerItem;
 
-    public ReminderContainer(@NonNull BaseRecycleItem headerItem) {
+    public SummaryContainer(@NonNull ReminderItem item) {
         super(true);
         this.item = null;
-        this.headerItem = headerItem;
+        this.headerItem = item;
     }
 
-    public ReminderContainer(@NonNull ReminderItem item) {
+    public SummaryContainer(@NonNull BaseRecycleItem item) {
         super(false);
         this.item = item;
         this.headerItem = null;
     }
 
     @Override
-    public BaseRecycleItem getHeaderItem() {
+    public ReminderItem getHeaderItem() {
         return headerItem;
     }
 
     @Override
-    public ReminderItem getItem() {
+    public BaseRecycleItem getItem() {
         return item;
     }
 }

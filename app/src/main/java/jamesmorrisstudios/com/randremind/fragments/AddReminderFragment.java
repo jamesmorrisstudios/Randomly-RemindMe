@@ -205,14 +205,8 @@ public final class AddReminderFragment extends BaseFragment {
         return view;
     }
 
-    /**
-     * View creation done
-     * @param view This fragments main view
-     * @param savedInstanceState Saved instance state
-     */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void afterViewCreated() {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_save_white_24dp);
     }
@@ -277,16 +271,24 @@ public final class AddReminderFragment extends BaseFragment {
         }
         if(remind.rangeTiming) {
             //Show all of the range timing views
-            showView(timingTimes);
-            showView(timingTimesPerDay);
-            showView(timingDistribution);
-            hideView(timingSingleTime);
+            timingTimes.setVisibility(View.VISIBLE);
+            timingTimesPerDay.setVisibility(View.VISIBLE);
+            timingDistribution.setVisibility(View.VISIBLE);
+            timingSingleTime.setVisibility(View.GONE);
+            //showView(timingTimes);
+            //showView(timingTimesPerDay);
+            //showView(timingDistribution);
+            //hideView(timingSingleTime);
         } else {
             //Hide all of the range timing views
-            hideView(timingTimes);
-            hideView(timingTimesPerDay);
-            hideView(timingDistribution);
-            showView(timingSingleTime);
+            timingTimes.setVisibility(View.GONE);
+            timingTimesPerDay.setVisibility(View.GONE);
+            timingDistribution.setVisibility(View.GONE);
+            timingSingleTime.setVisibility(View.VISIBLE);
+            //hideView(timingTimes);
+            //hideView(timingTimesPerDay);
+            //hideView(timingDistribution);
+            //showView(timingSingleTime);
         }
         if(remind.rangeTiming) {
             timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));

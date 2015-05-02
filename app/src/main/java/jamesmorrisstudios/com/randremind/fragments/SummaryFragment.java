@@ -3,32 +3,34 @@ package jamesmorrisstudios.com.randremind.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.SwitchCompat;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
+import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleAdapter;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContainer;
+import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 
+import java.util.ArrayList;
+
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.listAdapters.SummaryAdapter;
+import jamesmorrisstudios.com.randremind.listAdapters.SummaryContainer;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
  *
  */
-public class SummaryFragment extends BaseFragment {
+public class SummaryFragment extends BaseRecycleListFragment {
     public static final String TAG = "SummaryFragment";
     private OnSummaryListener mListener;
     private TextView titleText, contentText;
@@ -109,6 +111,7 @@ public class SummaryFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
@@ -117,6 +120,41 @@ public class SummaryFragment extends BaseFragment {
         enable = (SwitchCompat) view.findViewById(R.id.titleEnabled);
         initData();
         return view;
+    }
+*/
+
+    @Override
+    protected BaseRecycleAdapter getAdapter(int i, @NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
+        return new SummaryAdapter(i, onItemClickListener);
+    }
+
+    @Override
+    protected void startDataLoad() {
+        applyItems();
+    }
+
+    @Override
+    protected void itemClicked(BaseRecycleItem baseRecycleItem) {
+        //TODO
+    }
+
+    @Override
+    protected void afterViewCreated() {
+
+    }
+
+    /**
+     * Apply reminder items to this view
+     */
+    private void applyItems() {
+        ReminderItem item = ReminderList.getInstance().getCurrentReminder();
+        if(item == null) {
+            applyData(null);
+        } else {
+            ArrayList<BaseRecycleContainer> summaries = new ArrayList<>();
+            summaries.add(new SummaryContainer(item));
+            applyData(summaries);
+        }
     }
 
     private void initData() {

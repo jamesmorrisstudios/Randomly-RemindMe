@@ -22,9 +22,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.util.TimeUtils;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.Calendar;
 
@@ -65,6 +67,7 @@ public final class Scheduler {
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
         i.putExtra("REMINDER_WAKE", true);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
         am.cancel(pi);
     }
 
@@ -74,6 +77,7 @@ public final class Scheduler {
     public final void cancelMidnightAlarm() {
         AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT");
         i.putExtra("REPEAT", true);
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         am.cancel(pi);
@@ -101,6 +105,7 @@ public final class Scheduler {
         Log.v("SCHEDULER", "Alarm Set For: " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
         AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
         i.putExtra("REMINDER_WAKE", true);
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
@@ -114,6 +119,7 @@ public final class Scheduler {
         AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.putExtra("REPEAT", true);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT");
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

@@ -80,6 +80,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onStop() {
         super.onStop();
         Log.v("Main Activity", "On Stop");
+        ReminderList.getInstance().trimWakesToCurrent();
         ReminderList.getInstance().saveData();
         Scheduler.getInstance().cancelNextWake();
         Scheduler.getInstance().scheduleNextWake();
@@ -101,11 +102,6 @@ public final class MainActivity extends BaseLauncherActivity implements
         ReminderList.getInstance().createNewReminder();
         loadSummaryFragment();
         loadAddReminderFragment();
-    }
-
-    @Override
-    public void onNewIntent(Intent intent) {
-        Log.v("Main Activity", "Intent received");
     }
 
     /**

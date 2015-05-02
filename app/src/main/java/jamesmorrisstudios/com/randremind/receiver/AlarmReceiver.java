@@ -20,6 +20,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -57,6 +58,11 @@ public final class AlarmReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
+        //if(intent.getExtras() == null && (intent.getAction() == null || !intent.getAction().equals("android.intent.action.BOOT_COMPLETED"))) {
+        //    Log.v("ALARM RECEIVER", "Woke but nothing for us");
+        //    return;
+        //}
+
         //Get our wakelock
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Randomly RemindMe Wake For Reminder");
@@ -76,15 +82,16 @@ public final class AlarmReceiver extends BroadcastReceiver {
             ReminderList.getInstance().trimWakesToCurrent();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
-        } else if(intent.getExtras() != null && intent.getExtras().containsKey("REPEAT")){
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT")) {
             Log.v("ALARM RECEIVER", "Midnight update");
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
+            ReminderList.getInstance().trimWakesToCurrent();
             //Post a notification if we have one (likely don't)
             postNextNotification();
             //Schedule the next wake event
             Scheduler.getInstance().scheduleNextWake();
-        } else if(intent.getExtras() != null && intent.getExtras().containsKey("REMINDER_WAKE")){
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER")){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
             postNextNotification();
