@@ -120,7 +120,7 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         dropDownButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setExpanded(!isExpanded);
+               toggleExpanded();
             }
         });
     }

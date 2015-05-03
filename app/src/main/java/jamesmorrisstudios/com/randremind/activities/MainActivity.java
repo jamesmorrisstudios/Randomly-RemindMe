@@ -26,6 +26,7 @@ import android.util.Log;
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
@@ -80,10 +81,25 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onStop() {
         super.onStop();
         Log.v("Main Activity", "On Stop");
-        ReminderList.getInstance().trimWakesToCurrent();
         ReminderList.getInstance().saveData();
         Scheduler.getInstance().cancelNextWake();
-        Scheduler.getInstance().scheduleNextWake();
+        Scheduler.getInstance().scheduleNextWake(UtilsTime.getTimeNow());
+    }
+
+    /**
+     * The fragment is changing. This is called right after the fragment is notified
+     */
+    @Override
+    protected void onFragmentChangeStart() {
+
+    }
+
+    /**
+     * The fragment was just changed
+     */
+    @Override
+    protected void onFragmentChangeEnd() {
+
     }
 
     /**

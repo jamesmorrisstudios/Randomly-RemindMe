@@ -43,6 +43,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -87,6 +88,7 @@ public final class AddReminderFragment extends BaseFragment {
     private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
     //Listeners
     private TextWatcher titleTextWatcher, contentTextWatcher;
+    private RelativeLayout timingParent;
 
     /**
      * Required empty public constructor
@@ -200,6 +202,7 @@ public final class AddReminderFragment extends BaseFragment {
         timingTimesPerDay = (LinearLayout) view.findViewById(R.id.timing_times_per_day);
         timingDistribution = (LinearLayout) view.findViewById(R.id.timing_distribution);
         timingSingleTime = (LinearLayout) view.findViewById(R.id.timing_times_specific);
+        timingParent = (RelativeLayout) view.findViewById(R.id.timingParent);
         //Now setup everything with actual data
         setupViewWithReminder();
         return view;
@@ -275,20 +278,12 @@ public final class AddReminderFragment extends BaseFragment {
             timingTimesPerDay.setVisibility(View.VISIBLE);
             timingDistribution.setVisibility(View.VISIBLE);
             timingSingleTime.setVisibility(View.GONE);
-            //showView(timingTimes);
-            //showView(timingTimesPerDay);
-            //showView(timingDistribution);
-            //hideView(timingSingleTime);
         } else {
-            //Hide all of the range timing views
+            //Hide all of the range timing
+            timingSingleTime.setVisibility(View.VISIBLE);
             timingTimes.setVisibility(View.GONE);
             timingTimesPerDay.setVisibility(View.GONE);
             timingDistribution.setVisibility(View.GONE);
-            timingSingleTime.setVisibility(View.VISIBLE);
-            //hideView(timingTimes);
-            //hideView(timingTimesPerDay);
-            //hideView(timingDistribution);
-            //showView(timingSingleTime);
         }
         if(remind.rangeTiming) {
             timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
@@ -686,7 +681,6 @@ public final class AddReminderFragment extends BaseFragment {
         list.add(getString(R.string.distribution_even));
         list.add(getString(R.string.distribution_part_random));
         list.add(getString(R.string.distribution_most_random));
-       // list.add(getString(R.string.distribution_full_random));
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, list);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         distributionSpinner.setAdapter(spinnerArrayAdapter);
@@ -702,7 +696,8 @@ public final class AddReminderFragment extends BaseFragment {
             return;
         }
         int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
-        int max = Math.max(diffMinutes / 10, 1);
+        //int max = Math.max(diffMinutes / 10, 1);
+        int max = diffMinutes; //TODO
         remind.numberPerDay = Math.min(remind.numberPerDay, max);
         List<String> perDayList = new ArrayList<>();
         for(int i=0; i<max; i++) {

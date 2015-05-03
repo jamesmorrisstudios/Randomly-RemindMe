@@ -16,26 +16,23 @@
 
 package jamesmorrisstudios.com.randremind.receiver;
 
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
+import com.jamesmorrisstudios.utilitieslibrary.preferences.Preferences;
+import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.activities.MainActivity;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
@@ -58,122 +55,91 @@ public final class AlarmReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
-        //if(intent.getExtras() == null && (intent.getAction() == null || !intent.getAction().equals("android.intent.action.BOOT_COMPLETED"))) {
-        //    Log.v("ALARM RECEIVER", "Woke but nothing for us");
-        //    return;
-        //}
+        //Get the time right away as we use this and it needs to be precise
+        //We have some wiggle room before we need the wakelock
+        DateTimeItem now = UtilsTime.getDateTimeNow();
 
         //Get our wakelock
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Randomly RemindMe Wake For Reminder");
         wl.acquire();
 
-        ReminderList.getInstance().loadDataSync();
+        //Only load the reminders if they aren't already loaded
+        //This way if the user has the app open their changes aren't overwritten
+        if(!ReminderList.getInstance().hasReminders()) {
+            ReminderList.getInstance().loadDataSync();
+        }
 
-        TimeItem timeNow = UtilsTime.getTimeNow();
-        Log.v("ALARM RECEIVER", "Woke At: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
+        DateTimeItem lastWake = getLastWake();
+        TimeItem prevTime;
+        //If the last wake was a different day
+        if(now.dateItem.equals(lastWake.dateItem)) {
+            prevTime = lastWake.timeItem;
+        } else {
+            prevTime = new TimeItem(0, 0);
+        }
+
+        Log.v("ALARM RECEIVER", "Woke At: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
 
         if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             Log.v("ALARM RECEIVER", "Device just woke");
             //Set up our midnight recalculate wake
             Scheduler.getInstance().scheduleRepeatingMidnight();
-            //Make sure our wakes are recalculated and cleaned up as we don't know how long we were off for
-            ReminderList.getInstance().recalculateWakes();
-            ReminderList.getInstance().trimWakesToCurrent();
+            //Recalculate wakes if we were off for over a day
+            if(!now.dateItem.equals(lastWake.dateItem)) {
+                ReminderList.getInstance().recalculateWakes();
+            }
             //Schedule the next wake event
-            Scheduler.getInstance().scheduleNextWake();
+            Scheduler.getInstance().cancelNextWake();
+            Scheduler.getInstance().scheduleNextWake(now.timeItem);
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT")) {
             Log.v("ALARM RECEIVER", "Midnight update");
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
-            ReminderList.getInstance().trimWakesToCurrent();
             //Post a notification if we have one (likely don't)
-            postNextNotification();
+            postNextNotification(prevTime, now.timeItem);
             //Schedule the next wake event
-            Scheduler.getInstance().scheduleNextWake();
+            Scheduler.getInstance().cancelNextWake();
+            Scheduler.getInstance().scheduleNextWake(now.timeItem);
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER")){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
-            postNextNotification();
+            postNextNotification(prevTime, now.timeItem);
             //Schedule the next wake event
-            Scheduler.getInstance().scheduleNextWake();
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED")) {
-            Log.v("ALARM RECEIVER", "notification click");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
-                logClicked(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"), context);
-            }
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED")) {
-            Log.v("ALARM RECEIVER", "notification delete");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
-                logDeleted(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"));
-            }
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS")) {
-            Log.v("ALARM RECEIVER", "notification dismiss");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
-                logDismiss(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"));
-            }
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE")) {
-            Log.v("ALARM RECEIVER", "notification acknowledge");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME")) {
-                logAck(intent.getExtras().getString("NAME"), intent.getExtras().containsKey("PREVIEW"));
-            }
+            Scheduler.getInstance().cancelNextWake();
+            Scheduler.getInstance().scheduleNextWake(now.timeItem);
         }
 
-        Log.v("ALARM RECEIVER", "Completed Wake: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
+        logLastWake(now);
 
-        ReminderList.getInstance().saveDataSync();
+        //Get now again just to see how long this method took. It is not used for anything else
+        now = UtilsTime.getDateTimeNow();
+        Log.v("ALARM RECEIVER", "Completed Wake: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
+
+        //We made no changes to the reminders so we don't have to save anything
 
         //Release the wakelock
         wl.release();
     }
 
-    private void logClicked(String name, boolean preview, Context context) {
-        ReminderItem item = ReminderList.getInstance().getReminder(name);
-        if(item == null) {
-            return;
-        }
-        Log.v("ALARM RECEIVER", "log clicked: Preview: "+preview);
-        if(!preview) {
-            Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
-            intent.putExtra("NAME", name);
-            intent.putExtra("REMINDER", true);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        }
-    }
-
-    private void logDeleted(String name, boolean preview) {
-        //Do nothing?...
-    }
-
-    private void logDismiss(String name, boolean preview) {
-        ReminderItem item = ReminderList.getInstance().getReminder(name);
-        if(item == null) {
-            return;
-        }
-        Notifier.dismissNotification(item.notificationId);
-        //if(!preview) {
-            //Do nothing?...
-        //}
-    }
-
-    private void logAck(String name, boolean preview) {
-        ReminderItem item = ReminderList.getInstance().getReminder(name);
-        if(item == null) {
-            return;
-        }
-        Notifier.dismissNotification(item.notificationId);
-        if(!preview) {
-            item.logReminderClicked();
-        }
-    }
-
-    private void postNextNotification() {
-        ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes();
+    private void postNextNotification(TimeItem prevTime, TimeItem now) {
+        ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes(prevTime, now);
         for(ReminderItem item : items) {
-            item.logReminderShown();
+            ReminderItem.logReminderShown(item.uniqueName);
             Notifier.buildNotification(item.getNotification(false));
+            Log.v("ALARM RECEIVER", "Post Notification: "+item.notificationId);
         }
+    }
+
+    private void logLastWake(@NonNull DateTimeItem time) {
+        String lastWake = DateTimeItem.encodeToString(time);
+        Preferences.putString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE", lastWake);
+    }
+
+    @NonNull
+    private DateTimeItem getLastWake() {
+        String lastWake = Preferences.getString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE");
+        return DateTimeItem.decodeFromString(lastWake);
     }
 
 }

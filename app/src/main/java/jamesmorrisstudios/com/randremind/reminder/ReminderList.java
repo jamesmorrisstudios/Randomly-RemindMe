@@ -16,35 +16,24 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import org.json.JSONObject;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
 
 /**
  * Reminder list control class. Add, remove, save, delete reminders
@@ -282,7 +271,6 @@ public final class ReminderList {
      */
     public final void saveCurrentReminder() {
         currentItem.updateAlertTimes();
-        trimWakeToCurrent(currentItem);
         if(currentIndex == -1) {
             //New Item so add to end
             reminders.data.add(currentItem);
@@ -300,7 +288,6 @@ public final class ReminderList {
      */
     public final void duplicateReminder() {
         currentItem.updateAlertTimes();
-        trimWakeToCurrent(currentItem);
         reminders.data.add(currentItem.duplicate());
         saveToFile();
     }
@@ -322,6 +309,7 @@ public final class ReminderList {
 
     /**
      * Updates all reminders wake times
+     * This is stored in the Android shared prefs. Not the primary serialized save for this app.
      */
     public final void recalculateWakes() {
         for(ReminderItem item : reminders.data) {
@@ -330,47 +318,27 @@ public final class ReminderList {
     }
 
     /**
-     * Trim the alert times of all reminder items so all at current or past times are removed
-     */
-    public final void trimWakesToCurrent() {
-        TimeItem timeNow = UtilsTime.getTimeNow();
-        for(ReminderItem item : reminders.data) {
-            trimWakeToCurrent(item, timeNow);
-        }
-    }
-
-    /**
-     * Trim the alert times of the specified reminder reminder so all at current or past times are removed
-     */
-    private void trimWakeToCurrent(@NonNull ReminderItem item) {
-        TimeItem timeNow = UtilsTime.getTimeNow();
-        trimWakeToCurrent(item, timeNow);
-    }
-
-    /**
-     * Trim the alert times of the specified reminder reminder so all at current or past times are removed
-     */
-    private void trimWakeToCurrent(@NonNull ReminderItem item, @NonNull TimeItem timeNow) {
-        while(!item.alertTimes.isEmpty() && timeBeforeOrEqual(item.alertTimes.get(0), timeNow)) {
-            item.alertTimes.remove(0);
-        }
-    }
-
-    /**
      * @return Return list of all reminder items that have a wake time that is current or past.
      */
     @NonNull
-    public final ArrayList<ReminderItem> getCurrentWakes() {
-        TimeItem timeNow = UtilsTime.getTimeNow();
+    public final ArrayList<ReminderItem> getCurrentWakes(TimeItem startTime, TimeItem endTime) {
         ArrayList<ReminderItem> items = new ArrayList<>();
+        //Loop through all reminders
         for(ReminderItem item : reminders.data) {
-            if(item.enabled && item.daysToRun[getDayOfWeek()] && (timeInBounds(item.startTime, item.endTime) || !item.rangeTiming)) {
-                if(!item.alertTimes.isEmpty() && timeBeforeOrEqual(item.alertTimes.get(0), timeNow)) {
-                    items.add(item);
+            //See if the reminder is enabled
+            if(item.enabled && item.daysToRun[getDayOfWeek()] && (timeInBoundsInclusive(item.startTime, item.endTime) || !item.rangeTiming)) {
+                //Get the alert times for the given reminder
+                ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(item.uniqueName);
+                for(TimeItem time : alertTimes) {
+                    //Check if the alert needs to be shown.
+                    if(timeInBoundsInclusiveEnd(startTime, endTime, time)) {
+                        //Max of one wake per reminder!
+                        items.add(item);
+                        break;
+                    }
                 }
             }
         }
-        trimWakesToCurrent();
         return items;
     }
 
@@ -385,32 +353,47 @@ public final class ReminderList {
     }
 
     /**
-     * Check that the current time is within the given bounds
+     * @return The time reminder of the next wake in this cycle. Null if no more today
+     */
+    @Nullable
+    public final TimeItem getNextWake(TimeItem timeNow) {
+        TimeItem time = null;
+        //Schedule the next wake we have in this days cycle if any
+        for(ReminderItem item : reminders.data) {
+            ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(item.uniqueName);
+            if(alertTimes.isEmpty()) {
+                continue;
+            }
+            for(TimeItem alertTime : alertTimes) {
+                //alert time is after the current time and (the current reminder is null or this time is before it)
+                if(!timeBeforeOrEqual(alertTime, timeNow) && (time == null || timeBeforeOrEqual(alertTime, time))) {
+                    time = alertTime;
+                }
+            }
+        }
+        return time;
+    }
+
+    /**
+     * Check that the given time is within the given bounds inclusive of end value only
+     * @param start Start time
+     * @param end End time
+     * @param value Time to check against
+     * @return True if within
+     */
+    private boolean timeInBoundsInclusiveEnd(@NonNull TimeItem start, @NonNull TimeItem end, @NonNull TimeItem value) {
+        return timeBefore(start, value) && timeBeforeOrEqual(value, end);
+    }
+
+    /**
+     * Check that the current time is within the given bounds inclusive of both end points
      * @param start Start time
      * @param end End time
      * @return True if within
      */
-    private boolean timeInBounds(@NonNull TimeItem start, @NonNull TimeItem end) {
+    private boolean timeInBoundsInclusive(@NonNull TimeItem start, @NonNull TimeItem end) {
         TimeItem timeNow = UtilsTime.getTimeNow();
         return timeBeforeOrEqual(start, timeNow) && timeBeforeOrEqual(timeNow, end);
-    }
-
-    /**
-     * @return The time reminder of the next wake in this cycle. Null if no more today
-     */
-    @Nullable
-    public final TimeItem getNextWake() {
-        TimeItem time = null;
-        //Schedule the next wake we have in this days cycle if any
-        for(ReminderItem item : reminders.data) {
-            if(item.alertTimes.isEmpty()) {
-                continue;
-            }
-            if(time == null || timeBeforeOrEqual(item.alertTimes.get(0), time)) {
-                time = item.alertTimes.get(0);
-            }
-        }
-        return time;
     }
 
     /**
@@ -420,6 +403,15 @@ public final class ReminderList {
      */
     private boolean timeBeforeOrEqual(@NonNull TimeItem newTime, @NonNull TimeItem oldTime) {
         return (newTime.hour * 60 + newTime.minute) - (oldTime.hour * 60 + oldTime.minute) <= 0;
+    }
+
+    /**
+     * @param newTime New time
+     * @param oldTime Old time
+     * @return True if new time is before old time
+     */
+    private boolean timeBefore(@NonNull TimeItem newTime, @NonNull TimeItem oldTime) {
+        return (newTime.hour * 60 + newTime.minute) - (oldTime.hour * 60 + oldTime.minute) < 0;
     }
 
     /**

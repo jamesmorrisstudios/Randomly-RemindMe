@@ -16,4 +16,9 @@ public class ReminderLogDay {
     public ArrayList<TimeItem> timesShown = new ArrayList<>();
     @SerializedName("timesClicked")
     public ArrayList<TimeItem> timesClicked = new ArrayList<>();
+
+    public ReminderLogDay(DateItem dateItem) {
+        this.date = dateItem;
+    }
+
 }
