@@ -88,7 +88,6 @@ public final class AddReminderFragment extends BaseFragment {
     private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
     //Listeners
     private TextWatcher titleTextWatcher, contentTextWatcher;
-    private RelativeLayout timingParent;
 
     /**
      * Required empty public constructor
@@ -202,7 +201,6 @@ public final class AddReminderFragment extends BaseFragment {
         timingTimesPerDay = (LinearLayout) view.findViewById(R.id.timing_times_per_day);
         timingDistribution = (LinearLayout) view.findViewById(R.id.timing_distribution);
         timingSingleTime = (LinearLayout) view.findViewById(R.id.timing_times_specific);
-        timingParent = (RelativeLayout) view.findViewById(R.id.timingParent);
         //Now setup everything with actual data
         setupViewWithReminder();
         return view;
@@ -640,11 +638,7 @@ public final class AddReminderFragment extends BaseFragment {
         if(remind == null) {
             return;
         }
-        //if (remind.notification) {
-            showView(notificationContainer);
-        //} else {
-        //    hideView(notificationContainer);
-       // }
+        notificationContainer.setVisibility(View.VISIBLE);
         notificationSound.setText(remind.notificationToneName);
         notificationVibrateEnable.setChecked(remind.notificationVibrate);
         highPriorityEnable.setChecked(remind.notificationHighPriority);
@@ -659,11 +653,7 @@ public final class AddReminderFragment extends BaseFragment {
         if(remind == null) {
             return;
         }
-        //if(remind.repeat) {
-            showView(daysContainer);
-        //} else {
-        //    hideView(daysContainer);
-        //}
+        daysContainer.setVisibility(View.VISIBLE);
         for(int i=0; i<remind.daysToRun.length; i++) {
             setDayOfWeek(i, remind.daysToRun[i]);
         }
@@ -777,66 +767,6 @@ public final class AddReminderFragment extends BaseFragment {
         } else {
             dayButton.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
         }
-    }
-
-    /**
-     * Animates a view to hidden state
-     * @param view The view to hide
-     */
-    private void hideView(final View view) {
-        ObjectAnimator anim = AnimatorControl.alpha(view, 1.0f, 0.0f, 250, 0);
-        anim.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        anim.start();
-    }
-
-    /**
-     * Animates a view to shown state
-     * @param view The view to show
-     */
-    private void showView(final View view) {
-        ObjectAnimator anim = AnimatorControl.alpha(view, 0.0f, 1.0f, 250, 0);
-        anim.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                view.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        anim.start();
     }
 
 }

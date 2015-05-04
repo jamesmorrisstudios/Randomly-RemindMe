@@ -234,6 +234,16 @@ public final class ReminderList {
     }
 
     /**
+     * Resets the current reminder back to the last saved version
+     */
+    public final void cancelCurrentReminderChanges() {
+        if(currentIndex != -1) {
+            //TODO
+        }
+
+    }
+
+    /**
      * Deletes the current reminder from the list.
      * Clears it from the currently set
      */

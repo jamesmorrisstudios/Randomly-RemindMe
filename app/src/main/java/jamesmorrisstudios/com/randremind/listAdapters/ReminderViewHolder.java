@@ -23,8 +23,10 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
@@ -33,6 +35,7 @@ import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
  * Reminder view holder for use in RecyclerView
@@ -43,7 +46,8 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
     private TextView title, startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private SwitchCompat enabled;
     private View dash, endTop;
-    private ImageButton dropDownButton;
+    private ButtonCircleFlat[] dayButtons;
+    private LinearLayout daysContainer;
 
     /**
      * Constructor
@@ -77,7 +81,22 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         endAM = (TextView) endTop.findViewById(R.id.time_am);
         endPM = (TextView) endTop.findViewById(R.id.time_pm);
         dash = view.findViewById(R.id.timing_dash);
-        dropDownButton = (ImageButton) view.findViewById(R.id.reminder_drop_down);
+        daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
+        dayButtons = new ButtonCircleFlat[7];
+        dayButtons[0] = (ButtonCircleFlat) view.findViewById(R.id.daySun);
+        dayButtons[1] = (ButtonCircleFlat) view.findViewById(R.id.dayMon);
+        dayButtons[2] = (ButtonCircleFlat) view.findViewById(R.id.dayTue);
+        dayButtons[3] = (ButtonCircleFlat) view.findViewById(R.id.dayWed);
+        dayButtons[4] = (ButtonCircleFlat) view.findViewById(R.id.dayThu);
+        dayButtons[5] = (ButtonCircleFlat) view.findViewById(R.id.dayFri);
+        dayButtons[6] = (ButtonCircleFlat) view.findViewById(R.id.daySat);
+        dayButtons[0].getTextView().setText("S");
+        dayButtons[1].getTextView().setText("M");
+        dayButtons[2].getTextView().setText("T");
+        dayButtons[3].getTextView().setText("W");
+        dayButtons[4].getTextView().setText("T");
+        dayButtons[5].getTextView().setText("F");
+        dayButtons[6].getTextView().setText("S");
     }
 
     @Override
@@ -117,12 +136,29 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         } else {
             topLayout.setMinimumHeight(Utils.getDipInt(1));
         }
-        dropDownButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               toggleExpanded();
+        if(reminder.rangeTiming) {
+            daysContainer.setVisibility(View.VISIBLE);
+            for(int i=0; i<reminder.daysToRun.length; i++) {
+                setDayOfWeek(i, reminder.daysToRun[i]);
             }
-        });
+        } else {
+            daysContainer.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Set the active state of the day of week reminder
+     * @param dayIndex Index for the day
+     * @param active True to enable
+     */
+    private void setDayOfWeek(int dayIndex, boolean active) {
+        final ButtonCircleFlat dayButton = dayButtons[dayIndex];
+        dayButton.setActivated(active);
+        if(active) {
+            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
+        } else {
+            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));
+        }
     }
 
 }

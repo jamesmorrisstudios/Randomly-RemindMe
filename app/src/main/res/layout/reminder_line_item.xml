@@ -54,20 +54,12 @@
             android:textColor="@color/textDarkMain"
             android:textSize="22sp" />
 
-        <ImageButton
-            android:id="@+id/reminder_drop_down"
-            android:layout_below="@+id/reminder_title_text"
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/ic_arrow_drop_down_black_24dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
-
         <include
             android:id="@+id/reminder_time_start"
             layout="@layout/time_display_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/reminder_drop_down"
+            android:layout_alignParentLeft="true"
             android:layout_below="@+id/reminder_title_text" />
 
         <TextView
@@ -88,7 +80,75 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reminder_title_text"
-            android:layout_toRightOf="@+id/timing_dash" />
+            android:layout_toRightOf="@+id/timing_dash"
+            android:layout_toLeftOf="@+id/reminder_enabled"/>
+
+        <LinearLayout
+            android:id="@+id/daysContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/reminder_enabled"
+            android:layout_below="@+id/reminder_time_start"
+            android:orientation="horizontal">
+
+            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                android:id="@+id/daySun"
+                android:background="@color/iconDark"
+                android:clickable="false"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp" />
+
+            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                android:id="@+id/dayMon"
+                android:background="@color/iconDark"
+                android:clickable="false"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp" />
+
+            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                android:id="@+id/dayTue"
+                android:background="@color/iconDark"
+                android:clickable="false"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp" />
+
+            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                android:id="@+id/dayWed"
+                android:background="@color/iconDark"
+                android:clickable="false"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp" />
+
+            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                android:id="@+id/dayThu"
+                android:background="@color/iconDark"
+                android:clickable="false"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp" />
+
+            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                android:id="@+id/dayFri"
+                android:background="@color/iconDark"
+                android:clickable="false"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp" />
+
+            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                android:id="@+id/daySat"
+                android:background="@color/iconDark"
+                android:clickable="false"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="4dp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
