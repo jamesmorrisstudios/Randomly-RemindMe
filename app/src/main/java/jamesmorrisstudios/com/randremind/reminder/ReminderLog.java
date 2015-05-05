@@ -15,20 +15,18 @@ public class ReminderLog {
     @SerializedName("days")
     public ArrayList<ReminderLogDay> days = new ArrayList<>();
 
-    public final void logClicked() {
-        DateTimeItem dateTimeItem = UtilsTime.getDateTimeNow();
-        Log.v("ReminderLog", "Log Clicked: "+dateTimeItem.dateItem.year+" "+dateTimeItem.dateItem.month+" "+dateTimeItem.dateItem.dayOfMonth+
-        ", "+dateTimeItem.timeItem.getHourInTimeFormatString()+":"+dateTimeItem.timeItem.getMinuteString());
-        ReminderLogDay day = getDay(dateTimeItem);
-        day.timesClicked.add(0, dateTimeItem.timeItem);
+    public final void logClicked(DateTimeItem dateTime) {
+        Log.v("ReminderLog", "Log Clicked: "+dateTime.dateItem.year+" "+dateTime.dateItem.month+" "+dateTime.dateItem.dayOfMonth+
+        ", "+dateTime.timeItem.getHourInTimeFormatString()+":"+dateTime.timeItem.getMinuteString());
+        ReminderLogDay day = getDay(dateTime);
+        day.timesClicked.add(0, dateTime.timeItem);
     }
 
-    public final void logShown() {
-        DateTimeItem dateTimeItem = UtilsTime.getDateTimeNow();
-        Log.v("ReminderLog", "Log Shown: "+dateTimeItem.dateItem.year+" "+dateTimeItem.dateItem.month+" "+dateTimeItem.dateItem.dayOfMonth+
-                ", "+dateTimeItem.timeItem.getHourInTimeFormatString()+":"+dateTimeItem.timeItem.getMinuteString());
-        ReminderLogDay day = getDay(dateTimeItem);
-        day.timesShown.add(0, dateTimeItem.timeItem);
+    public final void logShown(DateTimeItem dateTime) {
+        Log.v("ReminderLog", "Log Shown: "+dateTime.dateItem.year+" "+dateTime.dateItem.month+" "+dateTime.dateItem.dayOfMonth+
+                ", "+dateTime.timeItem.getHourInTimeFormatString()+":"+dateTime.timeItem.getMinuteString());
+        ReminderLogDay day = getDay(dateTime);
+        day.timesShown.add(0, dateTime.timeItem);
     }
 
     private ReminderLogDay getDay(DateTimeItem dateTimeItem) {
@@ -45,7 +43,7 @@ public class ReminderLog {
             return day;
         }
         //If we have a new day then create a new entry and return it
-        days.add(new ReminderLogDay(dateTimeItem.dateItem));
+        days.add(0, new ReminderLogDay(dateTimeItem.dateItem));
         Log.v("ReminderLog", "New day so creating another entry");
         return days.get(0);
     }

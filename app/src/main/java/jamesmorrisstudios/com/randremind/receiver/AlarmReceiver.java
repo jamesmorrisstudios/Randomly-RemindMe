@@ -97,14 +97,14 @@ public final class AlarmReceiver extends BroadcastReceiver {
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
             //Post a notification if we have one (likely don't)
-            postNextNotification(prevTime, now.timeItem);
+            postNextNotification(prevTime, now);
             //Schedule the next wake event
             Scheduler.getInstance().cancelNextWake();
             Scheduler.getInstance().scheduleNextWake(now.timeItem);
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER")){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
-            postNextNotification(prevTime, now.timeItem);
+            postNextNotification(prevTime, now);
             //Schedule the next wake event
             Scheduler.getInstance().cancelNextWake();
             Scheduler.getInstance().scheduleNextWake(now.timeItem);
@@ -122,12 +122,12 @@ public final class AlarmReceiver extends BroadcastReceiver {
         wl.release();
     }
 
-    private void postNextNotification(TimeItem prevTime, TimeItem now) {
-        ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes(prevTime, now);
+    private void postNextNotification(TimeItem prevTime, DateTimeItem now) {
+        ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes(prevTime, now.timeItem);
         for(ReminderItem item : items) {
-            ReminderItem.logReminderShown(item.uniqueName);
-            Notifier.buildNotification(item.getNotification(false));
-            Log.v("ALARM RECEIVER", "Post Notification: "+item.notificationId);
+            ReminderItem.logReminderShown(item.uniqueName, now);
+            Notifier.buildNotification(item.getNotification(false, now));
+            Log.v("ALARM RECEIVER", "Post Notification: "+item.getNotificationId());
         }
     }
 

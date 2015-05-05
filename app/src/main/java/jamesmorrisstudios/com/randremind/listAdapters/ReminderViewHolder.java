@@ -133,6 +133,7 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 reminder.enabled = isChecked;
+                ReminderList.getInstance().saveData();
             }
         });
         for(int i=0; i<reminder.daysToRun.length; i++) {

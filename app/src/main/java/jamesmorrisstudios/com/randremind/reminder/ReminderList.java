@@ -271,7 +271,7 @@ public final class ReminderList {
         if(item == null) {
             return;
         }
-        Notifier.buildNotification(item.getNotification(true));
+        Notifier.buildNotification(item.getNotification(true, UtilsTime.getDateTimeNow()));
     }
 
     /**
@@ -294,7 +294,7 @@ public final class ReminderList {
      */
     public final void duplicateReminder() {
         currentItem.updateAlertTimes();
-        reminders.data.add(currentItem.duplicate());
+        reminders.data.add(currentIndex+1, currentItem.duplicate());
     }
 
     /**

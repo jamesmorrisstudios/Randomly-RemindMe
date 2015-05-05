@@ -29,6 +29,7 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.materialuilibrary.utils.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
@@ -36,6 +37,7 @@ import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.preferences.Preferences;
+import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 
 import java.sql.Time;
@@ -57,8 +59,6 @@ public final class ReminderItem extends BaseRecycleItem {
     //Unique data
     @SerializedName("uniqueName")
     public String uniqueName;
-    @SerializedName("notificationId")
-    public int notificationId;
     //Title
     @SerializedName("title")
     public String title;
@@ -116,7 +116,6 @@ public final class ReminderItem extends BaseRecycleItem {
     public ReminderItem() {
         //Unique name
         this.uniqueName = getUniqueName();
-        this.notificationId = getNotifictionId();
         //Title
         this.title = "";
         this.enabled = true;
@@ -153,13 +152,12 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param notificationToneName The readable name of the notification tone
      * @param notificationVibrate  True to enable vibrate with the notification
      */
-    public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, @NonNull String content,
+    public ReminderItem(@NonNull String uniqueName, @NonNull String title, @NonNull String content,
                         boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, @NonNull TimeItem singleTime,
                         int numberPerDay, @NonNull boolean randomDistribution, boolean rangeTiming, boolean repeat,
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
                         boolean notificationVibrate, boolean notificationLED, int notificationLEDColor, boolean notificationHighPriority) {
         this.uniqueName = uniqueName;
-        this.notificationId = notificationId;
         this.title = title;
         this.content = content;
         this.enabled = enabled;
@@ -184,8 +182,8 @@ public final class ReminderItem extends BaseRecycleItem {
      *
      * @return A unique notification id
      */
-    private static int getNotifictionId() {
-        return (int) UUID.randomUUID().getMostSignificantBits();
+    public final int getNotificationId() {
+        return uniqueName.hashCode();
     }
 
     /**
@@ -203,7 +201,7 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     @NonNull
     public final ReminderItem copy() {
-        return new ReminderItem(uniqueName, notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
+        return new ReminderItem(uniqueName, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority);
     }
@@ -213,7 +211,7 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     @NonNull
     public final ReminderItem duplicate() {
-        return new ReminderItem(getUniqueName(), notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
+        return new ReminderItem(getUniqueName(), title, content, enabled, startTime, endTime, singleTime, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority);
     }
@@ -317,7 +315,7 @@ public final class ReminderItem extends BaseRecycleItem {
         return new TimeItem(hour, minutes);
     }
 
-    public final NotificationContent getNotification(boolean preview) {
+    public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime) {
         String title = this.title;
         if(title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
@@ -328,7 +326,7 @@ public final class ReminderItem extends BaseRecycleItem {
         }
 
         NotificationContent notif = new NotificationContent(title, content, this.getNotificationTone(), R.drawable.notification_icon,
-                AppUtil.getContext().getResources().getColor(R.color.accent), this.notificationId);
+                AppUtil.getContext().getResources().getColor(R.color.accent), getNotificationId());
         if(this.notificationVibrate) {
             notif.enableVibrate();
         }
@@ -342,22 +340,26 @@ public final class ReminderItem extends BaseRecycleItem {
         Intent intentClicked = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
         intentClicked.putExtra("NAME", this.uniqueName);
-        intentClicked.putExtra("NOTIFICATION_ID", this.notificationId);
+        intentClicked.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentClicked.putExtra("NOTIFICATION_ID", getNotificationId());
 
         Intent intentCancel = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
         intentCancel.putExtra("NAME", this.uniqueName);
-        intentCancel.putExtra("NOTIFICATION_ID", this.notificationId);
+        intentCancel.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentCancel.putExtra("NOTIFICATION_ID", getNotificationId());
 
         Intent intentDismiss = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentDismiss.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS");
         intentDismiss.putExtra("NAME", this.uniqueName);
-        intentDismiss.putExtra("NOTIFICATION_ID", this.notificationId);
+        intentDismiss.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentDismiss.putExtra("NOTIFICATION_ID", getNotificationId());
 
         Intent intentAck = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
         intentAck.putExtra("NAME", this.uniqueName);
-        intentAck.putExtra("NOTIFICATION_ID", this.notificationId);
+        intentAck.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentAck.putExtra("NOTIFICATION_ID", getNotificationId());
 
         if(preview) {
             intentClicked.putExtra("PREVIEW", true);
@@ -396,25 +398,25 @@ public final class ReminderItem extends BaseRecycleItem {
         Preferences.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
     }
 
-    public static boolean logReminderShown(String uniqueName) {
+    public static boolean logReminderShown(String uniqueName, DateTimeItem dateTime) {
         Log.v("REMINDER ITEM", "STATIC Log Show Reminder");
         ReminderLog reminderLog = loadFromFile(uniqueName);
         if(reminderLog == null) {
             Log.v("REMINDER ITEM", "No save, creating new one");
             reminderLog = new ReminderLog();
         }
-        reminderLog.logShown();
+        reminderLog.logShown(dateTime);
         return saveToFile(reminderLog, uniqueName);
     }
 
-    public static boolean logReminderClicked(String uniqueName) {
+    public static boolean logReminderClicked(String uniqueName, DateTimeItem dateTime) {
         Log.v("REMINDER ITEM", "Log Clicked Reminder");
         ReminderLog reminderLog = loadFromFile(uniqueName);
         if(reminderLog == null) {
             Log.v("REMINDER ITEM", "No save, creating new one");
             reminderLog = new ReminderLog();
         }
-        reminderLog.logClicked();
+        reminderLog.logClicked(dateTime);
         return saveToFile(reminderLog, uniqueName);
     }
 
