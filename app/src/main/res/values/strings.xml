@@ -18,6 +18,8 @@
     <string name="app_name">Randomly RemindMe</string>
     <string name="app_short_name">RemindMe</string>
 
+    <string name="store_link">https://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind</string>
+
     <string name="main_list_no_data">You have no reminders yet.\nClick the + button to add a new reminder.</string>
     <string name="data_load_fail">ERROR: Failed to load reminder list</string>
 

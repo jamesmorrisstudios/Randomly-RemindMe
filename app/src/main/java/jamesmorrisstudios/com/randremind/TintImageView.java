@@ -10,20 +10,20 @@ import android.widget.ImageView;
 /**
  * Created by James on 5/4/2015.
  */
-public class CompatImageView extends ImageView {
+public class TintImageView extends ImageView {
 
-    public CompatImageView(Context context) {
+    public TintImageView(Context context) {
         super(context);
     }
 
-    public CompatImageView(Context context, AttributeSet attrs) {
+    public TintImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if(getBackground() != null) {
             setImageDrawable(getBackground());
         }
     }
 
-    public CompatImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TintImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         if(getBackground() != null) {
             setImageDrawable(getBackground());

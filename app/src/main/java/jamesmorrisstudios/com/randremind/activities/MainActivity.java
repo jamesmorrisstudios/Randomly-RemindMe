@@ -58,7 +58,11 @@ public final class MainActivity extends BaseLauncherActivity implements
         if(extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
             Log.v("Main Activity", "Intent received to go to reminder");
             ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
+            clearBackStack();
+            loadMainFragment();
             loadSummaryFragment();
+            getIntent().removeExtra("REMINDER");
+            getIntent().removeExtra("NAME");
         }
     }
 

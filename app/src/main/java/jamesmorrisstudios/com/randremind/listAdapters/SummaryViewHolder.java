@@ -22,8 +22,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
@@ -33,9 +31,7 @@ import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHold
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
-import org.w3c.dom.Text;
-
-import jamesmorrisstudios.com.randremind.CompatImageView;
+import jamesmorrisstudios.com.randremind.TintImageView;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
@@ -50,7 +46,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View dash, endTop;
     private ButtonCircleFlat[] dayButtons;
-    private CompatImageView timingRandom, vibrate, tone;
+    private TintImageView timingRandom, vibrate, tone, ledIcon;
     private TextView timingTimes, content;
 
     //Item
@@ -99,11 +95,12 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         dayButtons[4].getTextView().setText("T");
         dayButtons[5].getTextView().setText("F");
         dayButtons[6].getTextView().setText("S");
-        timingRandom = (CompatImageView) view.findViewById(R.id.timing_random);
+        timingRandom = (TintImageView) view.findViewById(R.id.timing_random);
         timingTimes = (TextView) view.findViewById(R.id.timing_times);
-        vibrate = (CompatImageView) view.findViewById(R.id.notification_vibrate);
-        tone = (CompatImageView) view.findViewById(R.id.notification_tone);
+        vibrate = (TintImageView) view.findViewById(R.id.notification_vibrate);
+        tone = (TintImageView) view.findViewById(R.id.notification_tone);
         content = (TextView) view.findViewById(R.id.content);
+        ledIcon = (TintImageView) view.findViewById(R.id.notification_led);
     }
 
     @Override
@@ -169,6 +166,11 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             vibrate.setAlpha(0.12f);
         }
         content.setText(reminder.content);
+        if(reminder.notificationLED) {
+            ledIcon.setAlpha(1.0f);
+        } else {
+            ledIcon.setAlpha(0.12f);
+        }
     }
 
     @Override
