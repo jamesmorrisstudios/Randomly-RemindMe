@@ -52,11 +52,11 @@
     <string name="distribution_full_random">Fully Random</string>
 
     <string name="alerts_per_day">Reminders Per Day</string>
-    <string name="distribution">Distribution</string>
     <string name="title_hint">Short Name</string>
     <string name="content_hint">Reminder text</string>
     <string name="title_enable">Enable Reminder</string>
     <string name="vibrate_enable">Vibrate</string>
+    <string name="random_enable">Randomize Times</string>
     <string name="high_priority_enable">High Priority</string>
     <string name="led_enable">LED</string>
     <string name="led_color">Color:</string>
@@ -75,6 +75,4 @@
     <string name="reminder_save">Your Changes Have Been Saved</string>
     <string name="reminder_duplicate">Reminder duplicated</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

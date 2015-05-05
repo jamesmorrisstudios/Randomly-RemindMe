@@ -80,8 +80,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reminder_title_text"
-            android:layout_toRightOf="@+id/timing_dash"
-            android:layout_toLeftOf="@+id/reminder_enabled"/>
+            android:layout_toRightOf="@+id/timing_dash" />
+
+        <jamesmorrisstudios.com.randremind.CompatImageView
+            android:id="@+id/timing_random"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@+id/reminder_title_text"
+            android:layout_toRightOf="@+id/reminder_time_end"
+            android:background="@drawable/ic_shuffle_white_24dp"
+            android:tint="@color/textDarkMain"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/timing_times"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@+id/reminder_title_text"
+            android:layout_toRightOf="@+id/timing_random"
+            android:textSize="16sp"
+            android:textColor="@color/textDarkSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:id="@+id/daysContainer"
@@ -98,7 +121,9 @@
                 android:clickable="false"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_margin="4dp" />
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"/>
 
             <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayMon"

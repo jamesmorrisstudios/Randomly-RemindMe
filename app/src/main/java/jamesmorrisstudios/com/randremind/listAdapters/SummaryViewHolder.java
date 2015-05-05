@@ -22,15 +22,24 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.materialuilibrary.controls.CircleProgressDeterminate;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
+import org.w3c.dom.Text;
+
+import jamesmorrisstudios.com.randremind.CompatImageView;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 
 /**
  * Reminder view holder for use in RecyclerView
@@ -40,7 +49,13 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     private TextView title, startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private SwitchCompat enabled;
     private View dash, endTop;
+    private ButtonCircleFlat[] dayButtons;
+    private CompatImageView timingRandom, vibrate, tone;
+    private TextView timingTimes, content;
 
+    //Item
+    private TextView date, show, acked, percent;
+    private CircleProgressDeterminate percentImage;
 
     /**
      * Constructor
@@ -69,11 +84,35 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         endAM = (TextView) endTop.findViewById(R.id.time_am);
         endPM = (TextView) endTop.findViewById(R.id.time_pm);
         dash = view.findViewById(R.id.timing_dash);
+        dayButtons = new ButtonCircleFlat[7];
+        dayButtons[0] = (ButtonCircleFlat) view.findViewById(R.id.daySun);
+        dayButtons[1] = (ButtonCircleFlat) view.findViewById(R.id.dayMon);
+        dayButtons[2] = (ButtonCircleFlat) view.findViewById(R.id.dayTue);
+        dayButtons[3] = (ButtonCircleFlat) view.findViewById(R.id.dayWed);
+        dayButtons[4] = (ButtonCircleFlat) view.findViewById(R.id.dayThu);
+        dayButtons[5] = (ButtonCircleFlat) view.findViewById(R.id.dayFri);
+        dayButtons[6] = (ButtonCircleFlat) view.findViewById(R.id.daySat);
+        dayButtons[0].getTextView().setText("S");
+        dayButtons[1].getTextView().setText("M");
+        dayButtons[2].getTextView().setText("T");
+        dayButtons[3].getTextView().setText("W");
+        dayButtons[4].getTextView().setText("T");
+        dayButtons[5].getTextView().setText("F");
+        dayButtons[6].getTextView().setText("S");
+        timingRandom = (CompatImageView) view.findViewById(R.id.timing_random);
+        timingTimes = (TextView) view.findViewById(R.id.timing_times);
+        vibrate = (CompatImageView) view.findViewById(R.id.notification_vibrate);
+        tone = (CompatImageView) view.findViewById(R.id.notification_tone);
+        content = (TextView) view.findViewById(R.id.content);
     }
 
     @Override
     protected void initItem(View view) {
-
+        date = (TextView) view.findViewById(R.id.date);
+        percent = (TextView) view.findViewById(R.id.percentage);
+        percentImage = (CircleProgressDeterminate) view.findViewById(R.id.percentage_image);
+        show = (TextView) view.findViewById(R.id.shown);
+        acked = (TextView) view.findViewById(R.id.acked);
     }
 
     @Override
@@ -101,13 +140,62 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 reminder.enabled = isChecked;
+                ReminderList.getInstance().saveCurrentReminder();
             }
         });
+        for(int i=0; i<reminder.daysToRun.length; i++) {
+            setDayOfWeek(i, reminder.daysToRun[i]);
+        }
+        if(reminder.rangeTiming) {
+            timingTimes.setText(Integer.toString(reminder.numberPerDay));
+            timingRandom.setVisibility(View.VISIBLE);
+            if(reminder.randomDistribution) {
+                timingRandom.setAlpha(1.0f);
+            } else {
+                timingRandom.setAlpha(0.12f);
+            }
+        } else {
+            timingTimes.setVisibility(View.INVISIBLE);
+            timingRandom.setVisibility(View.INVISIBLE);
+        }
+        if(reminder.notificationTone != null) {
+            tone.setAlpha(1.0f);
+        } else {
+            tone.setAlpha(0.12f);
+        }
+        if(reminder.notificationVibrate) {
+            vibrate.setAlpha(1.0f);
+        } else {
+            vibrate.setAlpha(0.12f);
+        }
+        content.setText(reminder.content);
     }
 
     @Override
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
+        final ReminderLogDay day = (ReminderLogDay) baseRecycleItem;
+        date.setText(UtilsTime.getDateFormatted(day.date));
+        float percentage = (100.0f * day.timesClicked.size()) / day.timesShown.size();
+        percent.setText(Integer.toString(Math.round(percentage))+"%");
+        percentImage.setMax(day.timesShown.size());
+        percentImage.setProgress(day.timesClicked.size());
+        show.setText(Integer.toString(day.timesShown.size()));
+        acked.setText(Integer.toString(day.timesClicked.size()));
+    }
 
+    /**
+     * Set the active state of the day of week reminder
+     * @param dayIndex Index for the day
+     * @param active True to enable
+     */
+    private void setDayOfWeek(int dayIndex, boolean active) {
+        final ButtonCircleFlat dayButton = dayButtons[dayIndex];
+        dayButton.setActivated(active);
+        if(active) {
+            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
+        } else {
+            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));
+        }
     }
 
 }

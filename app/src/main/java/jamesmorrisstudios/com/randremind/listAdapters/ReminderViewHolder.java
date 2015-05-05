@@ -23,6 +23,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
+import jamesmorrisstudios.com.randremind.CompatImageView;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
@@ -47,7 +49,8 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View dash, endTop;
     private ButtonCircleFlat[] dayButtons;
-    private LinearLayout daysContainer;
+    private CompatImageView timingRandom;
+    private TextView timingTimes;
 
     /**
      * Constructor
@@ -81,7 +84,6 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         endAM = (TextView) endTop.findViewById(R.id.time_am);
         endPM = (TextView) endTop.findViewById(R.id.time_pm);
         dash = view.findViewById(R.id.timing_dash);
-        daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
         dayButtons = new ButtonCircleFlat[7];
         dayButtons[0] = (ButtonCircleFlat) view.findViewById(R.id.daySun);
         dayButtons[1] = (ButtonCircleFlat) view.findViewById(R.id.dayMon);
@@ -97,6 +99,8 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         dayButtons[4].getTextView().setText("T");
         dayButtons[5].getTextView().setText("F");
         dayButtons[6].getTextView().setText("S");
+        timingRandom = (CompatImageView) view.findViewById(R.id.timing_random);
+        timingTimes = (TextView) view.findViewById(R.id.timing_times);
     }
 
     @Override
@@ -120,8 +124,8 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
             dash.setVisibility(View.VISIBLE);
         } else {
             UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.singleTime);
-            endTop.setVisibility(View.GONE);
-            dash.setVisibility(View.GONE);
+            endTop.setVisibility(View.INVISIBLE);
+            dash.setVisibility(View.INVISIBLE);
         }
         enabled.setOnCheckedChangeListener(null);
         enabled.setChecked(reminder.enabled);
@@ -131,18 +135,20 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
                 reminder.enabled = isChecked;
             }
         });
-        if(expanded) {
-            topLayout.setMinimumHeight(Utils.getDipInt(200));
-        } else {
-            topLayout.setMinimumHeight(Utils.getDipInt(1));
+        for(int i=0; i<reminder.daysToRun.length; i++) {
+            setDayOfWeek(i, reminder.daysToRun[i]);
         }
         if(reminder.rangeTiming) {
-            daysContainer.setVisibility(View.VISIBLE);
-            for(int i=0; i<reminder.daysToRun.length; i++) {
-                setDayOfWeek(i, reminder.daysToRun[i]);
+            timingTimes.setText(Integer.toString(reminder.numberPerDay));
+            timingRandom.setVisibility(View.VISIBLE);
+            if(reminder.randomDistribution) {
+                timingRandom.setAlpha(1.0f);
+            } else {
+                timingRandom.setAlpha(0.12f);
             }
         } else {
-            daysContainer.setVisibility(View.GONE);
+            timingTimes.setVisibility(View.INVISIBLE);
+            timingRandom.setVisibility(View.INVISIBLE);
         }
     }
 

@@ -238,9 +238,9 @@ public final class ReminderList {
      */
     public final void cancelCurrentReminderChanges() {
         if(currentIndex != -1) {
-            //TODO
+            this.currentItem = null;
+            currentItem = reminders.data.get(currentIndex).copy();
         }
-
     }
 
     /**
@@ -258,8 +258,9 @@ public final class ReminderList {
      * Create a new reminder with default values and set it to current
      */
     public final void createNewReminder() {
-        currentIndex = -1;
-        currentItem = new ReminderItem();
+        currentIndex = reminders.data.size();
+        reminders.data.add(new ReminderItem());
+        currentItem = reminders.data.get(currentIndex).copy();
     }
 
     /**
@@ -270,7 +271,6 @@ public final class ReminderList {
         if(item == null) {
             return;
         }
-
         Notifier.buildNotification(item.getNotification(true));
     }
 
@@ -280,15 +280,11 @@ public final class ReminderList {
      * The current reminder is NOT cleared
      */
     public final void saveCurrentReminder() {
-        currentItem.updateAlertTimes();
-        if(currentIndex == -1) {
-            //New Item so add to end
-            reminders.data.add(currentItem);
-        } else {
+        if(currentItem != null) {
+            currentItem.updateAlertTimes();
             //Existing reminder so copy over the original
             reminders.data.set(currentIndex, currentItem.copy());
         }
-        saveToFile();
     }
 
     /**
@@ -299,7 +295,6 @@ public final class ReminderList {
     public final void duplicateReminder() {
         currentItem.updateAlertTimes();
         reminders.data.add(currentItem.duplicate());
-        saveToFile();
     }
 
     /**
@@ -370,6 +365,9 @@ public final class ReminderList {
         TimeItem time = null;
         //Schedule the next wake we have in this days cycle if any
         for(ReminderItem item : reminders.data) {
+            if(!item.enabled) {
+                continue;
+            }
             ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(item.uniqueName);
             if(alertTimes.isEmpty()) {
                 continue;
@@ -460,36 +458,15 @@ public final class ReminderList {
             return true;
         }
         byte[] bytes = FileWriter.readFile(saveName, false);
-        return bytes != null && deserializeSave(bytes);
-    }
-
-    /**
-     * Deserialize the reminder list
-     * @param bytes Byte array for the save
-     * @return True on success
-     */
-    private boolean deserializeSave(@NonNull byte[] bytes) {
-        //New Method
+        if(bytes == null) {
+            return false;
+        }
         reminders = Serializer.deserializeClass(bytes, Reminders.class);
         if(reminders != null && reminders.data != null) {
-            Log.v("ReminderList", "Deserialize save pass");
+            Log.v("ReminderList", "load save pass");
             return true;
         }
-        //On failure of new method use old method
-        //TODO when beta ends remove this fallback code and just return false;
-        String st;
-        try {
-            st = new String(bytes, stringType);
-        } catch (Exception e1) {
-            return false;
-        }
-        try {
-            JSONObject obj = new JSONObject(st);
-            reminders.data = new Gson().fromJson(obj.get(ReminderList.TAG).toString(), new TypeToken<ArrayList<ReminderItem>>() {}.getType());
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
 }

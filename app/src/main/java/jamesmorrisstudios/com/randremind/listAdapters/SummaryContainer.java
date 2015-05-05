@@ -22,14 +22,15 @@ import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContaine
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 
 /**
- * Container for reminder reminder that abstracts it for use in the recyclerView
+ * Container for reminder summary that abstracts it for use in the recyclerView
  *
  * Created by James on 3/31/2015.
  */
 public final class SummaryContainer extends BaseRecycleContainer {
-    private final BaseRecycleItem item;
+    private final ReminderLogDay item;
     private final ReminderItem headerItem;
 
     public SummaryContainer(@NonNull ReminderItem item) {
@@ -38,7 +39,7 @@ public final class SummaryContainer extends BaseRecycleContainer {
         this.headerItem = item;
     }
 
-    public SummaryContainer(@NonNull BaseRecycleItem item) {
+    public SummaryContainer(@NonNull ReminderLogDay item) {
         super(false);
         this.item = item;
         this.headerItem = null;
@@ -50,7 +51,8 @@ public final class SummaryContainer extends BaseRecycleContainer {
     }
 
     @Override
-    public BaseRecycleItem getItem() {
+    public ReminderLogDay getItem() {
         return item;
     }
+
 }

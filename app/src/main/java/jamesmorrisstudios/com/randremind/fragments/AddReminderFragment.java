@@ -74,12 +74,11 @@ public final class AddReminderFragment extends BaseFragment {
     private static final int NOTIFICATION_RESULT = 5;
     //Views
     private AppCompatEditText titleText, contentText;
-    private SwitchCompat titleEnable;
-    private AppCompatCheckBox notificationVibrateEnable, ledEnable, highPriorityEnable;
+    private AppCompatCheckBox notificationVibrateEnable, ledEnable, highPriorityEnable, randomEnable;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound,
             singleHour, singleMinute, singleAM, singlePM;
     private View startTimeTop, endTimeTop, singleTimeTop, ledColor;
-    private AppCompatSpinner timeSpinner, distributionSpinner;
+    private AppCompatSpinner timeSpinner;
     private ButtonCircleFlat[] dayButtons = new ButtonCircleFlat[7];
     private LinearLayout daysContainer, notificationContainer;
     private ScrollView scrollPane;
@@ -88,6 +87,8 @@ public final class AddReminderFragment extends BaseFragment {
     private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
     //Listeners
     private TextWatcher titleTextWatcher, contentTextWatcher;
+
+    private boolean saveOnBack = true;
 
     /**
      * Required empty public constructor
@@ -128,7 +129,8 @@ public final class AddReminderFragment extends BaseFragment {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         destroyListeners();
-                        ReminderList.getInstance().clearCurrentReminder();
+                        ReminderList.getInstance().cancelCurrentReminderChanges();
+                        saveOnBack = false;
                         utilListener.goBackFromFragment();
                         Utils.toastShort(getString(R.string.reminder_cancel));
                     }
@@ -160,7 +162,6 @@ public final class AddReminderFragment extends BaseFragment {
         //Get all the views
         titleText = (AppCompatEditText) view.findViewById(R.id.titleText);
         contentText = (AppCompatEditText) view.findViewById(R.id.contentText);
-        titleEnable = (SwitchCompat) view.findViewById(R.id.titleEnabled);
         startTimeTop = view.findViewById(R.id.timing_start);
         startHour = (TextView) startTimeTop.findViewById(R.id.time_hour);
         startMinute = (TextView) startTimeTop.findViewById(R.id.time_minute);
@@ -177,7 +178,7 @@ public final class AddReminderFragment extends BaseFragment {
         singleAM = (TextView) singleTimeTop.findViewById(R.id.time_am);
         singlePM = (TextView) singleTimeTop.findViewById(R.id.time_pm);
         timeSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_times_spinner);
-        distributionSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_distribution_spinner);
+        randomEnable = (AppCompatCheckBox) view.findViewById(R.id.timing_random_enabled);
         daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
         notificationContainer = (LinearLayout) view.findViewById(R.id.notificationContainer);
         notificationSound = (TextView) view.findViewById(R.id.notificationSound);
@@ -297,17 +298,6 @@ public final class AddReminderFragment extends BaseFragment {
      * Add title category listeners
      */
     private void addTitleListeners() {
-        //Enable
-        titleEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
-                ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-                if (currentReminder == null) {
-                    return;
-                }
-                currentReminder.enabled = isChecked;
-            }
-        });
         //Title text change
         titleTextWatcher = new TextWatcher() {
             @Override
@@ -462,19 +452,14 @@ public final class AddReminderFragment extends BaseFragment {
             }
         });
         //Distribution
-        distributionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        randomEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onItemSelected(@NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
                 if (currentReminder == null) {
                     return;
                 }
-                currentReminder.distribution = ReminderItem.Distribution.values()[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                currentReminder.randomDistribution = isChecked;
             }
         });
     }
@@ -601,7 +586,6 @@ public final class AddReminderFragment extends BaseFragment {
      * remove all listeners that may fire after we leave
      */
     private void destroyListeners() {
-        titleEnable.setOnCheckedChangeListener(null);
         titleText.removeTextChangedListener(titleTextWatcher);
         contentText.removeTextChangedListener(contentTextWatcher);
         timeSpinner.setOnItemSelectedListener(null);
@@ -617,7 +601,6 @@ public final class AddReminderFragment extends BaseFragment {
         }
         titleText.setText(remind.title);
         contentText.setText(remind.content);
-        titleEnable.setChecked(remind.enabled);
         timingSpecific.setText(getString(R.string.timing_specific));
         timingRange.setText(getString(R.string.timing_range));
         ledColor.setBackgroundColor(remind.notificationLEDColor);
@@ -625,7 +608,7 @@ public final class AddReminderFragment extends BaseFragment {
         UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
         UtilsTime.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
         generateNumberTimePerDay();
-        setupDistributionSpinner();
+        randomEnable.setChecked(remind.randomDistribution);
         setDaysOfWeek();
         setNotification();
     }
@@ -660,24 +643,6 @@ public final class AddReminderFragment extends BaseFragment {
     }
 
     /**
-     * Set the distribution spinner
-     */
-    private void setupDistributionSpinner() {
-        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-        if(remind == null) {
-            return;
-        }
-        List<String> list = new ArrayList<>();
-        list.add(getString(R.string.distribution_even));
-        list.add(getString(R.string.distribution_part_random));
-        list.add(getString(R.string.distribution_most_random));
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, list);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        distributionSpinner.setAdapter(spinnerArrayAdapter);
-        distributionSpinner.setSelection(Math.min(remind.distribution.ordinal(), 2)); //Restrict to the now less options
-    }
-
-    /**
      * Generates how many per day are allowed given the start and end times
      */
     private void generateNumberTimePerDay() {
@@ -686,8 +651,7 @@ public final class AddReminderFragment extends BaseFragment {
             return;
         }
         int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
-        //int max = Math.max(diffMinutes / 10, 1);
-        int max = diffMinutes; //TODO
+        int max = Math.max(diffMinutes / 10, 1);
         remind.numberPerDay = Math.min(remind.numberPerDay, max);
         List<String> perDayList = new ArrayList<>();
         for(int i=0; i<max; i++) {
@@ -704,11 +668,10 @@ public final class AddReminderFragment extends BaseFragment {
      */
     @Override
     public final void onBack() {
-        if(ReminderList.getInstance().hasCurrentReminder()) {
+        if(saveOnBack && ReminderList.getInstance().hasCurrentReminder()) {
             Utils.toastShort(getString(R.string.reminder_save));
             destroyListeners();
             ReminderList.getInstance().saveCurrentReminder();
-            ReminderList.getInstance().saveData();
         }
         utilListener.hideKeyboard();
     }

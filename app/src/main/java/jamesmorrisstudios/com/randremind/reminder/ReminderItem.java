@@ -22,12 +22,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
@@ -74,8 +76,8 @@ public final class ReminderItem extends BaseRecycleItem {
     public TimeItem singleTime;
     @SerializedName("numberPerDay")
     public int numberPerDay;
-    @SerializedName("distribution")
-    public Distribution distribution;
+    @SerializedName("randomDistribution")
+    public boolean randomDistribution;
     @SerializedName("rangeTiming")
     public boolean rangeTiming = true;
     //Repeat
@@ -97,7 +99,16 @@ public final class ReminderItem extends BaseRecycleItem {
     @SerializedName("notificationHighPriority")
     public boolean notificationHighPriority = false;
     //Do Not Serialize This
-    public transient ReminderLog reminderLog = new ReminderLog();
+    public transient ReminderLog reminderLog = null;
+    private transient AsyncTask<Void, Void, Boolean> taskLoad = null;
+
+    /**
+     * Events
+     */
+    public enum ReminderItemEvent {
+        DATA_LOAD_PASS,
+        DATA_LOAD_FAIL,
+    }
 
     /**
      * Creates a new reminder reminder with all the default values set
@@ -116,7 +127,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.endTime = new TimeItem(20, 0);
         this.singleTime = new TimeItem(13, 0);
         this.numberPerDay = 6;
-        this.distribution = Distribution.PART_RANDOM;
+        this.randomDistribution = true;
         this.rangeTiming = true;
         //Repeat
         this.repeat = true; //unused
@@ -136,7 +147,7 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param startTime            Start time object
      * @param endTime              End time object
      * @param numberPerDay         Number per day
-     * @param distribution         Distribution
+     * @param randomDistribution         Distribution
      * @param daysToRun            Days to run
      * @param notificationTone     The uri of the desired notification tone
      * @param notificationToneName The readable name of the notification tone
@@ -144,7 +155,7 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     public ReminderItem(@NonNull String uniqueName, int notificationId, @NonNull String title, @NonNull String content,
                         boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, @NonNull TimeItem singleTime,
-                        int numberPerDay, @NonNull Distribution distribution, boolean rangeTiming, boolean repeat,
+                        int numberPerDay, @NonNull boolean randomDistribution, boolean rangeTiming, boolean repeat,
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
                         boolean notificationVibrate, boolean notificationLED, int notificationLEDColor, boolean notificationHighPriority) {
         this.uniqueName = uniqueName;
@@ -156,7 +167,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.endTime = endTime;
         this.singleTime = singleTime;
         this.numberPerDay = numberPerDay;
-        this.distribution = distribution;
+        this.randomDistribution = randomDistribution;
         this.rangeTiming = rangeTiming;
         this.repeat = repeat;
         this.daysToRun = daysToRun.clone();
@@ -193,7 +204,7 @@ public final class ReminderItem extends BaseRecycleItem {
     @NonNull
     public final ReminderItem copy() {
         return new ReminderItem(uniqueName, notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
-                distribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
+                randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority);
     }
 
@@ -203,7 +214,7 @@ public final class ReminderItem extends BaseRecycleItem {
     @NonNull
     public final ReminderItem duplicate() {
         return new ReminderItem(getUniqueName(), notificationId, title, content, enabled, startTime, endTime, singleTime, numberPerDay,
-                distribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
+                randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority);
     }
 
@@ -244,21 +255,10 @@ public final class ReminderItem extends BaseRecycleItem {
         int diff = getDiffMinutes();
         int startOffset = timeToMinutes(startTime);
 
-        //If even, partRandom, or mostRandom start with an even distribution with some wiggle room
-        float wiggle = 0;
-        switch (distribution) {
-            case EVEN:
-                wiggle = 0;
-                generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
-                break;
-            case PART_RANDOM:
-                wiggle = 0.35f;
-                generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
-                break;
-            case MOST_RANDOM:
-                wiggle = 0.75f;
-                generateEvenishSplit(diff, startOffset, wiggle, numberPerDay);
-                break;
+        if(randomDistribution) {
+            generateEvenishSplit(diff, startOffset, 0.5f, numberPerDay);
+        } else {
+            generateEvenishSplit(diff, startOffset, 0, numberPerDay);
         }
     }
 
@@ -278,7 +278,7 @@ public final class ReminderItem extends BaseRecycleItem {
         for (int i = 0; i < values.length; i++) {
             values[i] = Math.round((i * 1.0f) / (numberItems) * diff) + itemSplit / 2 + Math.round((itemSplit * wiggle) * (rand.nextFloat() - 0.5f));
             if (i > 0) {
-                values[i] = Math.min(Math.max(values[i], values[i - 1] + 1), diff); //TODO +1 back to 5
+                values[i] = Math.min(Math.max(values[i], values[i - 1] + 5), diff);
             }
         }
         for (int value : values) {
@@ -379,13 +379,6 @@ public final class ReminderItem extends BaseRecycleItem {
         return notif;
     }
 
-    /**
-     * Timing distribution
-     */
-    public enum Distribution {
-        EVEN, PART_RANDOM, MOST_RANDOM
-    }
-
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
         ArrayList<String> items = Preferences.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS"+uniqueName);
         ArrayList<TimeItem> timeItems = new ArrayList<>();
@@ -400,7 +393,7 @@ public final class ReminderItem extends BaseRecycleItem {
         for(TimeItem timeItem : alertTimes) {
             items.add(TimeItem.encodeToString(timeItem));
         }
-        Preferences.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS"+uniqueName, items);
+        Preferences.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
     }
 
     public static boolean logReminderShown(String uniqueName) {
@@ -426,6 +419,53 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     /**
+     * Events to post
+     *
+     * @param event Enum to post
+     */
+    private static void postReminderItemEvent(@NonNull ReminderItemEvent event) {
+        Bus.postEnum(event);
+    }
+
+    public final boolean hasReminderLog() {
+        return reminderLog != null && reminderLog.days != null;
+    }
+
+    /**
+     * Loads the reminder list from disk. If already loaded it posts instantly
+     * subscribe to Event.DATA_LOAD_PASS and Event.DATA_LOAD_FAIL for callbacks
+     * @param forceRefresh True to force reload from disk
+     */
+    public final void loadData(boolean forceRefresh) {
+        if(!forceRefresh && hasReminderLog()) {
+            postReminderItemEvent(ReminderItemEvent.DATA_LOAD_PASS);
+        } else {
+            taskLoad = new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(Void... params) {
+                    ReminderLog log = loadFromFile(uniqueName);
+                    if(log != null) {
+                        reminderLog = log;
+                        return true;
+                    }
+                    return false;
+                }
+
+                @Override
+                protected void onPostExecute(Boolean value) {
+                    if(value) {
+                        postReminderItemEvent(ReminderItemEvent.DATA_LOAD_PASS);
+                    } else {
+                        postReminderItemEvent(ReminderItemEvent.DATA_LOAD_FAIL);
+                    }
+                    taskLoad = null;
+                }
+            };
+            taskLoad.execute();
+        }
+    }
+
+    /**
      * Saves the reminder log to file
      *
      * @return True if successful
@@ -442,11 +482,11 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     private static ReminderLog loadFromFile(String uniqueName) {
         if (!FileWriter.doesFileExist("LOG" + uniqueName, false)) {
-            return null;
+            return new ReminderLog();
         }
         byte[] bytes = FileWriter.readFile("LOG" + uniqueName, false);
         if (bytes == null) {
-            return null;
+            return new ReminderLog();
         }
         return Serializer.deserializeClass(bytes, ReminderLog.class);
     }
