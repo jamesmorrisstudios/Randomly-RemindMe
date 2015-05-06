@@ -25,7 +25,6 @@ import android.util.Log;
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
@@ -36,7 +35,7 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 /**
  * Primary activity.
  * Handles navigation and lifecycle control.
- *
+ * <p/>
  * Created by James on 4/20/2015.
  */
 public final class MainActivity extends BaseLauncherActivity implements
@@ -47,14 +46,14 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         Intent intent = getIntent();
-        if(intent == null) {
+        if (intent == null) {
             return;
         }
         Bundle extras = intent.getExtras();
-        if(extras == null) {
+        if (extras == null) {
             return;
         }
-        if(extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
+        if (extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
             Log.v("Main Activity", "Intent received to go to reminder");
             ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
             clearBackStack();
@@ -146,6 +145,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     /**
      * Gets the add reminder fragment from the fragment manager.
      * Creates the fragment if it does not exist yet.
+     *
      * @return The fragment
      */
     @NonNull
@@ -170,6 +170,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     /**
      * Gets the summary fragment from the fragment manager.
      * Creates the fragment if it does not exist yet.
+     *
      * @return The fragment
      */
     @NonNull

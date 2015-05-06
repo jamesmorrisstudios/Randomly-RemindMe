@@ -30,8 +30,8 @@ import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHold
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
-import jamesmorrisstudios.com.randremind.TintImageView;
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.TintImageView;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -50,8 +50,9 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
 
     /**
      * Constructor
-     * @param view Parent view
-     * @param isHeader True if header reminder, false for normal
+     *
+     * @param view      Parent view
+     * @param isHeader  True if header reminder, false for normal
      * @param mListener Click listener. Null if none desired
      */
     public ReminderViewHolder(@NonNull View view, boolean isHeader, @Nullable cardClickListener mListener) {
@@ -109,11 +110,11 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
 
         String title = reminder.title;
-        if(title == null || title.isEmpty()) {
+        if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
         }
         this.title.setText(title);
-        if(reminder.rangeTiming) {
+        if (reminder.rangeTiming) {
             UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.startTime);
             UtilsTime.setTime(endHour, endMinute, endAM, endPM, reminder.endTime);
             endTop.setVisibility(View.VISIBLE);
@@ -131,13 +132,13 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
                 ReminderList.getInstance().setEnableReminder(reminder.uniqueName, isChecked);
             }
         });
-        for(int i=0; i<reminder.daysToRun.length; i++) {
+        for (int i = 0; i < reminder.daysToRun.length; i++) {
             setDayOfWeek(i, reminder.daysToRun[i]);
         }
-        if(reminder.rangeTiming) {
+        if (reminder.rangeTiming) {
             timingTimes.setText(Integer.toString(reminder.numberPerDay));
             timingRandom.setVisibility(View.VISIBLE);
-            if(reminder.randomDistribution) {
+            if (reminder.randomDistribution) {
                 timingRandom.setAlpha(1.0f);
             } else {
                 timingRandom.setAlpha(0.12f);
@@ -150,13 +151,14 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
 
     /**
      * Set the active state of the day of week reminder
+     *
      * @param dayIndex Index for the day
-     * @param active True to enable
+     * @param active   True to enable
      */
     private void setDayOfWeek(int dayIndex, boolean active) {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActivated(active);
-        if(active) {
+        if (active) {
             dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
         } else {
             dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));

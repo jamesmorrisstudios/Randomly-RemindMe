@@ -22,11 +22,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.util.TimeUtils;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.Calendar;
 
@@ -36,7 +34,7 @@ import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
  * Reminder wake scheduler class.
  * This class is responsible for setting all new wake alarms with the android system.
  * It can also cancel unused alarms if needed
- *
+ * <p/>
  * Created by James on 4/23/2015.
  */
 public final class Scheduler {
@@ -45,14 +43,15 @@ public final class Scheduler {
     /**
      * Required private constructor to maintain singleton
      */
-    private Scheduler() {}
+    private Scheduler() {
+    }
 
     /**
      * @return The singleton instance of the Scheduler
      */
     @NonNull
     public static Scheduler getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Scheduler();
         }
         return instance;
@@ -73,6 +72,7 @@ public final class Scheduler {
 
     /**
      * Schedules the next app wake time
+     *
      * @param time Time to schedule for
      */
     public final void scheduleWake(@NonNull TimeItem time, @NonNull String uniqueName) {

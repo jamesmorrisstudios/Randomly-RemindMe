@@ -28,12 +28,8 @@ import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
-import java.util.ArrayList;
-
 import jamesmorrisstudios.com.randremind.activities.MainActivity;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
-import jamesmorrisstudios.com.randremind.reminder.ReminderList;
-import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
 /**
  * Alarm receiver class.
@@ -44,12 +40,14 @@ public final class NotificationReceiver extends BroadcastReceiver {
     /**
      * Empty constructor
      */
-    public NotificationReceiver() {}
+    public NotificationReceiver() {
+    }
 
     /**
      * Receive an alarm from one of our wake settings
+     *
      * @param context Context
-     * @param intent Intent
+     * @param intent  Intent
      */
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
@@ -61,33 +59,33 @@ public final class NotificationReceiver extends BroadcastReceiver {
         TimeItem timeNow = UtilsTime.getTimeNow();
         Log.v("Notification RECEIVER", "Woke At: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
 
-        if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED")) {
+        if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED")) {
             Log.v("Notification RECEIVER", "notification click");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
+            if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
                 DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
                 logClicked(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted, context);
             }
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT")) {
+        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT")) {
             Log.v("Notification RECEIVER", "notification click silent");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
+            if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
                 DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
                 logAck(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED")) {
+        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED")) {
             Log.v("Notification RECEIVER", "notification delete");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
+            if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
                 DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
                 logDeleted(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS")) {
+        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS")) {
             Log.v("Notification RECEIVER", "notification dismiss");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
+            if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
                 DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
                 logDismiss(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE")) {
+        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE")) {
             Log.v("Notification RECEIVER", "notification acknowledge");
-            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
+            if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
                 DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
                 logAck(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
@@ -100,10 +98,10 @@ public final class NotificationReceiver extends BroadcastReceiver {
     }
 
     private void logClicked(String name, int notificationId, boolean preview, DateTimeItem dateTime, Context context) {
-        Log.v("Notification RECEIVER", "log clicked: Preview: "+preview);
-        Log.v("ALARM RECEIVER", "ID Clicked: "+notificationId);
+        Log.v("Notification RECEIVER", "log clicked: Preview: " + preview);
+        Log.v("ALARM RECEIVER", "ID Clicked: " + notificationId);
         logAck(name, notificationId, preview, dateTime);
-        if(!preview) {
+        if (!preview) {
             Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
             intent.putExtra("NAME", name);
             intent.putExtra("REMINDER", true);
@@ -113,22 +111,22 @@ public final class NotificationReceiver extends BroadcastReceiver {
     }
 
     private void logDeleted(String name, int notificationId, boolean preview, DateTimeItem dateTime) {
-        Log.v("Notification RECEIVER", "ID Deleted: "+notificationId);
+        Log.v("Notification RECEIVER", "ID Deleted: " + notificationId);
         //Do nothing?...
     }
 
     private void logDismiss(String name, int notificationId, boolean preview, DateTimeItem dateTime) {
-        Log.v("Notification RECEIVER", "ID Dismissed: "+notificationId);
+        Log.v("Notification RECEIVER", "ID Dismissed: " + notificationId);
         Notifier.dismissNotification(notificationId);
         //if(!preview) {
-            //Do nothing?...
+        //Do nothing?...
         //}
     }
 
     private void logAck(String name, int notificationId, boolean preview, DateTimeItem dateTime) {
-        Log.v("Notification RECEIVER", "ID Ack: "+notificationId);
+        Log.v("Notification RECEIVER", "ID Ack: " + notificationId);
         Notifier.dismissNotification(notificationId);
-        if(!preview) {
+        if (!preview) {
             ReminderItem.logReminderClicked(name, dateTime);
         }
     }

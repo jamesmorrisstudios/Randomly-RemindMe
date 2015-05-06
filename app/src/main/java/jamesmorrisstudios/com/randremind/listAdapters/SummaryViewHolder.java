@@ -16,7 +16,6 @@
 
 package jamesmorrisstudios.com.randremind.listAdapters;
 
-import android.app.ActivityManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -32,8 +31,8 @@ import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHold
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
-import jamesmorrisstudios.com.randremind.TintImageView;
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.TintImageView;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
@@ -56,8 +55,9 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
 
     /**
      * Constructor
-     * @param view Parent view
-     * @param isHeader True if header reminder, false for normal
+     *
+     * @param view      Parent view
+     * @param isHeader  True if header reminder, false for normal
      * @param mListener Click listener. Null if none desired
      */
     public SummaryViewHolder(@NonNull View view, boolean isHeader, @Nullable cardClickListener mListener) {
@@ -119,11 +119,11 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
 
         String title = reminder.title;
-        if(title == null || title.isEmpty()) {
+        if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
         }
         this.title.setText(title);
-        if(reminder.rangeTiming) {
+        if (reminder.rangeTiming) {
             UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.startTime);
             UtilsTime.setTime(endHour, endMinute, endAM, endPM, reminder.endTime);
             endTop.setVisibility(View.VISIBLE);
@@ -141,13 +141,13 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
                 ReminderList.getInstance().setEnableReminder(reminder.uniqueName, isChecked);
             }
         });
-        for(int i=0; i<reminder.daysToRun.length; i++) {
+        for (int i = 0; i < reminder.daysToRun.length; i++) {
             setDayOfWeek(i, reminder.daysToRun[i]);
         }
-        if(reminder.rangeTiming) {
+        if (reminder.rangeTiming) {
             timingTimes.setText(Integer.toString(reminder.numberPerDay));
             timingRandom.setVisibility(View.VISIBLE);
-            if(reminder.randomDistribution) {
+            if (reminder.randomDistribution) {
                 timingRandom.setAlpha(1.0f);
             } else {
                 timingRandom.setAlpha(0.12f);
@@ -156,23 +156,23 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             timingTimes.setVisibility(View.INVISIBLE);
             timingRandom.setVisibility(View.INVISIBLE);
         }
-        if(reminder.notificationTone != null) {
+        if (reminder.notificationTone != null) {
             tone.setAlpha(1.0f);
         } else {
             tone.setAlpha(0.12f);
         }
-        if(reminder.notificationVibrate) {
+        if (reminder.notificationVibrate) {
             vibrate.setAlpha(1.0f);
         } else {
             vibrate.setAlpha(0.12f);
         }
         content.setText(reminder.content);
-        if(reminder.notificationLED) {
+        if (reminder.notificationLED) {
             ledIcon.setAlpha(1.0f);
         } else {
             ledIcon.setAlpha(0.12f);
         }
-        if(reminder.notificationHighPriority) {
+        if (reminder.notificationHighPriority) {
             highPriorityIcon.setAlpha(1.0f);
         } else {
             highPriorityIcon.setAlpha(0.12f);
@@ -182,7 +182,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     @Override
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderLogDay day = (ReminderLogDay) baseRecycleItem;
-        if(day.lifetime) {
+        if (day.lifetime) {
             date.setText(AppUtil.getContext().getString(R.string.lifetime));
             float percentage = (100.0f * day.timesClickedLifetime) / day.timesShownLifetime;
             percent.setText(Integer.toString(Math.round(percentage)) + "%");
@@ -203,13 +203,14 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
 
     /**
      * Set the active state of the day of week reminder
+     *
      * @param dayIndex Index for the day
-     * @param active True to enable
+     * @param active   True to enable
      */
     private void setDayOfWeek(int dayIndex, boolean active) {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActivated(active);
-        if(active) {
+        if (active) {
             dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
         } else {
             dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));

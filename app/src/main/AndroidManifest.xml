@@ -13,8 +13,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
 -->
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jamesmorrisstudios.com.randremind">
 
     <!-- For notifications -->
@@ -44,8 +43,8 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="jamesmorrisstudios.com.randremind.WAKEREMINDER"/>
-                <action android:name="jamesmorrisstudios.com.randremind.WAKEMIDNIGHT"/>
+                <action android:name="jamesmorrisstudios.com.randremind.WAKEREMINDER" />
+                <action android:name="jamesmorrisstudios.com.randremind.WAKEMIDNIGHT" />
             </intent-filter>
         </receiver>
 
@@ -54,10 +53,10 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED"/>
-                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED"/>
-                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS"/>
-                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE"/>
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED" />
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED" />
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS" />
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE" />
             </intent-filter>
         </receiver>
 

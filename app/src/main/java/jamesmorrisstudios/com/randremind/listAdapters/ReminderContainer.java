@@ -25,7 +25,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 
 /**
  * Container for reminder reminder that abstracts it for use in the recyclerView
- *
+ * <p/>
  * Created by James on 3/31/2015.
  */
 public final class ReminderContainer extends BaseRecycleContainer {

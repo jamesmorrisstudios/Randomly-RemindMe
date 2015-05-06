@@ -29,11 +29,10 @@ import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Reminder list control class. Add, remove, save, delete reminders
- *
+ * <p/>
  * Created by James on 4/20/2015.
  */
 public final class ReminderList {
@@ -43,25 +42,25 @@ public final class ReminderList {
     private static final String stringType = "UTF-8";
     //Reminder singleton instance
     private static ReminderList instance = null;
+    AsyncTask<Void, Void, Boolean> taskLoad = null;
+    AsyncTask<Void, Void, Boolean> taskSave = null;
     //Reminder List
     private Reminders reminders = new Reminders();
     //The currently selected reminder as a copy
     private int currentIndex = -1;
     private ReminderItem currentItem;
 
-    AsyncTask<Void, Void, Boolean> taskLoad = null;
-    AsyncTask<Void, Void, Boolean> taskSave = null;
-
     /**
      * Required private constructor to maintain singleton
      */
-    private ReminderList() {}
+    private ReminderList() {
+    }
 
     /**
      * @return The singleton instance of the reminderList
      */
     public static ReminderList getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ReminderList();
         }
         return instance;
@@ -77,22 +76,13 @@ public final class ReminderList {
     }
 
     /**
-     * Events
-     */
-    public enum ReminderListEvent {
-        DATA_LOAD_PASS,
-        DATA_LOAD_FAIL,
-        DATA_SAVE_PASS,
-        DATA_SAVE_FAIL
-    }
-
-    /**
      * Loads the reminder list data on the calling thread instead of an asynctask
+     *
      * @return True if successful
      */
     public final boolean loadDataSync() {
         boolean status = loadFromFile();
-        if(status) {
+        if (status) {
             validateSaveData();
         }
         return status;
@@ -101,10 +91,11 @@ public final class ReminderList {
     /**
      * Loads the reminder list from disk. If already loaded it posts instantly
      * subscribe to Event.DATA_LOAD_PASS and Event.DATA_LOAD_FAIL for callbacks
+     *
      * @param forceRefresh True to force reload from disk
      */
     public final void loadData(boolean forceRefresh) {
-        if(!forceRefresh && hasReminders()) {
+        if (!forceRefresh && hasReminders()) {
             ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_PASS);
         } else {
             taskLoad = new AsyncTask<Void, Void, Boolean>() {
@@ -115,7 +106,7 @@ public final class ReminderList {
 
                 @Override
                 protected void onPostExecute(Boolean value) {
-                    if(value) {
+                    if (value) {
                         validateSaveData();
                         ReminderList.postReminderListEvent(ReminderListEvent.DATA_LOAD_PASS);
                     } else {
@@ -134,6 +125,7 @@ public final class ReminderList {
 
     /**
      * Saves the reminder list data on the calling thread instead of an asynctask
+     *
      * @return True if successful
      */
     public final boolean saveDataSync() {
@@ -153,7 +145,7 @@ public final class ReminderList {
 
             @Override
             protected void onPostExecute(Boolean value) {
-                if(value) {
+                if (value) {
                     ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_PASS);
                 } else {
                     ReminderList.postReminderListEvent(ReminderListEvent.DATA_SAVE_FAIL);
@@ -177,6 +169,7 @@ public final class ReminderList {
 
     /**
      * Get the reminders. This will be an empty list if you have not already loaded them.
+     *
      * @return The list of reminders
      */
     @NonNull
@@ -189,20 +182,8 @@ public final class ReminderList {
      */
     public final void setCurrentReminder(@NonNull ReminderItem item) {
         int index = 0;
-        for(ReminderItem itemInt : reminders.data) {
-            if(itemInt.equals(item)) {
-                this.currentIndex = index;
-                this.currentItem = reminders.data.get(currentIndex).copy();
-                return;
-            }
-            index++;
-        }
-    }
-
-    public final void setCurrentReminder(@NonNull String uniqueName) {
-        int index = 0;
-        for(ReminderItem itemInt : reminders.data) {
-            if(itemInt.uniqueName.equals(uniqueName)) {
+        for (ReminderItem itemInt : reminders.data) {
+            if (itemInt.equals(item)) {
                 this.currentIndex = index;
                 this.currentItem = reminders.data.get(currentIndex).copy();
                 return;
@@ -213,8 +194,8 @@ public final class ReminderList {
 
     @Nullable
     public final ReminderItem getReminder(@NonNull String uniqueName) {
-        for(ReminderItem item : reminders.data) {
-            if(item.uniqueName.equals(uniqueName)) {
+        for (ReminderItem item : reminders.data) {
+            if (item.uniqueName.equals(uniqueName)) {
                 return item;
             }
         }
@@ -223,12 +204,12 @@ public final class ReminderList {
 
     public final void setEnableReminder(@NonNull String uniqueName, boolean enable) {
         ReminderItem item = getReminder(uniqueName);
-        if(item == null) {
+        if (item == null) {
             return;
         }
-        if(currentItem != null && currentItem.equals(item)) {
+        if (currentItem != null && currentItem.equals(item)) {
             currentItem.enabled = enable;
-            if(enable) {
+            if (enable) {
                 currentItem.rescheduleNextWake(UtilsTime.getTimeNow());
             } else {
                 currentItem.deleteNextWake();
@@ -237,7 +218,7 @@ public final class ReminderList {
             return;
         }
         item.enabled = enable;
-        if(enable) {
+        if (enable) {
             item.rescheduleNextWake(UtilsTime.getTimeNow());
         } else {
             item.deleteNextWake();
@@ -256,7 +237,7 @@ public final class ReminderList {
      * Resets the current reminder back to the last saved version
      */
     public final void cancelCurrentReminderChanges() {
-        if(currentIndex != -1) {
+        if (currentIndex != -1) {
             this.currentItem = null;
             currentItem = reminders.data.get(currentIndex).copy();
         }
@@ -267,7 +248,7 @@ public final class ReminderList {
      * Clears it from the currently set
      */
     public final void deleteCurrentReminder() {
-        if(currentIndex != -1) {
+        if (currentIndex != -1) {
             reminders.data.get(currentIndex).deleteReminderLog();
             reminders.data.get(currentIndex).deleteAlertTimes();
             reminders.data.remove(currentIndex);
@@ -289,7 +270,7 @@ public final class ReminderList {
      */
     public final void previewCurrent() {
         ReminderItem item = getCurrentReminder();
-        if(item == null) {
+        if (item == null) {
             return;
         }
         Notifier.buildNotification(item.getNotification(true, UtilsTime.getDateTimeNow()));
@@ -301,7 +282,7 @@ public final class ReminderList {
      * The current reminder is NOT cleared
      */
     public final void saveCurrentReminder() {
-        if(currentItem != null) {
+        if (currentItem != null) {
             currentItem.updateAlertTimes();
             currentItem.rescheduleNextWake(UtilsTime.getTimeNow());
             //Existing reminder so copy over the original
@@ -316,7 +297,7 @@ public final class ReminderList {
      */
     public final void duplicateReminder() {
         currentItem.updateAlertTimes();
-        reminders.data.add(currentIndex+1, currentItem.duplicate());
+        reminders.data.add(currentIndex + 1, currentItem.duplicate());
     }
 
     /**
@@ -334,18 +315,30 @@ public final class ReminderList {
         return currentItem;
     }
 
+    public final void setCurrentReminder(@NonNull String uniqueName) {
+        int index = 0;
+        for (ReminderItem itemInt : reminders.data) {
+            if (itemInt.uniqueName.equals(uniqueName)) {
+                this.currentIndex = index;
+                this.currentItem = reminders.data.get(currentIndex).copy();
+                return;
+            }
+            index++;
+        }
+    }
+
     /**
      * Updates all reminders wake times
      * This is stored in the Android shared prefs. Not the primary serialized save for this app.
      */
     public final void recalculateWakes() {
-        for(ReminderItem item : reminders.data) {
+        for (ReminderItem item : reminders.data) {
             item.updateAlertTimes();
         }
     }
 
     public final void scheduleAllWakes(TimeItem timeNow) {
-        for(ReminderItem item : reminders.data) {
+        for (ReminderItem item : reminders.data) {
             item.rescheduleNextWake(timeNow);
         }
     }
@@ -354,14 +347,14 @@ public final class ReminderList {
      * This is to fix a bug where duplicated reminders had the same unique name.
      */
     private void validateSaveData() {
-        if(reminders.data == null || reminders.data.isEmpty() || reminders.data.size() < 2) {
+        if (reminders.data == null || reminders.data.isEmpty() || reminders.data.size() < 2) {
             return;
         }
-        for(int i=0; i<reminders.data.size(); i++) {
+        for (int i = 0; i < reminders.data.size(); i++) {
             ReminderItem firstItem = reminders.data.get(i);
-            for(int j=i+1; j<reminders.data.size(); j++) {
+            for (int j = i + 1; j < reminders.data.size(); j++) {
                 ReminderItem secondItem = reminders.data.get(j);
-                if(firstItem.uniqueName.equals(secondItem.uniqueName)) {
+                if (firstItem.uniqueName.equals(secondItem.uniqueName)) {
                     secondItem.uniqueName = ReminderItem.getUniqueName();
                 }
             }
@@ -370,6 +363,7 @@ public final class ReminderList {
 
     /**
      * Saves the reminder list to file
+     *
      * @return True if successful
      */
     private boolean saveToFile() {
@@ -379,22 +373,33 @@ public final class ReminderList {
 
     /**
      * Loads the reminder list from file
+     *
      * @return True if successful
      */
     private boolean loadFromFile() {
-        if(!FileWriter.doesFileExist(saveName, false)) {
+        if (!FileWriter.doesFileExist(saveName, false)) {
             return true;
         }
         byte[] bytes = FileWriter.readFile(saveName, false);
-        if(bytes == null) {
+        if (bytes == null) {
             return false;
         }
         reminders = Serializer.deserializeClass(bytes, Reminders.class);
-        if(reminders != null && reminders.data != null) {
+        if (reminders != null && reminders.data != null) {
             Log.v("ReminderList", "load save pass");
             return true;
         }
         return false;
+    }
+
+    /**
+     * Events
+     */
+    public enum ReminderListEvent {
+        DATA_LOAD_PASS,
+        DATA_LOAD_FAIL,
+        DATA_SAVE_PASS,
+        DATA_SAVE_FAIL
     }
 
 }

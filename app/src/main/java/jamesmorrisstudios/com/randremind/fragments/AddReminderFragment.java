@@ -88,10 +88,12 @@ public final class AddReminderFragment extends BaseFragment {
     /**
      * Required empty public constructor
      */
-    public AddReminderFragment() {}
+    public AddReminderFragment() {
+    }
 
     /**
      * Constructor. Enable menu options
+     *
      * @param savedInstanceState Saved instance state
      */
     @Override
@@ -102,7 +104,8 @@ public final class AddReminderFragment extends BaseFragment {
 
     /**
      * Setup the toolbar options menu
-     * @param menu Menu
+     *
+     * @param menu     Menu
      * @param inflater Inflater
      */
     @Override
@@ -113,6 +116,7 @@ public final class AddReminderFragment extends BaseFragment {
 
     /**
      * Handle toolbar menu button clicks
+     *
      * @param item Selected reminder
      * @return True if action consumed
      */
@@ -146,8 +150,9 @@ public final class AddReminderFragment extends BaseFragment {
     /**
      * Create the view and add references to all the items in the xml.
      * Then init with our reminder
-     * @param inflater Inflater
-     * @param container Container view
+     *
+     * @param inflater           Inflater
+     * @param container          Container view
      * @param savedInstanceState Saved instance state
      * @return This fragments top view
      */
@@ -266,7 +271,7 @@ public final class AddReminderFragment extends BaseFragment {
         if (remind == null) {
             return;
         }
-        if(remind.rangeTiming) {
+        if (remind.rangeTiming) {
             //Show all of the range timing views
             timingTimes.setVisibility(View.VISIBLE);
             timingTimesPerDay.setVisibility(View.VISIBLE);
@@ -279,7 +284,7 @@ public final class AddReminderFragment extends BaseFragment {
             timingTimesPerDay.setVisibility(View.GONE);
             timingDistribution.setVisibility(View.GONE);
         }
-        if(remind.rangeTiming) {
+        if (remind.rangeTiming) {
             timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
             timingRange.getTextView().setTextColor(getResources().getColor(R.color.primaryDark));
         } else {
@@ -379,7 +384,7 @@ public final class AddReminderFragment extends BaseFragment {
                     return;
                 }
                 int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (hourOfDay * 60 + minute);
-                if(diffMinutes >= 0) {
+                if (diffMinutes >= 0) {
                     remind.startTime.hour = hourOfDay;
                     remind.startTime.minute = minute;
                     UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
@@ -409,7 +414,7 @@ public final class AddReminderFragment extends BaseFragment {
                     return;
                 }
                 int diffMinutes = (hourOfDay * 60 + minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
-                if(diffMinutes >= 0) {
+                if (diffMinutes >= 0) {
                     remind.endTime.hour = hourOfDay;
                     remind.endTime.minute = minute;
                     UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
@@ -464,13 +469,13 @@ public final class AddReminderFragment extends BaseFragment {
      */
     private void repeatDaysListener() {
         //Day of week selector
-        for(int i=0; i<dayButtons.length; i++) {
+        for (int i = 0; i < dayButtons.length; i++) {
             final int index = i;
             dayButtons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(@NonNull View v) {
                     ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                    if(remind == null) {
+                    if (remind == null) {
                         return;
                     }
                     remind.daysToRun[index] = !dayButtons[index].isActivated();
@@ -492,7 +497,7 @@ public final class AddReminderFragment extends BaseFragment {
                     return;
                 }
                 Uri defaultUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                if(remind.notificationTone != null) {
+                if (remind.notificationTone != null) {
                     defaultUri = Uri.parse(remind.notificationTone);
                 }
                 Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
@@ -591,7 +596,7 @@ public final class AddReminderFragment extends BaseFragment {
      */
     private void populateData() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-        if(remind == null) {
+        if (remind == null) {
             return;
         }
         titleText.setText(remind.title);
@@ -613,7 +618,7 @@ public final class AddReminderFragment extends BaseFragment {
      */
     private void setNotification() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-        if(remind == null) {
+        if (remind == null) {
             return;
         }
         notificationContainer.setVisibility(View.VISIBLE);
@@ -628,11 +633,11 @@ public final class AddReminderFragment extends BaseFragment {
      */
     private void setDaysOfWeek() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-        if(remind == null) {
+        if (remind == null) {
             return;
         }
         daysContainer.setVisibility(View.VISIBLE);
-        for(int i=0; i<remind.daysToRun.length; i++) {
+        for (int i = 0; i < remind.daysToRun.length; i++) {
             setDayOfWeek(i, remind.daysToRun[i]);
         }
     }
@@ -642,15 +647,15 @@ public final class AddReminderFragment extends BaseFragment {
      */
     private void generateNumberTimePerDay() {
         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-        if(remind == null) {
+        if (remind == null) {
             return;
         }
         int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
         int max = Math.max(diffMinutes / 10, 1);
         remind.numberPerDay = Math.min(remind.numberPerDay, max);
         List<String> perDayList = new ArrayList<>();
-        for(int i=0; i<max; i++) {
-            perDayList.add(Integer.toString(i+1));
+        for (int i = 0; i < max; i++) {
+            perDayList.add(Integer.toString(i + 1));
         }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, perDayList);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -663,7 +668,7 @@ public final class AddReminderFragment extends BaseFragment {
      */
     @Override
     public final void onBack() {
-        if(saveOnBack && ReminderList.getInstance().hasCurrentReminder()) {
+        if (saveOnBack && ReminderList.getInstance().hasCurrentReminder()) {
             Utils.toastShort(getString(R.string.reminder_save));
             destroyListeners();
             ReminderList.getInstance().saveCurrentReminder();
@@ -674,16 +679,17 @@ public final class AddReminderFragment extends BaseFragment {
     /**
      * Activity callback result for popup actions.
      * TODO eventually replace all called activities with native designs
+     *
      * @param requestCode Request code
-     * @param resultCode Result code status
-     * @param intent Result intent
+     * @param resultCode  Result code status
+     * @param intent      Result intent
      */
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, @NonNull final Intent intent) {
         if (resultCode == Activity.RESULT_OK && requestCode == 5) {
             Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
             ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-            if(remind == null) {
+            if (remind == null) {
                 return;
             }
             if (uri != null) {
@@ -714,13 +720,14 @@ public final class AddReminderFragment extends BaseFragment {
 
     /**
      * Set the active state of the day of week reminder
+     *
      * @param dayIndex Index for the day
-     * @param active True to enable
+     * @param active   True to enable
      */
     private void setDayOfWeek(int dayIndex, boolean active) {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActivated(active);
-        if(active) {
+        if (active) {
             dayButton.getTextView().setTextColor(getResources().getColor(R.color.primary));
         } else {
             dayButton.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));

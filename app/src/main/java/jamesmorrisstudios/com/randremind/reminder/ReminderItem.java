@@ -17,9 +17,7 @@
 package jamesmorrisstudios.com.randremind.reminder;
 
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -29,7 +27,6 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
-import com.jamesmorrisstudios.materialuilibrary.utils.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
@@ -41,14 +38,11 @@ import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.activities.MainActivity;
-import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
 import jamesmorrisstudios.com.randremind.receiver.NotificationReceiver;
 
 /**
@@ -104,14 +98,6 @@ public final class ReminderItem extends BaseRecycleItem {
     private transient AsyncTask<Void, Void, Boolean> taskLoad = null;
 
     /**
-     * Events
-     */
-    public enum ReminderItemEvent {
-        DATA_LOAD_PASS,
-        DATA_LOAD_FAIL,
-    }
-
-    /**
      * Creates a new reminder reminder with all the default values set
      */
     public ReminderItem() {
@@ -147,7 +133,7 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param startTime            Start time object
      * @param endTime              End time object
      * @param numberPerDay         Number per day
-     * @param randomDistribution         Distribution
+     * @param randomDistribution   Distribution
      * @param daysToRun            Days to run
      * @param notificationTone     The uri of the desired notification tone
      * @param notificationToneName The readable name of the notification tone
@@ -179,15 +165,6 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     /**
-     * Truncates the UUID for a unique id
-     *
-     * @return A unique notification id
-     */
-    public final int getNotificationId() {
-        return uniqueName.hashCode();
-    }
-
-    /**
      * Generates a unique name for the reminder
      *
      * @return Unique name
@@ -195,6 +172,89 @@ public final class ReminderItem extends BaseRecycleItem {
     @NonNull
     public static String getUniqueName() {
         return UUID.randomUUID().toString();
+    }
+
+    public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
+        ArrayList<String> items = Preferences.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
+        ArrayList<TimeItem> timeItems = new ArrayList<>();
+        for (String item : items) {
+            timeItems.add(TimeItem.decodeFromString(item));
+        }
+        return timeItems;
+    }
+
+    public static void setAlertTimes(ArrayList<TimeItem> alertTimes, String uniqueName) {
+        ArrayList<String> items = new ArrayList<>();
+        for (TimeItem timeItem : alertTimes) {
+            items.add(TimeItem.encodeToString(timeItem));
+        }
+        Preferences.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
+    }
+
+    public static boolean logReminderShown(String uniqueName, DateTimeItem dateTime) {
+        Log.v("REMINDER ITEM", "STATIC Log Show Reminder");
+        ReminderLog reminderLog = loadFromFile(uniqueName);
+        if (reminderLog == null) {
+            Log.v("REMINDER ITEM", "No save, creating new one");
+            reminderLog = new ReminderLog();
+        }
+        reminderLog.logShown(dateTime);
+        return saveToFile(reminderLog, uniqueName);
+    }
+
+    public static boolean logReminderClicked(String uniqueName, DateTimeItem dateTime) {
+        Log.v("REMINDER ITEM", "Log Clicked Reminder");
+        ReminderLog reminderLog = loadFromFile(uniqueName);
+        if (reminderLog == null) {
+            Log.v("REMINDER ITEM", "No save, creating new one");
+            reminderLog = new ReminderLog();
+        }
+        reminderLog.logClicked(dateTime);
+        return saveToFile(reminderLog, uniqueName);
+    }
+
+    /**
+     * Events to post
+     *
+     * @param event Enum to post
+     */
+    private static void postReminderItemEvent(@NonNull ReminderItemEvent event) {
+        Bus.postEnum(event);
+    }
+
+    /**
+     * Saves the reminder log to file
+     *
+     * @return True if successful
+     */
+    private static boolean saveToFile(ReminderLog reminderLog, String uniqueName) {
+        byte[] bytes = Serializer.serializeClass(reminderLog);
+        return bytes != null && FileWriter.writeFile("LOG" + uniqueName, bytes, false);
+    }
+
+    /**
+     * Loads the reminder log from file
+     *
+     * @return True if successful
+     */
+    private static ReminderLog loadFromFile(String uniqueName) {
+        if (!FileWriter.doesFileExist("LOG" + uniqueName, false)) {
+            return new ReminderLog();
+        }
+        byte[] bytes = FileWriter.readFile("LOG" + uniqueName, false);
+        if (bytes == null) {
+            return new ReminderLog();
+        }
+        return Serializer.deserializeClass(bytes, ReminderLog.class);
+    }
+
+    /**
+     * Truncates the UUID for a unique id
+     *
+     * @return A unique notification id
+     */
+    public final int getNotificationId() {
+        return uniqueName.hashCode();
     }
 
     /**
@@ -254,7 +314,7 @@ public final class ReminderItem extends BaseRecycleItem {
         int diff = getDiffMinutes();
         int startOffset = timeToMinutes(startTime);
 
-        if(randomDistribution) {
+        if (randomDistribution) {
             generateEvenishSplit(diff, startOffset, 0.5f, numberPerDay);
         } else {
             generateEvenishSplit(diff, startOffset, 0, numberPerDay);
@@ -317,16 +377,16 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void scheduleNextWake(TimeItem timeNow) {
-        if(!enabled) {
+        if (!enabled) {
             return;
         }
         ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
-        if(alertTimes.isEmpty()) {
+        if (alertTimes.isEmpty()) {
             return;
         }
-        for(TimeItem alertTime : alertTimes) {
+        for (TimeItem alertTime : alertTimes) {
             //alert time is after the current time
-            if(!UtilsTime.timeBeforeOrEqual(alertTime, timeNow) || (timeNow.minute == 0 && timeNow.hour == 0)) {
+            if (!UtilsTime.timeBeforeOrEqual(alertTime, timeNow) || (timeNow.minute == 0 && timeNow.hour == 0)) {
                 Scheduler.getInstance().scheduleWake(alertTime, uniqueName);
                 return;
             }
@@ -344,25 +404,25 @@ public final class ReminderItem extends BaseRecycleItem {
 
     public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime) {
         String title = this.title;
-        if(title == null || title.isEmpty()) {
+        if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
         }
 
         String content = this.content;
-        if(content == null || content.isEmpty()) {
+        if (content == null || content.isEmpty()) {
             content = AppUtil.getContext().getString(R.string.default_content);
         }
 
         NotificationContent notif = new NotificationContent(title, content, this.getNotificationTone(), R.drawable.notification_icon,
                 AppUtil.getContext().getResources().getColor(R.color.accent), getNotificationId());
 
-        if(this.notificationVibrate) {
+        if (this.notificationVibrate) {
             notif.enableVibrate();
         }
-        if(this.notificationHighPriority) {
+        if (this.notificationHighPriority) {
             notif.enableHighPriority();
         }
-        if(this.notificationLED) {
+        if (this.notificationLED) {
             notif.enableLed(this.notificationLEDColor);
         }
 
@@ -394,7 +454,7 @@ public final class ReminderItem extends BaseRecycleItem {
         intentAck.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentAck.putExtra("NOTIFICATION_ID", getNotificationId());
 
-        if(preview) {
+        if (preview) {
             intentClicked.putExtra("PREVIEW", true);
             intentCancel.putExtra("PREVIEW", true);
             intentDismiss.putExtra("PREVIEW", true);
@@ -404,7 +464,7 @@ public final class ReminderItem extends BaseRecycleItem {
         String pref = AppUtil.getContext().getString(R.string.settings_pref);
         String key = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
 
-        if(!Preferences.getBoolean(pref, key, true)) {
+        if (!Preferences.getBoolean(pref, key, true)) {
             intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT");
         }
 
@@ -426,55 +486,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void deleteAlertTimes() {
-        Preferences.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS"+uniqueName);
-    }
-
-    public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
-        ArrayList<String> items = Preferences.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS"+uniqueName);
-        ArrayList<TimeItem> timeItems = new ArrayList<>();
-        for(String item : items) {
-            timeItems.add(TimeItem.decodeFromString(item));
-        }
-        return timeItems;
-    }
-
-    public static void setAlertTimes(ArrayList<TimeItem> alertTimes, String uniqueName) {
-        ArrayList<String> items = new ArrayList<>();
-        for(TimeItem timeItem : alertTimes) {
-            items.add(TimeItem.encodeToString(timeItem));
-        }
-        Preferences.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
-    }
-
-    public static boolean logReminderShown(String uniqueName, DateTimeItem dateTime) {
-        Log.v("REMINDER ITEM", "STATIC Log Show Reminder");
-        ReminderLog reminderLog = loadFromFile(uniqueName);
-        if(reminderLog == null) {
-            Log.v("REMINDER ITEM", "No save, creating new one");
-            reminderLog = new ReminderLog();
-        }
-        reminderLog.logShown(dateTime);
-        return saveToFile(reminderLog, uniqueName);
-    }
-
-    public static boolean logReminderClicked(String uniqueName, DateTimeItem dateTime) {
-        Log.v("REMINDER ITEM", "Log Clicked Reminder");
-        ReminderLog reminderLog = loadFromFile(uniqueName);
-        if(reminderLog == null) {
-            Log.v("REMINDER ITEM", "No save, creating new one");
-            reminderLog = new ReminderLog();
-        }
-        reminderLog.logClicked(dateTime);
-        return saveToFile(reminderLog, uniqueName);
-    }
-
-    /**
-     * Events to post
-     *
-     * @param event Enum to post
-     */
-    private static void postReminderItemEvent(@NonNull ReminderItemEvent event) {
-        Bus.postEnum(event);
+        Preferences.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
     }
 
     public final boolean hasReminderLog() {
@@ -484,17 +496,18 @@ public final class ReminderItem extends BaseRecycleItem {
     /**
      * Loads the reminder list from disk. If already loaded it posts instantly
      * subscribe to Event.DATA_LOAD_PASS and Event.DATA_LOAD_FAIL for callbacks
+     *
      * @param forceRefresh True to force reload from disk
      */
     public final void loadData(boolean forceRefresh) {
-        if(!forceRefresh && hasReminderLog()) {
+        if (!forceRefresh && hasReminderLog()) {
             postReminderItemEvent(ReminderItemEvent.DATA_LOAD_PASS);
         } else {
             taskLoad = new AsyncTask<Void, Void, Boolean>() {
                 @Override
                 protected Boolean doInBackground(Void... params) {
                     ReminderLog log = loadFromFile(uniqueName);
-                    if(log != null) {
+                    if (log != null) {
                         reminderLog = log;
                         return true;
                     }
@@ -503,7 +516,7 @@ public final class ReminderItem extends BaseRecycleItem {
 
                 @Override
                 protected void onPostExecute(Boolean value) {
-                    if(value) {
+                    if (value) {
                         postReminderItemEvent(ReminderItemEvent.DATA_LOAD_PASS);
                     } else {
                         postReminderItemEvent(ReminderItemEvent.DATA_LOAD_FAIL);
@@ -516,29 +529,11 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     /**
-     * Saves the reminder log to file
-     *
-     * @return True if successful
+     * Events
      */
-    private static boolean saveToFile(ReminderLog reminderLog, String uniqueName) {
-        byte[] bytes = Serializer.serializeClass(reminderLog);
-        return bytes != null && FileWriter.writeFile("LOG" + uniqueName, bytes, false);
-    }
-
-    /**
-     * Loads the reminder log from file
-     *
-     * @return True if successful
-     */
-    private static ReminderLog loadFromFile(String uniqueName) {
-        if (!FileWriter.doesFileExist("LOG" + uniqueName, false)) {
-            return new ReminderLog();
-        }
-        byte[] bytes = FileWriter.readFile("LOG" + uniqueName, false);
-        if (bytes == null) {
-            return new ReminderLog();
-        }
-        return Serializer.deserializeClass(bytes, ReminderLog.class);
+    public enum ReminderItemEvent {
+        DATA_LOAD_PASS,
+        DATA_LOAD_FAIL,
     }
 
 }

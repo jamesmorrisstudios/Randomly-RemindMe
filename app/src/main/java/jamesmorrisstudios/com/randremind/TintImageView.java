@@ -18,14 +18,14 @@ public class TintImageView extends ImageView {
 
     public TintImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if(getBackground() != null) {
+        if (getBackground() != null) {
             setImageDrawable(getBackground());
         }
     }
 
     public TintImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        if(getBackground() != null) {
+        if (getBackground() != null) {
             setImageDrawable(getBackground());
         }
     }

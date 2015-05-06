@@ -30,8 +30,6 @@ import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
-import java.util.ArrayList;
-
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
@@ -46,12 +44,14 @@ public final class AlarmReceiver extends BroadcastReceiver {
     /**
      * Empty constructor
      */
-    public AlarmReceiver() {}
+    public AlarmReceiver() {
+    }
 
     /**
      * Receive an alarm from one of our wake settings
+     *
      * @param context Context
-     * @param intent Intent
+     * @param intent  Intent
      */
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
@@ -66,14 +66,14 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
         //Only load the reminders if they aren't already loaded
         //This way if the user has the app open their changes aren't overwritten
-        if(!ReminderList.getInstance().hasReminders()) {
+        if (!ReminderList.getInstance().hasReminders()) {
             ReminderList.getInstance().loadDataSync();
         }
 
         DateTimeItem lastWake = getLastWake();
         TimeItem prevTime;
         //If the last wake was a different day
-        if(now.dateItem.equals(lastWake.dateItem)) {
+        if (now.dateItem.equals(lastWake.dateItem)) {
             prevTime = lastWake.timeItem;
         } else {
             prevTime = new TimeItem(0, 0);
@@ -86,18 +86,18 @@ public final class AlarmReceiver extends BroadcastReceiver {
             //Set up our midnight recalculate wake
             Scheduler.getInstance().scheduleRepeatingMidnight();
             //Recalculate wakes if we were off for over a day
-            if(!now.dateItem.equals(lastWake.dateItem)) {
+            if (!now.dateItem.equals(lastWake.dateItem)) {
                 ReminderList.getInstance().recalculateWakes();
             }
             //Schedule the next wake event
             ReminderList.getInstance().scheduleAllWakes(now.timeItem);
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT")) {
+        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT")) {
             Log.v("ALARM RECEIVER", "Midnight update");
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
             //Schedule the next wake event
             ReminderList.getInstance().scheduleAllWakes(new TimeItem(0, 0));
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER") && intent.getType() != null && !intent.getType().isEmpty()){
+        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER") && intent.getType() != null && !intent.getType().isEmpty()) {
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
             postNotifications(intent.getType(), now);
@@ -117,12 +117,12 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
     private void postNotifications(@NonNull String uniqueName, @NonNull DateTimeItem now) {
         ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
-        if(item == null) {
+        if (item == null) {
             return;
         }
         ReminderItem.logReminderShown(item.uniqueName, now);
         Notifier.buildNotification(item.getNotification(false, now));
-        Log.v("ALARM RECEIVER", "Post Notification: "+item.getNotificationId());
+        Log.v("ALARM RECEIVER", "Post Notification: " + item.getNotificationId());
     }
 
     private void logLastWake(@NonNull DateTimeItem time) {

@@ -5,15 +5,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
@@ -44,10 +41,12 @@ public class SummaryFragment extends BaseRecycleListFragment {
     /**
      * Required empty public constructor
      */
-    public SummaryFragment() {}
+    public SummaryFragment() {
+    }
 
     /**
      * Constructor. Enable menu options
+     *
      * @param savedInstanceState Saved instance state
      */
     @Override
@@ -58,7 +57,8 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
     /**
      * Setup the toolbar options menu
-     * @param menu Menu
+     *
+     * @param menu     Menu
      * @param inflater Inflater
      */
     @Override
@@ -69,6 +69,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
     /**
      * Handle toolbar menu button clicks
+     *
      * @param item Selected reminder
      * @return True if action consumed
      */
@@ -117,8 +118,8 @@ public class SummaryFragment extends BaseRecycleListFragment {
     }
 
     /**
-     * @param inflater Inflater
-     * @param container Root container
+     * @param inflater           Inflater
+     * @param container          Root container
      * @param savedInstanceState Saved instance state
      * @return This fragments top view
      */
@@ -147,7 +148,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
     protected void startDataLoad(boolean forceRefresh) {
         applyItems();
         ReminderItem item = ReminderList.getInstance().getCurrentReminder();
-        if(item != null) {
+        if (item != null) {
             item.loadData(forceRefresh);
         }
     }
@@ -167,17 +168,17 @@ public class SummaryFragment extends BaseRecycleListFragment {
      */
     private void applyItems() {
         ReminderItem item = ReminderList.getInstance().getCurrentReminder();
-        if(item == null) {
+        if (item == null) {
             applyData(null);
         } else {
             ArrayList<BaseRecycleContainer> summaries = new ArrayList<>();
             //Header
             summaries.add(new SummaryContainer(item));
             //Items
-            if(item.hasReminderLog()) {
+            if (item.hasReminderLog()) {
                 ReminderLogDay dayLifetime = new ReminderLogDay(UtilsTime.getDateNow());
                 dayLifetime.lifetime = true;
-                for(ReminderLogDay day : item.reminderLog.days) {
+                for (ReminderLogDay day : item.reminderLog.days) {
                     dayLifetime.timesClickedLifetime += day.timesClicked.size();
                     dayLifetime.timesShownLifetime += day.timesShown.size();
                     summaries.add(new SummaryContainer(day));
@@ -194,7 +195,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
      */
     @Subscribe
     public final void onReminderItemEvent(@NonNull ReminderItem.ReminderItemEvent event) {
-        switch(event) {
+        switch (event) {
             case DATA_LOAD_PASS:
                 applyItems();
                 break;
@@ -207,6 +208,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
     /**
      * Attach to the activity
+     *
      * @param activity Activity to attach to
      */
     @Override
