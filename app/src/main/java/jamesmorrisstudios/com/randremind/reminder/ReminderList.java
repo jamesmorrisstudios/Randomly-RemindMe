@@ -344,41 +344,6 @@ public final class ReminderList {
         }
     }
 
-    /**
-     * @return Return list of all reminder items that have a wake time that is current or past.
-     */
-    @NonNull
-    public final ArrayList<ReminderItem> getCurrentWakes(TimeItem startTime, TimeItem endTime) {
-        ArrayList<ReminderItem> items = new ArrayList<>();
-        //Loop through all reminders
-        for(ReminderItem item : reminders.data) {
-            //See if the reminder is enabled
-            if(item.enabled && item.daysToRun[getDayOfWeek()] && (UtilsTime.timeInBoundsInclusive(item.startTime, item.endTime) || !item.rangeTiming)) {
-                //Get the alert times for the given reminder
-                ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(item.uniqueName);
-                for(TimeItem time : alertTimes) {
-                    //Check if the alert needs to be shown.
-                    if(UtilsTime.timeInBoundsInclusiveEnd(startTime, endTime, time)) {
-                        //Max of one wake per reminder!
-                        items.add(item);
-                        break;
-                    }
-                }
-            }
-        }
-        return items;
-    }
-
-    /**
-     * @return The current day of the week
-     */
-    private int getDayOfWeek() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        return calendar.get(Calendar.DAY_OF_WEEK) - 1; //These are indexed starting at 1
-    }
-
     public final void scheduleAllWakes(TimeItem timeNow) {
         for(ReminderItem item : reminders.data) {
             item.rescheduleNextWake(timeNow);
