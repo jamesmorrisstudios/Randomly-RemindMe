@@ -215,11 +215,23 @@
                 android:layout_height="wrap_content" />
 
             <jamesmorrisstudios.com.randremind.TintImageView
-                android:id="@+id/notification_led"
+                android:id="@+id/notification_high_priority"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_toRightOf="@+id/notification_vibrate"
+                android:background="@drawable/high_priority_icon"
+                android:tint="@color/textDarkMain"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <jamesmorrisstudios.com.randremind.TintImageView
+                android:id="@+id/notification_led"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toRightOf="@+id/notification_high_priority"
                 android:background="@drawable/led_icon"
                 android:tint="@color/textDarkMain"
                 android:layout_alignParentTop="true"

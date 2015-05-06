@@ -16,7 +16,6 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -62,7 +61,7 @@ public final class MainActivity extends BaseLauncherActivity implements
             loadMainFragment();
             loadSummaryFragment();
             getIntent().removeExtra("REMINDER");
-            getIntent().removeExtra("NAME");
+            getIntent().removeExtra("REMINDER");
         }
     }
 

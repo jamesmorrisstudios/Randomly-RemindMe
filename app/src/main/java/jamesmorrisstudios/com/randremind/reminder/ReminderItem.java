@@ -320,6 +320,7 @@ public final class ReminderItem extends BaseRecycleItem {
         if(title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
         }
+
         String content = this.content;
         if(content == null || content.isEmpty()) {
             content = AppUtil.getContext().getString(R.string.default_content);
@@ -327,6 +328,7 @@ public final class ReminderItem extends BaseRecycleItem {
 
         NotificationContent notif = new NotificationContent(title, content, this.getNotificationTone(), R.drawable.notification_icon,
                 AppUtil.getContext().getResources().getColor(R.color.accent), getNotificationId());
+
         if(this.notificationVibrate) {
             notif.enableVibrate();
         }
@@ -339,24 +341,28 @@ public final class ReminderItem extends BaseRecycleItem {
 
         Intent intentClicked = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
+        intentClicked.setType(this.uniqueName);
         intentClicked.putExtra("NAME", this.uniqueName);
         intentClicked.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentClicked.putExtra("NOTIFICATION_ID", getNotificationId());
 
         Intent intentCancel = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
+        intentCancel.setType(this.uniqueName);
         intentCancel.putExtra("NAME", this.uniqueName);
         intentCancel.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentCancel.putExtra("NOTIFICATION_ID", getNotificationId());
 
         Intent intentDismiss = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentDismiss.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS");
+        intentDismiss.setType(this.uniqueName);
         intentDismiss.putExtra("NAME", this.uniqueName);
         intentDismiss.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentDismiss.putExtra("NOTIFICATION_ID", getNotificationId());
 
         Intent intentAck = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
+        intentAck.setType(this.uniqueName);
         intentAck.putExtra("NAME", this.uniqueName);
         intentAck.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentAck.putExtra("NOTIFICATION_ID", getNotificationId());
@@ -366,6 +372,13 @@ public final class ReminderItem extends BaseRecycleItem {
             intentCancel.putExtra("PREVIEW", true);
             intentDismiss.putExtra("PREVIEW", true);
             intentAck.putExtra("PREVIEW", true);
+        }
+
+        String pref = AppUtil.getContext().getString(R.string.settings_pref);
+        String key = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
+
+        if(!Preferences.getBoolean(pref, key, true)) {
+            intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT");
         }
 
         PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -380,6 +393,7 @@ public final class ReminderItem extends BaseRecycleItem {
 
         return notif;
     }
+
 
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
         ArrayList<String> items = Preferences.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS"+uniqueName);

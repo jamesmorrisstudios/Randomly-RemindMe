@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.listAdapters;
 
+import android.app.ActivityManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -46,7 +47,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View dash, endTop;
     private ButtonCircleFlat[] dayButtons;
-    private TintImageView timingRandom, vibrate, tone, ledIcon;
+    private TintImageView timingRandom, vibrate, tone, ledIcon, highPriorityIcon;
     private TextView timingTimes, content;
 
     //Item
@@ -101,6 +102,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         tone = (TintImageView) view.findViewById(R.id.notification_tone);
         content = (TextView) view.findViewById(R.id.content);
         ledIcon = (TintImageView) view.findViewById(R.id.notification_led);
+        highPriorityIcon = (TintImageView) view.findViewById(R.id.notification_high_priority);
     }
 
     @Override
@@ -171,18 +173,33 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         } else {
             ledIcon.setAlpha(0.12f);
         }
+        if(reminder.notificationHighPriority) {
+            highPriorityIcon.setAlpha(1.0f);
+        } else {
+            highPriorityIcon.setAlpha(0.12f);
+        }
     }
 
     @Override
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderLogDay day = (ReminderLogDay) baseRecycleItem;
-        date.setText(UtilsTime.getDateFormatted(day.date));
-        float percentage = (100.0f * day.timesClicked.size()) / day.timesShown.size();
-        percent.setText(Integer.toString(Math.round(percentage))+"%");
-        percentImage.setMax(day.timesShown.size());
-        percentImage.setProgress(day.timesClicked.size());
-        show.setText(Integer.toString(day.timesShown.size()));
-        acked.setText(Integer.toString(day.timesClicked.size()));
+        if(day.lifetime) {
+            date.setText(AppUtil.getContext().getString(R.string.lifetime));
+            float percentage = (100.0f * day.timesClickedLifetime) / day.timesShownLifetime;
+            percent.setText(Integer.toString(Math.round(percentage)) + "%");
+            percentImage.setMax(day.timesShownLifetime);
+            percentImage.setProgress(day.timesClickedLifetime);
+            show.setText(Integer.toString(day.timesShownLifetime));
+            acked.setText(Integer.toString(day.timesClickedLifetime));
+        } else {
+            date.setText(UtilsTime.getDateFormatted(day.date));
+            float percentage = (100.0f * day.timesClicked.size()) / day.timesShown.size();
+            percent.setText(Integer.toString(Math.round(percentage)) + "%");
+            percentImage.setMax(day.timesShown.size());
+            percentImage.setProgress(day.timesClicked.size());
+            show.setText(Integer.toString(day.timesShown.size()));
+            acked.setText(Integer.toString(day.timesClicked.size()));
+        }
     }
 
     /**

@@ -22,6 +22,7 @@ import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContaine
 import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -170,11 +171,19 @@ public class SummaryFragment extends BaseRecycleListFragment {
             applyData(null);
         } else {
             ArrayList<BaseRecycleContainer> summaries = new ArrayList<>();
+            //Header
             summaries.add(new SummaryContainer(item));
+            //Items
             if(item.hasReminderLog()) {
+                ReminderLogDay dayLifetime = new ReminderLogDay(UtilsTime.getDateNow());
+                dayLifetime.lifetime = true;
                 for(ReminderLogDay day : item.reminderLog.days) {
+                    dayLifetime.timesClickedLifetime += day.timesClicked.size();
+                    dayLifetime.timesShownLifetime += day.timesShown.size();
                     summaries.add(new SummaryContainer(day));
                 }
+                //Lifetime stats
+                summaries.add(1, new SummaryContainer(dayLifetime));
             }
             applyData(summaries);
         }

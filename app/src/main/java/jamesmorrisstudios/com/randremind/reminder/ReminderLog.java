@@ -1,5 +1,6 @@
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
@@ -15,21 +16,21 @@ public class ReminderLog {
     @SerializedName("days")
     public ArrayList<ReminderLogDay> days = new ArrayList<>();
 
-    public final void logClicked(DateTimeItem dateTime) {
+    public final void logClicked(@NonNull DateTimeItem dateTime) {
         Log.v("ReminderLog", "Log Clicked: "+dateTime.dateItem.year+" "+dateTime.dateItem.month+" "+dateTime.dateItem.dayOfMonth+
         ", "+dateTime.timeItem.getHourInTimeFormatString()+":"+dateTime.timeItem.getMinuteString());
         ReminderLogDay day = getDay(dateTime);
         day.timesClicked.add(0, dateTime.timeItem);
     }
 
-    public final void logShown(DateTimeItem dateTime) {
+    public final void logShown(@NonNull DateTimeItem dateTime) {
         Log.v("ReminderLog", "Log Shown: "+dateTime.dateItem.year+" "+dateTime.dateItem.month+" "+dateTime.dateItem.dayOfMonth+
                 ", "+dateTime.timeItem.getHourInTimeFormatString()+":"+dateTime.timeItem.getMinuteString());
         ReminderLogDay day = getDay(dateTime);
         day.timesShown.add(0, dateTime.timeItem);
     }
 
-    private ReminderLogDay getDay(DateTimeItem dateTimeItem) {
+    private ReminderLogDay getDay(@NonNull DateTimeItem dateTimeItem) {
         //If no days yet add and return one
         if(days.isEmpty()) {
             Log.v("ReminderLog", "No days yet, creating a new one");

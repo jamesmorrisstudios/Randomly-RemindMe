@@ -67,6 +67,12 @@ public final class NotificationReceiver extends BroadcastReceiver {
                 DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
                 logClicked(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted, context);
             }
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT")) {
+            Log.v("Notification RECEIVER", "notification click silent");
+            if(intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
+                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
+                logAck(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
+            }
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED")) {
             Log.v("Notification RECEIVER", "notification delete");
             if(intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {

@@ -23,6 +23,8 @@
     <string name="main_list_no_data">You have no reminders yet.\nClick the + button to add a new reminder.</string>
     <string name="data_load_fail">ERROR: Failed to load reminder list</string>
 
+    <string name="lifetime">Lifetime</string>
+
     <string name="edit_title">Title</string>
     <string name="edit_content">Content</string>
     <string name="edit_timing">Timing</string>

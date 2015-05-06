@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Override to define your settings -->
+    <array name="settings_array">
+        <item>@array/settings_item_0</item>
+    </array>
+
+    <!-- Item demo for help tutorial -->
+    <array name="settings_item_0">
+        <item name="type">@bool/settings_item_0_type</item>
+        <item name="key">@string/settings_item_0_key</item>
+        <item name="primary">@string/settings_item_0_primary</item>
+        <item name="secondary">@string/settings_item_0_secondary</item>
+    </array>
+
+    <bool name="settings_item_0_type">true</bool>
+    <string name="settings_item_0_key">@string/pref_notification_click_ack</string>
+    <string name="settings_item_0_primary">Notification click opens summary</string>
+    <string name="settings_item_0_secondary">Un-check to make notification silently acknowledge</string>
+
+
+    <string name="pref_notification_click_ack">NOTIFICATION_CLICK_ACK</string>
+
+</resources>
