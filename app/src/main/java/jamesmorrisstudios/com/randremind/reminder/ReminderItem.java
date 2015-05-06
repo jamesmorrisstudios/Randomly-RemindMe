@@ -39,6 +39,7 @@ import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.preferences.Preferences;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -315,6 +316,32 @@ public final class ReminderItem extends BaseRecycleItem {
         return new TimeItem(hour, minutes);
     }
 
+    public final void scheduleNextWake(TimeItem timeNow) {
+        if(!enabled) {
+            return;
+        }
+        ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
+        if(alertTimes.isEmpty()) {
+            return;
+        }
+        for(TimeItem alertTime : alertTimes) {
+            //alert time is after the current time
+            if(!UtilsTime.timeBeforeOrEqual(alertTime, timeNow)) {
+                Scheduler.getInstance().scheduleWake(alertTime, uniqueName);
+                return;
+            }
+        }
+    }
+
+    public final void deleteNextWake() {
+        Scheduler.getInstance().cancelWake(uniqueName);
+    }
+
+    public final void rescheduleNextWake(TimeItem time) {
+        deleteNextWake();
+        scheduleNextWake(time);
+    }
+
     public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime) {
         String title = this.title;
         if(title == null || title.isEmpty()) {
@@ -394,6 +421,13 @@ public final class ReminderItem extends BaseRecycleItem {
         return notif;
     }
 
+    public final void deleteReminderLog() {
+        FileWriter.deleteFile("LOG" + uniqueName, false);
+    }
+
+    public final void deleteAlertTimes() {
+        Preferences.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS"+uniqueName);
+    }
 
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
         ArrayList<String> items = Preferences.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS"+uniqueName);

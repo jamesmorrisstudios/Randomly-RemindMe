@@ -90,24 +90,21 @@ public final class AlarmReceiver extends BroadcastReceiver {
                 ReminderList.getInstance().recalculateWakes();
             }
             //Schedule the next wake event
-            Scheduler.getInstance().cancelNextWake();
-            Scheduler.getInstance().scheduleNextWake(now.timeItem);
+            ReminderList.getInstance().scheduleAllWakes(now.timeItem);
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT")) {
             Log.v("ALARM RECEIVER", "Midnight update");
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
             //Post a notification if we have one (likely don't)
-            postNextNotification(prevTime, now);
+            postNotifications(prevTime, now);
             //Schedule the next wake event
-            Scheduler.getInstance().cancelNextWake();
-            Scheduler.getInstance().scheduleNextWake(now.timeItem);
+            ReminderList.getInstance().scheduleAllWakes(now.timeItem);
         } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER")){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
-            postNextNotification(prevTime, now);
+            postNotifications(prevTime, now);
             //Schedule the next wake event
-            Scheduler.getInstance().cancelNextWake();
-            Scheduler.getInstance().scheduleNextWake(now.timeItem);
+            ReminderList.getInstance().scheduleAllWakes(now.timeItem);
         }
 
         logLastWake(now);
@@ -116,13 +113,11 @@ public final class AlarmReceiver extends BroadcastReceiver {
         now = UtilsTime.getDateTimeNow();
         Log.v("ALARM RECEIVER", "Completed Wake: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
 
-        //We made no changes to the reminders so we don't have to save anything
-
         //Release the wakelock
         wl.release();
     }
 
-    private void postNextNotification(TimeItem prevTime, DateTimeItem now) {
+    private void postNotifications(TimeItem prevTime, DateTimeItem now) {
         ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes(prevTime, now.timeItem);
         for(ReminderItem item : items) {
             ReminderItem.logReminderShown(item.uniqueName, now);
