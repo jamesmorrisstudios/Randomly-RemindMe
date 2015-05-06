@@ -95,14 +95,12 @@ public final class AlarmReceiver extends BroadcastReceiver {
             Log.v("ALARM RECEIVER", "Midnight update");
             //Recalculate all wakes for a new day
             ReminderList.getInstance().recalculateWakes();
-            //Post a notification if we have one (likely don't)
-            postNotifications(prevTime, now);
             //Schedule the next wake event
-            ReminderList.getInstance().scheduleAllWakes(now.timeItem);
-        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER")){
+            ReminderList.getInstance().scheduleAllWakes(new TimeItem(0, 0));
+        } else if(intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER") && intent.getType() != null && !intent.getType().isEmpty()){
             Log.v("ALARM RECEIVER", "Reminder!");
             //Post a notification if we have one
-            postNotifications(prevTime, now);
+            postNotifications(intent.getType(), now);
             //Schedule the next wake event
             ReminderList.getInstance().scheduleAllWakes(now.timeItem);
         }
@@ -117,13 +115,14 @@ public final class AlarmReceiver extends BroadcastReceiver {
         wl.release();
     }
 
-    private void postNotifications(TimeItem prevTime, DateTimeItem now) {
-        ArrayList<ReminderItem> items = ReminderList.getInstance().getCurrentWakes(prevTime, now.timeItem);
-        for(ReminderItem item : items) {
-            ReminderItem.logReminderShown(item.uniqueName, now);
-            Notifier.buildNotification(item.getNotification(false, now));
-            Log.v("ALARM RECEIVER", "Post Notification: "+item.getNotificationId());
+    private void postNotifications(@NonNull String uniqueName, @NonNull DateTimeItem now) {
+        ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
+        if(item == null) {
+            return;
         }
+        ReminderItem.logReminderShown(item.uniqueName, now);
+        Notifier.buildNotification(item.getNotification(false, now));
+        Log.v("ALARM RECEIVER", "Post Notification: "+item.getNotificationId());
     }
 
     private void logLastWake(@NonNull DateTimeItem time) {

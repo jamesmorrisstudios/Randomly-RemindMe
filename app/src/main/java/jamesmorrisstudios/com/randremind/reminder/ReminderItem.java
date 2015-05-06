@@ -326,7 +326,7 @@ public final class ReminderItem extends BaseRecycleItem {
         }
         for(TimeItem alertTime : alertTimes) {
             //alert time is after the current time
-            if(!UtilsTime.timeBeforeOrEqual(alertTime, timeNow)) {
+            if(!UtilsTime.timeBeforeOrEqual(alertTime, timeNow) || (timeNow.minute == 0 && timeNow.hour == 0)) {
                 Scheduler.getInstance().scheduleWake(alertTime, uniqueName);
                 return;
             }

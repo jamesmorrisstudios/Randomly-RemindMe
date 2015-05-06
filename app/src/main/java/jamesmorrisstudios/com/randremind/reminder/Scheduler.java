@@ -112,8 +112,10 @@ public final class Scheduler {
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+        calendar.add(Calendar.DATE, 1); //Increment to tomorrow
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pi); //Every 24 hours
     }
 

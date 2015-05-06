@@ -383,26 +383,6 @@ public final class ReminderList {
         for(ReminderItem item : reminders.data) {
             item.rescheduleNextWake(timeNow);
         }
-        /*
-        TimeItem time = null;
-        //Schedule the next wake we have in this days cycle if any
-        for(ReminderItem item : reminders.data) {
-            if(!item.enabled) {
-                continue;
-            }
-            ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(item.uniqueName);
-            if(alertTimes.isEmpty()) {
-                continue;
-            }
-            for(TimeItem alertTime : alertTimes) {
-                //alert time is after the current time and (the current reminder is null or this time is before it)
-                if(!timeBeforeOrEqual(alertTime, timeNow) && (time == null || timeBeforeOrEqual(alertTime, time))) {
-                    time = alertTime;
-                }
-            }
-        }
-        return time;
-        */
     }
 
     /**
