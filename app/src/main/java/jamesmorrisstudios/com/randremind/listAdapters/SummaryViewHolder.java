@@ -32,7 +32,7 @@ import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.TintImageView;
+import jamesmorrisstudios.com.randremind.views.TintImageView;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;

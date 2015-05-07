@@ -83,8 +83,6 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onStop() {
         super.onStop();
         Log.v("Main Activity", "On Stop");
-        //If any reminders are currently open save them
-        ReminderList.getInstance().saveCurrentReminder();
         //Save the reminder list back to storage
         ReminderList.getInstance().saveDataSync();
     }

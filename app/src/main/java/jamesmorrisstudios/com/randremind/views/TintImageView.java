@@ -1,4 +1,4 @@
-package jamesmorrisstudios.com.randremind;
+package jamesmorrisstudios.com.randremind.views;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import jamesmorrisstudios.com.randremind.R;
 
 /**
  * Created by James on 5/4/2015.

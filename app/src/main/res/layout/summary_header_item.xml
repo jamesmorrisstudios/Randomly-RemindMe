@@ -89,7 +89,7 @@
                 android:layout_below="@+id/reminder_title_text"
                 android:layout_toRightOf="@+id/timing_dash" />
 
-            <jamesmorrisstudios.com.randremind.TintImageView
+            <jamesmorrisstudios.com.randremind.views.TintImageView
                 android:id="@+id/timing_random"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <jamesmorrisstudios.com.randremind.TintImageView
+            <jamesmorrisstudios.com.randremind.views.TintImageView
                 android:id="@+id/notification_tone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                 android:scaleType="fitCenter"
                 android:tint="@color/textDarkMain" />
 
-            <jamesmorrisstudios.com.randremind.TintImageView
+            <jamesmorrisstudios.com.randremind.views.TintImageView
                 android:id="@+id/notification_vibrate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
                 android:scaleType="fitCenter"
                 android:tint="@color/textDarkMain" />
 
-            <jamesmorrisstudios.com.randremind.TintImageView
+            <jamesmorrisstudios.com.randremind.views.TintImageView
                 android:id="@+id/notification_high_priority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                 android:background="@drawable/high_priority_icon"
                 android:tint="@color/textDarkMain" />
 
-            <jamesmorrisstudios.com.randremind.TintImageView
+            <jamesmorrisstudios.com.randremind.views.TintImageView
                 android:id="@+id/notification_led"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

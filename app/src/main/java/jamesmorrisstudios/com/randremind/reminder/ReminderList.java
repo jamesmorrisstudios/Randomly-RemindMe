@@ -25,6 +25,7 @@ import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
+import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
@@ -210,7 +211,7 @@ public final class ReminderList {
         if (currentItem != null && currentItem.equals(item)) {
             currentItem.enabled = enable;
             if (enable) {
-                currentItem.rescheduleNextWake(UtilsTime.getTimeNow());
+                currentItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
             } else {
                 currentItem.deleteNextWake();
             }
@@ -219,7 +220,7 @@ public final class ReminderList {
         }
         item.enabled = enable;
         if (enable) {
-            item.rescheduleNextWake(UtilsTime.getTimeNow());
+            item.rescheduleNextWake(UtilsTime.getDateTimeNow());
         } else {
             item.deleteNextWake();
         }
@@ -284,7 +285,7 @@ public final class ReminderList {
     public final void saveCurrentReminder() {
         if (currentItem != null) {
             currentItem.updateAlertTimes();
-            currentItem.rescheduleNextWake(UtilsTime.getTimeNow());
+            currentItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
             //Existing reminder so copy over the original
             reminders.data.set(currentIndex, currentItem.copy());
         }
@@ -337,7 +338,7 @@ public final class ReminderList {
         }
     }
 
-    public final void scheduleAllWakes(TimeItem timeNow) {
+    public final void scheduleAllWakes(DateTimeItem timeNow) {
         for (ReminderItem item : reminders.data) {
             item.rescheduleNextWake(timeNow);
         }

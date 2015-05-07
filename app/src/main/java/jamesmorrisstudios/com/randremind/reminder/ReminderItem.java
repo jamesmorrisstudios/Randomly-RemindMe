@@ -39,6 +39,7 @@ import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.UUID;
 
@@ -376,8 +377,11 @@ public final class ReminderItem extends BaseRecycleItem {
         return new TimeItem(hour, minutes);
     }
 
-    public final void scheduleNextWake(TimeItem timeNow) {
+    public final void scheduleNextWake(DateTimeItem now) {
         if (!enabled) {
+            return;
+        }
+        if(!daysToRun[getDayOfWeek()]) {
             return;
         }
         ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
@@ -386,18 +390,28 @@ public final class ReminderItem extends BaseRecycleItem {
         }
         for (TimeItem alertTime : alertTimes) {
             //alert time is after the current time
-            if (!UtilsTime.timeBeforeOrEqual(alertTime, timeNow) || (timeNow.minute == 0 && timeNow.hour == 0)) {
+            if (!UtilsTime.timeBeforeOrEqual(alertTime, now.timeItem) || (now.timeItem.minute == 0 && now.timeItem.hour == 0)) {
                 Scheduler.getInstance().scheduleWake(alertTime, uniqueName);
                 return;
             }
         }
     }
 
+    /**
+     * @return The current day of the week
+     */
+    private int getDayOfWeek() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+        return calendar.get(Calendar.DAY_OF_WEEK) - 1; //These are indexed starting at 1
+    }
+
     public final void deleteNextWake() {
         Scheduler.getInstance().cancelWake(uniqueName);
     }
 
-    public final void rescheduleNextWake(TimeItem time) {
+    public final void rescheduleNextWake(DateTimeItem time) {
         deleteNextWake();
         scheduleNextWake(time);
     }

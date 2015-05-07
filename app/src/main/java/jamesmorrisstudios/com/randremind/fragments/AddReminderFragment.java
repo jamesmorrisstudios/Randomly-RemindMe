@@ -29,6 +29,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -661,6 +662,17 @@ public final class AddReminderFragment extends BaseFragment {
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         timeSpinner.setAdapter(spinnerArrayAdapter);
         timeSpinner.setSelection(remind.numberPerDay - 1);
+    }
+
+    /**
+     * On Stop
+     */
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.v("Add Reminder Fragment", "On Stop");
+        //If any reminders are currently open save them
+        ReminderList.getInstance().saveCurrentReminder();
     }
 
     /**
