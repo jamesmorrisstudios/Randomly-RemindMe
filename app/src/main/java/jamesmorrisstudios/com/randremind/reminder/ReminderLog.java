@@ -14,12 +14,17 @@ import java.util.ArrayList;
 public class ReminderLog {
     @SerializedName("days")
     public ArrayList<ReminderLogDay> days = new ArrayList<>();
+    @SerializedName("lifetimeShown")
+    public int lifetimeShown = 0;
+    @SerializedName("lifetimeClicked")
+    public int lifetimeClicked = 0;
 
     public final void logClicked(@NonNull DateTimeItem dateTime) {
         Log.v("ReminderLog", "Log Clicked: " + dateTime.dateItem.year + " " + dateTime.dateItem.month + " " + dateTime.dateItem.dayOfMonth +
                 ", " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
         ReminderLogDay day = getDay(dateTime);
         day.timesClicked.add(0, dateTime.timeItem);
+        lifetimeClicked++;
     }
 
     public final void logShown(@NonNull DateTimeItem dateTime) {
@@ -27,6 +32,7 @@ public class ReminderLog {
                 ", " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
         ReminderLogDay day = getDay(dateTime);
         day.timesShown.add(0, dateTime.timeItem);
+        lifetimeShown++;
     }
 
     private ReminderLogDay getDay(@NonNull DateTimeItem dateTimeItem) {
@@ -44,6 +50,9 @@ public class ReminderLog {
         }
         //If we have a new day then create a new entry and return it
         days.add(0, new ReminderLogDay(dateTimeItem.dateItem));
+        while(days.size() > 30) {
+            days.remove(days.size()-1);
+        }
         Log.v("ReminderLog", "New day so creating another entry");
         return days.get(0);
     }

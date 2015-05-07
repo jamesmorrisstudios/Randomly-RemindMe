@@ -19,7 +19,7 @@ public class ReminderLogDay extends BaseRecycleItem {
     public ArrayList<TimeItem> timesShown = new ArrayList<>();
     @SerializedName("timesClicked")
     public ArrayList<TimeItem> timesClicked = new ArrayList<>();
-    //Not serialized
+    //Not serialized. We use these as temp use only
     public transient boolean lifetime = false;
     public transient int timesShownLifetime = 0, timesClickedLifetime = 0;
 

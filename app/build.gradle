@@ -29,8 +29,8 @@ android {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 7
-        versionName "0.0.7"
+        versionCode 9
+        versionName "0.0.9"
     }
     buildTypes {
         release {
