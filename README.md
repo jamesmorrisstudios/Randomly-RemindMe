@@ -14,15 +14,15 @@ Customize each reminder independently with these options
 
 • Vibrate or not
 
+• Priority
+
 • Start and end times in the day
 
 • How many notifications during the day
 
 • What days of the week to run
 
-• How to distribute the reminders (Evenly all the way to fully random)
-
-Additional features are on the way
+• Randomized reminders (or evenly if you want)
 
 # Usage
 This project requires https://github.com/morris-james/UtilitiesLibrary and https://github.com/morris-james/materialuilibrary and https://github.com/morris-james/appbaselibrary
