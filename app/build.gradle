@@ -31,7 +31,7 @@ android {
         }
 
         amazon {
-            applicationId "jamesmorrisstudios.com.randremind.amz"
+            applicationId "jamesmorrisstudios.com.randremind.amazon"
         }
     }
 

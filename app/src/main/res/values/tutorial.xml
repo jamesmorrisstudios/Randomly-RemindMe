@@ -77,6 +77,7 @@
         <item>@array/help_tutorial_item_4</item>
         <item>@array/help_tutorial_item_5</item>
         <item>@array/help_tutorial_item_6</item>
+        <item>@array/help_tutorial_item_7</item>
     </array>
 
     <!-- Item demo for help tutorial -->
@@ -85,7 +86,7 @@
         <item name="text">@string/help_tutorial_0</item>
     </array>
     <string name="help_tutorial_0_header">Add Reminder</string>
-    <string name="help_tutorial_0">To add a new reminder simply press the + action button on the main page</string>
+    <string name="help_tutorial_0">To add a new reminder press the + action button on the main page</string>
 
     <array name="help_tutorial_item_1">
         <item name="header">@string/help_tutorial_1_header</item>
@@ -101,7 +102,7 @@
     </array>
     <string name="help_tutorial_2_header">Timing Specific</string>
     <string name="help_tutorial_2">Choose Specific for a single reminder at a certain time in the day.
-    Touch the time shown to pick the reminder time of day.</string>
+    Touch the time shown to pick the reminder time.</string>
 
     <array name="help_tutorial_item_3">
         <item name="header">@string/help_tutorial_3_header</item>
@@ -109,7 +110,7 @@
     </array>
     <string name="help_tutorial_3_header">Timing Range</string>
     <string name="help_tutorial_3">Choose Range for one or more reminders throughout the day.
-    Touch the start and end times to set the reminder times per day.
+    Touch the start and end times to set the range.
     Next choose how many reminders you want during those times.
     Finally choose if you want the times randomized or at an even interval.</string>
 
@@ -141,8 +142,8 @@
         <item name="text">@string/help_tutorial_7</item>
     </array>
     <string name="help_tutorial_7_header">The Notification</string>
-    <string name="help_tutorial_7">For reminders that require action you can use notification button Acknowledge if you completed it and dismiss if you did not.
+    <string name="help_tutorial_7">For reminders that require action you can use notification buttons Acknowledge and Dismiss.
     Swiping away the reminder counts as a dismiss and clicking it counts as Acknowledging it.
-    Using the notification action buttons will not open the app. If you want clicking the notification to have this behavior change the option in settings.</string>
+    Using the notification action buttons will not open the app. By default clicking the notification opens the app. Change this in settings if you want a different behavior.</string>
 
 </resources>
