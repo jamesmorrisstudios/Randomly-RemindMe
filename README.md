@@ -1,18 +1,8 @@
 # Randomly RemindMe
 
-This app is currently in Beta.
+Get it on Google Play https://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind
 
-If you want to try the beta out without having to compile it yourself it is available on the play store
-once you opt into the beta.
-
-Screenshots http://imgur.com/a/CyRPR
-
-Join This https://plus.google.com/communities/105206368108124765493
-
-Opt in here https://play.google.com/apps/testing/jamesmorrisstudios.com.randremind
-
-Download here https://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind
-
+Work in progress screenshots http://imgur.com/a/CyRPR
 
 Do you have trouble drinking enough water during the day? Maybe you want a reminder to step away from the computer for a bit. This app will let you set any number of custom reminders that will remind you throughout the day for just that and a whole lot more. If you only want the reminders on week days then select only those days.
 
@@ -36,6 +26,8 @@ Additional features are on the way
 
 # Usage
 This project requires https://github.com/morris-james/UtilitiesLibrary and https://github.com/morris-james/materialuilibrary and https://github.com/morris-james/appbaselibrary
+
+The dependencies are setup to upload to your local maven repository so you must build and upload each of them before building this project.
 
 Make sure you follow the build instructions on all the dependencies first.
 Then use Android Studio to build the project.
