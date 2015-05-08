@@ -2,7 +2,7 @@
 <resources>
 
     <string-array name="help_license_code_item_0">
-        <item name="title">Icon Designer: Chad Brewer</item>
+        <item name="title">Logo Designer: Chad Brewer</item>
         <item name="link_site">chad.design@gmail.com</item>
         <item name="link_license">http://www.apache.org/licenses/LICENSE-2.0</item>
     </string-array>

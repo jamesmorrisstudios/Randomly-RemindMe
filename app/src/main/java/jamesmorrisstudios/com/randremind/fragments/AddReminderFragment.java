@@ -506,7 +506,11 @@ public final class AddReminderFragment extends BaseFragment {
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Notification");
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, defaultUri);
-                startActivityForResult(intent, NOTIFICATION_RESULT);
+                try {
+                    startActivityForResult(intent, NOTIFICATION_RESULT);
+                }catch (Exception ex) {
+                    Utils.toastShort(getString(R.string.help_link_error));
+                }
             }
         });
         notificationVibrateEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

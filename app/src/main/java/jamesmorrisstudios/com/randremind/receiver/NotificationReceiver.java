@@ -23,11 +23,13 @@ import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
+import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.activities.MainActivity;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 
@@ -106,7 +108,11 @@ public final class NotificationReceiver extends BroadcastReceiver {
             intent.putExtra("NAME", name);
             intent.putExtra("REMINDER", true);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            try {
+                context.startActivity(intent);
+            }catch (Exception ex) {
+                Utils.toastShort(context.getString(R.string.app_open_fail));
+            }
         }
     }
 

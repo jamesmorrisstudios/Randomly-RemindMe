@@ -25,12 +25,22 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    productFlavors {
+        googlePlay {
+            applicationId "jamesmorrisstudios.com.randremind"
+        }
+
+        amazon {
+            applicationId "jamesmorrisstudios.com.randremind.amz"
+        }
+    }
+
     defaultConfig {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 9
-        versionName "0.0.9"
+        versionCode 10
+        versionName "1.0.0"
     }
     buildTypes {
         release {

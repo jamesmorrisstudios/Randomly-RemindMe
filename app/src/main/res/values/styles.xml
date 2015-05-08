@@ -20,5 +20,8 @@
           Override only what we want to change
      -->
 
+  <style name="help_watch_how">
+    <item name="android:visibility">gone</item>
+  </style>
 
 </resources>
