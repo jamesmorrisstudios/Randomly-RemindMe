@@ -34,7 +34,7 @@ import jamesmorrisstudios.com.randremind.receiver.AlarmReceiver;
  * Reminder wake scheduler class.
  * This class is responsible for setting all new wake alarms with the android system.
  * It can also cancel unused alarms if needed
- *
+ * <p/>
  * Created by James on 4/23/2015.
  */
 public final class Scheduler {
@@ -43,14 +43,15 @@ public final class Scheduler {
     /**
      * Required private constructor to maintain singleton
      */
-    private Scheduler() {}
+    private Scheduler() {
+    }
 
     /**
      * @return The singleton instance of the Scheduler
      */
     @NonNull
     public static Scheduler getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Scheduler();
         }
         return instance;
@@ -60,50 +61,44 @@ public final class Scheduler {
      * Cancels the next scheduled wake.
      * Does not cancel the midnight update alarm
      */
-    public final void cancelNextWake() {
-        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+    public final void cancelWake(@NonNull String uniqueName) {
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setType(uniqueName);
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
-        i.putExtra("REMINDER_WAKE", true);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
         am.cancel(pi);
+    }
+
+    /**
+     * Schedules the next app wake time
+     *
+     * @param time Time to schedule for
+     */
+    public final void scheduleWake(@NonNull TimeItem time, @NonNull String uniqueName) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+        calendar.set(Calendar.HOUR_OF_DAY, time.hour);
+        calendar.set(Calendar.MINUTE, time.minute);
+        Log.v("SCHEDULER", "Alarm Set For: " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setType(uniqueName);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
+        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 
     /**
      * Cancels the midnight update alarm
      */
     public final void cancelMidnightAlarm() {
-        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
-        i.putExtra("REPEAT", true);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT");
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         am.cancel(pi);
-    }
-
-    /**
-     * Schedule the next wake we have in this days cycle.
-     */
-    public final void scheduleNextWake() {
-        TimeItem time = ReminderList.getInstance().getNextWake();
-        if(time != null) {
-            scheduleWake(time);
-        }
-    }
-
-    /**
-     * Schedules the next app wake time
-     * @param time Time to schedule for
-     */
-    private void scheduleWake(@NonNull TimeItem time) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, time.hour);
-        calendar.set(Calendar.MINUTE, time.minute);
-        Log.v("SCHEDULER", "Alarm Set For: " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
-        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
-        i.putExtra("REMINDER_WAKE", true);
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
-        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 
     /**
@@ -111,14 +106,16 @@ public final class Scheduler {
      */
     public final void scheduleRepeatingMidnight() {
         Log.v("SCHEDULER", "Repeating midnight alarm set");
-        AlarmManager am=(AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
-        i.putExtra("REPEAT", true);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT");
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
+        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+        calendar.add(Calendar.DATE, 1); //Increment to tomorrow
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pi); //Every 24 hours
     }
 

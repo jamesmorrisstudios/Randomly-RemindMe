@@ -16,7 +16,6 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,7 +35,7 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 /**
  * Primary activity.
  * Handles navigation and lifecycle control.
- *
+ * <p/>
  * Created by James on 4/20/2015.
  */
 public final class MainActivity extends BaseLauncherActivity implements
@@ -47,17 +46,21 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         Intent intent = getIntent();
-        if(intent == null) {
+        if (intent == null) {
             return;
         }
         Bundle extras = intent.getExtras();
-        if(extras == null) {
+        if (extras == null) {
             return;
         }
-        if(extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
+        if (extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
             Log.v("Main Activity", "Intent received to go to reminder");
             ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
+            clearBackStack();
+            loadMainFragment();
             loadSummaryFragment();
+            getIntent().removeExtra("REMINDER");
+            getIntent().removeExtra("REMINDER");
         }
     }
 
@@ -80,9 +83,24 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onStop() {
         super.onStop();
         Log.v("Main Activity", "On Stop");
-        ReminderList.getInstance().saveData();
-        Scheduler.getInstance().cancelNextWake();
-        Scheduler.getInstance().scheduleNextWake();
+        //Save the reminder list back to storage
+        ReminderList.getInstance().saveDataSync();
+    }
+
+    /**
+     * The fragment is changing. This is called right after the fragment is notified
+     */
+    @Override
+    protected void onFragmentChangeStart() {
+
+    }
+
+    /**
+     * The fragment was just changed
+     */
+    @Override
+    protected void onFragmentChangeEnd() {
+
     }
 
     /**
@@ -101,11 +119,6 @@ public final class MainActivity extends BaseLauncherActivity implements
         ReminderList.getInstance().createNewReminder();
         loadSummaryFragment();
         loadAddReminderFragment();
-    }
-
-    @Override
-    public void onNewIntent(Intent intent) {
-        Log.v("Main Activity", "Intent received");
     }
 
     /**
@@ -130,6 +143,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     /**
      * Gets the add reminder fragment from the fragment manager.
      * Creates the fragment if it does not exist yet.
+     *
      * @return The fragment
      */
     @NonNull
@@ -154,6 +168,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     /**
      * Gets the summary fragment from the fragment manager.
      * Creates the fragment if it does not exist yet.
+     *
      * @return The fragment
      */
     @NonNull

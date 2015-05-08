@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="store_link">amzn://apps/android?p=jamesmorrisstudios.com.randremind.amz</string>
+    <string name="store_link_all">amzn://apps/android?p=jamesmorrisstudios.com.randremind.amz&amp;showAll=1</string>
+
+</resources>

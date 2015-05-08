@@ -51,7 +51,8 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     /**
      * Required empty public constructor
      */
-    public MainListFragment() {}
+    public MainListFragment() {
+    }
 
     @Override
     public void onBack() {
@@ -59,8 +60,8 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     }
 
     /**
-     * @param inflater Inflater
-     * @param container Root container
+     * @param inflater           Inflater
+     * @param container          Root container
      * @param savedInstanceState Saved instance state
      * @return This fragments top view
      */
@@ -68,20 +69,7 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Bus.register(this);
-        return super.onCreateView(inflater,container,savedInstanceState);
-    }
-
-    /**
-     * View creation done
-     * @param view This fragments main view
-     * @param savedInstanceState Saved instance state
-     */
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setFabEnable(true);
-        setFabIcon(R.drawable.ic_add_white_24dp);
-        setNoDataText(getString(R.string.main_list_no_data));
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -90,9 +78,10 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     }
 
     @Override
-    protected void startDataLoad() {
-        if(!ReminderList.getInstance().isSaveInProgress()) {
-            ReminderList.getInstance().loadData(false);
+    protected void startDataLoad(boolean forceRefresh) {
+        ReminderList.getInstance().clearCurrentReminder();
+        if (!ReminderList.getInstance().isSaveInProgress()) {
+            ReminderList.getInstance().loadData(forceRefresh);
         } else {
             loadAfterSave = true;
         }
@@ -102,6 +91,13 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     protected void itemClicked(BaseRecycleItem baseRecycleItem) {
         ReminderList.getInstance().setCurrentReminder((ReminderItem) baseRecycleItem);
         mListener.onReminderItemClicked();
+    }
+
+    @Override
+    protected void afterViewCreated() {
+        setFabEnable(true);
+        setFabIcon(R.drawable.ic_add_white_24dp);
+        setNoDataText(getString(R.string.main_list_no_data));
     }
 
     @Override
@@ -123,7 +119,7 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
      */
     @Subscribe
     public final void onReminderListEvent(@NonNull ReminderList.ReminderListEvent event) {
-        switch(event) {
+        switch (event) {
             case DATA_LOAD_PASS:
                 applyItems();
                 break;
@@ -132,13 +128,13 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
                 applyItems();
                 break;
             case DATA_SAVE_PASS:
-                if(loadAfterSave) {
+                if (loadAfterSave) {
                     ReminderList.getInstance().loadData(false);
                     loadAfterSave = false;
                 }
                 break;
             case DATA_SAVE_FAIL:
-                if(loadAfterSave) {
+                if (loadAfterSave) {
                     ReminderList.getInstance().loadData(false);
                     loadAfterSave = false;
                 }
@@ -151,11 +147,11 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
      */
     private void applyItems() {
         ArrayList<ReminderItem> data = ReminderList.getInstance().getData();
-        if(data.isEmpty()) {
+        if (data.isEmpty()) {
             applyData(null);
         } else {
             ArrayList<BaseRecycleContainer> reminders = new ArrayList<>();
-            for(ReminderItem item : data) {
+            for (ReminderItem item : data) {
                 reminders.add(new ReminderContainer(item));
             }
             applyData(reminders);
@@ -164,6 +160,7 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
 
     /**
      * Attach to the activity
+     *
      * @param activity Activity to attach to
      */
     @Override

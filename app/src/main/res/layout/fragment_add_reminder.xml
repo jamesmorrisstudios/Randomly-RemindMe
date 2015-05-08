@@ -47,21 +47,14 @@
                     android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/titleEnabled"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/titleHeader" />
-
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
                     android:layout_below="@+id/titleHeader"
                     android:layout_margin="4dp"
-                    android:layout_toLeftOf="@+id/titleEnabled"
                     android:gravity="center"
                     android:hint="@string/title_hint"
                     android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
@@ -109,8 +102,10 @@
 
             <!-- Timing -->
             <RelativeLayout
+                android:id="@+id/timingParent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:padding="8dip">
 
                 <TextView
@@ -122,6 +117,7 @@
                     android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
+                <!-- Picker for specific or range -->
                 <LinearLayout
                     android:id="@+id/timing_range_picker"
                     android:layout_width="wrap_content"
@@ -133,19 +129,21 @@
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_specific"
-                        android:padding="2dp"
-                        android:background="@color/iconLight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:background="@color/iconLight"
+                        android:clickable="true"
+                        android:padding="2dp" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_range"
-                        android:padding="2dp"
-                        android:background="@color/iconLight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:background="@color/iconLight"
+                        android:clickable="true"
+                        android:padding="2dp" />
 
                 </LinearLayout>
 
@@ -237,20 +235,12 @@
                     android:layout_margin="4dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/timing_random_enabled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:text="@string/distribution"
-                        android:textColor="@color/textLightMain"
-                        android:textSize="20sp" />
-
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/timing_distribution_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="50dp" />
+                        android:text="@string/random_enable"
+                        android:textSize="@dimen/item_size" />
 
                 </LinearLayout>
 
@@ -276,65 +266,72 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/repeat_header"
-                    android:minWidth="300dp"
                     android:layout_centerHorizontal="true"
+                    android:minWidth="300dp"
                     android:orientation="horizontal">
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/daySun"
-                        android:background="@color/iconLight"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/iconLight"
+                        android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayMon"
-                        android:background="@color/iconLight"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/iconLight"
+                        android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayTue"
-                        android:background="@color/iconLight"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/iconLight"
+                        android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayWed"
-                        android:background="@color/iconLight"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/iconLight"
+                        android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayThu"
-                        android:background="@color/iconLight"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/iconLight"
+                        android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayFri"
-                        android:background="@color/iconLight"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/iconLight"
+                        android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
                         android:id="@+id/daySat"
-                        android:background="@color/iconLight"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@color/iconLight"
+                        android:clickable="true" />
 
                 </LinearLayout>
 
@@ -366,11 +363,11 @@
 
                     <!-- Sound picker -->
                     <LinearLayout
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_margin="4dp"
+                        android:gravity="center_horizontal"
                         android:orientation="horizontal">
 
                         <TextView
@@ -397,19 +394,19 @@
                         android:orientation="horizontal">
 
                         <android.support.v7.widget.AppCompatCheckBox
-                            android:layout_marginRight="8dp"
                             android:id="@+id/notification_vibrate_enabled"
-                            android:text="@string/vibrate_enable"
-                            android:textSize="@dimen/item_size"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/vibrate_enable"
+                            android:textSize="@dimen/item_size" />
 
                         <android.support.v7.widget.AppCompatCheckBox
                             android:id="@+id/notification_high_priority_enabled"
-                            android:text="@string/high_priority_enable"
-                            android:textSize="@dimen/item_size"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@string/high_priority_enable"
+                            android:textSize="@dimen/item_size" />
 
                     </LinearLayout>
 
@@ -421,12 +418,12 @@
                         android:orientation="horizontal">
 
                         <android.support.v7.widget.AppCompatCheckBox
-                            android:layout_marginRight="8dp"
                             android:id="@+id/notification_led_enabled"
-                            android:text="@string/led_enable"
-                            android:textSize="@dimen/item_size"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/led_enable"
+                            android:textSize="@dimen/item_size" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -436,10 +433,10 @@
                             android:textSize="@dimen/item_size" />
 
                         <View
-                            android:layout_gravity="center_vertical"
                             android:id="@+id/notification_led_color"
                             android:layout_width="50dp"
-                            android:layout_height="25dp" />
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical" />
 
                     </LinearLayout>
 

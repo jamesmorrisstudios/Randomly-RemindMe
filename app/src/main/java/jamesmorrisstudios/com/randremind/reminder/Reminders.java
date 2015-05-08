@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Serialized reminder storage object
- *
+ * <p/>
  * Created by James on 4/28/2015.
  */
 public class Reminders {
