@@ -91,8 +91,6 @@
                     android:gravity="center"
                     android:hint="@string/content_hint"
                     android:inputType="textMultiLine|textAutoCorrect|textCapSentences|textAutoComplete"
-                    android:lines="5"
-                    android:minLines="3"
                     android:singleLine="false"
                     android:textColor="@color/textLightMain"
                     android:textColorHint="@color/textLightDisabled"
@@ -154,11 +152,152 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/timing_range_picker"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
                     android:layout_margin="4dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/timing_times_specific_per_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/timing_times"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/alerts_per_day"
+                            android:textColor="@color/textLightMain"
+                            android:textSize="20sp" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/timing_times_specific_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="50dp" />
+
+                    </LinearLayout>
 
                     <include
-                        android:id="@+id/timing_single"
+                        android:id="@+id/timing_single_00"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_01"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_02"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_03"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_04"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_05"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_06"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_07"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_08"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_09"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_10"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_11"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_12"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_13"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_14"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_15"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_16"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_17"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_18"
+                        layout="@layout/time_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <include
+                        android:id="@+id/timing_single_19"
                         layout="@layout/time_display"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

@@ -129,7 +129,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             endTop.setVisibility(View.VISIBLE);
             dash.setVisibility(View.VISIBLE);
         } else {
-            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.singleTime);
+            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.specificTimeList.get(0));
             endTop.setVisibility(View.GONE);
             dash.setVisibility(View.GONE);
         }

@@ -387,10 +387,17 @@ public final class ReminderList {
         }
         reminders = Serializer.deserializeClass(bytes, Reminders.class);
         if (reminders != null && reminders.data != null) {
+            updateVersion(reminders);
             Log.v("ReminderList", "load save pass");
             return true;
         }
         return false;
+    }
+
+    private void updateVersion(@NonNull Reminders reminders) {
+        for(ReminderItem item : reminders.data) {
+            item.updateVersion();
+        }
     }
 
     /**

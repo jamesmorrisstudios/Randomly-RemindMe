@@ -80,7 +80,7 @@
             android:layout_toRightOf="@+id/percentContainer"
             android:text="Shown:"
             android:textColor="@color/textDarkSecondary"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/shown"
@@ -92,7 +92,7 @@
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/shown_label"
             android:textColor="@color/textDarkMain"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/acked_label"
@@ -106,7 +106,7 @@
             android:layout_toRightOf="@+id/shown"
             android:text="Acknowledged:"
             android:textColor="@color/textDarkSecondary"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/acked"
@@ -118,7 +118,7 @@
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/acked_label"
             android:textColor="@color/textDarkMain"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

@@ -52,6 +52,7 @@ import com.jamesmorrisstudios.materialuilibrary.dialogs.time.RadialPickerLayout;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.time.TimePickerDialog;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.ArrayList;
@@ -71,10 +72,11 @@ public final class AddReminderFragment extends BaseFragment {
     //Views
     private AppCompatEditText titleText, contentText;
     private AppCompatCheckBox notificationVibrateEnable, ledEnable, highPriorityEnable, randomEnable;
-    private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound,
-            singleHour, singleMinute, singleAM, singlePM;
-    private View startTimeTop, endTimeTop, singleTimeTop, ledColor;
-    private AppCompatSpinner timeSpinner;
+    private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound;
+    private TextView[] specificHour = new TextView[20], specificMinute = new TextView[20], specificAM = new TextView[20], specificPM = new TextView[20];
+    private View[] specificTimeTop = new View[20];
+    private View startTimeTop, endTimeTop, ledColor;
+    private AppCompatSpinner timeSpinner, timeSpecificSpinner;
     private ButtonCircleFlat[] dayButtons = new ButtonCircleFlat[7];
     private LinearLayout daysContainer, notificationContainer;
     private ScrollView scrollPane;
@@ -89,8 +91,7 @@ public final class AddReminderFragment extends BaseFragment {
     /**
      * Required empty public constructor
      */
-    public AddReminderFragment() {
-    }
+    public AddReminderFragment() {}
 
     /**
      * Constructor. Enable menu options
@@ -173,12 +174,34 @@ public final class AddReminderFragment extends BaseFragment {
         endMinute = (TextView) endTimeTop.findViewById(R.id.time_minute);
         endAM = (TextView) endTimeTop.findViewById(R.id.time_am);
         endPM = (TextView) endTimeTop.findViewById(R.id.time_pm);
-        singleTimeTop = view.findViewById(R.id.timing_single);
-        singleHour = (TextView) singleTimeTop.findViewById(R.id.time_hour);
-        singleMinute = (TextView) singleTimeTop.findViewById(R.id.time_minute);
-        singleAM = (TextView) singleTimeTop.findViewById(R.id.time_am);
-        singlePM = (TextView) singleTimeTop.findViewById(R.id.time_pm);
+        specificTimeTop[0] = view.findViewById(R.id.timing_single_00);
+        specificTimeTop[1] = view.findViewById(R.id.timing_single_01);
+        specificTimeTop[2] = view.findViewById(R.id.timing_single_02);
+        specificTimeTop[3] = view.findViewById(R.id.timing_single_03);
+        specificTimeTop[4] = view.findViewById(R.id.timing_single_04);
+        specificTimeTop[5] = view.findViewById(R.id.timing_single_05);
+        specificTimeTop[6] = view.findViewById(R.id.timing_single_06);
+        specificTimeTop[7] = view.findViewById(R.id.timing_single_07);
+        specificTimeTop[8] = view.findViewById(R.id.timing_single_08);
+        specificTimeTop[9] = view.findViewById(R.id.timing_single_09);
+        specificTimeTop[10] = view.findViewById(R.id.timing_single_10);
+        specificTimeTop[11] = view.findViewById(R.id.timing_single_11);
+        specificTimeTop[12] = view.findViewById(R.id.timing_single_12);
+        specificTimeTop[13] = view.findViewById(R.id.timing_single_13);
+        specificTimeTop[14] = view.findViewById(R.id.timing_single_14);
+        specificTimeTop[15] = view.findViewById(R.id.timing_single_15);
+        specificTimeTop[16] = view.findViewById(R.id.timing_single_16);
+        specificTimeTop[17] = view.findViewById(R.id.timing_single_17);
+        specificTimeTop[18] = view.findViewById(R.id.timing_single_18);
+        specificTimeTop[19] = view.findViewById(R.id.timing_single_19);
+        for(int i=0; i<specificTimeTop.length; i++) {
+            specificHour[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_hour);
+            specificMinute[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_minute);
+            specificAM[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_am);
+            specificPM[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_pm);
+        }
         timeSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_times_spinner);
+        timeSpecificSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_times_specific_spinner);
         randomEnable = (AppCompatCheckBox) view.findViewById(R.id.timing_random_enabled);
         daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
         notificationContainer = (LinearLayout) view.findViewById(R.id.notificationContainer);
@@ -353,29 +376,32 @@ public final class AddReminderFragment extends BaseFragment {
      */
     private void addTimeSetListeners() {
         //Time single
-        final TimePickerDialog.OnTimeSetListener timeSingleListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(@NonNull RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
-                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                if (remind == null) {
-                    return;
+        for(int i=0; i<specificTimeTop.length; i++) {
+            final int index = i;
+            final TimePickerDialog.OnTimeSetListener timeSingleListener = new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(@NonNull RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
+                    ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                    if (remind == null) {
+                        return;
+                    }
+                    remind.specificTimeList.get(index).hour = hourOfDay;
+                    remind.specificTimeList.get(index).minute = minute;
+                    UtilsTime.setTime(specificHour[index], specificMinute[index], specificAM[index], specificPM[index], remind.specificTimeList.get(index));
                 }
-                remind.singleTime.hour = hourOfDay;
-                remind.singleTime.minute = minute;
-                UtilsTime.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
-            }
-        };
-        singleTimeTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(@NonNull View v) {
-                ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-                if (currentReminder == null) {
-                    return;
+            };
+            specificTimeTop[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(@NonNull View v) {
+                    ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
+                    if (currentReminder == null) {
+                        return;
+                    }
+                    dialogListener.createTimePickerDialog(timeSingleListener, currentReminder.specificTimeList.get(index).hour,
+                            currentReminder.specificTimeList.get(index).minute, currentReminder.specificTimeList.get(index).is24Hour());
                 }
-                dialogListener.createTimePickerDialog(timeSingleListener, currentReminder.singleTime.hour,
-                        currentReminder.singleTime.minute, currentReminder.singleTime.is24Hour());
-            }
-        });
+            });
+        }
         //Time start
         final TimePickerDialog.OnTimeSetListener timeStartListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -445,6 +471,31 @@ public final class AddReminderFragment extends BaseFragment {
                     return;
                 }
                 currentReminder.numberPerDay = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //Times specific per day
+        timeSpecificSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(@NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                int size = position + 1;
+                //If we are making the list bigger
+                while(size > remind.specificTimeList.size()) {
+                    remind.specificTimeList.add(new TimeItem(9, 0));
+                }
+                //If we are making the list smaller
+                while(size < remind.specificTimeList.size()) {
+                    remind.specificTimeList.remove(remind.specificTimeList.size() -1);
+                }
+                updateSpecifcTimes();
             }
 
             @Override
@@ -594,6 +645,7 @@ public final class AddReminderFragment extends BaseFragment {
         titleText.removeTextChangedListener(titleTextWatcher);
         contentText.removeTextChangedListener(contentTextWatcher);
         timeSpinner.setOnItemSelectedListener(null);
+        timeSpecificSpinner.setOnItemSelectedListener(null);
     }
 
     /**
@@ -611,11 +663,27 @@ public final class AddReminderFragment extends BaseFragment {
         ledColor.setBackgroundColor(remind.notificationLEDColor);
         UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
         UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
-        UtilsTime.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
+        updateSpecifcTimes();
         generateNumberTimePerDay();
+        generateNumberSpecificTimePerDay();
         randomEnable.setChecked(remind.randomDistribution);
         setDaysOfWeek();
         setNotification();
+    }
+
+    private void updateSpecifcTimes() {
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if (remind == null) {
+            return;
+        }
+        for(int i=0; i<specificTimeTop.length; i++) {
+            if(i < remind.specificTimeList.size()) {
+                specificTimeTop[i].setVisibility(View.VISIBLE);
+                UtilsTime.setTime(specificHour[i], specificMinute[i], specificAM[i], specificPM[i], remind.specificTimeList.get(i));
+            } else {
+                specificTimeTop[i].setVisibility(View.GONE);
+            }
+        }
     }
 
     /**
@@ -666,6 +734,21 @@ public final class AddReminderFragment extends BaseFragment {
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         timeSpinner.setAdapter(spinnerArrayAdapter);
         timeSpinner.setSelection(remind.numberPerDay - 1);
+    }
+
+    private void generateNumberSpecificTimePerDay() {
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if (remind == null) {
+            return;
+        }
+        List<String> perDayList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            perDayList.add(Integer.toString(i + 1));
+        }
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, perDayList);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        timeSpecificSpinner.setAdapter(spinnerArrayAdapter);
+        timeSpecificSpinner.setSelection(remind.specificTimeList.size() - 1);
     }
 
     /**

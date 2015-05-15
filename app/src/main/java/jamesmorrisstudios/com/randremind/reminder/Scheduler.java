@@ -62,11 +62,12 @@ public final class Scheduler {
      * Does not cancel the midnight update alarm
      */
     public final void cancelWake(@NonNull String uniqueName) {
+        Log.v("SCHEDULER", "Alarm deleted For: " + uniqueName);
         AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
         am.cancel(pi);
     }
 
@@ -81,7 +82,7 @@ public final class Scheduler {
         calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         calendar.set(Calendar.HOUR_OF_DAY, time.hour);
         calendar.set(Calendar.MINUTE, time.minute);
-        Log.v("SCHEDULER", "Alarm Set For: " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
+        Log.v("SCHEDULER", "Alarm Set For: "+uniqueName +" at " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
         AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
