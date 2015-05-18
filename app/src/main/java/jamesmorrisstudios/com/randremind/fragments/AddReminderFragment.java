@@ -309,11 +309,11 @@ public final class AddReminderFragment extends BaseFragment {
             timingDistribution.setVisibility(View.GONE);
         }
         if (remind.rangeTiming) {
-            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
-            timingRange.getTextView().setTextColor(getResources().getColor(R.color.primaryDark));
-        } else {
-            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.primaryDark));
+            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textDarkMain));
             timingRange.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
+        } else {
+            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
+            timingRange.getTextView().setTextColor(getResources().getColor(R.color.textDarkMain));
         }
 
     }
@@ -827,9 +827,9 @@ public final class AddReminderFragment extends BaseFragment {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActivated(active);
         if (active) {
-            dayButton.getTextView().setTextColor(getResources().getColor(R.color.primary));
-        } else {
             dayButton.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
+        } else {
+            dayButton.getTextView().setTextColor(getResources().getColor(R.color.textDarkMain));
         }
     }
 

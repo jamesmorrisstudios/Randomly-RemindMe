@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_title"
-                    android:textColor="@color/textLightMain"
+                    android:textColor="@color/textDarkMain"
                     android:textSize="@dimen/header_size" />
 
                 <android.support.v7.widget.AppCompatEditText
@@ -59,8 +59,8 @@
                     android:hint="@string/title_hint"
                     android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
                     android:singleLine="true"
-                    android:textColor="@color/textLightMain"
-                    android:textColorHint="@color/textLightDisabled"
+                    android:textColor="@color/textDarkMain"
+                    android:textColorHint="@color/textDarkDisabled"
                     android:textSize="@dimen/item_size" />
 
             </RelativeLayout>
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_content"
-                    android:textColor="@color/textLightMain"
+                    android:textColor="@color/textDarkMain"
                     android:textSize="@dimen/header_size" />
 
                 <android.support.v7.widget.AppCompatEditText
@@ -92,8 +92,8 @@
                     android:hint="@string/content_hint"
                     android:inputType="textMultiLine|textAutoCorrect|textCapSentences|textAutoComplete"
                     android:singleLine="false"
-                    android:textColor="@color/textLightMain"
-                    android:textColorHint="@color/textLightDisabled"
+                    android:textColor="@color/textDarkMain"
+                    android:textColorHint="@color/textDarkDisabled"
                     android:textSize="@dimen/item_size" />
 
             </RelativeLayout>
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_timing"
-                    android:textColor="@color/textLightMain"
+                    android:textColor="@color/textDarkMain"
                     android:textSize="@dimen/header_size" />
 
                 <!-- Picker for specific or range -->
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true"
                         android:padding="2dp" />
 
@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true"
                         android:padding="2dp" />
 
@@ -171,7 +171,7 @@
                             android:layout_marginLeft="4dp"
                             android:layout_marginRight="4dp"
                             android:text="@string/alerts_per_day"
-                            android:textColor="@color/textLightMain"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="20sp" />
 
                         <android.support.v7.widget.AppCompatSpinner
@@ -326,7 +326,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/dash"
-                        android:textColor="@color/textLightMain"
+                        android:textColor="@color/textDarkMain"
                         android:textSize="30sp" />
 
                     <include
@@ -353,7 +353,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/alerts_per_day"
-                        android:textColor="@color/textLightMain"
+                        android:textColor="@color/textDarkMain"
                         android:textSize="20sp" />
 
                     <android.support.v7.widget.AppCompatSpinner
@@ -378,6 +378,7 @@
                         android:id="@+id/timing_random_enabled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/textDarkMain"
                         android:text="@string/random_enable"
                         android:textSize="@dimen/item_size" />
 
@@ -397,7 +398,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_repeat"
-                    android:textColor="@color/textLightMain"
+                    android:textColor="@color/textDarkMain"
                     android:textSize="@dimen/header_size" />
 
                 <LinearLayout
@@ -415,7 +416,7 @@
                         android:layout_height="48dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
@@ -424,7 +425,7 @@
                         android:layout_height="48dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
@@ -433,7 +434,7 @@
                         android:layout_height="48dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
@@ -442,7 +443,7 @@
                         android:layout_height="48dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
@@ -451,7 +452,7 @@
                         android:layout_height="48dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
@@ -460,7 +461,7 @@
                         android:layout_height="48dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true" />
 
                     <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
@@ -469,7 +470,7 @@
                         android:layout_height="48dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:background="@color/iconLight"
+                        android:background="@color/iconDark"
                         android:clickable="true" />
 
                 </LinearLayout>
@@ -488,7 +489,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:text="@string/edit_notification"
-                    android:textColor="@color/textLightMain"
+                    android:textColor="@color/textDarkMain"
                     android:textSize="@dimen/header_size" />
 
                 <LinearLayout
@@ -513,6 +514,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
+                            android:textColor="@color/textDarkMain"
                             android:text="@string/sound_set"
                             android:textSize="@dimen/item_size" />
 
@@ -521,6 +523,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="@dimen/item_size" />
 
                     </LinearLayout>
@@ -537,6 +540,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
+                            android:textColor="@color/textDarkMain"
                             android:text="@string/vibrate_enable"
                             android:textSize="@dimen/item_size" />
 
@@ -544,6 +548,7 @@
                             android:id="@+id/notification_high_priority_enabled"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/textDarkMain"
                             android:text="@string/high_priority_enable"
                             android:textSize="@dimen/item_size" />
 
@@ -562,6 +567,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
                             android:text="@string/led_enable"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="@dimen/item_size" />
 
                         <TextView
@@ -569,6 +575,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
                             android:text="@string/led_color"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="@dimen/item_size" />
 
                         <View

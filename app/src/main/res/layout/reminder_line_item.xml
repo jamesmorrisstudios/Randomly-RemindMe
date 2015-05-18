@@ -82,7 +82,7 @@
             android:layout_below="@+id/reminder_title_text"
             android:layout_toRightOf="@+id/timing_dash" />
 
-        <jamesmorrisstudios.com.randremind.views.TintImageView
+        <com.jamesmorrisstudios.appbaselibrary.views.TintImageView
             android:id="@+id/timing_random"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
