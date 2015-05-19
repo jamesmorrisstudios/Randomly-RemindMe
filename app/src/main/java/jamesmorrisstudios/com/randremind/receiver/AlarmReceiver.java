@@ -64,53 +64,59 @@ public final class AlarmReceiver extends BroadcastReceiver {
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Randomly RemindMe Wake For Reminder");
         wl.acquire();
 
+        boolean status = true;
+
         //Only load the reminders if they aren't already loaded
         //This way if the user has the app open their changes aren't overwritten
         if (!ReminderList.getInstance().hasReminders()) {
-            ReminderList.getInstance().loadDataSync();
+            Log.v("ALARM RECEIVER", "No Data loaded, loading...");
+            status = ReminderList.getInstance().loadDataSync();
         }
 
-        DateTimeItem lastWake = getLastWake();
-        TimeItem prevTime;
-        //If the last wake was a different day
-        if (now.dateItem.equals(lastWake.dateItem)) {
-            prevTime = lastWake.timeItem;
-        } else {
-            prevTime = new TimeItem(0, 0);
-        }
-
-        Log.v("ALARM RECEIVER", "Woke At: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
-
-        if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            Log.v("ALARM RECEIVER", "Device just woke");
-            //Set up our midnight recalculate wake
-            Scheduler.getInstance().scheduleRepeatingMidnight();
-            //Recalculate wakes if we were off for over a day
-            if (!now.dateItem.equals(lastWake.dateItem)) {
-                ReminderList.getInstance().recalculateWakes();
+        if(status) {
+            DateTimeItem lastWake = getLastWake();
+            TimeItem prevTime;
+            //If the last wake was a different day
+            if (now.dateItem.equals(lastWake.dateItem)) {
+                prevTime = lastWake.timeItem;
+            } else {
+                prevTime = new TimeItem(0, 0);
             }
-            //Schedule the next wake event
-            ReminderList.getInstance().scheduleAllWakes(now);
-        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT")) {
-            Log.v("ALARM RECEIVER", "Midnight update");
-            //Recalculate all wakes for a new day
-            ReminderList.getInstance().recalculateWakes();
-            //Schedule the next wake event
-            ReminderList.getInstance().scheduleAllWakes(now);
-        } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER") && intent.getType() != null && !intent.getType().isEmpty()) {
-            Log.v("ALARM RECEIVER", "Reminder!");
-            //Post a notification if we have one
-            postNotifications(intent.getType(), now);
-            //Schedule the next wake event
-            //ReminderList.getInstance().scheduleAllWakes(now.timeItem);
+
+            Log.v("ALARM RECEIVER", "Woke At: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
+
+            if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+                Log.v("ALARM RECEIVER", "Device just woke");
+                //Set up our midnight recalculate wake
+                Scheduler.getInstance().scheduleRepeatingMidnight();
+                //Recalculate wakes if we were off for over a day
+                if (!now.dateItem.equals(lastWake.dateItem)) {
+                    ReminderList.getInstance().recalculateWakes();
+                }
+                //Schedule the next wake event
+                ReminderList.getInstance().scheduleAllWakes(now);
+            } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT")) {
+                Log.v("ALARM RECEIVER", "Midnight update");
+                //Recalculate all wakes for a new day
+                ReminderList.getInstance().recalculateWakes();
+                //Schedule the next wake event
+                ReminderList.getInstance().scheduleAllWakes(now);
+            } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER") && intent.getType() != null && !intent.getType().isEmpty()) {
+                Log.v("ALARM RECEIVER", "Reminder!");
+                //Post a notification if we have one
+                postNotifications(intent.getType(), now);
+                //Schedule the next wake event
+                //ReminderList.getInstance().scheduleAllWakes(now.timeItem);
+            }
+
+            logLastWake(now);
+
+            //Get now again just to see how long this method took. It is not used for anything else
+            now = UtilsTime.getDateTimeNow();
+            Log.v("ALARM RECEIVER", "Completed Wake: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
+        } else {
+            Log.v("ALARM RECEIVER", "Failed to load");
         }
-
-        logLastWake(now);
-
-        //Get now again just to see how long this method took. It is not used for anything else
-        now = UtilsTime.getDateTimeNow();
-        Log.v("ALARM RECEIVER", "Completed Wake: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
-
         //Release the wakelock
         wl.release();
     }

@@ -57,10 +57,9 @@ public final class MainActivity extends BaseLauncherActivity implements
             Log.v("Main Activity", "Intent received to go to reminder");
             ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
             clearBackStack();
-            loadMainFragment();
             loadSummaryFragment();
             getIntent().removeExtra("REMINDER");
-            getIntent().removeExtra("REMINDER");
+            getIntent().removeExtra("NAME");
         }
     }
 

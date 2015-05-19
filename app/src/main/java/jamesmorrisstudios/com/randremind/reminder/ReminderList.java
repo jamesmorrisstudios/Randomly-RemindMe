@@ -38,15 +38,13 @@ import java.util.ArrayList;
  */
 public final class ReminderList {
     //Constants
-    private static final String TAG = "ReminderList";
     private static final String saveName = "SAVEDATA";
-    private static final String stringType = "UTF-8";
     //Reminder singleton instance
     private static ReminderList instance = null;
     AsyncTask<Void, Void, Boolean> taskLoad = null;
     AsyncTask<Void, Void, Boolean> taskSave = null;
     //Reminder List
-    private Reminders reminders = new Reminders();
+    private Reminders reminders = null;
     //The currently selected reminder as a copy
     private int currentIndex = -1;
     private ReminderItem currentItem;
@@ -165,7 +163,7 @@ public final class ReminderList {
      * @return True if reminders exist
      */
     public final boolean hasReminders() {
-        return !reminders.data.isEmpty();
+        return reminders != null && reminders.data != null && !reminders.data.isEmpty();
     }
 
     /**
@@ -368,8 +366,11 @@ public final class ReminderList {
      * @return True if successful
      */
     private boolean saveToFile() {
-        byte[] bytes = Serializer.serializeClass(reminders);
-        return bytes != null && FileWriter.writeFile(saveName, bytes, false);
+        if(reminders != null && reminders.data != null) {
+            byte[] bytes = Serializer.serializeClass(reminders);
+            return bytes != null && FileWriter.writeFile(saveName, bytes, false);
+        }
+        return false;
     }
 
     /**
@@ -379,6 +380,7 @@ public final class ReminderList {
      */
     private boolean loadFromFile() {
         if (!FileWriter.doesFileExist(saveName, false)) {
+            reminders = new Reminders();
             return true;
         }
         byte[] bytes = FileWriter.readFile(saveName, false);

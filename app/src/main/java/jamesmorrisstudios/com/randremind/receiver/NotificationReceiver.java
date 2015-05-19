@@ -32,6 +32,7 @@ import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.activities.MainActivity;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
  * Alarm receiver class.
@@ -101,17 +102,24 @@ public final class NotificationReceiver extends BroadcastReceiver {
 
     private void logClicked(String name, int notificationId, boolean preview, DateTimeItem dateTime, Context context) {
         Log.v("Notification RECEIVER", "log clicked: Preview: " + preview);
-        Log.v("ALARM RECEIVER", "ID Clicked: " + notificationId);
+        Log.v("Notification RECEIVER", "ID Clicked: " + notificationId);
         logAck(name, notificationId, preview, dateTime);
         if (!preview) {
-            Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
-            intent.putExtra("NAME", name);
-            intent.putExtra("REMINDER", true);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            try {
-                context.startActivity(intent);
-            }catch (Exception ex) {
-                Utils.toastShort(context.getString(R.string.app_open_fail));
+            boolean status = true;
+            if (!ReminderList.getInstance().hasReminders()) {
+                Log.v("Notification RECEIVER", "No Data loaded, loading...");
+                status = ReminderList.getInstance().loadDataSync();
+            }
+            if(status) {
+                Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
+                intent.putExtra("NAME", name);
+                intent.putExtra("REMINDER", true);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    context.startActivity(intent);
+                } catch (Exception ex) {
+                    Utils.toastShort(context.getString(R.string.app_open_fail));
+                }
             }
         }
     }
