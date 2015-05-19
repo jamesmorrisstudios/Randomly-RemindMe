@@ -17,7 +17,10 @@
 package jamesmorrisstudios.com.randremind.fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -46,8 +49,9 @@ import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.ColorSelector;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
+import com.jamesmorrisstudios.materialuilibrary.dialogs.colorpicker.OnColorSelectedListener;
+import com.jamesmorrisstudios.materialuilibrary.dialogs.colorpicker.builder.ColorPickerClickListener;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.time.RadialPickerLayout;
 import com.jamesmorrisstudios.materialuilibrary.dialogs.time.TimePickerDialog;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
@@ -601,15 +605,15 @@ public final class AddReminderFragment extends BaseFragment {
                 if (remind == null) {
                     return;
                 }
-                dialogListener.createColorPickerDialog(remind.notificationLEDColor, new ColorSelector.OnColorSelectedListener() {
+                dialogListener.createColorPickerDialog(remind.notificationLEDColor, new ColorPickerClickListener() {
                     @Override
-                    public void onColorSelected(int color) {
+                    public void onClick(DialogInterface dialogInterface, int color, Integer[] integers) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                         if (remind == null) {
                             return;
                         }
                         remind.notificationLEDColor = color;
-                        ledColor.setBackgroundColor(remind.notificationLEDColor);
+                        ((GradientDrawable)ledColor.getBackground()).setColor(remind.notificationLEDColor);
                     }
                 });
             }
@@ -660,7 +664,7 @@ public final class AddReminderFragment extends BaseFragment {
         contentText.setText(remind.content);
         timingSpecific.setText(getString(R.string.timing_specific));
         timingRange.setText(getString(R.string.timing_range));
-        ledColor.setBackgroundColor(remind.notificationLEDColor);
+        ((GradientDrawable)ledColor.getBackground()).setColor(remind.notificationLEDColor);
         UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
         UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
         updateSpecifcTimes();
