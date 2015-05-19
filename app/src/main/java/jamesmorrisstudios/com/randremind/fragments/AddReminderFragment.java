@@ -794,13 +794,15 @@ public final class AddReminderFragment extends BaseFragment {
             if (uri != null) {
                 remind.notificationTone = uri.toString();
                 Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), uri);
-                remind.notificationToneName = ringtone.getTitle(getActivity());
-                notificationSound.setText(remind.notificationToneName);
-            } else {
-                remind.notificationTone = null;
-                remind.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
-                notificationSound.setText(remind.notificationToneName);
+                if(ringtone != null) {
+                    remind.notificationToneName = ringtone.getTitle(getActivity());
+                    notificationSound.setText(remind.notificationToneName);
+                    return;
+                }
             }
+            remind.notificationTone = null;
+            remind.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
+            notificationSound.setText(remind.notificationToneName);
         }
     }
 
