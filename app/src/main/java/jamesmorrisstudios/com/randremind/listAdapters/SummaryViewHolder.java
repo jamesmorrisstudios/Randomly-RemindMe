@@ -24,15 +24,15 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.materialuilibrary.controls.CircleProgressDeterminate;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHolder;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate;
+import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.views.TintImageView;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
@@ -46,7 +46,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View dash, endTop;
     private ButtonCircleFlat[] dayButtons;
-    private TintImageView timingRandom, vibrate, tone, ledIcon, highPriorityIcon;
+    private TintedImageView timingRandom, vibrate, tone, ledIcon, highPriorityIcon;
     private TextView timingTimes, content;
 
     //Item
@@ -96,13 +96,13 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         dayButtons[4].getTextView().setText("T");
         dayButtons[5].getTextView().setText("F");
         dayButtons[6].getTextView().setText("S");
-        timingRandom = (TintImageView) view.findViewById(R.id.timing_random);
+        timingRandom = (TintedImageView) view.findViewById(R.id.timing_random);
         timingTimes = (TextView) view.findViewById(R.id.timing_times);
-        vibrate = (TintImageView) view.findViewById(R.id.notification_vibrate);
-        tone = (TintImageView) view.findViewById(R.id.notification_tone);
+        vibrate = (TintedImageView) view.findViewById(R.id.notification_vibrate);
+        tone = (TintedImageView) view.findViewById(R.id.notification_tone);
         content = (TextView) view.findViewById(R.id.content);
-        ledIcon = (TintImageView) view.findViewById(R.id.notification_led);
-        highPriorityIcon = (TintImageView) view.findViewById(R.id.notification_high_priority);
+        ledIcon = (TintedImageView) view.findViewById(R.id.notification_led);
+        highPriorityIcon = (TintedImageView) view.findViewById(R.id.notification_high_priority);
     }
 
     @Override
@@ -129,7 +129,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             endTop.setVisibility(View.VISIBLE);
             dash.setVisibility(View.VISIBLE);
         } else {
-            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.singleTime);
+            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.specificTimeList.get(0));
             endTop.setVisibility(View.GONE);
             dash.setVisibility(View.GONE);
         }

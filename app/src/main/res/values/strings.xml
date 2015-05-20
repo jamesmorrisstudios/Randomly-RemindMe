@@ -28,6 +28,7 @@
     <string name="edit_repeat">Repeat</string>
     <string name="edit_alarm">Alarm</string>
     <string name="edit_notification">Notification</string>
+    <string name="edit_notification_icon">Notification Icon</string>
     <string name="edit_message">Message</string>
 
     <string name="delete_prompt_title">Delete Reminder</string>
@@ -63,6 +64,8 @@
     <string name="led_color">Color:</string>
     <string name="sound_set">Tone:</string>
     <string name="sound_none">None</string>
+    <string name="icon_set">Icon</string>
+    <string name="icon_color">Accent Color</string>
 
     <string name="repeat_enable">Repeat Enable</string>
     <string name="alarm_enable">Alarm Enable</string>

@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,7 +27,9 @@ import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 
+import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
+import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
 import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
@@ -40,7 +43,8 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
  */
 public final class MainActivity extends BaseLauncherActivity implements
         MainListFragment.OnFragmentInteractionListener,
-        SummaryFragment.OnSummaryListener {
+        SummaryFragment.OnSummaryListener,
+        AddReminderFragment.OnAddReminderFragmentListener {
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -54,13 +58,27 @@ public final class MainActivity extends BaseLauncherActivity implements
             return;
         }
         if (extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
+            if(!ReminderList.getInstance().hasReminders()) {
+                ReminderList.getInstance().loadDataSync();
+                if(!ReminderList.getInstance().hasReminders()) {
+                    clearBackStack();
+                    loadMainFragment();
+                    getIntent().removeExtra("REMINDER");
+                    getIntent().removeExtra("NAME");
+                    return;
+                }
+            }
             Log.v("Main Activity", "Intent received to go to reminder");
             ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
             clearBackStack();
-            loadMainFragment();
             loadSummaryFragment();
             getIntent().removeExtra("REMINDER");
-            getIntent().removeExtra("REMINDER");
+            getIntent().removeExtra("NAME");
+        }
+
+        if(!ReminderList.getInstance().hasReminders()) {
+            clearBackStack();
+            loadMainFragment();
         }
     }
 
@@ -190,4 +208,13 @@ public final class MainActivity extends BaseLauncherActivity implements
         getSupportFragmentManager().executePendingTransactions();
     }
 
+    @Override
+    public void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
+        IconPickerDialogBuilder.with(this)
+                .setTitle("Choose Icon")
+                .setAccentColor(accentColor)
+                .setOnIconPicked(iconPickerListener)
+                .build()
+                .show();
+    }
 }

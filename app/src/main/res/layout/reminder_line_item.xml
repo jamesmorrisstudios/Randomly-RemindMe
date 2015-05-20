@@ -82,7 +82,7 @@
             android:layout_below="@+id/reminder_title_text"
             android:layout_toRightOf="@+id/timing_dash" />
 
-        <jamesmorrisstudios.com.randremind.views.TintImageView
+        <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
             android:id="@+id/timing_random"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             android:layout_toLeftOf="@+id/reminder_enabled"
             android:orientation="horizontal">
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+            <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/daySun"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -125,7 +125,7 @@
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+            <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayMon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -133,7 +133,7 @@
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+            <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayTue"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -141,7 +141,7 @@
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+            <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayWed"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -149,7 +149,7 @@
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+            <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayThu"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -157,7 +157,7 @@
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+            <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayFri"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -165,7 +165,7 @@
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+            <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/daySat"
                 android:layout_width="25dp"
                 android:layout_height="25dp"

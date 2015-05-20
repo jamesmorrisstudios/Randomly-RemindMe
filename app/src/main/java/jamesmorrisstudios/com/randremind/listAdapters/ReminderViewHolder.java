@@ -24,14 +24,14 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHolder;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.views.TintImageView;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -45,7 +45,7 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View dash, endTop;
     private ButtonCircleFlat[] dayButtons;
-    private TintImageView timingRandom;
+    private TintedImageView timingRandom;
     private TextView timingTimes;
 
     /**
@@ -96,7 +96,7 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         dayButtons[4].getTextView().setText("T");
         dayButtons[5].getTextView().setText("F");
         dayButtons[6].getTextView().setText("S");
-        timingRandom = (TintImageView) view.findViewById(R.id.timing_random);
+        timingRandom = (TintedImageView) view.findViewById(R.id.timing_random);
         timingTimes = (TextView) view.findViewById(R.id.timing_times);
     }
 
@@ -120,7 +120,7 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
             endTop.setVisibility(View.VISIBLE);
             dash.setVisibility(View.VISIBLE);
         } else {
-            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.singleTime);
+            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.specificTimeList.get(0));
             endTop.setVisibility(View.INVISIBLE);
             dash.setVisibility(View.INVISIBLE);
         }

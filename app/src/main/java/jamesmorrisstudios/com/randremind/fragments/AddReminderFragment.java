@@ -17,11 +17,14 @@
 package jamesmorrisstudios.com.randremind.fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -40,19 +43,21 @@ import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
-import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.ColorSelector;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.time.RadialPickerLayout;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.time.TimePickerDialog;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.utilitieslibrary.dialogs.colorpicker.builder.ColorPickerClickListener;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,19 +73,23 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 public final class AddReminderFragment extends BaseFragment {
     public static final String TAG = "AddReminderFragment";
     private static final int NOTIFICATION_RESULT = 5;
+    private OnAddReminderFragmentListener reminderFragmentListener;
     //Views
     private AppCompatEditText titleText, contentText;
     private AppCompatCheckBox notificationVibrateEnable, ledEnable, highPriorityEnable, randomEnable;
-    private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound,
-            singleHour, singleMinute, singleAM, singlePM;
-    private View startTimeTop, endTimeTop, singleTimeTop, ledColor;
-    private AppCompatSpinner timeSpinner;
+    private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound;
+    private TextView[] specificHour = new TextView[20], specificMinute = new TextView[20], specificAM = new TextView[20], specificPM = new TextView[20];
+    private View[] specificTimeTop = new View[20];
+    private View startTimeTop, endTimeTop, ledColor, accentColor;
+    private AppCompatSpinner timeSpinner, timeSpecificSpinner;
     private ButtonCircleFlat[] dayButtons = new ButtonCircleFlat[7];
     private LinearLayout daysContainer, notificationContainer;
     private ScrollView scrollPane;
     private int scrollPosition = 0;
     private ButtonCircleFlat timingSpecific, timingRange;
     private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
+    private RelativeLayout notificationIconContainer;
+    private ImageView notificationIcon;
     //Listeners
     private TextWatcher titleTextWatcher, contentTextWatcher;
 
@@ -89,8 +98,7 @@ public final class AddReminderFragment extends BaseFragment {
     /**
      * Required empty public constructor
      */
-    public AddReminderFragment() {
-    }
+    public AddReminderFragment() {}
 
     /**
      * Constructor. Enable menu options
@@ -125,19 +133,19 @@ public final class AddReminderFragment extends BaseFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cancel:
-                dialogListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new MaterialDialog.ButtonCallback() {
+                dialogListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
                         destroyListeners();
                         ReminderList.getInstance().cancelCurrentReminderChanges();
                         saveOnBack = false;
                         utilListener.goBackFromFragment();
                         Utils.toastShort(getString(R.string.reminder_cancel));
                     }
-
+                }, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onNegative(MaterialDialog dialog) {
-
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Nothing on negative
                     }
                 });
                 break;
@@ -173,12 +181,34 @@ public final class AddReminderFragment extends BaseFragment {
         endMinute = (TextView) endTimeTop.findViewById(R.id.time_minute);
         endAM = (TextView) endTimeTop.findViewById(R.id.time_am);
         endPM = (TextView) endTimeTop.findViewById(R.id.time_pm);
-        singleTimeTop = view.findViewById(R.id.timing_single);
-        singleHour = (TextView) singleTimeTop.findViewById(R.id.time_hour);
-        singleMinute = (TextView) singleTimeTop.findViewById(R.id.time_minute);
-        singleAM = (TextView) singleTimeTop.findViewById(R.id.time_am);
-        singlePM = (TextView) singleTimeTop.findViewById(R.id.time_pm);
+        specificTimeTop[0] = view.findViewById(R.id.timing_single_00);
+        specificTimeTop[1] = view.findViewById(R.id.timing_single_01);
+        specificTimeTop[2] = view.findViewById(R.id.timing_single_02);
+        specificTimeTop[3] = view.findViewById(R.id.timing_single_03);
+        specificTimeTop[4] = view.findViewById(R.id.timing_single_04);
+        specificTimeTop[5] = view.findViewById(R.id.timing_single_05);
+        specificTimeTop[6] = view.findViewById(R.id.timing_single_06);
+        specificTimeTop[7] = view.findViewById(R.id.timing_single_07);
+        specificTimeTop[8] = view.findViewById(R.id.timing_single_08);
+        specificTimeTop[9] = view.findViewById(R.id.timing_single_09);
+        specificTimeTop[10] = view.findViewById(R.id.timing_single_10);
+        specificTimeTop[11] = view.findViewById(R.id.timing_single_11);
+        specificTimeTop[12] = view.findViewById(R.id.timing_single_12);
+        specificTimeTop[13] = view.findViewById(R.id.timing_single_13);
+        specificTimeTop[14] = view.findViewById(R.id.timing_single_14);
+        specificTimeTop[15] = view.findViewById(R.id.timing_single_15);
+        specificTimeTop[16] = view.findViewById(R.id.timing_single_16);
+        specificTimeTop[17] = view.findViewById(R.id.timing_single_17);
+        specificTimeTop[18] = view.findViewById(R.id.timing_single_18);
+        specificTimeTop[19] = view.findViewById(R.id.timing_single_19);
+        for(int i=0; i<specificTimeTop.length; i++) {
+            specificHour[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_hour);
+            specificMinute[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_minute);
+            specificAM[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_am);
+            specificPM[i] = (TextView) specificTimeTop[i].findViewById(R.id.time_pm);
+        }
         timeSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_times_spinner);
+        timeSpecificSpinner = (AppCompatSpinner) view.findViewById(R.id.timing_times_specific_spinner);
         randomEnable = (AppCompatCheckBox) view.findViewById(R.id.timing_random_enabled);
         daysContainer = (LinearLayout) view.findViewById(R.id.daysContainer);
         notificationContainer = (LinearLayout) view.findViewById(R.id.notificationContainer);
@@ -203,6 +233,9 @@ public final class AddReminderFragment extends BaseFragment {
         timingTimesPerDay = (LinearLayout) view.findViewById(R.id.timing_times_per_day);
         timingDistribution = (LinearLayout) view.findViewById(R.id.timing_distribution);
         timingSingleTime = (LinearLayout) view.findViewById(R.id.timing_times_specific);
+        accentColor = view.findViewById(R.id.notification_accent_color);
+        notificationIconContainer = (RelativeLayout) view.findViewById(R.id.notificationIconTop);
+        notificationIcon = (ImageView) view.findViewById(R.id.notificationIcon);
         //Now setup everything with actual data
         setupViewWithReminder();
         return view;
@@ -212,6 +245,29 @@ public final class AddReminderFragment extends BaseFragment {
     protected void afterViewCreated() {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_save_white_24dp);
+    }
+
+    /**
+     * @param activity Activity to attach to
+     */
+    @Override
+    public void onAttach(@NonNull Activity activity) {
+        super.onAttach(activity);
+        try {
+            reminderFragmentListener = (OnAddReminderFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnAddReminderFragmentListener");
+        }
+    }
+
+    /**
+     * Detach from activity
+     */
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        reminderFragmentListener = null;
     }
 
     /**
@@ -286,11 +342,11 @@ public final class AddReminderFragment extends BaseFragment {
             timingDistribution.setVisibility(View.GONE);
         }
         if (remind.rangeTiming) {
-            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
-            timingRange.getTextView().setTextColor(getResources().getColor(R.color.primaryDark));
-        } else {
-            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.primaryDark));
+            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textDarkMain));
             timingRange.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
+        } else {
+            timingSpecific.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
+            timingRange.getTextView().setTextColor(getResources().getColor(R.color.textDarkMain));
         }
 
     }
@@ -353,29 +409,32 @@ public final class AddReminderFragment extends BaseFragment {
      */
     private void addTimeSetListeners() {
         //Time single
-        final TimePickerDialog.OnTimeSetListener timeSingleListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(@NonNull RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
-                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                if (remind == null) {
-                    return;
+        for(int i=0; i<specificTimeTop.length; i++) {
+            final int index = i;
+            final TimePickerDialog.OnTimeSetListener timeSingleListener = new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(@NonNull RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
+                    ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                    if (remind == null) {
+                        return;
+                    }
+                    remind.specificTimeList.get(index).hour = hourOfDay;
+                    remind.specificTimeList.get(index).minute = minute;
+                    UtilsTime.setTime(specificHour[index], specificMinute[index], specificAM[index], specificPM[index], remind.specificTimeList.get(index));
                 }
-                remind.singleTime.hour = hourOfDay;
-                remind.singleTime.minute = minute;
-                UtilsTime.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
-            }
-        };
-        singleTimeTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(@NonNull View v) {
-                ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-                if (currentReminder == null) {
-                    return;
+            };
+            specificTimeTop[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(@NonNull View v) {
+                    ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
+                    if (currentReminder == null) {
+                        return;
+                    }
+                    dialogListener.createTimePickerDialog(timeSingleListener, currentReminder.specificTimeList.get(index).hour,
+                            currentReminder.specificTimeList.get(index).minute, currentReminder.specificTimeList.get(index).is24Hour());
                 }
-                dialogListener.createTimePickerDialog(timeSingleListener, currentReminder.singleTime.hour,
-                        currentReminder.singleTime.minute, currentReminder.singleTime.is24Hour());
-            }
-        });
+            });
+        }
         //Time start
         final TimePickerDialog.OnTimeSetListener timeStartListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -445,6 +504,31 @@ public final class AddReminderFragment extends BaseFragment {
                     return;
                 }
                 currentReminder.numberPerDay = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //Times specific per day
+        timeSpecificSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(@NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                int size = position + 1;
+                //If we are making the list bigger
+                while(size > remind.specificTimeList.size()) {
+                    remind.specificTimeList.add(new TimeItem(9, 0));
+                }
+                //If we are making the list smaller
+                while(size < remind.specificTimeList.size()) {
+                    remind.specificTimeList.remove(remind.specificTimeList.size() -1);
+                }
+                updateSpecifcTimes();
             }
 
             @Override
@@ -550,17 +634,58 @@ public final class AddReminderFragment extends BaseFragment {
                 if (remind == null) {
                     return;
                 }
-                dialogListener.createColorPickerDialog(remind.notificationLEDColor, new ColorSelector.OnColorSelectedListener() {
+                dialogListener.createColorPickerDialog(remind.notificationLEDColor, new ColorPickerClickListener() {
                     @Override
-                    public void onColorSelected(int color) {
+                    public void onClick(DialogInterface dialogInterface, int color, Integer[] integers) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                         if (remind == null) {
                             return;
                         }
                         remind.notificationLEDColor = color;
-                        ledColor.setBackgroundColor(remind.notificationLEDColor);
+                        ((GradientDrawable) ledColor.getBackground()).setColor(remind.notificationLEDColor);
                     }
                 });
+            }
+        });
+        accentColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                dialogListener.createColorPickerDialog(remind.notificationAccentColor, new ColorPickerClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int color, Integer[] integers) {
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        remind.notificationAccentColor = color;
+                        ((GradientDrawable)accentColor.getBackground()).setColor(remind.notificationAccentColor);
+                        ((GradientDrawable)notificationIconContainer.getBackground()).setColor(remind.notificationAccentColor);
+                    }
+                });
+            }
+        });
+        notificationIconContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                reminderFragmentListener.showIconPickerDialog(new IconPickerDialogBuilder.IconPickerListener() {
+                    @Override
+                    public void onClick(@DrawableRes int iconRes) {
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        remind.notificationIconRes = iconRes;
+                        notificationIcon.setImageResource(iconRes);
+                    }
+                }, remind.notificationAccentColor);
             }
         });
     }
@@ -594,6 +719,7 @@ public final class AddReminderFragment extends BaseFragment {
         titleText.removeTextChangedListener(titleTextWatcher);
         contentText.removeTextChangedListener(contentTextWatcher);
         timeSpinner.setOnItemSelectedListener(null);
+        timeSpecificSpinner.setOnItemSelectedListener(null);
     }
 
     /**
@@ -608,14 +734,33 @@ public final class AddReminderFragment extends BaseFragment {
         contentText.setText(remind.content);
         timingSpecific.setText(getString(R.string.timing_specific));
         timingRange.setText(getString(R.string.timing_range));
-        ledColor.setBackgroundColor(remind.notificationLEDColor);
+        ((GradientDrawable)ledColor.getBackground()).setColor(remind.notificationLEDColor);
+        ((GradientDrawable)accentColor.getBackground()).setColor(remind.notificationAccentColor);
+        ((GradientDrawable)notificationIconContainer.getBackground()).setColor(remind.notificationAccentColor);
+        notificationIcon.setImageResource(remind.notificationIconRes);
         UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
         UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
-        UtilsTime.setTime(singleHour, singleMinute, singleAM, singlePM, remind.singleTime);
+        updateSpecifcTimes();
         generateNumberTimePerDay();
+        generateNumberSpecificTimePerDay();
         randomEnable.setChecked(remind.randomDistribution);
         setDaysOfWeek();
         setNotification();
+    }
+
+    private void updateSpecifcTimes() {
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if (remind == null) {
+            return;
+        }
+        for(int i=0; i<specificTimeTop.length; i++) {
+            if(i < remind.specificTimeList.size()) {
+                specificTimeTop[i].setVisibility(View.VISIBLE);
+                UtilsTime.setTime(specificHour[i], specificMinute[i], specificAM[i], specificPM[i], remind.specificTimeList.get(i));
+            } else {
+                specificTimeTop[i].setVisibility(View.GONE);
+            }
+        }
     }
 
     /**
@@ -668,6 +813,21 @@ public final class AddReminderFragment extends BaseFragment {
         timeSpinner.setSelection(remind.numberPerDay - 1);
     }
 
+    private void generateNumberSpecificTimePerDay() {
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if (remind == null) {
+            return;
+        }
+        List<String> perDayList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            perDayList.add(Integer.toString(i + 1));
+        }
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, perDayList);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        timeSpecificSpinner.setAdapter(spinnerArrayAdapter);
+        timeSpecificSpinner.setSelection(remind.specificTimeList.size() - 1);
+    }
+
     /**
      * On Stop
      */
@@ -711,13 +871,15 @@ public final class AddReminderFragment extends BaseFragment {
             if (uri != null) {
                 remind.notificationTone = uri.toString();
                 Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), uri);
-                remind.notificationToneName = ringtone.getTitle(getActivity());
-                notificationSound.setText(remind.notificationToneName);
-            } else {
-                remind.notificationTone = null;
-                remind.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
-                notificationSound.setText(remind.notificationToneName);
+                if(ringtone != null) {
+                    remind.notificationToneName = ringtone.getTitle(getActivity());
+                    notificationSound.setText(remind.notificationToneName);
+                    return;
+                }
             }
+            remind.notificationTone = null;
+            remind.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
+            notificationSound.setText(remind.notificationToneName);
         }
     }
 
@@ -744,10 +906,22 @@ public final class AddReminderFragment extends BaseFragment {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActivated(active);
         if (active) {
-            dayButton.getTextView().setTextColor(getResources().getColor(R.color.primary));
-        } else {
             dayButton.getTextView().setTextColor(getResources().getColor(R.color.textLightMain));
+        } else {
+            dayButton.getTextView().setTextColor(getResources().getColor(R.color.textDarkMain));
         }
+    }
+
+    /**
+     *
+     */
+    public interface OnAddReminderFragmentListener {
+
+        /**
+         *
+         */
+        void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor);
+
     }
 
 }

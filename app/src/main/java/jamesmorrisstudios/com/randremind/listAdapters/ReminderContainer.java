@@ -18,8 +18,8 @@ package jamesmorrisstudios.com.randremind.listAdapters;
 
 import android.support.annotation.NonNull;
 
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 

@@ -19,8 +19,8 @@ package jamesmorrisstudios.com.randremind.listAdapters;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleAdapter;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleViewHolder;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 
 import jamesmorrisstudios.com.randremind.R;
 

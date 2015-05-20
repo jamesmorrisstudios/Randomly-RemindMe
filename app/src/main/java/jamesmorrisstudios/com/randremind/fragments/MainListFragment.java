@@ -25,9 +25,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainRecycleListFragment;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleAdapter;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.squareup.otto.Subscribe;
