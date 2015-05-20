@@ -22,10 +22,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a47070ce-a684-4114-8a6f-5dce455393d9" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\ic_clear_black_24dp.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\ic_done_black_24dp.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\notification_icon.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Programming\randRemind\app\src\main\res\drawable-xxhdpi\notification_icon.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="randRemind.iws" />
@@ -66,14 +70,113 @@
     <favorites_list name="randRemind" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="AddReminderFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="670" column="35" selection-start-line="670" selection-start-column="35" selection-end-line="670" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#AddReminderFragment#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#onCreate#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#onCreateOptionsMenu#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#onOptionsItemSelected#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#onCreateView#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#onCreateView#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#afterViewCreated#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#setupViewWithReminder#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#setupViewWithReminder#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#addTimingTypeListener#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#setTimingType#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#addContentListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="class#16852:17481" expanded="false" />
+                <element signature="method#beforeTextChanged#0;class#16852:17481" expanded="false" />
+                <element signature="method#onTextChanged#0;class#16852:17481" expanded="false" />
+                <element signature="method#afterTextChanged#0;class#16852:17481" expanded="false" />
+                <element signature="docComment;method#addTimeSetListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#addTimeSetListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="class#22411:22966" expanded="false" />
+                <element signature="method#onItemSelected#0;class#22411:22966" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#22411:22966" expanded="false" />
+                <element signature="class#23060:24036" expanded="false" />
+                <element signature="method#onItemSelected#0;class#23060:24036" expanded="false" />
+                <element signature="method#onNothingSelected#0;class#23060:24036" expanded="false" />
+                <element signature="docComment;method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#notificationListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="e#30263#31168#0" expanded="true" />
+                <element signature="e#31167#31168#0" expanded="true" />
+                <element signature="method#scrollPaneListener#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#populateData#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#populateData#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#updateSpecifcTimes#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#setNotification#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#setNotification#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#setDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#setDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#generateNumberTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#generateNumberTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#generateNumberSpecificTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#onStop#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#onBack#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="docComment;method#onActivityResult#0;class#AddReminderFragment#0" expanded="false" />
+                <element signature="method#initDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SummaryFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/SummaryFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="191" column="9" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="73" column="34" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
+              <folding>
+                <element signature="e#4132#4133#0" expanded="true" />
+                <element signature="e#4169#4170#0" expanded="true" />
+                <element signature="e#4486#4487#0" expanded="true" />
+                <element signature="e#4527#4528#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.45293072">
+              <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="valueResourceFile" />
         <option value="resourceFile" />
+        <option value="layoutResourceFile_vertical" />
+        <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -2104,7 +2207,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4293468471299" />
+        <entry key="$PROJECT_DIR$" value="4293498683279" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2757,16 +2860,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/reminder_header_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/time_display_small.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/color/bg_day_tint_color.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/day_button.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_summary.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_add_new.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_summary.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/notificationReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/string_constant.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
@@ -2781,19 +2878,15 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings_override.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings_store_specific.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/licenses.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/tutorial.xml" />
         <option value="$PROJECT_DIR$/app/src/amazon/res/values/strings_store_specific.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/Scheduler.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/time_display.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/NotificationReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/circle_led.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/SummaryFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/MainListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderAdapter.java" />
@@ -2803,11 +2896,21 @@
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderLogDay.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderViewHolder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/SummaryViewHolder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/reminder_line_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/summary_header_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/summary_line_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_icon_picker.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/IconPickerDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/icon_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/IconPickerDialogBuilder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/app/App.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
       </list>
     </option>
   </component>
@@ -2924,70 +3027,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randremind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -2995,7 +3034,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="04a457b713ad3a56" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="192.168.1.2:5555" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="10_1_WXGA_Tablet_API_22" />
     <property name="DEBUGGABLE_DEVICE" value="lge-nexus_5-04a457b713ad3a56" />
     <property name="DEBUGGABLE_PROCESS" value="jamesmorrisstudios.com.randremind" />
@@ -3185,7 +3224,7 @@
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -3241,8 +3280,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="1" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3250,20 +3289,20 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28111112" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4611111" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32333332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21375267" sideWeight="0.31051752" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22333333" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34666666" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21428572" sideWeight="0.6905158" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18710022" sideWeight="0.6905158" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21444444" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -3289,16 +3328,11 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="156" />
+      <option name="time" value="160" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/high_priority_icon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/settings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.70961887">
@@ -3383,26 +3417,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53927493">
-          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_store_specific.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14847161">
           <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="37" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -3431,38 +3449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4376855">
-          <caret line="85" column="50" selection-start-line="85" selection-start-column="50" selection-end-line="85" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/NotificationReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.025222551">
-          <caret line="104" column="24" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14243324">
-          <caret line="118" column="9" selection-start-line="118" selection-start-column="9" selection-end-line="118" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/listAdapters/ReminderAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50445104">
@@ -3479,83 +3465,6 @@
           <caret line="83" column="61" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/SummaryFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7106825">
-          <caret line="231" column="25" selection-start-line="231" selection-start-column="25" selection-end-line="231" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2576#2615#0" expanded="false" />
-            <element signature="e#2617#2658#0" expanded="false" />
-            <element signature="e#2660#3123#0" expanded="false" />
-            <element signature="e#3046#3081#0" expanded="false" />
-            <element signature="e#3122#3123#0" expanded="false" />
-            <element signature="e#3651#3693#0" expanded="false" />
-            <element signature="e#3695#3739#0" expanded="false" />
-            <element signature="e#3741#4144#0" expanded="false" />
-            <element signature="e#3929#3967#0" expanded="false" />
-            <element signature="e#4143#4144#0" expanded="false" />
-            <element signature="e#7157#7206#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.054896142">
-          <caret line="144" column="22" selection-start-line="144" selection-start-column="22" selection-end-line="144" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="docComment;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#AddReminderFragment#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#onCreate#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#onCreateOptionsMenu#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#onOptionsItemSelected#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#onCreateView#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#afterViewCreated#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#setupViewWithReminder#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#setupViewWithReminder#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#setTimingType#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#addContentListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="class#15696:16325" expanded="false" />
-            <element signature="method#beforeTextChanged#0;class#15696:16325" expanded="false" />
-            <element signature="method#onTextChanged#0;class#15696:16325" expanded="false" />
-            <element signature="method#afterTextChanged#0;class#15696:16325" expanded="false" />
-            <element signature="docComment;method#addTimeSetListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="class#21255:21810" expanded="false" />
-            <element signature="method#onItemSelected#0;class#21255:21810" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#21255:21810" expanded="false" />
-            <element signature="class#21904:22880" expanded="false" />
-            <element signature="method#onItemSelected#0;class#21904:22880" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#21904:22880" expanded="false" />
-            <element signature="docComment;method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#notificationListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#scrollPaneListener#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#populateData#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#updateSpecifcTimes#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#setNotification#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#setNotification#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#setDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#setDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#generateNumberTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#generateNumberTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#generateNumberSpecificTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#onStop#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#onBack#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#onActivityResult#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#initDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="docComment;method#setDayOfWeek#0;class#AddReminderFragment#0" expanded="false" />
-            <element signature="method#setDayOfWeek#0;class#AddReminderFragment#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3598,52 +3507,6 @@
           <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4792285">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#ReminderList#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#ReminderList#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#getInstance#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#getInstance#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#postReminderListEvent#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#loadDataSync#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#loadData#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#saveDataSync#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#saveData#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#4436:4996" expanded="false" />
-            <element signature="docComment;method#setCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#getReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#setEnableReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#clearCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#clearCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#cancelCurrentReminderChanges#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#cancelCurrentReminderChanges#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#deleteCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#deleteCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#createNewReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#createNewReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#previewCurrent#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#previewCurrent#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#saveCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#saveCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#duplicateReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#hasCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#getCurrentReminder#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#setCurrentReminder#1;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#scheduleAllWakes#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;method#validateSaveData#0;class#ReminderList#0" expanded="false" />
-            <element signature="method#updateVersion#0;class#ReminderList#0" expanded="false" />
-            <element signature="docComment;class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
-            <element signature="class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3785,26 +3648,49 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_notifications_none_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48079878">
+          <caret line="467" column="55" selection-start-line="467" selection-start-column="55" selection-end-line="467" selection-end-column="55" />
+          <folding>
+            <element signature="e#17239#17295#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_add_reminder.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10452962">
-          <caret line="494" column="13" selection-start-line="494" selection-start-column="13" selection-end-line="494" selection-end-column="13" />
+        <state vertical-scroll-proportion="-4.9814816">
+          <caret line="657" column="21" selection-start-line="657" selection-start-column="21" selection-end-line="657" selection-end-column="21" />
           <folding>
             <element signature="e#0#631#0" expanded="false" />
+            <element signature="e#1803#1823#0" expanded="false" />
+            <element signature="e#1921#1941#0" expanded="false" />
+            <element signature="e#2471#2491#0" expanded="false" />
+            <element signature="e#2793#2811#0" expanded="false" />
             <element signature="n#RelativeLayout#0;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#TextView#0;n#RelativeLayout#0;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#1803#1823#0" expanded="false" />
+            <element signature="e#1921#1941#0" expanded="false" />
             <element signature="n#android.support.v7.widget.AppCompatEditText#0;n#RelativeLayout#0;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#RelativeLayout#1;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#TextView#0;n#RelativeLayout#1;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#android.support.v7.widget.AppCompatEditText#0;n#RelativeLayout#1;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#2471#2491#0" expanded="false" />
+            <element signature="e#2793#2811#0" expanded="false" />
             <element signature="n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#TextView#0;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#4979#5000#0" expanded="false" />
+            <element signature="e#5098#5118#0" expanded="false" />
             <element signature="n#LinearLayout#0;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#0;n#LinearLayout#0;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#1;n#LinearLayout#0;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#LinearLayout#1;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#LinearLayout#0;n#LinearLayout#1;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#TextView#0;n#LinearLayout#0;n#LinearLayout#1;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#7915#7939#0" expanded="false" />
             <element signature="n#android.support.v7.widget.AppCompatSpinner#0;n#LinearLayout#0;n#LinearLayout#1;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#include#0;n#LinearLayout#1;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#include#1;n#LinearLayout#1;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
@@ -3829,32 +3715,47 @@
             <element signature="n#LinearLayout#2;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#include#0;n#LinearLayout#2;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#TextView#0;n#LinearLayout#2;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#14841#14855#0" expanded="false" />
             <element signature="n#include#1;n#LinearLayout#2;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#LinearLayout#3;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#TextView#0;n#LinearLayout#3;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#16031#16055#0" expanded="false" />
             <element signature="n#android.support.v7.widget.AppCompatSpinner#0;n#LinearLayout#3;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#LinearLayout#4;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#android.support.v7.widget.AppCompatCheckBox#0;n#LinearLayout#4;n#RelativeLayout#2;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#TextView#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#17326#17349#0" expanded="false" />
+            <element signature="e#17391#17409#0" expanded="false" />
+            <element signature="e#17961#17982#0" expanded="false" />
+            <element signature="e#18080#18100#0" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#0;n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#1;n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#2;n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#3;n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="n#TextView#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#17961#17982#0" expanded="false" />
+            <element signature="e#18080#18100#0" expanded="false" />
+            <element signature="n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#4;n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#23621#23640#0" expanded="false" />
+            <element signature="e#23686#23704#0" expanded="false" />
+            <element signature="e#24109#24127#0" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#5;n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#24928#24952#0" expanded="false" />
+            <element signature="e#24998#25016#0" expanded="false" />
+            <element signature="e#25409#25439#0" expanded="false" />
+            <element signature="e#25485#25503#0" expanded="false" />
             <element signature="n#com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat#6;n#LinearLayout#0;n#RelativeLayout#3;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#LinearLayout#0;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#TextView#0;n#LinearLayout#0;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#TextView#1;n#LinearLayout#0;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#LinearLayout#1;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#android.support.v7.widget.AppCompatCheckBox#0;n#LinearLayout#1;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#android.support.v7.widget.AppCompatCheckBox#1;n#LinearLayout#1;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#LinearLayout#2;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#android.support.v7.widget.AppCompatCheckBox#0;n#LinearLayout#2;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#TextView#0;n#LinearLayout#2;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
-            <element signature="n#View#0;n#LinearLayout#2;n#LinearLayout#0;n#RelativeLayout#4;n#LinearLayout#0;n#ScrollView#0;n#RelativeLayout#0;n#!!top" expanded="false" />
+            <element signature="e#26215#26235#0" expanded="false" />
+            <element signature="e#26349#26367#0" expanded="false" />
+            <element signature="e#26637#26656#0" expanded="false" />
+            <element signature="e#26770#26788#0" expanded="false" />
+            <element signature="e#22272#22299#0" expanded="false" />
+            <element signature="e#22397#22417#0" expanded="false" />
+            <element signature="e#24928#24952#0" expanded="false" />
+            <element signature="e#24998#25016#0" expanded="false" />
+            <element signature="e#26637#26656#0" expanded="false" />
+            <element signature="e#26770#26788#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3862,20 +3763,189 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/notification_icon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_notifications_none_white_24dp.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderItem.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8631922">
-          <caret line="507" column="0" selection-start-line="507" selection-start-column="0" selection-end-line="507" selection-end-column="0" />
+        <state vertical-scroll-proportion="-10.76">
+          <caret line="67" column="7" selection-start-line="67" selection-start-column="7" selection-end-line="67" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/IconPickerDialogBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9584665">
+          <caret line="121" column="11" selection-start-line="121" selection-start-column="11" selection-end-line="121" selection-end-column="11" />
+          <folding>
+            <element signature="e#5301#5506#0" expanded="true" />
+            <element signature="e#5505#5506#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/AlarmReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="118" column="9" selection-start-line="118" selection-start-column="9" selection-end-line="118" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/receiver/NotificationReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="25" selection-start-line="110" selection-start-column="25" selection-end-line="110" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/reminder/ReminderList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="11" selection-start-line="165" selection-start-column="11" selection-end-line="165" selection-end-column="11" />
+          <folding>
+            <element signature="docComment;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#ReminderList#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#ReminderList#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getInstance#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#getInstance#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#postReminderListEvent#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#loadDataSync#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#loadData#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#saveDataSync#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#saveData#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#onPostExecute#0;class#4436:4996" expanded="false" />
+            <element signature="docComment;method#setCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#getReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#setEnableReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#clearCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#clearCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#cancelCurrentReminderChanges#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#cancelCurrentReminderChanges#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#deleteCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#deleteCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#createNewReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#createNewReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#previewCurrent#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#previewCurrent#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#saveCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#saveCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#duplicateReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#hasCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#getCurrentReminder#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#setCurrentReminder#1;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#recalculateWakes#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#scheduleAllWakes#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;method#validateSaveData#0;class#ReminderList#0" expanded="false" />
+            <element signature="method#updateVersion#0;class#ReminderList#0" expanded="false" />
+            <element signature="docComment;class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
+            <element signature="class#ReminderListEvent#0;class#ReminderList#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/app/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15097691">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5790408">
+          <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="670" column="35" selection-start-line="670" selection-start-column="35" selection-end-line="670" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#AddReminderFragment#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#onCreate#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#onCreateOptionsMenu#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#onOptionsItemSelected#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#onCreateView#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#afterViewCreated#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#setupViewWithReminder#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#setupViewWithReminder#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#addTimingTypeListener#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#setTimingType#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#addTitleListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#addContentListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="class#16852:17481" expanded="false" />
+            <element signature="method#beforeTextChanged#0;class#16852:17481" expanded="false" />
+            <element signature="method#onTextChanged#0;class#16852:17481" expanded="false" />
+            <element signature="method#afterTextChanged#0;class#16852:17481" expanded="false" />
+            <element signature="docComment;method#addTimeSetListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#addTimeSetListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="class#22411:22966" expanded="false" />
+            <element signature="method#onItemSelected#0;class#22411:22966" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#22411:22966" expanded="false" />
+            <element signature="class#23060:24036" expanded="false" />
+            <element signature="method#onItemSelected#0;class#23060:24036" expanded="false" />
+            <element signature="method#onNothingSelected#0;class#23060:24036" expanded="false" />
+            <element signature="docComment;method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#repeatDaysListener#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#notificationListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="e#30263#31168#0" expanded="true" />
+            <element signature="e#31167#31168#0" expanded="true" />
+            <element signature="method#scrollPaneListener#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#destroyListeners#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#populateData#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#populateData#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#updateSpecifcTimes#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#setNotification#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#setNotification#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#setDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#setDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#generateNumberTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#generateNumberTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#generateNumberSpecificTimePerDay#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#onStop#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#onBack#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="docComment;method#onActivityResult#0;class#AddReminderFragment#0" expanded="false" />
+            <element signature="method#initDaysOfWeek#0;class#AddReminderFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/SummaryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="191" column="9" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="34" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
+          <folding>
+            <element signature="e#4132#4133#0" expanded="true" />
+            <element signature="e#4169#4170#0" expanded="true" />
+            <element signature="e#4486#4487#0" expanded="true" />
+            <element signature="e#4527#4528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45293072">
+          <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
           <folding />
         </state>
       </provider>

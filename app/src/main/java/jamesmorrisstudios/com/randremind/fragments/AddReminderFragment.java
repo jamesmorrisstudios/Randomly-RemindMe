@@ -24,6 +24,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -42,7 +43,9 @@ import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -70,13 +73,14 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 public final class AddReminderFragment extends BaseFragment {
     public static final String TAG = "AddReminderFragment";
     private static final int NOTIFICATION_RESULT = 5;
+    private OnAddReminderFragmentListener reminderFragmentListener;
     //Views
     private AppCompatEditText titleText, contentText;
     private AppCompatCheckBox notificationVibrateEnable, ledEnable, highPriorityEnable, randomEnable;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM, notificationSound;
     private TextView[] specificHour = new TextView[20], specificMinute = new TextView[20], specificAM = new TextView[20], specificPM = new TextView[20];
     private View[] specificTimeTop = new View[20];
-    private View startTimeTop, endTimeTop, ledColor;
+    private View startTimeTop, endTimeTop, ledColor, accentColor;
     private AppCompatSpinner timeSpinner, timeSpecificSpinner;
     private ButtonCircleFlat[] dayButtons = new ButtonCircleFlat[7];
     private LinearLayout daysContainer, notificationContainer;
@@ -84,6 +88,8 @@ public final class AddReminderFragment extends BaseFragment {
     private int scrollPosition = 0;
     private ButtonCircleFlat timingSpecific, timingRange;
     private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
+    private RelativeLayout notificationIconContainer;
+    private ImageView notificationIcon;
     //Listeners
     private TextWatcher titleTextWatcher, contentTextWatcher;
 
@@ -227,6 +233,9 @@ public final class AddReminderFragment extends BaseFragment {
         timingTimesPerDay = (LinearLayout) view.findViewById(R.id.timing_times_per_day);
         timingDistribution = (LinearLayout) view.findViewById(R.id.timing_distribution);
         timingSingleTime = (LinearLayout) view.findViewById(R.id.timing_times_specific);
+        accentColor = view.findViewById(R.id.notification_accent_color);
+        notificationIconContainer = (RelativeLayout) view.findViewById(R.id.notificationIconTop);
+        notificationIcon = (ImageView) view.findViewById(R.id.notificationIcon);
         //Now setup everything with actual data
         setupViewWithReminder();
         return view;
@@ -236,6 +245,29 @@ public final class AddReminderFragment extends BaseFragment {
     protected void afterViewCreated() {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_save_white_24dp);
+    }
+
+    /**
+     * @param activity Activity to attach to
+     */
+    @Override
+    public void onAttach(@NonNull Activity activity) {
+        super.onAttach(activity);
+        try {
+            reminderFragmentListener = (OnAddReminderFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnAddReminderFragmentListener");
+        }
+    }
+
+    /**
+     * Detach from activity
+     */
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        reminderFragmentListener = null;
     }
 
     /**
@@ -610,9 +642,50 @@ public final class AddReminderFragment extends BaseFragment {
                             return;
                         }
                         remind.notificationLEDColor = color;
-                        ((GradientDrawable)ledColor.getBackground()).setColor(remind.notificationLEDColor);
+                        ((GradientDrawable) ledColor.getBackground()).setColor(remind.notificationLEDColor);
                     }
                 });
+            }
+        });
+        accentColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                dialogListener.createColorPickerDialog(remind.notificationAccentColor, new ColorPickerClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int color, Integer[] integers) {
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        remind.notificationAccentColor = color;
+                        ((GradientDrawable)accentColor.getBackground()).setColor(remind.notificationAccentColor);
+                        ((GradientDrawable)notificationIconContainer.getBackground()).setColor(remind.notificationAccentColor);
+                    }
+                });
+            }
+        });
+        notificationIconContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                reminderFragmentListener.showIconPickerDialog(new IconPickerDialogBuilder.IconPickerListener() {
+                    @Override
+                    public void onClick(@DrawableRes int iconRes) {
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        remind.notificationIconRes = iconRes;
+                        notificationIcon.setImageResource(iconRes);
+                    }
+                }, remind.notificationAccentColor);
             }
         });
     }
@@ -662,6 +735,9 @@ public final class AddReminderFragment extends BaseFragment {
         timingSpecific.setText(getString(R.string.timing_specific));
         timingRange.setText(getString(R.string.timing_range));
         ((GradientDrawable)ledColor.getBackground()).setColor(remind.notificationLEDColor);
+        ((GradientDrawable)accentColor.getBackground()).setColor(remind.notificationAccentColor);
+        ((GradientDrawable)notificationIconContainer.getBackground()).setColor(remind.notificationAccentColor);
+        notificationIcon.setImageResource(remind.notificationIconRes);
         UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
         UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
         updateSpecifcTimes();
@@ -834,6 +910,18 @@ public final class AddReminderFragment extends BaseFragment {
         } else {
             dayButton.getTextView().setTextColor(getResources().getColor(R.color.textDarkMain));
         }
+    }
+
+    /**
+     *
+     */
+    public interface OnAddReminderFragmentListener {
+
+        /**
+         *
+         */
+        void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor);
+
     }
 
 }
