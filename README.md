@@ -25,7 +25,7 @@ Customize each reminder independently with these options
 • Randomized reminders (or evenly if you want)
 
 # Usage
-This project requires https://github.com/morris-james/UtilitiesLibrary and https://github.com/morris-james/materialuilibrary and https://github.com/morris-james/appbaselibrary
+This project requires https://github.com/morris-james/UtilitiesLibrary and https://github.com/morris-james/appbaselibrary
 
 The dependencies are setup to upload to your local maven repository so you must build and upload each of them before building this project.
 
