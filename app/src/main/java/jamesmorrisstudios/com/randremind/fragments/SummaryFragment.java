@@ -2,6 +2,7 @@ package jamesmorrisstudios.com.randremind.fragments;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,10 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleAdapter;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -77,17 +77,17 @@ public class SummaryFragment extends BaseRecycleListFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                dialogListener.createPromptDialog(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new MaterialDialog.ButtonCallback() {
+                dialogListener.createPromptDialog(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
                         ReminderList.getInstance().deleteCurrentReminder();
                         ReminderList.getInstance().saveData();
                         utilListener.goBackFromFragment();
                         Utils.toastShort(getString(R.string.reminder_delete));
                     }
-
+                }, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onNegative(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
@@ -99,16 +99,16 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 ReminderList.getInstance().previewCurrent();
                 break;
             case R.id.action_duplicate:
-                dialogListener.createPromptDialog(getString(R.string.duplicate_prompt_title), getString(R.string.duplicate_prompt_content), new MaterialDialog.ButtonCallback() {
+                dialogListener.createPromptDialog(getString(R.string.duplicate_prompt_title), getString(R.string.duplicate_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
                         Utils.toastShort(getString(R.string.reminder_duplicate));
                         ReminderList.getInstance().duplicateReminder();
                         ReminderList.getInstance().saveData();
                     }
-
+                }, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onNegative(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });

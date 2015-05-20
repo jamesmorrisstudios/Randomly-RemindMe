@@ -125,7 +125,7 @@
                     android:layout_margin="4dp"
                     android:orientation="horizontal">
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_specific"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                         android:clickable="true"
                         android:padding="2dp" />
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_range"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -410,7 +410,7 @@
                     android:minWidth="300dp"
                     android:orientation="horizontal">
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/daySun"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
@@ -419,7 +419,7 @@
                         android:background="@color/iconDark"
                         android:clickable="true" />
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayMon"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
@@ -428,7 +428,7 @@
                         android:background="@color/iconDark"
                         android:clickable="true" />
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayTue"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
@@ -437,7 +437,7 @@
                         android:background="@color/iconDark"
                         android:clickable="true" />
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayWed"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
@@ -446,7 +446,7 @@
                         android:background="@color/iconDark"
                         android:clickable="true" />
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayThu"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
@@ -455,7 +455,7 @@
                         android:background="@color/iconDark"
                         android:clickable="true" />
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/dayFri"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
@@ -464,7 +464,7 @@
                         android:background="@color/iconDark"
                         android:clickable="true" />
 
-                    <com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat
+                    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/daySat"
                         android:layout_width="0dp"
                         android:layout_height="48dp"

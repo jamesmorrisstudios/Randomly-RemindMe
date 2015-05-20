@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-    compile 'com.jamesmorrisstudios:utilitieslibrary:1.0'
-    compile 'com.jamesmorrisstudios:appbaselibrary:1.0'
-    compile 'com.jamesmorrisstudios:materialuilibrary:1.0'
+    compile 'com.jamesmorrisstudios:utilitieslibrary:1.1'
+    compile 'com.jamesmorrisstudios:appbaselibrary:1.1'
 }

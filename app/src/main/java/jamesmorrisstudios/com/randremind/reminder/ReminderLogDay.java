@@ -3,7 +3,7 @@ package jamesmorrisstudios.com.randremind.reminder;
 import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 

@@ -51,7 +51,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true">
 
-            <com.jamesmorrisstudios.materialuilibrary.controls.CircleProgressDeterminate
+            <com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate
                 android:id="@+id/percentage_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

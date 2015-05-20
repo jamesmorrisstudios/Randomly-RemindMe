@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -48,16 +47,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
-import com.jamesmorrisstudios.materialuilibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.MaterialDialog;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.colorpicker.OnColorSelectedListener;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.colorpicker.builder.ColorPickerClickListener;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.time.RadialPickerLayout;
-import com.jamesmorrisstudios.materialuilibrary.dialogs.time.TimePickerDialog;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.utilitieslibrary.dialogs.colorpicker.builder.ColorPickerClickListener;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,19 +127,19 @@ public final class AddReminderFragment extends BaseFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cancel:
-                dialogListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new MaterialDialog.ButtonCallback() {
+                dialogListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(DialogInterface dialog, int which) {
                         destroyListeners();
                         ReminderList.getInstance().cancelCurrentReminderChanges();
                         saveOnBack = false;
                         utilListener.goBackFromFragment();
                         Utils.toastShort(getString(R.string.reminder_cancel));
                     }
-
+                }, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onNegative(MaterialDialog dialog) {
-
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Nothing on negative
                     }
                 });
                 break;

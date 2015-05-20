@@ -26,7 +26,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
-import com.jamesmorrisstudios.materialuilibrary.listAdapters.BaseRecycleItem;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
@@ -441,7 +441,7 @@ public final class ReminderItem extends BaseRecycleItem {
             content = AppUtil.getContext().getString(R.string.default_content);
         }
 
-        NotificationContent notif = new NotificationContent(title, content, this.getNotificationTone(), R.drawable.notification_icon,
+        NotificationContent notif = new NotificationContent(NotificationContent.NotificationType.DISMISS_ACK, title, content, this.getNotificationTone(), R.drawable.notification_icon,
                 AppUtil.getContext().getResources().getColor(R.color.accent), getNotificationId());
 
         if (this.notificationVibrate) {
