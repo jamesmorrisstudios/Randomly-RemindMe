@@ -503,8 +503,8 @@ public final class ReminderItem extends BaseRecycleItem {
 
         notif.addContentIntent(pClicked);
         notif.addDeleteIntent(pCanceled);
-        notif.addAction(new NotificationAction(R.drawable.ic_clear_black_24dp, "Dismiss", pDismiss));
-        notif.addAction(new NotificationAction(R.drawable.ic_done_black_24dp, "Acknowledge", pAck));
+        notif.addAction(new NotificationAction(0, "Dismiss", pDismiss));
+        notif.addAction(new NotificationAction(0, "Acknowledge", pAck));
 
         return notif;
     }
