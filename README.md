@@ -33,7 +33,7 @@ Make sure you follow the build instructions on all the dependencies first.
 Then use Android Studio to build the project.
 
 # Donate
-Support continued development of this and future apps.
+Support continued development of this and future apps and thank the developer for all his work.
 
 [Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HV5VHLU3PVGCL&lc=US&item_name=James%20Morris%20Studios&item_number=1234&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
