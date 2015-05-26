@@ -1,19 +1,3 @@
-<!--
-  ~ Copyright (c) 2015.  James Morris Studios
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~         http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~  distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <resources>
     <string name="main_list_no_data">You have no reminders yet.\nClick the + button to add a new reminder.</string>
     <string name="data_load_fail">ERROR: Failed to load reminder list</string>
@@ -78,5 +62,62 @@
     <string name="reminder_delete">Reminder Deleted</string>
     <string name="reminder_save">Your Changes Have Been Saved</string>
     <string name="reminder_duplicate">Reminder duplicated</string>
+
+
+    <!-- Settings -->
+
+    <string name="settings_item_0_primary">Notification opens reminder summary</string>
+    <string name="settings_item_0_secondary">Uncheck to make notification silently acknowledge</string>
+
+    <string name="settings_item_1_primary">Use custom notification</string>
+    <string name="settings_item_1_secondary">Uncheck to disable the custom notification and revert to the standard system</string>
+
+    <string name="settings_item_2_primary">Use ongoing notification</string>
+    <string name="settings_item_2_secondary">Uncheck to allow the notification to be dismissible by swiping it away</string>
+
+
+    <!-- Tutorial -->
+    <string name="help_icon_0_description">Randomized Notification Times</string>
+    <string name="help_icon_1_description">Notification Tone</string>
+    <string name="help_icon_2_description">Vibrate</string>
+    <string name="help_icon_3_description">High Priority</string>
+    <string name="help_icon_4_description">LED</string>
+    <string name="help_icon_5_description">Edit Reminder</string>
+    <string name="help_icon_6_description">Delete Reminder</string>
+    <string name="help_icon_7_description">Preview Notification</string>
+    <string name="help_icon_8_description">Duplicate Reminder</string>
+
+    <string name="help_tutorial_0_header">Add Reminder</string>
+    <string name="help_tutorial_0">To add a new reminder press the + action button on the main page</string>
+
+    <string name="help_tutorial_1_header">Title &amp; Content</string>
+    <string name="help_tutorial_1">The reminder title will show on the main page and on the top of notifications.
+        The content will show in the body of the notification and on the reminder summary page.</string>
+
+    <string name="help_tutorial_2_header">Timing Specific</string>
+    <string name="help_tutorial_2">Choose Specific for a single reminder at a certain time in the day.
+    Touch the time shown to pick the reminder time.</string>
+
+    <string name="help_tutorial_3_header">Timing Range</string>
+    <string name="help_tutorial_3">Choose Range for one or more reminders throughout the day.
+    Touch the start and end times to set the range.
+    Next choose how many reminders you want during those times.
+    Finally choose if you want the times randomized or at an even interval.</string>
+
+    <string name="help_tutorial_4_header">Repeat</string>
+    <string name="help_tutorial_4">Highlight the days of the week where you want to be reminded</string>
+
+    <string name="help_tutorial_5_header">Notification</string>
+    <string name="help_tutorial_5">Customize the notification with a custom tone, vibrate, priority, and LED color.
+        High priority may only work if either or both vibrate and a tone are enabled (depending on device).</string>
+
+    <string name="help_tutorial_6_header">Reminder Summary</string>
+    <string name="help_tutorial_6">The number of notifications shown and clicked are logged and shown on the summary page.
+    The statistics are available on a per day basis for the last 30 days along with a lifetime total.</string>
+
+    <string name="help_tutorial_7_header">The Notification</string>
+    <string name="help_tutorial_7">For reminders that require action you can use notification buttons Acknowledge and Dismiss.
+    Swiping away the reminder counts as a dismiss and clicking it counts as Acknowledging it.
+    Using the notification action buttons will not open the app. By default clicking the notification opens the app. Change this in settings if you want a different behavior.</string>
 
 </resources>

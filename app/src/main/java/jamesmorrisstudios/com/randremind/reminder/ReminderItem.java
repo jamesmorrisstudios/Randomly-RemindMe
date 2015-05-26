@@ -443,6 +443,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime) {
+        String pref = AppUtil.getContext().getString(R.string.settings_pref);
         String title = this.title;
         if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
@@ -453,10 +454,19 @@ public final class ReminderItem extends BaseRecycleItem {
             content = AppUtil.getContext().getString(R.string.default_content);
         }
 
-        int accentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+        NotificationContent notif;
+        String keySystem = AppUtil.getContext().getString(R.string.pref_notification_custom);
 
-        NotificationContent notif = new NotificationContent(NotificationContent.NotificationType.DISMISS_ACK,
-                title, content, this.getNotificationTone(), notificationIconRes, notificationAccentColor, getNotificationId());
+        if (Preferences.getBoolean(pref, keySystem, true)) {
+            notif = new NotificationContent(NotificationContent.NotificationType.DISMISS_ACK,
+                    title, content, this.getNotificationTone(), notificationIconRes, notificationAccentColor, getNotificationId());
+        } else {
+            notif = new NotificationContent(NotificationContent.NotificationType.NORMAL,
+                    title, content, this.getNotificationTone(), notificationIconRes, notificationAccentColor, getNotificationId());
+        }
+
+        String keyOnGoing = AppUtil.getContext().getString(R.string.pref_notification_ongoing);
+        notif.setOnGoing(Preferences.getBoolean(pref, keyOnGoing, false));
 
         if (this.notificationVibrate) {
             notif.enableVibrate();
@@ -503,10 +513,10 @@ public final class ReminderItem extends BaseRecycleItem {
             intentAck.putExtra("PREVIEW", true);
         }
 
-        String pref = AppUtil.getContext().getString(R.string.settings_pref);
-        String key = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
 
-        if (!Preferences.getBoolean(pref, key, true)) {
+        String keySummary = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
+
+        if (!Preferences.getBoolean(pref, keySummary, true)) {
             intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT");
         }
 
