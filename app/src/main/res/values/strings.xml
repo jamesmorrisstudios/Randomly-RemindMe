@@ -32,11 +32,6 @@
     <string name="timing_specific">Specific</string>
     <string name="timing_range">Range</string>
 
-    <string name="distribution_even">Evenly</string>
-    <string name="distribution_part_random">Partly Random</string>
-    <string name="distribution_most_random">Mostly Random</string>
-    <string name="distribution_full_random">Fully Random</string>
-
     <string name="alerts_per_day">Reminders Per Day</string>
     <string name="title_hint">Short Name</string>
     <string name="content_hint">Reminder text</string>
@@ -51,6 +46,13 @@
     <string name="icon_set">Icon</string>
     <string name="icon_color">Accent Color</string>
     <string name="today">Today</string>
+
+    <string name="shown">Shown</string>
+    <string name="snooze">Snooze</string>
+    <string name="snoozed">Snoozed</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="accept">Accept</string>
+    <string name="accepted">Accepted</string>
 
     <string name="repeat_enable">Repeat Enable</string>
     <string name="alarm_enable">Alarm Enable</string>

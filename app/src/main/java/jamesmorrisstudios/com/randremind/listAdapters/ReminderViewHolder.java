@@ -16,10 +16,12 @@
 
 package jamesmorrisstudios.com.randremind.listAdapters;
 
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -104,7 +106,6 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
     @Override
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
-
         String title = reminder.title;
         if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);

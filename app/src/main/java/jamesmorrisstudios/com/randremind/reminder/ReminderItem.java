@@ -16,15 +16,26 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.app.Notification;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.annotations.SerializedName;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
@@ -499,6 +510,13 @@ public final class ReminderItem extends BaseRecycleItem {
         intentDismiss.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentDismiss.putExtra("NOTIFICATION_ID", getNotificationId());
 
+        Intent intentSnooze = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+        intentSnooze.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE");
+        intentSnooze.setType(this.uniqueName);
+        intentSnooze.putExtra("NAME", this.uniqueName);
+        intentSnooze.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentSnooze.putExtra("NOTIFICATION_ID", getNotificationId());
+
         Intent intentAck = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
         intentAck.setType(this.uniqueName);
@@ -510,6 +528,7 @@ public final class ReminderItem extends BaseRecycleItem {
             intentClicked.putExtra("PREVIEW", true);
             intentCancel.putExtra("PREVIEW", true);
             intentDismiss.putExtra("PREVIEW", true);
+            intentSnooze.putExtra("PREVIEW", true);
             intentAck.putExtra("PREVIEW", true);
         }
 
@@ -523,14 +542,76 @@ public final class ReminderItem extends BaseRecycleItem {
         PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pDismiss = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentDismiss, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pSnooze = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pAck = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentAck, PendingIntent.FLAG_CANCEL_CURRENT);
 
         notif.addContentIntent(pClicked);
         notif.addDeleteIntent(pCanceled);
-        notif.addAction(new NotificationAction(0, "Dismiss", pDismiss));
-        notif.addAction(new NotificationAction(0, "Acknowledge", pAck));
+        notif.addAction(new NotificationAction(R.drawable.led_icon, AppUtil.getContext().getResources().getString(R.string.dismiss), pDismiss));
+        notif.addAction(new NotificationAction(0, AppUtil.getContext().getResources().getString(R.string.snooze), pSnooze));
+        notif.addAction(new NotificationAction(0, AppUtil.getContext().getResources().getString(R.string.accept), pAck));
+
+        //extractColors();
+
+
 
         return notif;
+    }
+
+    private Integer notification_text_color = null;
+    private float notification_text_size = 11;
+    private final String COLOR_SEARCH_RECURSE_TIP = "SOME_SAMPLE_TEXT";
+
+    private boolean recurseGroup(ViewGroup gp)
+    {
+        final int count = gp.getChildCount();
+        for (int i = 0; i < count; i++)
+        {
+            if (gp.getChildAt(i) instanceof TextView)
+            {
+                final TextView text = (TextView) gp.getChildAt(i);
+                final String szText = text.getText().toString();
+                if (COLOR_SEARCH_RECURSE_TIP.equals(szText))
+                {
+                    notification_text_color = text.getTextColors().getDefaultColor();
+                    notification_text_size = text.getTextSize();
+                    DisplayMetrics metrics = new DisplayMetrics();
+                    WindowManager systemWM = (WindowManager)AppUtil.getContext().getSystemService(Context.WINDOW_SERVICE);
+                    systemWM.getDefaultDisplay().getMetrics(metrics);
+                    notification_text_size /= metrics.scaledDensity;
+                    return true;
+                }
+            }
+            else if (gp.getChildAt(i) instanceof ViewGroup)
+                return recurseGroup((ViewGroup) gp.getChildAt(i));
+        }
+        return false;
+    }
+
+    private void extractColors()
+    {
+        if (notification_text_color != null)
+            return;
+
+        //try
+        //{
+        Notification notification;
+        NotificationCompat.Builder mBuilder;
+        mBuilder = new NotificationCompat.Builder(AppUtil.getContext())
+                .setSmallIcon(R.drawable.led_icon)
+                .setContentTitle("Test")
+                .setContentText("Test");
+        notification = mBuilder.build();
+
+            LinearLayout group = new LinearLayout(AppUtil.getContext());
+            ViewGroup event = (ViewGroup) notification.contentView.apply(AppUtil.getContext(), group);
+            recurseGroup(event);
+            group.removeAllViews();
+        //}
+        //catch (Exception e)
+        //{
+       //     notification_text_color = android.R.color.black;
+       // }
     }
 
     public final void deleteReminderLog() {
