@@ -45,8 +45,6 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View dash, endTop;
     private ButtonCircleFlat[] dayButtons;
-    private TintedImageView timingRandom;
-    private TextView timingTimes;
 
     /**
      * Constructor
@@ -96,8 +94,6 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         dayButtons[4].getTextView().setText("T");
         dayButtons[5].getTextView().setText("F");
         dayButtons[6].getTextView().setText("S");
-        timingRandom = (TintedImageView) view.findViewById(R.id.timing_random);
-        timingTimes = (TextView) view.findViewById(R.id.timing_times);
     }
 
     @Override
@@ -134,18 +130,6 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         });
         for (int i = 0; i < reminder.daysToRun.length; i++) {
             setDayOfWeek(i, reminder.daysToRun[i]);
-        }
-        if (reminder.rangeTiming) {
-            timingTimes.setText(Integer.toString(reminder.numberPerDay));
-            timingRandom.setVisibility(View.VISIBLE);
-            if (reminder.randomDistribution) {
-                timingRandom.setAlpha(1.0f);
-            } else {
-                timingRandom.setAlpha(0.12f);
-            }
-        } else {
-            timingTimes.setVisibility(View.INVISIBLE);
-            timingRandom.setVisibility(View.INVISIBLE);
         }
     }
 

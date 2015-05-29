@@ -20,7 +20,10 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
     app:slm_isHeader="false"
@@ -41,15 +44,14 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:textColor="@color/textDarkMain"
-            android:textSize="22sp" />
+            android:textSize="16sp" />
 
         <FrameLayout
             android:id="@+id/percentContainer"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true">
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true">
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate
                 android:id="@+id/percentage_image"
@@ -63,62 +65,91 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/primaryDark"
-                android:textSize="18sp" />
+                android:textColor="@color/textDarkMain"
+                android:textSize="16sp" />
 
         </FrameLayout>
 
+        <!-- Shown -->
         <TextView
             android:id="@+id/shown_label"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/date"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="8dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="1dp"
+            android:gravity="center"
+            android:layout_marginLeft="4dp"
             android:layout_marginRight="1dp"
-            android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/percentContainer"
             android:text="Shown:"
             android:textColor="@color/textDarkSecondary"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/shown"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/date"
-            android:layout_marginBottom="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@+id/shown_label"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="1dp"
+            android:layout_toRightOf="@+id/acked_label"
             android:textColor="@color/textDarkMain"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
+        <!-- Snoozed -->
+        <TextView
+            android:id="@+id/snooze_label"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/shown_label"
+            android:gravity="center"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/percentContainer"
+            android:text="Snoozed:"
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/snooze"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/shown"
+            android:gravity="center"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/acked_label"
+            android:text="0"
+            android:textColor="@color/textDarkMain"
+            android:textSize="14sp" />
+
+        <!-- Acknowledged -->
         <TextView
             android:id="@+id/acked_label"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/date"
-            android:layout_marginBottom="4dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/snooze_label"
+            android:gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="1dp"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@+id/shown"
-            android:text="Acknowledged:"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/percentContainer"
+            android:text="Accepted:"
             android:textColor="@color/textDarkSecondary"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/acked"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/date"
-            android:layout_marginBottom="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/snooze"
+            android:gravity="center"
+            android:layout_marginTop="1dp"
             android:layout_toRightOf="@+id/acked_label"
             android:textColor="@color/textDarkMain"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 

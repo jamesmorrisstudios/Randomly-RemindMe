@@ -27,13 +27,4 @@
     app:slm_isHeader="true"
     app:slm_section_headerMarginStart="56dip">
 
-    <!-- Main Text -->
-    <TextView
-        android:id="@+id/reminder_main_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/textLightMain"
-        android:textSize="20sp" />
-
 </RelativeLayout>

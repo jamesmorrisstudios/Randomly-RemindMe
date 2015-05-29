@@ -50,6 +50,7 @@
     <string name="sound_none">None</string>
     <string name="icon_set">Icon</string>
     <string name="icon_color">Accent Color</string>
+    <string name="today">Today</string>
 
     <string name="repeat_enable">Repeat Enable</string>
     <string name="alarm_enable">Alarm Enable</string>
@@ -66,7 +67,7 @@
 
     <!-- Settings -->
 
-    <string name="settings_item_0_primary">Notification opens reminder summary</string>
+    <string name="settings_item_0_primary">Notification opens summary</string>
     <string name="settings_item_0_secondary">Uncheck to make notification silently acknowledge</string>
 
     <string name="settings_item_1_primary">Use custom notification</string>

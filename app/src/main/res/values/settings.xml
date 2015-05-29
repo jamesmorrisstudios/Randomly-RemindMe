@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <array name="settings_base_array">
+        <!-- Override to disable base settings (immersive mode option) -->
+    </array>
+
     <!-- Override to define your settings -->
     <array name="settings_array">
         <item>@array/settings_item_0</item>
@@ -10,37 +14,37 @@
 
     <!-- Notification click opens app  -->
     <array name="settings_item_0">
-        <item name="type">@bool/settings_item_0_type</item>
+        <item name="defaultValue">@bool/settings_item_0_default_value</item>
         <item name="key">@string/settings_item_0_key</item>
         <item name="primary">@string/settings_item_0_primary</item>
         <item name="secondary">@string/settings_item_0_secondary</item>
     </array>
 
-    <bool name="settings_item_0_type">true</bool>
+    <bool name="settings_item_0_default_value">true</bool>
     <string name="settings_item_0_key">@string/pref_notification_click_ack</string>
     <string name="pref_notification_click_ack">NOTIFICATION_CLICK_ACK</string>
 
     <!-- Enable to use system notification -->
     <array name="settings_item_1">
-        <item name="type">@bool/settings_item_1_type</item>
+        <item name="defaultValue">@bool/settings_item_1_default_value</item>
         <item name="key">@string/settings_item_1_key</item>
         <item name="primary">@string/settings_item_1_primary</item>
         <item name="secondary">@string/settings_item_1_secondary</item>
     </array>
 
-    <bool name="settings_item_1_type">true</bool>
+    <bool name="settings_item_1_default_value">true</bool>
     <string name="settings_item_1_key">@string/pref_notification_custom</string>
     <string name="pref_notification_custom">NOTIFICATION_CUSTOM</string>
 
     <!-- Enable to make notification ongoing -->
     <array name="settings_item_2">
-        <item name="type">@bool/settings_item_2_type</item>
+        <item name="defaultValue">@bool/settings_item_2_default_value</item>
         <item name="key">@string/settings_item_2_key</item>
         <item name="primary">@string/settings_item_2_primary</item>
         <item name="secondary">@string/settings_item_2_secondary</item>
     </array>
 
-    <bool name="settings_item_2_type">false</bool>
+    <bool name="settings_item_2_default_value">false</bool>
     <string name="settings_item_2_key">@string/pref_notification_ongoing</string>
     <string name="pref_notification_ongoing">NOTIFICATION_ONGOING</string>
 

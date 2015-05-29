@@ -33,6 +33,7 @@ import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.app.App;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
@@ -191,7 +192,11 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             show.setText(Integer.toString(day.timesShownLifetime));
             acked.setText(Integer.toString(day.timesClickedLifetime));
         } else {
-            date.setText(UtilsTime.getDateFormatted(day.date));
+            if(day.date.equals(UtilsTime.getDateNow())) {
+                date.setText(AppUtil.getContext().getResources().getString(R.string.today));
+            } else {
+                date.setText(UtilsTime.getDateFormatted(day.date));
+            }
             float percentage = (100.0f * day.timesClicked.size()) / day.timesShown.size();
             percent.setText(Integer.toString(Math.round(percentage)) + "%");
             percentImage.setMax(day.timesShown.size());
