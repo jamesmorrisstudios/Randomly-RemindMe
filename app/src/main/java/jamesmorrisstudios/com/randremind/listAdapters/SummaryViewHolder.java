@@ -31,9 +31,9 @@ import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
 import com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate;
 import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.nineoldandroids.view.ViewHelper;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.app.App;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
@@ -90,13 +90,13 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         dayButtons[4] = (ButtonCircleFlat) view.findViewById(R.id.dayThu);
         dayButtons[5] = (ButtonCircleFlat) view.findViewById(R.id.dayFri);
         dayButtons[6] = (ButtonCircleFlat) view.findViewById(R.id.daySat);
-        dayButtons[0].getTextView().setText("S");
-        dayButtons[1].getTextView().setText("M");
-        dayButtons[2].getTextView().setText("T");
-        dayButtons[3].getTextView().setText("W");
-        dayButtons[4].getTextView().setText("T");
-        dayButtons[5].getTextView().setText("F");
-        dayButtons[6].getTextView().setText("S");
+        String[] week = UtilsTime.getWeekStringFirstLetterArray();
+        for (int i = 0; i < week.length; i++) {
+            TextView text = dayButtons[i].getTextView();
+            if (text != null) {
+                text.setText(week[i]);
+            }
+        }
         timingRandom = (TintedImageView) view.findViewById(R.id.timing_random);
         timingTimes = (TextView) view.findViewById(R.id.timing_times);
         vibrate = (TintedImageView) view.findViewById(R.id.notification_vibrate);
@@ -149,34 +149,34 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             timingTimes.setText(Integer.toString(reminder.numberPerDay));
             timingRandom.setVisibility(View.VISIBLE);
             if (reminder.randomDistribution) {
-                timingRandom.setAlpha(1.0f);
+                ViewHelper.setAlpha(timingRandom, 1.0f);
             } else {
-                timingRandom.setAlpha(0.12f);
+                ViewHelper.setAlpha(timingRandom, 0.12f);
             }
         } else {
             timingTimes.setVisibility(View.INVISIBLE);
             timingRandom.setVisibility(View.INVISIBLE);
         }
         if (reminder.notificationTone != null) {
-            tone.setAlpha(1.0f);
+            ViewHelper.setAlpha(tone, 1.0f);
         } else {
-            tone.setAlpha(0.12f);
+            ViewHelper.setAlpha(tone, 0.12f);
         }
         if (reminder.notificationVibrate) {
-            vibrate.setAlpha(1.0f);
+            ViewHelper.setAlpha(vibrate, 1.0f);
         } else {
-            vibrate.setAlpha(0.12f);
+            ViewHelper.setAlpha(vibrate, 0.12f);
         }
         content.setText(reminder.content);
         if (reminder.notificationLED) {
-            ledIcon.setAlpha(1.0f);
+            ViewHelper.setAlpha(ledIcon, 1.0f);
         } else {
-            ledIcon.setAlpha(0.12f);
+            ViewHelper.setAlpha(ledIcon, 0.12f);
         }
         if (reminder.notificationHighPriority) {
-            highPriorityIcon.setAlpha(1.0f);
+            ViewHelper.setAlpha(highPriorityIcon, 1.0f);
         } else {
-            highPriorityIcon.setAlpha(0.12f);
+            ViewHelper.setAlpha(highPriorityIcon, 0.12f);
         }
     }
 
@@ -192,7 +192,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             show.setText(Integer.toString(day.timesShownLifetime));
             acked.setText(Integer.toString(day.timesClickedLifetime));
         } else {
-            if(day.date.equals(UtilsTime.getDateNow())) {
+            if (day.date.equals(UtilsTime.getDateNow())) {
                 date.setText(AppUtil.getContext().getResources().getString(R.string.today));
             } else {
                 date.setText(UtilsTime.getDateFormatted(day.date));
@@ -214,7 +214,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
      */
     private void setDayOfWeek(int dayIndex, boolean active) {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
-        dayButton.setActivated(active);
+        dayButton.setActive(active);
         if (active) {
             dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
         } else {

@@ -28,42 +28,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dip">
 
             <!-- Title -->
-            <RelativeLayout
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dip">
-
-                <TextView
-                    android:id="@+id/titleHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_title"
-                    android:textColor="@color/textDarkMain"
-                    android:textSize="@dimen/header_size" />
+                android:paddingBottom="8dip">
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/titleText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/titleHeader"
                     android:layout_margin="4dp"
-                    android:gravity="center"
-                    android:hint="@string/title_hint"
-                    android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
+                    android:hint="@string/default_title"
+                    android:inputType="text|textAutoCorrect|textCapSentences"
                     android:singleLine="true"
                     android:textColor="@color/textDarkMain"
                     android:textColorHint="@color/textDarkDisabled"
                     android:textSize="@dimen/item_size" />
 
-            </RelativeLayout>
+            </android.support.design.widget.TextInputLayout>
 
             <!-- Content -->
             <RelativeLayout
@@ -89,7 +77,7 @@
                     android:layout_below="@+id/contentHeader"
                     android:layout_margin="4dp"
                     android:gravity="center"
-                    android:hint="@string/content_hint"
+                    android:hint="@string/default_content"
                     android:inputType="textMultiLine|textAutoCorrect|textCapSentences|textAutoComplete"
                     android:singleLine="false"
                     android:textColor="@color/textDarkMain"
@@ -152,8 +140,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/timing_range_picker"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center_horizontal"
                     android:layout_margin="4dp"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -178,7 +166,10 @@
                             android:id="@+id/timing_times_specific_spinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minWidth="50dp" />
+                            android:layout_gravity="center_horizontal"
+                            android:dropDownWidth="45dp"
+                            android:gravity="center_horizontal"
+                            android:minWidth="45dp" />
 
                     </LinearLayout>
 
@@ -360,7 +351,10 @@
                         android:id="@+id/timing_times_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:minWidth="50dp" />
+                        android:layout_gravity="center_horizontal"
+                        android:dropDownWidth="45dp"
+                        android:gravity="center_horizontal"
+                        android:minWidth="45dp" />
 
                 </LinearLayout>
 
@@ -378,8 +372,8 @@
                         android:id="@+id/timing_random_enabled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textDarkMain"
                         android:text="@string/random_enable"
+                        android:textColor="@color/textDarkMain"
                         android:textSize="@dimen/item_size" />
 
                 </LinearLayout>
@@ -514,8 +508,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
-                            android:textColor="@color/textDarkMain"
                             android:text="@string/sound_set"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="@dimen/item_size" />
 
                         <TextView
@@ -540,16 +534,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:textColor="@color/textDarkMain"
                             android:text="@string/vibrate_enable"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="@dimen/item_size" />
 
                         <android.support.v7.widget.AppCompatCheckBox
                             android:id="@+id/notification_high_priority_enabled"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textDarkMain"
                             android:text="@string/high_priority_enable"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="@dimen/item_size" />
 
                     </LinearLayout>
@@ -580,10 +574,10 @@
 
                         <View
                             android:id="@+id/notification_led_color"
-                            android:background="@drawable/circle_led"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_gravity="center_vertical" />
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/circle_led" />
 
                     </LinearLayout>
 
@@ -625,27 +619,27 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_gravity="center"
-                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
+                            android:layout_gravity="center"
                             android:layout_marginRight="4dp"
-                            android:textColor="@color/textDarkMain"
+                            android:gravity="center"
                             android:text="@string/icon_set"
+                            android:textColor="@color/textDarkMain"
                             android:textSize="@dimen/item_size" />
 
                         <RelativeLayout
                             android:id="@+id/notificationIconTop"
-                            android:background="@drawable/circle"
                             android:layout_width="40dp"
-                            android:layout_height="40dp">
+                            android:layout_height="40dp"
+                            android:background="@drawable/circle">
 
                             <ImageView
-                                android:layout_centerInParent="true"
                                 android:id="@+id/notificationIcon"
-                                android:scaleType="fitCenter"
                                 android:layout_width="22dp"
-                                android:layout_height="22dp" />
+                                android:layout_height="22dp"
+                                android:layout_centerInParent="true"
+                                android:scaleType="fitCenter" />
 
                         </RelativeLayout>
 
@@ -668,10 +662,10 @@
 
                         <View
                             android:id="@+id/notification_accent_color"
-                            android:background="@drawable/circle_led"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:layout_gravity="center_vertical" />
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/circle_led" />
 
                     </LinearLayout>
 

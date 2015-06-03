@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:text="@string/edit_title"
+                    android:text="@string/default_title"
                     android:textColor="@color/textLightMain"
                     android:textSize="@dimen/header_size" />
 
@@ -47,7 +47,7 @@
                     android:layout_margin="4dp"
                     android:layout_toLeftOf="@+id/titleEnabled"
                     android:gravity="center"
-                    android:hint="@string/title_hint"
+                    android:hint="@string/default_title"
                     android:singleLine="true"
                     android:textColor="@color/textLightMain"
                     android:textColorHint="@color/textLightDisabled"
@@ -79,7 +79,7 @@
                     android:layout_below="@+id/contentHeader"
                     android:layout_margin="4dp"
                     android:gravity="center"
-                    android:hint="@string/content_hint"
+                    android:hint="@string/default_content"
                     android:lines="5"
                     android:minLines="3"
                     android:singleLine="false"

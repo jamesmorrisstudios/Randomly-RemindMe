@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -154,8 +153,8 @@ public class SummaryFragment extends BaseRecycleListFragment {
     }
 
     @Override
-    protected void itemClicked(BaseRecycleItem baseRecycleItem) {
-        //Don't care
+    protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
+        //Don't care (YET)
     }
 
     @Override

@@ -19,10 +19,10 @@
     android:id="@+id/reminder_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="1dp"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
     android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp"
     android:animateLayoutChanges="true"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
@@ -50,10 +50,10 @@
             android:id="@+id/reminder_title_text"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/reminder_enabled"
+            android:gravity="center_vertical"
             android:singleLine="true"
             android:textColor="@color/textDarkMain"
             android:textSize="20sp" />
@@ -119,7 +119,7 @@
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:background="@color/iconDark"
-            android:clickable="false" />
+                android:clickable="false" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayWed"

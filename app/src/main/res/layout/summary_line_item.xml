@@ -20,10 +20,10 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="1dp"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
     android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
     app:slm_isHeader="false"
@@ -50,13 +50,13 @@
             android:id="@+id/percentContainer"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true">
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true">
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate
                 android:id="@+id/percentage_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:background="@color/primaryLight" />
 
             <TextView
@@ -75,12 +75,12 @@
             android:id="@+id/shown_label"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/date"
             android:layout_marginBottom="1dp"
-            android:gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="1dp"
             android:layout_toRightOf="@+id/percentContainer"
+            android:gravity="center"
             android:text="@string/shown"
             android:textColor="@color/textDarkSecondary"
             android:textSize="14sp" />
@@ -89,39 +89,10 @@
             android:id="@+id/shown"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:gravity="center"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/date"
             android:layout_marginBottom="1dp"
             android:layout_toRightOf="@+id/acked_label"
-            android:textColor="@color/textDarkMain"
-            android:textSize="14sp" />
-
-        <!-- Snoozed -->
-        <TextView
-            android:id="@+id/snooze_label"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_below="@+id/shown_label"
             android:gravity="center"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_toRightOf="@+id/percentContainer"
-            android:text="@string/snoozed"
-            android:textColor="@color/textDarkSecondary"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/snooze"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_below="@+id/shown"
-            android:gravity="center"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_toRightOf="@+id/acked_label"
-            android:text="0"
             android:textColor="@color/textDarkMain"
             android:textSize="14sp" />
 
@@ -130,12 +101,12 @@
             android:id="@+id/acked_label"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_below="@+id/snooze_label"
-            android:gravity="center"
+            android:layout_below="@+id/shown_label"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="1dp"
             android:layout_marginTop="1dp"
             android:layout_toRightOf="@+id/percentContainer"
+            android:gravity="center"
             android:text="@string/accepted"
             android:textColor="@color/textDarkSecondary"
             android:textSize="14sp" />
@@ -144,10 +115,10 @@
             android:id="@+id/acked"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_below="@+id/snooze"
-            android:gravity="center"
+            android:layout_below="@+id/shown"
             android:layout_marginTop="1dp"
             android:layout_toRightOf="@+id/acked_label"
+            android:gravity="center"
             android:textColor="@color/textDarkMain"
             android:textSize="14sp" />
 

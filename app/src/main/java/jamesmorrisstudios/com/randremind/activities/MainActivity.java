@@ -16,7 +16,6 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +26,6 @@ import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 
-import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
@@ -58,9 +56,9 @@ public final class MainActivity extends BaseLauncherActivity implements
             return;
         }
         if (extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
-            if(!ReminderList.getInstance().hasReminders()) {
+            if (!ReminderList.getInstance().hasReminders()) {
                 ReminderList.getInstance().loadDataSync();
-                if(!ReminderList.getInstance().hasReminders()) {
+                if (!ReminderList.getInstance().hasReminders()) {
                     clearBackStack();
                     loadMainFragment();
                     getIntent().removeExtra("REMINDER");
@@ -76,7 +74,7 @@ public final class MainActivity extends BaseLauncherActivity implements
             getIntent().removeExtra("NAME");
         }
 
-        if(!ReminderList.getInstance().hasReminders()) {
+        if (!ReminderList.getInstance().hasReminders()) {
             clearBackStack();
             loadMainFragment();
         }

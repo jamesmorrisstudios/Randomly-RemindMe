@@ -16,12 +16,10 @@
 
 package jamesmorrisstudios.com.randremind.listAdapters;
 
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -30,7 +28,6 @@ import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
@@ -89,13 +86,13 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         dayButtons[4] = (ButtonCircleFlat) view.findViewById(R.id.dayThu);
         dayButtons[5] = (ButtonCircleFlat) view.findViewById(R.id.dayFri);
         dayButtons[6] = (ButtonCircleFlat) view.findViewById(R.id.daySat);
-        dayButtons[0].getTextView().setText("S");
-        dayButtons[1].getTextView().setText("M");
-        dayButtons[2].getTextView().setText("T");
-        dayButtons[3].getTextView().setText("W");
-        dayButtons[4].getTextView().setText("T");
-        dayButtons[5].getTextView().setText("F");
-        dayButtons[6].getTextView().setText("S");
+        String[] week = UtilsTime.getWeekStringFirstLetterArray();
+        for (int i = 0; i < week.length; i++) {
+            TextView text = dayButtons[i].getTextView();
+            if (text != null) {
+                text.setText(week[i]);
+            }
+        }
     }
 
     @Override
@@ -142,7 +139,7 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
      */
     private void setDayOfWeek(int dayIndex, boolean active) {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
-        dayButton.setActivated(active);
+        dayButton.setActive(active);
         if (active) {
             dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
         } else {

@@ -20,10 +20,10 @@
     android:id="@+id/reminder_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="1dp"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
     android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
     app:slm_headerDisplay="inline"
@@ -57,10 +57,10 @@
                 android:id="@+id/reminder_title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:gravity="center_vertical"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/reminder_enabled"
+                android:gravity="center_vertical"
                 android:singleLine="true"
                 android:textColor="@color/textDarkMain"
                 android:textSize="20sp" />
@@ -177,8 +177,8 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/ic_notifications_none_white_24dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_notifications_none_white_24dp"
                 android:tint="@color/textDarkSecondary" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
@@ -188,8 +188,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@+id/notification_tone"
-                android:src="@drawable/ic_vibration_white_24dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_vibration_white_24dp"
                 android:tint="@color/textDarkSecondary" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
@@ -199,8 +199,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@+id/notification_vibrate"
-                android:src="@drawable/high_priority_icon"
                 android:scaleType="fitCenter"
+                android:src="@drawable/high_priority_icon"
                 android:tint="@color/textDarkSecondary" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
@@ -210,8 +210,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@+id/notification_high_priority"
-                android:src="@drawable/led_icon"
                 android:scaleType="fitCenter"
+                android:src="@drawable/led_icon"
                 android:tint="@color/textDarkSecondary" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
@@ -220,8 +220,8 @@
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:layout_toRightOf="@+id/notification_led"
-                android:src="@drawable/ic_shuffle_white_24dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_shuffle_white_24dp"
                 android:tint="@color/textDarkSecondary" />
 
             <TextView
@@ -229,8 +229,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
-                android:gravity="center"
                 android:layout_toRightOf="@+id/timing_random"
+                android:gravity="center"
                 android:textColor="@color/textDarkSecondary"
                 android:textSize="16sp" />
 

@@ -26,7 +26,6 @@ import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.ArrayList;
@@ -366,7 +365,7 @@ public final class ReminderList {
      * @return True if successful
      */
     private boolean saveToFile() {
-        if(reminders != null && reminders.data != null) {
+        if (reminders != null && reminders.data != null) {
             byte[] bytes = Serializer.serializeClass(reminders);
             return bytes != null && FileWriter.writeFile(saveName, bytes, false);
         }
@@ -397,7 +396,7 @@ public final class ReminderList {
     }
 
     private void updateVersion(@NonNull Reminders reminders) {
-        for(ReminderItem item : reminders.data) {
+        for (ReminderItem item : reminders.data) {
             item.updateVersion();
         }
     }

@@ -73,7 +73,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
             status = ReminderList.getInstance().loadDataSync();
         }
 
-        if(status) {
+        if (status) {
             DateTimeItem lastWake = getLastWake();
             TimeItem prevTime;
             //If the last wake was a different day

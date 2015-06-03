@@ -1,7 +1,6 @@
 package jamesmorrisstudios.com.randremind.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -21,7 +20,7 @@ import jamesmorrisstudios.com.randremind.R;
  * Created by James on 5/20/2015.
  */
 public class IconPickerDialogBuilder {
-    private static int[] icons = new int[] {
+    private static int[] icons = new int[]{
             R.drawable.notif_1, R.drawable.notif_2, R.drawable.notif_3, R.drawable.notif_4,
             R.drawable.notif_5, R.drawable.notif_6, R.drawable.notif_7, R.drawable.notif_8,
             R.drawable.notif_9, R.drawable.notif_10, R.drawable.notif_11, R.drawable.notif_12,
@@ -87,14 +86,14 @@ public class IconPickerDialogBuilder {
 
     private void buildIconList(Context context) {
         LinearLayout row = null;
-        for(int i=0; i<icons.length; i++) {
-            if(i % 4 == 0) {
+        for (int i = 0; i < icons.length; i++) {
+            if (i % 4 == 0) {
                 row = new LinearLayout(context);
                 row.setOrientation(LinearLayout.HORIZONTAL);
                 row.setGravity(Gravity.CENTER);
                 pickerContainer.addView(row);
             }
-            if(row != null) {
+            if (row != null) {
                 addIcon(context, row, icons[i]);
             }
         }
@@ -106,7 +105,7 @@ public class IconPickerDialogBuilder {
         paramTop.setMargins(Utils.getDipInt(6), Utils.getDipInt(6), Utils.getDipInt(6), Utils.getDipInt(6));
         top.setLayoutParams(paramTop);
         top.setBackgroundResource(R.drawable.circle);
-        ((GradientDrawable)top.getBackground()).setColor(accentColor);
+        ((GradientDrawable) top.getBackground()).setColor(accentColor);
 
         ImageView image = new ImageView(context);
         RelativeLayout.LayoutParams paramImage = new RelativeLayout.LayoutParams(Utils.getDipInt(25), Utils.getDipInt(25));

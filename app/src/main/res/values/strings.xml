@@ -6,7 +6,6 @@
 
     <string name="lifetime">Lifetime</string>
 
-    <string name="edit_title">Title</string>
     <string name="edit_content">Content</string>
     <string name="edit_timing">Timing</string>
     <string name="edit_repeat">Repeat</string>
@@ -22,8 +21,8 @@
     <string name="duplicate_prompt_title">Duplicate Reminder</string>
     <string name="duplicate_prompt_content">Are you sure you want to duplicate this reminder?</string>
 
-    <string name="default_title">Default Title</string>
-    <string name="default_content">Default Content</string>
+    <string name="default_title">Title</string>
+    <string name="default_content">Message</string>
     <string name="colon">:</string>
     <string name="dash">-</string>
     <string name="am">AM</string>
@@ -33,9 +32,6 @@
     <string name="timing_range">Range</string>
 
     <string name="alerts_per_day">Reminders Per Day</string>
-    <string name="title_hint">Short Name</string>
-    <string name="content_hint">Reminder text</string>
-    <string name="title_enable">Enable Reminder</string>
     <string name="vibrate_enable">Vibrate</string>
     <string name="random_enable">Randomize Times</string>
     <string name="high_priority_enable">High Priority</string>
@@ -51,8 +47,8 @@
     <string name="snooze">Snooze</string>
     <string name="snoozed">Snoozed</string>
     <string name="dismiss">Dismiss</string>
-    <string name="accept">Accept</string>
-    <string name="accepted">Accepted</string>
+    <string name="accept">Complete</string>
+    <string name="accepted">Completed</string>
 
     <string name="repeat_enable">Repeat Enable</string>
     <string name="alarm_enable">Alarm Enable</string>
@@ -68,7 +64,6 @@
 
 
     <!-- Settings -->
-
     <string name="settings_item_0_primary">Notification opens summary</string>
     <string name="settings_item_0_secondary">Uncheck to make notification silently acknowledge</string>
 
@@ -76,8 +71,10 @@
     <string name="settings_item_1_secondary">Uncheck to disable the custom notification and revert to the standard system</string>
 
     <string name="settings_item_2_primary">Use ongoing notification</string>
-    <string name="settings_item_2_secondary">Uncheck to allow the notification to be dismissible by swiping it away</string>
+    <string name="settings_item_2_secondary">Uncheck to allow the notification to be dismissible by swiping it away. Ongoing notifications are not supported on Android Wear</string>
 
+    <string name="settings_item_3_primary">Use light notification theme</string>
+    <string name="settings_item_3_secondary">Uncheck to set dark notification theme</string>
 
     <!-- Tutorial -->
     <string name="help_icon_0_description">Randomized Notification Times</string>
