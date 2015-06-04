@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"فشل تحميل قائمة تذكير"</string>
+    <string name="app_open_fail">"فشل لفتح التطبيق"</string>
+    <string name="error_time_difference">"الوقت غير صالح"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"لا يوجد لديك تذكير حتى الآن."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"حذف تذكير"</string>
+    <string name="delete_prompt_content">"هل أنت متأكد أنك تريد حذف هذا التذكير؟"</string>
+    <string name="cancel_prompt_title">"تجاهل التغييرات"</string>
+    <string name="cancel_prompt_content">"هل أنت متأكد أنك تريد تجاهل التغييرات؟"</string>
+    <string name="duplicate_prompt_title">"تذكير مكررة"</string>
+    <string name="duplicate_prompt_content">"هل أنت متأكد أنك تريد تكرار هذا التذكير؟"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"اختيار أيقونة"</string>
+    <string name="selectNotification">"حدد إعلام"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"حياة"</string>
+    <string name="today">"اليوم"</string>
+    <string name="shown">"أظهرت"</string>
+    <string name="accepted">"الانتهاء"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"لقب"</string>
+    <string name="default_content">"رسالة"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"توقيت"</string>
+    <string name="edit_repeat">"كرر"</string>
+    <string name="edit_notification">"إعلام"</string>
+    <string name="timing_specific">"خاص"</string>
+    <string name="timing_range">"نطاق"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"تذكير لكل يوم"</string>
+    <string name="vibrate_enable">"ذبذب"</string>
+    <string name="random_enable">"بطريقة عشوائية تايمز"</string>
+    <string name="high_priority_enable">"أولوية عالية"</string>
+    <string name="led_enable">"الصمام"</string>
+    <string name="led_color">"اللون"</string>
+    <string name="sound_set">"نغمة"</string>
+    <string name="sound_none">"لا شيء"</string>
+    <string name="icon_set">"رمز"</string>
+    <string name="icon_color">"لهجة اللون"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"تغييرات التخلص منها"</string>
+    <string name="reminder_save">"التغييرات المحفوظة"</string>
+    <string name="reminder_delete">"تذكير المحذوفة"</string>
+    <string name="reminder_duplicate">"تذكير المكررة"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"يفتح إشعار موجز"</string>
+    <string name="settings_item_0_secondary">"قم بإلغاء التحديد لجعل الإخطار الاعتراف بصمت"</string>
+    <string name="settings_item_1_primary">"استخدام إعلام مخصصة"</string>
+    <string name="settings_item_1_secondary">"قم بإلغاء التحديد لتعطيل إعلام مخصص والعودة إلى نظام موحد"</string>
+    <string name="settings_item_2_primary">"استخدام الإخطار المستمر"</string>
+    <string name="settings_item_2_secondary">"قم بإلغاء التحديد من السماح للإعلام أن يكون dismissible عن طريق تمرير بعيدا. غير معتمدة الإخطارات الجارية بشأن Android Wear"</string>
+    <string name="settings_item_3_primary">"استخدام موضوع الإخطار خفيفة"</string>
+    <string name="settings_item_3_secondary">"قم بإلغاء التحديد لاستخدام موضوع الإخطار الظلام"</string>
+
+</resources>

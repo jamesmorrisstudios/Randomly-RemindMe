@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,7 +35,7 @@ import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
-import com.jamesmorrisstudios.utilitieslibrary.preferences.Preferences;
+import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -193,7 +194,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
-        ArrayList<String> items = Preferences.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
+        ArrayList<String> items = Prefs.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
         ArrayList<TimeItem> timeItems = new ArrayList<>();
         for (String item : items) {
             timeItems.add(TimeItem.decodeFromString(item));
@@ -206,7 +207,7 @@ public final class ReminderItem extends BaseRecycleItem {
         for (TimeItem timeItem : alertTimes) {
             items.add(TimeItem.encodeToString(timeItem));
         }
-        Preferences.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
+        Prefs.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
     }
 
     public static boolean logReminderShown(String uniqueName, DateTimeItem dateTime) {
@@ -462,10 +463,17 @@ public final class ReminderItem extends BaseRecycleItem {
         NotificationContent.NotificationTheme theme = NotificationContent.NotificationTheme.DARK;
         @DrawableRes int iconCancel, iconCheck, iconSnooze;
 
-        if (Preferences.getBoolean(pref, keySystem, true)) {
+        if (Prefs.getBoolean(pref, keySystem, true)) {
             type = NotificationContent.NotificationType.CUSTOM;
         }
-        if (Preferences.getBoolean(pref, keytheme, true)) {
+        if(!Prefs.getBooleanExists(pref, keytheme)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Prefs.putBoolean(pref, keytheme, true);
+            } else {
+                Prefs.putBoolean(pref, keytheme, false);
+            }
+        }
+        if (Prefs.getBoolean(pref, keytheme, true)) {
             theme = NotificationContent.NotificationTheme.LIGHT;
             iconCancel = R.drawable.notif_cancel_light;
             iconCheck = R.drawable.notif_check_light;
@@ -479,7 +487,7 @@ public final class ReminderItem extends BaseRecycleItem {
         notif = new NotificationContent(theme, type, title, content, this.getNotificationTone(), notificationIconRes, notificationAccentColor, getNotificationId());
 
         String keyOnGoing = AppUtil.getContext().getString(R.string.pref_notification_ongoing);
-        notif.setOnGoing(Preferences.getBoolean(pref, keyOnGoing, false));
+        notif.setOnGoing(Prefs.getBoolean(pref, keyOnGoing, false));
 
         if (this.notificationVibrate) {
             notif.enableVibrate();
@@ -536,20 +544,20 @@ public final class ReminderItem extends BaseRecycleItem {
 
         String keySummary = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
 
-        if (!Preferences.getBoolean(pref, keySummary, true)) {
+        if (!Prefs.getBoolean(pref, keySummary, true)) {
             intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT");
         }
 
         PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pDismiss = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentDismiss, PendingIntent.FLAG_CANCEL_CURRENT);
-        PendingIntent pSnooze = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
+        //PendingIntent pSnooze = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pAck = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentAck, PendingIntent.FLAG_CANCEL_CURRENT);
 
         notif.addContentIntent(pClicked);
         notif.addDeleteIntent(pCanceled);
         notif.addAction(new NotificationAction(iconCancel, "", pDismiss));
-        notif.addAction(new NotificationAction(iconSnooze, "", pSnooze));
+        //notif.addAction(new NotificationAction(iconSnooze, "", pSnooze));
         notif.addAction(new NotificationAction(iconCheck, "", pAck));
 
 /*
@@ -580,7 +588,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void deleteAlertTimes() {
-        Preferences.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
+        Prefs.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
     }
 
     public final boolean hasReminderLog() {

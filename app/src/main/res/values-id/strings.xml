@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Gagal memuat daftar pengingat"</string>
+    <string name="app_open_fail">"Gagal membuka aplikasi"</string>
+    <string name="error_time_difference">"Waktu tidak valid"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Anda tidak memiliki pengingat belum."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Hapus Reminder"</string>
+    <string name="delete_prompt_content">"Apakah Anda yakin ingin menghapus pengingat ini?"</string>
+    <string name="cancel_prompt_title">"Membuang Perubahan"</string>
+    <string name="cancel_prompt_content">"Apakah Anda yakin ingin membuang perubahan Anda?"</string>
+    <string name="duplicate_prompt_title">"Pengingat duplikat"</string>
+    <string name="duplicate_prompt_content">"Apakah Anda yakin ingin menduplikasi pengingat ini?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Pilih Icon"</string>
+    <string name="selectNotification">"Pilih Pemberitahuan"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Seumur Hidup"</string>
+    <string name="today">"Hari ini"</string>
+    <string name="shown">"Tampil"</string>
+    <string name="accepted">"Selesai"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Judul"</string>
+    <string name="default_content">"Pesan"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Pemilihan waktu"</string>
+    <string name="edit_repeat">"Ulangi"</string>
+    <string name="edit_notification">"Pemberitahuan"</string>
+    <string name="timing_specific">"Spesifik"</string>
+    <string name="timing_range">"Jarak"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Pengingat Per Hari"</string>
+    <string name="vibrate_enable">"Bergetar"</string>
+    <string name="random_enable">"Randomize Waktu"</string>
+    <string name="high_priority_enable">"Prioritas Utama"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Warna"</string>
+    <string name="sound_set">"Nada"</string>
+    <string name="sound_none">"Tak satupun"</string>
+    <string name="icon_set">"Icon"</string>
+    <string name="icon_color">"Accent Warna"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Perubahan Dibuang"</string>
+    <string name="reminder_save">"Perubahan Disimpan"</string>
+    <string name="reminder_delete">"Pengingat Dihapus"</string>
+    <string name="reminder_duplicate">"Pengingat Digandakan"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Pemberitahuan membuka Ringkasan"</string>
+    <string name="settings_item_0_secondary">"Hapus tanda centang untuk membuat pemberitahuan diam-diam mengakui"</string>
+    <string name="settings_item_1_primary">"Gunakan pemberitahuan kustom"</string>
+    <string name="settings_item_1_secondary">"Hapus tanda centang untuk menonaktifkan notifikasi kustom dan kembali ke sistem standar"</string>
+    <string name="settings_item_2_primary">"Gunakan pemberitahuan berkelanjutan"</string>
+    <string name="settings_item_2_secondary">"Hapus tanda centang untuk memungkinkan pemberitahuan untuk menjadi dismissible dengan menggesekkan itu pergi. Pemberitahuan yang sedang berlangsung tidak didukung pada Android Wear"</string>
+    <string name="settings_item_3_primary">"Menggunakan tema pemberitahuan cahaya"</string>
+    <string name="settings_item_3_secondary">"Hapus tanda centang untuk menggunakan pemberitahuan tema dark"</string>
+
+</resources>

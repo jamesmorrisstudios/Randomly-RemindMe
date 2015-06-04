@@ -451,7 +451,7 @@ public final class AddReminderFragment extends BaseFragment {
                     UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
                     generateNumberTimePerDay();
                 } else {
-                    Utils.toastShort(getResources().getString(R.string.error_time_difference_start));
+                    Utils.toastShort(getResources().getString(R.string.error_time_difference));
                 }
             }
         };
@@ -481,7 +481,7 @@ public final class AddReminderFragment extends BaseFragment {
                     UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
                     generateNumberTimePerDay();
                 } else {
-                    Utils.toastShort(getResources().getString(R.string.error_time_difference_end));
+                    Utils.toastShort(getResources().getString(R.string.error_time_difference));
                 }
             }
         };
@@ -588,7 +588,7 @@ public final class AddReminderFragment extends BaseFragment {
                 }
                 Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Notification");
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getResources().getString(R.string.selectNotification));
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, defaultUri);
                 try {

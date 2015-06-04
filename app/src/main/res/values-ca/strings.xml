@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Error en carregar llista de recordatoris"</string>
+    <string name="app_open_fail">"No s'ha pogut obrir l'aplicació"</string>
+    <string name="error_time_difference">"Temps no vàlid"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"No té recordatoris encara."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Eliminar Recordatori"</string>
+    <string name="delete_prompt_content">"¿Segur que vols eliminar aquest recordatori?"</string>
+    <string name="cancel_prompt_title">"Descarta Els Canvis"</string>
+    <string name="cancel_prompt_content">"¿Segur que vols descartar els canvis?"</string>
+    <string name="duplicate_prompt_title">"Recordatori Duplicar"</string>
+    <string name="duplicate_prompt_content">"Esteu segur que voleu duplicar aquest recordatori?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Trieu Icona"</string>
+    <string name="selectNotification">"Seleccioneu Notificació"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Vida"</string>
+    <string name="today">"Avui"</string>
+    <string name="shown">"Mostrat"</string>
+    <string name="accepted">"Acabat"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Títol"</string>
+    <string name="default_content">"Missatge"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Sincronització"</string>
+    <string name="edit_repeat">"Repetició"</string>
+    <string name="edit_notification">"Notificació"</string>
+    <string name="timing_specific">"Específic"</string>
+    <string name="timing_range">"Abast"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Recordatoris Per Dia"</string>
+    <string name="vibrate_enable">"Vibra"</string>
+    <string name="random_enable">"Fer amics Temps"</string>
+    <string name="high_priority_enable">"Alta Prioritat"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Color"</string>
+    <string name="sound_set">"To"</string>
+    <string name="sound_none">"Cap"</string>
+    <string name="icon_set">"Icona"</string>
+    <string name="icon_color">"Accentuar color"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Canvis rebutjades"</string>
+    <string name="reminder_save">"Canvis Guardats"</string>
+    <string name="reminder_delete">"Recordatori Suprimit"</string>
+    <string name="reminder_duplicate">"Recordatori duplicat"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Notificació obre Resum"</string>
+    <string name="settings_item_0_secondary">"Desactiveu l'opció de fer la notificació en silenci reconèixer"</string>
+    <string name="settings_item_1_primary">"Utilitzeu notificació personalitzada"</string>
+    <string name="settings_item_1_secondary">"Desactiveu l'opció per desactivar la notificació personalitzada i tornar al sistema estàndard"</string>
+    <string name="settings_item_2_primary">"Utilitzeu notificació en curs"</string>
+    <string name="settings_item_2_secondary">"Desactiveu l'opció per permetre que la notificació sigui descartable al colpejar a les escombraries. Notificacions en curs no són compatibles amb Android Wear"</string>
+    <string name="settings_item_3_primary">"Utilitzeu la llum el tema de notificació"</string>
+    <string name="settings_item_3_secondary">"Desactiveu l'opció d'usar el tema de la notificació fosc"</string>
+
+</resources>

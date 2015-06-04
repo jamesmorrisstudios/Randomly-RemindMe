@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Impossible de charger la liste de rappel"</string>
+    <string name="app_open_fail">"Impossible d'ouvrir l'application"</string>
+    <string name="error_time_difference">"Heure invalide"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Vous avez encore aucun rappel."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Supprimer Rappel"</string>
+    <string name="delete_prompt_content">"Êtes-vous sûr de vouloir supprimer ce rappel?"</string>
+    <string name="cancel_prompt_title">"Annuler Les Modifications"</string>
+    <string name="cancel_prompt_content">"Êtes-vous sûr que vous voulez annuler vos modifications?"</string>
+    <string name="duplicate_prompt_title">"Rappel Duplicate"</string>
+    <string name="duplicate_prompt_content">"Etes-vous sûr que vous voulez dupliquer ce rappel?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Choisissez Icône"</string>
+    <string name="selectNotification">"Sélectionner les notifications"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Vie"</string>
+    <string name="today">"Aujourd'hui"</string>
+    <string name="shown">"Affiché"</string>
+    <string name="accepted">"Terminé"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Titre"</string>
+    <string name="default_content">"Message"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Timing"</string>
+    <string name="edit_repeat">"Répétition"</string>
+    <string name="edit_notification">"Notification"</string>
+    <string name="timing_specific">"Spécifique"</string>
+    <string name="timing_range">"Gamme"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Rappels par jour"</string>
+    <string name="vibrate_enable">"Vibrer"</string>
+    <string name="random_enable">"Aléatoire Times,"</string>
+    <string name="high_priority_enable">"Haute Priorité"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Couleur"</string>
+    <string name="sound_set">"Ton"</string>
+    <string name="sound_none">"Aucun"</string>
+    <string name="icon_set">"Icône"</string>
+    <string name="icon_color">"Accent de couleur"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Changements jetés"</string>
+    <string name="reminder_save">"Modifications enregistrées"</string>
+    <string name="reminder_delete">"Rappel Supprimé"</string>
+    <string name="reminder_duplicate">"Rappel dupliqué"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"La notification ouvre résumé"</string>
+    <string name="settings_item_0_secondary">"Décochez la case pour faire reconnaître notification silence"</string>
+    <string name="settings_item_1_primary">"Utilisez des notifications personnalisées"</string>
+    <string name="settings_item_1_secondary">"Décochez pour désactiver la notification de la coutume et de revenir à le système standard"</string>
+    <string name="settings_item_2_primary">"Utilisez notification cours"</string>
+    <string name="settings_item_2_secondary">"Décochez la case pour permettre la notification d'être révocable en faisant glisser loin. Notifications en cours ne sont pas pris en charge sur Android Wear"</string>
+    <string name="settings_item_3_primary">"Utilisez le thème de notification lumière"</string>
+    <string name="settings_item_3_secondary">"Décochez cette option pour utiliser le thème de notification sombre"</string>
+
+</resources>

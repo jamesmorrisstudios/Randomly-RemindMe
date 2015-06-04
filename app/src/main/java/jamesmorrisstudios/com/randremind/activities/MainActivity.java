@@ -26,6 +26,7 @@ import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 
+import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
@@ -209,7 +210,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     @Override
     public void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
         IconPickerDialogBuilder.with(this)
-                .setTitle("Choose Icon")
+                .setTitle(getResources().getString(R.string.chooseIcon))
                 .setAccentColor(accentColor)
                 .setOnIconPicked(iconPickerListener)
                 .build()

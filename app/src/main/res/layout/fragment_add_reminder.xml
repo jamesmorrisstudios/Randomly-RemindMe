@@ -32,6 +32,38 @@
             android:padding="8dip">
 
             <!-- Title -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dip">
+
+                <TextView
+                    android:id="@+id/titleHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/default_title"
+                    android:textColor="@color/textDarkMain"
+                    android:textSize="@dimen/header_size" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/titleHeader"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:hint="@string/default_title"
+                    android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
+                    android:singleLine="true"
+                    android:textColor="@color/textDarkMain"
+                    android:textColorHint="@color/textDarkDisabled"
+                    android:textSize="@dimen/item_size" />
+
+            </RelativeLayout>
+            <!--
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +84,7 @@
                     android:textSize="@dimen/item_size" />
 
             </android.support.design.widget.TextInputLayout>
-
+-->
             <!-- Content -->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -64,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:text="@string/edit_content"
+                    android:text="@string/default_content"
                     android:textColor="@color/textDarkMain"
                     android:textSize="@dimen/header_size" />
 
@@ -115,7 +147,7 @@
 
                     <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_specific"
-                        android:layout_width="80dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:background="@color/iconDark"
@@ -124,7 +156,7 @@
 
                     <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                         android:id="@+id/timing_range"
-                        android:layout_width="80dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:background="@color/iconDark"
@@ -148,8 +180,6 @@
                         android:id="@+id/timing_times_specific_per_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/timing_times"
-                        android:layout_centerHorizontal="true"
                         android:layout_margin="4dp"
                         android:orientation="horizontal">
 
@@ -581,34 +611,6 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <!-- Notification Icon -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dip">
-
-                <TextView
-                    android:id="@+id/notification_icon_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/edit_notification_icon"
-                    android:textColor="@color/textDarkMain"
-                    android:textSize="@dimen/header_size" />
-
-                <LinearLayout
-                    android:id="@+id/notificationIconContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/notification_icon_header"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="8dp"
-                    android:orientation="vertical">
-
                     <!-- Icon picker -->
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -647,6 +649,8 @@
 
                     <!-- Accent Color -->
                     <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"

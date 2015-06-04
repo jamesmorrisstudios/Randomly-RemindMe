@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Nepodařilo se načíst seznam připomenutí"</string>
+    <string name="app_open_fail">"Nepodařilo se otevřít aplikaci"</string>
+    <string name="error_time_difference">"Neplatný čas"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Nemáte zatím žádné připomínky."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Vymazat připomenutí"</string>
+    <string name="delete_prompt_content">"Jste si jisti, že chcete smazat toto připomenutí?"</string>
+    <string name="cancel_prompt_title">"Zrušit Změny"</string>
+    <string name="cancel_prompt_content">"Jste si jisti, že chcete změny zrušit?"</string>
+    <string name="duplicate_prompt_title">"Duplicate Připomínka"</string>
+    <string name="duplicate_prompt_content">"Jste si jisti, že chcete duplikovat toto připomenutí?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Vybrat ikonu"</string>
+    <string name="selectNotification">"Select Notification"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Život"</string>
+    <string name="today">"Dnes"</string>
+    <string name="shown">"Zobrazovat"</string>
+    <string name="accepted">"Dokončený"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Název"</string>
+    <string name="default_content">"Zpráva"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Načasování"</string>
+    <string name="edit_repeat">"Opakovat"</string>
+    <string name="edit_notification">"Oznámení"</string>
+    <string name="timing_specific">"Specifický"</string>
+    <string name="timing_range">"Rozsah"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Upomínky za den"</string>
+    <string name="vibrate_enable">"Vibrovat"</string>
+    <string name="random_enable">"Randomize Times"</string>
+    <string name="high_priority_enable">"Vysoká priorita"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Barva"</string>
+    <string name="sound_set">"Tón"</string>
+    <string name="sound_none">"Nikdo"</string>
+    <string name="icon_set">"Ikona"</string>
+    <string name="icon_color">"Accent Color"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Změny Vyřazené"</string>
+    <string name="reminder_save">"Změny byly uloženy"</string>
+    <string name="reminder_delete">"Připomenutí Deleted"</string>
+    <string name="reminder_duplicate">"Připomenutí Duplicitní"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Oznámení se otevře shrnutí"</string>
+    <string name="settings_item_0_secondary">"Zrušte zaškrtnutí učinit oznámení mlčky potvrdit"</string>
+    <string name="settings_item_1_primary">"Použít vlastní oznámení"</string>
+    <string name="settings_item_1_secondary">"Zrušte zaškrtnutí zakázat vlastní oznámení a vrátit do standardního systému"</string>
+    <string name="settings_item_2_primary">"Použít probíhající oznámení"</string>
+    <string name="settings_item_2_secondary">"Zrušte zaškrtnutí aby oznámení za dismissible přejetím to pryč. Probíhající oznámení nejsou podporovány na Android Wear"</string>
+    <string name="settings_item_3_primary">"Pomocí světelného upozornění téma"</string>
+    <string name="settings_item_3_secondary">"Zrušte zaškrtnutí políčka použít tmavé oznámení motiv"</string>
+
+</resources>

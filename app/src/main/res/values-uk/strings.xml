@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Не вдалося завантажити список нагадування"</string>
+    <string name="app_open_fail">"Не вдалося відкрити програму"</string>
+    <string name="error_time_difference">"Невірний час"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"У вас немає нагадування ще."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Видалити нагадування"</string>
+    <string name="delete_prompt_content">"Ви впевнені, що хочете видалити це нагадування?"</string>
+    <string name="cancel_prompt_title">"Скасувати зміни"</string>
+    <string name="cancel_prompt_content">"Ви впевнені, що хочете скасувати зміни?"</string>
+    <string name="duplicate_prompt_title">"Дублікат Нагадування"</string>
+    <string name="duplicate_prompt_content">"Ви впевнені, що хочете, щоб дублювати це нагадування?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Виберіть значок"</string>
+    <string name="selectNotification">"Вибір повідомлення"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Тривалість Життя"</string>
+    <string name="today">"Сьогодні"</string>
+    <string name="shown">"Показаний"</string>
+    <string name="accepted">"Завершений"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Назва"</string>
+    <string name="default_content">"Повідомлення"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Синхронізація"</string>
+    <string name="edit_repeat">"Повторення"</string>
+    <string name="edit_notification">"Повідомлення"</string>
+    <string name="timing_specific">"Питома"</string>
+    <string name="timing_range">"Діапазон"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Нагадування в день"</string>
+    <string name="vibrate_enable">"Вібрувати"</string>
+    <string name="random_enable">"Випадковий раз"</string>
+    <string name="high_priority_enable">"Високий Пріоритет"</string>
+    <string name="led_enable">"СВІТЛОДІОД"</string>
+    <string name="led_color">"Колір"</string>
+    <string name="sound_set">"Тон"</string>
+    <string name="sound_none">"Ні"</string>
+    <string name="icon_set">"Значок"</string>
+    <string name="icon_color">"Акцент Колір"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Зміни Викинуті"</string>
+    <string name="reminder_save">"Зміни збережені"</string>
+    <string name="reminder_delete">"Нагадування Дистанційні"</string>
+    <string name="reminder_duplicate">"Нагадування Дубльований"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Повідомлення відкриває резюме"</string>
+    <string name="settings_item_0_secondary">"Зніміть, щоб повідомлення мовчки визнати"</string>
+    <string name="settings_item_1_primary">"Використовувати користувацький повідомлення"</string>
+    <string name="settings_item_1_secondary">"Зніміть цей прапорець для відключення користувальницького повідомлення та повернутися до стандартної системи"</string>
+    <string name="settings_item_2_primary">"Використовуйте поточну повідомлення"</string>
+    <string name="settings_item_2_secondary">"Зніміть, щоб повідомлення буде відмахнутися, проводячи його. Поточні повідомлення не підтримується на Android Wear"</string>
+    <string name="settings_item_3_primary">"Використовуйте легкий тему повідомлення"</string>
+    <string name="settings_item_3_secondary">"Зніміть використовувати темну тему повідомлення"</string>
+
+</resources>

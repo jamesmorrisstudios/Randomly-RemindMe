@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="store_link">http://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind</string>
-    <string name="store_link_all">https://play.google.com/store/search?q=pub:James+Morris+Studios</string>
+    <string name="store_link" translatable="false">http://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind</string>
+    <string name="store_link_all" translatable="false">https://play.google.com/store/search?q=pub:James+Morris+Studios</string>
 
 </resources>

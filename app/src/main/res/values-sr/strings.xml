@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Фаилед то лоад листу подсетника"</string>
+    <string name="app_open_fail">"Фаилед то опен апликацију"</string>
+    <string name="error_time_difference">"Неважећи време"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Немате још нема подсетника."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Обриши подсетник"</string>
+    <string name="delete_prompt_content">"Да ли сте сигурни да желите да избришете овај подсетник?"</string>
+    <string name="cancel_prompt_title">"Одбаци промене"</string>
+    <string name="cancel_prompt_content">"Да ли сте сигурни да желите да одбаците своје измене?"</string>
+    <string name="duplicate_prompt_title">"Дупликат Подсетник"</string>
+    <string name="duplicate_prompt_content">"Да ли сте сигурни да желите да дуплирати овај подсетник?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Изаберите Ицон"</string>
+    <string name="selectNotification">"Избор Обавештење"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Живот"</string>
+    <string name="today">"Данас"</string>
+    <string name="shown">"Приказан"</string>
+    <string name="accepted">"Завршен"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Наслов"</string>
+    <string name="default_content">"Порука"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Тајминг"</string>
+    <string name="edit_repeat">"Понављање"</string>
+    <string name="edit_notification">"Обавештење"</string>
+    <string name="timing_specific">"Специфичан"</string>
+    <string name="timing_range">"Домет"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Подсетник Пер Даи"</string>
+    <string name="vibrate_enable">"Вибрирати"</string>
+    <string name="random_enable">"Рандомизе Тајмс"</string>
+    <string name="high_priority_enable">"Високи приоритет"</string>
+    <string name="led_enable">"ЛЕД"</string>
+    <string name="led_color">"Боја"</string>
+    <string name="sound_set">"Тон"</string>
+    <string name="sound_none">"Ниједан"</string>
+    <string name="icon_set">"Икона"</string>
+    <string name="icon_color">"Акцент боје"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Промене Дисцардед"</string>
+    <string name="reminder_save">"Промене су сачуване"</string>
+    <string name="reminder_delete">"Подсетник Делетед"</string>
+    <string name="reminder_duplicate">"Подсетник Дуплицатед"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Обавештење отвара резиме"</string>
+    <string name="settings_item_0_secondary">"Искључи да обавештење тихо признају"</string>
+    <string name="settings_item_1_primary">"Користи прилагођену обавештење"</string>
+    <string name="settings_item_1_secondary">"Искључи да бисте онемогућили прилагођени обавештење и да се вратите на стандардни систем"</string>
+    <string name="settings_item_2_primary">"Користи текући обавештење"</string>
+    <string name="settings_item_2_secondary">"Уклоните ознаку да би обавештење да се дисмиссибле једноставним проласком га. Текуће обавештења нису подржани на Андроид Веар"</string>
+    <string name="settings_item_3_primary">"Користи светло обавештења тему"</string>
+    <string name="settings_item_3_secondary">"Искључи да користите тамне обавештења тему"</string>
+
+</resources>

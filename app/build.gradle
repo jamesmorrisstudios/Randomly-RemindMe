@@ -17,6 +17,9 @@
 apply plugin: 'com.android.application'
 
 repositories {
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
     mavenLocal()
     mavenCentral()
 }
@@ -39,8 +42,8 @@ android {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 15
-        versionName "1.0.5"
+        versionCode 16
+        versionName "1.0.6"
     }
     buildTypes {
         release {
@@ -53,4 +56,8 @@ android {
 dependencies {
     compile 'com.jamesmorrisstudios:utilitieslibrary:1.1'
     compile 'com.jamesmorrisstudios:appbaselibrary:1.1'
+    compile 'com.scottyab:aes-crypto:0.0.2-SNAPSHOT'
+    compile('com.scottyab:secure-preferences-lib:0.1.0') {
+        provided 'com.scottyab:aes-crypto:0.0.2-SNAPSHOT'
+    }
 }

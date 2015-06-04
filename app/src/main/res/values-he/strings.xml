@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"נכשל ניסיון לטעון רשימת תזכורת"</string>
+    <string name="app_open_fail">"לא הצליח לפתוח את האפליקציה"</string>
+    <string name="error_time_difference">"זמן לא חוקי"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"אין לך תזכורות עדיין."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"מחיקת תזכורת"</string>
+    <string name="delete_prompt_content">"האם אתה בטוח שאתה רוצה למחוק תזכורת זו?"</string>
+    <string name="cancel_prompt_title">"למחוק את שינויים"</string>
+    <string name="cancel_prompt_content">"האם אתה בטוח שאתה רוצה למחוק את השינויים?"</string>
+    <string name="duplicate_prompt_title">"תזכורת כפולה"</string>
+    <string name="duplicate_prompt_content">"האם אתה בטוח שאתה רוצה לשכפל תזכורת זו?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"בחר אייקון"</string>
+    <string name="selectNotification">"הודעה בחר"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"כל החיים"</string>
+    <string name="today">"היום"</string>
+    <string name="shown">"מוצג"</string>
+    <string name="accepted">"הושלם"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"כותרת"</string>
+    <string name="default_content">"הודעה"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"עיתוי"</string>
+    <string name="edit_repeat">"חזור"</string>
+    <string name="edit_notification">"הודעה"</string>
+    <string name="timing_specific">"ספציפי"</string>
+    <string name="timing_range">"טווח"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"תזכורות ליום"</string>
+    <string name="vibrate_enable">"לְהַרְטִיט"</string>
+    <string name="random_enable">"האקראי טיימס"</string>
+    <string name="high_priority_enable">"עדיפות גבוהה"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"צבע"</string>
+    <string name="sound_set">"טון"</string>
+    <string name="sound_none">"אין"</string>
+    <string name="icon_set">"אייקון"</string>
+    <string name="icon_color">"מבטא צבע"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"שינויים זרוקות"</string>
+    <string name="reminder_save">"שינויים שמורים"</string>
+    <string name="reminder_delete">"תזכורת שנמחקה"</string>
+    <string name="reminder_duplicate">"תזכורת כפולות"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"הודעה פותחת סיכום"</string>
+    <string name="settings_item_0_secondary">"בטל לעשות הודעה בשקט להכיר"</string>
+    <string name="settings_item_1_primary">"השתמש הודעה מותאמת אישית"</string>
+    <string name="settings_item_1_secondary">"בטל להשבית את ההודעה המותאמת אישית ולחזור למערכת סטנדרטית"</string>
+    <string name="settings_item_2_primary">"השתמש הודעה מתמשכת"</string>
+    <string name="settings_item_2_secondary">"בטל לאפשר את ההודעה להיות dismissible על ידי והעבירה אותו משם. הודעות שוטפות אינן נתמכות על Android Wear"</string>
+    <string name="settings_item_3_primary">"השתמש נושא הודעת אור"</string>
+    <string name="settings_item_3_secondary">"בטל להשתמש נושא הודעה כהה"</string>
+
+</resources>

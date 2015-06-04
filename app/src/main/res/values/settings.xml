@@ -22,8 +22,8 @@
     </array>
 
     <bool name="settings_item_0_default_value">true</bool>
-    <string name="settings_item_0_key">@string/pref_notification_click_ack</string>
-    <string name="pref_notification_click_ack">NOTIFICATION_CLICK_ACK</string>
+    <string name="settings_item_0_key" translatable="false">@string/pref_notification_click_ack</string>
+    <string name="pref_notification_click_ack" translatable="false">NOTIFICATION_CLICK_ACK</string>
 
     <!-- Enable to use system notification -->
     <array name="settings_item_1">
@@ -34,8 +34,8 @@
     </array>
 
     <bool name="settings_item_1_default_value">true</bool>
-    <string name="settings_item_1_key">@string/pref_notification_custom</string>
-    <string name="pref_notification_custom">NOTIFICATION_CUSTOM</string>
+    <string name="settings_item_1_key" translatable="false">@string/pref_notification_custom</string>
+    <string name="pref_notification_custom" translatable="false">NOTIFICATION_CUSTOM</string>
 
     <!-- Enable to make notification ongoing -->
     <array name="settings_item_2">
@@ -46,8 +46,8 @@
     </array>
 
     <bool name="settings_item_2_default_value">false</bool>
-    <string name="settings_item_2_key">@string/pref_notification_ongoing</string>
-    <string name="pref_notification_ongoing">NOTIFICATION_ONGOING</string>
+    <string name="settings_item_2_key" translatable="false">@string/pref_notification_ongoing</string>
+    <string name="pref_notification_ongoing" translatable="false">NOTIFICATION_ONGOING</string>
 
     <!-- Enable to make notifications light theme -->
     <array name="settings_item_3">
@@ -58,7 +58,7 @@
     </array>
 
     <bool name="settings_item_3_default_value">true</bool>
-    <string name="settings_item_3_key">@string/pref_notification_theme</string>
-    <string name="pref_notification_theme">NOTIFICATION_THEME</string>
+    <string name="settings_item_3_key" translatable="false">@string/pref_notification_theme</string>
+    <string name="pref_notification_theme" translatable="false">NOTIFICATION_THEME</string>
 
 </resources>

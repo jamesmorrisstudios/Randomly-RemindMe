@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Απέτυχε να φορτώσει λίστα υπενθύμισης"</string>
+    <string name="app_open_fail">"Απέτυχε να ανοίξει το app"</string>
+    <string name="error_time_difference">"Μη έγκυρη ώρα"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Δεν έχετε ακόμα υπενθυμίσεις."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Διαγραφή υπενθύμισης"</string>
+    <string name="delete_prompt_content">"Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το υπενθύμιση;"</string>
+    <string name="cancel_prompt_title">"Απορρίψετε Τις Αλλαγές"</string>
+    <string name="cancel_prompt_content">"Είστε σίγουροι ότι θέλετε να απορρίψετε τις αλλαγές σας;"</string>
+    <string name="duplicate_prompt_title">"Διπλότυπο Υπενθύμιση"</string>
+    <string name="duplicate_prompt_content">"Είστε σίγουροι ότι θέλετε να αντιγράψετε αυτό το υπενθύμιση;"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Επιλέξτε Icon"</string>
+    <string name="selectNotification">"Επιλέξτε Κοινοποίηση"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Διάρκεια Ζωής"</string>
+    <string name="today">"Σήμερα"</string>
+    <string name="shown">"Ορατή"</string>
+    <string name="accepted">"Ολοκληρώθηκε"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Τίτλος"</string>
+    <string name="default_content">"Μήνυμα"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Συγχρονισμός"</string>
+    <string name="edit_repeat">"Επαναλαμβάνω"</string>
+    <string name="edit_notification">"Κοινοποίηση"</string>
+    <string name="timing_specific">"Συγκεκριμένος"</string>
+    <string name="timing_range">"Σειρά"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Υπενθυμίσεις ανά ημέρα"</string>
+    <string name="vibrate_enable">"Δόνηση"</string>
+    <string name="random_enable">"Τυχαία Times"</string>
+    <string name="high_priority_enable">"Υψηλή προτεραιότητα"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Χρώμα"</string>
+    <string name="sound_set">"Τόνος"</string>
+    <string name="sound_none">"Κανένας"</string>
+    <string name="icon_set">"Icon"</string>
+    <string name="icon_color">"Χρώμα Accent"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Αλλαγές Απερρίφθη"</string>
+    <string name="reminder_save">"Οι αλλαγές αποθηκεύτηκαν"</string>
+    <string name="reminder_delete">"Υπενθύμιση Διαγράφεται"</string>
+    <string name="reminder_duplicate">"Υπενθύμιση Διπλασιασμός"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Ειδοποίηση ανοίγει περίληψη"</string>
+    <string name="settings_item_0_secondary">"Καταργήστε την επιλογή για να κάνει την κοινοποίηση σιωπηλά αναγνωρίζουν"</string>
+    <string name="settings_item_1_primary">"Χρήση προσαρμοσμένης ειδοποίησης"</string>
+    <string name="settings_item_1_secondary">"Καταργήστε την επιλογή για να απενεργοποιήσετε το προσαρμοσμένο κοινοποίηση και να επανέλθει στο καθιερωμένο σύστημα"</string>
+    <string name="settings_item_2_primary">"Χρησιμοποιούν την παράλληλη κοινοποίηση"</string>
+    <string name="settings_item_2_secondary">"Καταργήστε την επιλογή για να επιτραπεί η κοινοποίηση είναι αποκρυφτούν περνώντας μακριά. Συνεχίζεται κοινοποιήσεις δεν υποστηρίζονται στο Android Ρούχα"</string>
+    <string name="settings_item_3_primary">"Χρησιμοποιήστε το φως το θέμα κοινοποίησης"</string>
+    <string name="settings_item_3_secondary">"Καταργήστε την επιλογή για να χρησιμοποιήσετε σκοτεινό θέμα κοινοποίησης"</string>
+
+</resources>
