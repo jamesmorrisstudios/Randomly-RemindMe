@@ -47,6 +47,7 @@ import java.util.UUID;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.receiver.NotificationReceiver;
+import jamesmorrisstudios.com.randremind.util.IconUtil;
 
 /**
  * Individual reminder reminder that contains all needed items to be a reminder
@@ -99,8 +100,8 @@ public final class ReminderItem extends BaseRecycleItem {
     @SerializedName("notificationHighPriority")
     public boolean notificationHighPriority = false;
     @DrawableRes
-    @SerializedName("notificationIconRes")
-    public int notificationIconRes = R.drawable.notif_1;
+    @SerializedName("notificationIconIndex")
+    public int notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
     @SerializedName("notificationAccentColor")
     public int notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
     //Do Not Serialize This
@@ -137,7 +138,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.notificationLED = true;
         this.notificationLEDColor = Color.BLUE;
         this.notificationHighPriority = false;
-        this.notificationIconRes = R.drawable.notif_1;
+        this.notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
         this.notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
     }
 
@@ -159,7 +160,7 @@ public final class ReminderItem extends BaseRecycleItem {
                         int numberPerDay, boolean randomDistribution, boolean rangeTiming, boolean repeat,
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
                         boolean notificationVibrate, boolean notificationLED, int notificationLEDColor,
-                        boolean notificationHighPriority, int notificationIconRes, int notificationAccentColor) {
+                        boolean notificationHighPriority, int notificationIcon, int notificationAccentColor) {
         this.uniqueName = uniqueName;
         this.title = title;
         this.content = content;
@@ -179,7 +180,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.notificationLED = notificationLED;
         this.notificationLEDColor = notificationLEDColor;
         this.notificationHighPriority = notificationHighPriority;
-        this.notificationIconRes = notificationIconRes;
+        this.notificationIcon = notificationIcon;
         this.notificationAccentColor = notificationAccentColor;
     }
 
@@ -284,7 +285,7 @@ public final class ReminderItem extends BaseRecycleItem {
         return new ReminderItem(uniqueName, title, content, enabled, startTime, endTime, singleTime, specificTimeList, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
-                notificationIconRes, notificationAccentColor);
+                notificationIcon, notificationAccentColor);
     }
 
     /**
@@ -295,7 +296,7 @@ public final class ReminderItem extends BaseRecycleItem {
         return new ReminderItem(getUniqueName(), title, content, enabled, startTime, endTime, singleTime, specificTimeList, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
-                notificationIconRes, notificationAccentColor);
+                notificationIcon, notificationAccentColor);
     }
 
     /**
@@ -484,7 +485,7 @@ public final class ReminderItem extends BaseRecycleItem {
             iconSnooze = R.drawable.notif_snooze_dark;
         }
 
-        notif = new NotificationContent(theme, type, title, content, this.getNotificationTone(), notificationIconRes, notificationAccentColor, getNotificationId());
+        notif = new NotificationContent(theme, type, title, content, this.getNotificationTone(), IconUtil.getIconRes(notificationIcon), notificationAccentColor, getNotificationId());
 
         String keyOnGoing = AppUtil.getContext().getString(R.string.pref_notification_ongoing);
         notif.setOnGoing(Prefs.getBoolean(pref, keyOnGoing, false));

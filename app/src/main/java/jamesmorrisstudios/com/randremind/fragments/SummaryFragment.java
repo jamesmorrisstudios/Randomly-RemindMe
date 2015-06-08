@@ -237,6 +237,11 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
     }
 
+    @Override
+    public boolean showToolbarTitle() {
+        return true;
+    }
+
     /**
      *
      */

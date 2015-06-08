@@ -58,6 +58,11 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
 
     }
 
+    @Override
+    public boolean showToolbarTitle() {
+        return true;
+    }
+
     /**
      * @param inflater           Inflater
      * @param container          Root container

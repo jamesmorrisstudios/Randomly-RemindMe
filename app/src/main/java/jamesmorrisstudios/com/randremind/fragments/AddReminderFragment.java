@@ -65,6 +65,7 @@ import java.util.List;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.util.IconUtil;
 
 /**
  * Add and edit reminder fragment.
@@ -683,7 +684,7 @@ public final class AddReminderFragment extends BaseFragment {
                         if (remind == null) {
                             return;
                         }
-                        remind.notificationIconRes = iconRes;
+                        remind.notificationIcon = IconUtil.getIndex(iconRes);
                         notificationIcon.setImageResource(iconRes);
                     }
                 }, remind.notificationAccentColor);
@@ -738,7 +739,7 @@ public final class AddReminderFragment extends BaseFragment {
         ((GradientDrawable) ledColor.getBackground()).setColor(remind.notificationLEDColor);
         ((GradientDrawable) accentColor.getBackground()).setColor(remind.notificationAccentColor);
         ((GradientDrawable) notificationIconContainer.getBackground()).setColor(remind.notificationAccentColor);
-        notificationIcon.setImageResource(remind.notificationIconRes);
+        notificationIcon.setImageResource(IconUtil.getIconRes(remind.notificationIcon));
         UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
         UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
         updateSpecifcTimes();
@@ -851,6 +852,11 @@ public final class AddReminderFragment extends BaseFragment {
             ReminderList.getInstance().saveCurrentReminder();
         }
         utilListener.hideKeyboard();
+    }
+
+    @Override
+    public boolean showToolbarTitle() {
+        return true;
     }
 
     /**
