@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="store_link">amzn://apps/android?asin=B00XD5VXZ0</string>
-    <string name="store_link_all">amzn://apps/android?asin=B00XD5VXZ0&amp;showAll=1</string>
+    <string name="store_link" translatable="false">amzn://apps/android?asin=B00XD5VXZ0</string>
+    <string name="store_link_all" translatable="false">amzn://apps/android?asin=B00XD5VXZ0&amp;showAll=1</string>
 
 </resources>
