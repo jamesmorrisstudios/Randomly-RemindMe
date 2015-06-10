@@ -82,7 +82,7 @@ public final class Scheduler {
         calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         calendar.set(Calendar.HOUR_OF_DAY, time.hour);
         calendar.set(Calendar.MINUTE, time.minute);
-        Log.v("SCHEDULER", "Alarm Set For: "+uniqueName +" at " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
+        Log.v("SCHEDULER", "Alarm Set For: " + uniqueName + " at " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
         AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);

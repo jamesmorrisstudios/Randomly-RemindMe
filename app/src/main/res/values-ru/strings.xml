@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Не удалось загрузить список напоминание"</string>
+    <string name="app_open_fail">"Не удалось открыть приложение"</string>
+    <string name="error_time_difference">"Неверный время"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"У вас нет напоминания еще."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Удалить напоминание"</string>
+    <string name="delete_prompt_content">"Вы уверены, что хотите удалить это напоминание?"</string>
+    <string name="cancel_prompt_title">"Отменить изменения"</string>
+    <string name="cancel_prompt_content">"Вы уверены, что хотите отменить изменения?"</string>
+    <string name="duplicate_prompt_title">"Дубликат Напоминание"</string>
+    <string name="duplicate_prompt_content">"Вы уверены, что хотите, чтобы дублировать это напоминание?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Выберите значок"</string>
+    <string name="selectNotification">"Выбор уведомления"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Продолжительность Жизни"</string>
+    <string name="today">"Сегодня"</string>
+    <string name="shown">"Показанный"</string>
+    <string name="accepted">"Завершен"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Название"</string>
+    <string name="default_content">"Сообщение"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Синхронизация"</string>
+    <string name="edit_repeat">"Повторение"</string>
+    <string name="edit_notification">"Уведомление"</string>
+    <string name="timing_specific">"Удельный"</string>
+    <string name="timing_range">"Диапазон"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Напоминания в день"</string>
+    <string name="vibrate_enable">"Вибрировать"</string>
+    <string name="random_enable">"Случайный раз"</string>
+    <string name="high_priority_enable">"Высокий Приоритет"</string>
+    <string name="led_enable">"СВЕТОДИОД"</string>
+    <string name="led_color">"Цвет"</string>
+    <string name="sound_set">"Тон"</string>
+    <string name="sound_none">"Ни"</string>
+    <string name="icon_set">"Значок"</string>
+    <string name="icon_color">"Акцент Цвет"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Изменения Выброшенные"</string>
+    <string name="reminder_save">"Изменения сохранены"</string>
+    <string name="reminder_delete">"Напоминание Удаленные"</string>
+    <string name="reminder_duplicate">"Напоминание Дублированный"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Уведомление открывает резюме"</string>
+    <string name="settings_item_0_secondary">"Снимите, чтобы уведомление молча признать"</string>
+    <string name="settings_item_1_primary">"Использовать пользовательский уведомления"</string>
+    <string name="settings_item_1_secondary">"Снимите этот флажок для отключения пользовательского уведомления и вернуться к стандартной системе"</string>
+    <string name="settings_item_2_primary">"Используйте текущую уведомления"</string>
+    <string name="settings_item_2_secondary">"Снимите, чтобы уведомление будет отмахнуться, проводя его. Текущие уведомления не поддерживается на Android Wear"</string>
+    <string name="settings_item_3_primary">"Используйте легкий тему уведомления"</string>
+    <string name="settings_item_3_secondary">"Снимите использовать темную тему уведомления"</string>
+
+</resources>

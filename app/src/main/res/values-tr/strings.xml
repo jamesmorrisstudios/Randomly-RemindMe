@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Hatırlatma listesi yüklenemedi"</string>
+    <string name="app_open_fail">"Uygulamayı açılamadı"</string>
+    <string name="error_time_difference">"Geçersiz zaman"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Henüz hiçbir hatırlatmalar var."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Hatırlatma sil"</string>
+    <string name="delete_prompt_content">"Bu hatırlatma silmek istediğinizden emin misiniz?"</string>
+    <string name="cancel_prompt_title">"Değişiklikleri İptal"</string>
+    <string name="cancel_prompt_content">"Yaptığınız değişiklikleri iptal etmek istediğinizden emin misiniz?"</string>
+    <string name="duplicate_prompt_title">"Çift Hatırlatma"</string>
+    <string name="duplicate_prompt_content">"Bu hatırlatma çoğaltmak istiyor emin misin?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Simge Seçin"</string>
+    <string name="selectNotification">"Seçin Bildirimi"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Ömür"</string>
+    <string name="today">"Bugün"</string>
+    <string name="shown">"Gösterildi"</string>
+    <string name="accepted">"Tamamlandı"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Başlık"</string>
+    <string name="default_content">"Mesaj"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Zamanlama"</string>
+    <string name="edit_repeat">"Tekrar"</string>
+    <string name="edit_notification">"Tebliğ"</string>
+    <string name="timing_specific">"Özel"</string>
+    <string name="timing_range">"Menzil"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Günlük Hatırlatmalar"</string>
+    <string name="vibrate_enable">"Titremek"</string>
+    <string name="random_enable">"Rastgele Times"</string>
+    <string name="high_priority_enable">"Yüksek Öncelik"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Renk"</string>
+    <string name="sound_set">"Ton"</string>
+    <string name="sound_none">"Hiçbiri"</string>
+    <string name="icon_set">"Ikon"</string>
+    <string name="icon_color">"Accent Renk"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Değişiklikler Atılan"</string>
+    <string name="reminder_save">"Değişiklikler Kaydedildi"</string>
+    <string name="reminder_delete">"Hatırlatma Silindi"</string>
+    <string name="reminder_duplicate">"Hatırlatma Yinelenen"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Bildirim özeti açar"</string>
+    <string name="settings_item_0_secondary">"Sessizce kabul bildirimi yapmak için işaretini kaldırın"</string>
+    <string name="settings_item_1_primary">"Özel bildirim kullanın"</string>
+    <string name="settings_item_1_secondary">"Özel bildirimini devre dışı bırakmak ve standart sisteme geri dönmek için işaretini kaldırın"</string>
+    <string name="settings_item_2_primary">"Devam eden bildirim kullanın"</string>
+    <string name="settings_item_2_secondary">"Işaretini kaldırın bildirim o uzakta kaydırarak bırakabileceğinizi izin vermek. Devam eden bildirimler Android Wear desteklenmez"</string>
+    <string name="settings_item_3_primary">"Işık bildirim temayı kullanın"</string>
+    <string name="settings_item_3_secondary">"Koyu bildirim tema kullanmak için işareti kaldırın"</string>
+
+</resources>

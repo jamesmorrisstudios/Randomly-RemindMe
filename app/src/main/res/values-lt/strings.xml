@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Nepavyko įkelti priminimo sąrašą"</string>
+    <string name="app_open_fail">"Nepavyko atidaryti programą"</string>
+    <string name="error_time_difference">"Neteisingas laikas"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Jūs neturite priminimus dar."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Ištrinti priminimas"</string>
+    <string name="delete_prompt_content">"Ar tikrai norite ištrinti šį priminimą?"</string>
+    <string name="cancel_prompt_title">"Atmesti pakeitimai"</string>
+    <string name="cancel_prompt_content">"Ar tikrai norite išmesti pakeitimus?"</string>
+    <string name="duplicate_prompt_title">"Dubliuoti priminimas"</string>
+    <string name="duplicate_prompt_content">"Ar tikrai norite dubliuoti šią priminimą?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Pasirinkite piktogramą"</string>
+    <string name="selectNotification">"Pasirinkite Pranešimas"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Gyvenimas"</string>
+    <string name="today">"Šiandien"</string>
+    <string name="shown">"Rodoma"</string>
+    <string name="accepted">"Užbaigtas"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Pavadinimas"</string>
+    <string name="default_content">"Žinutė"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Laikas"</string>
+    <string name="edit_repeat">"Pakartojimas"</string>
+    <string name="edit_notification">"Pranešimas"</string>
+    <string name="timing_specific">"Specifinis"</string>
+    <string name="timing_range">"Diapazonas"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Priminimai Per Day"</string>
+    <string name="vibrate_enable">"Vibruoti"</string>
+    <string name="random_enable">"Randomize Times \""</string>
+    <string name="high_priority_enable">"Aukštas prioritetas"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Spalva"</string>
+    <string name="sound_set">"Tonas"</string>
+    <string name="sound_none">"Niekas"</string>
+    <string name="icon_set">"Piktograma"</string>
+    <string name="icon_color">"Accent spalva"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Pokyčiai Nebenaudojama"</string>
+    <string name="reminder_save">"Pokyčiai Išsaugotos"</string>
+    <string name="reminder_delete">"Priminimas Ištrinta"</string>
+    <string name="reminder_duplicate">"Priminimas Pasikartojantis"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Pranešimas atveria santrauka"</string>
+    <string name="settings_item_0_secondary">"Nuimkite padaryti pranešimą tyliai pripažinti,"</string>
+    <string name="settings_item_1_primary">"Naudokite pasirinktinį pranešimą"</string>
+    <string name="settings_item_1_secondary">"Nuimkite išjungti pasirinktinį pranešimą ir grįžti prie standartinės sistemos"</string>
+    <string name="settings_item_2_primary">"Naudokite esamą pranešimą"</string>
+    <string name="settings_item_2_secondary">"Nuimkite leisti pranešimas turi būti dismissible swiping jį. Vykdomi pranešimai nepalaiko Android drabužiai"</string>
+    <string name="settings_item_3_primary">"Naudokite šviesos pranešimo tema"</string>
+    <string name="settings_item_3_secondary">"Nuimkite naudoti tamsiai pranešimo tema"</string>
+
+</resources>

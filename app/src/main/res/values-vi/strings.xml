@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Không thể tải danh sách nhắc nhở"</string>
+    <string name="app_open_fail">"Không thể mở ứng dụng"</string>
+    <string name="error_time_difference">"Thời gian không hợp lệ"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Bạn không có nhắc nhở nào."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Xóa Reminder"</string>
+    <string name="delete_prompt_content">"Bạn có chắc chắn muốn xóa lời nhắc nhở này?"</string>
+    <string name="cancel_prompt_title">"Huỷ Thay đổi"</string>
+    <string name="cancel_prompt_content">"Bạn có chắc chắn muốn hủy các thay đổi của bạn?"</string>
+    <string name="duplicate_prompt_title">"Reminder Duplicate"</string>
+    <string name="duplicate_prompt_content">"Bạn có chắc chắn muốn lặp lại lời nhắc nhở này?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Chọn Icon"</string>
+    <string name="selectNotification">"Chọn Notification"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Cả Đời"</string>
+    <string name="today">"Hôm nay"</string>
+    <string name="shown">"Thể hiện"</string>
+    <string name="accepted">"Đã hoàn thành"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Tiêu đề"</string>
+    <string name="default_content">"Thông điệp"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Timing"</string>
+    <string name="edit_repeat">"Lặp lại"</string>
+    <string name="edit_notification">"Thông báo"</string>
+    <string name="timing_specific">"Đặc biệt"</string>
+    <string name="timing_range">"Phạm vi"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Nhắc nhở mỗi ngày"</string>
+    <string name="vibrate_enable">"Rung"</string>
+    <string name="random_enable">"Randomize Times"</string>
+    <string name="high_priority_enable">"Ưu tiên cao"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Màu"</string>
+    <string name="sound_set">"Giọng"</string>
+    <string name="sound_none">"Không ai"</string>
+    <string name="icon_set">"Biểu tượng"</string>
+    <string name="icon_color">"Accent Màu"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Thay đổi Phế"</string>
+    <string name="reminder_save">"Thay đổi lưu"</string>
+    <string name="reminder_delete">"Reminder Deleted"</string>
+    <string name="reminder_duplicate">"Reminder trùng lặp"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Thông báo mở tóm tắt"</string>
+    <string name="settings_item_0_secondary">"Bỏ chọn để làm cho thông báo âm thầm thừa nhận"</string>
+    <string name="settings_item_1_primary">"Sử dụng thông báo tùy chỉnh"</string>
+    <string name="settings_item_1_secondary">"Bỏ chọn để vô hiệu hóa các thông báo tùy chỉnh và quay trở lại hệ thống tiêu chuẩn"</string>
+    <string name="settings_item_2_primary">"Sử dụng thông báo liên tục"</string>
+    <string name="settings_item_2_secondary">"Bỏ chọn để cho phép các thông báo được bãi miễn bằng cách vuốt nó đi. Thông báo liên tục không được hỗ trợ trên Android Wear"</string>
+    <string name="settings_item_3_primary">"Sử dụng theme thông báo ánh sáng"</string>
+    <string name="settings_item_3_secondary">"Bỏ chọn để sử dụng theme thông báo tối"</string>
+
+</resources>

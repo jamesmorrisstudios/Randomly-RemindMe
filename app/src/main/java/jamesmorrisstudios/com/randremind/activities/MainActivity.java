@@ -16,7 +16,6 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -58,9 +57,9 @@ public final class MainActivity extends BaseLauncherActivity implements
             return;
         }
         if (extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
-            if(!ReminderList.getInstance().hasReminders()) {
+            if (!ReminderList.getInstance().hasReminders()) {
                 ReminderList.getInstance().loadDataSync();
-                if(!ReminderList.getInstance().hasReminders()) {
+                if (!ReminderList.getInstance().hasReminders()) {
                     clearBackStack();
                     loadMainFragment();
                     getIntent().removeExtra("REMINDER");
@@ -76,7 +75,7 @@ public final class MainActivity extends BaseLauncherActivity implements
             getIntent().removeExtra("NAME");
         }
 
-        if(!ReminderList.getInstance().hasReminders()) {
+        if (!ReminderList.getInstance().hasReminders()) {
             clearBackStack();
             loadMainFragment();
         }
@@ -211,10 +210,11 @@ public final class MainActivity extends BaseLauncherActivity implements
     @Override
     public void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
         IconPickerDialogBuilder.with(this)
-                .setTitle("Choose Icon")
+                .setTitle(getResources().getString(R.string.chooseIcon))
                 .setAccentColor(accentColor)
                 .setOnIconPicked(iconPickerListener)
                 .build()
                 .show();
     }
+
 }

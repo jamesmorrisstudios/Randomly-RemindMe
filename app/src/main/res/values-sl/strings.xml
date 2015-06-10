@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Ni mogoče naložiti seznama opomnika"</string>
+    <string name="app_open_fail">"Ni uspelo odpreti aplikacijo"</string>
+    <string name="error_time_difference">"Neveljaven čas"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Imate še nima opomnikov."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Izbriši Opomnik"</string>
+    <string name="delete_prompt_content">"Ali ste prepričani, da želite izbrisati ta opomnik?"</string>
+    <string name="cancel_prompt_title">"Zavrzi spremembe"</string>
+    <string name="cancel_prompt_content">"Ali ste prepričani, da želite zavreči spremembe?"</string>
+    <string name="duplicate_prompt_title">"Dvojnik Opomnik"</string>
+    <string name="duplicate_prompt_content">"Ali ste prepričani, da želite podvojiti ta opomnik?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Izberite ikono"</string>
+    <string name="selectNotification">"Izberite Obvestilo"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Lifetime"</string>
+    <string name="today">"Danes"</string>
+    <string name="shown">"Prikazano"</string>
+    <string name="accepted">"Dopolnil"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Naslov"</string>
+    <string name="default_content">"Sporočilo"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Timing"</string>
+    <string name="edit_repeat">"Ponovite"</string>
+    <string name="edit_notification">"Obvestilo"</string>
+    <string name="timing_specific">"Specifična"</string>
+    <string name="timing_range">"Razpon"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Opomniki na dan"</string>
+    <string name="vibrate_enable">"Vibriranje"</string>
+    <string name="random_enable">"Naključni Times"</string>
+    <string name="high_priority_enable">"Visoka prioriteta"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Color"</string>
+    <string name="sound_set">"Tone"</string>
+    <string name="sound_none">"Noben"</string>
+    <string name="icon_set">"Icon"</string>
+    <string name="icon_color">"Accent Color"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Spremembe Zavržena"</string>
+    <string name="reminder_save">"Spremembe Saved"</string>
+    <string name="reminder_delete">"Opomnik Črtan"</string>
+    <string name="reminder_duplicate">"Opomnik podvojenih"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Obvestilo odpre povzetek"</string>
+    <string name="settings_item_0_secondary">"Počistite narediti obvestilo tiho priznavajo"</string>
+    <string name="settings_item_1_primary">"Uporabite obvestilo po meri"</string>
+    <string name="settings_item_1_secondary">"Počistite onemogočiti obvestilo po meri in se vrniti na standardni sistem"</string>
+    <string name="settings_item_2_primary">"Uporabljata sprotno obveščanje"</string>
+    <string name="settings_item_2_secondary">"Počistite omogočiti obvestilo, da bo dismissible ga povlečete proč. Tekoča obvestila niso podprte na Android Wear"</string>
+    <string name="settings_item_3_primary">"Uporabite temo svetlobe obveščanja"</string>
+    <string name="settings_item_3_secondary">"Počistite uporabiti temo temno obveščanja"</string>
+
+</resources>

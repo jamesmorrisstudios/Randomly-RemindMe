@@ -110,11 +110,11 @@ public final class NotificationReceiver extends BroadcastReceiver {
                 Log.v("Notification RECEIVER", "No Data loaded, loading...");
                 status = ReminderList.getInstance().loadDataSync();
             }
-            if(status) {
+            if (status) {
                 Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
                 intent.putExtra("NAME", name);
                 intent.putExtra("REMINDER", true);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 try {
                     context.startActivity(intent);
                 } catch (Exception ex) {

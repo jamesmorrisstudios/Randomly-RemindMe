@@ -19,7 +19,10 @@
     android:id="@+id/reminder_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
+    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="1dp"
     android:animateLayoutChanges="true"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
@@ -46,13 +49,14 @@
         <TextView
             android:id="@+id/reminder_title_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/reminder_enabled"
+            android:gravity="center_vertical"
             android:singleLine="true"
             android:textColor="@color/textDarkMain"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <include
             android:id="@+id/reminder_time_start"
@@ -82,30 +86,6 @@
             android:layout_below="@+id/reminder_title_text"
             android:layout_toRightOf="@+id/timing_dash" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
-            android:id="@+id/timing_random"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/reminder_title_text"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="2dp"
-            android:layout_toRightOf="@+id/reminder_time_end"
-            android:background="@drawable/ic_shuffle_white_24dp"
-            android:scaleType="fitCenter"
-            android:tint="@color/textDarkMain" />
-
-        <TextView
-            android:id="@+id/timing_times"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/reminder_title_text"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_toRightOf="@+id/timing_random"
-            android:textColor="@color/textDarkSecondary"
-            android:textSize="16sp" />
-
         <LinearLayout
             android:id="@+id/daysContainer"
             android:layout_width="wrap_content"
@@ -117,8 +97,8 @@
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/daySun"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="4dp"
@@ -127,48 +107,48 @@
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayMon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayTue"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayWed"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayThu"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/dayFri"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
                 android:id="@+id/daySat"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="4dp"
                 android:background="@color/iconDark"
                 android:clickable="false" />

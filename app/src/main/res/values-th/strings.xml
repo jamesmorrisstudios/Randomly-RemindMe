@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"ไม่สามารถโหลดรายการเตือน"</string>
+    <string name="app_open_fail">"ไม่สามารถเปิด app"</string>
+    <string name="error_time_difference">"เวลาที่ไม่ถูกต้อง"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"คุณมีการแจ้งเตือนยังไม่มี"</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"ลบการแจ้งเตือน"</string>
+    <string name="delete_prompt_content">"คุณแน่ใจหรือว่าต้องการลบเตือนนี้หรือไม่?"</string>
+    <string name="cancel_prompt_title">"ยกเลิกการเปลี่ยนแปลง"</string>
+    <string name="cancel_prompt_content">"คุณแน่ใจหรือว่าต้องการยกเลิกการเปลี่ยนแปลงหรือไม่?"</string>
+    <string name="duplicate_prompt_title">"เตือนซ้ำ"</string>
+    <string name="duplicate_prompt_content">"คุณแน่ใจหรือว่าต้องการที่จะทำซ้ำเตือนนี้หรือไม่?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"เลือกไอคอน"</string>
+    <string name="selectNotification">"เลือกการแจ้งเตือน"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"ตลอดชีวิต"</string>
+    <string name="today">"ในวันนี้"</string>
+    <string name="shown">"แสดงให้เห็นว่า"</string>
+    <string name="accepted">"เสร็จ"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"ชื่อเรื่อง"</string>
+    <string name="default_content">"ข่าวสาร"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"การจับเวลา"</string>
+    <string name="edit_repeat">"ทำซ้ำ"</string>
+    <string name="edit_notification">"การประกาศ"</string>
+    <string name="timing_specific">"โดยเฉพาะ"</string>
+    <string name="timing_range">"พิสัย"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"การแจ้งเตือนต่อวัน"</string>
+    <string name="vibrate_enable">"สั่นสะเทือน"</string>
+    <string name="random_enable">"สุ่มไทม์"</string>
+    <string name="high_priority_enable">"ลำดับความสำคัญสูง"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"สี"</string>
+    <string name="sound_set">"โทน"</string>
+    <string name="sound_none">"ไม่"</string>
+    <string name="icon_set">"ไอคอน"</string>
+    <string name="icon_color">"สำเนียงสี"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"การเปลี่ยนแปลงทิ้ง"</string>
+    <string name="reminder_save">"การเปลี่ยนแปลงที่บันทึกไว้"</string>
+    <string name="reminder_delete">"การแจ้งเตือนที่ถูกลบ"</string>
+    <string name="reminder_duplicate">"เตือนซ้ำ"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"ประกาศเปิดสรุป"</string>
+    <string name="settings_item_0_secondary">"ยกเลิกการเลือกที่จะทำให้การแจ้งเตือนอย่างเงียบ ๆ ได้รับทราบ"</string>
+    <string name="settings_item_1_primary">"ใช้การแจ้งเตือนที่กำหนดเอง"</string>
+    <string name="settings_item_1_secondary">"ยกเลิกการเลือกปิดการใช้งานการแจ้งเตือนที่กำหนดเองและกลับไปใช้ระบบมาตรฐาน"</string>
+    <string name="settings_item_2_primary">"ใช้การแจ้งเตือนอย่างต่อเนื่อง"</string>
+    <string name="settings_item_2_secondary">"ยกเลิกการเลือกเพื่อให้การแจ้งเตือนที่จะ dismissible โดยรูดมันออกไป การแจ้งเตือนอย่างต่อเนื่องไม่ได้รับการสนับสนุนบน Android Wear"</string>
+    <string name="settings_item_3_primary">"ใช้รูปแบบการแจ้งเตือนแสง"</string>
+    <string name="settings_item_3_secondary">"ยกเลิกการเลือกที่จะใช้รูปแบบการแจ้งเตือนที่มืด"</string>
+
+</resources>

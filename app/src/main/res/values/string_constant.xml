@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="pref_reminder_alerts">jamesmorrisstudios.com.randremind.REMINDER_ALERT_TIMES</string>
-    <string name="pref_alarm_receiver">jamesmorrisstudios.com.randremind.ALARM_RECEIVER</string>
+    <string name="pref_reminder_alerts" translatable="false">jamesmorrisstudios.com.randremind.REMINDER_ALERT_TIMES</string>
+    <string name="pref_alarm_receiver" translatable="false">jamesmorrisstudios.com.randremind.ALARM_RECEIVER</string>
 
 
 </resources>

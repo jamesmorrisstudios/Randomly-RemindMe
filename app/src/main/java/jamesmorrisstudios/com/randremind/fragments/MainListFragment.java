@@ -27,7 +27,6 @@ import android.view.ViewGroup;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.squareup.otto.Subscribe;
@@ -59,6 +58,11 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
 
     }
 
+    @Override
+    public boolean showToolbarTitle() {
+        return true;
+    }
+
     /**
      * @param inflater           Inflater
      * @param container          Root container
@@ -88,8 +92,8 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     }
 
     @Override
-    protected void itemClicked(BaseRecycleItem baseRecycleItem) {
-        ReminderList.getInstance().setCurrentReminder((ReminderItem) baseRecycleItem);
+    protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
+        ReminderList.getInstance().setCurrentReminder((ReminderItem) baseRecycleContainer.getItem());
         mListener.onReminderItemClicked();
     }
 

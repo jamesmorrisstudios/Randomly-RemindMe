@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Nepodarilo sa načítať zoznam pripomenutie"</string>
+    <string name="app_open_fail">"Nepodarilo sa otvoriť aplikáciu"</string>
+    <string name="error_time_difference">"Neplatný čas"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Nemáte zatiaľ žiadne pripomienky."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Vymazať pripomenutie"</string>
+    <string name="delete_prompt_content">"Ste si istí, že chcete zmazať toto pripomenutie?"</string>
+    <string name="cancel_prompt_title">"Zrušiť Zmeny"</string>
+    <string name="cancel_prompt_content">"Ste si istí, že chcete zmeny zrušiť?"</string>
+    <string name="duplicate_prompt_title">"Duplicate Pripomienka"</string>
+    <string name="duplicate_prompt_content">"Ste si istí, že chcete duplikovať toto pripomenutie?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Vybrať ikonu"</string>
+    <string name="selectNotification">"Select Notification"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Život"</string>
+    <string name="today">"Dnes"</string>
+    <string name="shown">"Zobrazovať"</string>
+    <string name="accepted">"Dokončený"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Názov"</string>
+    <string name="default_content">"Správa"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Načasovanie"</string>
+    <string name="edit_repeat">"Opakovať"</string>
+    <string name="edit_notification">"Oznámenie"</string>
+    <string name="timing_specific">"Špecifický"</string>
+    <string name="timing_range">"Rozsah"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Upomienky za deň"</string>
+    <string name="vibrate_enable">"Vibrovať"</string>
+    <string name="random_enable">"Randomize Times"</string>
+    <string name="high_priority_enable">"Vysoká priorita"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Farba"</string>
+    <string name="sound_set">"Tón"</string>
+    <string name="sound_none">"Nikto"</string>
+    <string name="icon_set">"Ikona"</string>
+    <string name="icon_color">"Accent Color"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Zmeny Vyradené"</string>
+    <string name="reminder_save">"Zmeny boli uložené"</string>
+    <string name="reminder_delete">"Pripomenutie Deleted"</string>
+    <string name="reminder_duplicate">"Pripomenutie Duplicitné"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Oznámenie sa otvorí zhrnutie"</string>
+    <string name="settings_item_0_secondary">"Zrušte zaškrtnutie urobiť oznámenie mlčky potvrdiť"</string>
+    <string name="settings_item_1_primary">"Použiť vlastné oznámenia"</string>
+    <string name="settings_item_1_secondary">"Zrušte zaškrtnutie zakázať vlastné oznámenia a vrátiť do štandardného systému"</string>
+    <string name="settings_item_2_primary">"Použiť prebiehajúce oznámenia"</string>
+    <string name="settings_item_2_secondary">"Zrušte zaškrtnutie aby oznámenie za dismissible prejdením to preč. Prebiehajúce oznámenia nie sú podporované na Android Wear"</string>
+    <string name="settings_item_3_primary">"Pomocou svetelného upozornenia tému"</string>
+    <string name="settings_item_3_secondary">"Zrušte zaškrtnutie políčka použiť tmavé oznámenia motív"</string>
+
+</resources>

@@ -50,8 +50,8 @@ public class ReminderLog {
         }
         //If we have a new day then create a new entry and return it
         days.add(0, new ReminderLogDay(dateTimeItem.dateItem));
-        while(days.size() > 30) {
-            days.remove(days.size()-1);
+        while (days.size() > 30) {
+            days.remove(days.size() - 1);
         }
         Log.v("ReminderLog", "New day so creating another entry");
         return days.get(0);

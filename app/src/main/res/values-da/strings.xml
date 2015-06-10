@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Kunne ikke indlæse påmindelse liste"</string>
+    <string name="app_open_fail">"Kunne ikke åbne app"</string>
+    <string name="error_time_difference">"Ugyldig tid"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Du har ingen påmindelser endnu."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Slet Påmindelse"</string>
+    <string name="delete_prompt_content">"Er du sikker på at du vil slette denne påmindelse?"</string>
+    <string name="cancel_prompt_title">"Discard Changes"</string>
+    <string name="cancel_prompt_content">"Er du sikker på du vil kassere dine ændringer?"</string>
+    <string name="duplicate_prompt_title">"Duplicate Reminder"</string>
+    <string name="duplicate_prompt_content">"Er du sikker på, du vil dublere denne påmindelse?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Vælg Ikon"</string>
+    <string name="selectNotification">"Vælg Notification"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Lifetime"</string>
+    <string name="today">"I dag"</string>
+    <string name="shown">"Vist"</string>
+    <string name="accepted">"Afsluttet"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Titel"</string>
+    <string name="default_content">"Besked"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Timing"</string>
+    <string name="edit_repeat">"Gentag"</string>
+    <string name="edit_notification">"Meddelelse"</string>
+    <string name="timing_specific">"Specifikke"</string>
+    <string name="timing_range">"Range"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Påmindelser om dagen"</string>
+    <string name="vibrate_enable">"Vibrer"</string>
+    <string name="random_enable">"Tilfældig Times"</string>
+    <string name="high_priority_enable">"Høj prioritet"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Farve"</string>
+    <string name="sound_set">"Tone"</string>
+    <string name="sound_none">"Ingen"</string>
+    <string name="icon_set">"Ikon"</string>
+    <string name="icon_color">"Accent Color"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Ændringer Kasseret"</string>
+    <string name="reminder_save">"Ændringer gemt"</string>
+    <string name="reminder_delete">"Påmindelse Slettet"</string>
+    <string name="reminder_duplicate">"Påmindelse Duplicated"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Meddelelse åbner resumé"</string>
+    <string name="settings_item_0_secondary">"Fjern markeringen for at gøre meddelelse lydløst anerkender"</string>
+    <string name="settings_item_1_primary">"Brug brugerdefinerede meddelelse"</string>
+    <string name="settings_item_1_secondary">"Fjern markeringen for at deaktivere den brugerdefinerede meddelelse og vende tilbage til standardsystemet"</string>
+    <string name="settings_item_2_primary">"Anvender løbende underretning"</string>
+    <string name="settings_item_2_secondary">"Fjern markeringen for at lade meddelelsen for at være afviselig ved at føre den væk. Igangværende meddelelser understøttes ikke på Android Wear"</string>
+    <string name="settings_item_3_primary">"Bruge lys meddelelse tema"</string>
+    <string name="settings_item_3_secondary">"Fjern markeringen for at bruge mørke meddelelse tema"</string>
+
+</resources>

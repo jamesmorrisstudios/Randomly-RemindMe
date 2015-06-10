@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Nije uspjelo učitavanje popis podsjetnik"</string>
+    <string name="app_open_fail">"Nisam uspio otvoriti aplikaciju"</string>
+    <string name="error_time_difference">"Nevažeće vrijeme"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Nemate podsjetnike još."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Brisanje Podsjetnik"</string>
+    <string name="delete_prompt_content">"Jeste li sigurni da želite izbrisati ovaj podsjetnik?"</string>
+    <string name="cancel_prompt_title">"Odbaciti Promjene"</string>
+    <string name="cancel_prompt_content">"Jeste li sigurni da želite odbaciti promjene?"</string>
+    <string name="duplicate_prompt_title">"Dvostruki Podsjetnik"</string>
+    <string name="duplicate_prompt_content">"Jeste li sigurni da želite duplicirati ovaj podsjetnik?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Odaberite ikonu"</string>
+    <string name="selectNotification">"Odaberite Obavijest"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Doživotno"</string>
+    <string name="today">"Danas"</string>
+    <string name="shown">"Prikazan"</string>
+    <string name="accepted">"Dovršen"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Naslov"</string>
+    <string name="default_content">"Poruka"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Vrijeme"</string>
+    <string name="edit_repeat">"Ponoviti"</string>
+    <string name="edit_notification">"Obavijest"</string>
+    <string name="timing_specific">"Specifična"</string>
+    <string name="timing_range">"Opseg"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Podsjetnici dnevno"</string>
+    <string name="vibrate_enable">"Vibrirati"</string>
+    <string name="random_enable">"Nasumce Vremena"</string>
+    <string name="high_priority_enable">"Visoki prioritet"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Boja"</string>
+    <string name="sound_set">"Ton"</string>
+    <string name="sound_none">"Nijedan"</string>
+    <string name="icon_set">"Ikona"</string>
+    <string name="icon_color">"Accent boja"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Promjene Odbačena"</string>
+    <string name="reminder_save">"Promjene spremljene"</string>
+    <string name="reminder_delete">"Podsjetnik Izbrisano"</string>
+    <string name="reminder_duplicate">"Podsjetnik umnožen"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Obavijest sažetak otvara"</string>
+    <string name="settings_item_0_secondary">"Poništite da obavijest tiho prizna"</string>
+    <string name="settings_item_1_primary">"Koristite prilagođeni obavijest"</string>
+    <string name="settings_item_1_secondary">"Poništite onemogućiti prilagođeni obavijest i vratiti na standardni sustav"</string>
+    <string name="settings_item_2_primary">"Koristite tijeku obavijest"</string>
+    <string name="settings_item_2_secondary">"Poništite dopustiti obavijest da se dismissible ga swiping daleko. U tijeku obavijesti nisu podržane na Android Wear"</string>
+    <string name="settings_item_3_primary">"Koristite temu obavijesti svjetlo"</string>
+    <string name="settings_item_3_secondary">"Poništite koristiti tamnu temu obavijesti"</string>
+
+</resources>

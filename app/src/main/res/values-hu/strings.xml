@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Nem sikerült betölteni emlékeztető listát"</string>
+    <string name="app_open_fail">"Nem sikerült megnyitni app"</string>
+    <string name="error_time_difference">"Érvénytelen idő"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Ön nincs emlékeztetőket még."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Emlékeztető törlése"</string>
+    <string name="delete_prompt_content">"Biztosan törölni szeretné ezt az emlékeztetőt?"</string>
+    <string name="cancel_prompt_title">"Módosítások Elvetése"</string>
+    <string name="cancel_prompt_content">"Biztos benne, hogy szeretné megtartani a módosításokat?"</string>
+    <string name="duplicate_prompt_title">"Duplicate Emlékeztető"</string>
+    <string name="duplicate_prompt_content">"Biztosan másolni kívánt emlékeztető?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Ikon választása"</string>
+    <string name="selectNotification">"Select Notification"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Élettartam"</string>
+    <string name="today">"Ma"</string>
+    <string name="shown">"Mutatott"</string>
+    <string name="accepted">"Befejezték"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Cím"</string>
+    <string name="default_content">"Üzenet"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Időzítés"</string>
+    <string name="edit_repeat">"Ismétlés"</string>
+    <string name="edit_notification">"Bejelentés"</string>
+    <string name="timing_specific">"Fajlagos"</string>
+    <string name="timing_range">"Tartomány"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Emlékeztetők Per Day"</string>
+    <string name="vibrate_enable">"Rezeg"</string>
+    <string name="random_enable">"Randomize Times"</string>
+    <string name="high_priority_enable">"Magas Prioritás"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Szín"</string>
+    <string name="sound_set">"Tónus"</string>
+    <string name="sound_none">"Egyik sem"</string>
+    <string name="icon_set">"Ikon"</string>
+    <string name="icon_color">"Kiemelőszín"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Változások kiselejtezett"</string>
+    <string name="reminder_save">"Változások Saved"</string>
+    <string name="reminder_delete">"Emlékeztető Törölt"</string>
+    <string name="reminder_duplicate">"Emlékeztető ismétlődő"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Notification nyit összefoglaló"</string>
+    <string name="settings_item_0_secondary">"Szüntesse hogy értesítést némán tudomásul"</string>
+    <string name="settings_item_1_primary">"Használja az egyéni bejelentés"</string>
+    <string name="settings_item_1_secondary">"Szüntesse meg kikapcsolni az egyéni bejelentés és visszatér a normál rendszer"</string>
+    <string name="settings_item_2_primary">"Használja a folyamatban lévő értesítés"</string>
+    <string name="settings_item_2_secondary">"Szüntesse meg, hogy a bejelentést hagyhatók, ellop el. Folyamatban lévő bejelentések nem támogatja az Android Wear"</string>
+    <string name="settings_item_3_primary">"Használja fény értesítést téma"</string>
+    <string name="settings_item_3_secondary">"Meg kell szüntetni a sötétebb értesítést téma"</string>
+
+</resources>

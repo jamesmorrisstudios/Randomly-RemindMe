@@ -47,11 +47,12 @@ public final class ReminderAdapter extends BaseRecycleAdapter {
 
     @Override
     protected int getHeaderResId() {
-        return R.layout.reminder_header_item;
+        return R.layout.reminder_line_item;
     }
 
     @Override
     protected int getItemResId() {
         return R.layout.reminder_line_item;
     }
+
 }

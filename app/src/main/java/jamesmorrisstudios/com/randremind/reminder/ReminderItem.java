@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,7 +35,7 @@ import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
-import com.jamesmorrisstudios.utilitieslibrary.preferences.Preferences;
+import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -46,6 +47,7 @@ import java.util.UUID;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.receiver.NotificationReceiver;
+import jamesmorrisstudios.com.randremind.util.IconUtil;
 
 /**
  * Individual reminder reminder that contains all needed items to be a reminder
@@ -97,8 +99,9 @@ public final class ReminderItem extends BaseRecycleItem {
     public int notificationLEDColor = Color.BLUE;
     @SerializedName("notificationHighPriority")
     public boolean notificationHighPriority = false;
-    @DrawableRes @SerializedName("notificationIconRes")
-    public int notificationIconRes = R.drawable.notif_1;
+    @DrawableRes
+    @SerializedName("notificationIconIndex")
+    public int notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
     @SerializedName("notificationAccentColor")
     public int notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
     //Do Not Serialize This
@@ -135,7 +138,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.notificationLED = true;
         this.notificationLEDColor = Color.BLUE;
         this.notificationHighPriority = false;
-        this.notificationIconRes = R.drawable.notif_1;
+        this.notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
         this.notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
     }
 
@@ -157,7 +160,7 @@ public final class ReminderItem extends BaseRecycleItem {
                         int numberPerDay, boolean randomDistribution, boolean rangeTiming, boolean repeat,
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
                         boolean notificationVibrate, boolean notificationLED, int notificationLEDColor,
-                        boolean notificationHighPriority, int notificationIconRes, int notificationAccentColor) {
+                        boolean notificationHighPriority, int notificationIcon, int notificationAccentColor) {
         this.uniqueName = uniqueName;
         this.title = title;
         this.content = content;
@@ -177,7 +180,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.notificationLED = notificationLED;
         this.notificationLEDColor = notificationLEDColor;
         this.notificationHighPriority = notificationHighPriority;
-        this.notificationIconRes = notificationIconRes;
+        this.notificationIcon = notificationIcon;
         this.notificationAccentColor = notificationAccentColor;
     }
 
@@ -192,7 +195,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
-        ArrayList<String> items = Preferences.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
+        ArrayList<String> items = Prefs.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
         ArrayList<TimeItem> timeItems = new ArrayList<>();
         for (String item : items) {
             timeItems.add(TimeItem.decodeFromString(item));
@@ -205,7 +208,7 @@ public final class ReminderItem extends BaseRecycleItem {
         for (TimeItem timeItem : alertTimes) {
             items.add(TimeItem.encodeToString(timeItem));
         }
-        Preferences.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
+        Prefs.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
     }
 
     public static boolean logReminderShown(String uniqueName, DateTimeItem dateTime) {
@@ -282,7 +285,7 @@ public final class ReminderItem extends BaseRecycleItem {
         return new ReminderItem(uniqueName, title, content, enabled, startTime, endTime, singleTime, specificTimeList, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
-                notificationIconRes, notificationAccentColor);
+                notificationIcon, notificationAccentColor);
     }
 
     /**
@@ -293,7 +296,7 @@ public final class ReminderItem extends BaseRecycleItem {
         return new ReminderItem(getUniqueName(), title, content, enabled, startTime, endTime, singleTime, specificTimeList, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
-                notificationIconRes, notificationAccentColor);
+                notificationIcon, notificationAccentColor);
     }
 
     /**
@@ -326,7 +329,7 @@ public final class ReminderItem extends BaseRecycleItem {
     public final void updateAlertTimes() {
         if (!rangeTiming) {
             ArrayList<TimeItem> alertTimes = new ArrayList<>();
-            for(TimeItem item : specificTimeList) {
+            for (TimeItem item : specificTimeList) {
                 alertTimes.add(item.copy());
                 Log.v(title, item.getHourInTimeFormatString() + ":" + item.getMinuteString());
             }
@@ -402,7 +405,7 @@ public final class ReminderItem extends BaseRecycleItem {
         if (!enabled) {
             return;
         }
-        if(!daysToRun[getDayOfWeek()]) {
+        if (!daysToRun[getDayOfWeek()]) {
             return;
         }
         ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
@@ -413,12 +416,12 @@ public final class ReminderItem extends BaseRecycleItem {
         for (TimeItem alertTime : alertTimes) {
             //alert time is after the current time
             if (!UtilsTime.timeBeforeOrEqual(alertTime, now.timeItem) || (now.timeItem.minute == 0 && now.timeItem.hour == 0)) {
-                if(time == null || UtilsTime.timeBefore(alertTime, time)) {
+                if (time == null || UtilsTime.timeBefore(alertTime, time)) {
                     time = alertTime;
                 }
             }
         }
-        if(time != null) {
+        if (time != null) {
             Scheduler.getInstance().scheduleWake(time, uniqueName);
         }
     }
@@ -443,6 +446,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime) {
+        String pref = AppUtil.getContext().getString(R.string.settings_pref);
         String title = this.title;
         if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.default_title);
@@ -453,10 +457,38 @@ public final class ReminderItem extends BaseRecycleItem {
             content = AppUtil.getContext().getString(R.string.default_content);
         }
 
-        int accentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+        NotificationContent notif;
+        String keySystem = AppUtil.getContext().getString(R.string.pref_notification_custom);
+        String keytheme = AppUtil.getContext().getString(R.string.pref_notification_theme);
+        NotificationContent.NotificationType type = NotificationContent.NotificationType.NORMAL;
+        NotificationContent.NotificationTheme theme = NotificationContent.NotificationTheme.DARK;
+        @DrawableRes int iconCancel, iconCheck, iconSnooze;
 
-        NotificationContent notif = new NotificationContent(NotificationContent.NotificationType.DISMISS_ACK,
-                title, content, this.getNotificationTone(), notificationIconRes, notificationAccentColor, getNotificationId());
+        if (Prefs.getBoolean(pref, keySystem, true)) {
+            type = NotificationContent.NotificationType.CUSTOM;
+        }
+        if(!Prefs.getBooleanExists(pref, keytheme)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Prefs.putBoolean(pref, keytheme, true);
+            } else {
+                Prefs.putBoolean(pref, keytheme, false);
+            }
+        }
+        if (Prefs.getBoolean(pref, keytheme, true)) {
+            theme = NotificationContent.NotificationTheme.LIGHT;
+            iconCancel = R.drawable.notif_cancel_light;
+            iconCheck = R.drawable.notif_check_light;
+            iconSnooze = R.drawable.notif_snooze_light;
+        } else {
+            iconCancel = R.drawable.notif_cancel_dark;
+            iconCheck = R.drawable.notif_check_dark;
+            iconSnooze = R.drawable.notif_snooze_dark;
+        }
+
+        notif = new NotificationContent(theme, type, title, content, this.getNotificationTone(), IconUtil.getIconRes(notificationIcon), notificationAccentColor, getNotificationId());
+
+        String keyOnGoing = AppUtil.getContext().getString(R.string.pref_notification_ongoing);
+        notif.setOnGoing(Prefs.getBoolean(pref, keyOnGoing, false));
 
         if (this.notificationVibrate) {
             notif.enableVibrate();
@@ -489,6 +521,13 @@ public final class ReminderItem extends BaseRecycleItem {
         intentDismiss.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentDismiss.putExtra("NOTIFICATION_ID", getNotificationId());
 
+        Intent intentSnooze = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+        intentSnooze.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE");
+        intentSnooze.setType(this.uniqueName);
+        intentSnooze.putExtra("NAME", this.uniqueName);
+        intentSnooze.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentSnooze.putExtra("NOTIFICATION_ID", getNotificationId());
+
         Intent intentAck = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
         intentAck.setType(this.uniqueName);
@@ -500,26 +539,48 @@ public final class ReminderItem extends BaseRecycleItem {
             intentClicked.putExtra("PREVIEW", true);
             intentCancel.putExtra("PREVIEW", true);
             intentDismiss.putExtra("PREVIEW", true);
+            intentSnooze.putExtra("PREVIEW", true);
             intentAck.putExtra("PREVIEW", true);
         }
 
-        String pref = AppUtil.getContext().getString(R.string.settings_pref);
-        String key = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
+        String keySummary = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
 
-        if (!Preferences.getBoolean(pref, key, true)) {
+        if (!Prefs.getBoolean(pref, keySummary, true)) {
             intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT");
         }
 
         PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pDismiss = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentDismiss, PendingIntent.FLAG_CANCEL_CURRENT);
+        //PendingIntent pSnooze = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pAck = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentAck, PendingIntent.FLAG_CANCEL_CURRENT);
 
         notif.addContentIntent(pClicked);
         notif.addDeleteIntent(pCanceled);
-        notif.addAction(new NotificationAction(0, "Dismiss", pDismiss));
-        notif.addAction(new NotificationAction(0, "Acknowledge", pAck));
+        notif.addAction(new NotificationAction(iconCancel, "", pDismiss));
+        //notif.addAction(new NotificationAction(iconSnooze, "", pSnooze));
+        notif.addAction(new NotificationAction(iconCheck, "", pAck));
 
+/*
+        String EXTRA_VOICE_REPLY = "extra_voice_reply";
+        String replyLabel = "Reply Label";
+        String[] replyChoices = new String[] {"Dismiss", "Snooze", "Complete"};
+
+        RemoteInput remoteInput = new RemoteInput.Builder(EXTRA_VOICE_REPLY)
+                .setLabel(replyLabel)
+                .setChoices(replyChoices)
+                .build();
+
+        Intent replyIntent = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+
+        PendingIntent replyPendingIntent = PendingIntent.getActivity(AppUtil.getContext(), 0, replyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Create the reply action and add the remote input
+        notif.wearableAction = new NotificationCompat.Action.Builder(R.drawable.led_icon,
+                        "Label", replyPendingIntent)
+                        .addRemoteInput(remoteInput)
+                        .build();
+*/
         return notif;
     }
 
@@ -528,7 +589,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void deleteAlertTimes() {
-        Preferences.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
+        Prefs.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
     }
 
     public final boolean hasReminderLog() {
@@ -571,7 +632,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void updateVersion() {
-        if(singleTime.hour != -1) {
+        if (singleTime.hour != -1) {
             specificTimeList.clear();
             specificTimeList.add(singleTime.copy());
             singleTime.hour = -1;

@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Neizdevās ielādēt atgādinājuma sarakstu"</string>
+    <string name="app_open_fail">"Neizdevās atvērt lietotni"</string>
+    <string name="error_time_difference">"Nederīgs laiks"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Jums nav atgādinājumi vēl."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Dzēst Atgādinājums"</string>
+    <string name="delete_prompt_content">"Vai tiešām vēlaties dzēst šo atgādinājumu?"</string>
+    <string name="cancel_prompt_title">"Izmest izmaiņas"</string>
+    <string name="cancel_prompt_content">"Vai jūs tiešām vēlaties atmest izmaiņas?"</string>
+    <string name="duplicate_prompt_title">"Dublikāts Atgādinājums"</string>
+    <string name="duplicate_prompt_content">"Vai jūs tiešām vēlaties dublēt šo atgādinājumu?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Izvēlieties Icon"</string>
+    <string name="selectNotification">"Select Paziņojums"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Mūžs"</string>
+    <string name="today">"Šodien"</string>
+    <string name="shown">"Parādīts"</string>
+    <string name="accepted">"Pabeigts"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Virsraksts"</string>
+    <string name="default_content">"Ziņa"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Laika noteikšana"</string>
+    <string name="edit_repeat">"Atkārtot"</string>
+    <string name="edit_notification">"Paziņojums"</string>
+    <string name="timing_specific">"Specifisks"</string>
+    <string name="timing_range">"Diapazons"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Atgādinājumi par dienu"</string>
+    <string name="vibrate_enable">"Vibrēt"</string>
+    <string name="random_enable">"Randomize Times"</string>
+    <string name="high_priority_enable">"Augsta prioritāte"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Krāsa"</string>
+    <string name="sound_set">"Tonis"</string>
+    <string name="sound_none">"Neviens"</string>
+    <string name="icon_set">"Ikona"</string>
+    <string name="icon_color">"Accent Color"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Izmaiņas Nolietotas"</string>
+    <string name="reminder_save">"Izmaiņas Saglabātās"</string>
+    <string name="reminder_delete">"Atgādinājums Svītrots"</string>
+    <string name="reminder_duplicate">"Atgādinājums Dublētais"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Paziņošana atver kopsavilkums"</string>
+    <string name="settings_item_0_secondary">"Noņemiet atzīmi, lai paziņojumu klusi atzīt"</string>
+    <string name="settings_item_1_primary">"Izmantot pielāgotu paziņojumu"</string>
+    <string name="settings_item_1_secondary">"Noņemiet atzīmi atslēgt pasūtījuma paziņojumu un atgriezties pie standarta sistēmai"</string>
+    <string name="settings_item_2_primary">"Izmantot notiekošo paziņojumu"</string>
+    <string name="settings_item_2_secondary">"Noņemiet atzīmi, lai ļautu paziņojums būt dismissible uzsitot to prom. Notiekošās paziņojumus neatbalsta Android Wear"</string>
+    <string name="settings_item_3_primary">"Izmantojiet gaismas paziņošanas tēmu"</string>
+    <string name="settings_item_3_secondary">"Noņemiet atzīmi izmantot tumšo paziņošanas motīvu"</string>
+
+</resources>

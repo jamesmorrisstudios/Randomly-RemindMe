@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"Nie udało się załadować listy z przypomnieniem"</string>
+    <string name="app_open_fail">"Nie udało się otworzyć aplikację"</string>
+    <string name="error_time_difference">"Nieprawidłowy czas"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"Masz jeszcze przypomnienia."</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"Usuń Przypomnienie"</string>
+    <string name="delete_prompt_content">"Czy na pewno chcesz usunąć tę przypomnienie?"</string>
+    <string name="cancel_prompt_title">"Pomiń zmiany"</string>
+    <string name="cancel_prompt_content">"Czy na pewno chcesz odrzucić zmiany?"</string>
+    <string name="duplicate_prompt_title">"Duplikat Przypomnienie"</string>
+    <string name="duplicate_prompt_content">"Czy na pewno chcesz powielać to przypomnienie?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"Wybierz Ikona"</string>
+    <string name="selectNotification">"Wybierz Powiadamianie"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"Życie"</string>
+    <string name="today">"Dzisiaj"</string>
+    <string name="shown">"Pokazano"</string>
+    <string name="accepted">"Zakończony"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"Tytuł"</string>
+    <string name="default_content">"Wiadomość"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"Chronometraż"</string>
+    <string name="edit_repeat">"Powtarzać"</string>
+    <string name="edit_notification">"Zgłoszenie"</string>
+    <string name="timing_specific">"Specyficzny"</string>
+    <string name="timing_range">"Zakres"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"Przypomnienia Na Dzień"</string>
+    <string name="vibrate_enable">"Wibrować"</string>
+    <string name="random_enable">"Randomize Times"</string>
+    <string name="high_priority_enable">"Wysoki Priorytet"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"Kolor"</string>
+    <string name="sound_set">"Ton"</string>
+    <string name="sound_none">"Żaden"</string>
+    <string name="icon_set">"Ikona"</string>
+    <string name="icon_color">"Akcent koloru"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"Zmiany Odrzucone"</string>
+    <string name="reminder_save">"Zmiany zapisane"</string>
+    <string name="reminder_delete">"Przypomnienie Usunięte"</string>
+    <string name="reminder_duplicate">"Przypomnienie Duplicated"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"Zawiadomienie otwiera podsumowanie"</string>
+    <string name="settings_item_0_secondary">"Usuń zaznaczenie pola wyboru, aby potwierdzić zgłoszenie cichu"</string>
+    <string name="settings_item_1_primary">"Użyj własnego powiadomienia"</string>
+    <string name="settings_item_1_secondary">"Usuń zaznaczenie pola wyboru, aby wyłączyć powiadomienia niestandardowy i powrócić do standardowego systemu"</string>
+    <string name="settings_item_2_primary">"Użyj bieżącej powiadomienia"</string>
+    <string name="settings_item_2_secondary">"Usuń zaznaczenie pola wyboru, aby umożliwić zgłoszenie za dismissible przesuwając ją. Bieżące powiadomienia nie są obsługiwane na Android Wear"</string>
+    <string name="settings_item_3_primary">"Użyj motywu światła powiadomienia"</string>
+    <string name="settings_item_3_secondary">"Usuń zaznaczenie pola wyboru, aby użyć motywu ciemnego powiadomienia"</string>
+
+</resources>

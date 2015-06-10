@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Failure Messages -->
+    <string name="data_load_fail">"अनुस्मारक सूची लोड करने में असफल"</string>
+    <string name="app_open_fail">"एप्लिकेशन को खोलने में विफल"</string>
+    <string name="error_time_difference">"अमान्य समय"</string>
+
+    <!-- Main Screen no data -->
+    <string name="main_list_no_data">"आपने अभी तक कोई याद दिलाते है।"</string>
+
+    <!-- Prompts -->
+    <string name="delete_prompt_title">"अनुस्मारक हटाएं"</string>
+    <string name="delete_prompt_content">"आप इस अनुस्मारक हटाना चाहते हैं आप यकीन कर रहे हैं?"</string>
+    <string name="cancel_prompt_title">"परिवर्तनों को निरस्त करें"</string>
+    <string name="cancel_prompt_content">"आप अपने परिवर्तनों को छोड़ना चाहते तुम्हें यकीन है?"</string>
+    <string name="duplicate_prompt_title">"डुप्लिकेट अनुस्मारक"</string>
+    <string name="duplicate_prompt_content">"आप इस अनुस्मारक नकल करना चाहते हैं आप यकीन कर रहे हैं?"</string>
+
+    <!-- Dialogs -->
+    <string name="chooseIcon">"चिह्न चुनें"</string>
+    <string name="selectNotification">"चयन करें अधिसूचना"</string>
+
+    <!-- Confirm tracking -->
+    <string name="lifetime">"जीवनभर"</string>
+    <string name="today">"आज"</string>
+    <string name="shown">"दिखाया"</string>
+    <string name="accepted">"पूरे किए"</string>
+
+    <!-- Title and message defaults (also used as edit headers) -->
+    <string name="default_title">"शीर्षक"</string>
+    <string name="default_content">"संदेश"</string>
+
+    <!-- Edit headers -->
+    <string name="edit_timing">"समय"</string>
+    <string name="edit_repeat">"दोहराएँ"</string>
+    <string name="edit_notification">"अधिसूचना"</string>
+    <string name="timing_specific">"विशिष्ट"</string>
+    <string name="timing_range">"सीमा"</string>
+
+    <!-- Edit items -->
+    <string name="alerts_per_day">"दिन प्रति अनुस्मारक"</string>
+    <string name="vibrate_enable">"कांपना"</string>
+    <string name="random_enable">"Randomize टाइम्स"</string>
+    <string name="high_priority_enable">"उच्च प्राथमिकता"</string>
+    <string name="led_enable">"LED"</string>
+    <string name="led_color">"रंग"</string>
+    <string name="sound_set">"लहजा"</string>
+    <string name="sound_none">"कोई नहीं"</string>
+    <string name="icon_set">"चिह्न"</string>
+    <string name="icon_color">"एक्सेंट रंग"</string>
+
+    <!-- Toast Status messages -->
+    <string name="reminder_cancel">"परिवर्तन छोड़ दिए"</string>
+    <string name="reminder_save">"परिवर्तनों को सहेजा"</string>
+    <string name="reminder_delete">"अनुस्मारक हटाए गए"</string>
+    <string name="reminder_duplicate">"अनुस्मारक दोहराए गए"</string>
+
+    <!-- Settings -->
+    <string name="settings_item_0_primary">"अधिसूचना सारांश खोलता है"</string>
+    <string name="settings_item_0_secondary">"चुपचाप स्वीकार अधिसूचना बनाने के लिए अचयनित"</string>
+    <string name="settings_item_1_primary">"कस्टम अधिसूचना का प्रयोग करें"</string>
+    <string name="settings_item_1_secondary">"कस्टम अधिसूचना को अक्षम और मानक प्रणाली पर वापस लौटने की अचयनित"</string>
+    <string name="settings_item_2_primary">"चल रहे अधिसूचना का प्रयोग करें"</string>
+    <string name="settings_item_2_secondary">"अचयनित अधिसूचना इसे दूर स्वाइप करके dismissible होने की अनुमति देने के लिए। चल रही है सूचनाएं Android Wear पर समर्थित नहीं हैं"</string>
+    <string name="settings_item_3_primary">"प्रकाश अधिसूचना विषय का प्रयोग करें"</string>
+    <string name="settings_item_3_secondary">"अंधेरे अधिसूचना विषय का उपयोग करने अचयनित"</string>
+
+</resources>

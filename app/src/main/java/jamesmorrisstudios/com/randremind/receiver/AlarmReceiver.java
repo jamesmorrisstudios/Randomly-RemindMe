@@ -25,7 +25,7 @@ import android.util.Log;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
-import com.jamesmorrisstudios.utilitieslibrary.preferences.Preferences;
+import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -73,7 +73,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
             status = ReminderList.getInstance().loadDataSync();
         }
 
-        if(status) {
+        if (status) {
             DateTimeItem lastWake = getLastWake();
             TimeItem prevTime;
             //If the last wake was a different day
@@ -134,12 +134,12 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
     private void logLastWake(@NonNull DateTimeItem time) {
         String lastWake = DateTimeItem.encodeToString(time);
-        Preferences.putString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE", lastWake);
+        Prefs.putString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE", lastWake);
     }
 
     @NonNull
     private DateTimeItem getLastWake() {
-        String lastWake = Preferences.getString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE");
+        String lastWake = Prefs.getString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE");
         return DateTimeItem.decodeFromString(lastWake);
     }
 

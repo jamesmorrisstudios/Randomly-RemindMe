@@ -1,24 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <array name="settings_base_array">
+        <!-- Override to disable base settings (immersive mode option) -->
+    </array>
+
     <!-- Override to define your settings -->
     <array name="settings_array">
         <item>@array/settings_item_0</item>
+        <item>@array/settings_item_1</item>
+        <item>@array/settings_item_2</item>
+        <item>@array/settings_item_3</item>
     </array>
 
-    <!-- Item demo for help tutorial -->
+    <!-- Notification click opens app  -->
     <array name="settings_item_0">
-        <item name="type">@bool/settings_item_0_type</item>
+        <item name="defaultValue">@bool/settings_item_0_default_value</item>
         <item name="key">@string/settings_item_0_key</item>
         <item name="primary">@string/settings_item_0_primary</item>
         <item name="secondary">@string/settings_item_0_secondary</item>
     </array>
 
-    <bool name="settings_item_0_type">true</bool>
-    <string name="settings_item_0_key">@string/pref_notification_click_ack</string>
-    <string name="settings_item_0_primary">Notification opens reminder summary</string>
-    <string name="settings_item_0_secondary">Un-check to make notification silently acknowledge</string>
+    <bool name="settings_item_0_default_value">true</bool>
+    <string name="settings_item_0_key" translatable="false">@string/pref_notification_click_ack</string>
+    <string name="pref_notification_click_ack" translatable="false">NOTIFICATION_CLICK_ACK</string>
 
-    <string name="pref_notification_click_ack">NOTIFICATION_CLICK_ACK</string>
+    <!-- Enable to use system notification -->
+    <array name="settings_item_1">
+        <item name="defaultValue">@bool/settings_item_1_default_value</item>
+        <item name="key">@string/settings_item_1_key</item>
+        <item name="primary">@string/settings_item_1_primary</item>
+        <item name="secondary">@string/settings_item_1_secondary</item>
+    </array>
+
+    <bool name="settings_item_1_default_value">true</bool>
+    <string name="settings_item_1_key" translatable="false">@string/pref_notification_custom</string>
+    <string name="pref_notification_custom" translatable="false">NOTIFICATION_CUSTOM</string>
+
+    <!-- Enable to make notification ongoing -->
+    <array name="settings_item_2">
+        <item name="defaultValue">@bool/settings_item_2_default_value</item>
+        <item name="key">@string/settings_item_2_key</item>
+        <item name="primary">@string/settings_item_2_primary</item>
+        <item name="secondary">@string/settings_item_2_secondary</item>
+    </array>
+
+    <bool name="settings_item_2_default_value">false</bool>
+    <string name="settings_item_2_key" translatable="false">@string/pref_notification_ongoing</string>
+    <string name="pref_notification_ongoing" translatable="false">NOTIFICATION_ONGOING</string>
+
+    <!-- Enable to make notifications light theme -->
+    <array name="settings_item_3">
+        <item name="defaultValue">@bool/settings_item_3_default_value</item>
+        <item name="key">@string/settings_item_3_key</item>
+        <item name="primary">@string/settings_item_3_primary</item>
+        <item name="secondary">@string/settings_item_3_secondary</item>
+    </array>
+
+    <bool name="settings_item_3_default_value">true</bool>
+    <string name="settings_item_3_key" translatable="false">@string/pref_notification_theme</string>
+    <string name="pref_notification_theme" translatable="false">NOTIFICATION_THEME</string>
 
 </resources>
