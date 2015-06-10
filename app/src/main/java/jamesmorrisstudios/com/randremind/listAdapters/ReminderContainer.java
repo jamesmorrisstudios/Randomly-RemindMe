@@ -53,4 +53,5 @@ public final class ReminderContainer extends BaseRecycleContainer {
     public ReminderItem getItem() {
         return item;
     }
+
 }
