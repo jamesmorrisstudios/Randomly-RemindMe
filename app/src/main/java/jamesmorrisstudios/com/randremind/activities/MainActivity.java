@@ -120,6 +120,11 @@ public final class MainActivity extends BaseLauncherActivity implements
 
     }
 
+    @Override
+    protected void onBackToHome() {
+
+    }
+
     /**
      * Reminder item clicked
      */
