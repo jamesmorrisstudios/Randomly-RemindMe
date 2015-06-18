@@ -405,7 +405,7 @@ public final class ReminderItem extends BaseRecycleItem {
         if (!enabled) {
             return;
         }
-        if (!daysToRun[getDayOfWeek()]) {
+        if (!daysToRun[UtilsTime.getCurrentDayOfWeek().getIndex()]) {
             return;
         }
         ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
@@ -424,16 +424,6 @@ public final class ReminderItem extends BaseRecycleItem {
         if (time != null) {
             Scheduler.getInstance().scheduleWake(time, uniqueName);
         }
-    }
-
-    /**
-     * @return The current day of the week
-     */
-    private int getDayOfWeek() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        return calendar.get(Calendar.DAY_OF_WEEK) - 1; //These are indexed starting at 1
     }
 
     public final void deleteNextWake() {

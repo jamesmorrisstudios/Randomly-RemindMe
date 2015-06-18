@@ -79,7 +79,6 @@ public final class Scheduler {
     public final void scheduleWake(@NonNull TimeItem time, @NonNull String uniqueName) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         calendar.set(Calendar.HOUR_OF_DAY, time.hour);
         calendar.set(Calendar.MINUTE, time.minute);
         Log.v("SCHEDULER", "Alarm Set For: " + uniqueName + " at " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
@@ -113,7 +112,6 @@ public final class Scheduler {
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
         calendar.add(Calendar.DATE, 1); //Increment to tomorrow
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);

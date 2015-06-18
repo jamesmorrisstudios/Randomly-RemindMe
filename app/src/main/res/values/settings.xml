@@ -19,8 +19,10 @@
         <item name="key">@string/settings_item_0_key</item>
         <item name="primary">@string/settings_item_0_primary</item>
         <item name="secondary">@string/settings_item_0_secondary</item>
+        <item name="restart">@bool/settings_item_0_restart</item>
     </array>
 
+    <bool name="settings_item_0_restart">false</bool>
     <bool name="settings_item_0_default_value">true</bool>
     <string name="settings_item_0_key" translatable="false">@string/pref_notification_click_ack</string>
     <string name="pref_notification_click_ack" translatable="false">NOTIFICATION_CLICK_ACK</string>
@@ -31,8 +33,10 @@
         <item name="key">@string/settings_item_1_key</item>
         <item name="primary">@string/settings_item_1_primary</item>
         <item name="secondary">@string/settings_item_1_secondary</item>
+        <item name="restart">@bool/settings_item_1_restart</item>
     </array>
 
+    <bool name="settings_item_1_restart">false</bool>
     <bool name="settings_item_1_default_value">true</bool>
     <string name="settings_item_1_key" translatable="false">@string/pref_notification_custom</string>
     <string name="pref_notification_custom" translatable="false">NOTIFICATION_CUSTOM</string>
@@ -43,8 +47,10 @@
         <item name="key">@string/settings_item_2_key</item>
         <item name="primary">@string/settings_item_2_primary</item>
         <item name="secondary">@string/settings_item_2_secondary</item>
+        <item name="restart">@bool/settings_item_2_restart</item>
     </array>
 
+    <bool name="settings_item_2_restart">false</bool>
     <bool name="settings_item_2_default_value">false</bool>
     <string name="settings_item_2_key" translatable="false">@string/pref_notification_ongoing</string>
     <string name="pref_notification_ongoing" translatable="false">NOTIFICATION_ONGOING</string>
@@ -55,8 +61,10 @@
         <item name="key">@string/settings_item_3_key</item>
         <item name="primary">@string/settings_item_3_primary</item>
         <item name="secondary">@string/settings_item_3_secondary</item>
+        <item name="restart">@bool/settings_item_3_restart</item>
     </array>
 
+    <bool name="settings_item_3_restart">false</bool>
     <bool name="settings_item_3_default_value">true</bool>
     <string name="settings_item_3_key" translatable="false">@string/pref_notification_theme</string>
     <string name="pref_notification_theme" translatable="false">NOTIFICATION_THEME</string>
