@@ -303,7 +303,7 @@
                         android:id="@+id/timing_single_16"
                         layout="@layout/time_display"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" />
 
                     <include
                         android:id="@+id/timing_single_17"

@@ -40,8 +40,11 @@ import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
 
@@ -402,10 +405,22 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void scheduleNextWake(DateTimeItem now) {
+/*
+        Log.v("TAG", "FirstDayOfWeek: "+UtilsTime.getFirstDayOfWeek().name);
+
+        Log.v("TAG", "Sunday: "+UtilsTime.DayOfWeek.SUNDAY.getIndex());
+        Log.v("TAG", "Monday: "+UtilsTime.DayOfWeek.MONDAY.getIndex());
+        Log.v("TAG", "Tuesday: "+UtilsTime.DayOfWeek.TUESDAY.getIndex());
+        Log.v("TAG", "Wednesday: "+UtilsTime.DayOfWeek.WEDNESDAY.getIndex());
+        Log.v("TAG", "Thursday: "+UtilsTime.DayOfWeek.THURSDAY.getIndex());
+        Log.v("TAG", "Friday: "+UtilsTime.DayOfWeek.FRIDAY.getIndex());
+        Log.v("TAG", "Saturday: "+UtilsTime.DayOfWeek.SATURDAY.getIndex());
+*/
+
         if (!enabled) {
             return;
         }
-        if (!daysToRun[getDayOfWeek()]) {
+        if (!daysToRun[UtilsTime.getCurrentDayOfWeek().getIndex()]) {
             return;
         }
         ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
@@ -424,16 +439,6 @@ public final class ReminderItem extends BaseRecycleItem {
         if (time != null) {
             Scheduler.getInstance().scheduleWake(time, uniqueName);
         }
-    }
-
-    /**
-     * @return The current day of the week
-     */
-    private int getDayOfWeek() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        return calendar.get(Calendar.DAY_OF_WEEK) - 1; //These are indexed starting at 1
     }
 
     public final void deleteNextWake() {
