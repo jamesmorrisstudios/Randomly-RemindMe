@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Wählen Icon"</string>
     <string name="selectNotification">"Mitteilung auswählen"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Lebensdauer"</string>
-    <string name="today">"Heute"</string>
-    <string name="shown">"Gezeigt"</string>
-    <string name="accepted">"Fertiggestellt"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Titel"</string>
-    <string name="default_content">"Nachricht"</string>
+    <string name="default_message">"Nachricht"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"General"</string>
     <string name="edit_timing">"Timing"</string>
     <string name="edit_repeat">"Wiederholung"</string>
     <string name="edit_notification">"Benachrichtigung"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Spezifisch"</string>
     <string name="timing_range">"Angebot"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Farbe"</string>
     <string name="sound_set">"Ton"</string>
-    <string name="sound_none">"Keiner"</string>
     <string name="icon_set">"Symbol"</string>
     <string name="icon_color">"Akzentfarbe"</string>
+
+    <string name="in_order">"In Ordnung"</string>
+    <string name="random">"Zufällig"</string>
+    <string name="num_messages">"Anzahl der Nachrichten"</string>
+    <string name="edit_messages">"Nachrichten bearbeiten"</string>
+    <string name="edit_times">"Bearbeiten Zeiten"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Änderungen verworfen"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Deaktivieren Sie die Option, damit die Benachrichtigung dismissible von swiping es weg zu sein. Laufende Benachrichtigungen nicht auf Android Wear unterstützt"</string>
     <string name="settings_item_3_primary">"Verwenden Sie leichte Benachrichtigung Thema"</string>
     <string name="settings_item_3_secondary">"Deaktivieren Sie die Option, um dunkle Benachrichtigung Thema verwenden"</string>
+    <string name="settings_item_4_primary">"Erster Tag der Woche"</string>
 
 </resources>

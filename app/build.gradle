@@ -17,16 +17,13 @@
 apply plugin: 'com.android.application'
 
 repositories {
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
     mavenLocal()
     mavenCentral()
 }
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "23.0.0 rc2"
 
     productFlavors {
         googlePlay {
@@ -42,22 +39,38 @@ android {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 18
-        versionName "1.0.8"
+        versionCode 21
+        versionName "1.1.1"
     }
+
+    signingConfigs {
+        debug
+        release
+    }
+
     buildTypes {
+        signedDebug {
+            minifyEnabled false
+            jniDebuggable true
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            zipAlignEnabled false
+        }
         release {
             minifyEnabled false
+            jniDebuggable false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
         }
     }
 }
 
+apply from: file("../../../keystore/signing-rand-remind.gradle")
+
 dependencies {
     compile 'com.jamesmorrisstudios:utilitieslibrary:1.1'
     compile 'com.jamesmorrisstudios:appbaselibrary:1.1'
-    compile 'com.scottyab:aes-crypto:0.0.2-SNAPSHOT'
-    compile('com.scottyab:secure-preferences-lib:0.1.0') {
-        provided 'com.scottyab:aes-crypto:0.0.2-SNAPSHOT'
-    }
 }

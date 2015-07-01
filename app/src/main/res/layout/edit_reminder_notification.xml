@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/notificationContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <!-- Sound picker -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="4dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:text="@string/sound_set"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+            <TextView
+                android:id="@+id/notificationSound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+        </LinearLayout>
+
+        <!-- Vibrate and priority -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/notification_vibrate_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="@string/vibrate_enable"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/notification_high_priority_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/high_priority_enable"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+        </LinearLayout>
+
+        <!-- LED -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/notification_led_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="@string/led_enable"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:text="@string/led_color"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+            <View
+                android:id="@+id/notification_led_color"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/circle_led" />
+
+        </LinearLayout>
+
+        <!-- Icon picker -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="4dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:gravity="center"
+                android:text="@string/icon_set"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+            <RelativeLayout
+                android:id="@+id/notificationIconTop"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle">
+
+                <ImageView
+                    android:id="@+id/notificationIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_centerInParent="true"
+                    android:scaleType="fitCenter" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="8dp"
+                android:text="@string/icon_color"
+                android:textColor="@color/textDarkMain"
+                android:textSize="@dimen/item_size" />
+
+            <View
+                android:id="@+id/notification_accent_color"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/circle_led" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

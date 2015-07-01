@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Scegli icona"</string>
     <string name="selectNotification">"Seleziona notifica"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Tutta La Vita"</string>
-    <string name="today">"Oggi"</string>
-    <string name="shown">"Mostrato"</string>
-    <string name="accepted">"Completato"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Titolo"</string>
-    <string name="default_content">"Messaggio"</string>
+    <string name="default_message">"Messaggio"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Generale"</string>
     <string name="edit_timing">"Sincronizzazione"</string>
     <string name="edit_repeat">"Ripetizione"</string>
     <string name="edit_notification">"Notifica"</string>
+    <string name="edit_alarm">"Allarme"</string>
     <string name="timing_specific">"Specifico"</string>
     <string name="timing_range">"Gamma"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Colore"</string>
     <string name="sound_set">"Tono"</string>
-    <string name="sound_none">"Nessuno"</string>
     <string name="icon_set">"Icona"</string>
     <string name="icon_color">"Risalto colore"</string>
+
+    <string name="in_order">"In Ordine"</string>
+    <string name="random">"Casuale"</string>
+    <string name="num_messages">"Numero di messaggi"</string>
+    <string name="edit_messages">"Modifica dei messaggi"</string>
+    <string name="edit_times">"Modifica Volte"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Cambiamenti scartati"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Deselezionare per consentire la notifica di essere dismissible facendo scorrere via. Le notifiche in corso non sono supportati su Android Wear"</string>
     <string name="settings_item_3_primary">"Utilizzare la luce tema di notifica"</string>
     <string name="settings_item_3_secondary">"Deselezionare utilizzare tema notifica scuro"</string>
+    <string name="settings_item_4_primary">"Primo giorno della settimana"</string>
 
 </resources>

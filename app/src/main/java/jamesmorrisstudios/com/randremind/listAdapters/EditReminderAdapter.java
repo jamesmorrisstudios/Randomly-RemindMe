@@ -1,5 +1,6 @@
 package jamesmorrisstudios.com.randremind.listAdapters;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleNoHeaderAdapter;
@@ -17,7 +18,7 @@ public class EditReminderAdapter extends BaseRecycleNoHeaderAdapter {
     }
 
     @Override
-    protected BaseRecycleNoHeaderViewHolder getViewHolder(View view, BaseRecycleNoHeaderViewHolder.cardClickListener cardClickListener) {
+    protected BaseRecycleNoHeaderViewHolder getViewHolder(@NonNull View view, BaseRecycleNoHeaderViewHolder.cardClickListener cardClickListener) {
         return new EditReminderViewHolder(view, cardClickListener);
     }
 

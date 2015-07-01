@@ -41,7 +41,6 @@ import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Random;
 import java.util.UUID;
 
@@ -55,6 +54,12 @@ import jamesmorrisstudios.com.randremind.util.IconUtil;
  * Created by James on 4/20/2015.
  */
 public final class ReminderItem extends BaseRecycleItem {
+    //Content
+    @SerializedName("content") //Depreciated
+    public String content; //Depreciated
+
+
+
     //Unique data
     @SerializedName("uniqueName")
     public String uniqueName;
@@ -63,16 +68,16 @@ public final class ReminderItem extends BaseRecycleItem {
     public String title;
     @SerializedName("enabled")
     public boolean enabled;
-    //Content
-    @SerializedName("content")
-    public String content;
+    //messageList (replaces content)
+    @SerializedName("messageList")
+    public ArrayList<String> messageList = new ArrayList<>();
+    @SerializedName("messageInOrder")
+    public boolean messageInOrder = false;
     //Timing
     @SerializedName("startTime")
     public TimeItem startTime;
     @SerializedName("endTime")
     public TimeItem endTime;
-    @SerializedName("singleTime")
-    public TimeItem singleTime;
     @SerializedName("specificTimeList")
     public ArrayList<TimeItem> specificTimeList;
     @SerializedName("numberPerDay")
@@ -85,7 +90,7 @@ public final class ReminderItem extends BaseRecycleItem {
     @SerializedName("repeat")
     public boolean repeat = true;
     @SerializedName("daysToRun")
-    public boolean[] daysToRun; //Sunday -> Saturday
+    public boolean[] daysToRun;
     //Notifications
     @SerializedName("notificationToneString")
     public String notificationTone;
@@ -118,14 +123,16 @@ public final class ReminderItem extends BaseRecycleItem {
         this.title = "";
         this.enabled = true;
         //Content
-        this.content = "";
+        this.content = ""; //Depreciated
+        //Messages
+        this.messageList = new ArrayList<>();
+        this.messageInOrder = false;
         //Timing
         this.startTime = new TimeItem(9, 0);
         this.endTime = new TimeItem(20, 0);
         this.numberPerDay = 6;
         this.randomDistribution = true;
         this.rangeTiming = true;
-        this.singleTime = new TimeItem(-1, -1);
         this.specificTimeList = new ArrayList<>();
         this.specificTimeList.add(new TimeItem(9, 0));
         //Repeat
@@ -133,7 +140,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.daysToRun = new boolean[]{true, true, true, true, true, true, true};
         //Notifications
         this.notificationTone = null;
-        this.notificationToneName = AppUtil.getContext().getString(R.string.sound_none);
+        this.notificationToneName = AppUtil.getContext().getString(R.string.none);
         this.notificationVibrate = false;
         this.notificationLED = true;
         this.notificationLEDColor = Color.BLUE;
@@ -155,7 +162,8 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param notificationVibrate  True to enable vibrate with the notification
      */
     public ReminderItem(@NonNull String uniqueName, @NonNull String title, @NonNull String content,
-                        boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime, @NonNull TimeItem singleTime,
+                        @NonNull ArrayList<String> messageList, boolean messageInOrder,
+                        boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime,
                         @NonNull ArrayList<TimeItem> specificTimeList,
                         int numberPerDay, boolean randomDistribution, boolean rangeTiming, boolean repeat,
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
@@ -164,10 +172,11 @@ public final class ReminderItem extends BaseRecycleItem {
         this.uniqueName = uniqueName;
         this.title = title;
         this.content = content;
+        this.messageList = messageList;
+        this.messageInOrder = messageInOrder;
         this.enabled = enabled;
         this.startTime = startTime.copy();
         this.endTime = endTime;
-        this.singleTime = singleTime;
         this.specificTimeList = specificTimeList;
         this.numberPerDay = numberPerDay;
         this.randomDistribution = randomDistribution;
@@ -192,6 +201,14 @@ public final class ReminderItem extends BaseRecycleItem {
     @NonNull
     public static String getUniqueName() {
         return UUID.randomUUID().toString();
+    }
+
+    public final void setCurMessage(int curMessage) {
+        Prefs.putInt(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, curMessage);
+    }
+
+    public final int getCurMessage() {
+        return Prefs.getInt(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, 0);
     }
 
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
@@ -282,7 +299,8 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     @NonNull
     public final ReminderItem copy() {
-        return new ReminderItem(uniqueName, title, content, enabled, startTime, endTime, singleTime, specificTimeList, numberPerDay,
+        return new ReminderItem(uniqueName, title, content, messageList, messageInOrder,
+                enabled, startTime, endTime, specificTimeList, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
                 notificationIcon, notificationAccentColor);
@@ -293,7 +311,8 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     @NonNull
     public final ReminderItem duplicate() {
-        return new ReminderItem(getUniqueName(), title, content, enabled, startTime, endTime, singleTime, specificTimeList, numberPerDay,
+        return new ReminderItem(getUniqueName(), title, content, messageList, messageInOrder,
+                enabled, startTime, endTime, specificTimeList, numberPerDay,
                 randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
                 notificationIcon, notificationAccentColor);
@@ -402,10 +421,22 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void scheduleNextWake(DateTimeItem now) {
+/*
+        Log.v("TAG", "FirstDayOfWeek: "+UtilsTime.getFirstDayOfWeek().name);
+
+        Log.v("TAG", "Sunday: "+UtilsTime.DayOfWeek.SUNDAY.getIndex());
+        Log.v("TAG", "Monday: "+UtilsTime.DayOfWeek.MONDAY.getIndex());
+        Log.v("TAG", "Tuesday: "+UtilsTime.DayOfWeek.TUESDAY.getIndex());
+        Log.v("TAG", "Wednesday: "+UtilsTime.DayOfWeek.WEDNESDAY.getIndex());
+        Log.v("TAG", "Thursday: "+UtilsTime.DayOfWeek.THURSDAY.getIndex());
+        Log.v("TAG", "Friday: "+UtilsTime.DayOfWeek.FRIDAY.getIndex());
+        Log.v("TAG", "Saturday: "+UtilsTime.DayOfWeek.SATURDAY.getIndex());
+*/
+
         if (!enabled) {
             return;
         }
-        if (!daysToRun[getDayOfWeek()]) {
+        if (!daysToRun[UtilsTime.getCurrentDayOfWeek().getIndex()]) {
             return;
         }
         ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
@@ -426,16 +457,6 @@ public final class ReminderItem extends BaseRecycleItem {
         }
     }
 
-    /**
-     * @return The current day of the week
-     */
-    private int getDayOfWeek() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.setFirstDayOfWeek(Calendar.SUNDAY);
-        return calendar.get(Calendar.DAY_OF_WEEK) - 1; //These are indexed starting at 1
-    }
-
     public final void deleteNextWake() {
         Scheduler.getInstance().cancelWake(uniqueName);
     }
@@ -452,9 +473,22 @@ public final class ReminderItem extends BaseRecycleItem {
             title = AppUtil.getContext().getString(R.string.default_title);
         }
 
-        String content = this.content;
-        if (content == null || content.isEmpty()) {
-            content = AppUtil.getContext().getString(R.string.default_content);
+        String content = null;
+        if(messageInOrder) {
+            int curMessage = getCurMessage();
+            if(curMessage >= messageList.size()) {
+                curMessage = 0;
+            }
+            content = messageList.get(curMessage);
+            //if(!preview) {
+                setCurMessage(curMessage+1);
+            //}
+        } else {
+            Random rand = new Random();
+            content = messageList.get(rand.nextInt(messageList.size()));
+        }
+        if(content == null) {
+            content = "";
         }
 
         NotificationContent notif;
@@ -632,11 +666,9 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void updateVersion() {
-        if (singleTime.hour != -1) {
-            specificTimeList.clear();
-            specificTimeList.add(singleTime.copy());
-            singleTime.hour = -1;
-            singleTime.minute = -1;
+        if(!content.isEmpty() || messageList.isEmpty()) {
+            messageList.add(content);
+            content = "";
         }
     }
 

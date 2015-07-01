@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Ștergeți Memento"</string>
     <string name="delete_prompt_content">"Sigur doriți să ștergeți acest memento?"</string>
-    <string name="cancel_prompt_title">"Renunțați Modificări"</string>
+    <string name="cancel_prompt_title">"Nu Salva Modificarile"</string>
     <string name="cancel_prompt_content">"Ești sigur că doriți să renunțați la modificări?"</string>
     <string name="duplicate_prompt_title">"Duplicate Reminder"</string>
     <string name="duplicate_prompt_content">"Ești sigur că vrei să duplicat acest memento?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Alege Icon"</string>
     <string name="selectNotification">"Selectați Notificare"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Viata"</string>
-    <string name="today">"Astăzi"</string>
-    <string name="shown">"Afișate"</string>
-    <string name="accepted">"Terminat"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Titlu"</string>
-    <string name="default_content">"Mesaj"</string>
+    <string name="default_message">"Mesaj"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"General"</string>
     <string name="edit_timing">"Sincronizare"</string>
     <string name="edit_repeat">"Repeta"</string>
     <string name="edit_notification">"Notificare"</string>
+    <string name="edit_alarm">"Alarmă"</string>
     <string name="timing_specific">"Specific"</string>
     <string name="timing_range">"Gamă"</string>
 
@@ -41,13 +37,18 @@
     <string name="alerts_per_day">"Memento pe zi"</string>
     <string name="vibrate_enable">"Vibra"</string>
     <string name="random_enable">"Randomize Times"</string>
-    <string name="high_priority_enable">"High Priority"</string>
+    <string name="high_priority_enable">"Prioritate Ridicată"</string>
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Culoare"</string>
     <string name="sound_set">"Ton"</string>
-    <string name="sound_none">"Nici unul"</string>
     <string name="icon_set">"Icoană"</string>
     <string name="icon_color">"Accent culoare"</string>
+
+    <string name="in_order">"În Ordine"</string>
+    <string name="random">"Întâmplător"</string>
+    <string name="num_messages">"Numărul de mesaje"</string>
+    <string name="edit_messages">"Editați Mesaje"</string>
+    <string name="edit_times">"Edit Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Modificări casate"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Debifați pentru a permite notificarea să fie dismissible trecând să degajeze. Notificările în curs nu sunt acceptate pe Android Wear"</string>
     <string name="settings_item_3_primary">"Utilizați tema notificare lumină"</string>
     <string name="settings_item_3_secondary">"Debifați pentru a utiliza tema notificare închis"</string>
+    <string name="settings_item_4_primary">"Prima zi a săptămânii"</string>
 
 </resources>

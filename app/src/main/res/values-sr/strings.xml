@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Обриши подсетник"</string>
     <string name="delete_prompt_content">"Да ли сте сигурни да желите да избришете овај подсетник?"</string>
-    <string name="cancel_prompt_title">"Одбаци промене"</string>
+    <string name="cancel_prompt_title">"Одбаците Промене"</string>
     <string name="cancel_prompt_content">"Да ли сте сигурни да желите да одбаците своје измене?"</string>
     <string name="duplicate_prompt_title">"Дупликат Подсетник"</string>
     <string name="duplicate_prompt_content">"Да ли сте сигурни да желите да дуплирати овај подсетник?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Изаберите Ицон"</string>
     <string name="selectNotification">"Избор Обавештење"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Живот"</string>
-    <string name="today">"Данас"</string>
-    <string name="shown">"Приказан"</string>
-    <string name="accepted">"Завршен"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Наслов"</string>
-    <string name="default_content">"Порука"</string>
+    <string name="default_message">"Порука"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Генерал"</string>
     <string name="edit_timing">"Тајминг"</string>
     <string name="edit_repeat">"Понављање"</string>
     <string name="edit_notification">"Обавештење"</string>
+    <string name="edit_alarm">"Аларм"</string>
     <string name="timing_specific">"Специфичан"</string>
     <string name="timing_range">"Домет"</string>
 
@@ -41,13 +37,18 @@
     <string name="alerts_per_day">"Подсетник Пер Даи"</string>
     <string name="vibrate_enable">"Вибрирати"</string>
     <string name="random_enable">"Рандомизе Тајмс"</string>
-    <string name="high_priority_enable">"Високи приоритет"</string>
+    <string name="high_priority_enable">"Велика Важност"</string>
     <string name="led_enable">"ЛЕД"</string>
     <string name="led_color">"Боја"</string>
     <string name="sound_set">"Тон"</string>
-    <string name="sound_none">"Ниједан"</string>
     <string name="icon_set">"Икона"</string>
     <string name="icon_color">"Акцент боје"</string>
+
+    <string name="in_order">"У Реду"</string>
+    <string name="random">"Случајан"</string>
+    <string name="num_messages">"Број порука"</string>
+    <string name="edit_messages">"Измена поруке"</string>
+    <string name="edit_times">"Едит Тајмс"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Промене Дисцардед"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Уклоните ознаку да би обавештење да се дисмиссибле једноставним проласком га. Текуће обавештења нису подржани на Андроид Веар"</string>
     <string name="settings_item_3_primary">"Користи светло обавештења тему"</string>
     <string name="settings_item_3_secondary">"Искључи да користите тамне обавештења тему"</string>
+    <string name="settings_item_4_primary">"Први дан у недељи"</string>
 
 </resources>

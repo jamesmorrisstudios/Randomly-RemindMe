@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Pilih Icon"</string>
     <string name="selectNotification">"Pilih Pemberitahuan"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Seumur Hidup"</string>
-    <string name="today">"Hari ini"</string>
-    <string name="shown">"Tampil"</string>
-    <string name="accepted">"Selesai"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Judul"</string>
-    <string name="default_content">"Pesan"</string>
+    <string name="default_message">"Pesan"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Umum"</string>
     <string name="edit_timing">"Pemilihan waktu"</string>
     <string name="edit_repeat">"Ulangi"</string>
     <string name="edit_notification">"Pemberitahuan"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Spesifik"</string>
     <string name="timing_range">"Jarak"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Warna"</string>
     <string name="sound_set">"Nada"</string>
-    <string name="sound_none">"Tak satupun"</string>
     <string name="icon_set">"Icon"</string>
     <string name="icon_color">"Accent Warna"</string>
+
+    <string name="in_order">"Dalam Urutan"</string>
+    <string name="random">"Acak"</string>
+    <string name="num_messages">"Jumlah Pesan"</string>
+    <string name="edit_messages">"Mengedit Pesan"</string>
+    <string name="edit_times">"Mengedit Waktu"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Perubahan Dibuang"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Hapus tanda centang untuk memungkinkan pemberitahuan untuk menjadi dismissible dengan menggesekkan itu pergi. Pemberitahuan yang sedang berlangsung tidak didukung pada Android Wear"</string>
     <string name="settings_item_3_primary">"Menggunakan tema pemberitahuan cahaya"</string>
     <string name="settings_item_3_secondary">"Hapus tanda centang untuk menggunakan pemberitahuan tema dark"</string>
+    <string name="settings_item_4_primary">"Hari pertama dalam seminggu"</string>
 
 </resources>

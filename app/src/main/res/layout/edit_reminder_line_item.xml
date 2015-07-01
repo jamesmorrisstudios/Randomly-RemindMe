@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,62 +27,26 @@
             android:singleLine="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/toggle_expand"
             android:textSize="20sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="30dp" />
 
-        <ViewFlipper
-            android:id="@+id/view_flipper"
+        <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
+            android:id="@+id/toggle_expand"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_expand_less_white_24dp"
+            android:tint="@color/textDarkSecondary" />
+
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_below="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!-- general -->
-            <TextView
-                android:id="@+id/general"
-                android:singleLine="false"
-                android:textSize="18sp"
-                android:text="This is the category content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- message -->
-            <TextView
-                android:id="@+id/message"
-                android:singleLine="false"
-                android:textSize="18sp"
-                android:text="This is the category content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- timing -->
-            <TextView
-                android:id="@+id/timing"
-                android:singleLine="false"
-                android:textSize="18sp"
-                android:text="This is the category content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- repeat -->
-            <TextView
-                android:id="@+id/repeat"
-                android:singleLine="false"
-                android:textSize="18sp"
-                android:text="This is the category content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- notification and alarm -->
-            <TextView
-                android:id="@+id/notification_alarm"
-                android:singleLine="false"
-                android:textSize="18sp"
-                android:text="This is the category content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </ViewFlipper>
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

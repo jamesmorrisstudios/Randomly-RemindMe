@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Slett Påminnelse"</string>
     <string name="delete_prompt_content">"Er du sikker på at du vil slette denne påminnelsen?"</string>
-    <string name="cancel_prompt_title">"Forkast endringer"</string>
+    <string name="cancel_prompt_title">"Forkaste Endringer"</string>
     <string name="cancel_prompt_content">"Er du sikker på at du vil forkaste endringene?"</string>
     <string name="duplicate_prompt_title">"Duplicate Påminnelse"</string>
     <string name="duplicate_prompt_content">"Er du sikker på at du vil duplisere denne påminnelsen?"</string>
@@ -20,22 +20,18 @@
     <string name="chooseIcon">"Velg Ikon"</string>
     <string name="selectNotification">"Velg Notification"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Livstid"</string>
-    <string name="today">"I dag"</string>
-    <string name="shown">"Vist"</string>
-    <string name="accepted">"Fullført"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Tittel"</string>
-    <string name="default_content">"Beskjed"</string>
+    <string name="default_message">"Beskjed"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Generelt"</string>
     <string name="edit_timing">"Timing"</string>
     <string name="edit_repeat">"Gjenta"</string>
     <string name="edit_notification">"Varsling"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Spesifikk"</string>
-    <string name="timing_range">"Range"</string>
+    <string name="timing_range">"Område"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Påminnelser per dag"</string>
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Farge"</string>
     <string name="sound_set">"Tone"</string>
-    <string name="sound_none">"None"</string>
     <string name="icon_set">"Ikon"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"I Orden"</string>
+    <string name="random">"Tilfeldig"</string>
+    <string name="num_messages">"Antall meldinger"</string>
+    <string name="edit_messages">"Rediger Meldinger"</string>
+    <string name="edit_times">"Edit Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Endringer Forkastet"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Fjern haken ved å tillate meldingen for å være dismissible ved å dra den bort. Løpende meldinger støttes ikke på Android Wear"</string>
     <string name="settings_item_3_primary">"Bruk lys varsling tema"</string>
     <string name="settings_item_3_secondary">"Fjern haken ved å bruke mørk varsling tema"</string>
+    <string name="settings_item_4_primary">"Første dag i uken"</string>
 
 </resources>

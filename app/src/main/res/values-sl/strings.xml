@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Izberite ikono"</string>
     <string name="selectNotification">"Izberite Obvestilo"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Lifetime"</string>
-    <string name="today">"Danes"</string>
-    <string name="shown">"Prikazano"</string>
-    <string name="accepted">"Dopolnil"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Naslov"</string>
-    <string name="default_content">"Sporočilo"</string>
+    <string name="default_message">"Sporočilo"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Splošno"</string>
     <string name="edit_timing">"Timing"</string>
     <string name="edit_repeat">"Ponovite"</string>
     <string name="edit_notification">"Obvestilo"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Specifična"</string>
     <string name="timing_range">"Razpon"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Color"</string>
     <string name="sound_set">"Tone"</string>
-    <string name="sound_none">"Noben"</string>
     <string name="icon_set">"Icon"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"V odredbi"</string>
+    <string name="random">"Random"</string>
+    <string name="num_messages">"Število sporočil"</string>
+    <string name="edit_messages">"Uredi Sporočila"</string>
+    <string name="edit_times">"Uredi Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Spremembe Zavržena"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Počistite omogočiti obvestilo, da bo dismissible ga povlečete proč. Tekoča obvestila niso podprte na Android Wear"</string>
     <string name="settings_item_3_primary">"Uporabite temo svetlobe obveščanja"</string>
     <string name="settings_item_3_secondary">"Počistite uporabiti temo temno obveščanja"</string>
+    <string name="settings_item_4_primary">"Prvi dan v tednu"</string>
 
 </resources>

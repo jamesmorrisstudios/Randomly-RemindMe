@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Ištrinti priminimas"</string>
     <string name="delete_prompt_content">"Ar tikrai norite ištrinti šį priminimą?"</string>
-    <string name="cancel_prompt_title">"Atmesti pakeitimai"</string>
+    <string name="cancel_prompt_title">"Atsisakyti Pakeitimų"</string>
     <string name="cancel_prompt_content">"Ar tikrai norite išmesti pakeitimus?"</string>
     <string name="duplicate_prompt_title">"Dubliuoti priminimas"</string>
     <string name="duplicate_prompt_content">"Ar tikrai norite dubliuoti šią priminimą?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Pasirinkite piktogramą"</string>
     <string name="selectNotification">"Pasirinkite Pranešimas"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Gyvenimas"</string>
-    <string name="today">"Šiandien"</string>
-    <string name="shown">"Rodoma"</string>
-    <string name="accepted">"Užbaigtas"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Pavadinimas"</string>
-    <string name="default_content">"Žinutė"</string>
+    <string name="default_message">"Žinutė"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Bendras"</string>
     <string name="edit_timing">"Laikas"</string>
     <string name="edit_repeat">"Pakartojimas"</string>
     <string name="edit_notification">"Pranešimas"</string>
+    <string name="edit_alarm">"Žadintuvas"</string>
     <string name="timing_specific">"Specifinis"</string>
     <string name="timing_range">"Diapazonas"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Spalva"</string>
     <string name="sound_set">"Tonas"</string>
-    <string name="sound_none">"Niekas"</string>
     <string name="icon_set">"Piktograma"</string>
     <string name="icon_color">"Accent spalva"</string>
+
+    <string name="in_order">"Siekiant"</string>
+    <string name="random">"Atsitiktinis"</string>
+    <string name="num_messages">"Taškų Žinutės"</string>
+    <string name="edit_messages">"Redaguoti Žinutės"</string>
+    <string name="edit_times">"Redaguoti Times \""</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Pokyčiai Nebenaudojama"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Nuimkite leisti pranešimas turi būti dismissible swiping jį. Vykdomi pranešimai nepalaiko Android drabužiai"</string>
     <string name="settings_item_3_primary">"Naudokite šviesos pranešimo tema"</string>
     <string name="settings_item_3_secondary">"Nuimkite naudoti tamsiai pranešimo tema"</string>
+    <string name="settings_item_4_primary">"Pirma savaitės diena"</string>
 
 </resources>

@@ -20,20 +20,16 @@
     <string name="chooseIcon">"चिह्न चुनें"</string>
     <string name="selectNotification">"चयन करें अधिसूचना"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"जीवनभर"</string>
-    <string name="today">"आज"</string>
-    <string name="shown">"दिखाया"</string>
-    <string name="accepted">"पूरे किए"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"शीर्षक"</string>
-    <string name="default_content">"संदेश"</string>
+    <string name="default_message">"संदेश"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"सामान्य"</string>
     <string name="edit_timing">"समय"</string>
     <string name="edit_repeat">"दोहराएँ"</string>
     <string name="edit_notification">"अधिसूचना"</string>
+    <string name="edit_alarm">"अलार्म"</string>
     <string name="timing_specific">"विशिष्ट"</string>
     <string name="timing_range">"सीमा"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"रंग"</string>
     <string name="sound_set">"लहजा"</string>
-    <string name="sound_none">"कोई नहीं"</string>
     <string name="icon_set">"चिह्न"</string>
     <string name="icon_color">"एक्सेंट रंग"</string>
+
+    <string name="in_order">"क्रम में"</string>
+    <string name="random">"बिना सोचे समझे"</string>
+    <string name="num_messages">"संदेशों की संख्या"</string>
+    <string name="edit_messages">"संपादित करें संदेश"</string>
+    <string name="edit_times">"संपादित करें टाइम्स"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"परिवर्तन छोड़ दिए"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"अचयनित अधिसूचना इसे दूर स्वाइप करके dismissible होने की अनुमति देने के लिए। चल रही है सूचनाएं Android Wear पर समर्थित नहीं हैं"</string>
     <string name="settings_item_3_primary">"प्रकाश अधिसूचना विषय का प्रयोग करें"</string>
     <string name="settings_item_3_secondary">"अंधेरे अधिसूचना विषय का उपयोग करने अचयनित"</string>
+    <string name="settings_item_4_primary">"सप्ताह का पहला दिन"</string>
 
 </resources>

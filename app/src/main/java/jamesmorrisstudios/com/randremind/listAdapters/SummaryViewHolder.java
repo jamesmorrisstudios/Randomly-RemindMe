@@ -186,7 +186,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         if (day.lifetime) {
             date.setText(AppUtil.getContext().getString(R.string.lifetime));
             float percentage = (100.0f * day.timesClickedLifetime) / day.timesShownLifetime;
-            percent.setText(Integer.toString(Math.round(percentage)) + AppUtil.getContext().getResources().getString(R.string.percentSign));
+            percent.setText(Integer.toString(Math.round(percentage)) + AppUtil.getContext().getResources().getString(R.string.percent_char));
             percentImage.setMax(day.timesShownLifetime);
             percentImage.setProgress(day.timesClickedLifetime);
             show.setText(Integer.toString(day.timesShownLifetime));
@@ -198,7 +198,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
                 date.setText(UtilsTime.getDateFormatted(day.date));
             }
             float percentage = (100.0f * day.timesClicked.size()) / day.timesShown.size();
-            percent.setText(Integer.toString(Math.round(percentage)) + AppUtil.getContext().getResources().getString(R.string.percentSign));
+            percent.setText(Integer.toString(Math.round(percentage)) + AppUtil.getContext().getResources().getString(R.string.percent_char));
             percentImage.setMax(day.timesShown.size());
             percentImage.setProgress(day.timesClicked.size());
             show.setText(Integer.toString(day.timesShown.size()));

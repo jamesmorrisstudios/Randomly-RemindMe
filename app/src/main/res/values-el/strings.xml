@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Επιλέξτε Icon"</string>
     <string name="selectNotification">"Επιλέξτε Κοινοποίηση"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Διάρκεια Ζωής"</string>
-    <string name="today">"Σήμερα"</string>
-    <string name="shown">"Ορατή"</string>
-    <string name="accepted">"Ολοκληρώθηκε"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Τίτλος"</string>
-    <string name="default_content">"Μήνυμα"</string>
+    <string name="default_message">"Μήνυμα"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Γενικός"</string>
     <string name="edit_timing">"Συγχρονισμός"</string>
     <string name="edit_repeat">"Επαναλαμβάνω"</string>
     <string name="edit_notification">"Κοινοποίηση"</string>
+    <string name="edit_alarm">"Συναγερμός"</string>
     <string name="timing_specific">"Συγκεκριμένος"</string>
     <string name="timing_range">"Σειρά"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Χρώμα"</string>
     <string name="sound_set">"Τόνος"</string>
-    <string name="sound_none">"Κανένας"</string>
     <string name="icon_set">"Icon"</string>
     <string name="icon_color">"Χρώμα Accent"</string>
+
+    <string name="in_order">"Για Να"</string>
+    <string name="random">"Τυχαίος"</string>
+    <string name="num_messages">"Αριθμός μηνυμάτων"</string>
+    <string name="edit_messages">"Επεξεργασία Μηνύματα"</string>
+    <string name="edit_times">"Επεξεργασία Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Αλλαγές Απερρίφθη"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Καταργήστε την επιλογή για να επιτραπεί η κοινοποίηση είναι αποκρυφτούν περνώντας μακριά. Συνεχίζεται κοινοποιήσεις δεν υποστηρίζονται στο Android Ρούχα"</string>
     <string name="settings_item_3_primary">"Χρησιμοποιήστε το φως το θέμα κοινοποίησης"</string>
     <string name="settings_item_3_secondary">"Καταργήστε την επιλογή για να χρησιμοποιήσετε σκοτεινό θέμα κοινοποίησης"</string>
+    <string name="settings_item_4_primary">"Πρώτη ημέρα της εβδομάδας"</string>
 
 </resources>

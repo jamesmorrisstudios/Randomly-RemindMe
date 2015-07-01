@@ -145,6 +145,11 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
     @Override
     protected void startDataLoad(boolean forceRefresh) {
+        if(!ReminderList.getInstance().hasCurrentReminder()) {
+            utilListener.goBackFromFragment();
+            return;
+        }
+
         applyItems();
         ReminderItem item = ReminderList.getInstance().getCurrentReminder();
         if (item != null) {
