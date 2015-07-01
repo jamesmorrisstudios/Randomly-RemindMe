@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Verwijder Herinnering"</string>
     <string name="delete_prompt_content">"Bent u zeker dat u deze herinnering verwijderen?"</string>
-    <string name="cancel_prompt_title">"Wijzigingen negeren"</string>
+    <string name="cancel_prompt_title">"Veranderingen Ongedaan Maken"</string>
     <string name="cancel_prompt_content">"Bent u zeker dat u uw wijzigingen weggooien?"</string>
     <string name="duplicate_prompt_title">"Duplicate Herinnering"</string>
     <string name="duplicate_prompt_content">"Bent u zeker dat u deze herinnering dupliceren?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Kies Icoon"</string>
     <string name="selectNotification">"Select Notification"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Levenslang"</string>
-    <string name="today">"Vandaag"</string>
-    <string name="shown">"Getoond"</string>
-    <string name="accepted">"Voltooid"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Titel"</string>
-    <string name="default_content">"Bericht"</string>
+    <string name="default_message">"Bericht"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Algemeen"</string>
     <string name="edit_timing">"Timing"</string>
     <string name="edit_repeat">"Herhalen"</string>
     <string name="edit_notification">"Kennisgeving"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Specifiek"</string>
     <string name="timing_range">"Reeks"</string>
 
@@ -41,13 +37,18 @@
     <string name="alerts_per_day">"Herinneringen per dag"</string>
     <string name="vibrate_enable">"Trillen"</string>
     <string name="random_enable">"Willekeurig Times"</string>
-    <string name="high_priority_enable">"Hoog In Het Vaandel"</string>
-    <string name="led_enable">"LED-"</string>
+    <string name="high_priority_enable">"Hoge Prioriteit"</string>
+    <string name="led_enable">"LED"</string>
     <string name="led_color">"Kleur"</string>
     <string name="sound_set">"Toon"</string>
-    <string name="sound_none">"Geen"</string>
     <string name="icon_set">"Icoon"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"Om Te"</string>
+    <string name="random">"Toevallig"</string>
+    <string name="num_messages">"Aantal Berichten"</string>
+    <string name="edit_messages">"Bewerken Berichten"</string>
+    <string name="edit_times">"Bewerken Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Wijzigingen Afgedankte"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Verwijder het vinkje om de kennisgeving aan afgezet kunnen door met het weg zijn. Lopende meldingen worden niet ondersteund op Android Wear"</string>
     <string name="settings_item_3_primary">"Gebruik lichte thema kennisgeving"</string>
     <string name="settings_item_3_secondary">"Haal het vinkje weg om donkere kennisgeving thema te gebruiken"</string>
+    <string name="settings_item_4_primary">"Eerste dag van de week"</string>
 
 </resources>

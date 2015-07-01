@@ -20,20 +20,16 @@
     <string name="chooseIcon">Choose Icon</string>
     <string name="selectNotification">Select Notification</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">Lifetime</string>
-    <string name="today">Today</string>
-    <string name="shown">Shown</string>
-    <string name="accepted">Completed</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">Title</string>
-    <string name="default_content">Message</string>
+    <string name="default_message">Message</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">General</string>
     <string name="edit_timing">Timing</string>
     <string name="edit_repeat">Repeat</string>
     <string name="edit_notification">Notification</string>
+    <string name="edit_alarm">Alarm</string>
     <string name="timing_specific">Specific</string>
     <string name="timing_range">Range</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">LED</string>
     <string name="led_color">Color</string>
     <string name="sound_set">Tone</string>
-    <string name="sound_none">None</string>
     <string name="icon_set">Icon</string>
     <string name="icon_color">Accent Color</string>
+
+    <string name="in_order">In Order</string>
+    <string name="random">Random</string>
+    <string name="num_messages">Number of Messages</string>
+    <string name="edit_messages">Edit Messages</string>
+    <string name="edit_times">Edit Times</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">Changes Discarded</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">Uncheck to allow the notification to be dismissible by swiping it away. Ongoing notifications are not supported on Android Wear</string>
     <string name="settings_item_3_primary">Use light notification theme</string>
     <string name="settings_item_3_secondary">Uncheck to use dark notification theme</string>
+    <string name="settings_item_4_primary">First day of the week</string>
 
 </resources>

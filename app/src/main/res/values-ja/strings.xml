@@ -20,20 +20,16 @@
     <string name="chooseIcon">"アイコンを選択してください"</string>
     <string name="selectNotification">"[通知"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"一生"</string>
-    <string name="today">"今日"</string>
-    <string name="shown">"示します"</string>
-    <string name="accepted">"完成しました"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"タイトル"</string>
-    <string name="default_content">"メッセージ"</string>
+    <string name="default_message">"メッセージ"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"一般的な"</string>
     <string name="edit_timing">"タイミング"</string>
     <string name="edit_repeat">"リピート"</string>
     <string name="edit_notification">"通知"</string>
+    <string name="edit_alarm">"アラーム"</string>
     <string name="timing_specific">"特定"</string>
     <string name="timing_range">"範囲"</string>
 
@@ -43,11 +39,16 @@
     <string name="random_enable">"タイムズをランダム"</string>
     <string name="high_priority_enable">"最優先"</string>
     <string name="led_enable">"LED"</string>
-    <string name="led_color">"カラー"</string>
+    <string name="led_color">"色"</string>
     <string name="sound_set">"トーン"</string>
-    <string name="sound_none">"なし"</string>
     <string name="icon_set">"アイコン"</string>
     <string name="icon_color">"アクセントカラー"</string>
+
+    <string name="in_order">"順番に"</string>
+    <string name="random">"ランダム"</string>
+    <string name="num_messages">"メッセージ数"</string>
+    <string name="edit_messages">"メッセージを編集"</string>
+    <string name="edit_times">"編集タイムズ"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"変更は廃棄します"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"通知はそれを離れてスワイプしてdismissibleことを可能にするには、無効にします。継続的な通知はアンドロイドウェアでサポートされていません"</string>
     <string name="settings_item_3_primary">"光通知テーマを使用"</string>
     <string name="settings_item_3_secondary">"ダーク通知テーマを使用するには、無効"</string>
+    <string name="settings_item_4_primary">"週の最初の日"</string>
 
 </resources>

@@ -20,20 +20,16 @@
     <string name="chooseIcon">"เลือกไอคอน"</string>
     <string name="selectNotification">"เลือกการแจ้งเตือน"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"ตลอดชีวิต"</string>
-    <string name="today">"ในวันนี้"</string>
-    <string name="shown">"แสดงให้เห็นว่า"</string>
-    <string name="accepted">"เสร็จ"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"ชื่อเรื่อง"</string>
-    <string name="default_content">"ข่าวสาร"</string>
+    <string name="default_message">"ข่าวสาร"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"ทั่วไป"</string>
     <string name="edit_timing">"การจับเวลา"</string>
     <string name="edit_repeat">"ทำซ้ำ"</string>
     <string name="edit_notification">"การประกาศ"</string>
+    <string name="edit_alarm">"ปลุก"</string>
     <string name="timing_specific">"โดยเฉพาะ"</string>
     <string name="timing_range">"พิสัย"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"สี"</string>
     <string name="sound_set">"โทน"</string>
-    <string name="sound_none">"ไม่"</string>
     <string name="icon_set">"ไอคอน"</string>
     <string name="icon_color">"สำเนียงสี"</string>
+
+    <string name="in_order">"ในการสั่งซื้อ"</string>
+    <string name="random">"สุ่ม"</string>
+    <string name="num_messages">"จำนวนข้อความ"</string>
+    <string name="edit_messages">"แก้ไขข้อความ"</string>
+    <string name="edit_times">"แก้ไขไทม์"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"การเปลี่ยนแปลงทิ้ง"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"ยกเลิกการเลือกเพื่อให้การแจ้งเตือนที่จะ dismissible โดยรูดมันออกไป การแจ้งเตือนอย่างต่อเนื่องไม่ได้รับการสนับสนุนบน Android Wear"</string>
     <string name="settings_item_3_primary">"ใช้รูปแบบการแจ้งเตือนแสง"</string>
     <string name="settings_item_3_secondary">"ยกเลิกการเลือกที่จะใช้รูปแบบการแจ้งเตือนที่มืด"</string>
+    <string name="settings_item_4_primary">"วันแรกของสัปดาห์"</string>
 
 </resources>

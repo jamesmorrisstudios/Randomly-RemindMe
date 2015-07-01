@@ -11,6 +11,7 @@
         <item>@array/settings_item_1</item>
         <item>@array/settings_item_2</item>
         <item>@array/settings_item_3</item>
+        <item>@array/settings_item_4</item>
     </array>
 
     <!-- Notification click opens app  -->
@@ -68,5 +69,31 @@
     <bool name="settings_item_3_default_value">true</bool>
     <string name="settings_item_3_key" translatable="false">@string/pref_notification_theme</string>
     <string name="pref_notification_theme" translatable="false">NOTIFICATION_THEME</string>
+
+    <!-- Set the first day of the week -->
+    <array name="settings_item_4">
+        <item name="defaultValue">@integer/settings_item_4_default_value</item>
+        <item name="key">@string/settings_item_4_key</item>
+        <item name="primary">@string/settings_item_4_primary</item>
+        <item name="secondary">@string/settings_item_4_secondary</item>
+        <item name="restart">@bool/settings_item_4_restart</item>
+        <item name="list">@array/settings_item_4_list</item>
+    </array>
+
+    <bool name="settings_item_4_restart">false</bool>
+    <integer name="settings_item_4_default_value">0</integer>
+    <string name="settings_item_4_key" translatable="false">@string/pref_notification_first_day</string>
+    <string name="pref_notification_first_day" translatable="false">NOTIFICATION_FIRST_DAY</string>
+
+    <string-array name="settings_item_4_list">
+        <item name="automatic">@string/automatic</item>
+        <item name="sunday">@string/day_sunday</item>
+        <item name="monday">@string/day_monday</item>
+        <item name="tuesday">@string/day_tuesday</item>
+        <item name="wednesday">@string/day_wednesday</item>
+        <item name="thursday">@string/day_thursday</item>
+        <item name="friday">@string/day_friday</item>
+        <item name="saturday">@string/day_saturday</item>
+    </string-array>
 
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit_message" translatable="false">@string/default_message</string>
+    <string name="settings_item_4_secondary" translatable="false"></string>
+
+</resources>

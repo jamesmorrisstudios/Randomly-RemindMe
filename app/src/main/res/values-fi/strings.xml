@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Valitse Ikoni"</string>
     <string name="selectNotification">"Valitse Ilmoitus"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Elinikäinen"</string>
-    <string name="today">"Tänään"</string>
-    <string name="shown">"Näkyy"</string>
-    <string name="accepted">"Valmistunut"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Otsikko"</string>
-    <string name="default_content">"Viesti"</string>
+    <string name="default_message">"Viesti"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Yleinen"</string>
     <string name="edit_timing">"Ajoitus"</string>
     <string name="edit_repeat">"Toisto"</string>
     <string name="edit_notification">"Ilmoitus"</string>
+    <string name="edit_alarm">"Hälytys"</string>
     <string name="timing_specific">"Erityinen"</string>
     <string name="timing_range">"Alue"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Väri"</string>
     <string name="sound_set">"Sävy"</string>
-    <string name="sound_none">"Ei mitään"</string>
     <string name="icon_set">"Ikoni"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"Järjestyksessä"</string>
+    <string name="random">"Satunnainen"</string>
+    <string name="num_messages">"Lukumäärä Viestien"</string>
+    <string name="edit_messages">"Edit Viestit"</string>
+    <string name="edit_times">"Edit Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Muutokset Hylätty"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Poista valinnat jotta ilmoituksen olevan dismissible pyyhkäisemällä sen pois. Käynnissä olevia ilmoituksia ei tueta Android Wear"</string>
     <string name="settings_item_3_primary">"Käytä kevyt ilmoitus teema"</string>
     <string name="settings_item_3_secondary">"Poista valinnat käyttää tummia ilmoituksen teemaa"</string>
+    <string name="settings_item_4_primary">"Ensimmäinen viikonpäivä"</string>
 
 </resources>

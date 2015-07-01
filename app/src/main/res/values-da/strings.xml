@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Vælg Ikon"</string>
     <string name="selectNotification">"Vælg Notification"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Lifetime"</string>
-    <string name="today">"I dag"</string>
-    <string name="shown">"Vist"</string>
-    <string name="accepted">"Afsluttet"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Titel"</string>
-    <string name="default_content">"Besked"</string>
+    <string name="default_message">"Besked"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Generelt"</string>
     <string name="edit_timing">"Timing"</string>
     <string name="edit_repeat">"Gentag"</string>
     <string name="edit_notification">"Meddelelse"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Specifikke"</string>
     <string name="timing_range">"Range"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Farve"</string>
     <string name="sound_set">"Tone"</string>
-    <string name="sound_none">"Ingen"</string>
     <string name="icon_set">"Ikon"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"I Rækkefølge"</string>
+    <string name="random">"Tilfældig"</string>
+    <string name="num_messages">"Antal meddelelser"</string>
+    <string name="edit_messages">"Rediger Beskeder"</string>
+    <string name="edit_times">"Edit Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Ændringer Kasseret"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Fjern markeringen for at lade meddelelsen for at være afviselig ved at føre den væk. Igangværende meddelelser understøttes ikke på Android Wear"</string>
     <string name="settings_item_3_primary">"Bruge lys meddelelse tema"</string>
     <string name="settings_item_3_secondary">"Fjern markeringen for at bruge mørke meddelelse tema"</string>
+    <string name="settings_item_4_primary">"Første dag i ugen"</string>
 
 </resources>

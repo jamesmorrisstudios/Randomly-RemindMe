@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Hatırlatma sil"</string>
     <string name="delete_prompt_content">"Bu hatırlatma silmek istediğinizden emin misiniz?"</string>
-    <string name="cancel_prompt_title">"Değişiklikleri İptal"</string>
+    <string name="cancel_prompt_title">"Değişiklikleri Gözardı Et"</string>
     <string name="cancel_prompt_content">"Yaptığınız değişiklikleri iptal etmek istediğinizden emin misiniz?"</string>
     <string name="duplicate_prompt_title">"Çift Hatırlatma"</string>
     <string name="duplicate_prompt_content">"Bu hatırlatma çoğaltmak istiyor emin misin?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Simge Seçin"</string>
     <string name="selectNotification">"Seçin Bildirimi"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Ömür"</string>
-    <string name="today">"Bugün"</string>
-    <string name="shown">"Gösterildi"</string>
-    <string name="accepted">"Tamamlandı"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Başlık"</string>
-    <string name="default_content">"Mesaj"</string>
+    <string name="default_message">"Mesaj"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Genel"</string>
     <string name="edit_timing">"Zamanlama"</string>
     <string name="edit_repeat">"Tekrar"</string>
     <string name="edit_notification">"Tebliğ"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Özel"</string>
     <string name="timing_range">"Menzil"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Renk"</string>
     <string name="sound_set">"Ton"</string>
-    <string name="sound_none">"Hiçbiri"</string>
     <string name="icon_set">"Ikon"</string>
     <string name="icon_color">"Accent Renk"</string>
+
+    <string name="in_order">"Sırayla"</string>
+    <string name="random">"Rasgele"</string>
+    <string name="num_messages">"Mesajlar sayısı"</string>
+    <string name="edit_messages">"Düzenleme Mesajları"</string>
+    <string name="edit_times">"Düzenleme Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Değişiklikler Atılan"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Işaretini kaldırın bildirim o uzakta kaydırarak bırakabileceğinizi izin vermek. Devam eden bildirimler Android Wear desteklenmez"</string>
     <string name="settings_item_3_primary">"Işık bildirim temayı kullanın"</string>
     <string name="settings_item_3_secondary">"Koyu bildirim tema kullanmak için işareti kaldırın"</string>
+    <string name="settings_item_4_primary">"Haftanın ilk günü"</string>
 
 </resources>

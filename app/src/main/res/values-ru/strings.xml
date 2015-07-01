@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Удалить напоминание"</string>
     <string name="delete_prompt_content">"Вы уверены, что хотите удалить это напоминание?"</string>
-    <string name="cancel_prompt_title">"Отменить изменения"</string>
+    <string name="cancel_prompt_title">"Отменить Изменения"</string>
     <string name="cancel_prompt_content">"Вы уверены, что хотите отменить изменения?"</string>
     <string name="duplicate_prompt_title">"Дубликат Напоминание"</string>
     <string name="duplicate_prompt_content">"Вы уверены, что хотите, чтобы дублировать это напоминание?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Выберите значок"</string>
     <string name="selectNotification">"Выбор уведомления"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Продолжительность Жизни"</string>
-    <string name="today">"Сегодня"</string>
-    <string name="shown">"Показанный"</string>
-    <string name="accepted">"Завершен"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Название"</string>
-    <string name="default_content">"Сообщение"</string>
+    <string name="default_message">"Сообщение"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Генеральная"</string>
     <string name="edit_timing">"Синхронизация"</string>
     <string name="edit_repeat">"Повторение"</string>
     <string name="edit_notification">"Уведомление"</string>
+    <string name="edit_alarm">"Тревога"</string>
     <string name="timing_specific">"Удельный"</string>
     <string name="timing_range">"Диапазон"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"СВЕТОДИОД"</string>
     <string name="led_color">"Цвет"</string>
     <string name="sound_set">"Тон"</string>
-    <string name="sound_none">"Ни"</string>
-    <string name="icon_set">"Значок"</string>
+    <string name="icon_set">"Икона"</string>
     <string name="icon_color">"Акцент Цвет"</string>
+
+    <string name="in_order">"В Порядке"</string>
+    <string name="random">"Случайный"</string>
+    <string name="num_messages">"Количество сообщений"</string>
+    <string name="edit_messages">"Редактировать сообщения"</string>
+    <string name="edit_times">"Изменить время"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Изменения Выброшенные"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Снимите, чтобы уведомление будет отмахнуться, проводя его. Текущие уведомления не поддерживается на Android Wear"</string>
     <string name="settings_item_3_primary">"Используйте легкий тему уведомления"</string>
     <string name="settings_item_3_secondary">"Снимите использовать темную тему уведомления"</string>
+    <string name="settings_item_4_primary">"Первый день недели"</string>
 
 </resources>

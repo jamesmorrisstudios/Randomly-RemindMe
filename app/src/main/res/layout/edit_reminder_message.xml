@@ -4,9 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RadioGroup
+        android:layout_margin="4dp"
+        android:id="@+id/radio_group"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/in_order"
+            android:id="@+id/radio_in_order" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/random"
+            android:id="@+id/radio_random" />
+    </RadioGroup>
+
     <LinearLayout
         android:id="@+id/message_container"
-        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/radio_group"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:text="Number of messages"
+            android:text="@string/num_messages"
             android:textColor="@color/textDarkMain"
             android:textSize="20sp" />
 
@@ -33,5 +55,14 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_below="@+id/message_container"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_edit_messages"
+        android:textColor="@color/textLightMain"
+        android:text="@string/edit_messages"
+        android:layout_margin="10dp"
+        android:layout_width="250dp"
+        android:layout_height="48dp" />
 
 </RelativeLayout>

@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Vybrať ikonu"</string>
     <string name="selectNotification">"Select Notification"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Život"</string>
-    <string name="today">"Dnes"</string>
-    <string name="shown">"Zobrazovať"</string>
-    <string name="accepted">"Dokončený"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Názov"</string>
-    <string name="default_content">"Správa"</string>
+    <string name="default_message">"Správa"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Všeobecný"</string>
     <string name="edit_timing">"Načasovanie"</string>
     <string name="edit_repeat">"Opakovať"</string>
     <string name="edit_notification">"Oznámenie"</string>
+    <string name="edit_alarm">"Poplach"</string>
     <string name="timing_specific">"Špecifický"</string>
     <string name="timing_range">"Rozsah"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Farba"</string>
     <string name="sound_set">"Tón"</string>
-    <string name="sound_none">"Nikto"</string>
     <string name="icon_set">"Ikona"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"V Prípade"</string>
+    <string name="random">"Náhodný"</string>
+    <string name="num_messages">"Počet správ"</string>
+    <string name="edit_messages">"Upraviť Správy"</string>
+    <string name="edit_times">"Edit Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Zmeny Vyradené"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Zrušte zaškrtnutie aby oznámenie za dismissible prejdením to preč. Prebiehajúce oznámenia nie sú podporované na Android Wear"</string>
     <string name="settings_item_3_primary">"Pomocou svetelného upozornenia tému"</string>
     <string name="settings_item_3_secondary">"Zrušte zaškrtnutie políčka použiť tmavé oznámenia motív"</string>
+    <string name="settings_item_4_primary">"Prvý deň v týždni"</string>
 
 </resources>

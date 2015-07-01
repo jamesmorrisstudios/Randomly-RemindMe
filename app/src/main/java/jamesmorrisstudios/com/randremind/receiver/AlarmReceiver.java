@@ -105,8 +105,6 @@ public final class AlarmReceiver extends BroadcastReceiver {
                 Log.v("ALARM RECEIVER", "Reminder!");
                 //Post a notification if we have one
                 postNotifications(intent.getType(), now);
-                //Schedule the next wake event
-                //ReminderList.getInstance().scheduleAllWakes(now.timeItem);
             }
 
             logLastWake(now);

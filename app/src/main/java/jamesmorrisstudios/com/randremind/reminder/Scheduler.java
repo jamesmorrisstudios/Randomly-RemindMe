@@ -25,6 +25,7 @@ import android.util.Log;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import java.util.Calendar;
 
@@ -77,8 +78,7 @@ public final class Scheduler {
      * @param time Time to schedule for
      */
     public final void scheduleWake(@NonNull TimeItem time, @NonNull String uniqueName) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
+        Calendar calendar = UtilsTime.getCalendar();
         calendar.set(Calendar.HOUR_OF_DAY, time.hour);
         calendar.set(Calendar.MINUTE, time.minute);
         Log.v("SCHEDULER", "Alarm Set For: " + uniqueName + " at " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
@@ -110,8 +110,7 @@ public final class Scheduler {
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT");
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
+        Calendar calendar = UtilsTime.getCalendar();
         calendar.add(Calendar.DATE, 1); //Increment to tomorrow
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);

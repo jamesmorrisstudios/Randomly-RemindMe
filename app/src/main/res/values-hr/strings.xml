@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Odaberite ikonu"</string>
     <string name="selectNotification">"Odaberite Obavijest"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Doživotno"</string>
-    <string name="today">"Danas"</string>
-    <string name="shown">"Prikazan"</string>
-    <string name="accepted">"Dovršen"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Naslov"</string>
-    <string name="default_content">"Poruka"</string>
+    <string name="default_message">"Poruka"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Opći"</string>
     <string name="edit_timing">"Vrijeme"</string>
     <string name="edit_repeat">"Ponoviti"</string>
     <string name="edit_notification">"Obavijest"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Specifična"</string>
     <string name="timing_range">"Opseg"</string>
 
@@ -41,13 +37,18 @@
     <string name="alerts_per_day">"Podsjetnici dnevno"</string>
     <string name="vibrate_enable">"Vibrirati"</string>
     <string name="random_enable">"Nasumce Vremena"</string>
-    <string name="high_priority_enable">"Visoki prioritet"</string>
+    <string name="high_priority_enable">"Visoki Prioritet"</string>
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Boja"</string>
     <string name="sound_set">"Ton"</string>
-    <string name="sound_none">"Nijedan"</string>
     <string name="icon_set">"Ikona"</string>
     <string name="icon_color">"Accent boja"</string>
+
+    <string name="in_order">"U Redu"</string>
+    <string name="random">"Slučajan"</string>
+    <string name="num_messages">"Broj poruka"</string>
+    <string name="edit_messages">"Uredi Poruke"</string>
+    <string name="edit_times">"Uredi Vremena"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Promjene Odbačena"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Poništite dopustiti obavijest da se dismissible ga swiping daleko. U tijeku obavijesti nisu podržane na Android Wear"</string>
     <string name="settings_item_3_primary">"Koristite temu obavijesti svjetlo"</string>
     <string name="settings_item_3_secondary">"Poništite koristiti tamnu temu obavijesti"</string>
+    <string name="settings_item_4_primary">"Prvi dan u tjednu"</string>
 
 </resources>

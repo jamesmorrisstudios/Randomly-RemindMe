@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Radera påminnelse"</string>
     <string name="delete_prompt_content">"Är du säker på att du vill ta bort denna påminnelse?"</string>
-    <string name="cancel_prompt_title">"Släng Ändringar"</string>
+    <string name="cancel_prompt_title">"Ignorera Ändringar"</string>
     <string name="cancel_prompt_content">"Är du säker på att du vill radera dina ändringar?"</string>
     <string name="duplicate_prompt_title">"Duplicera Påminnelse"</string>
     <string name="duplicate_prompt_content">"Är du säker på att du vill kopiera denna påminnelse?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Välj Icon"</string>
     <string name="selectNotification">"Välj Anmälan"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Livstid"</string>
-    <string name="today">"I dag"</string>
-    <string name="shown">"Visat"</string>
-    <string name="accepted">"Avslutade"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Titel"</string>
-    <string name="default_content">"Meddelande"</string>
+    <string name="default_message">"Meddelande"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Allmänt"</string>
     <string name="edit_timing">"Timing"</string>
     <string name="edit_repeat">"Upprepa"</string>
     <string name="edit_notification">"Anmälan"</string>
+    <string name="edit_alarm">"Larm"</string>
     <string name="timing_specific">"Specifik"</string>
     <string name="timing_range">"Intervall"</string>
 
@@ -41,13 +37,18 @@
     <string name="alerts_per_day">"Påminnelser per dag"</string>
     <string name="vibrate_enable">"Vibrera"</string>
     <string name="random_enable">"Randomize Gånger"</string>
-    <string name="high_priority_enable">"Hög prioritet"</string>
+    <string name="high_priority_enable">"Hög Prioritet"</string>
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Färg"</string>
     <string name="sound_set">"Ton"</string>
-    <string name="sound_none">"Inget"</string>
     <string name="icon_set">"Ikon"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"I Ordning"</string>
+    <string name="random">"Slumpmässig"</string>
+    <string name="num_messages">"Antal meddelanden"</string>
+    <string name="edit_messages">"Redigera meddelanden"</string>
+    <string name="edit_times">"Redigera Gånger"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Ändringar kasserad"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Avmarkera för att låta anmälan till vara dismissible genom att svepa bort det. Pågående anmälningar stöds inte på Android Wear"</string>
     <string name="settings_item_3_primary">"Använda ljus tema anmälan"</string>
     <string name="settings_item_3_secondary">"Avmarkera för att använda mörkt tema anmälan"</string>
+    <string name="settings_item_4_primary">"Första dagen i veckan"</string>
 
 </resources>

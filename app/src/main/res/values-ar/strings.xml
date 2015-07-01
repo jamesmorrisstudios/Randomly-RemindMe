@@ -20,20 +20,16 @@
     <string name="chooseIcon">"اختيار أيقونة"</string>
     <string name="selectNotification">"حدد إعلام"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"حياة"</string>
-    <string name="today">"اليوم"</string>
-    <string name="shown">"أظهرت"</string>
-    <string name="accepted">"الانتهاء"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"لقب"</string>
-    <string name="default_content">"رسالة"</string>
+    <string name="default_title">"عنوان"</string>
+    <string name="default_message">"رسالة"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"عام"</string>
     <string name="edit_timing">"توقيت"</string>
     <string name="edit_repeat">"كرر"</string>
     <string name="edit_notification">"إعلام"</string>
+    <string name="edit_alarm">"إنذار"</string>
     <string name="timing_specific">"خاص"</string>
     <string name="timing_range">"نطاق"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"الصمام"</string>
     <string name="led_color">"اللون"</string>
     <string name="sound_set">"نغمة"</string>
-    <string name="sound_none">"لا شيء"</string>
     <string name="icon_set">"رمز"</string>
     <string name="icon_color">"لهجة اللون"</string>
+
+    <string name="in_order">"من أجل"</string>
+    <string name="random">"عشوائي"</string>
+    <string name="num_messages">"عدد الرسائل"</string>
+    <string name="edit_messages">"تحرير الرسائل"</string>
+    <string name="edit_times">"تحرير تايمز"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"تغييرات التخلص منها"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"قم بإلغاء التحديد من السماح للإعلام أن يكون dismissible عن طريق تمرير بعيدا. غير معتمدة الإخطارات الجارية بشأن Android Wear"</string>
     <string name="settings_item_3_primary">"استخدام موضوع الإخطار خفيفة"</string>
     <string name="settings_item_3_secondary">"قم بإلغاء التحديد لاستخدام موضوع الإخطار الظلام"</string>
+    <string name="settings_item_4_primary">"اليوم الأول من الأسبوع"</string>
 
 </resources>

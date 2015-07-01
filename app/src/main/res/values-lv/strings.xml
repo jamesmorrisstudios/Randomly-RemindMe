@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Izvēlieties Icon"</string>
     <string name="selectNotification">"Select Paziņojums"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Mūžs"</string>
-    <string name="today">"Šodien"</string>
-    <string name="shown">"Parādīts"</string>
-    <string name="accepted">"Pabeigts"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Virsraksts"</string>
-    <string name="default_content">"Ziņa"</string>
+    <string name="default_message">"Ziņa"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Vispārējs"</string>
     <string name="edit_timing">"Laika noteikšana"</string>
     <string name="edit_repeat">"Atkārtot"</string>
     <string name="edit_notification">"Paziņojums"</string>
+    <string name="edit_alarm">"Signalizācija"</string>
     <string name="timing_specific">"Specifisks"</string>
     <string name="timing_range">"Diapazons"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Krāsa"</string>
     <string name="sound_set">"Tonis"</string>
-    <string name="sound_none">"Neviens"</string>
     <string name="icon_set">"Ikona"</string>
     <string name="icon_color">"Accent Color"</string>
+
+    <string name="in_order">"Lai"</string>
+    <string name="random">"Nejaušs"</string>
+    <string name="num_messages">"Ziņojumu skaits"</string>
+    <string name="edit_messages">"Rediģēt ziņojumus"</string>
+    <string name="edit_times">"Edit Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Izmaiņas Nolietotas"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Noņemiet atzīmi, lai ļautu paziņojums būt dismissible uzsitot to prom. Notiekošās paziņojumus neatbalsta Android Wear"</string>
     <string name="settings_item_3_primary">"Izmantojiet gaismas paziņošanas tēmu"</string>
     <string name="settings_item_3_secondary">"Noņemiet atzīmi izmantot tumšo paziņošanas motīvu"</string>
+    <string name="settings_item_4_primary">"Pirmā nedēļas diena"</string>
 
 </resources>

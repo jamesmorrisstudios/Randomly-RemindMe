@@ -28,8 +28,8 @@ public class IconPickerDialogBuilder {
     private int accentColor;
     private AlertDialog dialog;
 
-    private IconPickerDialogBuilder(Context context) {
-        builder = new AlertDialog.Builder(context, R.style.ColorPickerDialog);
+    private IconPickerDialogBuilder(@NonNull Context context) {
+        builder = new AlertDialog.Builder(context, R.style.alertDialog);
         mainView = new ScrollView(context);
         pickerContainer = new LinearLayout(context);
         pickerContainer.setOrientation(LinearLayout.VERTICAL);
@@ -38,11 +38,11 @@ public class IconPickerDialogBuilder {
         builder.setView(mainView);
     }
 
-    public static IconPickerDialogBuilder with(Context context) {
+    public static IconPickerDialogBuilder with(@NonNull Context context) {
         return new IconPickerDialogBuilder(context);
     }
 
-    public IconPickerDialogBuilder setTitle(String title) {
+    public IconPickerDialogBuilder setTitle(@NonNull String title) {
         builder.setTitle(title);
         return this;
     }
@@ -52,7 +52,7 @@ public class IconPickerDialogBuilder {
         return this;
     }
 
-    public IconPickerDialogBuilder setOnIconPicked(IconPickerListener onIconPickedListener) {
+    public IconPickerDialogBuilder setOnIconPicked(@NonNull IconPickerListener onIconPickedListener) {
         this.onIconPickedListener = onIconPickedListener;
         return this;
     }
@@ -64,7 +64,7 @@ public class IconPickerDialogBuilder {
         return dialog;
     }
 
-    private void buildIconList(Context context) {
+    private void buildIconList(@NonNull Context context) {
         LinearLayout row = null;
         for (int i = 0; i < IconUtil.iconList.length; i++) {
             if (i % 4 == 0) {

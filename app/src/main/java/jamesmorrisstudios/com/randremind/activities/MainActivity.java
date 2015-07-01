@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,9 +26,21 @@ import android.util.Log;
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
+import com.jamesmorrisstudios.utilitieslibrary.Bus;
+import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
+import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
+import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.squareup.otto.Subscribe;
+
+import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.dialogHelper.EditMessageRequest;
+import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
+import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
+import jamesmorrisstudios.com.randremind.fragments.EditMessageDialogBuilder;
+import jamesmorrisstudios.com.randremind.fragments.EditTimesDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
 import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
@@ -42,8 +55,7 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
  */
 public final class MainActivity extends BaseLauncherActivity implements
         MainListFragment.OnFragmentInteractionListener,
-        SummaryFragment.OnSummaryListener,
-        AddReminderFragment.OnAddReminderFragmentListener {
+        SummaryFragment.OnSummaryListener {
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -88,6 +100,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onStart() {
         super.onStart();
         Log.v("Main Activity", "On Start");
+        Bus.register(this);
         //Ensure that the repeating alarm is active.
         Scheduler.getInstance().cancelMidnightAlarm();
         Scheduler.getInstance().scheduleRepeatingMidnight();
@@ -100,8 +113,44 @@ public final class MainActivity extends BaseLauncherActivity implements
     public void onStop() {
         super.onStop();
         Log.v("Main Activity", "On Stop");
+        Bus.unregister(this);
         //Save the reminder list back to storage
         ReminderList.getInstance().saveDataSync();
+    }
+
+    /**
+     * Called on settings change event
+     */
+    @Override
+    public void onSettingsChanged() {
+        super.onSettingsChanged();
+        int firstDay = Prefs.getInt(getString(R.string.settings_pref), getString(R.string.pref_notification_first_day), 0);
+        switch(firstDay) {
+            case 0:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.AUTOMATIC);
+                break;
+            case 1:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.SUNDAY);
+                break;
+            case 2:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.MONDAY);
+                break;
+            case 3:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.TUESDAY);
+                break;
+            case 4:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.WEDNESDAY);
+                break;
+            case 5:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.THURSDAY);
+                break;
+            case 6:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.FRIDAY);
+                break;
+            case 7:
+                UtilsTime.setFirstDayOfWeek(UtilsTime.DayOfWeek.SATURDAY);
+                break;
+        }
     }
 
     /**
@@ -212,12 +261,44 @@ public final class MainActivity extends BaseLauncherActivity implements
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    @Override
+    @Subscribe
+    public void onIconPickerRequest(@NonNull IconPickerRequest request) {
+        showIconPickerDialog(request.iconPickerListener, request.accentColor);
+    }
+
     public void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
         IconPickerDialogBuilder.with(this)
                 .setTitle(getResources().getString(R.string.chooseIcon))
                 .setAccentColor(accentColor)
                 .setOnIconPicked(iconPickerListener)
+                .build()
+                .show();
+    }
+
+    @Subscribe
+    public void onEditMessageRequest(@NonNull EditMessageRequest request) {
+        showEditMessageDialog(request.messages, request.onPositive, request.onNegative);
+    }
+
+    public void showEditMessageDialog(ArrayList<String> messages, EditMessageDialogBuilder.EditMessageListener onPositive, DialogInterface.OnClickListener onNegative) {
+        EditMessageDialogBuilder.with(this)
+                .setMessages(messages)
+                .setOnPositive(getResources().getString(R.string.okay), onPositive)
+                .setOnNegative(getResources().getString(R.string.cancel), onNegative)
+                .build()
+                .show();
+    }
+
+    @Subscribe
+    public void onEditTimesRequest(@NonNull EditTimesRequest request) {
+        showEditTimesDialog(request.times, request.onPositive, request.onNegative);
+    }
+
+    public void showEditTimesDialog(ArrayList<TimeItem> times, EditTimesDialogBuilder.EditTimesListener onPositive, DialogInterface.OnClickListener onNegative) {
+        EditTimesDialogBuilder.with(this)
+                .setTimes(times)
+                .setOnPositive(getResources().getString(R.string.okay), onPositive)
+                .setOnNegative(getResources().getString(R.string.cancel), onNegative)
                 .build()
                 .show();
     }

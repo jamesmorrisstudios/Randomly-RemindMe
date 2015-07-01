@@ -20,20 +20,16 @@
     <string name="chooseIcon">"选择图标"</string>
     <string name="selectNotification">"选择通知"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"一生"</string>
-    <string name="today">"今天"</string>
-    <string name="shown">"如图"</string>
-    <string name="accepted">"完成"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"称号"</string>
-    <string name="default_content">"信息"</string>
+    <string name="default_message">"信息"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"一般"</string>
     <string name="edit_timing">"定时"</string>
     <string name="edit_repeat">"重复"</string>
     <string name="edit_notification">"通知"</string>
+    <string name="edit_alarm">"报警"</string>
     <string name="timing_specific">"具体"</string>
     <string name="timing_range">"范围"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"颜色"</string>
     <string name="sound_set">"音"</string>
-    <string name="sound_none">"无"</string>
     <string name="icon_set">"图标"</string>
     <string name="icon_color">"雅绅特的颜色"</string>
+
+    <string name="in_order">"为了"</string>
+    <string name="random">"随机"</string>
+    <string name="num_messages">"消息数"</string>
+    <string name="edit_messages">"编辑留言"</string>
+    <string name="edit_times">"编辑时报"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"废弃的变化"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"取消选中允许通知要可取消刷卡它拿走。正在进行的通知不支持Android Wear"</string>
     <string name="settings_item_3_primary">"使用光主题的通知"</string>
     <string name="settings_item_3_secondary">"取消选中要使用深色主题的通知"</string>
+    <string name="settings_item_4_primary">"该周的第一天"</string>
 
 </resources>

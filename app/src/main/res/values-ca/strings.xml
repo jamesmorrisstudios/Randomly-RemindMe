@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Trieu Icona"</string>
     <string name="selectNotification">"Seleccioneu Notificació"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Vida"</string>
-    <string name="today">"Avui"</string>
-    <string name="shown">"Mostrat"</string>
-    <string name="accepted">"Acabat"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Títol"</string>
-    <string name="default_content">"Missatge"</string>
+    <string name="default_message">"Missatge"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"General"</string>
     <string name="edit_timing">"Sincronització"</string>
     <string name="edit_repeat">"Repetició"</string>
     <string name="edit_notification">"Notificació"</string>
+    <string name="edit_alarm">"Alarma"</string>
     <string name="timing_specific">"Específic"</string>
     <string name="timing_range">"Abast"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Color"</string>
     <string name="sound_set">"To"</string>
-    <string name="sound_none">"Cap"</string>
     <string name="icon_set">"Icona"</string>
     <string name="icon_color">"Accentuar color"</string>
+
+    <string name="in_order">"En Ordre"</string>
+    <string name="random">"Aleatori"</string>
+    <string name="num_messages">"Nombre de missatges"</string>
+    <string name="edit_messages">"Edita missatges"</string>
+    <string name="edit_times">"Edita Temps"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Canvis rebutjades"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Desactiveu l'opció per permetre que la notificació sigui descartable al colpejar a les escombraries. Notificacions en curs no són compatibles amb Android Wear"</string>
     <string name="settings_item_3_primary">"Utilitzeu la llum el tema de notificació"</string>
     <string name="settings_item_3_secondary">"Desactiveu l'opció d'usar el tema de la notificació fosc"</string>
+    <string name="settings_item_4_primary">"Primer dia de la setmana"</string>
 
 </resources>

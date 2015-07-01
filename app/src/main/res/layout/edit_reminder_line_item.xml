@@ -42,45 +42,11 @@
             android:src="@drawable/ic_expand_less_white_24dp"
             android:tint="@color/textDarkSecondary" />
 
-        <!-- general -->
-        <include
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_below="@+id/title"
-            android:id="@+id/container_general"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            layout="@layout/edit_reminder_general" />
-
-        <!-- message -->
-        <include
-            android:layout_below="@+id/title"
-            android:id="@+id/container_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            layout="@layout/edit_reminder_message" />
-
-        <!-- timing -->
-        <include
-            android:layout_below="@+id/title"
-            android:id="@+id/container_timing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            layout="@layout/edit_reminder_timing" />
-
-        <!-- repeat -->
-        <include
-            android:layout_below="@+id/title"
-            android:id="@+id/container_repeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            layout="@layout/edit_reminder_repeat" />
-
-        <!-- notification and alarm -->
-        <include
-            android:layout_below="@+id/title"
-            android:id="@+id/container_notification_alarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            layout="@layout/edit_reminder_notification_alarm" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Изтрий Reminder"</string>
     <string name="delete_prompt_content">"Сигурни ли сте, че искате да изтриете това напомняне?"</string>
-    <string name="cancel_prompt_title">"Отхвърляне на промените"</string>
+    <string name="cancel_prompt_title">"Отхвърлите Промените"</string>
     <string name="cancel_prompt_content">"Сигурни ли сте че искате да отхвърлите промените?"</string>
     <string name="duplicate_prompt_title">"Duplicate Reminder"</string>
     <string name="duplicate_prompt_content">"Сигурни ли сте че искате да дублира това напомняне?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Изберете Icon"</string>
     <string name="selectNotification">"Изберете Уведомление"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Живот"</string>
-    <string name="today">"Днес"</string>
-    <string name="shown">"Посочен"</string>
-    <string name="accepted">"Завършен"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Заглавие"</string>
-    <string name="default_content">"Съобщение"</string>
+    <string name="default_message">"Съобщение"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Общ"</string>
     <string name="edit_timing">"Синхронизиране"</string>
     <string name="edit_repeat">"Повторение"</string>
     <string name="edit_notification">"Нотификация"</string>
+    <string name="edit_alarm">"Аларма"</string>
     <string name="timing_specific">"Специфичен"</string>
     <string name="timing_range">"Диапазон"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Цвят"</string>
     <string name="sound_set">"Тон"</string>
-    <string name="sound_none">"Никой"</string>
     <string name="icon_set">"Икона"</string>
     <string name="icon_color">"Акцент Color"</string>
+
+    <string name="in_order">"В Ред"</string>
+    <string name="random">"Произволен"</string>
+    <string name="num_messages">"Броят на съобщенията"</string>
+    <string name="edit_messages">"Редактиране Съобщения"</string>
+    <string name="edit_times">"Edit Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Промени Бракуваните"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Махнете отметката, за да се даде възможност на уведомлението да бъде dismissible като го прекарате с кола. Продължаващите уведомления не се поддържат в Android Wear"</string>
     <string name="settings_item_3_primary">"Използвайте светлината тема уведомяване"</string>
     <string name="settings_item_3_secondary">"Махнете отметката да използвате тъмна палитра уведомяване"</string>
+    <string name="settings_item_4_primary">"Първи ден от седмицата"</string>
 
 </resources>

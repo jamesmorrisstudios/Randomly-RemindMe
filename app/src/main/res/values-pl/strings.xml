@@ -11,7 +11,7 @@
     <!-- Prompts -->
     <string name="delete_prompt_title">"Usuń Przypomnienie"</string>
     <string name="delete_prompt_content">"Czy na pewno chcesz usunąć tę przypomnienie?"</string>
-    <string name="cancel_prompt_title">"Pomiń zmiany"</string>
+    <string name="cancel_prompt_title">"Odrzuć Zmiany"</string>
     <string name="cancel_prompt_content">"Czy na pewno chcesz odrzucić zmiany?"</string>
     <string name="duplicate_prompt_title">"Duplikat Przypomnienie"</string>
     <string name="duplicate_prompt_content">"Czy na pewno chcesz powielać to przypomnienie?"</string>
@@ -20,20 +20,16 @@
     <string name="chooseIcon">"Wybierz Ikona"</string>
     <string name="selectNotification">"Wybierz Powiadamianie"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Życie"</string>
-    <string name="today">"Dzisiaj"</string>
-    <string name="shown">"Pokazano"</string>
-    <string name="accepted">"Zakończony"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Tytuł"</string>
-    <string name="default_content">"Wiadomość"</string>
+    <string name="default_message">"Wiadomość"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Ogólny"</string>
     <string name="edit_timing">"Chronometraż"</string>
     <string name="edit_repeat">"Powtarzać"</string>
     <string name="edit_notification">"Zgłoszenie"</string>
+    <string name="edit_alarm">"Alarm"</string>
     <string name="timing_specific">"Specyficzny"</string>
     <string name="timing_range">"Zakres"</string>
 
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Kolor"</string>
     <string name="sound_set">"Ton"</string>
-    <string name="sound_none">"Żaden"</string>
     <string name="icon_set">"Ikona"</string>
     <string name="icon_color">"Akcent koloru"</string>
+
+    <string name="in_order">"W Celu"</string>
+    <string name="random">"Przypadkowy"</string>
+    <string name="num_messages">"Ilość wiadomości"</string>
+    <string name="edit_messages">"Edycja wiadomości"</string>
+    <string name="edit_times">"Edycja Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Zmiany Odrzucone"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Usuń zaznaczenie pola wyboru, aby umożliwić zgłoszenie za dismissible przesuwając ją. Bieżące powiadomienia nie są obsługiwane na Android Wear"</string>
     <string name="settings_item_3_primary">"Użyj motywu światła powiadomienia"</string>
     <string name="settings_item_3_secondary">"Usuń zaznaczenie pola wyboru, aby użyć motywu ciemnego powiadomienia"</string>
+    <string name="settings_item_4_primary">"Pierwszy dzień tygodnia"</string>
 
 </resources>

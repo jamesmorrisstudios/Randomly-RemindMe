@@ -20,22 +20,18 @@
     <string name="chooseIcon">"Ikon választása"</string>
     <string name="selectNotification">"Select Notification"</string>
 
-    <!-- Confirm tracking -->
-    <string name="lifetime">"Élettartam"</string>
-    <string name="today">"Ma"</string>
-    <string name="shown">"Mutatott"</string>
-    <string name="accepted">"Befejezték"</string>
-
     <!-- Title and message defaults (also used as edit headers) -->
     <string name="default_title">"Cím"</string>
-    <string name="default_content">"Üzenet"</string>
+    <string name="default_message">"Üzenet"</string>
 
     <!-- Edit headers -->
+    <string name="edit_general">"Általános"</string>
     <string name="edit_timing">"Időzítés"</string>
     <string name="edit_repeat">"Ismétlés"</string>
     <string name="edit_notification">"Bejelentés"</string>
+    <string name="edit_alarm">"Riasztás"</string>
     <string name="timing_specific">"Fajlagos"</string>
-    <string name="timing_range">"Tartomány"</string>
+    <string name="timing_range">"Hatótávolság"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Emlékeztetők Per Day"</string>
@@ -45,9 +41,14 @@
     <string name="led_enable">"LED"</string>
     <string name="led_color">"Szín"</string>
     <string name="sound_set">"Tónus"</string>
-    <string name="sound_none">"Egyik sem"</string>
     <string name="icon_set">"Ikon"</string>
     <string name="icon_color">"Kiemelőszín"</string>
+
+    <string name="in_order">"In Order"</string>
+    <string name="random">"Véletlen"</string>
+    <string name="num_messages">"Üzenetek száma"</string>
+    <string name="edit_messages">"Szerkesztés üzenetek"</string>
+    <string name="edit_times">"Szerkesztés Times"</string>
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">"Változások kiselejtezett"</string>
@@ -64,5 +65,6 @@
     <string name="settings_item_2_secondary">"Szüntesse meg, hogy a bejelentést hagyhatók, ellop el. Folyamatban lévő bejelentések nem támogatja az Android Wear"</string>
     <string name="settings_item_3_primary">"Használja fény értesítést téma"</string>
     <string name="settings_item_3_secondary">"Meg kell szüntetni a sötétebb értesítést téma"</string>
+    <string name="settings_item_4_primary">"Első nap a héten"</string>
 
 </resources>
