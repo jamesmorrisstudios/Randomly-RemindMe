@@ -11,6 +11,32 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="8dp"
         android:orientation="vertical">
+<!--
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sound Only"
+                android:id="@+id/radio_sound" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notification"
+                android:id="@+id/radio_notification" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alarm"
+                android:id="@+id/radio_alarm" />
+
+        </RadioGroup>
+-->
 
         <!-- Sound picker -->
         <LinearLayout

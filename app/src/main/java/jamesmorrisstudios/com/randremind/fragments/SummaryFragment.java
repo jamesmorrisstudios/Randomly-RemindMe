@@ -91,9 +91,6 @@ public class SummaryFragment extends BaseRecycleListFragment {
                     }
                 });
                 break;
-            case R.id.action_edit:
-                mListener.onEditClicked();
-                break;
             case R.id.action_preview:
                 ReminderList.getInstance().previewCurrent();
                 break;
@@ -159,7 +156,9 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
     @Override
     protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
-        //Don't care (YET)
+        if(baseRecycleContainer.isHeader) {
+            mListener.onEditClicked();
+        }
     }
 
     @Override

@@ -37,10 +37,9 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
  */
 public class EditReminderTiming {
     private RelativeLayout parent;
-    private AppCompatCheckBox randomEnable;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private RadioButton timingSpecific, timingRange;
-    private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
+    private LinearLayout timingTimes, timingTimesPerDay, timingSingleTime;
     private View startTimeTop, endTimeTop;
     private AppCompatSpinner timeSpinner, timeSpecificSpinner;
     private Button editSpecificTimes;
@@ -65,10 +64,7 @@ public class EditReminderTiming {
         timingRange = (RadioButton) parent.findViewById(R.id.radio_range);
         timingTimes = (LinearLayout) parent.findViewById(R.id.timing_times);
         timingTimesPerDay = (LinearLayout) parent.findViewById(R.id.timing_times_per_day);
-        timingDistribution = (LinearLayout) parent.findViewById(R.id.timing_distribution);
         timingSingleTime = (LinearLayout) parent.findViewById(R.id.timing_times_specific);
-
-        randomEnable = (AppCompatCheckBox) parent.findViewById(R.id.timing_random_enabled);
 
         editSpecificTimes = (Button) parent.findViewById(R.id.btn_edit_times);
     }
@@ -83,7 +79,6 @@ public class EditReminderTiming {
 
         generateNumberTimePerDay();
         generateNumberSpecificTimePerDay();
-        randomEnable.setChecked(remind.randomDistribution);
 
         UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
         UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
@@ -133,14 +128,12 @@ public class EditReminderTiming {
             //Show all of the range timing views
             timingTimes.setVisibility(View.VISIBLE);
             timingTimesPerDay.setVisibility(View.VISIBLE);
-            timingDistribution.setVisibility(View.VISIBLE);
             timingSingleTime.setVisibility(View.GONE);
         } else {
             //Hide all of the range timing
             timingSingleTime.setVisibility(View.VISIBLE);
             timingTimes.setVisibility(View.GONE);
             timingTimesPerDay.setVisibility(View.GONE);
-            timingDistribution.setVisibility(View.GONE);
         }
     }
 
@@ -243,17 +236,6 @@ public class EditReminderTiming {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        //Distribution
-        randomEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-                if (currentReminder == null) {
-                    return;
-                }
-                currentReminder.randomDistribution = isChecked;
             }
         });
     }

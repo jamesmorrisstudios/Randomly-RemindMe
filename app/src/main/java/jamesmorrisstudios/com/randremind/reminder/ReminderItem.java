@@ -59,7 +59,6 @@ public final class ReminderItem extends BaseRecycleItem {
     public String content; //Depreciated
 
 
-
     //Unique data
     @SerializedName("uniqueName")
     public String uniqueName;
@@ -82,8 +81,6 @@ public final class ReminderItem extends BaseRecycleItem {
     public ArrayList<TimeItem> specificTimeList;
     @SerializedName("numberPerDay")
     public int numberPerDay;
-    @SerializedName("randomDistribution")
-    public boolean randomDistribution;
     @SerializedName("rangeTiming")
     public boolean rangeTiming = true;
     //Repeat
@@ -131,7 +128,6 @@ public final class ReminderItem extends BaseRecycleItem {
         this.startTime = new TimeItem(9, 0);
         this.endTime = new TimeItem(20, 0);
         this.numberPerDay = 6;
-        this.randomDistribution = true;
         this.rangeTiming = true;
         this.specificTimeList = new ArrayList<>();
         this.specificTimeList.add(new TimeItem(9, 0));
@@ -155,7 +151,6 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param startTime            Start time object
      * @param endTime              End time object
      * @param numberPerDay         Number per day
-     * @param randomDistribution   Distribution
      * @param daysToRun            Days to run
      * @param notificationTone     The uri of the desired notification tone
      * @param notificationToneName The readable name of the notification tone
@@ -165,7 +160,7 @@ public final class ReminderItem extends BaseRecycleItem {
                         @NonNull ArrayList<String> messageList, boolean messageInOrder,
                         boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime,
                         @NonNull ArrayList<TimeItem> specificTimeList,
-                        int numberPerDay, boolean randomDistribution, boolean rangeTiming, boolean repeat,
+                        int numberPerDay, boolean rangeTiming, boolean repeat,
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
                         boolean notificationVibrate, boolean notificationLED, int notificationLEDColor,
                         boolean notificationHighPriority, int notificationIcon, int notificationAccentColor) {
@@ -179,7 +174,6 @@ public final class ReminderItem extends BaseRecycleItem {
         this.endTime = endTime;
         this.specificTimeList = specificTimeList;
         this.numberPerDay = numberPerDay;
-        this.randomDistribution = randomDistribution;
         this.rangeTiming = rangeTiming;
         this.repeat = repeat;
         this.daysToRun = daysToRun.clone();
@@ -301,7 +295,7 @@ public final class ReminderItem extends BaseRecycleItem {
     public final ReminderItem copy() {
         return new ReminderItem(uniqueName, title, content, messageList, messageInOrder,
                 enabled, startTime, endTime, specificTimeList, numberPerDay,
-                randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
+                rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
                 notificationIcon, notificationAccentColor);
     }
@@ -313,7 +307,7 @@ public final class ReminderItem extends BaseRecycleItem {
     public final ReminderItem duplicate() {
         return new ReminderItem(getUniqueName(), title, content, messageList, messageInOrder,
                 enabled, startTime, endTime, specificTimeList, numberPerDay,
-                randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
+                rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
                 notificationIcon, notificationAccentColor);
     }
@@ -358,11 +352,7 @@ public final class ReminderItem extends BaseRecycleItem {
         int diff = getDiffMinutes();
         int startOffset = timeToMinutes(startTime);
 
-        if (randomDistribution) {
-            generateEvenishSplit(diff, startOffset, 0.5f, numberPerDay);
-        } else {
-            generateEvenishSplit(diff, startOffset, 0, numberPerDay);
-        }
+        generateEvenishSplit(diff, startOffset, 0.5f, numberPerDay);
     }
 
     /**

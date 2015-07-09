@@ -47,8 +47,6 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View dash, endTop;
     private ButtonCircleFlat[] dayButtons;
-    private TintedImageView timingRandom, vibrate, tone, ledIcon, highPriorityIcon;
-    private TextView timingTimes, content;
 
     //Item
     private TextView date, show, acked, percent;
@@ -97,13 +95,6 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
                 text.setText(week[i]);
             }
         }
-        timingRandom = (TintedImageView) view.findViewById(R.id.timing_random);
-        timingTimes = (TextView) view.findViewById(R.id.timing_times);
-        vibrate = (TintedImageView) view.findViewById(R.id.notification_vibrate);
-        tone = (TintedImageView) view.findViewById(R.id.notification_tone);
-        content = (TextView) view.findViewById(R.id.content);
-        ledIcon = (TintedImageView) view.findViewById(R.id.notification_led);
-        highPriorityIcon = (TintedImageView) view.findViewById(R.id.notification_high_priority);
     }
 
     @Override
@@ -144,39 +135,6 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         });
         for (int i = 0; i < reminder.daysToRun.length; i++) {
             setDayOfWeek(i, reminder.daysToRun[i]);
-        }
-        if (reminder.rangeTiming) {
-            timingTimes.setText(Integer.toString(reminder.numberPerDay));
-            timingRandom.setVisibility(View.VISIBLE);
-            if (reminder.randomDistribution) {
-                ViewHelper.setAlpha(timingRandom, 1.0f);
-            } else {
-                ViewHelper.setAlpha(timingRandom, 0.12f);
-            }
-        } else {
-            timingTimes.setVisibility(View.INVISIBLE);
-            timingRandom.setVisibility(View.INVISIBLE);
-        }
-        if (reminder.notificationTone != null) {
-            ViewHelper.setAlpha(tone, 1.0f);
-        } else {
-            ViewHelper.setAlpha(tone, 0.12f);
-        }
-        if (reminder.notificationVibrate) {
-            ViewHelper.setAlpha(vibrate, 1.0f);
-        } else {
-            ViewHelper.setAlpha(vibrate, 0.12f);
-        }
-        content.setText(reminder.content);
-        if (reminder.notificationLED) {
-            ViewHelper.setAlpha(ledIcon, 1.0f);
-        } else {
-            ViewHelper.setAlpha(ledIcon, 0.12f);
-        }
-        if (reminder.notificationHighPriority) {
-            ViewHelper.setAlpha(highPriorityIcon, 1.0f);
-        } else {
-            ViewHelper.setAlpha(highPriorityIcon, 0.12f);
         }
     }
 

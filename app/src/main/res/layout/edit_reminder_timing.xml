@@ -136,24 +136,4 @@
 
     </LinearLayout>
 
-    <!-- Distribution -->
-    <LinearLayout
-        android:id="@+id/timing_distribution"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timing_times_per_day"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="4dp"
-        android:orientation="horizontal">
-
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/timing_random_enabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/random_enable"
-            android:textColor="@color/textDarkMain"
-            android:textSize="@dimen/item_size" />
-
-    </LinearLayout>
-
 </RelativeLayout>
