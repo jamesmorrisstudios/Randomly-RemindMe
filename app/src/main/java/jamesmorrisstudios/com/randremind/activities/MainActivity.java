@@ -16,12 +16,13 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
@@ -35,12 +36,10 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.dialogHelper.EditMessageRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
-import jamesmorrisstudios.com.randremind.fragments.EditMessageDialogBuilder;
-import jamesmorrisstudios.com.randremind.fragments.EditTimesDialogBuilder;
+import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
 import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
@@ -266,7 +265,7 @@ public final class MainActivity extends BaseLauncherActivity implements
         showIconPickerDialog(request.iconPickerListener, request.accentColor);
     }
 
-    public void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
+    public void showIconPickerDialog(@NonNull IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
         IconPickerDialogBuilder.with(this)
                 .setTitle(getResources().getString(R.string.chooseIcon))
                 .setAccentColor(accentColor)
@@ -276,31 +275,15 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     @Subscribe
-    public void onEditMessageRequest(@NonNull EditMessageRequest request) {
-        showEditMessageDialog(request.messages, request.onPositive, request.onNegative);
-    }
-
-    public void showEditMessageDialog(ArrayList<String> messages, EditMessageDialogBuilder.EditMessageListener onPositive, DialogInterface.OnClickListener onNegative) {
-        EditMessageDialogBuilder.with(this)
-                .setMessages(messages)
-                .setOnPositive(getResources().getString(R.string.okay), onPositive)
-                .setOnNegative(getResources().getString(R.string.cancel), onNegative)
-                .build()
-                .show();
-    }
-
-    @Subscribe
     public void onEditTimesRequest(@NonNull EditTimesRequest request) {
-        showEditTimesDialog(request.times, request.onPositive, request.onNegative);
+        showEditTimesDialog(request.times, request.onPositive, request.onNegative, request.allowEdit);
     }
 
-    public void showEditTimesDialog(ArrayList<TimeItem> times, EditTimesDialogBuilder.EditTimesListener onPositive, DialogInterface.OnClickListener onNegative) {
-        EditTimesDialogBuilder.with(this)
-                .setTimes(times)
-                .setOnPositive(getResources().getString(R.string.okay), onPositive)
-                .setOnNegative(getResources().getString(R.string.cancel), onNegative)
-                .build()
-                .show();
+    public void showEditTimesDialog(@NonNull ArrayList<TimeItem> times, @NonNull EditTimesDialog.EditTimesListener onPositive, @Nullable View.OnClickListener onNegative, boolean allowEdit) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditTimesDialog editTimesDialog = new EditTimesDialog();
+        editTimesDialog.setData(times, onPositive, onNegative, allowEdit);
+        editTimesDialog.show(fm, "fragment_edit_times");
     }
 
 }

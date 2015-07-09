@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
@@ -76,7 +77,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                dialogListener.createPromptDialog(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new DialogInterface.OnClickListener() {
+                Bus.postObject(new PromptDialogRequest(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ReminderList.getInstance().deleteCurrentReminder();
@@ -89,13 +90,13 @@ public class SummaryFragment extends BaseRecycleListFragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                });
+                }));
                 break;
             case R.id.action_preview:
                 ReminderList.getInstance().previewCurrent();
                 break;
             case R.id.action_duplicate:
-                dialogListener.createPromptDialog(getString(R.string.duplicate_prompt_title), getString(R.string.duplicate_prompt_content), new DialogInterface.OnClickListener() {
+                Bus.postObject(new PromptDialogRequest(getString(R.string.duplicate_prompt_title), getString(R.string.duplicate_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Utils.toastShort(getString(R.string.reminder_duplicate));
@@ -107,7 +108,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                });
+                }));
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -9,9 +9,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListNoHeaderFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleNoHeaderAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleNoHeaderContainer;
+import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 
 import java.util.ArrayList;
@@ -63,20 +65,20 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cancel:
-                dialogListener.createPromptDialog(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ReminderList.getInstance().cancelCurrentReminderChanges();
-                        saveOnBack = false;
-                        utilListener.goBackFromFragment();
-                        Utils.toastShort(getString(R.string.reminder_cancel));
-                    }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Nothing on negative
-                    }
-                });
+                Bus.postObject(new PromptDialogRequest(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ReminderList.getInstance().cancelCurrentReminderChanges();
+                                saveOnBack = false;
+                                utilListener.goBackFromFragment();
+                                Utils.toastShort(getString(R.string.reminder_cancel));
+                            }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Nothing on negative
+                            }
+                        }));
                 break;
             case R.id.action_preview:
                 ReminderList.getInstance().previewCurrent();

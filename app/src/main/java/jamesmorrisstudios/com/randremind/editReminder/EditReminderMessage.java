@@ -1,6 +1,5 @@
 package jamesmorrisstudios.com.randremind.editReminder;
 
-import android.content.DialogInterface;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,14 +9,14 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.EditTextListRequest;
+import com.jamesmorrisstudios.appbaselibrary.fragments.EditTextListDialog;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.dialogHelper.EditMessageRequest;
-import jamesmorrisstudios.com.randremind.fragments.EditMessageDialogBuilder;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -78,14 +77,14 @@ public class EditReminderMessage {
         editMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bus.postObject(new EditMessageRequest(reminderItem.messageList, new EditMessageDialogBuilder.EditMessageListener() {
+                Bus.postObject(new EditTextListRequest(reminderItem.messageList, new EditTextListDialog.EditMessageListener() {
                     @Override
                     public void onPositive(ArrayList<String> messages) {
                         reminderItem.messageList = messages;
                     }
-                }, new DialogInterface.OnClickListener() {
+                }, new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
 
                     }
                 }));

@@ -1,8 +1,6 @@
 package jamesmorrisstudios.com.randremind.editReminder;
 
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,7 +26,7 @@ import java.util.List;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
-import jamesmorrisstudios.com.randremind.fragments.EditTimesDialogBuilder;
+import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -90,17 +88,17 @@ public class EditReminderTiming {
         editSpecificTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bus.postObject(new EditTimesRequest(remind.specificTimeList, new EditTimesDialogBuilder.EditTimesListener() {
+                Bus.postObject(new EditTimesRequest(remind.specificTimeList, new EditTimesDialog.EditTimesListener() {
                     @Override
                     public void onPositive(ArrayList<TimeItem> times) {
                         remind.specificTimeList = times;
                     }
-                }, new DialogInterface.OnClickListener() {
+                }, new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
 
                     }
-                }));
+                }, true));
             }
         });
     }
