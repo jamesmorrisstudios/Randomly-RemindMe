@@ -144,7 +144,17 @@ public class EditReminderNotification {
                         remind.notificationLEDColor = color;
                         ((GradientDrawable) ledColor.getBackground()).setColor(remind.notificationLEDColor);
                     }
-                }));
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }, null /* TODO new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }*/));
             }
         });
         accentColor.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +175,12 @@ public class EditReminderNotification {
                         ((GradientDrawable) accentColor.getBackground()).setColor(remind.notificationAccentColor);
                         ((GradientDrawable) notificationIconTop.getBackground()).setColor(remind.notificationAccentColor);
                     }
-                }));
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }, null));
             }
         });
         notificationIconTop.setOnClickListener(new View.OnClickListener() {

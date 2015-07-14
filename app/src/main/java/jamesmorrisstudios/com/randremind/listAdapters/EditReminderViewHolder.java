@@ -36,8 +36,8 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
     private TintedImageView toggleExpand;
     private FrameLayout container;
 
-    public EditReminderViewHolder(View view, cardClickListener mListener) {
-        super(view, mListener);
+    public EditReminderViewHolder(View view, boolean isDummyItem, cardClickListener mListener) {
+        super(view, isDummyItem, mListener);
     }
 
     @Override

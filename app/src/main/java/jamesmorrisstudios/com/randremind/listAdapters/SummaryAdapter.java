@@ -41,8 +41,8 @@ public final class SummaryAdapter extends BaseRecycleAdapter {
     }
 
     @Override
-    protected BaseRecycleViewHolder getViewHolder(@NonNull View view, boolean b, BaseRecycleViewHolder.cardClickListener cardClickListener) {
-        return new SummaryViewHolder(view, b, cardClickListener);
+    protected BaseRecycleViewHolder getViewHolder(@NonNull View view, boolean isHeader, boolean isDummyItem, BaseRecycleViewHolder.cardClickListener cardClickListener) {
+        return new SummaryViewHolder(view, isHeader, isDummyItem, cardClickListener);
     }
 
     @Override

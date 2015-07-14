@@ -102,6 +102,8 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_add_white_24dp);
         setNoDataText(getString(R.string.main_list_no_data));
+        setFabAutoHide(false);
+        setDummyItem(true);
     }
 
     @Override

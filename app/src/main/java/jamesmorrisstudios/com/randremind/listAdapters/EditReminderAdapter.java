@@ -18,8 +18,8 @@ public class EditReminderAdapter extends BaseRecycleNoHeaderAdapter {
     }
 
     @Override
-    protected BaseRecycleNoHeaderViewHolder getViewHolder(@NonNull View view, BaseRecycleNoHeaderViewHolder.cardClickListener cardClickListener) {
-        return new EditReminderViewHolder(view, cardClickListener);
+    protected BaseRecycleNoHeaderViewHolder getViewHolder(@NonNull View view, boolean isDummyItem, BaseRecycleNoHeaderViewHolder.cardClickListener cardClickListener) {
+        return new EditReminderViewHolder(view, isDummyItem, cardClickListener);
     }
 
     @Override

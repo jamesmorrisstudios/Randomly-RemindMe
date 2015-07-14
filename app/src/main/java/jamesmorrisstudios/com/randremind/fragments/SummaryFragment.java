@@ -80,10 +80,10 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 Bus.postObject(new PromptDialogRequest(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Utils.toastShort(getString(R.string.reminder_delete));
                         ReminderList.getInstance().deleteCurrentReminder();
                         ReminderList.getInstance().saveData();
                         utilListener.goBackFromFragment();
-                        Utils.toastShort(getString(R.string.reminder_delete));
                     }
                 }, new DialogInterface.OnClickListener() {
                     @Override
