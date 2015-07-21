@@ -63,6 +63,16 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         return true;
     }
 
+    @Override
+    protected void saveState(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void restoreState(Bundle bundle) {
+
+    }
+
     /**
      * @param inflater           Inflater
      * @param container          Root container

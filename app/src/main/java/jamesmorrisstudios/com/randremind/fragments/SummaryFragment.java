@@ -247,6 +247,16 @@ public class SummaryFragment extends BaseRecycleListFragment {
         return true;
     }
 
+    @Override
+    protected void saveState(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void restoreState(Bundle bundle) {
+
+    }
+
     /**
      *
      */

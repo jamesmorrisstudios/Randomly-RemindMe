@@ -51,43 +51,36 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expandedUnused) {
         final EditReminderItem item = (EditReminderItem)baseRecycleItem;
         container.removeAllViews();
-        LayoutInflater inflater = LayoutInflater.from(container.getContext());
-        RelativeLayout view = null;
+        RelativeLayout view = (RelativeLayout)item.pageView;
 
         switch(item.page) {
             case GENERAL:
                 title.setText(AppUtil.getContext().getString(R.string.edit_general));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_general, null );
                 EditReminderGeneral general = new EditReminderGeneral(view);
                 general.bindItem(item);
                 break;
             case MESSAGE:
                 title.setText(AppUtil.getContext().getString(R.string.edit_message));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_message, null );
                 EditReminderMessage message = new EditReminderMessage(view);
                 message.bindItem(item);
                 break;
             case TIMING:
                 title.setText(AppUtil.getContext().getString(R.string.edit_timing));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_timing, null );
                 EditReminderTiming timing = new EditReminderTiming(view);
                 timing.bindItem(item);
                 break;
             case REPEAT:
                 title.setText(AppUtil.getContext().getString(R.string.edit_repeat));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_repeat, null );
                 EditReminderRepeat repeat = new EditReminderRepeat(view);
                 repeat.bindItem(item);
                 break;
             case NOTIFICATION:
                 title.setText(AppUtil.getContext().getString(R.string.edit_notification));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_notification, null );
                 EditReminderNotification notification = new EditReminderNotification(view);
                 notification.bindItem(item);
                 break;
             case ALARM:
                 title.setText(AppUtil.getContext().getString(R.string.edit_alarm));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_alarm, null );
                 EditReminderAlarm alarm = new EditReminderAlarm(view);
                 alarm.bindItem(item);
                 break;

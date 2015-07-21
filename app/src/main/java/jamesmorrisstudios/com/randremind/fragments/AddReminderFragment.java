@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListNoHeaderFragment;
@@ -98,13 +101,19 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
             utilListener.goBackFromFragment();
             return;
         }
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View general = inflater.inflate(R.layout.edit_reminder_general, null);
+        View message = inflater.inflate(R.layout.edit_reminder_message, null);
+        View timing = inflater.inflate(R.layout.edit_reminder_timing, null);
+        View repeat = inflater.inflate(R.layout.edit_reminder_repeat, null);
+        View alert = inflater.inflate(R.layout.edit_reminder_notification, null);
+
         ArrayList<BaseRecycleNoHeaderContainer> data = new ArrayList<>();
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.GENERAL)));
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.MESSAGE)));
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.TIMING)));
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.REPEAT)));
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.NOTIFICATION)));
-        //data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.ALARM)));
+        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.GENERAL, general)));
+        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.MESSAGE, message)));
+        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.TIMING, timing)));
+        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.REPEAT, repeat)));
+        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.NOTIFICATION, alert)));
         applyData(data);
     }
 
@@ -137,6 +146,16 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
     @Override
     public boolean showToolbarTitle() {
         return true;
+    }
+
+    @Override
+    protected void saveState(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void restoreState(Bundle bundle) {
+
     }
 
     @Override
