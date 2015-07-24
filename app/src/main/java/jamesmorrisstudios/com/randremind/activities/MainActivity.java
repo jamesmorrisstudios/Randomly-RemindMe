@@ -25,9 +25,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceIconRequest;
+import com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuilder;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -103,6 +106,9 @@ public final class MainActivity extends BaseLauncherActivity implements
         //Ensure that the repeating alarm is active.
         Scheduler.getInstance().cancelMidnightAlarm();
         Scheduler.getInstance().scheduleRepeatingMidnight();
+        if(isFirstLaunch()) {
+            promptNotificationTheme();
+        }
     }
 
     /**
@@ -170,6 +176,37 @@ public final class MainActivity extends BaseLauncherActivity implements
 
     @Override
     protected void onBackToHome() {
+
+    }
+
+    private void promptNotificationTheme() {
+        String title = getString(R.string.notification_theme_title);
+        int[] items = new int[] {R.drawable.light_back, R.drawable.dark_back};
+        Bus.postObject(new SingleChoiceIconRequest(title, items, new SingleChoiceIconDialogBuilder.OptionPickerListener() {
+            @Override
+            public void onClick(int which) {
+                String pref = AppUtil.getContext().getString(R.string.settings_pref);
+                String keytheme = AppUtil.getContext().getString(R.string.pref_notification_theme);
+                if(which == 0) {
+                    Prefs.putBoolean(pref, keytheme, true);
+                } else {
+                    Prefs.putBoolean(pref, keytheme, false);
+                }
+                setFirstLaunchComplete();
+            }
+        }));
+    }
+
+    private boolean isFirstLaunch() {
+        String pref = AppUtil.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        return Prefs.getBoolean(pref, keyFirstLaunch, true);
+    }
+
+    private void setFirstLaunchComplete() {
+        String pref = AppUtil.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        Prefs.putBoolean(pref, keyFirstLaunch, false);
     }
 
     /**
@@ -266,7 +303,7 @@ public final class MainActivity extends BaseLauncherActivity implements
 
     public void showIconPickerDialog(@NonNull IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
         IconPickerDialogBuilder.with(this)
-                .setTitle(getResources().getString(R.string.chooseIcon))
+                .setTitle(getResources().getString(R.string.choose_icon))
                 .setAccentColor(accentColor)
                 .setOnIconPicked(iconPickerListener)
                 .build()

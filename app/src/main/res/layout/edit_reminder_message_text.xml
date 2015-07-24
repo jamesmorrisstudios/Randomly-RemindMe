@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:gravity="center"
-    android:hint="@string/default_message"
+    android:hint="@string/message"
     android:inputType="textMultiLine|textAutoCorrect|textCapSentences|textAutoComplete"
     android:singleLine="false"
     android:textColor="@color/textDarkMain"

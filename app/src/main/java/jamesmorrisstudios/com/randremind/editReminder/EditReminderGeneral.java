@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.RelativeLayout;
+import android.view.View;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -16,7 +16,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 public class EditReminderGeneral {
     private AppCompatEditText title;
 
-    public EditReminderGeneral(RelativeLayout parent) {
+    public EditReminderGeneral(View parent) {
         title = (AppCompatEditText) parent.findViewById(R.id.titleText);
     }
 

@@ -7,10 +7,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.EditTextListRequest;
-import com.jamesmorrisstudios.appbaselibrary.fragments.EditTextListDialog;
+import com.jamesmorrisstudios.appbaselibrary.dialogs.EditTextListDialog;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class EditReminderMessage {
     private RadioButton inOrder, random;
     private Button editMessages;
 
-    public EditReminderMessage(RelativeLayout parent) {
+    public EditReminderMessage(View parent) {
         numMessages = (AppCompatSpinner) parent.findViewById(R.id.message_count);
         inOrder = (RadioButton) parent.findViewById(R.id.radio_in_order);
         random = (RadioButton) parent.findViewById(R.id.radio_random);

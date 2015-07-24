@@ -16,13 +16,13 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/timing_specific"
+            android:text="@string/specific"
             android:id="@+id/radio_specific" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/timing_range"
+            android:text="@string/range"
             android:id="@+id/radio_range" />
 
     </RadioGroup>

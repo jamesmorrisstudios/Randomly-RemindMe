@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.TimePickerRequest;
@@ -34,7 +33,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
  * Created by James on 6/10/2015.
  */
 public class EditReminderTiming {
-    private RelativeLayout parent;
+    private View parent;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private RadioButton timingSpecific, timingRange;
     private LinearLayout timingTimes, timingTimesPerDay, timingSingleTime;
@@ -42,7 +41,7 @@ public class EditReminderTiming {
     private AppCompatSpinner timeSpinner, timeSpecificSpinner;
     private Button editSpecificTimes;
 
-    public EditReminderTiming(RelativeLayout parent) {
+    public EditReminderTiming(View parent) {
         this.parent = parent;
         startTimeTop = parent.findViewById(R.id.timing_start);
         startHour = (TextView) startTimeTop.findViewById(R.id.time_hour);

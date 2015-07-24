@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Mislukt herinnering lijst te laden"</string>
-    <string name="app_open_fail">"Mislukt app openen"</string>
     <string name="error_time_difference">"Ongeldige tijd"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Bent u zeker dat u uw wijzigingen weggooien?"</string>
     <string name="duplicate_prompt_title">"Duplicate Herinnering"</string>
     <string name="duplicate_prompt_content">"Bent u zeker dat u deze herinnering dupliceren?"</string>
+    <string name="notification_theme_title">"Selecteer de melding stijl die past bij uw telefoon"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Kies Icoon"</string>
-    <string name="selectNotification">"Select Notification"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Titel"</string>
-    <string name="default_message">"Bericht"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Algemeen"</string>
-    <string name="edit_timing">"Timing"</string>
-    <string name="edit_repeat">"Herhalen"</string>
-    <string name="edit_notification">"Kennisgeving"</string>
-    <string name="edit_alarm">"Alarm"</string>
-    <string name="timing_specific">"Specifiek"</string>
-    <string name="timing_range">"Reeks"</string>
+    <string name="select_notification">"Select Notification"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Herinneringen per dag"</string>
-    <string name="vibrate_enable">"Trillen"</string>
-    <string name="random_enable">"Willekeurig Times"</string>
-    <string name="high_priority_enable">"Hoge Prioriteit"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Kleur"</string>
-    <string name="sound_set">"Toon"</string>
-    <string name="icon_set">"Icoon"</string>
-    <string name="icon_color">"Accent Color"</string>
 
-    <string name="in_order">"Om Te"</string>
-    <string name="random">"Toevallig"</string>
     <string name="num_messages">"Aantal Berichten"</string>
     <string name="edit_messages">"Bewerken Berichten"</string>
     <string name="edit_times">"Bewerken Times"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Verwijder het vinkje om de aangepaste melding uit te schakelen en terug te keren naar de standaard systeem"</string>
     <string name="settings_item_2_primary">"Gebruik lopende kennisgeving"</string>
     <string name="settings_item_2_secondary">"Verwijder het vinkje om de kennisgeving aan afgezet kunnen door met het weg zijn. Lopende meldingen worden niet ondersteund op Android Wear"</string>
-    <string name="settings_item_3_primary">"Gebruik lichte thema kennisgeving"</string>
-    <string name="settings_item_3_secondary">"Haal het vinkje weg om donkere kennisgeving thema te gebruiken"</string>
+    <string name="settings_item_3_primary">"Gebruik melding thema van een lichte achtergrond en donkere tekst"</string>
+    <string name="settings_item_3_secondary">"Vink om donkere kennisgeving thema te gebruiken van een donkere achtergrond en lichte tekst"</string>
     <string name="settings_item_4_primary">"Eerste dag van de week"</string>
 
 </resources>

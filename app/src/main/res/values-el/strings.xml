@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Απέτυχε να φορτώσει λίστα υπενθύμισης"</string>
-    <string name="app_open_fail">"Απέτυχε να ανοίξει το app"</string>
     <string name="error_time_difference">"Μη έγκυρη ώρα"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Είστε σίγουροι ότι θέλετε να απορρίψετε τις αλλαγές σας;"</string>
     <string name="duplicate_prompt_title">"Διπλότυπο Υπενθύμιση"</string>
     <string name="duplicate_prompt_content">"Είστε σίγουροι ότι θέλετε να αντιγράψετε αυτό το υπενθύμιση;"</string>
+    <string name="notification_theme_title">"Παρακαλώ επιλέξτε το στυλ που ταιριάζει με την κοινοποίηση του τηλεφώνου σας"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Επιλέξτε Icon"</string>
-    <string name="selectNotification">"Επιλέξτε Κοινοποίηση"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Τίτλος"</string>
-    <string name="default_message">"Μήνυμα"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Γενικός"</string>
-    <string name="edit_timing">"Συγχρονισμός"</string>
-    <string name="edit_repeat">"Επαναλαμβάνω"</string>
-    <string name="edit_notification">"Κοινοποίηση"</string>
-    <string name="edit_alarm">"Συναγερμός"</string>
-    <string name="timing_specific">"Συγκεκριμένος"</string>
-    <string name="timing_range">"Σειρά"</string>
+    <string name="select_notification">"Επιλέξτε Κοινοποίηση"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Υπενθυμίσεις ανά ημέρα"</string>
-    <string name="vibrate_enable">"Δόνηση"</string>
-    <string name="random_enable">"Τυχαία Times"</string>
-    <string name="high_priority_enable">"Υψηλή προτεραιότητα"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Χρώμα"</string>
-    <string name="sound_set">"Τόνος"</string>
-    <string name="icon_set">"Icon"</string>
-    <string name="icon_color">"Χρώμα Accent"</string>
 
-    <string name="in_order">"Για Να"</string>
-    <string name="random">"Τυχαίος"</string>
     <string name="num_messages">"Αριθμός μηνυμάτων"</string>
     <string name="edit_messages">"Επεξεργασία Μηνύματα"</string>
     <string name="edit_times">"Επεξεργασία Times"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Καταργήστε την επιλογή για να απενεργοποιήσετε το προσαρμοσμένο κοινοποίηση και να επανέλθει στο καθιερωμένο σύστημα"</string>
     <string name="settings_item_2_primary">"Χρησιμοποιούν την παράλληλη κοινοποίηση"</string>
     <string name="settings_item_2_secondary">"Καταργήστε την επιλογή για να επιτραπεί η κοινοποίηση είναι αποκρυφτούν περνώντας μακριά. Συνεχίζεται κοινοποιήσεις δεν υποστηρίζονται στο Android Ρούχα"</string>
-    <string name="settings_item_3_primary">"Χρησιμοποιήστε το φως το θέμα κοινοποίησης"</string>
-    <string name="settings_item_3_secondary">"Καταργήστε την επιλογή για να χρησιμοποιήσετε σκοτεινό θέμα κοινοποίησης"</string>
+    <string name="settings_item_3_primary">"Χρησιμοποιήστε θέμα κοινοποίηση ανοιχτόχρωμο φόντο και σκούρο κείμενο"</string>
+    <string name="settings_item_3_secondary">"Καταργήστε την επιλογή για να χρησιμοποιήσετε σκοτεινό θέμα κοινοποίηση σε σκούρο φόντο και ανοιχτόχρωμο κείμενο"</string>
     <string name="settings_item_4_primary">"Πρώτη ημέρα της εβδομάδας"</string>
 
 </resources>

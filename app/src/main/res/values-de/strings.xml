@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Fehler beim Erinnerungsliste laden"</string>
-    <string name="app_open_fail">"Fehler beim app öffnen"</string>
     <string name="error_time_difference">"Ungültige Zeit"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Sind Sie sicher, dass Sie wollen, um Ihre Änderungen zu verwerfen?"</string>
     <string name="duplicate_prompt_title">"Doppelte Erinnerung"</string>
     <string name="duplicate_prompt_content">"Sind Sie sicher, dass Sie möchten, dass diese Erinnerung zu duplizieren?"</string>
+    <string name="notification_theme_title">"Bitte wählen Sie die Benachrichtigung Stil, der Ihr Telefon übereinstimmt"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Wählen Icon"</string>
-    <string name="selectNotification">"Mitteilung auswählen"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Titel"</string>
-    <string name="default_message">"Nachricht"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"General"</string>
-    <string name="edit_timing">"Timing"</string>
-    <string name="edit_repeat">"Wiederholung"</string>
-    <string name="edit_notification">"Benachrichtigung"</string>
-    <string name="edit_alarm">"Alarm"</string>
-    <string name="timing_specific">"Spezifisch"</string>
-    <string name="timing_range">"Angebot"</string>
+    <string name="select_notification">"Mitteilung auswählen"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Reminders pro Tag"</string>
-    <string name="vibrate_enable">"Vibrieren"</string>
-    <string name="random_enable">"Randomize Zeiten"</string>
-    <string name="high_priority_enable">"Hohe Priorität"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Farbe"</string>
-    <string name="sound_set">"Ton"</string>
-    <string name="icon_set">"Symbol"</string>
-    <string name="icon_color">"Akzentfarbe"</string>
 
-    <string name="in_order">"In Ordnung"</string>
-    <string name="random">"Zufällig"</string>
     <string name="num_messages">"Anzahl der Nachrichten"</string>
     <string name="edit_messages">"Nachrichten bearbeiten"</string>
     <string name="edit_times">"Bearbeiten Zeiten"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Deaktivieren Sie die Option zum Deaktivieren der benutzerdefinierten Benachrichtigung und holen Sie bitte die Standardsystem"</string>
     <string name="settings_item_2_primary">"Verwenden laufende Benachrichtigung"</string>
     <string name="settings_item_2_secondary">"Deaktivieren Sie die Option, damit die Benachrichtigung dismissible von swiping es weg zu sein. Laufende Benachrichtigungen nicht auf Android Wear unterstützt"</string>
-    <string name="settings_item_3_primary">"Verwenden Sie leichte Benachrichtigung Thema"</string>
-    <string name="settings_item_3_secondary">"Deaktivieren Sie die Option, um dunkle Benachrichtigung Thema verwenden"</string>
+    <string name="settings_item_3_primary">"Verwenden Benachrichtigung Thema einem hellen Hintergrund und dunklen Text"</string>
+    <string name="settings_item_3_secondary">"Deaktivieren Sie, um dunkle Benachrichtigung Thema einem dunklen Hintergrund und Lichttext verwenden"</string>
     <string name="settings_item_4_primary">"Erster Tag der Woche"</string>
 
 </resources>

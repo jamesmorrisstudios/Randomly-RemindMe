@@ -15,7 +15,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="@string/default_title"
+        android:hint="@string/title"
         android:inputType="text|textAutoCorrect|textCapSentences"
         android:singleLine="true"
         android:textColor="@color/textDarkMain"

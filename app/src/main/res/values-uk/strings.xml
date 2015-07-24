@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Не вдалося завантажити список нагадування"</string>
-    <string name="app_open_fail">"Не вдалося відкрити програму"</string>
     <string name="error_time_difference">"Невірний час"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Ви впевнені, що хочете скасувати зміни?"</string>
     <string name="duplicate_prompt_title">"Дублікат Нагадування"</string>
     <string name="duplicate_prompt_content">"Ви впевнені, що хочете, щоб дублювати це нагадування?"</string>
+    <string name="notification_theme_title">"Будь ласка, виберіть стиль, який відповідає повідомлення телефон"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Виберіть значок"</string>
-    <string name="selectNotification">"Вибір повідомлення"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Назва"</string>
-    <string name="default_message">"Повідомлення"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Генеральна"</string>
-    <string name="edit_timing">"Синхронізація"</string>
-    <string name="edit_repeat">"Повторення"</string>
-    <string name="edit_notification">"Повідомлення"</string>
-    <string name="edit_alarm">"Тривога"</string>
-    <string name="timing_specific">"Питома"</string>
-    <string name="timing_range">"Діапазон"</string>
+    <string name="select_notification">"Вибір повідомлення"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Нагадування в день"</string>
-    <string name="vibrate_enable">"Вібрувати"</string>
-    <string name="random_enable">"Випадковий раз"</string>
-    <string name="high_priority_enable">"Високий Пріоритет"</string>
-    <string name="led_enable">"СВІТЛОДІОД"</string>
-    <string name="led_color">"Колір"</string>
-    <string name="sound_set">"Тон"</string>
-    <string name="icon_set">"Ікона"</string>
-    <string name="icon_color">"Акцент Колір"</string>
 
-    <string name="in_order">"В Порядку"</string>
-    <string name="random">"Випадковий"</string>
     <string name="num_messages">"Кількість повідомлень"</string>
     <string name="edit_messages">"Редагувати повідомлення"</string>
     <string name="edit_times">"Змінити час"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Зніміть цей прапорець для відключення користувальницького повідомлення та повернутися до стандартної системи"</string>
     <string name="settings_item_2_primary">"Використовуйте поточну повідомлення"</string>
     <string name="settings_item_2_secondary">"Зніміть, щоб повідомлення буде відмахнутися, проводячи його. Поточні повідомлення не підтримується на Android Wear"</string>
-    <string name="settings_item_3_primary">"Використовуйте легкий тему повідомлення"</string>
-    <string name="settings_item_3_secondary">"Зніміть використовувати темну тему повідомлення"</string>
+    <string name="settings_item_3_primary">"Використовуйте повідомлення тема світлому фоні і темний текст"</string>
+    <string name="settings_item_3_secondary">"Зніміть використовувати темну тему Повідомлення про темному фоні і світлим текстом"</string>
     <string name="settings_item_4_primary">"Перший день тижня"</string>
 
 </resources>

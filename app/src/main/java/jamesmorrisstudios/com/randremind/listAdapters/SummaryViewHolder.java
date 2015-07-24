@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -30,9 +29,7 @@ import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
 import com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate;
-import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
-import com.nineoldandroids.view.ViewHelper;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -125,7 +122,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
 
         String title = reminder.title;
         if (title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.default_title);
+            title = AppUtil.getContext().getString(R.string.title);
         }
         this.title.setText(title);
         if (reminder.rangeTiming) {

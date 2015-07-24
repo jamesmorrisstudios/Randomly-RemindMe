@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"リマインダーリストの読み込みに失敗しました"</string>
-    <string name="app_open_fail">"アプリを開くことができませんでした"</string>
     <string name="error_time_difference">"無効な時刻"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"あなたの変更を破棄してもよろしいですか？"</string>
     <string name="duplicate_prompt_title">"重複リマインダー"</string>
     <string name="duplicate_prompt_content">"あなたは、この通知を複製してもよろしいですか？"</string>
+    <string name="notification_theme_title">"お使いの携帯電話に一致する通知のスタイルを選択してください"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"アイコンを選択してください"</string>
-    <string name="selectNotification">"[通知"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"タイトル"</string>
-    <string name="default_message">"メッセージ"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"一般的な"</string>
-    <string name="edit_timing">"タイミング"</string>
-    <string name="edit_repeat">"リピート"</string>
-    <string name="edit_notification">"通知"</string>
-    <string name="edit_alarm">"アラーム"</string>
-    <string name="timing_specific">"特定"</string>
-    <string name="timing_range">"範囲"</string>
+    <string name="select_notification">"[通知"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"1日のリマインダー"</string>
-    <string name="vibrate_enable">"振動します"</string>
-    <string name="random_enable">"タイムズをランダム"</string>
-    <string name="high_priority_enable">"最優先"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"色"</string>
-    <string name="sound_set">"トーン"</string>
-    <string name="icon_set">"アイコン"</string>
-    <string name="icon_color">"アクセントカラー"</string>
 
-    <string name="in_order">"順番に"</string>
-    <string name="random">"ランダム"</string>
     <string name="num_messages">"メッセージ数"</string>
     <string name="edit_messages">"メッセージを編集"</string>
     <string name="edit_times">"編集タイムズ"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"カスタム通知を無効にし、標準のシステムに戻すことはチェックを外します"</string>
     <string name="settings_item_2_primary">"継続的な通知を使用してください"</string>
     <string name="settings_item_2_secondary">"通知はそれを離れてスワイプしてdismissibleことを可能にするには、無効にします。継続的な通知はアンドロイドウェアでサポートされていません"</string>
-    <string name="settings_item_3_primary">"光通知テーマを使用"</string>
-    <string name="settings_item_3_secondary">"ダーク通知テーマを使用するには、無効"</string>
+    <string name="settings_item_3_primary">"明るい背景と暗いテキストの通知テーマを使用"</string>
+    <string name="settings_item_3_secondary">"暗い背景と光のテキストの暗い通知テーマを使用するには、無効"</string>
     <string name="settings_item_4_primary">"週の最初の日"</string>
 
 </resources>

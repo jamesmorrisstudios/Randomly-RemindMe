@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Gagal memuat daftar pengingat"</string>
-    <string name="app_open_fail">"Gagal membuka aplikasi"</string>
     <string name="error_time_difference">"Waktu tidak valid"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Apakah Anda yakin ingin membuang perubahan Anda?"</string>
     <string name="duplicate_prompt_title">"Pengingat duplikat"</string>
     <string name="duplicate_prompt_content">"Apakah Anda yakin ingin menduplikasi pengingat ini?"</string>
+    <string name="notification_theme_title">"Silakan pilih gaya pemberitahuan yang cocok telepon Anda"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Pilih Icon"</string>
-    <string name="selectNotification">"Pilih Pemberitahuan"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Judul"</string>
-    <string name="default_message">"Pesan"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Umum"</string>
-    <string name="edit_timing">"Pemilihan waktu"</string>
-    <string name="edit_repeat">"Ulangi"</string>
-    <string name="edit_notification">"Pemberitahuan"</string>
-    <string name="edit_alarm">"Alarm"</string>
-    <string name="timing_specific">"Spesifik"</string>
-    <string name="timing_range">"Jarak"</string>
+    <string name="select_notification">"Pilih Pemberitahuan"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Pengingat Per Hari"</string>
-    <string name="vibrate_enable">"Bergetar"</string>
-    <string name="random_enable">"Randomize Waktu"</string>
-    <string name="high_priority_enable">"Prioritas Utama"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Warna"</string>
-    <string name="sound_set">"Nada"</string>
-    <string name="icon_set">"Icon"</string>
-    <string name="icon_color">"Accent Warna"</string>
 
-    <string name="in_order">"Dalam Urutan"</string>
-    <string name="random">"Acak"</string>
     <string name="num_messages">"Jumlah Pesan"</string>
     <string name="edit_messages">"Mengedit Pesan"</string>
     <string name="edit_times">"Mengedit Waktu"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Hapus tanda centang untuk menonaktifkan notifikasi kustom dan kembali ke sistem standar"</string>
     <string name="settings_item_2_primary">"Gunakan pemberitahuan berkelanjutan"</string>
     <string name="settings_item_2_secondary">"Hapus tanda centang untuk memungkinkan pemberitahuan untuk menjadi dismissible dengan menggesekkan itu pergi. Pemberitahuan yang sedang berlangsung tidak didukung pada Android Wear"</string>
-    <string name="settings_item_3_primary">"Menggunakan tema pemberitahuan cahaya"</string>
-    <string name="settings_item_3_secondary">"Hapus tanda centang untuk menggunakan pemberitahuan tema dark"</string>
+    <string name="settings_item_3_primary">"Menggunakan tema pemberitahuan dari latar belakang cahaya dan teks gelap"</string>
+    <string name="settings_item_3_secondary">"Hapus tanda centang untuk menggunakan pemberitahuan tema gelap dari latar belakang gelap dan teks cahaya"</string>
     <string name="settings_item_4_primary">"Hari pertama dalam seminggu"</string>
 
 </resources>

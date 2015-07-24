@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">Failed to load reminder list</string>
-    <string name="app_open_fail">Failed to open app</string>
     <string name="error_time_difference">Invalid time</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">Are you sure you want to discard your changes?</string>
     <string name="duplicate_prompt_title">Duplicate Reminder</string>
     <string name="duplicate_prompt_content">Are you sure you want to duplicate this reminder?</string>
+    <string name="notification_theme_title">Please select the notification style that matches your phone</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">Choose Icon</string>
-    <string name="selectNotification">Select Notification</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">Title</string>
-    <string name="default_message">Message</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">General</string>
-    <string name="edit_timing">Timing</string>
-    <string name="edit_repeat">Repeat</string>
-    <string name="edit_notification">Notification</string>
-    <string name="edit_alarm">Alarm</string>
-    <string name="timing_specific">Specific</string>
-    <string name="timing_range">Range</string>
+    <string name="select_notification">Select Notification</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">Reminders Per Day</string>
-    <string name="vibrate_enable">Vibrate</string>
-    <string name="random_enable">Randomize Times</string>
-    <string name="high_priority_enable">High Priority</string>
-    <string name="led_enable">LED</string>
-    <string name="led_color">Color</string>
-    <string name="sound_set">Tone</string>
-    <string name="icon_set">Icon</string>
-    <string name="icon_color">Accent Color</string>
 
-    <string name="in_order">In Order</string>
-    <string name="random">Random</string>
     <string name="num_messages">Number of Messages</string>
     <string name="edit_messages">Edit Messages</string>
     <string name="edit_times">Edit Times</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">Uncheck to disable the custom notification and revert to the standard system</string>
     <string name="settings_item_2_primary">Use ongoing notification</string>
     <string name="settings_item_2_secondary">Uncheck to allow the notification to be dismissible by swiping it away. Ongoing notifications are not supported on Android Wear</string>
-    <string name="settings_item_3_primary">Use light notification theme</string>
-    <string name="settings_item_3_secondary">Uncheck to use dark notification theme</string>
+    <string name="settings_item_3_primary">Use notification theme of a light background and dark text</string>
+    <string name="settings_item_3_secondary">Uncheck to use dark notification theme of a dark background and light text</string>
     <string name="settings_item_4_primary">First day of the week</string>
 
 </resources>
