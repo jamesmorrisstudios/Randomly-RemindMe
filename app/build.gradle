@@ -18,6 +18,7 @@ apply plugin: 'com.android.application'
 
 repositories {
     mavenLocal()
+    maven { url "https://jitpack.io" }
     mavenCentral()
 }
 
@@ -71,6 +72,9 @@ android {
 apply from: file("../../../keystore/signing-rand-remind.gradle")
 
 dependencies {
-    compile 'com.jamesmorrisstudios:utilitieslibrary:1.1'
-    compile 'com.jamesmorrisstudios:appbaselibrary:1.1'
+    //compile 'com.jamesmorrisstudios:utilitieslibrary:1.1' //local gradle
+    //compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
+
+    compile 'com.github.morris-james:UtilitiesLibrary:v1.1.1' //Jitpack
+    compile 'com.github.morris-james:appbaselibrary:v1.1.1' //Jitpack
 }
