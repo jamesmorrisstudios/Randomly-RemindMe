@@ -2,7 +2,7 @@
 
 Get it on Google Play https://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind
 
-Work in progress screenshots http://imgur.com/a/CyRPR
+Official Website http://www.jamesmorrisstudios.us/
 
 Do you have trouble drinking enough water during the day? Maybe you want a reminder to step away from the computer for a bit. This app will let you set any number of custom reminders that will remind you throughout the day for just that and a whole lot more. If you only want the reminders on week days then select only those days.
 
@@ -27,10 +27,7 @@ Customize each reminder independently with these options
 # Usage
 This project requires https://github.com/morris-james/UtilitiesLibrary and https://github.com/morris-james/appbaselibrary
 
-The dependencies are setup to upload to your local maven repository so you must build and upload each of them before building this project.
-
-Make sure you follow the build instructions on all the dependencies first.
-Then use Android Studio to build the project.
+The dependencies are available via jitpack from their github releases.
 
 # Donate
 Support continued development of this and future apps and thank the developer for all his work.
