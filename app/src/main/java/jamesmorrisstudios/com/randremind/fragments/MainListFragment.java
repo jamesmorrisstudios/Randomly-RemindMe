@@ -63,6 +63,16 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         return true;
     }
 
+    @Override
+    protected void saveState(Bundle bundle) {
+
+    }
+
+    @Override
+    protected void restoreState(Bundle bundle) {
+
+    }
+
     /**
      * @param inflater           Inflater
      * @param container          Root container
@@ -102,6 +112,8 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_add_white_24dp);
         setNoDataText(getString(R.string.main_list_no_data));
+        setFabAutoHide(false);
+        setDummyItem(true);
     }
 
     @Override

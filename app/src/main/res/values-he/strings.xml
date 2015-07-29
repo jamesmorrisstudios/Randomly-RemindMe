@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"נכשל ניסיון לטעון רשימת תזכורת"</string>
-    <string name="app_open_fail">"לא הצליח לפתוח את האפליקציה"</string>
     <string name="error_time_difference">"זמן לא חוקי"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"האם אתה בטוח שאתה רוצה למחוק את השינויים?"</string>
     <string name="duplicate_prompt_title">"תזכורת כפולה"</string>
     <string name="duplicate_prompt_content">"האם אתה בטוח שאתה רוצה לשכפל תזכורת זו?"</string>
+    <string name="notification_theme_title">"אנא בחר את סגנון ההודעה שמתאים לטלפון שלך"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"בחר אייקון"</string>
-    <string name="selectNotification">"הודעה בחר"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"כותרת"</string>
-    <string name="default_message">"הודעה"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"כללי"</string>
-    <string name="edit_timing">"עיתוי"</string>
-    <string name="edit_repeat">"חזור"</string>
-    <string name="edit_notification">"הודעה"</string>
-    <string name="edit_alarm">"אזעקה"</string>
-    <string name="timing_specific">"ספציפי"</string>
-    <string name="timing_range">"טווח"</string>
+    <string name="select_notification">"הודעה בחר"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"תזכורות ליום"</string>
-    <string name="vibrate_enable">"לְהַרְטִיט"</string>
-    <string name="random_enable">"האקראי טיימס"</string>
-    <string name="high_priority_enable">"עדיפות גבוהה"</string>
-    <string name="led_enable">"לד"</string>
-    <string name="led_color">"צבע"</string>
-    <string name="sound_set">"טון"</string>
-    <string name="icon_set">"אייקון"</string>
-    <string name="icon_color">"מבטא צבע"</string>
 
-    <string name="in_order">"בסדר"</string>
-    <string name="random">"אקראי"</string>
     <string name="num_messages">"מספר הודעות"</string>
     <string name="edit_messages">"הודעות עריכה"</string>
     <string name="edit_times">"העריכה טיימס"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"בטל להשבית את ההודעה המותאמת אישית ולחזור למערכת סטנדרטית"</string>
     <string name="settings_item_2_primary">"השתמש הודעה מתמשכת"</string>
     <string name="settings_item_2_secondary">"בטל לאפשר את ההודעה להיות dismissible על ידי והעבירה אותו משם. הודעות שוטפות אינן נתמכות על Android Wear"</string>
-    <string name="settings_item_3_primary">"השתמש נושא הודעת אור"</string>
-    <string name="settings_item_3_secondary">"בטל להשתמש נושא הודעה כהה"</string>
+    <string name="settings_item_3_primary">"השתמש נושא הודעה של רקע בהיר וטקסט כהה"</string>
+    <string name="settings_item_3_secondary">"בטל להשתמש נושא הודעה כהה של רקע כהה וטקסט בהיר"</string>
     <string name="settings_item_4_primary">"היום הראשון של השבוע"</string>
 
 </resources>

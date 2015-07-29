@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.RelativeLayout;
+import android.view.View;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -16,7 +16,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 public class EditReminderGeneral {
     private AppCompatEditText title;
 
-    public EditReminderGeneral(RelativeLayout parent) {
+    public EditReminderGeneral(View parent) {
         title = (AppCompatEditText) parent.findViewById(R.id.titleText);
     }
 
@@ -25,7 +25,7 @@ public class EditReminderGeneral {
         if(reminderItem == null) {
             return;
         }
-        title.setText(reminderItem.title);
+        title.setText(reminderItem.getTitle());
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -39,7 +39,9 @@ public class EditReminderGeneral {
 
             @Override
             public void afterTextChanged(@NonNull Editable s) {
-                reminderItem.title = s.toString();
+                if(!reminderItem.getTitle().equals(s.toString())) {
+                    reminderItem.setTitle(s.toString());
+                }
             }
         };
         title.addTextChangedListener(textWatcher);

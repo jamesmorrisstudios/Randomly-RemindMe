@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Nepodarilo sa načítať zoznam pripomenutie"</string>
-    <string name="app_open_fail">"Nepodarilo sa otvoriť aplikáciu"</string>
     <string name="error_time_difference">"Neplatný čas"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Ste si istí, že chcete zmeny zrušiť?"</string>
     <string name="duplicate_prompt_title">"Duplicate Pripomienka"</string>
     <string name="duplicate_prompt_content">"Ste si istí, že chcete duplikovať toto pripomenutie?"</string>
+    <string name="notification_theme_title">"Prosím, vyberte si štýl, oznámenia, ktorý zodpovedá vášmu telefónu"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Vybrať ikonu"</string>
-    <string name="selectNotification">"Select Notification"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Názov"</string>
-    <string name="default_message">"Správa"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Všeobecný"</string>
-    <string name="edit_timing">"Načasovanie"</string>
-    <string name="edit_repeat">"Opakovať"</string>
-    <string name="edit_notification">"Oznámenie"</string>
-    <string name="edit_alarm">"Poplach"</string>
-    <string name="timing_specific">"Špecifický"</string>
-    <string name="timing_range">"Rozsah"</string>
+    <string name="select_notification">"Select Notification"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Upomienky za deň"</string>
-    <string name="vibrate_enable">"Vibrovať"</string>
-    <string name="random_enable">"Randomize Times"</string>
-    <string name="high_priority_enable">"Vysoká priorita"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Farba"</string>
-    <string name="sound_set">"Tón"</string>
-    <string name="icon_set">"Ikona"</string>
-    <string name="icon_color">"Accent Color"</string>
 
-    <string name="in_order">"V Prípade"</string>
-    <string name="random">"Náhodný"</string>
     <string name="num_messages">"Počet správ"</string>
     <string name="edit_messages">"Upraviť Správy"</string>
     <string name="edit_times">"Edit Times"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Zrušte zaškrtnutie zakázať vlastné oznámenia a vrátiť do štandardného systému"</string>
     <string name="settings_item_2_primary">"Použiť prebiehajúce oznámenia"</string>
     <string name="settings_item_2_secondary">"Zrušte zaškrtnutie aby oznámenie za dismissible prejdením to preč. Prebiehajúce oznámenia nie sú podporované na Android Wear"</string>
-    <string name="settings_item_3_primary">"Pomocou svetelného upozornenia tému"</string>
-    <string name="settings_item_3_secondary">"Zrušte zaškrtnutie políčka použiť tmavé oznámenia motív"</string>
+    <string name="settings_item_3_primary">"Použitie oznámenia tému na svetlom pozadí a tmavo textom"</string>
+    <string name="settings_item_3_secondary">"Zrušte zaškrtnutie políčka použiť tmavé oznámenia tému tmavom pozadí a svetlý text"</string>
     <string name="settings_item_4_primary">"Prvý deň v týždni"</string>
 
 </resources>

@@ -1,80 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/daysContainer"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:minWidth="300dp"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/daysContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:minWidth="300dp"
-        android:orientation="horizontal">
+    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+        android:id="@+id/day0"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@color/iconDark"
+        android:clickable="true" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
-            android:id="@+id/day0"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/iconDark"
-            android:clickable="true" />
+    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+        android:id="@+id/day1"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@color/iconDark"
+        android:clickable="true" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
-            android:id="@+id/day1"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/iconDark"
-            android:clickable="true" />
+    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+        android:id="@+id/day2"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@color/iconDark"
+        android:clickable="true" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
-            android:id="@+id/day2"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/iconDark"
-            android:clickable="true" />
+    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+        android:id="@+id/day3"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@color/iconDark"
+        android:clickable="true" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
-            android:id="@+id/day3"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/iconDark"
-            android:clickable="true" />
+    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+        android:id="@+id/day4"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@color/iconDark"
+        android:clickable="true" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
-            android:id="@+id/day4"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/iconDark"
-            android:clickable="true" />
+    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+        android:id="@+id/day5"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@color/iconDark"
+        android:clickable="true" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
-            android:id="@+id/day5"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/iconDark"
-            android:clickable="true" />
+    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+        android:id="@+id/day6"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:background="@color/iconDark"
+        android:clickable="true" />
 
-        <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
-            android:id="@+id/day6"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@color/iconDark"
-            android:clickable="true" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

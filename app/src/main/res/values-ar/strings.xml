@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"فشل تحميل قائمة تذكير"</string>
-    <string name="app_open_fail">"فشل لفتح التطبيق"</string>
     <string name="error_time_difference">"الوقت غير صالح"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"هل أنت متأكد أنك تريد تجاهل التغييرات؟"</string>
     <string name="duplicate_prompt_title">"تذكير مكررة"</string>
     <string name="duplicate_prompt_content">"هل أنت متأكد أنك تريد تكرار هذا التذكير؟"</string>
+    <string name="notification_theme_title">"يرجى تحديد نمط الإخطار الذي يطابق هاتفك"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"اختيار أيقونة"</string>
-    <string name="selectNotification">"حدد إعلام"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"عنوان"</string>
-    <string name="default_message">"رسالة"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"عام"</string>
-    <string name="edit_timing">"توقيت"</string>
-    <string name="edit_repeat">"كرر"</string>
-    <string name="edit_notification">"إعلام"</string>
-    <string name="edit_alarm">"إنذار"</string>
-    <string name="timing_specific">"خاص"</string>
-    <string name="timing_range">"نطاق"</string>
+    <string name="select_notification">"حدد إعلام"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"تذكير لكل يوم"</string>
-    <string name="vibrate_enable">"ذبذب"</string>
-    <string name="random_enable">"بطريقة عشوائية تايمز"</string>
-    <string name="high_priority_enable">"أولوية عالية"</string>
-    <string name="led_enable">"الصمام"</string>
-    <string name="led_color">"اللون"</string>
-    <string name="sound_set">"نغمة"</string>
-    <string name="icon_set">"رمز"</string>
-    <string name="icon_color">"لهجة اللون"</string>
 
-    <string name="in_order">"من أجل"</string>
-    <string name="random">"عشوائي"</string>
     <string name="num_messages">"عدد الرسائل"</string>
     <string name="edit_messages">"تحرير الرسائل"</string>
     <string name="edit_times">"تحرير تايمز"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"قم بإلغاء التحديد لتعطيل إعلام مخصص والعودة إلى نظام موحد"</string>
     <string name="settings_item_2_primary">"استخدام الإخطار المستمر"</string>
     <string name="settings_item_2_secondary">"قم بإلغاء التحديد من السماح للإعلام أن يكون dismissible عن طريق تمرير بعيدا. غير معتمدة الإخطارات الجارية بشأن Android Wear"</string>
-    <string name="settings_item_3_primary">"استخدام موضوع الإخطار خفيفة"</string>
-    <string name="settings_item_3_secondary">"قم بإلغاء التحديد لاستخدام موضوع الإخطار الظلام"</string>
+    <string name="settings_item_3_primary">"استخدام موضوع الإخطار خلفية الخفيفة والنص مظلم"</string>
+    <string name="settings_item_3_secondary">"قم بإلغاء التحديد لاستخدام موضوع الإخطار المظلم من خلفية داكنة والنص خفيفة"</string>
     <string name="settings_item_4_primary">"اليوم الأول من الأسبوع"</string>
 
 </resources>

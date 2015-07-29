@@ -1,9 +1,7 @@
 package jamesmorrisstudios.com.randremind.listAdapters;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
@@ -36,8 +34,8 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
     private TintedImageView toggleExpand;
     private FrameLayout container;
 
-    public EditReminderViewHolder(View view, cardClickListener mListener) {
-        super(view, mListener);
+    public EditReminderViewHolder(View view, boolean isDummyItem, cardClickListener mListener) {
+        super(view, isDummyItem, mListener);
     }
 
     @Override
@@ -51,43 +49,36 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expandedUnused) {
         final EditReminderItem item = (EditReminderItem)baseRecycleItem;
         container.removeAllViews();
-        LayoutInflater inflater = LayoutInflater.from(container.getContext());
-        RelativeLayout view = null;
+        View view = item.pageView;
 
         switch(item.page) {
             case GENERAL:
-                title.setText(AppUtil.getContext().getString(R.string.edit_general));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_general, null );
+                title.setText(AppUtil.getContext().getString(R.string.general));
                 EditReminderGeneral general = new EditReminderGeneral(view);
                 general.bindItem(item);
                 break;
             case MESSAGE:
                 title.setText(AppUtil.getContext().getString(R.string.edit_message));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_message, null );
                 EditReminderMessage message = new EditReminderMessage(view);
                 message.bindItem(item);
                 break;
             case TIMING:
-                title.setText(AppUtil.getContext().getString(R.string.edit_timing));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_timing, null );
+                title.setText(AppUtil.getContext().getString(R.string.timing));
                 EditReminderTiming timing = new EditReminderTiming(view);
                 timing.bindItem(item);
                 break;
             case REPEAT:
-                title.setText(AppUtil.getContext().getString(R.string.edit_repeat));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_repeat, null );
+                title.setText(AppUtil.getContext().getString(R.string.repeat));
                 EditReminderRepeat repeat = new EditReminderRepeat(view);
                 repeat.bindItem(item);
                 break;
             case NOTIFICATION:
-                title.setText(AppUtil.getContext().getString(R.string.edit_notification));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_notification, null );
+                title.setText(AppUtil.getContext().getString(R.string.notification));
                 EditReminderNotification notification = new EditReminderNotification(view);
                 notification.bindItem(item);
                 break;
             case ALARM:
-                title.setText(AppUtil.getContext().getString(R.string.edit_alarm));
-                view = (RelativeLayout) inflater.inflate(R.layout.edit_reminder_alarm, null );
+                title.setText(AppUtil.getContext().getString(R.string.alarm));
                 EditReminderAlarm alarm = new EditReminderAlarm(view);
                 alarm.bindItem(item);
                 break;

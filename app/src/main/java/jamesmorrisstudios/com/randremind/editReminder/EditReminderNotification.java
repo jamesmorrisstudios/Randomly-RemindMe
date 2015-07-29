@@ -6,18 +6,19 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatCheckBox;
+import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.ColorPickerRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.RingtoneRequest;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.dialogs.colorpicker.builder.ColorPickerClickListener;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
@@ -30,21 +31,27 @@ import jamesmorrisstudios.com.randremind.util.IconUtil;
  * Created by James on 6/10/2015.
  */
 public class EditReminderNotification {
-    private AppCompatCheckBox vibrateEnable, ledEnable, highPriorityEnable;
-    private TextView sound;
+    private TextView sound, priority, vibrate, led;
     private View ledColor, accentColor;
     private ImageView icon;
-    private RelativeLayout notificationIconTop;
+    private RelativeLayout notificationIconTop, notificationSoundContainer, notificationPriorityContainer,
+            notificationVibrateContainer, notificationLedContainer, notificationIconContainer, notificationAccentContainer;
 
-    public EditReminderNotification(RelativeLayout parent) {
-        vibrateEnable = (AppCompatCheckBox) parent.findViewById(R.id.notification_vibrate_enabled);
-        ledEnable = (AppCompatCheckBox) parent.findViewById(R.id.notification_led_enabled);
-        highPriorityEnable = (AppCompatCheckBox) parent.findViewById(R.id.notification_high_priority_enabled);
+    public EditReminderNotification(View parent) {
         sound = (TextView) parent.findViewById(R.id.notificationSound);
         ledColor = parent.findViewById(R.id.notification_led_color);
         icon = (ImageView) parent.findViewById(R.id.notificationIcon);
         accentColor = parent.findViewById(R.id.notification_accent_color);
         notificationIconTop = (RelativeLayout) parent.findViewById(R.id.notificationIconTop);
+        notificationSoundContainer = (RelativeLayout) parent.findViewById(R.id.notificationSoundContainer);
+        notificationPriorityContainer = (RelativeLayout) parent.findViewById(R.id.notificationPriorityContainer);
+        priority = (TextView) parent.findViewById(R.id.notificationPriority);
+        notificationVibrateContainer = (RelativeLayout) parent.findViewById(R.id.notificationVibrateContainer);
+        vibrate = (TextView) parent.findViewById(R.id.notificationVibrate);
+        notificationLedContainer = (RelativeLayout) parent.findViewById(R.id.notificationLedContainer);
+        led = (TextView) parent.findViewById(R.id.notificationLed);
+        notificationIconContainer = (RelativeLayout) parent.findViewById(R.id.notificationIconContainer);
+        notificationAccentContainer = (RelativeLayout) parent.findViewById(R.id.notificationAccentContainer);
     }
 
     public final void bindItem(EditReminderItem item) {
@@ -52,21 +59,25 @@ public class EditReminderNotification {
         if(reminderItem == null) {
             return;
         }
-        vibrateEnable.setChecked(reminderItem.notificationVibrate);
-        highPriorityEnable.setChecked(reminderItem.notificationHighPriority);
-        ledEnable.setChecked(reminderItem.notificationLED);
-        sound.setText(reminderItem.notificationToneName);
+        sound.setText(reminderItem.getNotificationToneName());
+        priority.setText(reminderItem.getNotificationPriority().name);
+        vibrate.setText(reminderItem.getNotificationVibratePattern().name);
+        if(reminderItem.isNotificationLED()) {
+            led.setText(AppUtil.getContext().getString(R.string.enabled));
+        } else {
+            led.setText(AppUtil.getContext().getString(R.string.disabled));
+        }
 
-        ((GradientDrawable) ledColor.getBackground()).setColor(reminderItem.notificationLEDColor);
-        ((GradientDrawable) accentColor.getBackground()).setColor(reminderItem.notificationAccentColor);
-        ((GradientDrawable) notificationIconTop.getBackground()).setColor(reminderItem.notificationAccentColor);
-        icon.setImageResource(IconUtil.getIconRes(reminderItem.notificationIcon));
+        ((GradientDrawable) ledColor.getBackground()).setColor(reminderItem.getNotificationLEDColor());
+        ((GradientDrawable) accentColor.getBackground()).setColor(reminderItem.getNotificationAccentColor());
+        ((GradientDrawable) notificationIconTop.getBackground()).setColor(reminderItem.getNotificationAccentColor());
+        icon.setImageResource(IconUtil.getIconRes(reminderItem.getNotificationIcon()));
 
         notificationListeners();
     }
 
     private void notificationListeners() {
-        sound.setOnClickListener(new View.OnClickListener() {
+        notificationSoundContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View v) {
                 final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
@@ -74,101 +85,143 @@ public class EditReminderNotification {
                     return;
                 }
                 Uri defaultUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                if (remind.notificationTone != null) {
-                    defaultUri = Uri.parse(remind.notificationTone);
+                if (remind.getNotificationTone() != null) {
+                    defaultUri = remind.getNotificationTone();
                 }
-                Bus.postObject(new RingtoneRequest(defaultUri, AppUtil.getContext().getResources().getString(R.string.selectNotification), new RingtoneRequest.RingtoneRequestListener() {
+                Bus.postObject(new RingtoneRequest(defaultUri, AppUtil.getContext().getResources().getString(R.string.select_notification), new RingtoneRequest.RingtoneRequestListener() {
                     @Override
                     public void ringtoneResponse(Uri uri, String name) {
                         if (uri != null) {
-                            if(uri != null) {
-                                remind.notificationTone = uri.toString();
-                            } else {
-                                remind.notificationTone = null;
-                            }
-                            if(name != null) {
-                                remind.notificationToneName = name;
-                            } else {
-                                remind.notificationToneName = AppUtil.getContext().getString(R.string.none);
-                            }
-                            sound.setText(remind.notificationToneName);
+                            remind.setNotificationTone(uri.toString());
+                        } else {
+                            remind.setNotificationTone(null);
                         }
+                        if (name != null) {
+                            remind.setNotificationToneName(name);
+                        } else {
+                            remind.setNotificationToneName(AppUtil.getContext().getString(R.string.none));
+                        }
+                        sound.setText(remind.getNotificationToneName());
                     }
                 }));
             }
         });
-        vibrateEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                if (remind == null) {
-                    return;
-                }
-                remind.notificationVibrate = isChecked;
-            }
-        });
-        highPriorityEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                if (remind == null) {
-                    return;
-                }
-                remind.notificationHighPriority = isChecked;
-            }
-        });
-        ledEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                if (remind == null) {
-                    return;
-                }
-                remind.notificationLED = isChecked;
-            }
-        });
-        ledColor.setOnClickListener(new View.OnClickListener() {
+        notificationVibrateContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                 if (remind == null) {
                     return;
                 }
-                Bus.postObject(new ColorPickerRequest(remind.notificationLEDColor, new ColorPickerClickListener() {
+                String title = AppUtil.getContext().getString(R.string.vibrate);
+                final NotificationContent.NotificationVibrate[] vibrateList = NotificationContent.NotificationVibrate.values();
+                String[] items = new String[vibrateList.length];
+                for (int i = 0; i < vibrateList.length; i++) {
+                    items[i] = vibrateList[i].name;
+                }
+                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int color, Integer[] integers) {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Item Selected
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                         if (remind == null) {
                             return;
                         }
-                        remind.notificationLEDColor = color;
-                        ((GradientDrawable) ledColor.getBackground()).setColor(remind.notificationLEDColor);
+                        remind.setNotificationVibratePattern(vibrateList[which]);
+                        vibrate.setText(remind.getNotificationVibratePattern().name);
                     }
-                }));
+                }, null));
             }
         });
-        accentColor.setOnClickListener(new View.OnClickListener() {
+        notificationPriorityContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = AppUtil.getContext().getString(R.string.priority);
+                final NotificationContent.NotificationPriority[] priorityList = NotificationContent.NotificationPriority.values();
+                String[] items = new String[priorityList.length];
+                for(int i=0; i<priorityList.length; i++) {
+                    items[i] = priorityList[i].name;
+                }
+                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Item Selected
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        remind.setNotificationPriority(priorityList[which]);
+                        priority.setText(remind.getNotificationPriority().name);
+                    }
+                }, null));
+            }
+        });
+        notificationLedContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                 if (remind == null) {
                     return;
                 }
-                Bus.postObject(new ColorPickerRequest(remind.notificationAccentColor, new ColorPickerClickListener() {
+                Bus.postObject(new ColorPickerRequest(remind.getNotificationLEDColor(), new ColorPickerClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int color, Integer[] integers) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                         if (remind == null) {
                             return;
                         }
-                        remind.notificationAccentColor = color;
-                        ((GradientDrawable) accentColor.getBackground()).setColor(remind.notificationAccentColor);
-                        ((GradientDrawable) notificationIconTop.getBackground()).setColor(remind.notificationAccentColor);
+                        remind.setNotificationLED(true);
+                        remind.setNotificationLEDColor(color);
+                        led.setText(AppUtil.getContext().getString(R.string.enabled));
+                        ((GradientDrawable) ledColor.getBackground()).setColor(remind.getNotificationLEDColor());
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cancel
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Disable
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        Log.v("Notification", "Disable LED");
+                        remind.setNotificationLED(false);
+                        led.setText(AppUtil.getContext().getString(R.string.disabled));
                     }
                 }));
             }
         });
-        notificationIconTop.setOnClickListener(new View.OnClickListener() {
+        notificationAccentContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                Bus.postObject(new ColorPickerRequest(remind.getNotificationAccentColor(), new ColorPickerClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int color, Integer[] integers) {
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        remind.setNotificationAccentColor(color);
+                        ((GradientDrawable) accentColor.getBackground()).setColor(remind.getNotificationAccentColor());
+                        ((GradientDrawable) notificationIconTop.getBackground()).setColor(remind.getNotificationAccentColor());
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }, null));
+            }
+        });
+        notificationIconContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
@@ -182,10 +235,10 @@ public class EditReminderNotification {
                         if (remind == null) {
                             return;
                         }
-                        remind.notificationIcon = IconUtil.getIndex(iconRes);
+                        remind.setNotificationIcon(IconUtil.getIndex(iconRes));
                         icon.setImageResource(iconRes);
                     }
-                }, remind.notificationAccentColor));
+                }, remind.getNotificationAccentColor()));
             }
         });
     }

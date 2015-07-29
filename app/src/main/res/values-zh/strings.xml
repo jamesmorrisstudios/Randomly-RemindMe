@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"无法加载列表提醒"</string>
-    <string name="app_open_fail">"无法打开应用程序"</string>
     <string name="error_time_difference">"时间无效"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"你确定要放弃更改？"</string>
     <string name="duplicate_prompt_title">"重复提醒"</string>
     <string name="duplicate_prompt_content">"你确定要复制此提醒？"</string>
+    <string name="notification_theme_title">"请选择符合您的手机款式的通知"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"选择图标"</string>
-    <string name="selectNotification">"选择通知"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"称号"</string>
-    <string name="default_message">"信息"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"一般"</string>
-    <string name="edit_timing">"定时"</string>
-    <string name="edit_repeat">"重复"</string>
-    <string name="edit_notification">"通知"</string>
-    <string name="edit_alarm">"报警"</string>
-    <string name="timing_specific">"具体"</string>
-    <string name="timing_range">"范围"</string>
+    <string name="select_notification">"选择通知"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"提醒每一天"</string>
-    <string name="vibrate_enable">"颤动"</string>
-    <string name="random_enable">"随机化时代"</string>
-    <string name="high_priority_enable">"高优先级"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"颜色"</string>
-    <string name="sound_set">"音"</string>
-    <string name="icon_set">"图标"</string>
-    <string name="icon_color">"雅绅特的颜色"</string>
 
-    <string name="in_order">"为了"</string>
-    <string name="random">"随机"</string>
     <string name="num_messages">"消息数"</string>
     <string name="edit_messages">"编辑留言"</string>
     <string name="edit_times">"编辑时报"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"取消选中禁用自定义通知，并恢复到标准体系"</string>
     <string name="settings_item_2_primary">"用持续的通知"</string>
     <string name="settings_item_2_secondary">"取消选中允许通知要可取消刷卡它拿走。正在进行的通知不支持Android Wear"</string>
-    <string name="settings_item_3_primary">"使用光主题的通知"</string>
-    <string name="settings_item_3_secondary">"取消选中要使用深色主题的通知"</string>
+    <string name="settings_item_3_primary">"使用浅色背景和深色文本通知的主题"</string>
+    <string name="settings_item_3_secondary">"取消选中要使用的深色背景和浅色文字黑暗主题的通知"</string>
     <string name="settings_item_4_primary">"该周的第一天"</string>
 
 </resources>

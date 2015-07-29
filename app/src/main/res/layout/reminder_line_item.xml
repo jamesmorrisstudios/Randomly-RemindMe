@@ -40,7 +40,7 @@
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/reminder_enabled"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
@@ -59,7 +59,7 @@
             android:textSize="20sp" />
 
         <include
-            android:id="@+id/reminder_time_start"
+            android:id="@+id/reminder_time_1"
             layout="@layout/time_display_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,31 +67,51 @@
             android:layout_below="@+id/reminder_title_text" />
 
         <TextView
-            android:id="@+id/timing_dash"
+            android:id="@+id/timing_dash_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reminder_title_text"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:layout_toRightOf="@+id/reminder_time_start"
-            android:text="@string/dash"
+            android:layout_toRightOf="@+id/reminder_time_1"
+            android:text="@string/comma"
             android:textColor="@color/textDarkSecondary"
             android:textSize="20sp" />
 
         <include
-            android:id="@+id/reminder_time_end"
+            android:id="@+id/reminder_time_2"
             layout="@layout/time_display_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reminder_title_text"
-            android:layout_toRightOf="@+id/timing_dash" />
+            android:layout_toRightOf="@+id/timing_dash_1" />
+
+        <TextView
+            android:id="@+id/timing_dash_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reminder_title_text"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_toRightOf="@+id/reminder_time_2"
+            android:text="@string/comma"
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="20sp" />
+
+        <include
+            android:id="@+id/reminder_time_3"
+            layout="@layout/time_display_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reminder_title_text"
+            android:layout_toRightOf="@+id/timing_dash_2" />
 
         <LinearLayout
             android:id="@+id/daysContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/reminder_time_start"
+            android:layout_below="@+id/reminder_time_1"
             android:layout_toLeftOf="@+id/reminder_enabled"
             android:orientation="horizontal">
 

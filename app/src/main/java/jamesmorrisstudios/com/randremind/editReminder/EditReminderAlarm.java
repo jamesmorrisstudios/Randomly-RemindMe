@@ -1,6 +1,6 @@
 package jamesmorrisstudios.com.randremind.editReminder;
 
-import android.widget.RelativeLayout;
+import android.view.View;
 
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
@@ -11,7 +11,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 public class EditReminderAlarm {
 
 
-    public EditReminderAlarm(RelativeLayout parent) {
+    public EditReminderAlarm(View parent) {
 
     }
 

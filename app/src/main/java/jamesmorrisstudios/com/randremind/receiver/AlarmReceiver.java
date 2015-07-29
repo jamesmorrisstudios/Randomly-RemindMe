@@ -124,7 +124,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
         if (item == null) {
             return;
         }
-        ReminderItem.logReminderShown(item.uniqueName, now);
+        ReminderItem.logReminderShown(item.getUniqueName(), now);
         Notifier.buildNotification(item.getNotification(false, now));
         Log.v("ALARM RECEIVER", "Post Notification: " + item.getNotificationId());
         item.rescheduleNextWake(now);

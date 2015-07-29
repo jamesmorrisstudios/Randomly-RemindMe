@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"अनुस्मारक सूची लोड करने में असफल"</string>
-    <string name="app_open_fail">"एप्लिकेशन को खोलने में विफल"</string>
     <string name="error_time_difference">"अमान्य समय"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"आप अपने परिवर्तनों को छोड़ना चाहते तुम्हें यकीन है?"</string>
     <string name="duplicate_prompt_title">"डुप्लिकेट अनुस्मारक"</string>
     <string name="duplicate_prompt_content">"आप इस अनुस्मारक नकल करना चाहते हैं आप यकीन कर रहे हैं?"</string>
+    <string name="notification_theme_title">"अपने फोन से मेल खाता है कि अधिसूचना शैली का चयन करें"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"चिह्न चुनें"</string>
-    <string name="selectNotification">"चयन करें अधिसूचना"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"शीर्षक"</string>
-    <string name="default_message">"संदेश"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"सामान्य"</string>
-    <string name="edit_timing">"समय"</string>
-    <string name="edit_repeat">"दोहराएँ"</string>
-    <string name="edit_notification">"अधिसूचना"</string>
-    <string name="edit_alarm">"अलार्म"</string>
-    <string name="timing_specific">"विशिष्ट"</string>
-    <string name="timing_range">"सीमा"</string>
+    <string name="select_notification">"चयन करें अधिसूचना"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"दिन प्रति अनुस्मारक"</string>
-    <string name="vibrate_enable">"कांपना"</string>
-    <string name="random_enable">"Randomize टाइम्स"</string>
-    <string name="high_priority_enable">"उच्च प्राथमिकता"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"रंग"</string>
-    <string name="sound_set">"लहजा"</string>
-    <string name="icon_set">"चिह्न"</string>
-    <string name="icon_color">"एक्सेंट रंग"</string>
 
-    <string name="in_order">"क्रम में"</string>
-    <string name="random">"बिना सोचे समझे"</string>
     <string name="num_messages">"संदेशों की संख्या"</string>
     <string name="edit_messages">"संपादित करें संदेश"</string>
     <string name="edit_times">"संपादित करें टाइम्स"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"कस्टम अधिसूचना को अक्षम और मानक प्रणाली पर वापस लौटने की अचयनित"</string>
     <string name="settings_item_2_primary">"चल रहे अधिसूचना का प्रयोग करें"</string>
     <string name="settings_item_2_secondary">"अचयनित अधिसूचना इसे दूर स्वाइप करके dismissible होने की अनुमति देने के लिए। चल रही है सूचनाएं Android Wear पर समर्थित नहीं हैं"</string>
-    <string name="settings_item_3_primary">"प्रकाश अधिसूचना विषय का प्रयोग करें"</string>
-    <string name="settings_item_3_secondary">"अंधेरे अधिसूचना विषय का उपयोग करने अचयनित"</string>
+    <string name="settings_item_3_primary">"एक प्रकाश पृष्ठभूमि और अंधेरे पाठ की अधिसूचना विषय का प्रयोग करें"</string>
+    <string name="settings_item_3_secondary">"एक काले रंग की पृष्ठभूमि और प्रकाश पाठ के अंधेरे अधिसूचना विषय का उपयोग करने के लिए अनचेक"</string>
     <string name="settings_item_4_primary">"सप्ताह का पहला दिन"</string>
 
 </resources>

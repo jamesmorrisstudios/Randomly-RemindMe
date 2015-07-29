@@ -23,7 +23,7 @@ repositories {
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc2"
+    buildToolsVersion "23.0.0 rc3"
 
     productFlavors {
         googlePlay {
@@ -39,8 +39,8 @@ android {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 21
-        versionName "1.1.1"
+        versionCode 28
+        versionName "1.1.8"
     }
 
     signingConfigs {

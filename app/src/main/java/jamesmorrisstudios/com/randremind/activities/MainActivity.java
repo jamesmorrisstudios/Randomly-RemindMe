@@ -16,17 +16,21 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceIconRequest;
+import com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuilder;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
+import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -35,12 +39,10 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.dialogHelper.EditMessageRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
-import jamesmorrisstudios.com.randremind.fragments.EditMessageDialogBuilder;
-import jamesmorrisstudios.com.randremind.fragments.EditTimesDialogBuilder;
+import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
 import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
@@ -104,6 +106,9 @@ public final class MainActivity extends BaseLauncherActivity implements
         //Ensure that the repeating alarm is active.
         Scheduler.getInstance().cancelMidnightAlarm();
         Scheduler.getInstance().scheduleRepeatingMidnight();
+        if(isFirstLaunch()) {
+            promptNotificationTheme();
+        }
     }
 
     /**
@@ -172,6 +177,36 @@ public final class MainActivity extends BaseLauncherActivity implements
     @Override
     protected void onBackToHome() {
 
+    }
+
+    private void promptNotificationTheme() {
+        String title = getString(R.string.notification_theme_title);
+        int[] items = new int[] {R.drawable.light_back, R.drawable.dark_back};
+        Bus.postObject(new SingleChoiceIconRequest(title, items, new SingleChoiceIconDialogBuilder.OptionPickerListener() {
+            @Override
+            public void onClick(int which) {
+                String pref = AppUtil.getContext().getString(R.string.settings_pref);
+                String keytheme = AppUtil.getContext().getString(R.string.pref_notification_theme);
+                if(which == 0) {
+                    Prefs.putBoolean(pref, keytheme, true);
+                } else {
+                    Prefs.putBoolean(pref, keytheme, false);
+                }
+                setFirstLaunchComplete();
+            }
+        }));
+    }
+
+    private boolean isFirstLaunch() {
+        String pref = AppUtil.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        return Prefs.getBoolean(pref, keyFirstLaunch, true);
+    }
+
+    private void setFirstLaunchComplete() {
+        String pref = AppUtil.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        Prefs.putBoolean(pref, keyFirstLaunch, false);
     }
 
     /**
@@ -266,9 +301,9 @@ public final class MainActivity extends BaseLauncherActivity implements
         showIconPickerDialog(request.iconPickerListener, request.accentColor);
     }
 
-    public void showIconPickerDialog(IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
+    public void showIconPickerDialog(@NonNull IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
         IconPickerDialogBuilder.with(this)
-                .setTitle(getResources().getString(R.string.chooseIcon))
+                .setTitle(getResources().getString(R.string.choose_icon))
                 .setAccentColor(accentColor)
                 .setOnIconPicked(iconPickerListener)
                 .build()
@@ -276,31 +311,15 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     @Subscribe
-    public void onEditMessageRequest(@NonNull EditMessageRequest request) {
-        showEditMessageDialog(request.messages, request.onPositive, request.onNegative);
-    }
-
-    public void showEditMessageDialog(ArrayList<String> messages, EditMessageDialogBuilder.EditMessageListener onPositive, DialogInterface.OnClickListener onNegative) {
-        EditMessageDialogBuilder.with(this)
-                .setMessages(messages)
-                .setOnPositive(getResources().getString(R.string.okay), onPositive)
-                .setOnNegative(getResources().getString(R.string.cancel), onNegative)
-                .build()
-                .show();
-    }
-
-    @Subscribe
     public void onEditTimesRequest(@NonNull EditTimesRequest request) {
-        showEditTimesDialog(request.times, request.onPositive, request.onNegative);
+        showEditTimesDialog(request.times, request.onPositive, request.onNegative, request.allowEdit);
     }
 
-    public void showEditTimesDialog(ArrayList<TimeItem> times, EditTimesDialogBuilder.EditTimesListener onPositive, DialogInterface.OnClickListener onNegative) {
-        EditTimesDialogBuilder.with(this)
-                .setTimes(times)
-                .setOnPositive(getResources().getString(R.string.okay), onPositive)
-                .setOnNegative(getResources().getString(R.string.cancel), onNegative)
-                .build()
-                .show();
+    public void showEditTimesDialog(@NonNull ArrayList<TimeItem> times, @NonNull EditTimesDialog.EditTimesListener onPositive, @Nullable View.OnClickListener onNegative, boolean allowEdit) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditTimesDialog editTimesDialog = new EditTimesDialog();
+        editTimesDialog.setData(times, onPositive, onNegative, allowEdit);
+        editTimesDialog.show(fm, "fragment_edit_times");
     }
 
 }

@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Nije uspjelo učitavanje popis podsjetnik"</string>
-    <string name="app_open_fail">"Nisam uspio otvoriti aplikaciju"</string>
     <string name="error_time_difference">"Nevažeće vrijeme"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Jeste li sigurni da želite odbaciti promjene?"</string>
     <string name="duplicate_prompt_title">"Dvostruki Podsjetnik"</string>
     <string name="duplicate_prompt_content">"Jeste li sigurni da želite duplicirati ovaj podsjetnik?"</string>
+    <string name="notification_theme_title">"Molimo odaberite stil obavijesti koja odgovara telefon"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Odaberite ikonu"</string>
-    <string name="selectNotification">"Odaberite Obavijest"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Naslov"</string>
-    <string name="default_message">"Poruka"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Opći"</string>
-    <string name="edit_timing">"Vrijeme"</string>
-    <string name="edit_repeat">"Ponoviti"</string>
-    <string name="edit_notification">"Obavijest"</string>
-    <string name="edit_alarm">"Alarm"</string>
-    <string name="timing_specific">"Specifična"</string>
-    <string name="timing_range">"Opseg"</string>
+    <string name="select_notification">"Odaberite Obavijest"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Podsjetnici dnevno"</string>
-    <string name="vibrate_enable">"Vibrirati"</string>
-    <string name="random_enable">"Nasumce Vremena"</string>
-    <string name="high_priority_enable">"Visoki Prioritet"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Boja"</string>
-    <string name="sound_set">"Ton"</string>
-    <string name="icon_set">"Ikona"</string>
-    <string name="icon_color">"Accent boja"</string>
 
-    <string name="in_order">"U Redu"</string>
-    <string name="random">"Slučajan"</string>
     <string name="num_messages">"Broj poruka"</string>
     <string name="edit_messages">"Uredi Poruke"</string>
     <string name="edit_times">"Uredi Vremena"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Poništite onemogućiti prilagođeni obavijest i vratiti na standardni sustav"</string>
     <string name="settings_item_2_primary">"Koristite tijeku obavijest"</string>
     <string name="settings_item_2_secondary">"Poništite dopustiti obavijest da se dismissible ga swiping daleko. U tijeku obavijesti nisu podržane na Android Wear"</string>
-    <string name="settings_item_3_primary">"Koristite temu obavijesti svjetlo"</string>
-    <string name="settings_item_3_secondary">"Poništite koristiti tamnu temu obavijesti"</string>
+    <string name="settings_item_3_primary">"Koristite temu obavijesti o svijetloj pozadini i tamno tekst"</string>
+    <string name="settings_item_3_secondary">"Poništite koristiti tamnu temu obavijesti o tamnoj podlozi i svjetlo tekst"</string>
     <string name="settings_item_4_primary">"Prvi dan u tjednu"</string>
 
 </resources>

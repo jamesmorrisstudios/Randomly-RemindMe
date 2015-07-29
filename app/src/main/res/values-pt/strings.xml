@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Falha ao carregar a lista de lembretes"</string>
-    <string name="app_open_fail">"Falha ao abrir o app"</string>
     <string name="error_time_difference">"Hora inválida"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Tem certeza de que deseja descartar as alterações?"</string>
     <string name="duplicate_prompt_title">"Lembrete Duplicate"</string>
     <string name="duplicate_prompt_content">"Tem certeza de que deseja duplicar este lembrete?"</string>
+    <string name="notification_theme_title">"Por favor, selecione o estilo de notificação que corresponde ao seu telefone"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Escolha Ícone"</string>
-    <string name="selectNotification">"Selecione Notificação"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Título"</string>
-    <string name="default_message">"Mensagem"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Geral"</string>
-    <string name="edit_timing">"Momento"</string>
-    <string name="edit_repeat">"Repita"</string>
-    <string name="edit_notification">"Notificação"</string>
-    <string name="edit_alarm">"Alarme"</string>
-    <string name="timing_specific">"Específico"</string>
-    <string name="timing_range">"Alcance"</string>
+    <string name="select_notification">"Selecione Notificação"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Lembretes por dia"</string>
-    <string name="vibrate_enable">"Vibrar"</string>
-    <string name="random_enable">"Randomize Vezes"</string>
-    <string name="high_priority_enable">"Alta Prioridade"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Cor"</string>
-    <string name="sound_set">"Tom"</string>
-    <string name="icon_set">"Ícone"</string>
-    <string name="icon_color">"Acentuação de Cor"</string>
 
-    <string name="in_order">"Em Ordem"</string>
-    <string name="random">"Acaso"</string>
     <string name="num_messages">"Número de Mensagens"</string>
     <string name="edit_messages">"Editar mensagens"</string>
     <string name="edit_times">"Editar horas"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Desmarque a opção para desativar a notificação personalizada e reverter para o sistema padrão"</string>
     <string name="settings_item_2_primary">"Use a notificação em curso"</string>
     <string name="settings_item_2_secondary">"Desmarque a opção para permitir a notificação dismissible passando-lo afastado. Notificações em curso não são suportados no Android Wear"</string>
-    <string name="settings_item_3_primary">"Use tema notificação luz"</string>
-    <string name="settings_item_3_secondary">"Desmarque a opção para usar tema notificação escuro"</string>
+    <string name="settings_item_3_primary">"Use tema notificação de um fundo claro e escuro texto"</string>
+    <string name="settings_item_3_secondary">"Desmarque para usar tema notificação escuro de um fundo escuro e texto luz"</string>
     <string name="settings_item_4_primary">"Primeiro dia da semana"</string>
 
 </resources>

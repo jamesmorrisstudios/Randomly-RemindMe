@@ -47,6 +47,7 @@
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/message_count"
+            android:saveEnabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:dropDownWidth="45dp"

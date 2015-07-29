@@ -1,8 +1,6 @@
 package jamesmorrisstudios.com.randremind.editReminder;
 
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,7 +9,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.TimePickerRequest;
@@ -28,7 +25,7 @@ import java.util.List;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
-import jamesmorrisstudios.com.randremind.fragments.EditTimesDialogBuilder;
+import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -36,16 +33,15 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
  * Created by James on 6/10/2015.
  */
 public class EditReminderTiming {
-    private RelativeLayout parent;
-    private AppCompatCheckBox randomEnable;
+    private View parent;
     private TextView startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
     private RadioButton timingSpecific, timingRange;
-    private LinearLayout timingTimes, timingTimesPerDay, timingDistribution, timingSingleTime;
+    private LinearLayout timingTimes, timingTimesPerDay, timingSingleTime;
     private View startTimeTop, endTimeTop;
     private AppCompatSpinner timeSpinner, timeSpecificSpinner;
     private Button editSpecificTimes;
 
-    public EditReminderTiming(RelativeLayout parent) {
+    public EditReminderTiming(View parent) {
         this.parent = parent;
         startTimeTop = parent.findViewById(R.id.timing_start);
         startHour = (TextView) startTimeTop.findViewById(R.id.time_hour);
@@ -65,10 +61,7 @@ public class EditReminderTiming {
         timingRange = (RadioButton) parent.findViewById(R.id.radio_range);
         timingTimes = (LinearLayout) parent.findViewById(R.id.timing_times);
         timingTimesPerDay = (LinearLayout) parent.findViewById(R.id.timing_times_per_day);
-        timingDistribution = (LinearLayout) parent.findViewById(R.id.timing_distribution);
         timingSingleTime = (LinearLayout) parent.findViewById(R.id.timing_times_specific);
-
-        randomEnable = (AppCompatCheckBox) parent.findViewById(R.id.timing_random_enabled);
 
         editSpecificTimes = (Button) parent.findViewById(R.id.btn_edit_times);
     }
@@ -78,15 +71,14 @@ public class EditReminderTiming {
         if (remind == null) {
             return;
         }
-        timingSpecific.setChecked(!remind.rangeTiming);
-        timingRange.setChecked(remind.rangeTiming);
+        timingSpecific.setChecked(!remind.isRangeTiming());
+        timingRange.setChecked(remind.isRangeTiming());
 
         generateNumberTimePerDay();
         generateNumberSpecificTimePerDay();
-        randomEnable.setChecked(remind.randomDistribution);
 
-        UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
-        UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
+        UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.getStartTime());
+        UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.getEndTime());
 
         setTimingType();
         addTimingTypeListener();
@@ -95,17 +87,17 @@ public class EditReminderTiming {
         editSpecificTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bus.postObject(new EditTimesRequest(remind.specificTimeList, new EditTimesDialogBuilder.EditTimesListener() {
+                Bus.postObject(new EditTimesRequest(remind.getSpecificTimeList(), new EditTimesDialog.EditTimesListener() {
                     @Override
                     public void onPositive(ArrayList<TimeItem> times) {
-                        remind.specificTimeList = times;
+                        remind.setSpecificTimeList(times);
                     }
-                }, new DialogInterface.OnClickListener() {
+                }, new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
 
                     }
-                }));
+                }, true));
             }
         });
     }
@@ -118,7 +110,7 @@ public class EditReminderTiming {
         timingSpecific.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                remind.rangeTiming = !isChecked;
+                remind.setRangeTiming(!isChecked);
                 setTimingType();
             }
         });
@@ -129,18 +121,16 @@ public class EditReminderTiming {
         if (remind == null) {
             return;
         }
-        if (remind.rangeTiming) {
+        if (remind.isRangeTiming()) {
             //Show all of the range timing views
             timingTimes.setVisibility(View.VISIBLE);
             timingTimesPerDay.setVisibility(View.VISIBLE);
-            timingDistribution.setVisibility(View.VISIBLE);
             timingSingleTime.setVisibility(View.GONE);
         } else {
             //Hide all of the range timing
             timingSingleTime.setVisibility(View.VISIBLE);
             timingTimes.setVisibility(View.GONE);
             timingTimesPerDay.setVisibility(View.GONE);
-            timingDistribution.setVisibility(View.GONE);
         }
     }
 
@@ -153,11 +143,11 @@ public class EditReminderTiming {
                 if (remind == null) {
                     return;
                 }
-                int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (hourOfDay * 60 + minute);
+                int diffMinutes = (remind.getEndTime().hour * 60 + remind.getEndTime().minute) - (hourOfDay * 60 + minute);
                 if (diffMinutes >= 0) {
-                    remind.startTime.hour = hourOfDay;
-                    remind.startTime.minute = minute;
-                    UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.startTime);
+                    remind.updateStartTime().hour = hourOfDay;
+                    remind.updateStartTime().minute = minute;
+                    UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.getStartTime());
                     generateNumberTimePerDay();
                 } else {
                     Utils.toastShort(AppUtil.getContext().getResources().getString(R.string.error_time_difference));
@@ -171,8 +161,8 @@ public class EditReminderTiming {
                 if (currentReminder == null) {
                     return;
                 }
-                Bus.postObject(new TimePickerRequest(timeStartListener, currentReminder.startTime.hour,
-                        currentReminder.startTime.minute, currentReminder.startTime.is24Hour()));
+                Bus.postObject(new TimePickerRequest(timeStartListener, currentReminder.getStartTime().hour,
+                        currentReminder.getStartTime().minute, currentReminder.getStartTime().is24Hour()));
             }
         });
         //Time End
@@ -183,11 +173,11 @@ public class EditReminderTiming {
                 if (remind == null) {
                     return;
                 }
-                int diffMinutes = (hourOfDay * 60 + minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
+                int diffMinutes = (hourOfDay * 60 + minute) - (remind.getStartTime().hour * 60 + remind.getStartTime().minute);
                 if (diffMinutes >= 0) {
-                    remind.endTime.hour = hourOfDay;
-                    remind.endTime.minute = minute;
-                    UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.endTime);
+                    remind.updateEndTime().hour = hourOfDay;
+                    remind.updateEndTime().minute = minute;
+                    UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.getEndTime());
                     generateNumberTimePerDay();
                 } else {
                     Utils.toastShort(AppUtil.getContext().getResources().getString(R.string.error_time_difference));
@@ -201,8 +191,8 @@ public class EditReminderTiming {
                 if (currentReminder == null) {
                     return;
                 }
-                Bus.postObject(new TimePickerRequest(timeEndListener, currentReminder.endTime.hour,
-                        currentReminder.endTime.minute, currentReminder.endTime.is24Hour()));
+                Bus.postObject(new TimePickerRequest(timeEndListener, currentReminder.getEndTime().hour,
+                        currentReminder.getEndTime().minute, currentReminder.getEndTime().is24Hour()));
             }
         });
         //Times per day
@@ -213,7 +203,7 @@ public class EditReminderTiming {
                 if (currentReminder == null) {
                     return;
                 }
-                currentReminder.numberPerDay = position + 1;
+                currentReminder.setNumberPerDay(position + 1);
             }
 
             @Override
@@ -231,29 +221,18 @@ public class EditReminderTiming {
                 }
                 int size = position + 1;
                 //If we are making the list bigger
-                while (size > remind.specificTimeList.size()) {
-                    remind.specificTimeList.add(new TimeItem(9, 0));
+                while (size > remind.getSpecificTimeList().size()) {
+                    remind.updateSpecificTimeList().add(new TimeItem(9, 0));
                 }
                 //If we are making the list smaller
-                while (size < remind.specificTimeList.size()) {
-                    remind.specificTimeList.remove(remind.specificTimeList.size() - 1);
+                while (size < remind.getSpecificTimeList().size()) {
+                    remind.updateSpecificTimeList().remove(remind.getSpecificTimeList().size() - 1);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        //Distribution
-        randomEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderItem currentReminder = ReminderList.getInstance().getCurrentReminder();
-                if (currentReminder == null) {
-                    return;
-                }
-                currentReminder.randomDistribution = isChecked;
             }
         });
     }
@@ -263,9 +242,9 @@ public class EditReminderTiming {
         if (remind == null) {
             return;
         }
-        int diffMinutes = (remind.endTime.hour * 60 + remind.endTime.minute) - (remind.startTime.hour * 60 + remind.startTime.minute);
+        int diffMinutes = (remind.getEndTime().hour * 60 + remind.getEndTime().minute) - (remind.getStartTime().hour * 60 + remind.getStartTime().minute);
         int max = Math.max(diffMinutes / 10, 1);
-        remind.numberPerDay = Math.min(remind.numberPerDay, max);
+        remind.setNumberPerDay(Math.min(remind.getNumberPerDay(), max));
         List<String> perDayList = new ArrayList<>();
         for (int i = 0; i < max; i++) {
             perDayList.add(Integer.toString(i + 1));
@@ -273,7 +252,7 @@ public class EditReminderTiming {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(parent.getContext(), R.layout.support_simple_spinner_dropdown_item, perDayList);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.simple_drop_down_item);
         timeSpinner.setAdapter(spinnerArrayAdapter);
-        timeSpinner.setSelection(remind.numberPerDay - 1);
+        timeSpinner.setSelection(remind.getNumberPerDay() - 1);
     }
 
     private void generateNumberSpecificTimePerDay() {
@@ -288,7 +267,7 @@ public class EditReminderTiming {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(parent.getContext(), R.layout.support_simple_spinner_dropdown_item, perDayList);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.simple_drop_down_item);
         timeSpecificSpinner.setAdapter(spinnerArrayAdapter);
-        timeSpecificSpinner.setSelection(remind.specificTimeList.size() - 1);
+        timeSpecificSpinner.setSelection(remind.getSpecificTimeList().size() - 1);
     }
 
 }

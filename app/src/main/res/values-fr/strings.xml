@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Impossible de charger la liste de rappel"</string>
-    <string name="app_open_fail">"Impossible d'ouvrir l'application"</string>
     <string name="error_time_difference">"Heure invalide"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Êtes-vous sûr que vous voulez annuler vos modifications?"</string>
     <string name="duplicate_prompt_title">"Rappel Duplicate"</string>
     <string name="duplicate_prompt_content">"Etes-vous sûr que vous voulez dupliquer ce rappel?"</string>
+    <string name="notification_theme_title">"S'il vous plaît sélectionner le style de notification qui correspond à votre téléphone"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Choisissez Icône"</string>
-    <string name="selectNotification">"Sélectionner les notifications"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Titre"</string>
-    <string name="default_message">"Message"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Général"</string>
-    <string name="edit_timing">"Timing"</string>
-    <string name="edit_repeat">"Répéter"</string>
-    <string name="edit_notification">"Notification"</string>
-    <string name="edit_alarm">"Alarme"</string>
-    <string name="timing_specific">"Spécifique"</string>
-    <string name="timing_range">"Gamme"</string>
+    <string name="select_notification">"Sélectionner les notifications"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Rappels par jour"</string>
-    <string name="vibrate_enable">"Vibrer"</string>
-    <string name="random_enable">"Aléatoire Times,"</string>
-    <string name="high_priority_enable">"Haute Priorité"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Couleur"</string>
-    <string name="sound_set">"Ton"</string>
-    <string name="icon_set">"Icône"</string>
-    <string name="icon_color">"Accent de couleur"</string>
 
-    <string name="in_order">"En Ordre"</string>
-    <string name="random">"Aléatoire"</string>
     <string name="num_messages">"Nombre de messages"</string>
     <string name="edit_messages">"Modifier Messages"</string>
     <string name="edit_times">"Modifier les horaires"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Décochez pour désactiver la notification de la coutume et de revenir à le système standard"</string>
     <string name="settings_item_2_primary">"Utilisez notification cours"</string>
     <string name="settings_item_2_secondary">"Décochez la case pour permettre la notification d'être révocable en faisant glisser loin. Notifications en cours ne sont pas pris en charge sur Android Wear"</string>
-    <string name="settings_item_3_primary">"Utilisez le thème de notification lumière"</string>
-    <string name="settings_item_3_secondary">"Décochez cette option pour utiliser le thème de notification sombre"</string>
+    <string name="settings_item_3_primary">"Utilisez le thème de notification d'un fond clair et le texte sombre"</string>
+    <string name="settings_item_3_secondary">"Décochez à utiliser le thème de notification sombre d'un fond sombre et un texte clair"</string>
     <string name="settings_item_4_primary">"Premier jour de la semaine"</string>
 
 </resources>

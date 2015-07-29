@@ -35,6 +35,8 @@ import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent.NotificationPriority;
+import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent.NotificationVibrate;
 import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
 import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
@@ -54,76 +56,310 @@ import jamesmorrisstudios.com.randremind.util.IconUtil;
  * Created by James on 4/20/2015.
  */
 public final class ReminderItem extends BaseRecycleItem {
+    public static final int CURRENT_VERSION = 1;
+
     //Content
     @SerializedName("content") //Depreciated
-    public String content; //Depreciated
-
-
+    private String content; //Depreciated
+    @SerializedName("notificationHighPriority")  //Depreciated
+    private boolean notificationHighPriority = false;  //Depreciated
+    @SerializedName("notificationVibrate") //Depreciated
+    private boolean notificationVibrate; //Depreciated
+    @SerializedName("repeat") //Depreciated
+    private boolean repeat = true; //Depreciated
 
     //Unique data
     @SerializedName("uniqueName")
-    public String uniqueName;
+    private String uniqueName;
+    @SerializedName("version")
+    private int version = 0;
     //Title
     @SerializedName("title")
-    public String title;
+    private String title;
     @SerializedName("enabled")
-    public boolean enabled;
+    private boolean enabled;
     //messageList (replaces content)
     @SerializedName("messageList")
-    public ArrayList<String> messageList = new ArrayList<>();
+    private ArrayList<String> messageList = new ArrayList<>();
     @SerializedName("messageInOrder")
-    public boolean messageInOrder = false;
+    private boolean messageInOrder = false;
     //Timing
     @SerializedName("startTime")
-    public TimeItem startTime;
+    private TimeItem startTime;
     @SerializedName("endTime")
-    public TimeItem endTime;
+    private TimeItem endTime;
     @SerializedName("specificTimeList")
-    public ArrayList<TimeItem> specificTimeList;
+    private ArrayList<TimeItem> specificTimeList;
     @SerializedName("numberPerDay")
-    public int numberPerDay;
-    @SerializedName("randomDistribution")
-    public boolean randomDistribution;
+    private int numberPerDay;
     @SerializedName("rangeTiming")
-    public boolean rangeTiming = true;
+    private boolean rangeTiming = true;
     //Repeat
-    @SerializedName("repeat")
-    public boolean repeat = true;
     @SerializedName("daysToRun")
-    public boolean[] daysToRun;
+    private boolean[] daysToRun;
     //Notifications
     @SerializedName("notificationToneString")
-    public String notificationTone;
+    private String notificationTone;
     @SerializedName("notificationToneName")
-    public String notificationToneName;
-    @SerializedName("notificationVibrate")
-    public boolean notificationVibrate;
+    private String notificationToneName;
+    @SerializedName("notificationVibratePattern")
+    private NotificationVibrate notificationVibratePattern = NotificationVibrate.SHORT;
     @SerializedName("notificationLED")
-    public boolean notificationLED = true;
+    private boolean notificationLED = true;
     @SerializedName("notificationLEDColorInt")
-    public int notificationLEDColor = Color.BLUE;
-    @SerializedName("notificationHighPriority")
-    public boolean notificationHighPriority = false;
-    @DrawableRes
+    private int notificationLEDColor = Color.BLUE;
+    @SerializedName("notificationPriority")
+    private NotificationPriority notificationPriority = NotificationPriority.DEFAULT;
     @SerializedName("notificationIconIndex")
-    public int notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
+    private int notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
     @SerializedName("notificationAccentColor")
-    public int notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+    private int notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+
     //Do Not Serialize This
+    private transient boolean dirty = false; //Set to true when changing something
     public transient ReminderLog reminderLog = null;
     private transient AsyncTask<Void, Void, Boolean> taskLoad = null;
+
+    public void clearDirty() {
+        dirty = false;
+    }
+
+    private void setDirty() {
+        dirty = true;
+    }
+
+    public boolean isDirty() {
+        return dirty;
+    }
+
+    public String getUniqueName() {
+        return uniqueName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        if(!this.title.equals(title)) {
+            setDirty();
+            this.title = title;
+        }
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        if(this.enabled != enabled) {
+            setDirty();
+            this.enabled = enabled;
+        }
+    }
+
+    public ArrayList<String> getMessageList() {
+        return messageList;
+    }
+
+    public ArrayList<String> updateMessageList() {
+        setDirty();
+        return messageList;
+    }
+
+    public void setMessageList(ArrayList<String> messageList) {
+        setDirty();
+        this.messageList = messageList;
+    }
+
+    public boolean isMessageInOrder() {
+        return messageInOrder;
+    }
+
+    public void setMessageInOrder(boolean messageInOrder) {
+        if(this.messageInOrder != messageInOrder) {
+            setDirty();
+            this.messageInOrder = messageInOrder;
+        }
+    }
+
+    public TimeItem getStartTime() {
+        return startTime;
+    }
+
+    public TimeItem updateStartTime() {
+        setDirty();
+        return startTime;
+    }
+
+    public void setStartTime(TimeItem startTime) {
+        setDirty();
+        this.startTime = startTime;
+    }
+
+    public TimeItem getEndTime() {
+        return endTime;
+    }
+
+    public TimeItem updateEndTime() {
+        setDirty();
+        return endTime;
+    }
+
+    public void setEndTime(TimeItem endTime) {
+        setDirty();
+        this.endTime = endTime;
+    }
+
+    public ArrayList<TimeItem> getSpecificTimeList() {
+        return specificTimeList;
+    }
+
+    public ArrayList<TimeItem> updateSpecificTimeList() {
+        setDirty();
+        return specificTimeList;
+    }
+
+    public void setSpecificTimeList(ArrayList<TimeItem> specificTimeList) {
+        setDirty();
+        this.specificTimeList = specificTimeList;
+    }
+
+    public int getNumberPerDay() {
+        return numberPerDay;
+    }
+
+    public void setNumberPerDay(int numberPerDay) {
+        if(this.numberPerDay != numberPerDay) {
+            setDirty();
+            this.numberPerDay = numberPerDay;
+        }
+    }
+
+    public boolean isRangeTiming() {
+        return rangeTiming;
+    }
+
+    public void setRangeTiming(boolean rangeTiming) {
+        if(this.rangeTiming != rangeTiming) {
+            setDirty();
+            this.rangeTiming = rangeTiming;
+        }
+    }
+
+    public boolean[] getDaysToRun() {
+        return daysToRun;
+    }
+
+    public boolean[] updateDaysToRun() {
+        setDirty();
+        return daysToRun;
+    }
+
+    public void setDaysToRun(boolean[] daysToRun) {
+        setDirty();
+        this.daysToRun = daysToRun;
+    }
+
+    public void setNotificationTone(String notificationTone) {
+        if(!this.notificationTone.equals(notificationTone)) {
+            setDirty();
+            this.notificationTone = notificationTone;
+        }
+    }
+
+    public String getNotificationToneName() {
+        return notificationToneName;
+    }
+
+    public void setNotificationToneName(String notificationToneName) {
+        if(!this.notificationToneName.equals(notificationToneName)) {
+            setDirty();
+            this.notificationToneName = notificationToneName;
+        }
+    }
+
+    public NotificationVibrate getNotificationVibratePattern() {
+        return notificationVibratePattern;
+    }
+
+    public void setNotificationVibratePattern(NotificationVibrate notificationVibratePattern) {
+        if(this.notificationVibratePattern != notificationVibratePattern) {
+            setDirty();
+            this.notificationVibratePattern = notificationVibratePattern;
+        }
+    }
+
+    public boolean isNotificationLED() {
+        return notificationLED;
+    }
+
+    public void setNotificationLED(boolean notificationLED) {
+        if(this.notificationLED != notificationLED) {
+            setDirty();
+            this.notificationLED = notificationLED;
+        }
+    }
+
+    public int getNotificationLEDColor() {
+        return notificationLEDColor;
+    }
+
+    public void setNotificationLEDColor(int notificationLEDColor) {
+        if(this.notificationLEDColor != notificationLEDColor) {
+            setDirty();
+            this.notificationLEDColor = notificationLEDColor;
+        }
+    }
+
+    public NotificationPriority getNotificationPriority() {
+        return notificationPriority;
+    }
+
+    public void setNotificationPriority(NotificationPriority notificationPriority) {
+        if(this.notificationPriority != notificationPriority) {
+            setDirty();
+            this.notificationPriority = notificationPriority;
+        }
+    }
+
+    public int getNotificationIcon() {
+        return notificationIcon;
+    }
+
+    public void setNotificationIcon(int notificationIcon) {
+        if(this.notificationIcon != notificationIcon) {
+            setDirty();
+            this.notificationIcon = notificationIcon;
+        }
+    }
+
+    public int getNotificationAccentColor() {
+        return notificationAccentColor;
+    }
+
+    public void setNotificationAccentColor(int notificationAccentColor) {
+        if(this.notificationAccentColor != notificationAccentColor) {
+            setDirty();
+            this.notificationAccentColor = notificationAccentColor;
+        }
+    }
 
     /**
      * Creates a new reminder reminder with all the default values set
      */
     public ReminderItem() {
+        this.content = ""; //Depreciated
+        this.notificationHighPriority = false; //Depreciated
+        this.notificationVibrate = false; //Depreciated
+        this.repeat = true; //Depreciated
+
         //Unique name
-        this.uniqueName = getUniqueName();
+        this.uniqueName = generateUniqueName();
+        this.version = 0;
         //Title
         this.title = "";
         this.enabled = true;
-        //Content
-        this.content = ""; //Depreciated
         //Messages
         this.messageList = new ArrayList<>();
         this.messageInOrder = false;
@@ -131,20 +367,18 @@ public final class ReminderItem extends BaseRecycleItem {
         this.startTime = new TimeItem(9, 0);
         this.endTime = new TimeItem(20, 0);
         this.numberPerDay = 6;
-        this.randomDistribution = true;
         this.rangeTiming = true;
         this.specificTimeList = new ArrayList<>();
         this.specificTimeList.add(new TimeItem(9, 0));
         //Repeat
-        this.repeat = true; //unused
         this.daysToRun = new boolean[]{true, true, true, true, true, true, true};
         //Notifications
         this.notificationTone = null;
         this.notificationToneName = AppUtil.getContext().getString(R.string.none);
-        this.notificationVibrate = false;
+        this.notificationVibratePattern = NotificationVibrate.SHORT;
         this.notificationLED = true;
         this.notificationLEDColor = Color.BLUE;
-        this.notificationHighPriority = false;
+        this.notificationPriority = NotificationPriority.DEFAULT;
         this.notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
         this.notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
     }
@@ -155,21 +389,22 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param startTime            Start time object
      * @param endTime              End time object
      * @param numberPerDay         Number per day
-     * @param randomDistribution   Distribution
      * @param daysToRun            Days to run
      * @param notificationTone     The uri of the desired notification tone
      * @param notificationToneName The readable name of the notification tone
      * @param notificationVibrate  True to enable vibrate with the notification
      */
-    public ReminderItem(@NonNull String uniqueName, @NonNull String title, @NonNull String content,
+    public ReminderItem(@NonNull String uniqueName, int version, @NonNull String title, @NonNull String content,
                         @NonNull ArrayList<String> messageList, boolean messageInOrder,
                         boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime,
                         @NonNull ArrayList<TimeItem> specificTimeList,
-                        int numberPerDay, boolean randomDistribution, boolean rangeTiming, boolean repeat,
+                        int numberPerDay, boolean rangeTiming, boolean repeat,
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
-                        boolean notificationVibrate, boolean notificationLED, int notificationLEDColor,
-                        boolean notificationHighPriority, int notificationIcon, int notificationAccentColor) {
+                        boolean notificationVibrate, NotificationVibrate notificationVibratePattern, boolean notificationLED,
+                        int notificationLEDColor, boolean notificationHighPriority, NotificationPriority notificationPriority,
+                        int notificationIcon, int notificationAccentColor) {
         this.uniqueName = uniqueName;
+        this.version = version;
         this.title = title;
         this.content = content;
         this.messageList = messageList;
@@ -179,16 +414,17 @@ public final class ReminderItem extends BaseRecycleItem {
         this.endTime = endTime;
         this.specificTimeList = specificTimeList;
         this.numberPerDay = numberPerDay;
-        this.randomDistribution = randomDistribution;
         this.rangeTiming = rangeTiming;
         this.repeat = repeat;
         this.daysToRun = daysToRun.clone();
         this.notificationTone = notificationTone;
         this.notificationToneName = notificationToneName;
         this.notificationVibrate = notificationVibrate;
+        this.notificationVibratePattern = notificationVibratePattern;
         this.notificationLED = notificationLED;
         this.notificationLEDColor = notificationLEDColor;
         this.notificationHighPriority = notificationHighPriority;
+        this.notificationPriority = notificationPriority;
         this.notificationIcon = notificationIcon;
         this.notificationAccentColor = notificationAccentColor;
     }
@@ -199,8 +435,12 @@ public final class ReminderItem extends BaseRecycleItem {
      * @return Unique name
      */
     @NonNull
-    public static String getUniqueName() {
+    public static String generateUniqueName() {
         return UUID.randomUUID().toString();
+    }
+
+    public final void regenerateUniqueName() {
+        uniqueName = UUID.randomUUID().toString();
     }
 
     public final void setCurMessage(int curMessage) {
@@ -208,7 +448,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final int getCurMessage() {
-        return Prefs.getInt(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, 0);
+        return Prefs.getInt(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, -1);
     }
 
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
@@ -299,10 +539,11 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     @NonNull
     public final ReminderItem copy() {
-        return new ReminderItem(uniqueName, title, content, messageList, messageInOrder,
+        return new ReminderItem(uniqueName, version, title, content, messageList, messageInOrder,
                 enabled, startTime, endTime, specificTimeList, numberPerDay,
-                randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
-                notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
+                rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
+                notificationVibrate, notificationVibratePattern, notificationLED, notificationLEDColor,
+                notificationHighPriority, notificationPriority,
                 notificationIcon, notificationAccentColor);
     }
 
@@ -311,10 +552,11 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     @NonNull
     public final ReminderItem duplicate() {
-        return new ReminderItem(getUniqueName(), title, content, messageList, messageInOrder,
+        return new ReminderItem(generateUniqueName(), version, title, content, messageList, messageInOrder,
                 enabled, startTime, endTime, specificTimeList, numberPerDay,
-                randomDistribution, rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
-                notificationVibrate, notificationLED, notificationLEDColor, notificationHighPriority,
+                rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
+                notificationVibrate, notificationVibratePattern, notificationLED, notificationLEDColor,
+                notificationHighPriority, notificationPriority,
                 notificationIcon, notificationAccentColor);
     }
 
@@ -358,11 +600,7 @@ public final class ReminderItem extends BaseRecycleItem {
         int diff = getDiffMinutes();
         int startOffset = timeToMinutes(startTime);
 
-        if (randomDistribution) {
-            generateEvenishSplit(diff, startOffset, 0.5f, numberPerDay);
-        } else {
-            generateEvenishSplit(diff, startOffset, 0, numberPerDay);
-        }
+        generateEvenishSplit(diff, startOffset, 0.5f, numberPerDay);
     }
 
     /**
@@ -470,22 +708,22 @@ public final class ReminderItem extends BaseRecycleItem {
         String pref = AppUtil.getContext().getString(R.string.settings_pref);
         String title = this.title;
         if (title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.default_title);
+            title = AppUtil.getContext().getString(R.string.title);
         }
 
         String content = null;
         if(messageInOrder) {
-            int curMessage = getCurMessage();
+            int curMessage = getCurMessage() + 1;
             if(curMessage >= messageList.size()) {
                 curMessage = 0;
             }
             content = messageList.get(curMessage);
-            //if(!preview) {
-                setCurMessage(curMessage+1);
-            //}
+            setCurMessage(curMessage);
         } else {
             Random rand = new Random();
-            content = messageList.get(rand.nextInt(messageList.size()));
+            int lastMessage = rand.nextInt(messageList.size());
+            setCurMessage(lastMessage);
+            content = messageList.get(lastMessage);
         }
         if(content == null) {
             content = "";
@@ -524,12 +762,9 @@ public final class ReminderItem extends BaseRecycleItem {
         String keyOnGoing = AppUtil.getContext().getString(R.string.pref_notification_ongoing);
         notif.setOnGoing(Prefs.getBoolean(pref, keyOnGoing, false));
 
-        if (this.notificationVibrate) {
-            notif.enableVibrate();
-        }
-        if (this.notificationHighPriority) {
-            notif.enableHighPriority();
-        }
+        notif.setVibrate(this.notificationVibratePattern);
+        notif.setNotificationPriority(this.notificationPriority);
+
         if (this.notificationLED) {
             notif.enableLed(this.notificationLEDColor);
         }
@@ -666,10 +901,36 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void updateVersion() {
+        //Update Content to Messages
         if(!content.isEmpty() || messageList.isEmpty()) {
             messageList.add(content);
             content = "";
         }
+        //Update Vibrate to Vibrate Pattern
+        if(version == 0) {
+            if(notificationVibrate) {
+                notificationVibratePattern = NotificationVibrate.SHORT;
+            } else {
+                notificationVibratePattern = NotificationVibrate.DISABLED;
+            }
+        }
+        //Update Priority
+        if(version == 0) {
+            if(notificationHighPriority) {
+                notificationPriority = NotificationPriority.HIGH;
+            } else {
+                notificationPriority = NotificationPriority.DEFAULT;
+            }
+        }
+        //Change how curMessage works
+        if(version == 0) {
+            int curMessage = getCurMessage();
+            if(curMessage >= messageList.size()) {
+                curMessage = 0;
+            }
+            setCurMessage(curMessage);
+        }
+        version = CURRENT_VERSION;
     }
 
     /**

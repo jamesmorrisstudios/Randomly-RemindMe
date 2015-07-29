@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Nepavyko įkelti priminimo sąrašą"</string>
-    <string name="app_open_fail">"Nepavyko atidaryti programą"</string>
     <string name="error_time_difference">"Neteisingas laikas"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Ar tikrai norite išmesti pakeitimus?"</string>
     <string name="duplicate_prompt_title">"Dubliuoti priminimas"</string>
     <string name="duplicate_prompt_content">"Ar tikrai norite dubliuoti šią priminimą?"</string>
+    <string name="notification_theme_title">"Prašome pasirinkti pranešimo stilių, kuris atitinka jūsų telefoną"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Pasirinkite piktogramą"</string>
-    <string name="selectNotification">"Pasirinkite Pranešimas"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Pavadinimas"</string>
-    <string name="default_message">"Žinutė"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Bendras"</string>
-    <string name="edit_timing">"Laikas"</string>
-    <string name="edit_repeat">"Pakartojimas"</string>
-    <string name="edit_notification">"Pranešimas"</string>
-    <string name="edit_alarm">"Žadintuvas"</string>
-    <string name="timing_specific">"Specifinis"</string>
-    <string name="timing_range">"Diapazonas"</string>
+    <string name="select_notification">"Pasirinkite Pranešimas"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Priminimai Per Day"</string>
-    <string name="vibrate_enable">"Vibruoti"</string>
-    <string name="random_enable">"Randomize Times \""</string>
-    <string name="high_priority_enable">"Aukštas prioritetas"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Spalva"</string>
-    <string name="sound_set">"Tonas"</string>
-    <string name="icon_set">"Piktograma"</string>
-    <string name="icon_color">"Accent spalva"</string>
 
-    <string name="in_order">"Siekiant"</string>
-    <string name="random">"Atsitiktinis"</string>
     <string name="num_messages">"Taškų Žinutės"</string>
     <string name="edit_messages">"Redaguoti Žinutės"</string>
     <string name="edit_times">"Redaguoti Times \""</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Nuimkite išjungti pasirinktinį pranešimą ir grįžti prie standartinės sistemos"</string>
     <string name="settings_item_2_primary">"Naudokite esamą pranešimą"</string>
     <string name="settings_item_2_secondary">"Nuimkite leisti pranešimas turi būti dismissible swiping jį. Vykdomi pranešimai nepalaiko Android drabužiai"</string>
-    <string name="settings_item_3_primary">"Naudokite šviesos pranešimo tema"</string>
-    <string name="settings_item_3_secondary">"Nuimkite naudoti tamsiai pranešimo tema"</string>
+    <string name="settings_item_3_primary">"Naudokite pranešimo tema šviesiame fone ir tamsiai tekstą"</string>
+    <string name="settings_item_3_secondary">"Atžymėti naudoti tamsiai pranešimo tema tamsiame fone ir šviesos tekstą"</string>
     <string name="settings_item_4_primary">"Pirma savaitės diena"</string>
 
 </resources>

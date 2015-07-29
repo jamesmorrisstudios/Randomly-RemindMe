@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"ไม่สามารถโหลดรายการเตือน"</string>
-    <string name="app_open_fail">"ไม่สามารถเปิด app"</string>
     <string name="error_time_difference">"เวลาที่ไม่ถูกต้อง"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"คุณแน่ใจหรือว่าต้องการยกเลิกการเปลี่ยนแปลงหรือไม่?"</string>
     <string name="duplicate_prompt_title">"เตือนซ้ำ"</string>
     <string name="duplicate_prompt_content">"คุณแน่ใจหรือว่าต้องการที่จะทำซ้ำเตือนนี้หรือไม่?"</string>
+    <string name="notification_theme_title">"กรุณาเลือกรูปแบบการแจ้งเตือนที่ตรงกับโทรศัพท์ของคุณ"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"เลือกไอคอน"</string>
-    <string name="selectNotification">"เลือกการแจ้งเตือน"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"ชื่อเรื่อง"</string>
-    <string name="default_message">"ข่าวสาร"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"ทั่วไป"</string>
-    <string name="edit_timing">"การจับเวลา"</string>
-    <string name="edit_repeat">"ทำซ้ำ"</string>
-    <string name="edit_notification">"การประกาศ"</string>
-    <string name="edit_alarm">"ปลุก"</string>
-    <string name="timing_specific">"โดยเฉพาะ"</string>
-    <string name="timing_range">"พิสัย"</string>
+    <string name="select_notification">"เลือกการแจ้งเตือน"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"การแจ้งเตือนต่อวัน"</string>
-    <string name="vibrate_enable">"สั่นสะเทือน"</string>
-    <string name="random_enable">"สุ่มไทม์"</string>
-    <string name="high_priority_enable">"ลำดับความสำคัญสูง"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"สี"</string>
-    <string name="sound_set">"โทน"</string>
-    <string name="icon_set">"ไอคอน"</string>
-    <string name="icon_color">"สำเนียงสี"</string>
 
-    <string name="in_order">"ในการสั่งซื้อ"</string>
-    <string name="random">"สุ่ม"</string>
     <string name="num_messages">"จำนวนข้อความ"</string>
     <string name="edit_messages">"แก้ไขข้อความ"</string>
     <string name="edit_times">"แก้ไขไทม์"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"ยกเลิกการเลือกปิดการใช้งานการแจ้งเตือนที่กำหนดเองและกลับไปใช้ระบบมาตรฐาน"</string>
     <string name="settings_item_2_primary">"ใช้การแจ้งเตือนอย่างต่อเนื่อง"</string>
     <string name="settings_item_2_secondary">"ยกเลิกการเลือกเพื่อให้การแจ้งเตือนที่จะ dismissible โดยรูดมันออกไป การแจ้งเตือนอย่างต่อเนื่องไม่ได้รับการสนับสนุนบน Android Wear"</string>
-    <string name="settings_item_3_primary">"ใช้รูปแบบการแจ้งเตือนแสง"</string>
-    <string name="settings_item_3_secondary">"ยกเลิกการเลือกที่จะใช้รูปแบบการแจ้งเตือนที่มืด"</string>
+    <string name="settings_item_3_primary">"ใช้รูปแบบการแจ้งเตือนของพื้นหลังสีอ่อนและข้อความที่มืด"</string>
+    <string name="settings_item_3_secondary">"ยกเลิกการเลือกที่จะใช้รูปแบบการแจ้งเตือนมืดของพื้นหลังสีดำและข้อความแสง"</string>
     <string name="settings_item_4_primary">"วันแรกของสัปดาห์"</string>
 
 </resources>

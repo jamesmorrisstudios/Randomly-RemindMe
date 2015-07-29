@@ -15,32 +15,11 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="@string/default_title"
+        android:hint="@string/title"
         android:inputType="text|textAutoCorrect|textCapSentences"
         android:singleLine="true"
         android:textColor="@color/textDarkMain"
         android:textColorHint="@color/textDarkDisabled"
         android:textSize="@dimen/item_size" />
-<!--
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleText"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notification"
-            android:id="@+id/radio_notification" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alarm"
-            android:id="@+id/radio_alarm" />
-    </RadioGroup>
--->
 
 </RelativeLayout>

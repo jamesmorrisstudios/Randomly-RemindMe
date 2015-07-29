@@ -2,7 +2,6 @@ package jamesmorrisstudios.com.randremind.editReminder;
 
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
@@ -19,7 +18,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 public class EditReminderRepeat {
     private ButtonCircleFlat[] dayButtons = new ButtonCircleFlat[7];
 
-    public EditReminderRepeat(RelativeLayout parent) {
+    public EditReminderRepeat(View parent) {
         dayButtons[0] = (ButtonCircleFlat) parent.findViewById(R.id.day0);
         dayButtons[1] = (ButtonCircleFlat) parent.findViewById(R.id.day1);
         dayButtons[2] = (ButtonCircleFlat) parent.findViewById(R.id.day2);
@@ -35,8 +34,8 @@ public class EditReminderRepeat {
         if (remind == null) {
             return;
         }
-        for (int i = 0; i < remind.daysToRun.length; i++) {
-            setDayOfWeek(i, remind.daysToRun[i]);
+        for (int i = 0; i < remind.getDaysToRun().length; i++) {
+            setDayOfWeek(i, remind.getDaysToRun()[i]);
         }
         repeatDaysListener();
     }
@@ -88,7 +87,7 @@ public class EditReminderRepeat {
                     if (remind == null) {
                         return;
                     }
-                    remind.daysToRun[index] = !dayButtons[index].getActive();
+                    remind.updateDaysToRun()[index] = !dayButtons[index].getActive();
                     setDayOfWeek(index, !dayButtons[index].getActive());
                 }
             });

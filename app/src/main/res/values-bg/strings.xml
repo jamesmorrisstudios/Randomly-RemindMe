@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Неуспешно зареждане списък напомняне"</string>
-    <string name="app_open_fail">"Неуспех при отваряне на приложението"</string>
     <string name="error_time_difference">"Невалиден време"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Сигурни ли сте че искате да отхвърлите промените?"</string>
     <string name="duplicate_prompt_title">"Duplicate Reminder"</string>
     <string name="duplicate_prompt_content">"Сигурни ли сте че искате да дублира това напомняне?"</string>
+    <string name="notification_theme_title">"Моля изберете стил за уведомяване, който съвпада с вашия телефон"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Изберете Icon"</string>
-    <string name="selectNotification">"Изберете Уведомление"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Заглавие"</string>
-    <string name="default_message">"Съобщение"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Общ"</string>
-    <string name="edit_timing">"Синхронизиране"</string>
-    <string name="edit_repeat">"Повторение"</string>
-    <string name="edit_notification">"Нотификация"</string>
-    <string name="edit_alarm">"Аларма"</string>
-    <string name="timing_specific">"Специфичен"</string>
-    <string name="timing_range">"Диапазон"</string>
+    <string name="select_notification">"Изберете Уведомление"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Напомняне на ден"</string>
-    <string name="vibrate_enable">"Откликвам"</string>
-    <string name="random_enable">"Randomize Times"</string>
-    <string name="high_priority_enable">"Висок приоритет"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Цвят"</string>
-    <string name="sound_set">"Тон"</string>
-    <string name="icon_set">"Икона"</string>
-    <string name="icon_color">"Акцент Color"</string>
 
-    <string name="in_order">"В Ред"</string>
-    <string name="random">"Произволен"</string>
     <string name="num_messages">"Броят на съобщенията"</string>
     <string name="edit_messages">"Редактиране Съобщения"</string>
     <string name="edit_times">"Edit Times"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Махнете отметката, за да забраните обичай нотификацията и се върне към стандартната система"</string>
     <string name="settings_item_2_primary">"Използвайте продължаващата уведомяване"</string>
     <string name="settings_item_2_secondary">"Махнете отметката, за да се даде възможност на уведомлението да бъде dismissible като го прекарате с кола. Продължаващите уведомления не се поддържат в Android Wear"</string>
-    <string name="settings_item_3_primary">"Използвайте светлината тема уведомяване"</string>
-    <string name="settings_item_3_secondary">"Махнете отметката да използвате тъмна палитра уведомяване"</string>
+    <string name="settings_item_3_primary">"Използвайте тема уведомление за светъл фон и тъмен текст"</string>
+    <string name="settings_item_3_secondary">"Махнете отметката да използвате тъмна палитра уведомление за тъмен фон и светъл текст"</string>
     <string name="settings_item_4_primary">"Първи ден от седмицата"</string>
 
 </resources>

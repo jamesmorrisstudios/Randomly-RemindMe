@@ -29,9 +29,8 @@ import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
 import com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate;
-import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
+import com.jamesmorrisstudios.utilitieslibrary.math.UtilsMath;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
-import com.nineoldandroids.view.ViewHelper;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -43,12 +42,12 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
  */
 public final class SummaryViewHolder extends BaseRecycleViewHolder {
     //Header
-    private TextView title, startHour, startMinute, startAM, startPM, endHour, endMinute, endAM, endPM;
+    private TextView title, hour1, minute1, AM1, PM1, hour2, minute2, AM2, PM2, hour3, minute3, AM3, PM3, dash1, dash2;
     private SwitchCompat enabled;
-    private View dash, endTop;
+    private View top1, top2, top3;
     private ButtonCircleFlat[] dayButtons;
-    private TintedImageView timingRandom, vibrate, tone, ledIcon, highPriorityIcon;
-    private TextView timingTimes, content;
+    private TextView message;
+    //private Toolbar toolbar;
 
     //Item
     private TextView date, show, acked, percent;
@@ -61,8 +60,8 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
      * @param isHeader  True if header reminder, false for normal
      * @param mListener Click listener. Null if none desired
      */
-    public SummaryViewHolder(@NonNull View view, boolean isHeader, @Nullable cardClickListener mListener) {
-        super(view, isHeader, mListener);
+    public SummaryViewHolder(@NonNull View view, boolean isHeader, boolean isDummyItem, @Nullable cardClickListener mListener) {
+        super(view, isHeader, isDummyItem, mListener);
     }
 
     @Override
@@ -71,17 +70,29 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         title = (TextView) view.findViewById(R.id.reminder_title_text);
         topLayout.setOnClickListener(this);
         enabled = (SwitchCompat) view.findViewById(R.id.reminder_enabled);
-        View startTop = view.findViewById(R.id.reminder_time_start);
-        startHour = (TextView) startTop.findViewById(R.id.time_hour);
-        startMinute = (TextView) startTop.findViewById(R.id.time_minute);
-        startAM = (TextView) startTop.findViewById(R.id.time_am);
-        startPM = (TextView) startTop.findViewById(R.id.time_pm);
-        endTop = view.findViewById(R.id.reminder_time_end);
-        endHour = (TextView) endTop.findViewById(R.id.time_hour);
-        endMinute = (TextView) endTop.findViewById(R.id.time_minute);
-        endAM = (TextView) endTop.findViewById(R.id.time_am);
-        endPM = (TextView) endTop.findViewById(R.id.time_pm);
-        dash = view.findViewById(R.id.timing_dash);
+        message = (TextView) view.findViewById(R.id.message);
+
+        //toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        //toolbar.inflateMenu(R.menu.menu_add_new);
+
+        top1 = view.findViewById(R.id.reminder_time_1);
+        hour1 = (TextView) top1.findViewById(R.id.time_hour);
+        minute1 = (TextView) top1.findViewById(R.id.time_minute);
+        AM1 = (TextView) top1.findViewById(R.id.time_am);
+        PM1 = (TextView) top1.findViewById(R.id.time_pm);
+        top2 = view.findViewById(R.id.reminder_time_2);
+        hour2 = (TextView) top2.findViewById(R.id.time_hour);
+        minute2 = (TextView) top2.findViewById(R.id.time_minute);
+        AM2 = (TextView) top2.findViewById(R.id.time_am);
+        PM2 = (TextView) top2.findViewById(R.id.time_pm);
+        top3 = view.findViewById(R.id.reminder_time_3);
+        hour3 = (TextView) top3.findViewById(R.id.time_hour);
+        minute3 = (TextView) top3.findViewById(R.id.time_minute);
+        AM3 = (TextView) top3.findViewById(R.id.time_am);
+        PM3 = (TextView) top3.findViewById(R.id.time_pm);
+        dash1 = (TextView) view.findViewById(R.id.timing_dash_1);
+        dash2 = (TextView) view.findViewById(R.id.timing_dash_2);
+
         dayButtons = new ButtonCircleFlat[7];
         dayButtons[0] = (ButtonCircleFlat) view.findViewById(R.id.daySun);
         dayButtons[1] = (ButtonCircleFlat) view.findViewById(R.id.dayMon);
@@ -97,13 +108,6 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
                 text.setText(week[i]);
             }
         }
-        timingRandom = (TintedImageView) view.findViewById(R.id.timing_random);
-        timingTimes = (TextView) view.findViewById(R.id.timing_times);
-        vibrate = (TintedImageView) view.findViewById(R.id.notification_vibrate);
-        tone = (TintedImageView) view.findViewById(R.id.notification_tone);
-        content = (TextView) view.findViewById(R.id.content);
-        ledIcon = (TintedImageView) view.findViewById(R.id.notification_led);
-        highPriorityIcon = (TintedImageView) view.findViewById(R.id.notification_high_priority);
     }
 
     @Override
@@ -119,64 +123,55 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     protected void bindHeader(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
 
-        String title = reminder.title;
+        String title = reminder.getTitle();
+        int lastMessage = UtilsMath.inBoundsInt(0, reminder.getMessageList().size()-1, reminder.getCurMessage());
+        String messageText = reminder.getMessageList().get(Math.max(0, lastMessage));
+        message.setText(messageText);
         if (title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.default_title);
+            title = AppUtil.getContext().getString(R.string.title);
         }
         this.title.setText(title);
-        if (reminder.rangeTiming) {
-            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.startTime);
-            UtilsTime.setTime(endHour, endMinute, endAM, endPM, reminder.endTime);
-            endTop.setVisibility(View.VISIBLE);
-            dash.setVisibility(View.VISIBLE);
+        if (reminder.isRangeTiming()) {
+            UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.getStartTime());
+            UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getEndTime());
+            dash1.setText(AppUtil.getContext().getString(R.string.dash));
+            top1.setVisibility(View.VISIBLE);
+            top2.setVisibility(View.VISIBLE);
+            dash1.setVisibility(View.VISIBLE);
+            dash2.setVisibility(View.INVISIBLE);
+            top3.setVisibility(View.INVISIBLE);
         } else {
-            UtilsTime.setTime(startHour, startMinute, startAM, startPM, reminder.specificTimeList.get(0));
-            endTop.setVisibility(View.GONE);
-            dash.setVisibility(View.GONE);
+            dash1.setText(AppUtil.getContext().getString(R.string.comma));
+            if(reminder.getSpecificTimeList().size() >= 1) {
+                UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.getSpecificTimeList().get(0));
+            }
+            if(reminder.getSpecificTimeList().size() >= 2) {
+                UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getSpecificTimeList().get(1));
+                dash1.setVisibility(View.VISIBLE);
+                top2.setVisibility(View.VISIBLE);
+            } else {
+                dash1.setVisibility(View.INVISIBLE);
+                top2.setVisibility(View.INVISIBLE);
+            }
+            if(reminder.getSpecificTimeList().size() >= 3) {
+                UtilsTime.setTime(hour3, minute3, AM3, PM3, reminder.getSpecificTimeList().get(2));
+                dash2.setVisibility(View.VISIBLE);
+                top3.setVisibility(View.VISIBLE);
+            } else {
+                dash2.setVisibility(View.INVISIBLE);
+                top3.setVisibility(View.INVISIBLE);
+            }
         }
         enabled.setOnCheckedChangeListener(null);
-        enabled.setChecked(reminder.enabled);
+        enabled.setChecked(reminder.isEnabled());
         enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderList.getInstance().setEnableReminder(reminder.uniqueName, isChecked);
+                ReminderList.getInstance().setEnableReminder(reminder.getUniqueName(), isChecked);
             }
         });
-        for (int i = 0; i < reminder.daysToRun.length; i++) {
-            setDayOfWeek(i, reminder.daysToRun[i]);
-        }
-        if (reminder.rangeTiming) {
-            timingTimes.setText(Integer.toString(reminder.numberPerDay));
-            timingRandom.setVisibility(View.VISIBLE);
-            if (reminder.randomDistribution) {
-                ViewHelper.setAlpha(timingRandom, 1.0f);
-            } else {
-                ViewHelper.setAlpha(timingRandom, 0.12f);
-            }
-        } else {
-            timingTimes.setVisibility(View.INVISIBLE);
-            timingRandom.setVisibility(View.INVISIBLE);
-        }
-        if (reminder.notificationTone != null) {
-            ViewHelper.setAlpha(tone, 1.0f);
-        } else {
-            ViewHelper.setAlpha(tone, 0.12f);
-        }
-        if (reminder.notificationVibrate) {
-            ViewHelper.setAlpha(vibrate, 1.0f);
-        } else {
-            ViewHelper.setAlpha(vibrate, 0.12f);
-        }
-        content.setText(reminder.content);
-        if (reminder.notificationLED) {
-            ViewHelper.setAlpha(ledIcon, 1.0f);
-        } else {
-            ViewHelper.setAlpha(ledIcon, 0.12f);
-        }
-        if (reminder.notificationHighPriority) {
-            ViewHelper.setAlpha(highPriorityIcon, 1.0f);
-        } else {
-            ViewHelper.setAlpha(highPriorityIcon, 0.12f);
+        for (int i = 0; i < reminder.getDaysToRun().length; i++) {
+            setDayOfWeek(i, reminder.getDaysToRun()[i]);
         }
     }
 

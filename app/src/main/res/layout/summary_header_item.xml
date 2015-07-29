@@ -32,22 +32,41 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardUseCompatPadding="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="8dip">
-
-        <!-- Primary layout container -->
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <!-- Primary layout container -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:padding="8dip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <!--
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@color/primaryLight"
+                android:minHeight="40dp"
+                android:theme="@style/toolbarDark"
+                app:popupTheme="@style/ThemeOverlay.AppCompat" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/toolbar"
+                android:id="@+id/reminder_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
+
+            -->
 
             <!-- Enable Switch -->
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/reminder_enabled"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true" />
@@ -66,7 +85,7 @@
                 android:textSize="20sp" />
 
             <include
-                android:id="@+id/reminder_time_start"
+                android:id="@+id/reminder_time_1"
                 layout="@layout/time_display_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,31 +93,51 @@
                 android:layout_below="@+id/reminder_title_text" />
 
             <TextView
-                android:id="@+id/timing_dash"
+                android:id="@+id/timing_dash_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/reminder_title_text"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_toRightOf="@+id/reminder_time_start"
-                android:text="@string/dash"
+                android:layout_toRightOf="@+id/reminder_time_1"
+                android:text="@string/comma"
                 android:textColor="@color/textDarkSecondary"
                 android:textSize="20sp" />
 
             <include
-                android:id="@+id/reminder_time_end"
+                android:id="@+id/reminder_time_2"
                 layout="@layout/time_display_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/reminder_title_text"
-                android:layout_toRightOf="@+id/timing_dash" />
+                android:layout_toRightOf="@+id/timing_dash_1" />
+
+            <TextView
+                android:id="@+id/timing_dash_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/reminder_title_text"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_toRightOf="@+id/reminder_time_2"
+                android:text="@string/comma"
+                android:textColor="@color/textDarkSecondary"
+                android:textSize="20sp" />
+
+            <include
+                android:id="@+id/reminder_time_3"
+                layout="@layout/time_display_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/reminder_title_text"
+                android:layout_toRightOf="@+id/timing_dash_2" />
 
             <LinearLayout
                 android:id="@+id/daysContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/reminder_time_start"
+                android:layout_below="@+id/reminder_time_1"
                 android:layout_toLeftOf="@+id/reminder_enabled"
                 android:orientation="horizontal">
 
@@ -162,91 +201,16 @@
 
             </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <TextView
+            android:id="@+id/message"
+            android:layout_toLeftOf="@+id/reminder_enabled"
+            android:layout_below="@+id/daysContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
-                android:id="@+id/notification_tone"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_notifications_none_white_24dp"
-                android:tint="@color/textDarkSecondary" />
-
-            <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
-                android:id="@+id/notification_vibrate"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@+id/notification_tone"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_vibration_white_24dp"
-                android:tint="@color/textDarkSecondary" />
-
-            <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
-                android:id="@+id/notification_high_priority"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@+id/notification_vibrate"
-                android:scaleType="fitCenter"
-                android:src="@drawable/high_priority_icon"
-                android:tint="@color/textDarkSecondary" />
-
-            <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
-                android:id="@+id/notification_led"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@+id/notification_high_priority"
-                android:scaleType="fitCenter"
-                android:src="@drawable/led_icon"
-                android:tint="@color/textDarkSecondary" />
-
-            <com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView
-                android:id="@+id/timing_random"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@+id/notification_led"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_shuffle_white_24dp"
-                android:tint="@color/textDarkSecondary" />
-
-            <TextView
-                android:id="@+id/timing_times"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="4dp"
-                android:layout_toRightOf="@+id/timing_random"
-                android:gravity="center"
-                android:textColor="@color/textDarkSecondary"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/notification_tone"
-                android:singleLine="false"
-                android:textColor="@color/textDarkSecondary"
-                android:textSize="16sp" />
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="18sp"/>
 
         </RelativeLayout>
-
-    </LinearLayout>
 
 </android.support.v7.widget.CardView>

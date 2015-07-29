@@ -2,7 +2,6 @@
 
     <!-- Failure Messages -->
     <string name="data_load_fail">"Nem sikerült betölteni emlékeztető listát"</string>
-    <string name="app_open_fail">"Nem sikerült megnyitni app"</string>
     <string name="error_time_difference">"Érvénytelen idő"</string>
 
     <!-- Main Screen no data -->
@@ -15,37 +14,14 @@
     <string name="cancel_prompt_content">"Biztos benne, hogy szeretné megtartani a módosításokat?"</string>
     <string name="duplicate_prompt_title">"Duplicate Emlékeztető"</string>
     <string name="duplicate_prompt_content">"Biztosan másolni kívánt emlékeztető?"</string>
+    <string name="notification_theme_title">"Kérjük, válassza ki az értesítést stílust, amely megfelel a telefon"</string>
 
     <!-- Dialogs -->
-    <string name="chooseIcon">"Ikon választása"</string>
-    <string name="selectNotification">"Select Notification"</string>
-
-    <!-- Title and message defaults (also used as edit headers) -->
-    <string name="default_title">"Cím"</string>
-    <string name="default_message">"Üzenet"</string>
-
-    <!-- Edit headers -->
-    <string name="edit_general">"Általános"</string>
-    <string name="edit_timing">"Időzítés"</string>
-    <string name="edit_repeat">"Ismétlés"</string>
-    <string name="edit_notification">"Bejelentés"</string>
-    <string name="edit_alarm">"Riasztás"</string>
-    <string name="timing_specific">"Fajlagos"</string>
-    <string name="timing_range">"Hatótávolság"</string>
+    <string name="select_notification">"Select Notification"</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Emlékeztetők Per Day"</string>
-    <string name="vibrate_enable">"Rezeg"</string>
-    <string name="random_enable">"Randomize Times"</string>
-    <string name="high_priority_enable">"Magas Prioritás"</string>
-    <string name="led_enable">"LED"</string>
-    <string name="led_color">"Szín"</string>
-    <string name="sound_set">"Tónus"</string>
-    <string name="icon_set">"Ikon"</string>
-    <string name="icon_color">"Kiemelőszín"</string>
 
-    <string name="in_order">"In Order"</string>
-    <string name="random">"Véletlen"</string>
     <string name="num_messages">"Üzenetek száma"</string>
     <string name="edit_messages">"Szerkesztés üzenetek"</string>
     <string name="edit_times">"Szerkesztés Times"</string>
@@ -63,8 +39,8 @@
     <string name="settings_item_1_secondary">"Szüntesse meg kikapcsolni az egyéni bejelentés és visszatér a normál rendszer"</string>
     <string name="settings_item_2_primary">"Használja a folyamatban lévő értesítés"</string>
     <string name="settings_item_2_secondary">"Szüntesse meg, hogy a bejelentést hagyhatók, ellop el. Folyamatban lévő bejelentések nem támogatja az Android Wear"</string>
-    <string name="settings_item_3_primary">"Használja fény értesítést téma"</string>
-    <string name="settings_item_3_secondary">"Meg kell szüntetni a sötétebb értesítést téma"</string>
+    <string name="settings_item_3_primary">"Használja értesítést témája a világos háttér és sötét szöveget"</string>
+    <string name="settings_item_3_secondary">"Meg kell szüntetni a sötétebb értesítést témája a sötét háttér és világos szöveg"</string>
     <string name="settings_item_4_primary">"Első nap a héten"</string>
 
 </resources>
