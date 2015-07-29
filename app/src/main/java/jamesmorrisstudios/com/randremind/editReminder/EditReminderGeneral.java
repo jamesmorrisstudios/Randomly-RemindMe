@@ -25,7 +25,7 @@ public class EditReminderGeneral {
         if(reminderItem == null) {
             return;
         }
-        title.setText(reminderItem.title);
+        title.setText(reminderItem.getTitle());
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -39,7 +39,9 @@ public class EditReminderGeneral {
 
             @Override
             public void afterTextChanged(@NonNull Editable s) {
-                reminderItem.title = s.toString();
+                if(!reminderItem.getTitle().equals(s.toString())) {
+                    reminderItem.setTitle(s.toString());
+                }
             }
         };
         title.addTextChangedListener(textWatcher);

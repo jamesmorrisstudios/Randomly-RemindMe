@@ -34,8 +34,8 @@ public class EditReminderRepeat {
         if (remind == null) {
             return;
         }
-        for (int i = 0; i < remind.daysToRun.length; i++) {
-            setDayOfWeek(i, remind.daysToRun[i]);
+        for (int i = 0; i < remind.getDaysToRun().length; i++) {
+            setDayOfWeek(i, remind.getDaysToRun()[i]);
         }
         repeatDaysListener();
     }
@@ -87,7 +87,7 @@ public class EditReminderRepeat {
                     if (remind == null) {
                         return;
                     }
-                    remind.daysToRun[index] = !dayButtons[index].getActive();
+                    remind.updateDaysToRun()[index] = !dayButtons[index].getActive();
                     setDayOfWeek(index, !dayButtons[index].getActive());
                 }
             });

@@ -48,7 +48,7 @@ public class EditReminderMessage {
         if(reminderItem == null) {
             return;
         }
-        if(reminderItem.messageInOrder) {
+        if(reminderItem.isMessageInOrder()) {
             inOrder.setChecked(true);
             random.setChecked(false);
         } else {
@@ -59,8 +59,8 @@ public class EditReminderMessage {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    reminderItem.messageInOrder = true;
-                    reminderItem.setCurMessage(0);
+                    reminderItem.setMessageInOrder(true);
+                    reminderItem.setCurMessage(-1);
                 }
             }
         });
@@ -68,18 +68,18 @@ public class EditReminderMessage {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    reminderItem.messageInOrder = false;
-                    reminderItem.setCurMessage(0);
+                    reminderItem.setMessageInOrder(false);
+                    reminderItem.setCurMessage(-1);
                 }
             }
         });
         editMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bus.postObject(new EditTextListRequest(reminderItem.messageList, new EditTextListDialog.EditMessageListener() {
+                Bus.postObject(new EditTextListRequest(reminderItem.getMessageList(), new EditTextListDialog.EditMessageListener() {
                     @Override
                     public void onPositive(ArrayList<String> messages) {
-                        reminderItem.messageList = messages;
+                        reminderItem.setMessageList(messages);
                     }
                 }, new View.OnClickListener() {
                     @Override
@@ -89,20 +89,21 @@ public class EditReminderMessage {
                 }));
             }
         });
-        numMessages.setSelection(reminderItem.messageList.size()-1);
+        numMessages.setSelection(reminderItem.getMessageList().size()-1);
         numMessages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int size = position + 1;
                 //If we are making the list bigger
-                while (size > reminderItem.messageList.size()) {
-                    reminderItem.messageList.add("");
+                while (size > reminderItem.getMessageList().size()) {
+                    reminderItem.updateMessageList().add("");
+                    reminderItem.setCurMessage(-1);
                 }
                 //If we are making the list smaller
-                while (size < reminderItem.messageList.size()) {
-                    reminderItem.messageList.remove(reminderItem.messageList.size() - 1);
+                while (size < reminderItem.getMessageList().size()) {
+                    reminderItem.updateMessageList().remove(reminderItem.getMessageList().size() - 1);
+                    reminderItem.setCurMessage(-1);
                 }
-                reminderItem.setCurMessage(0);
             }
 
             @Override

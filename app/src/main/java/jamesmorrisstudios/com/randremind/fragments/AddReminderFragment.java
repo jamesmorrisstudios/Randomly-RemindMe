@@ -25,6 +25,7 @@ import jamesmorrisstudios.com.randremind.editReminder.EditReminderItem;
 import jamesmorrisstudios.com.randremind.listAdapters.EditReminderAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.EditReminderContainer;
 import jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
@@ -129,15 +130,27 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
         super.onStop();
         Log.v("Add Reminder Fragment", "On Stop");
         //If any reminders are currently open save them
-        Utils.toastShort(getString(R.string.reminder_save));
-        ReminderList.getInstance().saveCurrentReminder();
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if(remind != null) {
+            if(ReminderList.getInstance().saveCurrentReminder()) {
+                Utils.toastShort(getString(R.string.reminder_save));
+            } else {
+                Utils.toastShort(getString(R.string.reminder_no_changes));
+            }
+        }
     }
 
     @Override
     public void onBack() {
         if(saveOnBack) {
-            Utils.toastShort(getString(R.string.reminder_save));
-            ReminderList.getInstance().saveCurrentReminder();
+            ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+            if(remind != null) {
+                if(ReminderList.getInstance().saveCurrentReminder()) {
+                    Utils.toastShort(getString(R.string.reminder_save));
+                } else {
+                    Utils.toastShort(getString(R.string.reminder_no_changes));
+                }
+            }
         }
         utilListener.hideKeyboard();
     }

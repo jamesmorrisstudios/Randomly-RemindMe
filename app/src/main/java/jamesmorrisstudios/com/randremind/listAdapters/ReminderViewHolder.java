@@ -111,14 +111,14 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
     @Override
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
-        String title = reminder.title;
+        String title = reminder.getTitle();
         if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.title);
         }
         this.title.setText(title);
-        if (reminder.rangeTiming) {
-            UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.startTime);
-            UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.endTime);
+        if (reminder.isRangeTiming()) {
+            UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.getStartTime());
+            UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getEndTime());
             dash1.setText(AppUtil.getContext().getString(R.string.dash));
             top1.setVisibility(View.VISIBLE);
             top2.setVisibility(View.VISIBLE);
@@ -127,19 +127,19 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
             top3.setVisibility(View.INVISIBLE);
         } else {
             dash1.setText(AppUtil.getContext().getString(R.string.comma));
-            if(reminder.specificTimeList.size() >= 1) {
-                UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.specificTimeList.get(0));
+            if(reminder.getSpecificTimeList().size() >= 1) {
+                UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.getSpecificTimeList().get(0));
             }
-            if(reminder.specificTimeList.size() >= 2) {
-                UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.specificTimeList.get(1));
+            if(reminder.getSpecificTimeList().size() >= 2) {
+                UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getSpecificTimeList().get(1));
                 dash1.setVisibility(View.VISIBLE);
                 top2.setVisibility(View.VISIBLE);
             } else {
                 dash1.setVisibility(View.INVISIBLE);
                 top2.setVisibility(View.INVISIBLE);
             }
-            if(reminder.specificTimeList.size() >= 3) {
-                UtilsTime.setTime(hour3, minute3, AM3, PM3, reminder.specificTimeList.get(2));
+            if(reminder.getSpecificTimeList().size() >= 3) {
+                UtilsTime.setTime(hour3, minute3, AM3, PM3, reminder.getSpecificTimeList().get(2));
                 dash2.setVisibility(View.VISIBLE);
                 top3.setVisibility(View.VISIBLE);
             } else {
@@ -148,15 +148,15 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
             }
         }
         enabled.setOnCheckedChangeListener(null);
-        enabled.setChecked(reminder.enabled);
+        enabled.setChecked(reminder.isEnabled());
         enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderList.getInstance().setEnableReminder(reminder.uniqueName, isChecked);
+                ReminderList.getInstance().setEnableReminder(reminder.getUniqueName(), isChecked);
             }
         });
-        for (int i = 0; i < reminder.daysToRun.length; i++) {
-            setDayOfWeek(i, reminder.daysToRun[i]);
+        for (int i = 0; i < reminder.getDaysToRun().length; i++) {
+            setDayOfWeek(i, reminder.getDaysToRun()[i]);
         }
     }
 

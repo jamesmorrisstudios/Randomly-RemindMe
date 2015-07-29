@@ -46,10 +46,9 @@ public class EditTimesDialog extends DialogFragment {
         // Empty constructor required for DialogFragment
     }
 
-    @Override
     public void onPause() {
-        super.onPause();
         dismiss();
+        super.onPause();
     }
 
     @Override

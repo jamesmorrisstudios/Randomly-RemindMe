@@ -28,6 +28,7 @@
 
     <!-- Toast Status messages -->
     <string name="reminder_cancel">Changes Discarded</string>
+    <string name="reminder_no_changes">No Changes</string>
     <string name="reminder_save">Changes Saved</string>
     <string name="reminder_delete">Reminder Deleted</string>
     <string name="reminder_duplicate">Reminder Duplicated</string>

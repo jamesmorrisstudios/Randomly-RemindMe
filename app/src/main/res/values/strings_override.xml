@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name" translatable="false">Randomly RemindMe</string>
     <string name="app_short_name" translatable="false">RemindMe</string>
+    <string name="app_package" translatable="false">jamesmorrisstudios.com.randremind</string>
 
     <string name="tutorial_link_read" translatable="false">http://www.jamesmorrisstudios.us/randomly-remindme-howto.html</string>
     <string name="tutorial_link_watch" translatable="false">TODO</string>

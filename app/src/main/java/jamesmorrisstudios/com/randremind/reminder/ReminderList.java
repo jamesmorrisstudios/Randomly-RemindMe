@@ -193,7 +193,7 @@ public final class ReminderList {
     @Nullable
     public final ReminderItem getReminder(@NonNull String uniqueName) {
         for (ReminderItem item : reminders.data) {
-            if (item.uniqueName.equals(uniqueName)) {
+            if (item.getUniqueName().equals(uniqueName)) {
                 return item;
             }
         }
@@ -206,20 +206,24 @@ public final class ReminderList {
             return;
         }
         if (currentItem != null && currentItem.equals(item)) {
-            currentItem.enabled = enable;
-            if (enable) {
-                currentItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
-            } else {
-                currentItem.deleteNextWake();
+            if(currentItem.isEnabled() != enable) {
+                currentItem.setEnabled(enable);
+                if (enable) {
+                    currentItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
+                } else {
+                    currentItem.deleteNextWake();
+                }
+                saveCurrentReminder();
             }
-            saveCurrentReminder();
             return;
         }
-        item.enabled = enable;
-        if (enable) {
-            item.rescheduleNextWake(UtilsTime.getDateTimeNow());
-        } else {
-            item.deleteNextWake();
+        if(item.isEnabled() != enable) {
+            item.setEnabled(enable);
+            if (enable) {
+                item.rescheduleNextWake(UtilsTime.getDateTimeNow());
+            } else {
+                item.deleteNextWake();
+            }
         }
     }
 
@@ -279,12 +283,16 @@ public final class ReminderList {
      * If its a new reminder it is added to the end of the list
      * The current reminder is NOT cleared
      */
-    public final void saveCurrentReminder() {
-        if (currentItem != null) {
+    public final boolean saveCurrentReminder() {
+        if (currentItem != null && currentItem.isDirty()) {
+            currentItem.clearDirty();
             currentItem.updateAlertTimes();
             currentItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
             //Existing reminder so copy over the original
             reminders.data.set(currentIndex, currentItem.copy());
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -316,7 +324,7 @@ public final class ReminderList {
     public final void setCurrentReminder(@NonNull String uniqueName) {
         int index = 0;
         for (ReminderItem itemInt : reminders.data) {
-            if (itemInt.uniqueName.equals(uniqueName)) {
+            if (itemInt.getUniqueName().equals(uniqueName)) {
                 this.currentIndex = index;
                 this.currentItem = reminders.data.get(currentIndex).copy();
                 return;
@@ -352,8 +360,8 @@ public final class ReminderList {
             ReminderItem firstItem = reminders.data.get(i);
             for (int j = i + 1; j < reminders.data.size(); j++) {
                 ReminderItem secondItem = reminders.data.get(j);
-                if (firstItem.uniqueName.equals(secondItem.uniqueName)) {
-                    secondItem.uniqueName = ReminderItem.getUniqueName();
+                if (firstItem.getUniqueName().equals(secondItem.getUniqueName())) {
+                    secondItem.regenerateUniqueName();
                 }
             }
         }

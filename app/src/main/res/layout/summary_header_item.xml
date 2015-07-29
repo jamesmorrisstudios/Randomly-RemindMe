@@ -201,6 +201,16 @@
 
             </LinearLayout>
 
+        <TextView
+            android:id="@+id/message"
+            android:layout_toLeftOf="@+id/reminder_enabled"
+            android:layout_below="@+id/daysContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="18sp"/>
+
         </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -29,6 +29,7 @@ import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
 import com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate;
+import com.jamesmorrisstudios.utilitieslibrary.math.UtilsMath;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
@@ -45,6 +46,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     private SwitchCompat enabled;
     private View top1, top2, top3;
     private ButtonCircleFlat[] dayButtons;
+    private TextView message;
     //private Toolbar toolbar;
 
     //Item
@@ -68,6 +70,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         title = (TextView) view.findViewById(R.id.reminder_title_text);
         topLayout.setOnClickListener(this);
         enabled = (SwitchCompat) view.findViewById(R.id.reminder_enabled);
+        message = (TextView) view.findViewById(R.id.message);
 
         //toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         //toolbar.inflateMenu(R.menu.menu_add_new);
@@ -120,14 +123,17 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     protected void bindHeader(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
 
-        String title = reminder.title;
+        String title = reminder.getTitle();
+        int lastMessage = UtilsMath.inBoundsInt(0, reminder.getMessageList().size()-1, reminder.getCurMessage());
+        String messageText = reminder.getMessageList().get(Math.max(0, lastMessage));
+        message.setText(messageText);
         if (title == null || title.isEmpty()) {
             title = AppUtil.getContext().getString(R.string.title);
         }
         this.title.setText(title);
-        if (reminder.rangeTiming) {
-            UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.startTime);
-            UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.endTime);
+        if (reminder.isRangeTiming()) {
+            UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.getStartTime());
+            UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getEndTime());
             dash1.setText(AppUtil.getContext().getString(R.string.dash));
             top1.setVisibility(View.VISIBLE);
             top2.setVisibility(View.VISIBLE);
@@ -136,19 +142,19 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             top3.setVisibility(View.INVISIBLE);
         } else {
             dash1.setText(AppUtil.getContext().getString(R.string.comma));
-            if(reminder.specificTimeList.size() >= 1) {
-                UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.specificTimeList.get(0));
+            if(reminder.getSpecificTimeList().size() >= 1) {
+                UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.getSpecificTimeList().get(0));
             }
-            if(reminder.specificTimeList.size() >= 2) {
-                UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.specificTimeList.get(1));
+            if(reminder.getSpecificTimeList().size() >= 2) {
+                UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getSpecificTimeList().get(1));
                 dash1.setVisibility(View.VISIBLE);
                 top2.setVisibility(View.VISIBLE);
             } else {
                 dash1.setVisibility(View.INVISIBLE);
                 top2.setVisibility(View.INVISIBLE);
             }
-            if(reminder.specificTimeList.size() >= 3) {
-                UtilsTime.setTime(hour3, minute3, AM3, PM3, reminder.specificTimeList.get(2));
+            if(reminder.getSpecificTimeList().size() >= 3) {
+                UtilsTime.setTime(hour3, minute3, AM3, PM3, reminder.getSpecificTimeList().get(2));
                 dash2.setVisibility(View.VISIBLE);
                 top3.setVisibility(View.VISIBLE);
             } else {
@@ -157,15 +163,15 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             }
         }
         enabled.setOnCheckedChangeListener(null);
-        enabled.setChecked(reminder.enabled);
+        enabled.setChecked(reminder.isEnabled());
         enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderList.getInstance().setEnableReminder(reminder.uniqueName, isChecked);
+                ReminderList.getInstance().setEnableReminder(reminder.getUniqueName(), isChecked);
             }
         });
-        for (int i = 0; i < reminder.daysToRun.length; i++) {
-            setDayOfWeek(i, reminder.daysToRun[i]);
+        for (int i = 0; i < reminder.getDaysToRun().length; i++) {
+            setDayOfWeek(i, reminder.getDaysToRun()[i]);
         }
     }
 
