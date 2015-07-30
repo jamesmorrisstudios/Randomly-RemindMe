@@ -135,7 +135,7 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
             if(ReminderList.getInstance().saveCurrentReminder()) {
                 Utils.toastShort(getString(R.string.reminder_save));
             } else {
-                Utils.toastShort(getString(R.string.reminder_no_changes));
+                //Utils.toastShort(getString(R.string.reminder_no_changes));
             }
         }
     }
@@ -148,7 +148,7 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
                 if(ReminderList.getInstance().saveCurrentReminder()) {
                     Utils.toastShort(getString(R.string.reminder_save));
                 } else {
-                    Utils.toastShort(getString(R.string.reminder_no_changes));
+                    //Utils.toastShort(getString(R.string.reminder_no_changes));
                 }
             }
         }
