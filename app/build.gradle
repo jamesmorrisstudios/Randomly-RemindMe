@@ -24,7 +24,7 @@ repositories {
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
+    buildToolsVersion "22.0.1"
 
     productFlavors {
         googlePlay {
@@ -33,6 +33,10 @@ android {
 
         amazon {
             applicationId "jamesmorrisstudios.com.randremind.amazon"
+        }
+
+        fdroid {
+            applicationId "jamesmorrisstudios.com.randremind.fd"
         }
     }
 
