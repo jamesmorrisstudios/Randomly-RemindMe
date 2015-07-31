@@ -1,6 +1,8 @@
 package jamesmorrisstudios.com.randremind.listAdapters;
 
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -84,6 +86,11 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
                 break;
         }
         if(view != null) {
+            if(view.getParent() != null && view.getParent() instanceof ViewGroup) {
+                Log.v("EditViewHolder", "View has parent. Removing");
+                ViewGroup parent = (ViewGroup) view.getParent();
+                parent.removeView(view);
+            }
             container.addView(view);
         }
         if(item.visible) {

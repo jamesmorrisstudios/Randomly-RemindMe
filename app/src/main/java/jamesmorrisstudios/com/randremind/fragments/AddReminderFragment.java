@@ -72,9 +72,9 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ReminderList.getInstance().cancelCurrentReminderChanges();
+                                Utils.toastShort(getString(R.string.reminder_cancel));
                                 saveOnBack = false;
                                 utilListener.goBackFromFragment();
-                                Utils.toastShort(getString(R.string.reminder_cancel));
                             }
                         }, new DialogInterface.OnClickListener() {
                             @Override
