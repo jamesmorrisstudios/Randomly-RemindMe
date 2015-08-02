@@ -91,14 +91,11 @@ public class EditReminderNotification {
                 Bus.postObject(new RingtoneRequest(defaultUri, AppUtil.getContext().getResources().getString(R.string.select_notification), new RingtoneRequest.RingtoneRequestListener() {
                     @Override
                     public void ringtoneResponse(Uri uri, String name) {
-                        if (uri != null) {
+                        if (uri != null && name != null) {
                             remind.setNotificationTone(uri.toString());
-                        } else {
-                            remind.setNotificationTone(null);
-                        }
-                        if (name != null) {
                             remind.setNotificationToneName(name);
                         } else {
+                            remind.setNotificationTone(null);
                             remind.setNotificationToneName(AppUtil.getContext().getString(R.string.none));
                         }
                         sound.setText(remind.getNotificationToneName());

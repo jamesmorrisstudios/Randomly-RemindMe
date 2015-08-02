@@ -44,8 +44,8 @@ android {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 29
-        versionName "1.1.9"
+        versionCode 30
+        versionName "1.1.9.1"
     }
 
     signingConfigs {
@@ -80,5 +80,5 @@ dependencies {
     //compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
 
     compile 'com.github.morris-james:UtilitiesLibrary:v1.1.1' //Jitpack
-    compile 'com.github.morris-james:appbaselibrary:v1.1.1' //Jitpack
+    compile 'com.github.morris-james:appbaselibrary:v1.1.2' //Jitpack
 }
