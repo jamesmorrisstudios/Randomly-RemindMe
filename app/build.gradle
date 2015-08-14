@@ -26,6 +26,10 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    //sourceSets {
+    //    main.res.srcDirs 'res', 'res-public'
+    //}
+
     productFlavors {
         googlePlay {
             applicationId "jamesmorrisstudios.com.randremind"
@@ -42,10 +46,10 @@ android {
 
     defaultConfig {
         applicationId "jamesmorrisstudios.com.randremind"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 22
-        versionCode 30
-        versionName "1.1.9.1"
+        versionCode 33
+        versionName "1.1.9.4"
     }
 
     signingConfigs {
@@ -76,9 +80,9 @@ android {
 apply from: file("../../../keystore/signing-rand-remind.gradle")
 
 dependencies {
-    //compile 'com.jamesmorrisstudios:utilitieslibrary:1.1' //local gradle
-    //compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
+    compile 'com.jamesmorrisstudios:utilitieslibrary:1.1' //local gradle
+    compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
 
-    compile 'com.github.morris-james:UtilitiesLibrary:v1.1.1' //Jitpack
-    compile 'com.github.morris-james:appbaselibrary:v1.1.2' //Jitpack
+    //compile 'com.github.morris-james:UtilitiesLibrary:v1.1.1' //Jitpack
+    //compile 'com.github.morris-james:appbaselibrary:v1.1.2' //Jitpack
 }
