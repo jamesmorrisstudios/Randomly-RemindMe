@@ -141,7 +141,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public void setTitle(String title) {
-        if(!this.title.equals(title)) {
+        if(this.title == null || !this.title.equals(title)) {
             setDirty();
             this.title = title;
         }
@@ -262,7 +262,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public void setNotificationTone(String notificationTone) {
-        if(!this.notificationTone.equals(notificationTone)) {
+        if(this.notificationTone == null || !this.notificationTone.equals(notificationTone)) {
             setDirty();
             this.notificationTone = notificationTone;
         }
@@ -273,7 +273,7 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public void setNotificationToneName(String notificationToneName) {
-        if(!this.notificationToneName.equals(notificationToneName)) {
+        if(this.notificationToneName == null || !this.notificationToneName.equals(notificationToneName)) {
             setDirty();
             this.notificationToneName = notificationToneName;
         }

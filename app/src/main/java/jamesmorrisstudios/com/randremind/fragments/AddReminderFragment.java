@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
-import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListNoHeaderFragment;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleNoHeaderAdapter;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleNoHeaderContainer;
+import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.Utils;
 
@@ -31,7 +31,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 /**
  * Created by James on 6/8/2015.
  */
-public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
+public class AddReminderFragment extends BaseRecycleListFragment {
     public static final String TAG = "AddReminderFragment";
     private boolean saveOnBack = true;
 
@@ -91,7 +91,7 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
     }
 
     @Override
-    protected BaseRecycleNoHeaderAdapter getAdapter(@NonNull BaseRecycleNoHeaderAdapter.OnItemClickListener onItemClickListener) {
+    protected BaseRecycleAdapter getAdapter(@NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
         return new EditReminderAdapter(onItemClickListener);
     }
 
@@ -108,7 +108,7 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
         View repeat = inflater.inflate(R.layout.edit_reminder_repeat, null);
         View alert = inflater.inflate(R.layout.edit_reminder_notification, null);
 
-        ArrayList<BaseRecycleNoHeaderContainer> data = new ArrayList<>();
+        ArrayList<BaseRecycleContainer> data = new ArrayList<>();
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.GENERAL, general)));
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.MESSAGE, message)));
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.TIMING, timing)));
@@ -118,8 +118,17 @@ public class AddReminderFragment extends BaseRecycleListNoHeaderFragment {
     }
 
     @Override
-    protected void itemClick(@NonNull BaseRecycleNoHeaderContainer baseRecycleContainer) {
+    protected void startMoreDataLoad() {
+
+    }
+
+    @Override
+    protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
         //Unused
+    }
+
+    protected int getNumberColumns() {
+        return getNumberColumnsWide();
     }
 
     /**

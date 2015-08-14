@@ -7,11 +7,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
-import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleNoHeaderViewHolder;
+import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.utilitieslibrary.animator.AnimatorControl;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.controls.TintedImageView;
-import com.nineoldandroids.view.ViewHelper;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderAlarm;
@@ -26,7 +25,7 @@ import jamesmorrisstudios.com.randremind.editReminder.EditReminderTiming;
  *
  * Created by James on 6/8/2015.
  */
-public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
+public class EditReminderViewHolder extends BaseRecycleViewHolder {
 
     public enum EditReminderPage {
         GENERAL, MESSAGE, TIMING, REPEAT, NOTIFICATION, ALARM
@@ -36,8 +35,13 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
     private TintedImageView toggleExpand;
     private FrameLayout container;
 
-    public EditReminderViewHolder(View view, boolean isDummyItem, cardClickListener mListener) {
-        super(view, isDummyItem, mListener);
+    public EditReminderViewHolder(View view, boolean isHeader, boolean isDummyItem, cardClickListener mListener) {
+        super(view, isHeader, isDummyItem, mListener);
+    }
+
+    @Override
+    protected void initHeader(View view) {
+
     }
 
     @Override
@@ -45,6 +49,11 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
         container = (FrameLayout) view.findViewById(R.id.container);
         title = (TextView)view.findViewById(R.id.title);
         toggleExpand = (TintedImageView) view.findViewById(R.id.toggle_expand);
+    }
+
+    @Override
+    protected void bindHeader(BaseRecycleItem baseRecycleItem, boolean b) {
+
     }
 
     @Override
@@ -95,10 +104,10 @@ public class EditReminderViewHolder extends BaseRecycleNoHeaderViewHolder {
         }
         if(item.visible) {
             container.setVisibility(View.VISIBLE);
-            ViewHelper.setRotation(toggleExpand, 0);
+            toggleExpand.setRotation(0);
         } else {
             container.setVisibility(View.GONE);
-            ViewHelper.setRotation(toggleExpand, 180);
+            toggleExpand.setRotation(180);
         }
         toggleExpand.setOnClickListener(new View.OnClickListener() {
             @Override

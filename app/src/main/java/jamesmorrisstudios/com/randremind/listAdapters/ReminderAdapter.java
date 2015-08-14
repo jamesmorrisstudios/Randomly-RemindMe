@@ -33,11 +33,10 @@ public final class ReminderAdapter extends BaseRecycleAdapter {
     /**
      * Constructor
      *
-     * @param headerMode Header mode to use
      * @param mListener  Item Click listener
      */
-    public ReminderAdapter(int headerMode, @NonNull OnItemClickListener mListener) {
-        super(headerMode, mListener);
+    public ReminderAdapter(@NonNull OnItemClickListener mListener) {
+        super(mListener);
     }
 
     @Override

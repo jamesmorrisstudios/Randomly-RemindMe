@@ -21,7 +21,7 @@ public class EditReminderGeneral {
     }
 
     public final void bindItem(EditReminderItem item) {
-        final ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+        ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
         if(reminderItem == null) {
             return;
         }
@@ -39,6 +39,10 @@ public class EditReminderGeneral {
 
             @Override
             public void afterTextChanged(@NonNull Editable s) {
+                ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+                if(reminderItem == null) {
+                    return;
+                }
                 if(!reminderItem.getTitle().equals(s.toString())) {
                     reminderItem.setTitle(s.toString());
                 }

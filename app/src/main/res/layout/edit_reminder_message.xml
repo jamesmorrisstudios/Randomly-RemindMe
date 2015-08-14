@@ -57,6 +57,7 @@
     </LinearLayout>
 
     <Button
+
         android:layout_below="@+id/message_container"
         android:layout_centerHorizontal="true"
         android:id="@+id/btn_edit_messages"

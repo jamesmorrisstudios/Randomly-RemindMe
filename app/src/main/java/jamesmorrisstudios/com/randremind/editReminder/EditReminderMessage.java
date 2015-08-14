@@ -44,7 +44,7 @@ public class EditReminderMessage {
     }
 
     public final void bindItem(EditReminderItem item) {
-        final ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+        ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
         if(reminderItem == null) {
             return;
         }
@@ -59,6 +59,10 @@ public class EditReminderMessage {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+                    if(reminderItem == null) {
+                        return;
+                    }
                     reminderItem.setMessageInOrder(true);
                     reminderItem.setCurMessage(-1);
                 }
@@ -68,6 +72,10 @@ public class EditReminderMessage {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+                    if(reminderItem == null) {
+                        return;
+                    }
                     reminderItem.setMessageInOrder(false);
                     reminderItem.setCurMessage(-1);
                 }
@@ -76,9 +84,17 @@ public class EditReminderMessage {
         editMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+                if(reminderItem == null) {
+                    return;
+                }
                 Bus.postObject(new EditTextListRequest(reminderItem.getMessageList(), new EditTextListDialog.EditMessageListener() {
                     @Override
                     public void onPositive(ArrayList<String> messages) {
+                        ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+                        if(reminderItem == null) {
+                            return;
+                        }
                         reminderItem.setMessageList(messages);
                     }
                 }, new View.OnClickListener() {
@@ -93,6 +109,10 @@ public class EditReminderMessage {
         numMessages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
+                if(reminderItem == null) {
+                    return;
+                }
                 int size = position + 1;
                 //If we are making the list bigger
                 while (size > reminderItem.getMessageList().size()) {

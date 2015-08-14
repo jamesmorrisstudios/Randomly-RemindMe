@@ -45,7 +45,7 @@ public final class ReminderContainer extends BaseRecycleContainer {
     }
 
     @Override
-    public BaseRecycleItem getHeaderItem() {
+    public BaseRecycleItem getHeader() {
         return headerItem;
     }
 

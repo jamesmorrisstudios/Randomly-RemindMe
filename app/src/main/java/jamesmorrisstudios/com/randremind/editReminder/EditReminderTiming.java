@@ -67,7 +67,7 @@ public class EditReminderTiming {
     }
 
     public final void bindItem(EditReminderItem item) {
-        final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
         if (remind == null) {
             return;
         }
@@ -87,9 +87,17 @@ public class EditReminderTiming {
         editSpecificTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
                 Bus.postObject(new EditTimesRequest(remind.getSpecificTimeList(), new EditTimesDialog.EditTimesListener() {
                     @Override
                     public void onPositive(ArrayList<TimeItem> times) {
+                        final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
                         remind.setSpecificTimeList(times);
                     }
                 }, new View.OnClickListener() {
@@ -103,13 +111,17 @@ public class EditReminderTiming {
     }
 
     private void addTimingTypeListener() {
-        final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
         if (remind == null) {
             return;
         }
         timingSpecific.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
                 remind.setRangeTiming(!isChecked);
                 setTimingType();
             }
