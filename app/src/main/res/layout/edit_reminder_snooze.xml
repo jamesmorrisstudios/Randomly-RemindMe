@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/manual_snooze_container"
+        android:background="@color/primaryLight"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:id="@+id/manual_snooze_label"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/snooze"
+            android:textColor="@color/textDarkMain"
+            android:textSize="@dimen/item_size" />
+
+        <TextView
+            android:layout_below="@+id/manual_snooze_label"
+            android:id="@+id/manual_snooze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="@dimen/item_small_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/dividerDark" />
+
+    <RelativeLayout
+        android:id="@+id/auto_snooze_container"
+        android:background="@color/primaryLight"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:id="@+id/auto_snooze_label"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/auto_snooze"
+            android:textColor="@color/textDarkMain"
+            android:textSize="@dimen/item_size" />
+
+        <TextView
+            android:layout_below="@+id/auto_snooze_label"
+            android:id="@+id/auto_snooze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="@dimen/item_small_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/dividerDark" />
+
+</LinearLayout>

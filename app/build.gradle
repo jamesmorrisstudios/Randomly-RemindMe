@@ -23,12 +23,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
-
-    //sourceSets {
-    //    main.res.srcDirs 'res', 'res-public'
-    //}
+    compileSdkVersion 23
+    buildToolsVersion "23"
 
     productFlavors {
         googlePlay {

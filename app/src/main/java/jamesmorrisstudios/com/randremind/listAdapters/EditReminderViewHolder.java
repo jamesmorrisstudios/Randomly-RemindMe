@@ -19,6 +19,7 @@ import jamesmorrisstudios.com.randremind.editReminder.EditReminderItem;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderMessage;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderNotification;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderRepeat;
+import jamesmorrisstudios.com.randremind.editReminder.EditReminderSnooze;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderTiming;
 
 /**
@@ -28,7 +29,7 @@ import jamesmorrisstudios.com.randremind.editReminder.EditReminderTiming;
 public class EditReminderViewHolder extends BaseRecycleViewHolder {
 
     public enum EditReminderPage {
-        GENERAL, MESSAGE, TIMING, REPEAT, NOTIFICATION, ALARM
+        GENERAL, MESSAGE, TIMING, REPEAT, NOTIFICATION, ALARM, SNOOZE
     }
 
     private TextView title;
@@ -92,6 +93,11 @@ public class EditReminderViewHolder extends BaseRecycleViewHolder {
                 title.setText(AppUtil.getContext().getString(R.string.alarm));
                 EditReminderAlarm alarm = new EditReminderAlarm(view);
                 alarm.bindItem(item);
+                break;
+            case SNOOZE:
+                title.setText(AppUtil.getContext().getString(R.string.snooze));
+                EditReminderSnooze snooze = new EditReminderSnooze(view);
+                snooze.bindItem(item);
                 break;
         }
         if(view != null) {

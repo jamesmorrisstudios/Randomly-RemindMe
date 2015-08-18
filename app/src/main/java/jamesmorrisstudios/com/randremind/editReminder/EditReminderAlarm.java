@@ -16,10 +16,13 @@ public class EditReminderAlarm {
     }
 
     public final void bindItem(EditReminderItem item) {
-        final ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
-        if(reminderItem == null) {
+        final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if(remind == null) {
             return;
         }
+
+
+
 
     }
 

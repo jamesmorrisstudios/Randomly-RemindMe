@@ -114,6 +114,11 @@ public final class ReminderItem extends BaseRecycleItem {
     private int notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
     @SerializedName("notificationAccentColor")
     private int notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+    //Snooze
+    @SerializedName("snooze")
+    private SnoozeOptions snooze;
+    @SerializedName("autoSnooze")
+    private SnoozeOptions autoSnooze;
 
     //Do Not Serialize This
     private transient boolean dirty = false; //Set to true when changing something
@@ -156,6 +161,24 @@ public final class ReminderItem extends BaseRecycleItem {
             setDirty();
             this.enabled = enabled;
         }
+    }
+
+    public SnoozeOptions getSnooze() {
+        return snooze;
+    }
+
+    public void setSnooze(@NonNull SnoozeOptions snooze) {
+        setDirty();
+        this.snooze = snooze;
+    }
+
+    public SnoozeOptions getAutoSnooze() {
+        return autoSnooze;
+    }
+
+    public void setAutoSnooze(@NonNull SnoozeOptions autoSnooze) {
+        setDirty();
+        this.autoSnooze = autoSnooze;
     }
 
     public ArrayList<String> getMessageList() {
@@ -381,6 +404,9 @@ public final class ReminderItem extends BaseRecycleItem {
         this.notificationPriority = NotificationPriority.DEFAULT;
         this.notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
         this.notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+        //Snooze
+        this.snooze = SnoozeOptions.DISABLED;
+        this.autoSnooze = SnoozeOptions.DISABLED;
     }
 
     /**
@@ -402,7 +428,7 @@ public final class ReminderItem extends BaseRecycleItem {
                         @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
                         boolean notificationVibrate, NotificationVibrate notificationVibratePattern, boolean notificationLED,
                         int notificationLEDColor, boolean notificationHighPriority, NotificationPriority notificationPriority,
-                        int notificationIcon, int notificationAccentColor) {
+                        int notificationIcon, int notificationAccentColor, SnoozeOptions snooze, SnoozeOptions autoSnooze) {
         this.uniqueName = uniqueName;
         this.version = version;
         this.title = title;
@@ -427,6 +453,8 @@ public final class ReminderItem extends BaseRecycleItem {
         this.notificationPriority = notificationPriority;
         this.notificationIcon = notificationIcon;
         this.notificationAccentColor = notificationAccentColor;
+        this.snooze = snooze;
+        this.autoSnooze = autoSnooze;
     }
 
     /**
@@ -544,7 +572,7 @@ public final class ReminderItem extends BaseRecycleItem {
                 rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationVibratePattern, notificationLED, notificationLEDColor,
                 notificationHighPriority, notificationPriority,
-                notificationIcon, notificationAccentColor);
+                notificationIcon, notificationAccentColor, snooze, autoSnooze);
     }
 
     /**
@@ -557,7 +585,7 @@ public final class ReminderItem extends BaseRecycleItem {
                 rangeTiming, repeat, daysToRun, notificationTone, notificationToneName,
                 notificationVibrate, notificationVibratePattern, notificationLED, notificationLEDColor,
                 notificationHighPriority, notificationPriority,
-                notificationIcon, notificationAccentColor);
+                notificationIcon, notificationAccentColor, snooze, autoSnooze);
     }
 
     /**
@@ -737,7 +765,11 @@ public final class ReminderItem extends BaseRecycleItem {
         @DrawableRes int iconCancel, iconCheck, iconSnooze;
 
         if (Prefs.getBoolean(pref, keySystem, true)) {
-            type = NotificationContent.NotificationType.CUSTOM;
+            if(getSnooze() == SnoozeOptions.DISABLED) {
+                type = NotificationContent.NotificationType.CUSTOM;
+            } else {
+                type = NotificationContent.NotificationType.CUSTOM_SNOOZE;
+            }
         }
         if(!Prefs.getBooleanExists(pref, keytheme)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -821,13 +853,15 @@ public final class ReminderItem extends BaseRecycleItem {
         PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pDismiss = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentDismiss, PendingIntent.FLAG_CANCEL_CURRENT);
-        //PendingIntent pSnooze = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pSnooze = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pAck = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentAck, PendingIntent.FLAG_CANCEL_CURRENT);
 
         notif.addContentIntent(pClicked);
         notif.addDeleteIntent(pCanceled);
         notif.addAction(new NotificationAction(iconCancel, "", pDismiss));
-        //notif.addAction(new NotificationAction(iconSnooze, "", pSnooze));
+        if(getSnooze() != SnoozeOptions.DISABLED) {
+            notif.addAction(new NotificationAction(iconSnooze, "", pSnooze));
+        }
         notif.addAction(new NotificationAction(iconCheck, "", pAck));
 
 /*
@@ -939,6 +973,27 @@ public final class ReminderItem extends BaseRecycleItem {
     public enum ReminderItemEvent {
         DATA_LOAD_PASS,
         DATA_LOAD_FAIL,
+    }
+
+    public enum SnoozeOptions {
+        DISABLED(AppUtil.getContext().getString(R.string.disabled)),
+        MIN_1("1 "+AppUtil.getContext().getString(R.string.minute_singular)),
+        MIN_2("2 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_3("3 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_4("4 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_5("5 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_10("10 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_15("15 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_20("20 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_25("25 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_30("30 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_60("60 "+AppUtil.getContext().getString(R.string.minute_plural));
+
+        public final String name;
+
+        SnoozeOptions(String name) {
+            this.name = name;
+        }
     }
 
 }
