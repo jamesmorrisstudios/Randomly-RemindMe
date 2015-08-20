@@ -13,12 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.TimePickerRequest;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonFlat;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -35,7 +35,7 @@ import jamesmorrisstudios.com.randremind.R;
 public class EditTimesDialog extends DialogFragment {
 
     private ListView list;
-    private ButtonFlat btnCancel, btnOk;
+    private Button btnCancel, btnOk;
     private ArrayList<TimeItem> times = null;
     private ListAdapter adapter = null;
     private EditTimesListener onPositive;
@@ -55,8 +55,8 @@ public class EditTimesDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_times_dialog, container);
         list = (ListView) view.findViewById(R.id.list);
-        btnCancel = (ButtonFlat) view.findViewById(R.id.btn_cancel);
-        btnOk = (ButtonFlat) view.findViewById(R.id.btn_ok);
+        btnCancel = (Button) view.findViewById(R.id.btn_cancel);
+        btnOk = (Button) view.findViewById(R.id.btn_ok);
 
         if(times != null) {
             adapter = new ListAdapter(getActivity(), R.layout.edit_times_item, times);

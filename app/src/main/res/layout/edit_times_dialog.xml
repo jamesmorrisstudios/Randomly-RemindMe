@@ -11,27 +11,27 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 
-    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonFlat
+    <Button
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="@color/textAccent"
         android:layout_above="@+id/bottom_space"
         android:layout_toLeftOf="@+id/btn_ok"
         android:id="@+id/btn_cancel"
         android:layout_width="75dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:background="@color/textAccent"
-        android:clickable="true"
         android:text="@string/cancel"
         android:textSize="@dimen/item_size" />
 
-    <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonFlat
+    <Button
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="@color/textAccent"
         android:layout_alignParentRight="true"
         android:layout_above="@+id/bottom_space"
         android:id="@+id/btn_ok"
         android:layout_width="75dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:background="@color/textAccent"
-        android:clickable="true"
         android:text="@string/okay"
         android:textSize="@dimen/item_size" />
     

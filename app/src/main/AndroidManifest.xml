@@ -23,7 +23,7 @@
     <!-- For the broadcast receiver to schedule app wakes -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- Needed to pick custom ringtones -->
+    <!-- Needed to pick custom ringtones on some devices (mainly Sony) -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -60,9 +60,11 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED" />
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT" />
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED" />
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS" />
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE" />
+                <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE" />
             </intent-filter>
         </receiver>
 

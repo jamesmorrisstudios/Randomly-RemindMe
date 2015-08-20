@@ -43,9 +43,9 @@ android {
     defaultConfig {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 14
-        targetSdkVersion 22
-        versionCode 33
-        versionName "1.1.9.4"
+        targetSdkVersion 23
+        versionCode 34
+        versionName "1.1.9.5"
     }
 
     signingConfigs {
