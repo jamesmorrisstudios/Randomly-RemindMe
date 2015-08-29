@@ -1,9 +1,12 @@
 package jamesmorrisstudios.com.randremind.editReminder;
 
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.MultiChoiceRequest;
+import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
@@ -16,6 +19,8 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
  * Created by James on 6/10/2015.
  */
 public class EditReminderRepeat {
+    private View weeksContainer;
+    private TextView weeks;
     private ButtonCircleFlat[] dayButtons = new ButtonCircleFlat[7];
 
     public EditReminderRepeat(View parent) {
@@ -27,6 +32,8 @@ public class EditReminderRepeat {
         dayButtons[5] = (ButtonCircleFlat) parent.findViewById(R.id.day5);
         dayButtons[6] = (ButtonCircleFlat) parent.findViewById(R.id.day6);
         initDaysOfWeek();
+        weeksContainer = parent.findViewById(R.id.weeksContainer);
+        weeks = (TextView) parent.findViewById(R.id.weeks);
     }
 
     public final void bindItem(EditReminderItem item) {
@@ -38,6 +45,81 @@ public class EditReminderRepeat {
             setDayOfWeek(i, remind.getDaysToRun()[i]);
         }
         repeatDaysListener();
+        weeksListener();
+        updateWeeksToRun();
+    }
+
+    private void weeksListener() {
+        weeksContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                if (remind == null) {
+                    return;
+                }
+                String title = AppUtil.getContext().getString(R.string.weeks);
+                String[] options = new String[ReminderItem.WeekOptions.values().length];
+                for (int i = 0; i < options.length; i++) {
+                    options[i] = ReminderItem.WeekOptions.values()[i].name;
+                }
+                final boolean[] checked = remind.getWeeksToRun().clone();
+
+                Bus.postObject(new MultiChoiceRequest(title, options, checked, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        //Each change
+                        checked[which] = isChecked;
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Confirm
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        remind.setWeeksToRun(checked);
+                        updateWeeksToRun();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cancel
+                    }
+                }));
+            }
+        });
+    }
+
+    private void updateWeeksToRun() {
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if (remind == null) {
+            return;
+        }
+        boolean anySelected = false;
+        String text = "";
+        if(remind.getWeeksToRun()[0]) {
+            text = AppUtil.getContext().getString(R.string.every_week);
+            anySelected = true;
+        } else {
+            boolean firstSelect = true;
+            for (int i = 1; i < remind.getWeeksToRun().length; i++) {
+                if (remind.getWeeksToRun()[i]) {
+                    if(firstSelect) {
+                        text += ReminderItem.WeekOptions.values()[i].name;
+                        firstSelect = false;
+                    } else {
+                        text += ", " + ReminderItem.WeekOptions.values()[i].name;
+                    }
+                    anySelected = true;
+                }
+            }
+        }
+        if(!anySelected) {
+            weeks.setText(AppUtil.getContext().getString(R.string.none));
+        } else {
+            weeks.setText(text);
+        }
     }
 
     /**

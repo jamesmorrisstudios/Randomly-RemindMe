@@ -27,4 +27,12 @@ public class ReminderLogDay extends BaseRecycleItem {
         this.date = dateItem;
     }
 
+    public int getTimesShown() {
+        return timesShown.size();
+    }
+
+    public int getTimesClicked() {
+        return Math.min(timesClicked.size(), getTimesShown());
+    }
+
 }

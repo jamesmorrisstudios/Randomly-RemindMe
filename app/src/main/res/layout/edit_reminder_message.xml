@@ -1,70 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RadioGroup
-        android:layout_margin="4dp"
-        android:id="@+id/radio_group"
-        android:layout_alignParentTop="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/in_order"
-            android:id="@+id/radio_in_order" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/random"
-            android:id="@+id/radio_random" />
-    </RadioGroup>
-
-    <LinearLayout
-        android:id="@+id/message_container"
-        android:layout_below="@+id/radio_group"
-        android:gravity="center_horizontal"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:orientation="horizontal">
+        android:layout_height="0.5dp"
+        android:background="@color/dividerDark" />
+
+    <!-- order type -->
+    <RelativeLayout
+        android:id="@+id/orderContainer"
+        android:background="@color/primaryLight"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
 
         <TextView
-            android:id="@+id/message_label"
+            android:id="@+id/orderLabel"
+            android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:text="@string/num_messages"
+            android:text="@string/ordering"
             android:textColor="@color/textDarkMain"
-            android:textSize="20sp" />
+            android:textSize="@dimen/item_size" />
 
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/message_count"
-            android:saveEnabled="false"
+        <TextView
+            android:layout_below="@+id/orderLabel"
+            android:id="@+id/order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:dropDownWidth="45dp"
-            android:gravity="center_horizontal"
-            android:minWidth="45dp" />
+            android:textColor="@color/textDarkSecondary"
+            android:textSize="@dimen/item_small_size" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <Button
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/dividerDark" />
 
-        android:layout_below="@+id/message_container"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btn_edit_messages"
-        android:textColor="@color/textLightMain"
-        android:text="@string/edit_messages"
-        android:layout_margin="10dp"
-        android:layout_width="250dp"
-        android:layout_height="48dp" />
+    <!-- Edit messages -->
+    <RelativeLayout
+        android:id="@+id/messageContainer"
+        android:background="@color/primaryLight"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/messageLabel"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_messages"
+            android:textColor="@color/textDarkMain"
+            android:textSize="@dimen/item_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/dividerDark" />
+
+</LinearLayout>

@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/dividerDark" />
+
     <RelativeLayout
         android:id="@+id/manual_snooze_container"
         android:background="@color/primaryLight"

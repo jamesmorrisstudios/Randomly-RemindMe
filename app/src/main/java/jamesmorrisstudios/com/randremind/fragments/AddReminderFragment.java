@@ -86,6 +86,9 @@ public class AddReminderFragment extends BaseRecycleListFragment {
             case R.id.action_preview:
                 ReminderList.getInstance().previewCurrent();
                 break;
+            case R.id.action_help:
+                Utils.openLink(getResources().getString(com.jamesmorrisstudios.appbaselibrary.R.string.tutorial_link_read));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -107,7 +110,7 @@ public class AddReminderFragment extends BaseRecycleListFragment {
         View timing = inflater.inflate(R.layout.edit_reminder_timing, null);
         View repeat = inflater.inflate(R.layout.edit_reminder_repeat, null);
         View alert = inflater.inflate(R.layout.edit_reminder_notification, null);
-        //View snooze = inflater.inflate(R.layout.edit_reminder_snooze, null);
+        View snooze = inflater.inflate(R.layout.edit_reminder_snooze, null);
 
         ArrayList<BaseRecycleContainer> data = new ArrayList<>();
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.GENERAL, general)));
@@ -115,7 +118,7 @@ public class AddReminderFragment extends BaseRecycleListFragment {
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.TIMING, timing)));
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.REPEAT, repeat)));
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.NOTIFICATION, alert)));
-        //data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.SNOOZE, snooze)));
+        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.SNOOZE, snooze)));
         applyData(data);
     }
 

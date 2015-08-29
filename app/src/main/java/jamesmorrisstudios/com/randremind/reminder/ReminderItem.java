@@ -33,6 +33,7 @@ import com.jamesmorrisstudios.utilitieslibrary.Bus;
 import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
 import com.jamesmorrisstudios.utilitieslibrary.Serializer;
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.math.UtilsMath;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent.NotificationPriority;
@@ -86,6 +87,8 @@ public final class ReminderItem extends BaseRecycleItem {
     //Repeat
     @SerializedName("daysToRun")
     private boolean[] daysToRun;
+    @SerializedName("weeksToRun")
+    private boolean[] weeksToRun;
     //Notifications
     @SerializedName("notificationToneString")
     private String notificationTone;
@@ -273,6 +276,21 @@ public final class ReminderItem extends BaseRecycleItem {
         this.daysToRun = daysToRun;
     }
 
+    public boolean[] getWeeksToRun() {
+        return weeksToRun;
+    }
+
+    public boolean[] updateWeeksToRun() {
+        setDirty();
+        return weeksToRun;
+    }
+
+    public void setWeeksToRun(boolean[] weeksToRun) {
+        setDirty();
+        this.weeksToRun = weeksToRun;
+    }
+
+
     public void setNotificationTone(String notificationTone) {
         if(this.notificationTone == null || !this.notificationTone.equals(notificationTone)) {
             setDirty();
@@ -379,6 +397,8 @@ public final class ReminderItem extends BaseRecycleItem {
         this.specificTimeList.add(new TimeItem(9, 0));
         //Repeat
         this.daysToRun = new boolean[]{true, true, true, true, true, true, true};
+        this.weeksToRun = new boolean[WeekOptions.values().length];
+        this.weeksToRun[0] = true;
         //Notifications
         this.notificationTone = null;
         this.notificationToneName = AppUtil.getContext().getString(R.string.none);
@@ -400,7 +420,7 @@ public final class ReminderItem extends BaseRecycleItem {
                         boolean enabled, @NonNull TimeItem startTime, @NonNull TimeItem endTime,
                         @NonNull ArrayList<TimeItem> specificTimeList,
                         int numberPerDay, boolean rangeTiming,
-                        @NonNull boolean[] daysToRun, String notificationTone, String notificationToneName,
+                        @NonNull boolean[] daysToRun, @NonNull boolean[] weeksToRun, String notificationTone, String notificationToneName,
                         NotificationVibrate notificationVibratePattern, boolean notificationLED,
                         int notificationLEDColor, NotificationPriority notificationPriority,
                         int notificationIcon, int notificationAccentColor, SnoozeOptions snooze, SnoozeOptions autoSnooze) {
@@ -416,6 +436,7 @@ public final class ReminderItem extends BaseRecycleItem {
         this.numberPerDay = numberPerDay;
         this.rangeTiming = rangeTiming;
         this.daysToRun = daysToRun.clone();
+        this.weeksToRun = weeksToRun.clone();
         this.notificationTone = notificationTone;
         this.notificationToneName = notificationToneName;
         this.notificationVibratePattern = notificationVibratePattern;
@@ -540,7 +561,7 @@ public final class ReminderItem extends BaseRecycleItem {
     public final ReminderItem copy() {
         return new ReminderItem(uniqueName, version, title, messageList, messageInOrder,
                 enabled, startTime, endTime, specificTimeList, numberPerDay,
-                rangeTiming, daysToRun, notificationTone, notificationToneName,
+                rangeTiming, daysToRun, weeksToRun, notificationTone, notificationToneName,
                 notificationVibratePattern, notificationLED, notificationLEDColor,
                 notificationPriority,
                 notificationIcon, notificationAccentColor, snooze, autoSnooze);
@@ -553,7 +574,7 @@ public final class ReminderItem extends BaseRecycleItem {
     public final ReminderItem duplicate() {
         return new ReminderItem(generateUniqueName(), version, title, messageList, messageInOrder,
                 enabled, startTime, endTime, specificTimeList, numberPerDay,
-                rangeTiming, daysToRun, notificationTone, notificationToneName,
+                rangeTiming, daysToRun, weeksToRun, notificationTone, notificationToneName,
                 notificationVibratePattern, notificationLED, notificationLEDColor,
                 notificationPriority,
                 notificationIcon, notificationAccentColor, snooze, autoSnooze);
@@ -657,23 +678,41 @@ public final class ReminderItem extends BaseRecycleItem {
         return new TimeItem(hour, minutes);
     }
 
+    private boolean isValidWeekToRun(DateTimeItem now) {
+        if(weeksToRun[0]) {
+            return true;
+        }
+        UtilsTime.WeekOfMonth week = UtilsTime.getWeekOfMonth(now.dateItem);
+        Log.v("ReminderItem", "Week of month: "+week.name+" is last of month: "+UtilsTime.isLastWeekOfMonth(now.dateItem));
+        if(weeksToRun[1] && week == UtilsTime.WeekOfMonth.FIRST) {
+            return true;
+        }
+        if(weeksToRun[2] && week == UtilsTime.WeekOfMonth.SECOND) {
+            return true;
+        }
+        if(weeksToRun[3] && week == UtilsTime.WeekOfMonth.THIRD) {
+            return true;
+        }
+        if(weeksToRun[4] && week == UtilsTime.WeekOfMonth.FOURTH) {
+            return true;
+        }
+        if(weeksToRun[5] && week == UtilsTime.WeekOfMonth.FIFTH) {
+            return true;
+        }
+        if(weeksToRun[6] && UtilsTime.isLastWeekOfMonth(now.dateItem)) {
+            return true;
+        }
+        return false;
+    }
+
     public final void scheduleNextWake(DateTimeItem now) {
-/*
-        Log.v("TAG", "FirstDayOfWeek: "+UtilsTime.getFirstDayOfWeek().name);
-
-        Log.v("TAG", "Sunday: "+UtilsTime.DayOfWeek.SUNDAY.getIndex());
-        Log.v("TAG", "Monday: "+UtilsTime.DayOfWeek.MONDAY.getIndex());
-        Log.v("TAG", "Tuesday: "+UtilsTime.DayOfWeek.TUESDAY.getIndex());
-        Log.v("TAG", "Wednesday: "+UtilsTime.DayOfWeek.WEDNESDAY.getIndex());
-        Log.v("TAG", "Thursday: "+UtilsTime.DayOfWeek.THURSDAY.getIndex());
-        Log.v("TAG", "Friday: "+UtilsTime.DayOfWeek.FRIDAY.getIndex());
-        Log.v("TAG", "Saturday: "+UtilsTime.DayOfWeek.SATURDAY.getIndex());
-*/
-
         if (!enabled) {
             return;
         }
         if (!daysToRun[UtilsTime.getCurrentDayOfWeek().getIndex()]) {
+            return;
+        }
+        if(!isValidWeekToRun(now)) {
             return;
         }
         ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(uniqueName);
@@ -690,7 +729,7 @@ public final class ReminderItem extends BaseRecycleItem {
             }
         }
         if (time != null) {
-            Scheduler.getInstance().scheduleWake(time, uniqueName);
+            Scheduler.getInstance().scheduleWake(new DateTimeItem(now.dateItem, time), uniqueName);
         }
     }
 
@@ -703,7 +742,7 @@ public final class ReminderItem extends BaseRecycleItem {
         scheduleNextWake(time);
     }
 
-    public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime) {
+    public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime, boolean getCurrent) {
         String pref = AppUtil.getContext().getString(R.string.settings_pref);
         String title = this.title;
         if (title == null || title.isEmpty()) {
@@ -711,23 +750,27 @@ public final class ReminderItem extends BaseRecycleItem {
         }
 
         String content = null;
-        if(messageInOrder) {
-            int curMessage = getCurMessage() + 1;
-            if(curMessage >= messageList.size()) {
-                curMessage = 0;
-            }
-            content = messageList.get(curMessage);
-            setCurMessage(curMessage);
+
+        if(getCurrent) {
+            content = messageList.get(UtilsMath.inBoundsInt(0, messageList.size() - 1, getCurMessage()));
         } else {
-            Random rand = new Random();
-            int lastMessage = rand.nextInt(messageList.size());
-            setCurMessage(lastMessage);
-            content = messageList.get(lastMessage);
+            if (messageInOrder) {
+                int curMessage = getCurMessage() + 1;
+                if (curMessage >= messageList.size()) {
+                    curMessage = 0;
+                }
+                content = messageList.get(curMessage);
+                setCurMessage(curMessage);
+            } else {
+                Random rand = new Random();
+                int lastMessage = rand.nextInt(messageList.size());
+                setCurMessage(lastMessage);
+                content = messageList.get(lastMessage);
+            }
         }
         if(content == null) {
             content = "";
         }
-
         NotificationContent notif;
         String keySystem = AppUtil.getContext().getString(R.string.pref_notification_custom);
         String keytheme = AppUtil.getContext().getString(R.string.pref_notification_theme);
@@ -799,6 +842,7 @@ public final class ReminderItem extends BaseRecycleItem {
         intentSnooze.putExtra("NAME", this.uniqueName);
         intentSnooze.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         intentSnooze.putExtra("NOTIFICATION_ID", getNotificationId());
+        intentSnooze.putExtra("SNOOZE_LENGTH", snooze.minutes);
 
         Intent intentAck = new Intent(AppUtil.getContext(), NotificationReceiver.class);
         intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
@@ -835,26 +879,6 @@ public final class ReminderItem extends BaseRecycleItem {
         }
         notif.addAction(new NotificationAction(iconCheck, "", pAck));
 
-/*
-        String EXTRA_VOICE_REPLY = "extra_voice_reply";
-        String replyLabel = "Reply Label";
-        String[] replyChoices = new String[] {"Dismiss", "Snooze", "Complete"};
-
-        RemoteInput remoteInput = new RemoteInput.Builder(EXTRA_VOICE_REPLY)
-                .setLabel(replyLabel)
-                .setChoices(replyChoices)
-                .build();
-
-        Intent replyIntent = new Intent(AppUtil.getContext(), NotificationReceiver.class);
-
-        PendingIntent replyPendingIntent = PendingIntent.getActivity(AppUtil.getContext(), 0, replyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        // Create the reply action and add the remote input
-        notif.wearableAction = new NotificationCompat.Action.Builder(R.drawable.led_icon,
-                        "Label", replyPendingIntent)
-                        .addRemoteInput(remoteInput)
-                        .build();
-*/
         return notif;
     }
 
@@ -907,6 +931,9 @@ public final class ReminderItem extends BaseRecycleItem {
 
     public final void updateVersion() {
         //Change how curMessage works
+        if(messageList == null) {
+            messageList = new ArrayList<>();
+        }
         if(version == 0) {
             int curMessage = getCurMessage();
             if(curMessage >= messageList.size()) {
@@ -926,22 +953,40 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public enum SnoozeOptions {
-        DISABLED(AppUtil.getContext().getString(R.string.disabled)),
-        MIN_1("1 "+AppUtil.getContext().getString(R.string.minute_singular)),
-        MIN_2("2 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_3("3 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_4("4 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_5("5 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_10("10 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_15("15 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_20("20 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_25("25 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_30("30 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_60("60 "+AppUtil.getContext().getString(R.string.minute_plural));
+        DISABLED(0, AppUtil.getContext().getString(R.string.disabled)),
+        MIN_1(1, "1 "+AppUtil.getContext().getString(R.string.minute_singular)),
+        MIN_2(2, "2 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_3(3, "3 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_4(4, "4 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_5(5, "5 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_10(10, "10 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_15(15, "15 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_20(20, "20 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_25(25, "25 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_30(30, "30 "+AppUtil.getContext().getString(R.string.minute_plural)),
+        MIN_60(60, "60 "+AppUtil.getContext().getString(R.string.minute_plural));
+
+        public final String name;
+        public final int minutes;
+
+        SnoozeOptions(int minutes, String name) {
+            this.minutes = minutes;
+            this.name = name;
+        }
+    }
+
+    public enum WeekOptions {
+        Every(AppUtil.getContext().getString(R.string.every_week)),
+        FIRST(AppUtil.getContext().getString(R.string.first)),
+        SECOND(AppUtil.getContext().getString(R.string.second)),
+        THIRD(AppUtil.getContext().getString(R.string.third)),
+        FOURTH(AppUtil.getContext().getString(R.string.fourth)),
+        FIFTH(AppUtil.getContext().getString(R.string.fifth)),
+        LAST(AppUtil.getContext().getString(R.string.last));
 
         public final String name;
 
-        SnoozeOptions(String name) {
+        WeekOptions(String name) {
             this.name = name;
         }
     }

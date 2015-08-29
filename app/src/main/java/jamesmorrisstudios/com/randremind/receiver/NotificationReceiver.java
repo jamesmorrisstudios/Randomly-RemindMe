@@ -33,6 +33,7 @@ import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.activities.MainActivity;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
 /**
  * Alarm receiver class.
@@ -59,51 +60,57 @@ public final class NotificationReceiver extends BroadcastReceiver {
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Randomly RemindMe Wake For Notification");
         wl.acquire();
 
-        TimeItem timeNow = UtilsTime.getTimeNow();
-        Log.v("Notification RECEIVER", "Woke At: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
+        DateTimeItem dateTimeNow = UtilsTime.getDateTimeNow();
+        Log.v("Notification RECEIVER", "Woke At: " + dateTimeNow.timeItem.getHourInTimeFormatString() + ":" + dateTimeNow.timeItem.getMinuteString());
 
         if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED")) {
             Log.v("Notification RECEIVER", "notification click");
             if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
-                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
+                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getStringExtra("DATETIME"));
                 logClicked(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted, context);
             }
         } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT")) {
             Log.v("Notification RECEIVER", "notification click silent");
             if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
-                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
+                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getStringExtra("DATETIME"));
                 logAck(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
         } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED")) {
             Log.v("Notification RECEIVER", "notification delete");
             if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
-                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
+                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getStringExtra("DATETIME"));
                 logDeleted(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
         } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS")) {
             Log.v("Notification RECEIVER", "notification dismiss");
             if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
-                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
+                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getStringExtra("DATETIME"));
                 logDismiss(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
         } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE")) {
             Log.v("Notification RECEIVER", "notification acknowledge");
             if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
-                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
+                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getStringExtra("DATETIME"));
                 logAck(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
             }
         } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE")) {
             Log.v("Notification RECEIVER", "notification snooze");
             if (intent.getExtras() != null && intent.getExtras().containsKey("NAME") && intent.getExtras().containsKey("NOTIFICATION_ID") && intent.getExtras().containsKey("DATETIME")) {
-                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getExtras().getString("DATETIME"));
-                logSnooze(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted);
+                DateTimeItem dateTimePosted = DateTimeItem.decodeFromString(intent.getStringExtra("DATETIME"));
+                int snoozeLength = intent.getIntExtra("SNOOZE_LENGTH", 0);
+                logSnooze(intent.getExtras().getString("NAME"), intent.getExtras().getInt("NOTIFICATION_ID"), intent.getExtras().containsKey("PREVIEW"), dateTimePosted, dateTimeNow, snoozeLength);
             }
         }
 
-        Log.v("Notification RECEIVER", "Completed Wake: " + timeNow.getHourInTimeFormatString() + ":" + timeNow.getMinuteString());
+        Log.v("Notification RECEIVER", "Completed Wake: " + dateTimeNow.timeItem.getHourInTimeFormatString() + ":" + dateTimeNow.timeItem.getMinuteString());
 
         //Release the wakelock
         wl.release();
+    }
+
+    private void cancelSnooze(@NonNull String uniqueName) {
+        Scheduler.getInstance().cancelWakeAutoSnooze(uniqueName);
+        Scheduler.getInstance().cancelWakeSnooze(uniqueName);
     }
 
     private void logClicked(String name, int notificationId, boolean preview, DateTimeItem dateTime, Context context) {
@@ -130,19 +137,26 @@ public final class NotificationReceiver extends BroadcastReceiver {
         }
     }
 
-    private void logSnooze(String name, int notificationId, boolean preview, DateTimeItem dateTime) {
+    private void logSnooze(String name, int notificationId, boolean preview, DateTimeItem dateTimePosted, DateTimeItem dateTimeNow, int snoozeLength) {
         Log.v("Notification RECEIVER", "ID snooze: " + notificationId);
+        cancelSnooze(name);
         Notifier.dismissNotification(notificationId);
-        //TODO
+        if(snoozeLength <= 0) {
+            return;
+        }
+        DateTimeItem next = UtilsTime.getDateTimePlusMinutes(dateTimeNow, snoozeLength);
+        Scheduler.getInstance().scheduleWakeSnooze(next, name);
     }
 
     private void logDeleted(String name, int notificationId, boolean preview, DateTimeItem dateTime) {
         Log.v("Notification RECEIVER", "ID Deleted: " + notificationId);
+        cancelSnooze(name);
         //Do nothing?...
     }
 
     private void logDismiss(String name, int notificationId, boolean preview, DateTimeItem dateTime) {
         Log.v("Notification RECEIVER", "ID Dismissed: " + notificationId);
+        cancelSnooze(name);
         Notifier.dismissNotification(notificationId);
         //if(!preview) {
         //Do nothing?...
@@ -151,6 +165,7 @@ public final class NotificationReceiver extends BroadcastReceiver {
 
     private void logAck(String name, int notificationId, boolean preview, DateTimeItem dateTime) {
         Log.v("Notification RECEIVER", "ID Ack: " + notificationId);
+        cancelSnooze(name);
         Notifier.dismissNotification(notificationId);
         if (!preview) {
             ReminderItem.logReminderClicked(name, dateTime);
