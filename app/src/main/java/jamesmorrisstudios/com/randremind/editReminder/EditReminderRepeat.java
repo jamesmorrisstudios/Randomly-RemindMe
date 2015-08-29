@@ -173,7 +173,7 @@ public class EditReminderRepeat {
                 }
                 String title = AppUtil.getContext().getString(R.string.days_of_week);
                 String[] week = UtilsTime.getWeekStringArray();
-                final boolean[] checked = remind.getDaysToRun();
+                final boolean[] checked = remind.getDaysToRun().clone();
                 Bus.postObject(new MultiChoiceRequest(title, week, checked, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -197,9 +197,6 @@ public class EditReminderRepeat {
                 }));
             }
         });
-
-
-
         //Day of week selector
         for (int i = 0; i < dayButtons.length; i++) {
             final int index = i;
