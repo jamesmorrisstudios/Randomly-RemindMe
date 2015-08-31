@@ -22,11 +22,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bde99396-d094-480e-a37d-c9490665a015" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/editReminder/EditReminderRepeat.java" afterPath="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/editReminder/EditReminderRepeat.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-nl/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-nl/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="randRemind.iws" />
@@ -65,7 +61,18 @@
     <favorites_list name="randRemind" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.67202574">
+              <caret line="78" column="74" selection-start-line="78" selection-start-column="74" selection-end-line="78" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1492,19 +1499,19 @@
                 <option name="name" value="prepareComAndroidSupportSupportV42300Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.jamesmorrisstudios:appbaselibrary:1.1" />
+                <option name="description" value="Prepare com.github.morris-james:appbaselibrary:v1.1.3" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComJamesmorrisstudiosAppbaselibrary11Library" />
+                <option name="name" value="prepareComGithubMorrisJamesAppbaselibraryV113Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.jamesmorrisstudios:datetimepickerlibrary:1.0" />
+                <option name="description" value="Prepare com.github.morris-james:MaterialDateTimePicker:v1.3.3" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComJamesmorrisstudiosDatetimepickerlibrary10Library" />
+                <option name="name" value="prepareComGithubMorrisJamesMaterialDateTimePickerV133Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.jamesmorrisstudios:utilitieslibrary:1.1" />
+                <option name="description" value="Prepare com.github.morris-james:UtilitiesLibrary:v1.1.2" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComJamesmorrisstudiosUtilitieslibrary11Library" />
+                <option name="name" value="prepareComGithubMorrisJamesUtilitiesLibraryV112Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -3259,19 +3266,19 @@
                 <option name="name" value="prepareComAndroidSupportSupportV42300Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.jamesmorrisstudios:appbaselibrary:1.1" />
+                <option name="description" value="Prepare com.github.morris-james:appbaselibrary:v1.1.3" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComJamesmorrisstudiosAppbaselibrary11Library" />
+                <option name="name" value="prepareComGithubMorrisJamesAppbaselibraryV113Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.jamesmorrisstudios:datetimepickerlibrary:1.0" />
+                <option name="description" value="Prepare com.github.morris-james:MaterialDateTimePicker:v1.3.3" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComJamesmorrisstudiosDatetimepickerlibrary10Library" />
+                <option name="name" value="prepareComGithubMorrisJamesMaterialDateTimePickerV133Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.jamesmorrisstudios:utilitieslibrary:1.1" />
+                <option name="description" value="Prepare com.github.morris-james:UtilitiesLibrary:v1.1.2" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComJamesmorrisstudiosUtilitieslibrary11Library" />
+                <option name="name" value="prepareComGithubMorrisJamesUtilitiesLibraryV112Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -3693,7 +3700,7 @@
         <entry key="$PROJECT_DIR$/../../TurnBasedLibrary" value="4293858258014" />
         <entry key="$PROJECT_DIR$" value="4297134531173" />
         <entry key="$PROJECT_DIR$/../../randRemind" value="4288693225737" />
-        <entry key="C:\Programming\apps\randRemind" value="4310414257788" />
+        <entry key="C:\Programming\apps\randRemind" value="4310577741979" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3871,8 +3878,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/intellij/annotations/12.0/annotations-12.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
-                            <option value="$MAVEN_REPOSITORY$/com/jamesmorrisstudios/utilitieslibrary/1.1/utilitieslibrary-1.1.aar" />
-                            <option value="$MAVEN_REPOSITORY$/com/jamesmorrisstudios/appbaselibrary/1.1/appbaselibrary-1.1.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.morris-james/UtilitiesLibrary/v1.1.2/f528fe7ba503c7bbb0999c290d08a2999efa7798/UtilitiesLibrary-v1.1.2.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.morris-james/appbaselibrary/v1.1.3/9b5ac99ae1094e3f29e3b49eab1af3a3b308e934/appbaselibrary-v1.1.3.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar" />
                             <option value="$PROJECT_DIR$/../../android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar" />
                             <option value="$PROJECT_DIR$/../../android/sdk/extras/android/m2repository/com/android/support/support-v4/23.0.0/support-v4-23.0.0.aar" />
@@ -3880,7 +3887,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/otto/1.3.8/cf615176cd1177edf71d3c9605f8dc148fede6be/otto-1.3.8.jar" />
                             <option value="$PROJECT_DIR$/../../android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.0.0/recyclerview-v7-23.0.0.aar" />
                             <option value="$PROJECT_DIR$/../../android/sdk/extras/android/m2repository/com/android/support/cardview-v7/23.0.0/cardview-v7-23.0.0.aar" />
-                            <option value="$MAVEN_REPOSITORY$/com/jamesmorrisstudios/datetimepickerlibrary/1.0/datetimepickerlibrary-1.0.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.morris-james/MaterialDateTimePicker/v1.3.3/dfff8facbdda55969711ae3225b377bb8160df4f/MaterialDateTimePicker-v1.3.3.aar" />
                             <option value="$PROJECT_DIR$/../../android/sdk/extras/android/m2repository/com/android/support/design/23.0.0/design-23.0.0.aar" />
                           </list>
                         </option>
@@ -4071,8 +4078,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_reminder_repeat.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/editReminder/EditReminderRepeat.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/jamesmorrisstudios/com/randremind/fragments/AddReminderFragment.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
       </list>
     </option>
   </component>
@@ -4157,109 +4164,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randremind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randremind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fragments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randRemind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="randremind" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="editReminder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4298,6 +4202,29 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="randRemind" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4531,11 +4458,9 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2822222" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28111112" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31111112" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -4549,12 +4474,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17004265" sideWeight="0.45114943" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17004265" sideWeight="0.45114943" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28444445" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3642534" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47666666" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -4723,7 +4650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45709282">
           <caret line="279" column="0" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4738,14 +4664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31135532">
           <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
-          <folding>
-            <element signature="e#921#937#0" expanded="true" />
-            <element signature="e#1019#1037#0" expanded="true" />
-            <element signature="e#1347#1371#0" expanded="true" />
-            <element signature="e#2082#2103#0" expanded="true" />
-            <element signature="e#2185#2203#0" expanded="true" />
-            <element signature="e#2509#2533#0" expanded="true" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4756,10 +4674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37728938">
           <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-          <folding>
-            <element signature="e#735#750#0" expanded="false" />
-            <element signature="e#980#998#0" expanded="false" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4770,7 +4684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.5494506">
           <caret line="16" column="94" selection-start-line="16" selection-start-column="94" selection-end-line="16" selection-end-column="94" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4781,7 +4694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.5842491">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4809,7 +4721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64489114">
           <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4824,13 +4735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0774648">
           <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
-          <folding>
-            <element signature="e#909#933#0" expanded="true" />
-            <element signature="e#1330#1346#0" expanded="true" />
-            <element signature="e#1372#1396#0" expanded="true" />
-            <element signature="e#1790#1804#0" expanded="true" />
-            <element signature="e#1830#1854#0" expanded="true" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4841,7 +4745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8380282">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4866,19 +4769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8808594">
           <caret line="168" column="48" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="48" />
-          <folding>
-            <element signature="e#238#376#0" expanded="false" />
-            <element signature="e#413#1402#0" expanded="false" />
-            <element signature="e#1039#1057#0" expanded="true" />
-            <element signature="e#1352#1376#0" expanded="true" />
-            <element signature="e#1580#2533#0" expanded="false" />
-            <element signature="e#2354#2374#0" expanded="true" />
-            <element signature="e#2464#2482#0" expanded="true" />
-            <element signature="e#3487#3505#0" expanded="true" />
-            <element signature="e#4726#4744#0" expanded="true" />
-            <element signature="e#5857#5881#0" expanded="true" />
-            <element signature="e#5971#5989#0" expanded="true" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4889,12 +4779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7480469">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding>
-            <element signature="e#1027#1045#0" expanded="true" />
-            <element signature="e#1338#1362#0" expanded="true" />
-            <element signature="e#2090#2113#0" expanded="true" />
-            <element signature="e#2195#2213#0" expanded="true" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4947,83 +4831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34363636">
           <caret line="911" column="35" selection-start-line="911" selection-start-column="24" selection-end-line="911" selection-end-column="35" />
-          <folding>
-            <element signature="docComment;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setTitle#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setEnabled#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setSnooze#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setAutoSnooze#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#updateMessageList#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setMessageList#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setMessageInOrder#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#updateStartTime#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setStartTime#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#updateEndTime#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setEndTime#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#updateSpecificTimeList#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setSpecificTimeList#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNumberPerDay#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setRangeTiming#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#updateDaysToRun#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setDaysToRun#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#updateWeeksToRun#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setWeeksToRun#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationTone#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationToneName#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#getNotificationVibratePattern#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationVibratePattern#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationLED#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationLEDColor#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationPriority#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationIcon#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setNotificationAccentColor#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#ReminderItem#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#ReminderItem#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#ReminderItem#1;class#ReminderItem#0" expanded="false" />
-            <element signature="method#ReminderItem#1;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#generateUniqueName#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setCurMessage#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#getCurMessage#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#getAlertTimes#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#setAlertTimes#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#postReminderItemEvent#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#postReminderItemEvent#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#saveToFile#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#saveToFile#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#loadFromFile#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#loadFromFile#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#getNotificationId#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#copy#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#copy#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#duplicate#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#duplicate#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#getNotificationTone#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#getNotificationTone#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#equals#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#equals#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#updateAlertTimes#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#updateAlertTimes#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#generateEvenishSplit#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#generateEvenishSplit#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#getDiffMinutes#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#timeToMinutes#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#minutesToTimeItem#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#minutesToTimeItem#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#isValidWeekToRun#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#scheduleNextWake#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#rescheduleNextWake#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#getNotification#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#deleteAlertTimes#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#hasReminderLog#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;method#loadData#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#32970:33758" expanded="false" />
-            <element signature="method#updateVersion#0;class#ReminderItem#0" expanded="false" />
-            <element signature="docComment;class#ReminderItemEvent#0;class#ReminderItem#0" expanded="false" />
-            <element signature="class#ReminderItemEvent#0;class#ReminderItem#0" expanded="false" />
-            <element signature="class#SnoozeOptions#0;class#ReminderItem#0" expanded="false" />
-            <element signature="method#SnoozeOptions#0;class#SnoozeOptions#0;class#ReminderItem#0" expanded="false" />
-            <element signature="class#WeekOptions#0;class#ReminderItem#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5031,7 +4838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37777779">
           <caret line="158" column="4" selection-start-line="158" selection-start-column="4" selection-end-line="191" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -5042,7 +4848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2155309">
           <caret line="131" column="12" selection-start-line="131" selection-start-column="12" selection-end-line="198" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -5053,7 +4858,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2350937">
           <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5061,7 +4865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21538462">
           <caret line="117" column="16" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -5072,15 +4875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.68438005">
           <caret line="188" column="53" selection-start-line="188" selection-start-column="53" selection-end-line="188" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2171717">
-          <caret line="57" column="31" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5088,6 +4882,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18171428">
           <caret line="103" column="46" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67202574">
+          <caret line="78" column="74" selection-start-line="78" selection-start-column="74" selection-end-line="78" selection-end-column="74" />
           <folding />
         </state>
       </provider>

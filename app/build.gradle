@@ -44,8 +44,8 @@ android {
         applicationId "jamesmorrisstudios.com.randremind"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 37
-        versionName "1.1.9.8"
+        versionCode 38
+        versionName "1.2.0"
     }
 
     signingConfigs {
@@ -76,9 +76,9 @@ android {
 apply from: file("../../../keystore/signing-rand-remind.gradle")
 
 dependencies {
-    compile 'com.jamesmorrisstudios:utilitieslibrary:1.1' //local gradle
-    compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
+    //compile 'com.jamesmorrisstudios:utilitieslibrary:1.1' //local gradle
+    //compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
 
-    //compile 'com.github.morris-james:UtilitiesLibrary:v1.1.1' //Jitpack
-    //compile 'com.github.morris-james:appbaselibrary:v1.1.2' //Jitpack
+    compile 'com.github.morris-james:UtilitiesLibrary:v1.1.2' //Jitpack
+    compile 'com.github.morris-james:appbaselibrary:v1.1.3' //Jitpack
 }
