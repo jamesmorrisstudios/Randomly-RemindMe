@@ -33,11 +33,10 @@ public final class SummaryAdapter extends BaseRecycleAdapter {
     /**
      * Constructor
      *
-     * @param headerMode Header mode to use
      * @param mListener  Item Click listener
      */
-    public SummaryAdapter(int headerMode, @NonNull OnItemClickListener mListener) {
-        super(headerMode, mListener);
+    public SummaryAdapter(@NonNull OnItemClickListener mListener) {
+        super(mListener);
     }
 
     @Override

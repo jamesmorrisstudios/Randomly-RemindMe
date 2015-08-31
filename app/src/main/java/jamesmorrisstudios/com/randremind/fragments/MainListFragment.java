@@ -87,8 +87,8 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     }
 
     @Override
-    protected BaseRecycleAdapter getAdapter(int i, @NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
-        return new ReminderAdapter(i, onItemClickListener);
+    protected BaseRecycleAdapter getAdapter(@NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
+        return new ReminderAdapter(onItemClickListener);
     }
 
     @Override
@@ -99,6 +99,11 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
         } else {
             loadAfterSave = true;
         }
+    }
+
+    @Override
+    protected void startMoreDataLoad() {
+
     }
 
     @Override

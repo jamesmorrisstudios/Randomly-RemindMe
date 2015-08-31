@@ -13,12 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.TimePickerRequest;
 import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonFlat;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -35,7 +36,7 @@ import jamesmorrisstudios.com.randremind.R;
 public class EditTimesDialog extends DialogFragment {
 
     private ListView list;
-    private ButtonFlat btnCancel, btnOk;
+    private Button btnCancel, btnOk, btnAdd;
     private ArrayList<TimeItem> times = null;
     private ListAdapter adapter = null;
     private EditTimesListener onPositive;
@@ -55,8 +56,9 @@ public class EditTimesDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_times_dialog, container);
         list = (ListView) view.findViewById(R.id.list);
-        btnCancel = (ButtonFlat) view.findViewById(R.id.btn_cancel);
-        btnOk = (ButtonFlat) view.findViewById(R.id.btn_ok);
+        btnCancel = (Button) view.findViewById(R.id.btn_cancel);
+        btnOk = (Button) view.findViewById(R.id.btn_ok);
+        btnAdd = (Button) view.findViewById(com.jamesmorrisstudios.appbaselibrary.R.id.btn_add);
 
         if(times != null) {
             adapter = new ListAdapter(getActivity(), R.layout.edit_times_item, times);
@@ -104,6 +106,12 @@ public class EditTimesDialog extends DialogFragment {
                 });
             }
         });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.add(new TimeItem(9, 0));
+            }
+        });
         return view;
     }
 
@@ -141,6 +149,7 @@ public class EditTimesDialog extends DialogFragment {
             final TimeItem item = getItem(position);
 
             TextView hour = null, minute = null, AM = null, PM = null;
+            ImageView delete;
             View view = convertView;
 
             if (view == null) {
@@ -152,8 +161,9 @@ public class EditTimesDialog extends DialogFragment {
             minute = (TextView) view.findViewById(R.id.time_minute);
             AM = (TextView) view.findViewById(R.id.time_am);
             PM = (TextView) view.findViewById(R.id.time_pm);
+            delete = (ImageView) view.findViewById(com.jamesmorrisstudios.appbaselibrary.R.id.delete1);
 
-            if(allowEdit) {
+            if(allowEdit && item != null) {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -165,6 +175,12 @@ public class EditTimesDialog extends DialogFragment {
                                 notifyDataSetChanged();
                             }
                         }, item.hour, item.minute, item.is24Hour()));
+                    }
+                });
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        remove(item);
                     }
                 });
             }

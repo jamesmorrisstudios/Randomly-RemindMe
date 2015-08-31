@@ -1,46 +1,46 @@
 <resources>
 
     <!-- Failure Messages -->
-    <string name="data_load_fail">"Mislukt herinnering lijst te laden"</string>
+    <string name="data_load_fail">"Lijst met herinneringen laden mislukt"</string>
     <string name="error_time_difference">"Ongeldige tijd"</string>
 
     <!-- Main Screen no data -->
     <string name="main_list_no_data">"U heeft nog geen herinneringen."</string>
 
     <!-- Prompts -->
-    <string name="delete_prompt_title">"Verwijder Herinnering"</string>
-    <string name="delete_prompt_content">"Bent u zeker dat u deze herinnering verwijderen?"</string>
-    <string name="cancel_prompt_title">"Veranderingen Ongedaan Maken"</string>
-    <string name="cancel_prompt_content">"Bent u zeker dat u uw wijzigingen weggooien?"</string>
-    <string name="duplicate_prompt_title">"Duplicate Herinnering"</string>
-    <string name="duplicate_prompt_content">"Bent u zeker dat u deze herinnering dupliceren?"</string>
-    <string name="notification_theme_title">"Selecteer de melding stijl die past bij uw telefoon"</string>
+    <string name="delete_prompt_title">"Verwijder herinnering"</string>
+    <string name="delete_prompt_content">"Bent u zeker dat u deze herinnering wil verwijderen?"</string>
+    <string name="cancel_prompt_title">"Annuleer wijzigingen"</string>
+    <string name="cancel_prompt_content">"Bent u zeker dat u uw wijzigingen wil annuleren?"</string>
+    <string name="duplicate_prompt_title">"Dupliceer herinnering"</string>
+    <string name="duplicate_prompt_content">"Bent u zeker dat u deze herinnering wil dupliceren?"</string>
+    <string name="notification_theme_title">"Selecteer de meldingsstijl die past bij uw telefoon"</string>
 
     <!-- Dialogs -->
-    <string name="select_notification">"Select Notification"</string>
+    <string name="select_notification">"Selecteer melding</string>
 
     <!-- Edit items -->
     <string name="alerts_per_day">"Herinneringen per dag"</string>
 
-    <string name="num_messages">"Aantal Berichten"</string>
-    <string name="edit_messages">"Bewerken Berichten"</string>
-    <string name="edit_times">"Bewerken Times"</string>
+    <string name="num_messages">"Aantal berichten"</string>
+    <string name="edit_messages">"Berichten bewerken"</string>
+    <string name="edit_times">"Aantal keren bewerken"</string>
 
     <!-- Toast Status messages -->
-    <string name="reminder_cancel">"Wijzigingen Afgedankte"</string>
+    <string name="reminder_cancel">"Wijzigingen geannuleerd"</string>
     <string name="reminder_save">"Wijzigingen opgeslagen"</string>
-    <string name="reminder_delete">"Herinnering Verwijderde"</string>
-    <string name="reminder_duplicate">"Herinnering Gedupliceerde"</string>
+    <string name="reminder_delete">"Herinnering verwijderd"</string>
+    <string name="reminder_duplicate">"Herinnering gedupliceerd"</string>
 
     <!-- Settings -->
     <string name="settings_item_0_primary">"Melding opent samenvatting"</string>
-    <string name="settings_item_0_secondary">"Haal het vinkje weg om melding te maken in stilte te erkennen"</string>
-    <string name="settings_item_1_primary">"Gebruik aangepaste kennisgeving"</string>
-    <string name="settings_item_1_secondary">"Verwijder het vinkje om de aangepaste melding uit te schakelen en terug te keren naar de standaard systeem"</string>
-    <string name="settings_item_2_primary">"Gebruik lopende kennisgeving"</string>
-    <string name="settings_item_2_secondary">"Verwijder het vinkje om de kennisgeving aan afgezet kunnen door met het weg zijn. Lopende meldingen worden niet ondersteund op Android Wear"</string>
-    <string name="settings_item_3_primary">"Gebruik melding thema van een lichte achtergrond en donkere tekst"</string>
-    <string name="settings_item_3_secondary">"Vink om donkere kennisgeving thema te gebruiken van een donkere achtergrond en lichte tekst"</string>
+    <string name="settings_item_0_secondary">"Haal het vinkje weg om melding in stilte te bevestigen"</string>
+    <string name="settings_item_1_primary">"Gebruik aangepaste melding"</string>
+    <string name="settings_item_1_secondary">"Verwijder het vinkje om de aangepaste melding uit te schakelen en terug te keren naar de standaard instelling"</string>
+    <string name="settings_item_2_primary">"Gebruik lopende melding"</string>
+    <string name="settings_item_2_secondary">"Verwijder het vinkje om toe te laten dat de melding kan worden afgewezen door te vegen. Lopende meldingen worden niet ondersteund op Android Wear"</string>
+    <string name="settings_item_3_primary">"Gebruik meldingsthema met een lichte achtergrond en donkere tekst"</string>
+    <string name="settings_item_3_secondary">"Verwijder het vinkje om het donkere meldingsthema te gebruiken met een donkere achtergrond en lichte tekst"</string>
     <string name="settings_item_4_primary">"Eerste dag van de week"</string>
 
 </resources>

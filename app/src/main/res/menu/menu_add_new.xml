@@ -18,16 +18,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_cancel"
-        android:icon="@drawable/ic_clear_white_24dp"
+        android:id="@+id/action_help"
+        android:icon="@drawable/help"
         android:orderInCategory="1"
+        android:title="@string/help"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_cancel"
+        android:icon="@drawable/notif_cancel_dark"
+        android:orderInCategory="2"
         android:title="@string/cancel"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_preview"
         android:icon="@drawable/ic_play_arrow_white_24dp"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="@string/preview"
         app:showAsAction="ifRoom" />
 

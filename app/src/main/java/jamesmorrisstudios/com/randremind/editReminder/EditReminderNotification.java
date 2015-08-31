@@ -80,7 +80,7 @@ public class EditReminderNotification {
         notificationSoundContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View v) {
-                final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                 if (remind == null) {
                     return;
                 }
@@ -91,14 +91,15 @@ public class EditReminderNotification {
                 Bus.postObject(new RingtoneRequest(defaultUri, AppUtil.getContext().getResources().getString(R.string.select_notification), new RingtoneRequest.RingtoneRequestListener() {
                     @Override
                     public void ringtoneResponse(Uri uri, String name) {
-                        if (uri != null) {
-                            remind.setNotificationTone(uri.toString());
-                        } else {
-                            remind.setNotificationTone(null);
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
                         }
-                        if (name != null) {
+                        if (uri != null && name != null) {
+                            remind.setNotificationTone(uri.toString());
                             remind.setNotificationToneName(name);
                         } else {
+                            remind.setNotificationTone(null);
                             remind.setNotificationToneName(AppUtil.getContext().getString(R.string.none));
                         }
                         sound.setText(remind.getNotificationToneName());

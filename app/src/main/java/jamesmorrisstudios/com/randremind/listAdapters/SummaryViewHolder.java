@@ -192,12 +192,12 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             } else {
                 date.setText(UtilsTime.getDateFormatted(day.date));
             }
-            float percentage = (100.0f * day.timesClicked.size()) / day.timesShown.size();
+            float percentage = (100.0f * day.getTimesClicked()) / day.getTimesShown();
             percent.setText(Integer.toString(Math.round(percentage)) + AppUtil.getContext().getResources().getString(R.string.percent_char));
-            percentImage.setMax(day.timesShown.size());
-            percentImage.setProgress(day.timesClicked.size());
-            show.setText(Integer.toString(day.timesShown.size()));
-            acked.setText(Integer.toString(day.timesClicked.size()));
+            percentImage.setMax(day.getTimesShown());
+            percentImage.setProgress(day.getTimesClicked());
+            show.setText(Integer.toString(day.getTimesShown()));
+            acked.setText(Integer.toString(day.getTimesClicked()));
         }
     }
 

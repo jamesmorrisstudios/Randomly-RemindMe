@@ -137,8 +137,8 @@ public class SummaryFragment extends BaseRecycleListFragment {
     }
 
     @Override
-    protected BaseRecycleAdapter getAdapter(int i, @NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
-        return new SummaryAdapter(i, onItemClickListener);
+    protected BaseRecycleAdapter getAdapter(@NonNull BaseRecycleAdapter.OnItemClickListener onItemClickListener) {
+        return new SummaryAdapter(onItemClickListener);
     }
 
     @Override
@@ -153,6 +153,11 @@ public class SummaryFragment extends BaseRecycleListFragment {
         if (item != null) {
             item.loadData(forceRefresh);
         }
+    }
+
+    @Override
+    protected void startMoreDataLoad() {
+
     }
 
     @Override

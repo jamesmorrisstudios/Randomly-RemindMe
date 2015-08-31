@@ -22,8 +22,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.util.TimeUtils;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
 import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
 
@@ -75,18 +77,79 @@ public final class Scheduler {
     /**
      * Schedules the next app wake time
      *
-     * @param time Time to schedule for
+     * @param dateTime Time to schedule for
      */
-    public final void scheduleWake(@NonNull TimeItem time, @NonNull String uniqueName) {
-        Calendar calendar = UtilsTime.getCalendar();
-        calendar.set(Calendar.HOUR_OF_DAY, time.hour);
-        calendar.set(Calendar.MINUTE, time.minute);
-        Log.v("SCHEDULER", "Alarm Set For: " + uniqueName + " at " + time.getHourInTimeFormatString() + ":" + time.getMinuteString());
+    public final void scheduleWake(@NonNull DateTimeItem dateTime, @NonNull String uniqueName) {
+        Calendar calendar = UtilsTime.getCalendar(dateTime);
+        Log.v("SCHEDULER", "Alarm Set For: " + uniqueName + " at " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
         AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
+        i.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
         PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
+        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
+    }
+
+    /**
+     * Cancels the next scheduled wake.
+     * Does not cancel the midnight update alarm
+     */
+    public final void cancelWakeAutoSnooze(@NonNull String uniqueName) {
+        Log.v("SCHEDULER", "Auto Snooze deleted For: " + uniqueName);
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setType(uniqueName);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_AUTOSNOOZE");
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 2, i, 0);
+        am.cancel(pi);
+    }
+
+    /**
+     * Schedules the next app wake time
+     *
+     * @param dateTime Time to schedule for
+     */
+    public final void scheduleWakeAutoSnooze(@NonNull DateTimeItem dateTime, @NonNull String uniqueName) {
+        Calendar calendar = UtilsTime.getCalendar(dateTime);
+        Log.v("SCHEDULER", "Auto Snooze Set For: " + uniqueName + " at " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setType(uniqueName);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_AUTOSNOOZE");
+        i.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 2, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
+    }
+
+    /**
+     * Cancels the next scheduled wake.
+     * Does not cancel the midnight update alarm
+     */
+    public final void cancelWakeSnooze(@NonNull String uniqueName) {
+        Log.v("SCHEDULER", "Snooze deleted For: " + uniqueName);
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setType(uniqueName);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_SNOOZE");
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 3, i, 0);
+        am.cancel(pi);
+    }
+
+    /**
+     * Schedules the next app wake time
+     *
+     * @param dateTime Time to schedule for
+     */
+    public final void scheduleWakeSnooze(@NonNull DateTimeItem dateTime, @NonNull String uniqueName) {
+        Calendar calendar = UtilsTime.getCalendar(dateTime);
+        Log.v("SCHEDULER", "Snooze Set For: " + uniqueName + " at " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
+        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        i.setType(uniqueName);
+        i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_SNOOZE");
+        i.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 3, i, PendingIntent.FLAG_UPDATE_CURRENT);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 

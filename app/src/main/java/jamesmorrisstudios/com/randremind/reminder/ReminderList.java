@@ -275,7 +275,7 @@ public final class ReminderList {
         if (item == null) {
             return;
         }
-        Notifier.buildNotification(item.getNotification(true, UtilsTime.getDateTimeNow()));
+        Notifier.buildNotification(item.getNotification(true, UtilsTime.getDateTimeNow(), true));
     }
 
     /**

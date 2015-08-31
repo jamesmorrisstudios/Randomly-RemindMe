@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
@@ -75,14 +76,6 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
         if (status) {
             DateTimeItem lastWake = getLastWake();
-            TimeItem prevTime;
-            //If the last wake was a different day
-            if (now.dateItem.equals(lastWake.dateItem)) {
-                prevTime = lastWake.timeItem;
-            } else {
-                prevTime = new TimeItem(0, 0);
-            }
-
             Log.v("ALARM RECEIVER", "Woke At: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
 
             if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
@@ -101,10 +94,29 @@ public final class AlarmReceiver extends BroadcastReceiver {
                 ReminderList.getInstance().recalculateWakes();
                 //Schedule the next wake event
                 ReminderList.getInstance().scheduleAllWakes(now);
-            } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER") && intent.getType() != null && !intent.getType().isEmpty()) {
+            } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER")
+                    && intent.getType() != null && !intent.getType().isEmpty()) {
                 Log.v("ALARM RECEIVER", "Reminder!");
                 //Post a notification if we have one
-                postNotifications(intent.getType(), now);
+                Scheduler.getInstance().cancelWakeAutoSnooze(intent.getType());
+                Scheduler.getInstance().cancelWakeSnooze(intent.getType());
+                scheduleAutoSnooze(intent.getType(), now);
+                postNotifications(intent.getType(), now, false);
+            } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER_AUTOSNOOZE")
+                    && intent.getType() != null && !intent.getType().isEmpty()) {
+                Log.v("ALARM RECEIVER", "Reminder Auto Snooze!");
+                //Post a notification if we have one
+                Scheduler.getInstance().cancelWakeAutoSnooze(intent.getType());
+                scheduleAutoSnooze(intent.getType(), now);
+                postNotifications(intent.getType(), now, true);
+            } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER_SNOOZE")
+                    && intent.getType() != null && !intent.getType().isEmpty()) {
+                Log.v("ALARM RECEIVER", "Reminder Snooze!");
+                //Post a notification if we have one
+                Scheduler.getInstance().cancelWakeSnooze(intent.getType());
+                Scheduler.getInstance().cancelWakeAutoSnooze(intent.getType());
+                scheduleAutoSnooze(intent.getType(), now);
+                postNotifications(intent.getType(), now, true);
             }
 
             logLastWake(now);
@@ -119,13 +131,27 @@ public final class AlarmReceiver extends BroadcastReceiver {
         wl.release();
     }
 
-    private void postNotifications(@NonNull String uniqueName, @NonNull DateTimeItem now) {
+    private void scheduleAutoSnooze(@NonNull String uniqueName, @NonNull DateTimeItem now) {
         ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
         if (item == null) {
             return;
         }
-        ReminderItem.logReminderShown(item.getUniqueName(), now);
-        Notifier.buildNotification(item.getNotification(false, now));
+        if(item.getAutoSnooze() == ReminderItem.SnoozeOptions.DISABLED) {
+            return;
+        }
+        DateTimeItem next = UtilsTime.getDateTimePlusMinutes(now, item.getAutoSnooze().minutes);
+        Scheduler.getInstance().scheduleWakeAutoSnooze(next, uniqueName);
+    }
+
+    private void postNotifications(@NonNull String uniqueName, @NonNull DateTimeItem now, boolean getCurrent) {
+        ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
+        if (item == null) {
+            return;
+        }
+        if(!getCurrent) {
+            ReminderItem.logReminderShown(item.getUniqueName(), now);
+        }
+        Notifier.buildNotification(item.getNotification(false, now, getCurrent));
         Log.v("ALARM RECEIVER", "Post Notification: " + item.getNotificationId());
         item.rescheduleNextWake(now);
     }
