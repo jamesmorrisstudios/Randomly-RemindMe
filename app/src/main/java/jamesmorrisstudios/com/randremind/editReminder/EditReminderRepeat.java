@@ -4,13 +4,12 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.util.TypedValue;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.widget.TextView;
 
-import com.jamesmorrisstudios.appbaselibrary.dialogHelper.MultiChoiceRequest;
 import com.jamesmorrisstudios.appbaselibrary.Bus;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.MultiChoiceRequest;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;

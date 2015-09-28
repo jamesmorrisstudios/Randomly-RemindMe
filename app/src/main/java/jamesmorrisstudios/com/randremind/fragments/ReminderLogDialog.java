@@ -9,20 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.Utils;
-import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
-import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.reminder.ReminderLog;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogItem;
 

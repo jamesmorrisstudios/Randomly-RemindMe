@@ -27,7 +27,6 @@ import android.util.Log;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.notification.Notifier;
 import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
-import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
