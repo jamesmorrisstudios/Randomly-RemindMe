@@ -24,10 +24,10 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.TimeUtils;
 
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import java.util.Calendar;
 
@@ -66,11 +66,11 @@ public final class Scheduler {
      */
     public final void cancelWake(@NonNull String uniqueName) {
         Log.v("SCHEDULER", "Alarm deleted For: " + uniqueName);
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 0, i, 0);
         am.cancel(pi);
     }
 
@@ -82,12 +82,12 @@ public final class Scheduler {
     public final void scheduleWake(@NonNull DateTimeItem dateTime, @NonNull String uniqueName) {
         Calendar calendar = UtilsTime.getCalendar(dateTime);
         Log.v("SCHEDULER", "Alarm Set For: " + uniqueName + " at " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER");
         i.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 0, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 0, i, 0);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 
@@ -97,11 +97,11 @@ public final class Scheduler {
      */
     public final void cancelWakeAutoSnooze(@NonNull String uniqueName) {
         Log.v("SCHEDULER", "Auto Snooze deleted For: " + uniqueName);
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_AUTOSNOOZE");
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 2, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 2, i, 0);
         am.cancel(pi);
     }
 
@@ -110,15 +110,16 @@ public final class Scheduler {
      *
      * @param dateTime Time to schedule for
      */
-    public final void scheduleWakeAutoSnooze(@NonNull DateTimeItem dateTime, @NonNull String uniqueName) {
+    public final void scheduleWakeAutoSnooze(@NonNull DateTimeItem dateTime, @NonNull String uniqueName, @NonNull DateTimeItem firstDateTime) {
         Calendar calendar = UtilsTime.getCalendar(dateTime);
         Log.v("SCHEDULER", "Auto Snooze Set For: " + uniqueName + " at " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_AUTOSNOOZE");
         i.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 2, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        i.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 2, i, PendingIntent.FLAG_UPDATE_CURRENT);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 
@@ -128,11 +129,11 @@ public final class Scheduler {
      */
     public final void cancelWakeSnooze(@NonNull String uniqueName) {
         Log.v("SCHEDULER", "Snooze deleted For: " + uniqueName);
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_SNOOZE");
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 3, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 3, i, 0);
         am.cancel(pi);
     }
 
@@ -141,15 +142,16 @@ public final class Scheduler {
      *
      * @param dateTime Time to schedule for
      */
-    public final void scheduleWakeSnooze(@NonNull DateTimeItem dateTime, @NonNull String uniqueName) {
+    public final void scheduleWakeSnooze(@NonNull DateTimeItem dateTime, @NonNull String uniqueName, @NonNull DateTimeItem firstDateTime) {
         Calendar calendar = UtilsTime.getCalendar(dateTime);
         Log.v("SCHEDULER", "Snooze Set For: " + uniqueName + " at " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setType(uniqueName);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEREMINDER_SNOOZE");
         i.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 3, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        i.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 3, i, PendingIntent.FLAG_UPDATE_CURRENT);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
     }
 
@@ -157,10 +159,10 @@ public final class Scheduler {
      * Cancels the midnight update alarm
      */
     public final void cancelMidnightAlarm() {
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT");
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 1, i, 0);
         am.cancel(pi);
     }
 
@@ -169,10 +171,10 @@ public final class Scheduler {
      */
     public final void scheduleRepeatingMidnight() {
         Log.v("SCHEDULER", "Repeating midnight alarm set");
-        AlarmManager am = (AlarmManager) AppUtil.getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(AppUtil.getContext(), AlarmReceiver.class);
+        AlarmManager am = (AlarmManager) AppBase.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(AppBase.getContext(), AlarmReceiver.class);
         i.setAction("jamesmorrisstudios.com.randremind.WAKEMIDNIGHT");
-        PendingIntent pi = PendingIntent.getBroadcast(AppUtil.getContext(), 1, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(AppBase.getContext(), 1, i, 0);
         Calendar calendar = UtilsTime.getCalendar();
         calendar.add(Calendar.DATE, 1); //Increment to tomorrow
         calendar.set(Calendar.HOUR_OF_DAY, 0);

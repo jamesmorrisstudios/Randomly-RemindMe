@@ -27,8 +27,8 @@ import android.view.ViewGroup;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -116,7 +116,7 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     protected void afterViewCreated() {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_add_white_24dp);
-        setNoDataText(getString(R.string.main_list_no_data));
+        setNoDataText(getString(R.string.no_reminders_yet));
         setFabAutoHide(false);
         setDummyItem(true);
     }

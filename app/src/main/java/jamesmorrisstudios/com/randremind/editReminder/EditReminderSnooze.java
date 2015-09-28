@@ -6,8 +6,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -38,7 +38,7 @@ public class EditReminderSnooze {
         snoozeContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = AppUtil.getContext().getString(R.string.snooze);
+                String title = AppBase.getContext().getString(R.string.snooze);
                 String[] items = new String[ReminderItem.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
                     items[i] = ReminderItem.SnoozeOptions.values()[i].name;
@@ -61,7 +61,7 @@ public class EditReminderSnooze {
         autoSnoozeContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = AppUtil.getContext().getString(R.string.auto_snooze);
+                String title = AppBase.getContext().getString(R.string.auto_snooze);
                 String[] items = new String[ReminderItem.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
                     items[i] = ReminderItem.SnoozeOptions.values()[i].name;

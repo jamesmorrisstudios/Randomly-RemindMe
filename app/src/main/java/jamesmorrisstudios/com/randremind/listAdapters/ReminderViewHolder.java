@@ -26,9 +26,9 @@ import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -113,20 +113,20 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         final ReminderItem reminder = (ReminderItem) baseRecycleItem;
         String title = reminder.getTitle();
         if (title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.title);
+            title = AppBase.getContext().getString(R.string.title);
         }
         this.title.setText(title);
         if (reminder.isRangeTiming()) {
             UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.getStartTime());
             UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getEndTime());
-            dash1.setText(AppUtil.getContext().getString(R.string.dash));
+            dash1.setText(AppBase.getContext().getString(R.string.dash));
             top1.setVisibility(View.VISIBLE);
             top2.setVisibility(View.VISIBLE);
             dash1.setVisibility(View.VISIBLE);
             dash2.setVisibility(View.INVISIBLE);
             top3.setVisibility(View.INVISIBLE);
         } else {
-            dash1.setText(AppUtil.getContext().getString(R.string.comma));
+            dash1.setText(AppBase.getContext().getString(R.string.comma));
             if(reminder.getSpecificTimeList().size() >= 1) {
                 UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.getSpecificTimeList().get(0));
             }
@@ -170,9 +170,9 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActive(active);
         if (active) {
-            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
+            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textLightMain));
         } else {
-            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));
+            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textDarkMain));
         }
     }
 

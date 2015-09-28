@@ -17,14 +17,16 @@ import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.dialogHelper.ExportReminderLogRequest;
+import jamesmorrisstudios.com.randremind.dialogHelper.ReminderLogRequest;
 import jamesmorrisstudios.com.randremind.listAdapters.SummaryAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.SummaryContainer;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -77,7 +79,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                Bus.postObject(new PromptDialogRequest(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new DialogInterface.OnClickListener() {
+                Bus.postObject(new PromptDialogRequest(getString(R.string.delete_reminder_prompt_title), getString(R.string.delete_reminder_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Utils.toastShort(getString(R.string.reminder_delete));
@@ -96,7 +98,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 ReminderList.getInstance().previewCurrent();
                 break;
             case R.id.action_duplicate:
-                Bus.postObject(new PromptDialogRequest(getString(R.string.duplicate_prompt_title), getString(R.string.duplicate_prompt_content), new DialogInterface.OnClickListener() {
+                Bus.postObject(new PromptDialogRequest(getString(R.string.duplicate_reminder_prompt_title), getString(R.string.duplicate_reminder_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Utils.toastShort(getString(R.string.reminder_duplicate));
@@ -109,6 +111,9 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
                     }
                 }));
+                break;
+            case R.id.action_export:
+                Bus.postObject(new ExportReminderLogRequest());
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -164,6 +169,11 @@ public class SummaryFragment extends BaseRecycleListFragment {
     protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
         if(baseRecycleContainer.isHeader) {
             mListener.onEditClicked();
+        } else {
+            ReminderLogDay day = (ReminderLogDay) baseRecycleContainer.getItem();
+            if(!day.lifetime) {
+                Bus.postObject(new ReminderLogRequest(day));
+            }
         }
     }
 
@@ -190,6 +200,8 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 dayLifetime.lifetime = true;
                 dayLifetime.timesClickedLifetime = item.reminderLog.lifetimeClicked;
                 dayLifetime.timesShownLifetime = item.reminderLog.lifetimeShown;
+                dayLifetime.timesShownAgainLifetime = item.reminderLog.lifetimeShownAgain;
+                dayLifetime.timesSnoozedLifetime = item.reminderLog.lifetimeSnoozed;
                 summaries.add(new SummaryContainer(dayLifetime));
 
                 for (ReminderLogDay day : item.reminderLog.days) {

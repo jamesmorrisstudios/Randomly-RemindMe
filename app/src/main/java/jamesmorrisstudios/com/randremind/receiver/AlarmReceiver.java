@@ -24,12 +24,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
-import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
-import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.notification.Notifier;
+import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
+import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -100,23 +100,35 @@ public final class AlarmReceiver extends BroadcastReceiver {
                 //Post a notification if we have one
                 Scheduler.getInstance().cancelWakeAutoSnooze(intent.getType());
                 Scheduler.getInstance().cancelWakeSnooze(intent.getType());
-                scheduleAutoSnooze(intent.getType(), now);
-                postNotifications(intent.getType(), now, false);
+                DateTimeItem dateTimeItem = null;
+                if(intent.hasExtra("DATETIME")) {
+                    dateTimeItem = DateTimeItem.decodeFromString(intent.getStringExtra("DATETIME"));
+                }
+                scheduleAutoSnooze(intent.getType(), now, dateTimeItem);
+                postNotifications(intent.getType(), now, false, dateTimeItem);
             } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER_AUTOSNOOZE")
                     && intent.getType() != null && !intent.getType().isEmpty()) {
                 Log.v("ALARM RECEIVER", "Reminder Auto Snooze!");
                 //Post a notification if we have one
                 Scheduler.getInstance().cancelWakeAutoSnooze(intent.getType());
-                scheduleAutoSnooze(intent.getType(), now);
-                postNotifications(intent.getType(), now, true);
+                DateTimeItem dateTimeItem = null;
+                if(intent.hasExtra("FIRSTDATETIME")) {
+                    dateTimeItem = DateTimeItem.decodeFromString(intent.getStringExtra("FIRSTDATETIME"));
+                }
+                scheduleAutoSnooze(intent.getType(), now, dateTimeItem);
+                postNotifications(intent.getType(), now, true, dateTimeItem);
             } else if (intent.getAction() != null && intent.getAction().equals("jamesmorrisstudios.com.randremind.WAKEREMINDER_SNOOZE")
                     && intent.getType() != null && !intent.getType().isEmpty()) {
                 Log.v("ALARM RECEIVER", "Reminder Snooze!");
                 //Post a notification if we have one
                 Scheduler.getInstance().cancelWakeSnooze(intent.getType());
                 Scheduler.getInstance().cancelWakeAutoSnooze(intent.getType());
-                scheduleAutoSnooze(intent.getType(), now);
-                postNotifications(intent.getType(), now, true);
+                DateTimeItem dateTimeItem = null;
+                if(intent.hasExtra("FIRSTDATETIME")) {
+                    dateTimeItem = DateTimeItem.decodeFromString(intent.getStringExtra("FIRSTDATETIME"));
+                }
+                scheduleAutoSnooze(intent.getType(), now, dateTimeItem);
+                postNotifications(intent.getType(), now, true, dateTimeItem);
             }
 
             logLastWake(now);
@@ -129,9 +141,12 @@ public final class AlarmReceiver extends BroadcastReceiver {
         }
         //Release the wakelock
         wl.release();
+
+        //Dont save the reminders again
+        //Nothing set in the main reminder is kept!
     }
 
-    private void scheduleAutoSnooze(@NonNull String uniqueName, @NonNull DateTimeItem now) {
+    private void scheduleAutoSnooze(@NonNull String uniqueName, @NonNull DateTimeItem now, @Nullable DateTimeItem firstDateTime) {
         ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
         if (item == null) {
             return;
@@ -140,30 +155,34 @@ public final class AlarmReceiver extends BroadcastReceiver {
             return;
         }
         DateTimeItem next = UtilsTime.getDateTimePlusMinutes(now, item.getAutoSnooze().minutes);
-        Scheduler.getInstance().scheduleWakeAutoSnooze(next, uniqueName);
+        if(firstDateTime == null) {
+            firstDateTime = now; //Backwards compatibility
+        }
+        Scheduler.getInstance().scheduleWakeAutoSnooze(next, uniqueName, firstDateTime);
     }
 
-    private void postNotifications(@NonNull String uniqueName, @NonNull DateTimeItem now, boolean getCurrent) {
+    private void postNotifications(@NonNull String uniqueName, @NonNull DateTimeItem now, boolean snoozed, @Nullable DateTimeItem firstDateTime) {
         ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
         if (item == null) {
             return;
         }
-        if(!getCurrent) {
-            ReminderItem.logReminderShown(item.getUniqueName(), now);
+        if(firstDateTime == null) {
+            firstDateTime = now; //Backwards compatibility
         }
-        Notifier.buildNotification(item.getNotification(false, now, getCurrent));
+        ReminderItem.logReminderShown(item.getUniqueName(), now, firstDateTime, snoozed);
+        Notifier.buildNotification(item.getNotification(false, now, snoozed, firstDateTime));
         Log.v("ALARM RECEIVER", "Post Notification: " + item.getNotificationId());
         item.rescheduleNextWake(now);
     }
 
     private void logLastWake(@NonNull DateTimeItem time) {
         String lastWake = DateTimeItem.encodeToString(time);
-        Prefs.putString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE", lastWake);
+        Prefs.putString(AppBase.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE", lastWake);
     }
 
     @NonNull
     private DateTimeItem getLastWake() {
-        String lastWake = Prefs.getString(AppUtil.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE");
+        String lastWake = Prefs.getString(AppBase.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE");
         return DateTimeItem.decodeFromString(lastWake);
     }
 

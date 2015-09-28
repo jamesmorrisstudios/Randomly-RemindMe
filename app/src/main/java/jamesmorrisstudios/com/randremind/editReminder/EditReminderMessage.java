@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.EditTextListRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogs.EditTextListDialog;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +42,15 @@ public class EditReminderMessage {
             return;
         }
         if(reminderItem.isMessageInOrder()) {
-            order.setText(AppUtil.getContext().getString(R.string.in_order));
+            order.setText(AppBase.getContext().getString(R.string.in_order));
         } else {
-            order.setText(AppUtil.getContext().getString(R.string.random));
+            order.setText(AppBase.getContext().getString(R.string.random));
         }
         orderContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = AppUtil.getContext().getString(R.string.ordering);
-                String[] items = new String[]{AppUtil.getContext().getString(R.string.in_order), AppUtil.getContext().getString(R.string.random)};
+                String title = AppBase.getContext().getString(R.string.ordering);
+                String[] items = new String[]{AppBase.getContext().getString(R.string.in_order), AppBase.getContext().getString(R.string.random)};
 
                 Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
                     @Override
@@ -61,10 +61,10 @@ public class EditReminderMessage {
                         }
                         if (which == 0) {
                             reminderItem.setMessageInOrder(true);
-                            order.setText(AppUtil.getContext().getString(R.string.in_order));
+                            order.setText(AppBase.getContext().getString(R.string.in_order));
                         } else {
                             reminderItem.setMessageInOrder(false);
-                            order.setText(AppUtil.getContext().getString(R.string.random));
+                            order.setText(AppBase.getContext().getString(R.string.random));
                         }
                     }
                 }, new DialogInterface.OnClickListener() {

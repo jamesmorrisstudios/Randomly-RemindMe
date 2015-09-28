@@ -6,19 +6,15 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.TimePickerRequest;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -85,8 +81,8 @@ public class EditReminderTiming {
         timingContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = AppUtil.getContext().getString(R.string.timing_type);
-                String[] items = new String[]{AppUtil.getContext().getString(R.string.range), AppUtil.getContext().getString(R.string.specific)};
+                String title = AppBase.getContext().getString(R.string.timing_type);
+                String[] items = new String[]{AppBase.getContext().getString(R.string.range), AppBase.getContext().getString(R.string.specific)};
                 Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -148,7 +144,7 @@ public class EditReminderTiming {
                     UtilsTime.setTime(startHour, startMinute, startAM, startPM, remind.getStartTime());
                     generateNumberTimePerDay();
                 } else {
-                    Utils.toastShort(AppUtil.getContext().getResources().getString(R.string.error_time_difference));
+                    Utils.toastShort(AppBase.getContext().getResources().getString(R.string.invalid_time));
                 }
             }
         };
@@ -177,7 +173,7 @@ public class EditReminderTiming {
                     UtilsTime.setTime(endHour, endMinute, endAM, endPM, remind.getEndTime());
                     generateNumberTimePerDay();
                 } else {
-                    Utils.toastShort(AppUtil.getContext().getResources().getString(R.string.error_time_difference));
+                    Utils.toastShort(AppBase.getContext().getResources().getString(R.string.invalid_time));
                 }
             }
         };
@@ -221,11 +217,11 @@ public class EditReminderTiming {
             return;
         }
         if(remind.isRangeTiming()) {
-            timing.setText(AppUtil.getContext().getString(R.string.range));
+            timing.setText(AppBase.getContext().getString(R.string.range));
             specificGroupContainer.setVisibility(View.GONE);
             rangeGroupContainer.setVisibility(View.VISIBLE);
         } else {
-            timing.setText(AppUtil.getContext().getString(R.string.specific));
+            timing.setText(AppBase.getContext().getString(R.string.specific));
             specificGroupContainer.setVisibility(View.VISIBLE);
             rangeGroupContainer.setVisibility(View.GONE);
         }

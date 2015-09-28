@@ -8,10 +8,10 @@ import android.webkit.WebSettings;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.MultiChoiceRequest;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -61,7 +61,7 @@ public class EditReminderRepeat {
                 if (remind == null) {
                     return;
                 }
-                String title = AppUtil.getContext().getString(R.string.weeks);
+                String title = AppBase.getContext().getString(R.string.weeks);
                 String[] options = new String[ReminderItem.WeekOptions.values().length];
                 for (int i = 0; i < options.length; i++) {
                     options[i] = ReminderItem.WeekOptions.values()[i].name;
@@ -103,7 +103,7 @@ public class EditReminderRepeat {
         boolean anySelected = false;
         String text = "";
         if(remind.getWeeksToRun()[0]) {
-            text = AppUtil.getContext().getString(R.string.every_week);
+            text = AppBase.getContext().getString(R.string.every_week);
             anySelected = true;
         } else {
             boolean firstSelect = true;
@@ -120,7 +120,7 @@ public class EditReminderRepeat {
             }
         }
         if(!anySelected) {
-            weeks.setText(AppUtil.getContext().getString(R.string.none));
+            weeks.setText(AppBase.getContext().getString(R.string.none));
         } else {
             weeks.setText(text);
         }
@@ -154,9 +154,9 @@ public class EditReminderRepeat {
             return;
         }
         if (active) {
-            text.setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
+            text.setTextColor(AppBase.getContext().getResources().getColor(R.color.textLightMain));
         } else {
-            text.setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));
+            text.setTextColor(AppBase.getContext().getResources().getColor(R.color.textDarkMain));
         }
     }
 
@@ -171,7 +171,7 @@ public class EditReminderRepeat {
                 if (remind == null) {
                     return;
                 }
-                String title = AppUtil.getContext().getString(R.string.days_of_week);
+                String title = AppBase.getContext().getString(R.string.days_of_week);
                 String[] week = UtilsTime.getWeekStringArray();
                 final boolean[] checked = remind.getDaysToRun().clone();
                 Bus.postObject(new MultiChoiceRequest(title, week, checked, new DialogInterface.OnMultiChoiceClickListener() {

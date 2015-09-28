@@ -5,6 +5,14 @@
     <string name="app_package" translatable="false">jamesmorrisstudios.com.randremind</string>
 
     <string name="tutorial_link_read" translatable="false">http://www.jamesmorrisstudios.us/randomly-remindme-howto.html</string>
+
+    <!-- TODO make this visible once the video tutorial is ready -->
     <string name="tutorial_link_watch" translatable="false">TODO</string>
+    <style name="help_watch_how">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <string name="edit_message" translatable="false">@string/message</string>
+    <string name="pref_first_launch" translatable="false">FIRST_LAUNCH</string>
 
 </resources>

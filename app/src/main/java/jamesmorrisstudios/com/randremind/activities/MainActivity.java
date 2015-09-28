@@ -16,7 +16,12 @@
 
 package jamesmorrisstudios.com.randremind.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Path;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,24 +34,37 @@ import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceIconReques
 import com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuilder;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
-import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.FileWriter;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
+import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
+import net.rdrei.android.dirchooser.DirectoryChooserConfig;
+import net.rdrei.android.dirchooser.DirectoryChooserFragment;
+
+import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
+import jamesmorrisstudios.com.randremind.dialogHelper.ExportReminderLogRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
+import jamesmorrisstudios.com.randremind.dialogHelper.ReminderLogRequest;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
 import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
+import jamesmorrisstudios.com.randremind.fragments.ReminderLogDialog;
 import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.reminder.ReminderLog;
+import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
 /**
@@ -57,7 +75,12 @@ import jamesmorrisstudios.com.randremind.reminder.Scheduler;
  */
 public final class MainActivity extends BaseLauncherActivity implements
         MainListFragment.OnFragmentInteractionListener,
-        SummaryFragment.OnSummaryListener {
+        SummaryFragment.OnSummaryListener,
+        DirectoryChooserFragment.OnFragmentInteractionListener {
+
+    private static final int REQUEST_WRITE_STORAGE = 6001;
+    private boolean useAutoLock = false;
+    private DirectoryChooserFragment mDialog;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -185,8 +208,8 @@ public final class MainActivity extends BaseLauncherActivity implements
         Bus.postObject(new SingleChoiceIconRequest(title, items, new SingleChoiceIconDialogBuilder.OptionPickerListener() {
             @Override
             public void onClick(int which) {
-                String pref = AppUtil.getContext().getString(R.string.settings_pref);
-                String keytheme = AppUtil.getContext().getString(R.string.pref_notification_theme);
+                String pref = AppBase.getContext().getString(R.string.settings_pref);
+                String keytheme = AppBase.getContext().getString(R.string.pref_notification_theme);
                 if(which == 0) {
                     Prefs.putBoolean(pref, keytheme, true);
                 } else {
@@ -198,14 +221,14 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     private boolean isFirstLaunch() {
-        String pref = AppUtil.getContext().getString(R.string.settings_pref);
-        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        String pref = AppBase.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppBase.getContext().getString(R.string.pref_first_launch);
         return Prefs.getBoolean(pref, keyFirstLaunch, true);
     }
 
     private void setFirstLaunchComplete() {
-        String pref = AppUtil.getContext().getString(R.string.settings_pref);
-        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        String pref = AppBase.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppBase.getContext().getString(R.string.pref_first_launch);
         Prefs.putBoolean(pref, keyFirstLaunch, false);
     }
 
@@ -297,8 +320,87 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     @Subscribe
+    public void onExportReminderLog(ExportReminderLogRequest request) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                enableAutoLock();
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_STORAGE);
+            } else {
+                exportReminderLog();
+            }
+        } else {
+            exportReminderLog();
+        }
+    }
+
+    @Override
+    public void onSelectDirectory(@NonNull String path) {
+        Log.v("Path", path);
+        mDialog.dismiss();
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if(remind == null) {
+            return;
+        }
+        FileWriter.writeFile(path + File.separator + remind.getTitle().replaceAll("\\W+", "") + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.PATH);
+        Utils.toastShort(AppBase.getContext().getString(R.string.export_log));
+    }
+
+    @Override
+    public void onCancelChooser() {
+        mDialog.dismiss();
+    }
+
+    private void exportReminderLog() {
+        final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                .newDirectoryName("RandomlyRemindMe")
+                .allowReadOnlyDirectory(false)
+                .allowNewDirectoryNameModification(true)
+                .build();
+        mDialog = DirectoryChooserFragment.newInstance(config);
+
+        mDialog.show(getFragmentManager(), null);
+
+
+        /*
+        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+        if(remind != null) {
+            FileWriter.mkDirs("RandomlyRemindMe", FileWriter.FileLocation.SDCARD);
+            FileWriter.writeFile("RandomlyRemindMe" + File.separator + remind.getTitle() + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.SDCARD);
+
+
+            //FileWriter.writeFile("RandomlyRemindMe"+"_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.CACHE);
+
+            //Uri uri = FileWriter.getFileUri("RandomlyRemindMe"+"_Log.csv", FileWriter.FileLocation.CACHE);
+            //shareStream("Title", uri, "text/csv");
+
+
+        }
+        Utils.toastShort(AppBase.getContext().getString(R.string.export_log));
+        */
+    }
+
+    private void shareStream(@NonNull final String chooserTitle, @NonNull final Uri uri, @NonNull final String shareType) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+        share.setType(shareType);
+        startActivity(Intent.createChooser(share, chooserTitle));
+    }
+
+    @Subscribe
     public void onIconPickerRequest(@NonNull IconPickerRequest request) {
         showIconPickerDialog(request.iconPickerListener, request.accentColor);
+    }
+
+    @Subscribe
+    public void onReminderLogRequest(@NonNull ReminderLogRequest request) {
+        showReminderLogDialog(request.reminderLogDay);
+    }
+
+    public void showReminderLogDialog(ReminderLogDay reminderLogDay) {
+        FragmentManager fm = getSupportFragmentManager();
+        ReminderLogDialog reminderLogDialog = new ReminderLogDialog();
+        reminderLogDialog.setData(reminderLogDay);
+        reminderLogDialog.show(fm, "fragment_reminder_log");
     }
 
     public void showIconPickerDialog(@NonNull IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
@@ -320,6 +422,23 @@ public final class MainActivity extends BaseLauncherActivity implements
         EditTimesDialog editTimesDialog = new EditTimesDialog();
         editTimesDialog.setData(times, onPositive, onNegative, allowEdit);
         editTimesDialog.show(fm, "fragment_edit_times");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_WRITE_STORAGE: {
+                disableAutoLock();
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.v("BaseActivity", "Permission Granted for external storage");
+                    exportReminderLog();
+                } else {
+                    Log.v("BaseActivity", "Permission Denied for external storage");
+                }
+                break;
+            }
+        }
     }
 
 }

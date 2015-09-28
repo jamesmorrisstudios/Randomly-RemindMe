@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
-import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 
 import java.util.ArrayList;
 
@@ -15,24 +15,50 @@ public class ReminderLog {
     @SerializedName("days")
     public ArrayList<ReminderLogDay> days = new ArrayList<>();
     @SerializedName("lifetimeShown")
-    public int lifetimeShown = 0;
+    public long lifetimeShown = 0;
     @SerializedName("lifetimeClicked")
-    public int lifetimeClicked = 0;
+    public long lifetimeClicked = 0;
+    @SerializedName("lifetimeSnoozed")
+    public long lifetimeSnoozed = 0;
+    @SerializedName("lifetimeShownAgain")
+    public long lifetimeShownAgain = 0;
 
-    public final void logClicked(@NonNull DateTimeItem dateTime) {
-        Log.v("ReminderLog", "Log Clicked: " + dateTime.dateItem.year + " " + dateTime.dateItem.month + " " + dateTime.dateItem.dayOfMonth +
-                ", " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
-        ReminderLogDay day = getDay(dateTime);
-        day.timesClicked.add(0, dateTime.timeItem);
-        lifetimeClicked++;
+    public final void updateLog() {
+        for(ReminderLogDay day : days) {
+            day.updateLog();
+        }
     }
 
-    public final void logShown(@NonNull DateTimeItem dateTime) {
+    public final void logClicked(@NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean snoozed) {
+        Log.v("ReminderLog", "Log Clicked: " + dateTime.dateItem.year + " " + dateTime.dateItem.month + " " + dateTime.dateItem.dayOfMonth +
+                ", " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
+        ReminderLogDay day = getDay(firstDateTime);
+        if(snoozed) {
+            //If snoozed it is manual (clicked) snooze
+            //day.dateTimesSnoozed.add(0, dateTime);
+            day.addItem(ReminderLogItem.LogType.SNOOZED, dateTime);
+            lifetimeSnoozed++;
+        } else {
+            //day.dateTimesClicked.add(0, dateTime);
+            day.addItem(ReminderLogItem.LogType.CLICKED, dateTime);
+            lifetimeClicked++;
+        }
+    }
+
+    public final void logShown(@NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean snoozed) {
         Log.v("ReminderLog", "Log Shown: " + dateTime.dateItem.year + " " + dateTime.dateItem.month + " " + dateTime.dateItem.dayOfMonth +
                 ", " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
-        ReminderLogDay day = getDay(dateTime);
-        day.timesShown.add(0, dateTime.timeItem);
-        lifetimeShown++;
+        ReminderLogDay day = getDay(firstDateTime);
+        if(snoozed) {
+            //If snoozed it is being shown again after either an auto snooze or manual snooze
+            //day.dateTimesShownAgain.add(0, dateTime);
+            day.addItem(ReminderLogItem.LogType.SHOWN_AGAIN, dateTime);
+            lifetimeShownAgain++;
+        } else {
+            //day.dateTimesShown.add(0, dateTime);
+            day.addItem(ReminderLogItem.LogType.SHOWN, dateTime);
+            lifetimeShown++;
+        }
     }
 
     private ReminderLogDay getDay(@NonNull DateTimeItem dateTimeItem) {
@@ -50,7 +76,7 @@ public class ReminderLog {
         }
         //If we have a new day then create a new entry and return it
         days.add(0, new ReminderLogDay(dateTimeItem.dateItem));
-        while (days.size() > 30) {
+        while (days.size() > 360) {
             days.remove(days.size() - 1);
         }
         Log.v("ReminderLog", "New day so creating another entry");

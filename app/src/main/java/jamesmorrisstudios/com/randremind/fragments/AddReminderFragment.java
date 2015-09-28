@@ -15,8 +15,8 @@ import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,7 @@ public class AddReminderFragment extends BaseRecycleListFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cancel:
-                Bus.postObject(new PromptDialogRequest(getString(R.string.cancel_prompt_title), getString(R.string.cancel_prompt_content), new DialogInterface.OnClickListener() {
+                Bus.postObject(new PromptDialogRequest(getString(R.string.cancel_reminder_prompt_title), getString(R.string.cancel_reminder_prompt_content), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ReminderList.getInstance().cancelCurrentReminderChanges();

@@ -21,12 +21,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
-import com.jamesmorrisstudios.utilitieslibrary.Serializer;
-import com.jamesmorrisstudios.utilitieslibrary.notification.Notifier;
-import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.FileWriter;
+import com.jamesmorrisstudios.appbaselibrary.Serializer;
+import com.jamesmorrisstudios.appbaselibrary.notification.Notifier;
+import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import java.util.ArrayList;
 
@@ -275,7 +275,7 @@ public final class ReminderList {
         if (item == null) {
             return;
         }
-        Notifier.buildNotification(item.getNotification(true, UtilsTime.getDateTimeNow(), true));
+        Notifier.buildNotification(item.getNotification(true, UtilsTime.getDateTimeNow(), true, null));
     }
 
     /**
@@ -375,7 +375,7 @@ public final class ReminderList {
     private boolean saveToFile() {
         if (reminders != null && reminders.data != null) {
             byte[] bytes = Serializer.serializeClass(reminders);
-            return bytes != null && FileWriter.writeFile(saveName, bytes, false);
+            return bytes != null && FileWriter.writeFile(saveName, bytes, FileWriter.FileLocation.INTERNAL);
         }
         return false;
     }
@@ -386,11 +386,11 @@ public final class ReminderList {
      * @return True if successful
      */
     private boolean loadFromFile() {
-        if (!FileWriter.doesFileExist(saveName, false)) {
+        if (!FileWriter.doesFileExist(saveName, FileWriter.FileLocation.INTERNAL)) {
             reminders = new Reminders();
             return true;
         }
-        byte[] bytes = FileWriter.readFile(saveName, false);
+        byte[] bytes = FileWriter.readFile(saveName, FileWriter.FileLocation.INTERNAL);
         if (bytes == null) {
             return false;
         }

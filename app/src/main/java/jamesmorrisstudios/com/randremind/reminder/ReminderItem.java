@@ -29,20 +29,22 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.FileWriter;
-import com.jamesmorrisstudios.utilitieslibrary.Serializer;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.math.UtilsMath;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationAction;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent.NotificationPriority;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent.NotificationVibrate;
-import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
-import com.jamesmorrisstudios.utilitieslibrary.time.DateTimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.FileWriter;
+import com.jamesmorrisstudios.appbaselibrary.Serializer;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.math.UtilsMath;
+import com.jamesmorrisstudios.appbaselibrary.notification.NotificationAction;
+import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent;
+import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent.NotificationPriority;
+import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent.NotificationVibrate;
+import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
+import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
@@ -105,7 +107,7 @@ public final class ReminderItem extends BaseRecycleItem {
     @SerializedName("notificationIconIndex")
     private int notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
     @SerializedName("notificationAccentColor")
-    private int notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+    private int notificationAccentColor = AppBase.getContext().getResources().getColor(R.color.accent);
     //Snooze
     @SerializedName("snooze")
     private SnoozeOptions snooze;
@@ -401,13 +403,13 @@ public final class ReminderItem extends BaseRecycleItem {
         this.weeksToRun[0] = true;
         //Notifications
         this.notificationTone = null;
-        this.notificationToneName = AppUtil.getContext().getString(R.string.none);
+        this.notificationToneName = AppBase.getContext().getString(R.string.none);
         this.notificationVibratePattern = NotificationVibrate.SHORT;
         this.notificationLED = true;
         this.notificationLEDColor = Color.BLUE;
         this.notificationPriority = NotificationPriority.DEFAULT;
         this.notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
-        this.notificationAccentColor = AppUtil.getContext().getResources().getColor(R.color.accent);
+        this.notificationAccentColor = AppBase.getContext().getResources().getColor(R.color.accent);
         //Snooze
         this.snooze = SnoozeOptions.DISABLED;
         this.autoSnooze = SnoozeOptions.DISABLED;
@@ -422,17 +424,17 @@ public final class ReminderItem extends BaseRecycleItem {
                         int numberPerDay, boolean rangeTiming,
                         @NonNull boolean[] daysToRun, @NonNull boolean[] weeksToRun, String notificationTone, String notificationToneName,
                         NotificationVibrate notificationVibratePattern, boolean notificationLED,
-                        int notificationLEDColor, NotificationPriority notificationPriority,
-                        int notificationIcon, int notificationAccentColor, SnoozeOptions snooze, SnoozeOptions autoSnooze) {
+                        int notificationLEDColor, @NonNull NotificationPriority notificationPriority,
+                        int notificationIcon, int notificationAccentColor, @NonNull SnoozeOptions snooze, @NonNull SnoozeOptions autoSnooze) {
         this.uniqueName = uniqueName;
         this.version = version;
         this.title = title;
-        this.messageList = messageList;
+        this.messageList = new ArrayList<>(messageList);
         this.messageInOrder = messageInOrder;
         this.enabled = enabled;
         this.startTime = startTime.copy();
-        this.endTime = endTime;
-        this.specificTimeList = specificTimeList;
+        this.endTime = endTime.copy();
+        this.specificTimeList = cloneArrayListTime(specificTimeList);
         this.numberPerDay = numberPerDay;
         this.rangeTiming = rangeTiming;
         this.daysToRun = daysToRun.clone();
@@ -447,6 +449,14 @@ public final class ReminderItem extends BaseRecycleItem {
         this.notificationAccentColor = notificationAccentColor;
         this.snooze = snooze;
         this.autoSnooze = autoSnooze;
+    }
+
+    private ArrayList<TimeItem> cloneArrayListTime(ArrayList<TimeItem> items) {
+        ArrayList<TimeItem> newItems = new ArrayList<>();
+        for(TimeItem item : items) {
+            newItems.add(item.copy());
+        }
+        return newItems;
     }
 
     /**
@@ -464,15 +474,15 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void setCurMessage(int curMessage) {
-        Prefs.putInt(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, curMessage);
+        Prefs.putInt(AppBase.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, curMessage);
     }
 
     public final int getCurMessage() {
-        return Prefs.getInt(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, -1);
+        return Prefs.getInt(AppBase.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + uniqueName, -1);
     }
 
     public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
-        ArrayList<String> items = Prefs.getStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
+        ArrayList<String> items = Prefs.getStringArrayList(AppBase.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
         ArrayList<TimeItem> timeItems = new ArrayList<>();
         for (String item : items) {
             timeItems.add(TimeItem.decodeFromString(item));
@@ -485,28 +495,30 @@ public final class ReminderItem extends BaseRecycleItem {
         for (TimeItem timeItem : alertTimes) {
             items.add(TimeItem.encodeToString(timeItem));
         }
-        Prefs.putStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
+        Prefs.putStringArrayList(AppBase.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
     }
 
-    public static boolean logReminderShown(String uniqueName, DateTimeItem dateTime) {
+    public static boolean logReminderShown(@NonNull String uniqueName, @NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean snoozed) {
         Log.v("REMINDER ITEM", "STATIC Log Show Reminder");
         ReminderLog reminderLog = loadFromFile(uniqueName);
         if (reminderLog == null) {
             Log.v("REMINDER ITEM", "No save, creating new one");
             reminderLog = new ReminderLog();
         }
-        reminderLog.logShown(dateTime);
+        reminderLog.updateLog();
+        reminderLog.logShown(dateTime, firstDateTime, snoozed);
         return saveToFile(reminderLog, uniqueName);
     }
 
-    public static boolean logReminderClicked(String uniqueName, DateTimeItem dateTime) {
+    public static boolean logReminderClicked(@NonNull String uniqueName, @NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean snoozed) {
         Log.v("REMINDER ITEM", "Log Clicked Reminder");
         ReminderLog reminderLog = loadFromFile(uniqueName);
         if (reminderLog == null) {
             Log.v("REMINDER ITEM", "No save, creating new one");
             reminderLog = new ReminderLog();
         }
-        reminderLog.logClicked(dateTime);
+        reminderLog.updateLog();
+        reminderLog.logClicked(dateTime, firstDateTime, snoozed);
         return saveToFile(reminderLog, uniqueName);
     }
 
@@ -526,7 +538,7 @@ public final class ReminderItem extends BaseRecycleItem {
      */
     private static boolean saveToFile(ReminderLog reminderLog, String uniqueName) {
         byte[] bytes = Serializer.serializeClass(reminderLog);
-        return bytes != null && FileWriter.writeFile("LOG" + uniqueName, bytes, false);
+        return bytes != null && FileWriter.writeFile("LOG" + uniqueName, bytes, FileWriter.FileLocation.INTERNAL);
     }
 
     /**
@@ -535,10 +547,10 @@ public final class ReminderItem extends BaseRecycleItem {
      * @return True if successful
      */
     private static ReminderLog loadFromFile(String uniqueName) {
-        if (!FileWriter.doesFileExist("LOG" + uniqueName, false)) {
+        if (!FileWriter.doesFileExist("LOG" + uniqueName, FileWriter.FileLocation.INTERNAL)) {
             return new ReminderLog();
         }
-        byte[] bytes = FileWriter.readFile("LOG" + uniqueName, false);
+        byte[] bytes = FileWriter.readFile("LOG" + uniqueName, FileWriter.FileLocation.INTERNAL);
         if (bytes == null) {
             return new ReminderLog();
         }
@@ -742,38 +754,41 @@ public final class ReminderItem extends BaseRecycleItem {
         scheduleNextWake(time);
     }
 
-    public final NotificationContent getNotification(boolean preview, DateTimeItem dateTime, boolean getCurrent) {
-        String pref = AppUtil.getContext().getString(R.string.settings_pref);
+    public final NotificationContent getNotification(boolean preview, @NonNull DateTimeItem dateTime, boolean getCurrent, @Nullable DateTimeItem firstDateTime) {
+        if(firstDateTime == null) {
+            firstDateTime = dateTime;
+        }
+
+        String pref = AppBase.getContext().getString(R.string.settings_pref);
         String title = this.title;
         if (title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.title);
+            title = AppBase.getContext().getString(R.string.title);
         }
 
-        String content = null;
+        String content = "";
 
-        if(getCurrent) {
-            content = messageList.get(UtilsMath.inBoundsInt(0, messageList.size() - 1, getCurMessage()));
-        } else {
-            if (messageInOrder) {
-                int curMessage = getCurMessage() + 1;
-                if (curMessage >= messageList.size()) {
-                    curMessage = 0;
-                }
-                content = messageList.get(curMessage);
-                setCurMessage(curMessage);
+        if(messageList.size() >= 1) {
+            if(getCurrent) {
+                content = messageList.get(UtilsMath.inBoundsInt(0, messageList.size() - 1, getCurMessage()));
             } else {
-                Random rand = new Random();
-                int lastMessage = rand.nextInt(messageList.size());
-                setCurMessage(lastMessage);
-                content = messageList.get(lastMessage);
+                if (messageInOrder) {
+                    int curMessage = getCurMessage() + 1;
+                    if (curMessage >= messageList.size()) {
+                        curMessage = 0;
+                    }
+                    content = messageList.get(curMessage);
+                    setCurMessage(curMessage);
+                } else {
+                    Random rand = new Random();
+                    int lastMessage = rand.nextInt(messageList.size());
+                    setCurMessage(lastMessage);
+                    content = messageList.get(lastMessage);
+                }
             }
         }
-        if(content == null) {
-            content = "";
-        }
         NotificationContent notif;
-        String keySystem = AppUtil.getContext().getString(R.string.pref_notification_custom);
-        String keytheme = AppUtil.getContext().getString(R.string.pref_notification_theme);
+        String keySystem = AppBase.getContext().getString(R.string.pref_notification_custom);
+        String keytheme = AppBase.getContext().getString(R.string.pref_notification_theme);
         NotificationContent.NotificationType type = NotificationContent.NotificationType.NORMAL;
         NotificationContent.NotificationTheme theme = NotificationContent.NotificationTheme.DARK;
         @DrawableRes int iconCancel, iconCheck, iconSnooze;
@@ -783,13 +798,6 @@ public final class ReminderItem extends BaseRecycleItem {
                 type = NotificationContent.NotificationType.CUSTOM;
             } else {
                 type = NotificationContent.NotificationType.CUSTOM_SNOOZE;
-            }
-        }
-        if(!Prefs.getBooleanExists(pref, keytheme)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Prefs.putBoolean(pref, keytheme, true);
-            } else {
-                Prefs.putBoolean(pref, keytheme, false);
             }
         }
         if (Prefs.getBoolean(pref, keytheme, true)) {
@@ -805,7 +813,7 @@ public final class ReminderItem extends BaseRecycleItem {
 
         notif = new NotificationContent(theme, type, title, content, this.getNotificationTone(), IconUtil.getIconRes(notificationIcon), notificationAccentColor, getNotificationId());
 
-        String keyOnGoing = AppUtil.getContext().getString(R.string.pref_notification_ongoing);
+        String keyOnGoing = AppBase.getContext().getString(R.string.pref_notification_ongoing);
         notif.setOnGoing(Prefs.getBoolean(pref, keyOnGoing, false));
 
         notif.setVibrate(this.notificationVibratePattern);
@@ -815,40 +823,45 @@ public final class ReminderItem extends BaseRecycleItem {
             notif.enableLed(this.notificationLEDColor);
         }
 
-        Intent intentClicked = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+        Intent intentClicked = new Intent(AppBase.getContext(), NotificationReceiver.class);
         intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
         intentClicked.setType(this.uniqueName);
         intentClicked.putExtra("NAME", this.uniqueName);
         intentClicked.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentClicked.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
         intentClicked.putExtra("NOTIFICATION_ID", getNotificationId());
 
-        Intent intentCancel = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+        Intent intentCancel = new Intent(AppBase.getContext(), NotificationReceiver.class);
         intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
         intentCancel.setType(this.uniqueName);
         intentCancel.putExtra("NAME", this.uniqueName);
         intentCancel.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentCancel.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
         intentCancel.putExtra("NOTIFICATION_ID", getNotificationId());
 
-        Intent intentDismiss = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+        Intent intentDismiss = new Intent(AppBase.getContext(), NotificationReceiver.class);
         intentDismiss.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS");
         intentDismiss.setType(this.uniqueName);
         intentDismiss.putExtra("NAME", this.uniqueName);
         intentDismiss.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentDismiss.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
         intentDismiss.putExtra("NOTIFICATION_ID", getNotificationId());
 
-        Intent intentSnooze = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+        Intent intentSnooze = new Intent(AppBase.getContext(), NotificationReceiver.class);
         intentSnooze.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE");
         intentSnooze.setType(this.uniqueName);
         intentSnooze.putExtra("NAME", this.uniqueName);
         intentSnooze.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentSnooze.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
         intentSnooze.putExtra("NOTIFICATION_ID", getNotificationId());
         intentSnooze.putExtra("SNOOZE_LENGTH", snooze.minutes);
 
-        Intent intentAck = new Intent(AppUtil.getContext(), NotificationReceiver.class);
+        Intent intentAck = new Intent(AppBase.getContext(), NotificationReceiver.class);
         intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
         intentAck.setType(this.uniqueName);
         intentAck.putExtra("NAME", this.uniqueName);
         intentAck.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intentAck.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
         intentAck.putExtra("NOTIFICATION_ID", getNotificationId());
 
         if (preview) {
@@ -859,17 +872,17 @@ public final class ReminderItem extends BaseRecycleItem {
             intentAck.putExtra("PREVIEW", true);
         }
 
-        String keySummary = AppUtil.getContext().getString(R.string.pref_notification_click_ack);
+        String keySummary = AppBase.getContext().getString(R.string.pref_notification_click_ack);
 
         if (!Prefs.getBoolean(pref, keySummary, true)) {
             intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT");
         }
 
-        PendingIntent pClicked = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
-        PendingIntent pCanceled = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
-        PendingIntent pDismiss = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentDismiss, PendingIntent.FLAG_CANCEL_CURRENT);
-        PendingIntent pSnooze = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
-        PendingIntent pAck = PendingIntent.getBroadcast(AppUtil.getContext(), 0, intentAck, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pClicked = PendingIntent.getBroadcast(AppBase.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pCanceled = PendingIntent.getBroadcast(AppBase.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pDismiss = PendingIntent.getBroadcast(AppBase.getContext(), 0, intentDismiss, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pSnooze = PendingIntent.getBroadcast(AppBase.getContext(), 0, intentSnooze, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pAck = PendingIntent.getBroadcast(AppBase.getContext(), 0, intentAck, PendingIntent.FLAG_CANCEL_CURRENT);
 
         notif.addContentIntent(pClicked);
         notif.addDeleteIntent(pCanceled);
@@ -883,15 +896,32 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void deleteReminderLog() {
-        FileWriter.deleteFile("LOG" + uniqueName, false);
+        FileWriter.deleteFile("LOG" + uniqueName, FileWriter.FileLocation.INTERNAL);
     }
 
     public final void deleteAlertTimes() {
-        Prefs.deleteStringArrayList(AppUtil.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
+        Prefs.deleteStringArrayList(AppBase.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
     }
 
     public final boolean hasReminderLog() {
         return reminderLog != null && reminderLog.days != null;
+    }
+
+    @NonNull
+    public final byte[] getReminderLogCsv() {
+        String append = "\n";
+        String log = "id,datestamp, datestampformat,timestamp, timestampformat,type"+append;
+        for(ReminderLogDay day : reminderLog.days) {
+            String prepend = uniqueName+","+UtilsTime.getTimeMillis(day.date)+","+UtilsTime.getShortDateFormatted(day.date)+",";
+            for(ReminderLogItem item : day.getItemList()) {
+                log += prepend;
+                log += UtilsTime.getTimeMillis(item.dateTime)+",";
+                log += UtilsTime.getShortDateTimeFormatted(item.dateTime)+",";
+                log += item.type.name;
+                log += append;
+            }
+        }
+        return log.getBytes(Charset.forName(Utils.stringType));
     }
 
     /**
@@ -910,6 +940,7 @@ public final class ReminderItem extends BaseRecycleItem {
                     ReminderLog log = loadFromFile(uniqueName);
                     if (log != null) {
                         reminderLog = log;
+                        reminderLog.updateLog();
                         return true;
                     }
                     return false;
@@ -953,18 +984,18 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public enum SnoozeOptions {
-        DISABLED(0, AppUtil.getContext().getString(R.string.disabled)),
-        MIN_1(1, "1 "+AppUtil.getContext().getString(R.string.minute_singular)),
-        MIN_2(2, "2 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_3(3, "3 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_4(4, "4 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_5(5, "5 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_10(10, "10 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_15(15, "15 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_20(20, "20 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_25(25, "25 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_30(30, "30 "+AppUtil.getContext().getString(R.string.minute_plural)),
-        MIN_60(60, "60 "+AppUtil.getContext().getString(R.string.minute_plural));
+        DISABLED(0, AppBase.getContext().getString(R.string.disabled)),
+        MIN_1(1, "1 "+AppBase.getContext().getString(R.string.minute_singular)),
+        MIN_2(2, "2 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_3(3, "3 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_4(4, "4 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_5(5, "5 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_10(10, "10 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_15(15, "15 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_20(20, "20 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_25(25, "25 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_30(30, "30 "+AppBase.getContext().getString(R.string.minute_plural)),
+        MIN_60(60, "60 "+AppBase.getContext().getString(R.string.minute_plural));
 
         public final String name;
         public final int minutes;
@@ -976,13 +1007,13 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public enum WeekOptions {
-        Every(AppUtil.getContext().getString(R.string.every_week)),
-        FIRST(AppUtil.getContext().getString(R.string.first)),
-        SECOND(AppUtil.getContext().getString(R.string.second)),
-        THIRD(AppUtil.getContext().getString(R.string.third)),
-        FOURTH(AppUtil.getContext().getString(R.string.fourth)),
-        FIFTH(AppUtil.getContext().getString(R.string.fifth)),
-        LAST(AppUtil.getContext().getString(R.string.last));
+        Every(AppBase.getContext().getString(R.string.every_week)),
+        FIRST(AppBase.getContext().getString(R.string.first)),
+        SECOND(AppBase.getContext().getString(R.string.second)),
+        THIRD(AppBase.getContext().getString(R.string.third)),
+        FOURTH(AppBase.getContext().getString(R.string.fourth)),
+        FIFTH(AppBase.getContext().getString(R.string.fifth)),
+        LAST(AppBase.getContext().getString(R.string.last));
 
         public final String name;
 
