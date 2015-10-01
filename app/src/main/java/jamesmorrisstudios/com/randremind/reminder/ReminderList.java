@@ -24,6 +24,7 @@ import android.util.Log;
 import com.jamesmorrisstudios.appbaselibrary.Bus;
 import com.jamesmorrisstudios.appbaselibrary.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.Serializer;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.notification.Notifier;
 import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
@@ -40,19 +41,19 @@ public final class ReminderList {
     private static final String saveName = "SAVEDATA";
     //Reminder singleton instance
     private static ReminderList instance = null;
+    //Load/Save tasks
     AsyncTask<Void, Void, Boolean> taskLoad = null;
     AsyncTask<Void, Void, Boolean> taskSave = null;
-    //Reminder List
-    private Reminders reminders = null;
-    //The currently selected reminder as a copy
-    private int currentIndex = -1;
-    private ReminderItem currentItem;
+    //Reminder Data List
+    private ReminderListData reminderListData = null;
+    //Handler that accepts a single data item
+    private ReminderItem selectedItem = new ReminderItem();
+    private int selectedItemIndex = -1;
 
     /**
      * Required private constructor to maintain singleton
      */
-    private ReminderList() {
-    }
+    private ReminderList() {}
 
     /**
      * @return The singleton instance of the reminderList
@@ -162,68 +163,89 @@ public final class ReminderList {
      * @return True if reminders exist
      */
     public final boolean hasReminders() {
-        return reminders != null && reminders.data != null && !reminders.data.isEmpty();
+        return reminderListData != null && reminderListData.reminderItemList != null && !reminderListData.reminderItemList.isEmpty();
     }
 
-    /**
-     * Get the reminders. This will be an empty list if you have not already loaded them.
-     *
-     * @return The list of reminders
-     */
     @NonNull
-    public final ArrayList<ReminderItem> getData() {
-        return reminders.data;
-    }
-
-    /**
-     * @param item Reminder reminder to set to
-     */
-    public final void setCurrentReminder(@NonNull ReminderItem item) {
-        int index = 0;
-        for (ReminderItem itemInt : reminders.data) {
-            if (itemInt.equals(item)) {
-                this.currentIndex = index;
-                this.currentItem = reminders.data.get(currentIndex).copy();
-                return;
-            }
-            index++;
+    public final ArrayList<ReminderItemSummary> getReminderSummaryList() {
+        if(!hasReminders()) {
+            return null;
         }
+        ArrayList<ReminderItemSummary> list = new ArrayList<>();
+        for(ReminderItemData data : reminderListData.reminderItemList) {
+            list.add(new ReminderItemSummary(data));
+        }
+        return list;
     }
 
     @Nullable
-    public final ReminderItem getReminder(@NonNull String uniqueName) {
-        for (ReminderItem item : reminders.data) {
-            if (item.getUniqueName().equals(uniqueName)) {
+    private ReminderItemData getReminderData(@NonNull String uniqueName) {
+        for (ReminderItemData item : reminderListData.reminderItemList) {
+            if (item.uniqueName.equals(uniqueName)) {
                 return item;
             }
         }
         return null;
     }
 
-    public final void setEnableReminder(@NonNull String uniqueName, boolean enable) {
-        ReminderItem item = getReminder(uniqueName);
-        if (item == null) {
+    /**
+     * Creates and returns a temp ReminderItem that will be GC after the caller is done with it
+     * The reminder item data is a copy and no changes will be saved
+     * @param uniqueName
+     * @return
+     */
+    @Nullable
+    public final ReminderItem getReminderCopy(@NonNull String uniqueName) {
+        ReminderItemData item = getReminderData(uniqueName);
+        if(item == null) {
+            return null;
+        }
+        ReminderItem itemNew = new ReminderItem();
+        itemNew.setReminderItemData(new ReminderItemData(item));
+        return itemNew;
+    }
+
+    public final void setReminderEnable(@NonNull String uniqueName, boolean enable) {
+        ReminderItem reminder = getReminderCopy(uniqueName);
+        int index = getReminderIndex(uniqueName);
+        if (reminder == null || index == -1) {
             return;
         }
-        if (currentItem != null && currentItem.equals(item)) {
-            if(currentItem.isEnabled() != enable) {
-                currentItem.setEnabled(enable);
-                if (enable) {
-                    currentItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
-                } else {
-                    currentItem.deleteNextWake();
-                }
-                saveCurrentReminder();
-            }
-            return;
-        }
-        if(item.isEnabled() != enable) {
-            item.setEnabled(enable);
+        if(reminder.isEnabled() != enable) {
+            reminder.setEnabled(enable);
             if (enable) {
-                item.rescheduleNextWake(UtilsTime.getDateTimeNow());
+                reminder.rescheduleNextWake(UtilsTime.getDateTimeNow());
             } else {
-                item.deleteNextWake();
+                reminder.deleteNextWake();
             }
+            reminder.commitChanges(reminderListData.reminderItemList.get(index));
+            reminder.clearDirty();
+        }
+    }
+
+    private int getReminderIndex(@NonNull String uniqueName) {
+        int index = 0;
+        for (ReminderItemData itemInt : reminderListData.reminderItemList) {
+            if (itemInt.uniqueName.equals(uniqueName)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    /**
+     * @param uniqueName Reminder unique name
+     */
+    public final void setCurrentReminder(@NonNull String uniqueName) {
+        int index = 0;
+        for (ReminderItemData itemInt : reminderListData.reminderItemList) {
+            if (itemInt.uniqueName.equals(uniqueName)) {
+                this.selectedItemIndex = index;
+                this.selectedItem.setReminderItemData(new ReminderItemData(itemInt)); //Clone the reminder data
+                return;
+            }
+            index++;
         }
     }
 
@@ -231,17 +253,17 @@ public final class ReminderList {
      * Clears the currently set reminder. If not saved any changes to it will be lost
      */
     public final void clearCurrentReminder() {
-        this.currentIndex = -1;
-        this.currentItem = null;
+        this.selectedItemIndex = -1;
+        this.selectedItem.clearReminderItemData();
     }
 
     /**
      * Resets the current reminder back to the last saved version
      */
     public final void cancelCurrentReminderChanges() {
-        if (currentIndex != -1) {
-            this.currentItem = null;
-            currentItem = reminders.data.get(currentIndex).copy();
+        if (selectedItemIndex != -1) {
+            this.selectedItem.clearReminderItemData();
+            this.selectedItem.setReminderItemData(new ReminderItemData(reminderListData.reminderItemList.get(selectedItemIndex)));
         }
     }
 
@@ -250,10 +272,10 @@ public final class ReminderList {
      * Clears it from the currently set
      */
     public final void deleteCurrentReminder() {
-        if (currentIndex != -1) {
-            reminders.data.get(currentIndex).deleteReminderLog();
-            reminders.data.get(currentIndex).deleteAlertTimes();
-            reminders.data.remove(currentIndex);
+        if (selectedItemIndex != -1) {
+            this.selectedItem.deleteReminderLog();
+            this.selectedItem.deleteAlertTimes();
+            this.reminderListData.reminderItemList.remove(selectedItemIndex);
         }
         clearCurrentReminder();
     }
@@ -262,9 +284,11 @@ public final class ReminderList {
      * Create a new reminder with default values and set it to current
      */
     public final void createNewReminder() {
-        currentIndex = reminders.data.size();
-        reminders.data.add(new ReminderItem());
-        currentItem = reminders.data.get(currentIndex).copy();
+        clearCurrentReminder();
+        String uniqueName = Utils.generateUniqueString();
+        selectedItemIndex = reminderListData.reminderItemList.size();
+        reminderListData.reminderItemList.add(new ReminderItemData(uniqueName));
+        setCurrentReminder(uniqueName);
     }
 
     /**
@@ -284,12 +308,11 @@ public final class ReminderList {
      * The current reminder is NOT cleared
      */
     public final boolean saveCurrentReminder() {
-        if (currentItem != null && currentItem.isDirty()) {
-            currentItem.clearDirty();
-            currentItem.updateAlertTimes();
-            currentItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
-            //Existing reminder so copy over the original
-            reminders.data.set(currentIndex, currentItem.copy());
+        if (selectedItemIndex != -1 && selectedItem.isAnyDirty()) {
+            selectedItem.updateAlertTimes();
+            selectedItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
+            selectedItem.commitChanges(reminderListData.reminderItemList.get(selectedItemIndex));
+            selectedItem.clearDirty();
             return true;
         } else {
             return false;
@@ -297,20 +320,23 @@ public final class ReminderList {
     }
 
     /**
-     * Duplicates the currently selected reminder reminder
-     * and moves the new reminder to the end of the list.
+     * Duplicates the currently selected reminder reminder and moves the new reminder to right after the original.
+     * This duplicates the last saved version so ensure it is saved prior to duplication
      * The current reminder stays selected
      */
     public final void duplicateReminder() {
-        currentItem.updateAlertTimes();
-        reminders.data.add(currentIndex + 1, currentItem.duplicate());
+        if(selectedItemIndex == -1) {
+            return;
+        }
+        ReminderItemData newItem = new ReminderItemData(reminderListData.reminderItemList.get(selectedItemIndex), Utils.generateUniqueString());
+        reminderListData.reminderItemList.add(selectedItemIndex + 1, newItem);
     }
 
     /**
      * @return True if a current reminder is set
      */
     public final boolean hasCurrentReminder() {
-        return currentItem != null;
+        return selectedItemIndex != -1;
     }
 
     /**
@@ -318,19 +344,7 @@ public final class ReminderList {
      */
     @Nullable
     public final ReminderItem getCurrentReminder() {
-        return currentItem;
-    }
-
-    public final void setCurrentReminder(@NonNull String uniqueName) {
-        int index = 0;
-        for (ReminderItem itemInt : reminders.data) {
-            if (itemInt.getUniqueName().equals(uniqueName)) {
-                this.currentIndex = index;
-                this.currentItem = reminders.data.get(currentIndex).copy();
-                return;
-            }
-            index++;
-        }
+        return selectedItem;
     }
 
     /**
@@ -338,33 +352,28 @@ public final class ReminderList {
      * This is stored in the Android shared prefs. Not the primary serialized save for this app.
      */
     public final void recalculateWakes() {
-        for (ReminderItem item : reminders.data) {
-            item.updateAlertTimes();
+        ReminderItem reminderItem = new ReminderItem();
+        for (ReminderItemData item : reminderListData.reminderItemList) {
+            reminderItem.setReminderItemData(item);
+            reminderItem.updateAlertTimes();
+            reminderItem.clearReminderItemData();
         }
     }
 
     public final void scheduleAllWakes(DateTimeItem timeNow) {
-        for (ReminderItem item : reminders.data) {
-            item.rescheduleNextWake(timeNow);
+        ReminderItem reminderItem = new ReminderItem();
+        for (ReminderItemData item : reminderListData.reminderItemList) {
+            reminderItem.setReminderItemData(item);
+            reminderItem.rescheduleNextWake(timeNow);
+            reminderItem.clearReminderItemData();
         }
     }
 
     /**
-     * This is to fix a bug where duplicated reminders had the same unique name.
+     * This is to fix any bugs with old save versions.
      */
     private void validateSaveData() {
-        if (reminders.data == null || reminders.data.isEmpty() || reminders.data.size() < 2) {
-            return;
-        }
-        for (int i = 0; i < reminders.data.size(); i++) {
-            ReminderItem firstItem = reminders.data.get(i);
-            for (int j = i + 1; j < reminders.data.size(); j++) {
-                ReminderItem secondItem = reminders.data.get(j);
-                if (firstItem.getUniqueName().equals(secondItem.getUniqueName())) {
-                    secondItem.regenerateUniqueName();
-                }
-            }
-        }
+        //TODO if more bugs are found
     }
 
     /**
@@ -373,8 +382,8 @@ public final class ReminderList {
      * @return True if successful
      */
     private boolean saveToFile() {
-        if (reminders != null && reminders.data != null) {
-            byte[] bytes = Serializer.serializeClass(reminders);
+        if (reminderListData != null && reminderListData.reminderItemList != null) {
+            byte[] bytes = Serializer.serializeClass(reminderListData);
             return bytes != null && FileWriter.writeFile(saveName, bytes, FileWriter.FileLocation.INTERNAL);
         }
         return false;
@@ -387,24 +396,24 @@ public final class ReminderList {
      */
     private boolean loadFromFile() {
         if (!FileWriter.doesFileExist(saveName, FileWriter.FileLocation.INTERNAL)) {
-            reminders = new Reminders();
+            reminderListData = new ReminderListData();
             return true;
         }
         byte[] bytes = FileWriter.readFile(saveName, FileWriter.FileLocation.INTERNAL);
         if (bytes == null) {
             return false;
         }
-        reminders = Serializer.deserializeClass(bytes, Reminders.class);
-        if (reminders != null && reminders.data != null) {
-            updateVersion(reminders);
+        reminderListData = Serializer.deserializeClass(bytes, ReminderListData.class);
+        if (reminderListData != null && reminderListData.reminderItemList != null) {
+            updateVersion(reminderListData);
             Log.v("ReminderList", "load save pass");
             return true;
         }
         return false;
     }
 
-    private void updateVersion(@NonNull Reminders reminders) {
-        for (ReminderItem item : reminders.data) {
+    private void updateVersion(@NonNull ReminderListData reminders) {
+        for (ReminderItemData item : reminders.reminderItemList) {
             item.updateVersion();
         }
     }

@@ -32,6 +32,7 @@ import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemData;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
@@ -146,11 +147,11 @@ public final class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void scheduleAutoSnooze(@NonNull String uniqueName, @NonNull DateTimeItem now, @Nullable DateTimeItem firstDateTime) {
-        ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
+        ReminderItem item = ReminderList.getInstance().getReminderCopy(uniqueName);
         if (item == null) {
             return;
         }
-        if(item.getAutoSnooze() == ReminderItem.SnoozeOptions.DISABLED) {
+        if(item.getAutoSnooze() == ReminderItemData.SnoozeOptions.DISABLED) {
             return;
         }
         DateTimeItem next = UtilsTime.getDateTimePlusMinutes(now, item.getAutoSnooze().minutes);
@@ -161,7 +162,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void postNotifications(@NonNull String uniqueName, @NonNull DateTimeItem now, boolean snoozed, @Nullable DateTimeItem firstDateTime) {
-        ReminderItem item = ReminderList.getInstance().getReminder(uniqueName);
+        ReminderItem item = ReminderList.getInstance().getReminderCopy(uniqueName);
         if (item == null) {
             return;
         }

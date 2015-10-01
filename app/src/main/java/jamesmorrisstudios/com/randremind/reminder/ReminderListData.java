@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * <p/>
  * Created by James on 4/28/2015.
  */
-public class Reminders {
+public class ReminderListData {
     @SerializedName("data")
-    public ArrayList<ReminderItem> data = new ArrayList<>();
+    public ArrayList<ReminderItemData> reminderItemList = new ArrayList<>();
 }

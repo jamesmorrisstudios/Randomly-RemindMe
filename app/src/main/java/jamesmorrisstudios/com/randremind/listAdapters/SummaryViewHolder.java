@@ -182,7 +182,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderList.getInstance().setEnableReminder(reminder.getUniqueName(), isChecked);
+                ReminderList.getInstance().setReminderEnable(reminder.getUniqueName(), isChecked);
             }
         });
         for (int i = 0; i < reminder.getDaysToRun().length; i++) {

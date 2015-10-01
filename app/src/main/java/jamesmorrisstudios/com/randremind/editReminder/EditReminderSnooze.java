@@ -11,6 +11,7 @@ import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemData;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
@@ -39,9 +40,9 @@ public class EditReminderSnooze {
             @Override
             public void onClick(View v) {
                 String title = AppBase.getContext().getString(R.string.snooze);
-                String[] items = new String[ReminderItem.SnoozeOptions.values().length];
+                String[] items = new String[ReminderItemData.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
-                    items[i] = ReminderItem.SnoozeOptions.values()[i].name;
+                    items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
                 }
                 Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
                     @Override
@@ -51,7 +52,7 @@ public class EditReminderSnooze {
                         if (remind == null) {
                             return;
                         }
-                        remind.setSnooze(ReminderItem.SnoozeOptions.values()[which]);
+                        remind.setSnooze(ReminderItemData.SnoozeOptions.values()[which]);
                         snooze.setText(remind.getSnooze().name);
                     }
                 }, null));
@@ -62,9 +63,9 @@ public class EditReminderSnooze {
             @Override
             public void onClick(View v) {
                 String title = AppBase.getContext().getString(R.string.auto_snooze);
-                String[] items = new String[ReminderItem.SnoozeOptions.values().length];
+                String[] items = new String[ReminderItemData.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
-                    items[i] = ReminderItem.SnoozeOptions.values()[i].name;
+                    items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
                 }
                 Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
                     @Override
@@ -74,7 +75,7 @@ public class EditReminderSnooze {
                         if (remind == null) {
                             return;
                         }
-                        remind.setAutoSnooze(ReminderItem.SnoozeOptions.values()[which]);
+                        remind.setAutoSnooze(ReminderItemData.SnoozeOptions.values()[which]);
                         autoSnooze.setText(remind.getAutoSnooze().name);
                     }
                 }, null));

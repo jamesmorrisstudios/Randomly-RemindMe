@@ -14,6 +14,7 @@ import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemData;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
@@ -61,9 +62,9 @@ public class EditReminderRepeat {
                     return;
                 }
                 String title = AppBase.getContext().getString(R.string.weeks);
-                String[] options = new String[ReminderItem.WeekOptions.values().length];
+                String[] options = new String[ReminderItemData.WeekOptions.values().length];
                 for (int i = 0; i < options.length; i++) {
-                    options[i] = ReminderItem.WeekOptions.values()[i].name;
+                    options[i] = ReminderItemData.WeekOptions.values()[i].name;
                 }
                 final boolean[] checked = remind.getWeeksToRun().clone();
 
@@ -109,10 +110,10 @@ public class EditReminderRepeat {
             for (int i = 1; i < remind.getWeeksToRun().length; i++) {
                 if (remind.getWeeksToRun()[i]) {
                     if(firstSelect) {
-                        text += ReminderItem.WeekOptions.values()[i].name;
+                        text += ReminderItemData.WeekOptions.values()[i].name;
                         firstSelect = false;
                     } else {
-                        text += ", " + ReminderItem.WeekOptions.values()[i].name;
+                        text += ", " + ReminderItemData.WeekOptions.values()[i].name;
                     }
                     anySelected = true;
                 }

@@ -76,7 +76,6 @@ public final class MainActivity extends BaseLauncherActivity implements
         DirectoryChooserFragment.OnFragmentInteractionListener {
 
     private static final int REQUEST_WRITE_STORAGE = 6001;
-    private boolean useAutoLock = false;
     private DirectoryChooserFragment mDialog;
 
     @Override

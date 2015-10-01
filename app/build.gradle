@@ -33,6 +33,10 @@ android {
             applicationId "jamesmorrisstudios.com.randremind"
         }
 
+        googlePlayDonation {
+            applicationId "jamesmorrisstudios.com.randremind.donate"
+        }
+
         amazon {
             applicationId "jamesmorrisstudios.com.randremind.amazon"
         }
@@ -78,6 +82,6 @@ android {
 apply from: file("../../../keystore/signing-rand-remind.gradle")
 
 dependencies {
-    //compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
-    compile 'com.github.morris-james:appbaselibrary:v1.1.4' //Jitpack
+    compile 'com.jamesmorrisstudios:appbaselibrary:1.1' //local gradle
+    //compile 'com.github.morris-james:appbaselibrary:v1.1.4' //Jitpack
 }

@@ -198,13 +198,13 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 //Lifetime stats
                 ReminderLogDay dayLifetime = new ReminderLogDay(UtilsTime.getDateNow());
                 dayLifetime.lifetime = true;
-                dayLifetime.timesClickedLifetime = item.reminderLog.lifetimeClicked;
-                dayLifetime.timesShownLifetime = item.reminderLog.lifetimeShown;
-                dayLifetime.timesShownAgainLifetime = item.reminderLog.lifetimeShownAgain;
-                dayLifetime.timesSnoozedLifetime = item.reminderLog.lifetimeSnoozed;
+                dayLifetime.timesClickedLifetime = item.getReminderLog().lifetimeClicked;
+                dayLifetime.timesShownLifetime = item.getReminderLog().lifetimeShown;
+                dayLifetime.timesShownAgainLifetime = item.getReminderLog().lifetimeShownAgain;
+                dayLifetime.timesSnoozedLifetime = item.getReminderLog().lifetimeSnoozed;
                 summaries.add(new SummaryContainer(dayLifetime));
 
-                for (ReminderLogDay day : item.reminderLog.days) {
+                for (ReminderLogDay day : item.getReminderLog().days) {
                     summaries.add(new SummaryContainer(day));
                 }
 

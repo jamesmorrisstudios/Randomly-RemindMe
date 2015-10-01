@@ -37,6 +37,7 @@ import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderContainer;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
@@ -108,7 +109,7 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
 
     @Override
     protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
-        ReminderList.getInstance().setCurrentReminder((ReminderItem) baseRecycleContainer.getItem());
+        ReminderList.getInstance().setCurrentReminder(((ReminderItemSummary) baseRecycleContainer.getItem()).uniqueName);
         mListener.onReminderItemClicked();
     }
 
@@ -167,12 +168,12 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
      * Apply reminder items to this view
      */
     private void applyItems() {
-        ArrayList<ReminderItem> data = ReminderList.getInstance().getData();
+        ArrayList<ReminderItemSummary> data = ReminderList.getInstance().getReminderSummaryList();
         if (data.isEmpty()) {
             applyData(null);
         } else {
             ArrayList<BaseRecycleContainer> reminders = new ArrayList<>();
-            for (ReminderItem item : data) {
+            for (ReminderItemSummary item : data) {
                 reminders.add(new ReminderContainer(item));
             }
             applyData(reminders);
