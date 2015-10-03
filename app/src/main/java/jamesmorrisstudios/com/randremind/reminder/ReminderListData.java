@@ -1,6 +1,7 @@
 package jamesmorrisstudios.com.randremind.reminder;
 
 import com.google.gson.annotations.SerializedName;
+import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 
 import java.util.ArrayList;
 
@@ -12,4 +13,8 @@ import java.util.ArrayList;
 public class ReminderListData {
     @SerializedName("data")
     public ArrayList<ReminderItemData> reminderItemList = new ArrayList<>();
+    @SerializedName("lastWake")
+    public DateTimeItem lastWake = null;
+    @SerializedName("version")
+    public String version;
 }

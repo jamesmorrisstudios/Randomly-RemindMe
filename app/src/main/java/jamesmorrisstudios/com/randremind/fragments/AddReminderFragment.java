@@ -144,18 +144,6 @@ public class AddReminderFragment extends BaseRecycleListFragment {
         super.onStop();
         Log.v("Add Reminder Fragment", "On Stop");
         //If any reminders are currently open save them
-        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-        if(remind != null) {
-            if(ReminderList.getInstance().saveCurrentReminder()) {
-                Utils.toastShort(getString(R.string.reminder_save));
-            } else {
-                Utils.toastShort(getString(R.string.no_changes));
-            }
-        }
-    }
-
-    @Override
-    public void onBack() {
         if(saveOnBack) {
             ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
             if(remind != null) {
@@ -166,6 +154,11 @@ public class AddReminderFragment extends BaseRecycleListFragment {
                 }
             }
         }
+    }
+
+    @Override
+    public void onBack() {
+        Log.v("Add Reminder Fragment", "On Back");
         utilListener.hideKeyboard();
     }
 

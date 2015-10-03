@@ -75,7 +75,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
         }
 
         if (status) {
-            DateTimeItem lastWake = getLastWake();
+            DateTimeItem lastWake = ReminderList.getInstance().getLastWake();
             Log.v("ALARM RECEIVER", "Woke At: " + now.timeItem.getHourInTimeFormatString() + ":" + now.timeItem.getMinuteString());
 
             if (intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
@@ -131,7 +131,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
                 postNotifications(intent.getType(), now, true, dateTimeItem);
             }
 
-            logLastWake(now);
+            ReminderList.getInstance().logLastWake(now);
 
             //Get now again just to see how long this method took. It is not used for anything else
             now = UtilsTime.getDateTimeNow();
@@ -139,11 +139,12 @@ public final class AlarmReceiver extends BroadcastReceiver {
         } else {
             Log.v("ALARM RECEIVER", "Failed to load");
         }
+
+        //Save changes to the reminders
+        ReminderList.getInstance().saveDataSync();
+
         //Release the wakelock
         wl.release();
-
-        //Dont save the reminders again
-        //Nothing set in the main reminder is kept!
     }
 
     private void scheduleAutoSnooze(@NonNull String uniqueName, @NonNull DateTimeItem now, @Nullable DateTimeItem firstDateTime) {
@@ -173,17 +174,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
         Notifier.buildNotification(item.getNotification(false, now, snoozed, firstDateTime));
         Log.v("ALARM RECEIVER", "Post Notification: " + item.getNotificationId());
         item.rescheduleNextWake(now);
-    }
-
-    private void logLastWake(@NonNull DateTimeItem time) {
-        String lastWake = DateTimeItem.encodeToString(time);
-        Prefs.putString(AppBase.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE", lastWake);
-    }
-
-    @NonNull
-    private DateTimeItem getLastWake() {
-        String lastWake = Prefs.getString(AppBase.getContext().getString(R.string.pref_alarm_receiver), "LAST_WAKE");
-        return DateTimeItem.decodeFromString(lastWake);
+        ReminderList.getInstance().saveReminderItem(item);
     }
 
 }

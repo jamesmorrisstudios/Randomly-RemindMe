@@ -3,9 +3,11 @@ package jamesmorrisstudios.com.randremind.fragments;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,18 +16,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.FileBrowserRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.dialogHelper.ExportReminderLogRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.ReminderLogRequest;
 import jamesmorrisstudios.com.randremind.listAdapters.SummaryAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.SummaryContainer;
@@ -113,7 +118,45 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 }));
                 break;
             case R.id.action_export:
-                Bus.postObject(new ExportReminderLogRequest());
+
+                String title = getString(R.string.export_location);
+                String[] items = new String[] {getString(R.string.share), getString(R.string.file)};
+
+                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(which == 0) {
+                            ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                            if(remind == null) {
+                                return;
+                            }
+                            //Share
+                            FileWriter.writeFile("RandomlyRemindMe" + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.CACHE);
+                            Uri uri = FileWriter.getFileUri("RandomlyRemindMe"+"_Log.csv", FileWriter.FileLocation.CACHE);
+                            if(uri != null) {
+                                Utils.shareStream(getString(R.string.share), uri, "text/csv");
+                            }
+                        } else {
+                            //FIle
+                            Bus.postObject(new FileBrowserRequest(FileBrowserRequest.DirType.DIRECTORY, true, null, new FileBrowserRequest.FileBrowserRequestListener() {
+                                @Override
+                                public void path(@Nullable Uri uri) {
+                                    ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                                    if(remind == null) {
+                                        return;
+                                    }
+                                    if(uri != null) {
+                                        String path = uri.getPath();
+                                        String name = remind.getTitle().replaceAll(" ", "_").replaceAll("\\W+", "");
+                                        FileWriter.writeFile(path + File.separator + name + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.PATH);
+                                        Log.v("FileBrowser", path);
+                                        Utils.toastShort(getString(R.string.export_log));
+                                    }
+                                }
+                            }));
+                        }
+                    }
+                }, null));
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -80,6 +80,8 @@ public final class ReminderItem extends BaseRecycleItem {
     private boolean notificationAccentColorDirty = false;
     private boolean snoozeDirty = false;
     private boolean autoSnoozeDirty = false;
+    private boolean curMessageDirty = false;
+    private boolean alertTimesDirty = false;
 
     //This is always a deep copy of the reminder item data. The original is NEVER given to this
     public final void setReminderItemData(ReminderItemData reminderItemData) {
@@ -157,6 +159,12 @@ public final class ReminderItem extends BaseRecycleItem {
         if(autoSnoozeDirty) {
             newData.autoSnooze = reminderItemData.autoSnooze;
         }
+        if(curMessageDirty) {
+            newData.curMessage = reminderItemData.curMessage;
+        }
+        if(alertTimesDirty) {
+            newData.alertTimes = reminderItemData.alertTimes;
+        }
     }
 
     public final boolean isAnyDirty() {
@@ -180,7 +188,9 @@ public final class ReminderItem extends BaseRecycleItem {
         notificationIconDirty |
         notificationAccentColorDirty |
         snoozeDirty |
-        autoSnoozeDirty;
+        autoSnoozeDirty |
+        curMessageDirty |
+        alertTimesDirty;
     }
 
     public void clearDirty() {
@@ -205,6 +215,8 @@ public final class ReminderItem extends BaseRecycleItem {
         notificationAccentColorDirty = false;
         snoozeDirty = false;
         autoSnoozeDirty = false;
+        curMessageDirty = false;
+        alertTimesDirty = false;
     }
 
     public String getUniqueName() {
@@ -428,29 +440,15 @@ public final class ReminderItem extends BaseRecycleItem {
         }
     }
 
-    public final void setCurMessage(int curMessage) {
-        Prefs.putInt(AppBase.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + reminderItemData.uniqueName, curMessage);
+    public int getCurMessage() {
+        return reminderItemData.curMessage;
     }
 
-    public final int getCurMessage() {
-        return Prefs.getInt(AppBase.getContext().getString(R.string.pref_reminder_alerts), "CURR_MESSAGE" + reminderItemData.uniqueName, -1);
-    }
-
-    public static ArrayList<TimeItem> getAlertTimes(String uniqueName) {
-        ArrayList<String> items = Prefs.getStringArrayList(AppBase.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName);
-        ArrayList<TimeItem> timeItems = new ArrayList<>();
-        for (String item : items) {
-            timeItems.add(TimeItem.decodeFromString(item));
+    public void setCurMessage(int curMessage) {
+        if(reminderItemData.curMessage != curMessage) {
+            curMessageDirty = true;
+            reminderItemData.curMessage = curMessage;
         }
-        return timeItems;
-    }
-
-    public static void setAlertTimes(ArrayList<TimeItem> alertTimes, String uniqueName) {
-        ArrayList<String> items = new ArrayList<>();
-        for (TimeItem timeItem : alertTimes) {
-            items.add(TimeItem.encodeToString(timeItem));
-        }
-        Prefs.putStringArrayList(AppBase.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + uniqueName, items);
     }
 
     public static boolean logReminderShown(@NonNull String uniqueName, @NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean snoozed) {
@@ -535,13 +533,13 @@ public final class ReminderItem extends BaseRecycleItem {
      * Generate new alert times given the current parameters
      */
     public final void updateAlertTimes() {
+        alertTimesDirty = true;
         if (!reminderItemData.rangeTiming) {
-            ArrayList<TimeItem> alertTimes = new ArrayList<>();
+            reminderItemData.alertTimes = new ArrayList<>();
             for (TimeItem item : reminderItemData.specificTimeList) {
-                alertTimes.add(item.copy());
+                reminderItemData.alertTimes.add(item.copy());
                 Log.v(reminderItemData.title, item.getHourInTimeFormatString() + ":" + item.getMinuteString());
             }
-            ReminderItem.setAlertTimes(alertTimes, reminderItemData.uniqueName);
             return;
         }
         int diff = getDiffMinutes();
@@ -559,7 +557,7 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param numberItems Number of items to generate
      */
     private void generateEvenishSplit(int diff, int offset, float wiggle, int numberItems) {
-        ArrayList<TimeItem> alertTimes = new ArrayList<>();
+        reminderItemData.alertTimes = new ArrayList<>();
         Random rand = new Random();
         int itemSplit = Math.round((diff * 1.0f) / numberItems);
         int[] values = new int[numberItems];
@@ -570,10 +568,9 @@ public final class ReminderItem extends BaseRecycleItem {
             }
         }
         for (int value : values) {
-            alertTimes.add(minutesToTimeItem(value + offset));
-            Log.v(reminderItemData.title, alertTimes.get(alertTimes.size() - 1).getHourInTimeFormatString() + ":" + alertTimes.get(alertTimes.size() - 1).getMinuteString());
+            reminderItemData.alertTimes.add(minutesToTimeItem(value + offset));
+            Log.v(reminderItemData.title, reminderItemData.alertTimes.get(reminderItemData.alertTimes.size() - 1).getHourInTimeFormatString() + ":" + reminderItemData.alertTimes.get(reminderItemData.alertTimes.size() - 1).getMinuteString());
         }
-        ReminderItem.setAlertTimes(alertTimes, reminderItemData.uniqueName);
     }
 
     public final ReminderLog getReminderLog() {
@@ -646,12 +643,11 @@ public final class ReminderItem extends BaseRecycleItem {
         if(!isValidWeekToRun(now)) {
             return;
         }
-        ArrayList<TimeItem> alertTimes = ReminderItem.getAlertTimes(reminderItemData.uniqueName);
-        if (alertTimes.isEmpty()) {
+        if (reminderItemData.alertTimes.isEmpty()) {
             return;
         }
         TimeItem time = null;
-        for (TimeItem alertTime : alertTimes) {
+        for (TimeItem alertTime : reminderItemData.alertTimes) {
             //alert time is after the current time
             if (!UtilsTime.timeBeforeOrEqual(alertTime, now.timeItem) || (now.timeItem.minute == 0 && now.timeItem.hour == 0)) {
                 if (time == null || UtilsTime.timeBefore(alertTime, time)) {
@@ -688,19 +684,20 @@ public final class ReminderItem extends BaseRecycleItem {
 
         if(reminderItemData.messageList.size() >= 1) {
             if(getCurrent) {
-                content = reminderItemData.messageList.get(UtilsMath.inBoundsInt(0, reminderItemData.messageList.size() - 1, getCurMessage()));
+                content = reminderItemData.messageList.get(UtilsMath.inBoundsInt(0, reminderItemData.messageList.size() - 1, reminderItemData.curMessage));
             } else {
+                curMessageDirty = true;
                 if (reminderItemData.messageInOrder) {
-                    int curMessage = getCurMessage() + 1;
+                    int curMessage = reminderItemData.curMessage + 1;
                     if (curMessage >= reminderItemData.messageList.size()) {
                         curMessage = 0;
                     }
                     content = reminderItemData.messageList.get(curMessage);
-                    setCurMessage(curMessage);
+                    reminderItemData.curMessage = curMessage;
                 } else {
                     Random rand = new Random();
                     int lastMessage = rand.nextInt(reminderItemData.messageList.size());
-                    setCurMessage(lastMessage);
+                    reminderItemData.curMessage = lastMessage;
                     content = reminderItemData.messageList.get(lastMessage);
                 }
             }
@@ -818,10 +815,6 @@ public final class ReminderItem extends BaseRecycleItem {
         FileWriter.deleteFile("LOG" + reminderItemData.uniqueName, FileWriter.FileLocation.INTERNAL);
     }
 
-    public final void deleteAlertTimes() {
-        Prefs.deleteStringArrayList(AppBase.getContext().getString(R.string.pref_reminder_alerts), "ALERTS" + reminderItemData.uniqueName);
-    }
-
     public final boolean hasReminderLog() {
         return reminderItemData.reminderLog != null && reminderItemData.reminderLog.days != null;
     }
@@ -877,6 +870,20 @@ public final class ReminderItem extends BaseRecycleItem {
             };
             taskLoad.execute();
         }
+    }
+
+    public final void updateVersion() {
+        //Change how curMessage works
+        if(reminderItemData.messageList == null) {
+            reminderItemData.messageList = new ArrayList<>();
+        }
+        if(reminderItemData.alertTimes == null) {
+            Log.v("ReminderItem", "Updating to newest alert times system");
+            reminderItemData.alertTimes = new ArrayList<>();
+            updateAlertTimes();
+            rescheduleNextWake(UtilsTime.getDateTimeNow());
+        }
+        reminderItemData.version = ReminderItemData.CURRENT_VERSION;
     }
 
     /**

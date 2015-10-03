@@ -76,6 +76,11 @@ public class ReminderItemData {
     public SnoozeOptions snooze;
     @SerializedName("autoSnooze")
     public SnoozeOptions autoSnooze;
+    //State management
+    @SerializedName("curMessage")
+    public int curMessage = 0;
+    @SerializedName("alertTimes")
+    ArrayList<TimeItem> alertTimes = new ArrayList<>();
 
     //Serialized on its own usually but included when exported (and its selected to be included)
     //Must null this before a save if not exporting it
@@ -118,6 +123,9 @@ public class ReminderItemData {
         //Snooze
         this.snooze = SnoozeOptions.DISABLED;
         this.autoSnooze = SnoozeOptions.DISABLED;
+        //State management
+        this.curMessage = 0;
+        this.alertTimes = new ArrayList<>();
     }
 
     /**
@@ -148,6 +156,8 @@ public class ReminderItemData {
         this.notificationAccentColor = reminderItemData.notificationAccentColor;
         this.snooze = reminderItemData.snooze;
         this.autoSnooze = reminderItemData.autoSnooze;
+        this.curMessage = reminderItemData.curMessage;
+        this.alertTimes = new ArrayList<>(reminderItemData.alertTimes);
     }
 
     /**
@@ -178,64 +188,8 @@ public class ReminderItemData {
         this.notificationAccentColor = reminderItemData.notificationAccentColor;
         this.snooze = reminderItemData.snooze;
         this.autoSnooze = reminderItemData.autoSnooze;
-    }
-
-    /**
-     */
-    public ReminderItemData(@NonNull String uniqueName,
-                            int version,
-                            @NonNull String title,
-                            @NonNull ArrayList<String> messageList,
-                            boolean messageInOrder,
-                            boolean enabled,
-                            @NonNull TimeItem startTime,
-                            @NonNull TimeItem endTime,
-                            @NonNull ArrayList<TimeItem> specificTimeList,
-                            int numberPerDay,
-                            boolean rangeTiming,
-                            @NonNull boolean[] daysToRun,
-                            @NonNull boolean[] weeksToRun,
-                            String notificationTone,
-                            String notificationToneName,
-                            NotificationContent.NotificationVibrate notificationVibratePattern,
-                            boolean notificationLED,
-                            int notificationLEDColor,
-                            @NonNull NotificationContent.NotificationPriority notificationPriority,
-                            int notificationIcon,
-                            int notificationAccentColor,
-                            @NonNull SnoozeOptions snooze,
-                            @NonNull SnoozeOptions autoSnooze) {
-        this.uniqueName = uniqueName;
-        this.version = version;
-        this.title = title;
-        this.messageList = new ArrayList<>(messageList);
-        this.messageInOrder = messageInOrder;
-        this.enabled = enabled;
-        this.startTime = startTime.copy();
-        this.endTime = endTime.copy();
-        this.specificTimeList = UtilsTime.cloneArrayListTime(specificTimeList);
-        this.numberPerDay = numberPerDay;
-        this.rangeTiming = rangeTiming;
-        this.daysToRun = daysToRun.clone();
-        this.weeksToRun = weeksToRun.clone();
-        this.notificationTone = notificationTone;
-        this.notificationToneName = notificationToneName;
-        this.notificationVibratePattern = notificationVibratePattern;
-        this.notificationLED = notificationLED;
-        this.notificationLEDColor = notificationLEDColor;
-        this.notificationPriority = notificationPriority;
-        this.notificationIcon = notificationIcon;
-        this.notificationAccentColor = notificationAccentColor;
-        this.snooze = snooze;
-        this.autoSnooze = autoSnooze;
-    }
-
-    public final void updateVersion() {
-        //Change how curMessage works
-        if(messageList == null) {
-            messageList = new ArrayList<>();
-        }
-        version = CURRENT_VERSION;
+        this.curMessage = reminderItemData.curMessage;
+        this.alertTimes = new ArrayList<>(reminderItemData.alertTimes);
     }
 
     public enum SnoozeOptions {

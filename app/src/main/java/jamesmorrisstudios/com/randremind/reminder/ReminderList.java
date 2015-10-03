@@ -25,11 +25,15 @@ import com.jamesmorrisstudios.appbaselibrary.Bus;
 import com.jamesmorrisstudios.appbaselibrary.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.Serializer;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.notification.Notifier;
+import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
 import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import java.util.ArrayList;
+
+import jamesmorrisstudios.com.randremind.R;
 
 /**
  * Reminder list control class. Add, remove, save, delete reminders
@@ -205,6 +209,15 @@ public final class ReminderList {
         return itemNew;
     }
 
+    public final void saveReminderItem(ReminderItem reminderItem) {
+        ReminderItemData item = getReminderData(reminderItem.getUniqueName());
+        if(item == null) {
+            return;
+        }
+        reminderItem.commitChanges(item);
+        reminderItem.clearDirty();
+    }
+
     public final void setReminderEnable(@NonNull String uniqueName, boolean enable) {
         ReminderItem reminder = getReminderCopy(uniqueName);
         int index = getReminderIndex(uniqueName);
@@ -274,7 +287,6 @@ public final class ReminderList {
     public final void deleteCurrentReminder() {
         if (selectedItemIndex != -1) {
             this.selectedItem.deleteReminderLog();
-            this.selectedItem.deleteAlertTimes();
             this.reminderListData.reminderItemList.remove(selectedItemIndex);
         }
         clearCurrentReminder();
@@ -369,11 +381,22 @@ public final class ReminderList {
         }
     }
 
+    public final void logLastWake(@NonNull DateTimeItem dateTime) {
+        reminderListData.lastWake = dateTime;
+    }
+
+    @NonNull
+    public final DateTimeItem getLastWake() {
+        return reminderListData.lastWake;
+    }
+
     /**
      * This is to fix any bugs with old save versions.
      */
     private void validateSaveData() {
-        //TODO if more bugs are found
+        if(reminderListData.lastWake == null) {
+            reminderListData.lastWake = UtilsTime.getDateTimeNow();
+        }
     }
 
     /**
@@ -383,6 +406,7 @@ public final class ReminderList {
      */
     private boolean saveToFile() {
         if (reminderListData != null && reminderListData.reminderItemList != null) {
+            reminderListData.version = Utils.getVersionName();
             byte[] bytes = Serializer.serializeClass(reminderListData);
             return bytes != null && FileWriter.writeFile(saveName, bytes, FileWriter.FileLocation.INTERNAL);
         }
@@ -413,8 +437,11 @@ public final class ReminderList {
     }
 
     private void updateVersion(@NonNull ReminderListData reminders) {
+        ReminderItem reminderItem = new ReminderItem();
         for (ReminderItemData item : reminders.reminderItemList) {
-            item.updateVersion();
+            reminderItem.setReminderItemData(item); //Using original not a copy here
+            reminderItem.updateVersion();
+            reminderItem.clearReminderItemData();
         }
     }
 
