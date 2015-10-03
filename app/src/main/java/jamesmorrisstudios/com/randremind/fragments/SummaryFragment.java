@@ -4,6 +4,7 @@ package jamesmorrisstudios.com.randremind.fragments;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,11 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
-import com.jamesmorrisstudios.appbaselibrary.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.FileBrowserRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.FileWriter;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.WriteFileAsync;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
@@ -44,6 +46,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 public class SummaryFragment extends BaseRecycleListFragment {
     public static final String TAG = "SummaryFragment";
     private OnSummaryListener mListener;
+    private WriteFileAsync writeFile = null;
 
     /**
      * Required empty public constructor
@@ -60,6 +63,21 @@ public class SummaryFragment extends BaseRecycleListFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    /**
+     * On Stop
+     */
+    @Override
+    public void onStop() {
+        if(writeFile != null) {
+            try {
+                writeFile.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onStop();
     }
 
     /**
@@ -131,11 +149,25 @@ public class SummaryFragment extends BaseRecycleListFragment {
                                 return;
                             }
                             //Share
-                            FileWriter.writeFile("RandomlyRemindMe" + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.CACHE);
-                            Uri uri = FileWriter.getFileUri("RandomlyRemindMe"+"_Log.csv", FileWriter.FileLocation.CACHE);
-                            if(uri != null) {
-                                Utils.shareStream(getString(R.string.share), uri, "text/csv");
-                            }
+                            final String name = remind.getTitle().replaceAll(" ", "_").replaceAll("\\W+", "")+ "_Log.csv";
+
+                            writeFile = new WriteFileAsync(name, remind.getReminderLogCsv(), FileWriter.FileLocation.CACHE, new WriteFileAsync.FileWriteListener() {
+                                @Override
+                                public void writeComplete(boolean success) {
+                                    if(success) {
+                                        Uri uri = FileWriter.getFileUri(name, FileWriter.FileLocation.CACHE);
+                                        if(uri != null) {
+                                            Utils.shareStream(getString(R.string.share), uri, "text/csv");
+                                        } else {
+                                            Utils.toastShort(getString(R.string.export_failed));
+                                        }
+                                    } else {
+                                        Utils.toastShort(getString(R.string.export_failed));
+                                    }
+                                    writeFile = null;
+                                }
+                            });
+                            writeFile.execute();
                         } else {
                             //FIle
                             Bus.postObject(new FileBrowserRequest(FileBrowserRequest.DirType.DIRECTORY, true, null, new FileBrowserRequest.FileBrowserRequestListener() {
@@ -148,9 +180,19 @@ public class SummaryFragment extends BaseRecycleListFragment {
                                     if(uri != null) {
                                         String path = uri.getPath();
                                         String name = remind.getTitle().replaceAll(" ", "_").replaceAll("\\W+", "");
-                                        FileWriter.writeFile(path + File.separator + name + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.PATH);
                                         Log.v("FileBrowser", path);
-                                        Utils.toastShort(getString(R.string.export_log));
+                                        writeFile = new WriteFileAsync(path + File.separator + name + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.PATH, new WriteFileAsync.FileWriteListener() {
+                                            @Override
+                                            public void writeComplete(boolean success) {
+                                                if(success) {
+                                                    Utils.toastShort(getString(R.string.export_log));
+                                                } else {
+                                                    Utils.toastShort(getString(R.string.export_failed));
+                                                }
+                                                writeFile = null;
+                                            }
+                                        });
+                                        writeFile.execute();
                                     }
                                 }
                             }));

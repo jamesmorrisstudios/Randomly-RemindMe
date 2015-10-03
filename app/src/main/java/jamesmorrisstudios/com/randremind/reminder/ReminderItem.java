@@ -26,10 +26,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
-import com.jamesmorrisstudios.appbaselibrary.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.Serializer;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.appbaselibrary.math.UtilsMath;
 import com.jamesmorrisstudios.appbaselibrary.notification.NotificationAction;

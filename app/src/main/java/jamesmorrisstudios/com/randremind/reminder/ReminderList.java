@@ -22,18 +22,14 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
-import com.jamesmorrisstudios.appbaselibrary.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.Serializer;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
-import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.FileWriter;
 import com.jamesmorrisstudios.appbaselibrary.notification.Notifier;
-import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
 import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import java.util.ArrayList;
-
-import jamesmorrisstudios.com.randremind.R;
 
 /**
  * Reminder list control class. Add, remove, save, delete reminders

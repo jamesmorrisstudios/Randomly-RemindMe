@@ -46,6 +46,7 @@ import jamesmorrisstudios.com.randremind.dialogHelper.ExportReminderLogRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.ReminderLogRequest;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
+import jamesmorrisstudios.com.randremind.fragments.BackupRestoreFragment;
 import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
@@ -233,6 +234,11 @@ public final class MainActivity extends BaseLauncherActivity implements
         loadAddReminderFragment();
     }
 
+    @Override
+    public void onBackupRestoreClicked() {
+        loadBackupRestoreFragment();
+    }
+
     /**
      * Edit button clicked
      */
@@ -299,6 +305,31 @@ public final class MainActivity extends BaseLauncherActivity implements
     protected final void loadSummaryFragment() {
         SummaryFragment fragment = getSummaryFragment();
         loadFragment(fragment, SummaryFragment.TAG, true);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+
+    /**
+     *
+     * Creates the fragment if it does not exist yet.
+     *
+     * @return The fragment
+     */
+    @NonNull
+    protected final BackupRestoreFragment getBackupRestoreFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        BackupRestoreFragment fragment = (BackupRestoreFragment) fragmentManager.findFragmentByTag(BackupRestoreFragment.TAG);
+        if (fragment == null) {
+            fragment = new BackupRestoreFragment();
+        }
+        return fragment;
+    }
+
+    /**
+     *
+     */
+    protected final void loadBackupRestoreFragment() {
+        BackupRestoreFragment fragment = getBackupRestoreFragment();
+        loadFragment(fragment, BackupRestoreFragment.TAG, true);
         getSupportFragmentManager().executePendingTransactions();
     }
 
