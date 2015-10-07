@@ -16,6 +16,7 @@
 
 package jamesmorrisstudios.com.randremind.reminder;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,10 +26,13 @@ import com.jamesmorrisstudios.appbaselibrary.Bus;
 import com.jamesmorrisstudios.appbaselibrary.Serializer;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.filewriting.FileWriter;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.ReadFileAsync;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.WriteFileAsync;
 import com.jamesmorrisstudios.appbaselibrary.notification.Notifier;
 import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -50,6 +54,13 @@ public final class ReminderList {
     private ReminderItem selectedItem = new ReminderItem();
     private int selectedItemIndex = -1;
 
+    //Backup/Restore
+    private ArrayList<ReminderItemBackupRestore> backupData = new ArrayList<>();
+    private BackupAsyncTask backupTask = null;
+    private ReminderListData restoreListData = null;
+    private ArrayList<ReminderItemBackupRestore> restoreData = new ArrayList<>();
+    private ReadFileAsync restoreTask = null;
+
     /**
      * Required private constructor to maintain singleton
      */
@@ -63,6 +74,144 @@ public final class ReminderList {
             instance = new ReminderList();
         }
         return instance;
+    }
+
+
+    public final ArrayList<ReminderItemBackupRestore> getBackupData() {
+        return backupData;
+    }
+
+    public final void setBackupData() {
+        if(!hasReminders()) {
+            return;
+        }
+        backupData = new ArrayList<>();
+        for(ReminderItemData data : reminderListData.reminderItemList) {
+            backupData.add(new ReminderItemBackupRestore(data));
+        }
+    }
+
+    public final boolean hasRestoreData() {
+        return restoreListData != null;
+    }
+
+    public final ArrayList<ReminderItemBackupRestore> getRestoreData() {
+        return restoreData;
+    }
+
+    public final void setRestoreData() {
+        if(!hasRestoreData()) {
+            return;
+        }
+        restoreData = new ArrayList<>();
+        for(ReminderItemData data : restoreListData.reminderItemList) {
+            restoreData.add(new ReminderItemBackupRestore(data));
+        }
+    }
+
+    public final void waitOnTasks() {
+        if(backupTask != null) {
+            try {
+                backupTask.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(restoreTask != null) {
+            try {
+                restoreTask.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //Auto appends the generated filename onto the path.
+    public final void backupSelectedData(String path, boolean includeLog, BackupAsyncTask.BackupListener listener) {
+        //Generate the backup file name and append it to the path
+        path += generateBackupFileName();
+        backupTask = new BackupAsyncTask(path, FileWriter.FileLocation.PATH, includeLog, listener, new BackupAsyncTask.BackupCompleteListener() {
+            @Override
+            public void backupComplete() {
+                backupTask = null;
+            }
+        });
+        backupTask.execute();
+    }
+
+    public final void backupSelectedDataForShare(boolean includeLog, BackupAsyncTask.BackupListener listener) {
+        String path = generateBackupFileName();
+        backupTask = new BackupAsyncTask(path, FileWriter.FileLocation.CACHE, includeLog, listener, new BackupAsyncTask.BackupCompleteListener() {
+            @Override
+            public void backupComplete() {
+                backupTask = null;
+            }
+        });
+        backupTask.execute();
+    }
+
+    public final void restoreSelectedData(boolean includeLog) {
+        Log.v("reminderList", "RestoreData");
+        ReminderItem reminderItem = new ReminderItem();
+        for(ReminderItemBackupRestore item : restoreData) {
+            //Make sure its selected for restore
+            if(!item.selected) {
+                continue;
+            }
+            //Get the actual data and make sure its valid
+            ReminderItemData newData = getRestoreReminderData(item.uniqueName);
+            if(newData == null) {
+                continue;
+            }
+            //Check if the item is a duplicate of an existing reminder and duplicate it if it is
+            if(getReminderData(item.uniqueName) != null) {
+                ReminderItemData newData2 = new ReminderItemData(newData, Utils.generateUniqueString());
+                newData2.reminderLog = newData.reminderLog;
+                newData = newData2;
+            }
+
+            reminderItem.setReminderItemData(newData);
+            reminderItem.updateAlertTimes();
+            reminderItem.rescheduleNextWake(UtilsTime.getDateTimeNow());
+            if(includeLog) {
+                reminderItem.saveReminderLog();
+            }
+            reminderItem.clearReminderItemData();
+            reminderListData.reminderItemList.add(newData);
+        }
+    }
+
+    @Nullable
+    private ReminderItemData getRestoreReminderData(@NonNull String uniqueName) {
+        for (ReminderItemData item : restoreListData.reminderItemList) {
+            if (item.uniqueName.equals(uniqueName)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+
+    private String generateBackupFileName() {
+        return File.separator + "RemindMe_Backup_"+UtilsTime.getShortDateFormatted(UtilsTime.getDateNow()) + ".json";
+    }
+
+    //RESTORE_LOAD_FAIL, RESTORE_LOAD_FAIL
+    public final void loadRestoreFile(Uri path) {
+        restoreTask = new ReadFileAsync(path, FileWriter.FileLocation.PATH, new ReadFileAsync.FileReadListener() {
+            @Override
+            public void readComplete(byte[] bytes) {
+                restoreListData = Serializer.deserializeClass(bytes, ReminderListData.class);
+                if(restoreListData == null) {
+                    Bus.postEnum(ReminderListEvent.RESTORE_LOAD_FAIL);
+                } else {
+                    setRestoreData();
+                    Bus.postEnum(ReminderListEvent.RESTORE_LOAD_PASS);
+                }
+                restoreTask = null;
+            }
+        });
+        restoreTask.execute();
     }
 
     /**
@@ -179,7 +328,7 @@ public final class ReminderList {
     }
 
     @Nullable
-    private ReminderItemData getReminderData(@NonNull String uniqueName) {
+    public final ReminderItemData getReminderData(@NonNull String uniqueName) {
         for (ReminderItemData item : reminderListData.reminderItemList) {
             if (item.uniqueName.equals(uniqueName)) {
                 return item;
@@ -403,6 +552,9 @@ public final class ReminderList {
     private boolean saveToFile() {
         if (reminderListData != null && reminderListData.reminderItemList != null) {
             reminderListData.version = Utils.getVersionName();
+            for(ReminderItemData item : reminderListData.reminderItemList) {
+                item.reminderLog = null;
+            }
             byte[] bytes = Serializer.serializeClass(reminderListData);
             return bytes != null && FileWriter.writeFile(saveName, bytes, FileWriter.FileLocation.INTERNAL);
         }
@@ -448,7 +600,9 @@ public final class ReminderList {
         DATA_LOAD_PASS,
         DATA_LOAD_FAIL,
         DATA_SAVE_PASS,
-        DATA_SAVE_FAIL
+        DATA_SAVE_FAIL,
+        RESTORE_LOAD_PASS,
+        RESTORE_LOAD_FAIL
     }
 
 }

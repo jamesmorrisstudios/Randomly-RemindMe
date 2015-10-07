@@ -45,7 +45,7 @@ public class EditReminderMessage {
                 String title = AppBase.getContext().getString(R.string.ordering);
                 String[] items = new String[]{AppBase.getContext().getString(R.string.in_order), AppBase.getContext().getString(R.string.random)};
 
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();

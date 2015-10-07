@@ -120,7 +120,7 @@ public class EditReminderNotification {
                 for (int i = 0; i < vibrateList.length; i++) {
                     items[i] = vibrateList[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected
@@ -143,7 +143,7 @@ public class EditReminderNotification {
                 for(int i=0; i<priorityList.length; i++) {
                     items[i] = priorityList[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected

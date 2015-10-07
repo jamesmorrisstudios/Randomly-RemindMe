@@ -44,7 +44,7 @@ public class EditReminderSnooze {
                 for (int i = 0; i < items.length; i++) {
                     items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected
@@ -67,7 +67,7 @@ public class EditReminderSnooze {
                 for (int i = 0; i < items.length; i++) {
                     items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected

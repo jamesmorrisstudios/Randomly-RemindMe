@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -27,6 +28,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceIconRequest;
@@ -38,6 +40,10 @@ import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
@@ -69,37 +75,68 @@ public final class MainActivity extends BaseLauncherActivity implements
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        Intent intent = getIntent();
-        if (intent == null) {
-            return;
-        }
-        //If we are opening from a reminder notification click go straight to that reminder page
-        if (intent.hasExtra("REMINDER") && intent.hasExtra("NAME")) {
-            //Load the reminder list if not already open
-            if (!ReminderList.getInstance().hasReminders()) {
-                ReminderList.getInstance().loadDataSync();
-                if (!ReminderList.getInstance().hasReminders()) {
-                    clearForOpen(intent);
-                    loadMainFragment();
-                    return;
-                }
-            }
-            Log.v("Main Activity", "Intent received to go to reminder");
-            ReminderList.getInstance().setCurrentReminder(intent.getStringExtra("NAME"));
-            clearForOpen(intent);
-            loadSummaryFragment();
-        }
+        processIntents();
         //Reload the main page if the reminder singleton was GC
         if (!ReminderList.getInstance().hasReminders()) {
-            clearForOpen(intent);
+            clearForOpen(getIntent());
             loadMainFragment();
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);//must store the new intent unless getIntent() will return the old one
+        processIntents();
+    }
+
+    private void processIntents() {
+        Intent intent = getIntent();
+        if (intent == null) {
+            return;
+        }
+        String action = intent.getAction();
+        String type = intent.getType();
+        //If we are opening from a reminder notification click go straight to that reminder page
+        if (intent.hasExtra("REMINDER") && intent.hasExtra("NAME")) {
+            if(loadReminderListSync(intent)) {
+                Log.v("Main Activity", "Intent received to go to reminder");
+                ReminderList.getInstance().setCurrentReminder(intent.getStringExtra("NAME"));
+                clearForOpen(intent);
+                loadSummaryFragment();
+            }
+        } else if((Intent.ACTION_SEND.equals(action) || Intent.ACTION_VIEW.equals(action)) && type != null) {
+            Log.v("MainActivity", "Shared text "+type);
+            Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if(uri == null) {
+                uri = intent.getData();
+            }
+            if(uri != null) {
+                clearForOpen(intent);
+                loadBackupRestoreFragment(uri);
+            }
+        }
+    }
+
+    private boolean loadReminderListSync(Intent intent) {
+        //Load the reminder list if not already open
+        if (!ReminderList.getInstance().hasReminders()) {
+            ReminderList.getInstance().loadDataSync();
+            if (!ReminderList.getInstance().hasReminders()) {
+                clearForOpen(intent);
+                loadMainFragment();
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void clearForOpen(Intent intent) {
         clearBackStack();
-        intent.removeExtra("REMINDER");
-        intent.removeExtra("NAME");
+        if(intent != null) {
+            intent.removeExtra("REMINDER");
+            intent.removeExtra("NAME");
+        }
     }
 
     /**
@@ -123,6 +160,7 @@ public final class MainActivity extends BaseLauncherActivity implements
      */
     @Override
     public void onStop() {
+        ReminderList.getInstance().waitOnTasks();
         super.onStop();
         Log.v("Main Activity", "On Stop");
         Bus.unregister(this);
@@ -236,7 +274,7 @@ public final class MainActivity extends BaseLauncherActivity implements
 
     @Override
     public void onBackupRestoreClicked() {
-        loadBackupRestoreFragment();
+        loadBackupRestoreFragment(null);
     }
 
     /**
@@ -327,8 +365,9 @@ public final class MainActivity extends BaseLauncherActivity implements
     /**
      *
      */
-    protected final void loadBackupRestoreFragment() {
+    protected final void loadBackupRestoreFragment(@Nullable Uri path) {
         BackupRestoreFragment fragment = getBackupRestoreFragment();
+        fragment.setPath(path);
         loadFragment(fragment, BackupRestoreFragment.TAG, true);
         getSupportFragmentManager().executePendingTransactions();
     }

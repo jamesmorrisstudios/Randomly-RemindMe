@@ -4,7 +4,6 @@ package jamesmorrisstudios.com.randremind.fragments;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -140,7 +139,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 String title = getString(R.string.export_location);
                 String[] items = new String[] {getString(R.string.share), getString(R.string.file)};
 
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(which == 0) {
@@ -153,14 +152,9 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
                             writeFile = new WriteFileAsync(name, remind.getReminderLogCsv(), FileWriter.FileLocation.CACHE, new WriteFileAsync.FileWriteListener() {
                                 @Override
-                                public void writeComplete(boolean success) {
-                                    if(success) {
-                                        Uri uri = FileWriter.getFileUri(name, FileWriter.FileLocation.CACHE);
-                                        if(uri != null) {
-                                            Utils.shareStream(getString(R.string.share), uri, "text/csv");
-                                        } else {
-                                            Utils.toastShort(getString(R.string.export_failed));
-                                        }
+                                public void writeComplete(boolean success, Uri filePath) {
+                                    if(success && filePath != null) {
+                                        Utils.shareStream(getString(R.string.share), filePath, "text/csv");
                                     } else {
                                         Utils.toastShort(getString(R.string.export_failed));
                                     }
@@ -183,7 +177,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
                                         Log.v("FileBrowser", path);
                                         writeFile = new WriteFileAsync(path + File.separator + name + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.PATH, new WriteFileAsync.FileWriteListener() {
                                             @Override
-                                            public void writeComplete(boolean success) {
+                                            public void writeComplete(boolean success, Uri filePath) {
                                                 if(success) {
                                                     Utils.toastShort(getString(R.string.export_log));
                                                 } else {
@@ -241,7 +235,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
         applyItems();
         ReminderItem item = ReminderList.getInstance().getCurrentReminder();
         if (item != null) {
-            item.loadData(forceRefresh);
+            item.loadReminderLogData(forceRefresh);
         }
     }
 

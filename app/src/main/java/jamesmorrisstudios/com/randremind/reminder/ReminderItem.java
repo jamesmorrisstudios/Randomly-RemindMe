@@ -451,6 +451,13 @@ public final class ReminderItem extends BaseRecycleItem {
         }
     }
 
+    public final void saveReminderLog() {
+        if(reminderItemData == null || reminderItemData.reminderLog == null) {
+            return;
+        }
+        saveToFile(reminderItemData.reminderLog, reminderItemData.uniqueName);
+    }
+
     public static boolean logReminderShown(@NonNull String uniqueName, @NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean snoozed) {
         Log.v("REMINDER ITEM", "STATIC Log Show Reminder");
         ReminderLog reminderLog = loadFromFile(uniqueName);
@@ -842,20 +849,14 @@ public final class ReminderItem extends BaseRecycleItem {
      *
      * @param forceRefresh True to force reload from disk
      */
-    public final void loadData(boolean forceRefresh) {
+    public final void loadReminderLogData(boolean forceRefresh) {
         if (!forceRefresh && hasReminderLog()) {
             postReminderItemEvent(ReminderItemEvent.DATA_LOAD_PASS);
         } else {
             taskLoad = new AsyncTask<Void, Void, Boolean>() {
                 @Override
                 protected Boolean doInBackground(Void... params) {
-                    ReminderLog log = loadFromFile(reminderItemData.uniqueName);
-                    if (log != null) {
-                        reminderItemData.reminderLog = log;
-                        reminderItemData.reminderLog.updateLog();
-                        return true;
-                    }
-                    return false;
+                    return loadReminderLogDataSync();
                 }
 
                 @Override
@@ -870,6 +871,16 @@ public final class ReminderItem extends BaseRecycleItem {
             };
             taskLoad.execute();
         }
+    }
+
+    public final boolean loadReminderLogDataSync() {
+        ReminderLog log = loadFromFile(reminderItemData.uniqueName);
+        if (log != null) {
+            reminderItemData.reminderLog = log;
+            reminderItemData.reminderLog.updateLog();
+            return true;
+        }
+        return false;
     }
 
     public final void updateVersion() {

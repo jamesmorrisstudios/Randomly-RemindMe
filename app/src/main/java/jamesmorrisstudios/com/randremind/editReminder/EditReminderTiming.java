@@ -83,7 +83,7 @@ public class EditReminderTiming {
             public void onClick(View v) {
                 String title = AppBase.getContext().getString(R.string.timing_type);
                 String[] items = new String[]{AppBase.getContext().getString(R.string.range), AppBase.getContext().getString(R.string.specific)};
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
