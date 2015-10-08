@@ -132,6 +132,21 @@ public class AddReminderFragment extends BaseRecycleListFragment {
         //Unused
     }
 
+    @Override
+    protected void itemMove(int i, int i1) {
+
+    }
+
+    @Override
+    protected boolean supportsHeaders() {
+        return true;
+    }
+
+    @Override
+    protected boolean allowReording() {
+        return false;
+    }
+
     protected int getNumberColumns() {
         return getNumberColumnsWide();
     }

@@ -54,6 +54,8 @@ public final class ReminderList {
     private ReminderItem selectedItem = new ReminderItem();
     private int selectedItemIndex = -1;
 
+    private ArrayList<ReminderItemSummary> reminderSummaryList = new ArrayList<>();
+
     //Backup/Restore
     private ArrayList<ReminderItemBackupRestore> backupData = new ArrayList<>();
     private BackupAsyncTask backupTask = null;
@@ -75,7 +77,6 @@ public final class ReminderList {
         }
         return instance;
     }
-
 
     public final ArrayList<ReminderItemBackupRestore> getBackupData() {
         return backupData;
@@ -315,16 +316,19 @@ public final class ReminderList {
         return reminderListData != null && reminderListData.reminderItemList != null && !reminderListData.reminderItemList.isEmpty();
     }
 
+    public final void setReminderSummaryList() {
+        if(!hasReminders()) {
+            return;
+        }
+        reminderSummaryList = new ArrayList<>();
+        for(ReminderItemData data : reminderListData.reminderItemList) {
+            reminderSummaryList.add(new ReminderItemSummary(data));
+        }
+    }
+
     @NonNull
     public final ArrayList<ReminderItemSummary> getReminderSummaryList() {
-        if(!hasReminders()) {
-            return null;
-        }
-        ArrayList<ReminderItemSummary> list = new ArrayList<>();
-        for(ReminderItemData data : reminderListData.reminderItemList) {
-            list.add(new ReminderItemSummary(data));
-        }
-        return list;
+        return reminderSummaryList;
     }
 
     @Nullable
@@ -335,6 +339,20 @@ public final class ReminderList {
             }
         }
         return null;
+    }
+
+    public final void reorderReminderList(int fromPosition, int toPosition) {
+        if(!hasReminders()) {
+            return;
+        }
+
+       // ReminderItemSummary prev = reminderSummaryList.remove(fromPosition);
+       // reminderSummaryList.add(toPosition, prev);
+
+        ReminderItemData prev2 = reminderListData.reminderItemList.remove(fromPosition);
+        reminderListData.reminderItemList.add(toPosition, prev2);
+
+        Log.v("Reoder", "Reorder " + fromPosition + " " + toPosition);
     }
 
     /**

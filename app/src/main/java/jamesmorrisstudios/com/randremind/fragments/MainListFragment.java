@@ -127,6 +127,21 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     }
 
     @Override
+    protected void itemMove(int fromPosition, int toPosition) {
+        ReminderList.getInstance().reorderReminderList(fromPosition, toPosition);
+    }
+
+    @Override
+    protected boolean supportsHeaders() {
+        return false;
+    }
+
+    @Override
+    protected boolean allowReording() {
+        return true;
+    }
+
+    @Override
     protected void afterViewCreated() {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_add_white_24dp);
@@ -181,6 +196,7 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
      * Apply reminder items to this view
      */
     private void applyItems() {
+        ReminderList.getInstance().setReminderSummaryList();
         ArrayList<ReminderItemSummary> data = ReminderList.getInstance().getReminderSummaryList();
         if (data.isEmpty()) {
             applyData(null);

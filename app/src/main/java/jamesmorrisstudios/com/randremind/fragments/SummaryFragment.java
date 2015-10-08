@@ -257,6 +257,21 @@ public class SummaryFragment extends BaseRecycleListFragment {
     }
 
     @Override
+    protected void itemMove(int i, int i1) {
+
+    }
+
+    @Override
+    protected boolean supportsHeaders() {
+        return true;
+    }
+
+    @Override
+    protected boolean allowReording() {
+        return false;
+    }
+
+    @Override
     protected void afterViewCreated() {
         setEnablePullToRefresh(true);
     }
