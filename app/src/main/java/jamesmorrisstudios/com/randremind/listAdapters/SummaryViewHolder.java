@@ -24,13 +24,13 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat;
+import com.jamesmorrisstudios.appbaselibrary.controls.CircleProgressDeterminate;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate;
-import com.jamesmorrisstudios.utilitieslibrary.math.UtilsMath;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.math.UtilsMath;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -50,7 +50,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     //private Toolbar toolbar;
 
     //Item
-    private TextView date, show, acked, percent;
+    private TextView date, show, acked, percent, shownAgain, snoozed;
     private CircleProgressDeterminate percentImage;
 
     /**
@@ -66,7 +66,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
 
     @Override
     protected void initHeader(View view) {
-        CardView topLayout = (CardView) view.findViewById(R.id.reminder_card);
+        CardView topLayout = (CardView) view.findViewById(R.id.card);
         title = (TextView) view.findViewById(R.id.reminder_title_text);
         topLayout.setOnClickListener(this);
         enabled = (SwitchCompat) view.findViewById(R.id.reminder_enabled);
@@ -112,11 +112,15 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
 
     @Override
     protected void initItem(View view) {
+        CardView topLayout = (CardView) view.findViewById(R.id.card);
+        topLayout.setOnClickListener(this);
         date = (TextView) view.findViewById(R.id.date);
         percent = (TextView) view.findViewById(R.id.percentage);
         percentImage = (CircleProgressDeterminate) view.findViewById(R.id.percentage_image);
         show = (TextView) view.findViewById(R.id.shown);
         acked = (TextView) view.findViewById(R.id.acked);
+        shownAgain = (TextView) view.findViewById(R.id.shownAgain);
+        snoozed = (TextView) view.findViewById(R.id.snoozed);
     }
 
     @Override
@@ -125,23 +129,34 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
 
         String title = reminder.getTitle();
         int lastMessage = UtilsMath.inBoundsInt(0, reminder.getMessageList().size()-1, reminder.getCurMessage());
-        String messageText = reminder.getMessageList().get(Math.max(0, lastMessage));
-        message.setText(messageText);
+        if(lastMessage != -1) {
+            String messageText = reminder.getMessageList().get(Math.max(0, lastMessage));
+            message.setText(messageText);
+        }
         if (title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.title);
+            title = AppBase.getContext().getString(R.string.title);
         }
         this.title.setText(title);
         if (reminder.isRangeTiming()) {
             UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.getStartTime());
             UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getEndTime());
-            dash1.setText(AppUtil.getContext().getString(R.string.dash));
+            dash1.setText(AppBase.getContext().getString(R.string.dash));
             top1.setVisibility(View.VISIBLE);
             top2.setVisibility(View.VISIBLE);
             dash1.setVisibility(View.VISIBLE);
             dash2.setVisibility(View.INVISIBLE);
             top3.setVisibility(View.INVISIBLE);
         } else {
-            dash1.setText(AppUtil.getContext().getString(R.string.comma));
+            dash1.setText(AppBase.getContext().getString(R.string.comma));
+            if(reminder.getSpecificTimeList().size() == 0) {
+                top1.setVisibility(View.INVISIBLE);
+                top2.setVisibility(View.INVISIBLE);
+                top3.setVisibility(View.INVISIBLE);
+            } else {
+                top1.setVisibility(View.VISIBLE);
+                top2.setVisibility(View.VISIBLE);
+                top3.setVisibility(View.VISIBLE);
+            }
             if(reminder.getSpecificTimeList().size() >= 1) {
                 UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.getSpecificTimeList().get(0));
             }
@@ -167,7 +182,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderList.getInstance().setEnableReminder(reminder.getUniqueName(), isChecked);
+                ReminderList.getInstance().setReminderEnable(reminder.getUniqueName(), isChecked);
             }
         });
         for (int i = 0; i < reminder.getDaysToRun().length; i++) {
@@ -179,25 +194,29 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
         final ReminderLogDay day = (ReminderLogDay) baseRecycleItem;
         if (day.lifetime) {
-            date.setText(AppUtil.getContext().getString(R.string.lifetime));
+            date.setText(AppBase.getContext().getString(R.string.lifetime));
             float percentage = (100.0f * day.timesClickedLifetime) / day.timesShownLifetime;
-            percent.setText(Integer.toString(Math.round(percentage)) + AppUtil.getContext().getResources().getString(R.string.percent_char));
+            percent.setText(Integer.toString(Math.round(percentage)) + AppBase.getContext().getResources().getString(R.string.percent_char));
             percentImage.setMax(day.timesShownLifetime);
             percentImage.setProgress(day.timesClickedLifetime);
-            show.setText(Integer.toString(day.timesShownLifetime));
-            acked.setText(Integer.toString(day.timesClickedLifetime));
+            show.setText(UtilsMath.formatDisplayNumber(day.timesShownLifetime));
+            acked.setText(UtilsMath.formatDisplayNumber(day.timesClickedLifetime));
+            shownAgain.setText(UtilsMath.formatDisplayNumber(day.timesShownAgainLifetime));
+            snoozed.setText(UtilsMath.formatDisplayNumber(day.timesSnoozedLifetime));
         } else {
             if (day.date.equals(UtilsTime.getDateNow())) {
-                date.setText(AppUtil.getContext().getResources().getString(R.string.today));
+                date.setText(AppBase.getContext().getResources().getString(R.string.today));
             } else {
-                date.setText(UtilsTime.getDateFormatted(day.date));
+                date.setText(UtilsTime.getLongDateFormatted(day.date));
             }
             float percentage = (100.0f * day.getTimesClicked()) / day.getTimesShown();
-            percent.setText(Integer.toString(Math.round(percentage)) + AppUtil.getContext().getResources().getString(R.string.percent_char));
+            percent.setText(Integer.toString(Math.round(percentage)) + AppBase.getContext().getResources().getString(R.string.percent_char));
             percentImage.setMax(day.getTimesShown());
             percentImage.setProgress(day.getTimesClicked());
-            show.setText(Integer.toString(day.getTimesShown()));
-            acked.setText(Integer.toString(day.getTimesClicked()));
+            show.setText(UtilsMath.formatDisplayNumber(day.getTimesShown()));
+            acked.setText(UtilsMath.formatDisplayNumber(day.getTimesClicked()));
+            shownAgain.setText(UtilsMath.formatDisplayNumber(day.getTimesShownAgain()));
+            snoozed.setText(UtilsMath.formatDisplayNumber(day.getTimesSnoozed()));
         }
     }
 
@@ -211,9 +230,9 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActive(active);
         if (active) {
-            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
+            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textLightMain));
         } else {
-            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));
+            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textDarkMain));
         }
     }
 

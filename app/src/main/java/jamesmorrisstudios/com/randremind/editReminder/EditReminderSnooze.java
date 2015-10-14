@@ -5,12 +5,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemData;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
@@ -38,12 +39,12 @@ public class EditReminderSnooze {
         snoozeContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = AppUtil.getContext().getString(R.string.snooze);
-                String[] items = new String[ReminderItem.SnoozeOptions.values().length];
+                String title = AppBase.getContext().getString(R.string.snooze);
+                String[] items = new String[ReminderItemData.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
-                    items[i] = ReminderItem.SnoozeOptions.values()[i].name;
+                    items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected
@@ -51,7 +52,7 @@ public class EditReminderSnooze {
                         if (remind == null) {
                             return;
                         }
-                        remind.setSnooze(ReminderItem.SnoozeOptions.values()[which]);
+                        remind.setSnooze(ReminderItemData.SnoozeOptions.values()[which]);
                         snooze.setText(remind.getSnooze().name);
                     }
                 }, null));
@@ -61,12 +62,12 @@ public class EditReminderSnooze {
         autoSnoozeContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = AppUtil.getContext().getString(R.string.auto_snooze);
-                String[] items = new String[ReminderItem.SnoozeOptions.values().length];
+                String title = AppBase.getContext().getString(R.string.auto_snooze);
+                String[] items = new String[ReminderItemData.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
-                    items[i] = ReminderItem.SnoozeOptions.values()[i].name;
+                    items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected
@@ -74,7 +75,7 @@ public class EditReminderSnooze {
                         if (remind == null) {
                             return;
                         }
-                        remind.setAutoSnooze(ReminderItem.SnoozeOptions.values()[which]);
+                        remind.setAutoSnooze(ReminderItemData.SnoozeOptions.values()[which]);
                         autoSnooze.setText(remind.getAutoSnooze().name);
                     }
                 }, null));

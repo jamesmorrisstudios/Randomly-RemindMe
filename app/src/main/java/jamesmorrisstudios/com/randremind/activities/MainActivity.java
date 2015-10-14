@@ -17,36 +17,49 @@
 package jamesmorrisstudios.com.randremind.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceIconRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuilder;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.preferences.Prefs;
-import com.jamesmorrisstudios.utilitieslibrary.time.TimeItem;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
+import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
+import jamesmorrisstudios.com.randremind.dialogHelper.ExportReminderLogRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
+import jamesmorrisstudios.com.randremind.dialogHelper.ReminderLogRequest;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
+import jamesmorrisstudios.com.randremind.fragments.BackupRestoreFragment;
 import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
+import jamesmorrisstudios.com.randremind.fragments.ReminderLogDialog;
 import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
 
 /**
@@ -62,36 +75,67 @@ public final class MainActivity extends BaseLauncherActivity implements
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        processIntents();
+        //Reload the main page if the reminder singleton was GC
+        if (!ReminderList.getInstance().hasReminders()) {
+            clearForOpen(getIntent());
+            loadMainFragment();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);//must store the new intent unless getIntent() will return the old one
+        processIntents();
+    }
+
+    private void processIntents() {
         Intent intent = getIntent();
         if (intent == null) {
             return;
         }
-        Bundle extras = intent.getExtras();
-        if (extras == null) {
-            return;
-        }
-        if (extras.containsKey("REMINDER") && extras.containsKey("NAME")) {
-            if (!ReminderList.getInstance().hasReminders()) {
-                ReminderList.getInstance().loadDataSync();
-                if (!ReminderList.getInstance().hasReminders()) {
-                    clearBackStack();
-                    loadMainFragment();
-                    getIntent().removeExtra("REMINDER");
-                    getIntent().removeExtra("NAME");
-                    return;
-                }
+        String action = intent.getAction();
+        String type = intent.getType();
+        //If we are opening from a reminder notification click go straight to that reminder page
+        if (intent.hasExtra("REMINDER") && intent.hasExtra("NAME")) {
+            if(loadReminderListSync(intent)) {
+                Log.v("Main Activity", "Intent received to go to reminder");
+                ReminderList.getInstance().setCurrentReminder(intent.getStringExtra("NAME"));
+                clearForOpen(intent);
+                loadSummaryFragment();
             }
-            Log.v("Main Activity", "Intent received to go to reminder");
-            ReminderList.getInstance().setCurrentReminder(extras.getString("NAME"));
-            clearBackStack();
-            loadSummaryFragment();
-            getIntent().removeExtra("REMINDER");
-            getIntent().removeExtra("NAME");
+        } else if((Intent.ACTION_SEND.equals(action) || Intent.ACTION_VIEW.equals(action)) && type != null) {
+            Log.v("MainActivity", "Shared text "+type);
+            Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if(uri == null) {
+                uri = intent.getData();
+            }
+            if(uri != null) {
+                clearForOpen(intent);
+                loadBackupRestoreFragment(uri);
+            }
         }
+    }
 
+    private boolean loadReminderListSync(Intent intent) {
+        //Load the reminder list if not already open
         if (!ReminderList.getInstance().hasReminders()) {
-            clearBackStack();
-            loadMainFragment();
+            ReminderList.getInstance().loadDataSync();
+            if (!ReminderList.getInstance().hasReminders()) {
+                clearForOpen(intent);
+                loadMainFragment();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void clearForOpen(Intent intent) {
+        clearBackStack();
+        if(intent != null) {
+            intent.removeExtra("REMINDER");
+            intent.removeExtra("NAME");
         }
     }
 
@@ -116,6 +160,7 @@ public final class MainActivity extends BaseLauncherActivity implements
      */
     @Override
     public void onStop() {
+        ReminderList.getInstance().waitOnTasks();
         super.onStop();
         Log.v("Main Activity", "On Stop");
         Bus.unregister(this);
@@ -185,8 +230,8 @@ public final class MainActivity extends BaseLauncherActivity implements
         Bus.postObject(new SingleChoiceIconRequest(title, items, new SingleChoiceIconDialogBuilder.OptionPickerListener() {
             @Override
             public void onClick(int which) {
-                String pref = AppUtil.getContext().getString(R.string.settings_pref);
-                String keytheme = AppUtil.getContext().getString(R.string.pref_notification_theme);
+                String pref = AppBase.getContext().getString(R.string.settings_pref);
+                String keytheme = AppBase.getContext().getString(R.string.pref_notification_theme);
                 if(which == 0) {
                     Prefs.putBoolean(pref, keytheme, true);
                 } else {
@@ -198,14 +243,14 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     private boolean isFirstLaunch() {
-        String pref = AppUtil.getContext().getString(R.string.settings_pref);
-        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        String pref = AppBase.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppBase.getContext().getString(R.string.pref_first_launch);
         return Prefs.getBoolean(pref, keyFirstLaunch, true);
     }
 
     private void setFirstLaunchComplete() {
-        String pref = AppUtil.getContext().getString(R.string.settings_pref);
-        String keyFirstLaunch = AppUtil.getContext().getString(R.string.pref_first_launch);
+        String pref = AppBase.getContext().getString(R.string.settings_pref);
+        String keyFirstLaunch = AppBase.getContext().getString(R.string.pref_first_launch);
         Prefs.putBoolean(pref, keyFirstLaunch, false);
     }
 
@@ -225,6 +270,11 @@ public final class MainActivity extends BaseLauncherActivity implements
         ReminderList.getInstance().createNewReminder();
         loadSummaryFragment();
         loadAddReminderFragment();
+    }
+
+    @Override
+    public void onBackupRestoreClicked() {
+        loadBackupRestoreFragment(null);
     }
 
     /**
@@ -296,9 +346,47 @@ public final class MainActivity extends BaseLauncherActivity implements
         getSupportFragmentManager().executePendingTransactions();
     }
 
+    /**
+     *
+     * Creates the fragment if it does not exist yet.
+     *
+     * @return The fragment
+     */
+    @NonNull
+    protected final BackupRestoreFragment getBackupRestoreFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        BackupRestoreFragment fragment = (BackupRestoreFragment) fragmentManager.findFragmentByTag(BackupRestoreFragment.TAG);
+        if (fragment == null) {
+            fragment = new BackupRestoreFragment();
+        }
+        return fragment;
+    }
+
+    /**
+     *
+     */
+    protected final void loadBackupRestoreFragment(@Nullable Uri path) {
+        BackupRestoreFragment fragment = getBackupRestoreFragment();
+        fragment.setPath(path);
+        loadFragment(fragment, BackupRestoreFragment.TAG, true);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+
     @Subscribe
     public void onIconPickerRequest(@NonNull IconPickerRequest request) {
         showIconPickerDialog(request.iconPickerListener, request.accentColor);
+    }
+
+    @Subscribe
+    public void onReminderLogRequest(@NonNull ReminderLogRequest request) {
+        showReminderLogDialog(request.reminderLogDay);
+    }
+
+    public void showReminderLogDialog(ReminderLogDay reminderLogDay) {
+        FragmentManager fm = getSupportFragmentManager();
+        ReminderLogDialog reminderLogDialog = new ReminderLogDialog();
+        reminderLogDialog.setData(reminderLogDay);
+        reminderLogDialog.show(fm, "fragment_reminder_log");
     }
 
     public void showIconPickerDialog(@NonNull IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {

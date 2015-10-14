@@ -51,7 +51,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true">
 
-            <com.jamesmorrisstudios.utilitieslibrary.controls.CircleProgressDeterminate
+            <com.jamesmorrisstudios.appbaselibrary.controls.CircleProgressDeterminate
                 android:id="@+id/percentage_image"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
@@ -68,57 +68,127 @@
 
         </FrameLayout>
 
-        <!-- Shown -->
-        <TextView
-            android:id="@+id/shown_label"
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_below="@+id/date"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="2dp"
             android:layout_toRightOf="@+id/percentContainer"
-            android:gravity="center"
-            android:text="@string/shown"
-            android:textColor="@color/textDarkSecondary"
-            android:textSize="14sp" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true">
 
-        <TextView
-            android:id="@+id/shown"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_below="@+id/date"
-            android:layout_marginBottom="1dp"
-            android:layout_toRightOf="@+id/shown_label"
-            android:gravity="center"
-            android:textColor="@color/textDarkMain"
-            android:textSize="14sp" />
+            <!-- Shown and Ack -->
+            <RelativeLayout
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
 
-        <!-- Acknowledged -->
-        <TextView
-            android:id="@+id/acked_label"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_below="@+id/shown_label"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="1dp"
-            android:layout_toRightOf="@+id/percentContainer"
-            android:gravity="center"
-            android:text="@string/completed"
-            android:textColor="@color/textDarkSecondary"
-            android:textSize="14sp" />
+                <!-- Shown -->
+                <TextView
+                    android:id="@+id/shown_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="2dp"
+                    android:gravity="center"
+                    android:text="@string/shown"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/acked"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_below="@+id/shown"
-            android:layout_marginTop="1dp"
-            android:layout_toRightOf="@+id/acked_label"
-            android:gravity="center"
-            android:textColor="@color/textDarkMain"
-            android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/shown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_toRightOf="@+id/shown_label"
+                    android:gravity="center"
+                    android:textColor="@color/textDarkMain"
+                    android:textSize="14sp" />
+
+                <!-- Acknowledged -->
+                <TextView
+                    android:id="@+id/acked_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/shown_label"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"
+                    android:text="@string/completed"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/acked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/shown"
+                    android:layout_marginTop="1dp"
+                    android:layout_toRightOf="@+id/acked_label"
+                    android:gravity="center"
+                    android:textColor="@color/textDarkMain"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <!-- Shown Again and Snooze -->
+            <RelativeLayout
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <!-- Shown Again -->
+                <TextView
+                    android:id="@+id/shownAgain_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="2dp"
+                    android:gravity="center"
+                    android:text="@string/shown_again"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/shownAgain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_toRightOf="@+id/shownAgain_label"
+                    android:gravity="center"
+                    android:textColor="@color/textDarkMain"
+                    android:textSize="14sp" />
+
+                <!-- Snoozed -->
+                <TextView
+                    android:id="@+id/snoozed_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/shownAgain_label"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"
+                    android:text="@string/snoozed"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/snoozed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/shownAgain"
+                    android:layout_marginTop="1dp"
+                    android:layout_toRightOf="@+id/snoozed_label"
+                    android:gravity="center"
+                    android:textColor="@color/textDarkMain"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
 
     </RelativeLayout>
 

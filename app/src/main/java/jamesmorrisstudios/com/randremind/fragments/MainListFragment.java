@@ -21,14 +21,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderContainer;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
@@ -51,6 +53,18 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
      * Required empty public constructor
      */
     public MainListFragment() {
+    }
+
+    /**
+     * @param item Selected item
+     * @return True if action consumed
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_backup_restore) {
+            mListener.onBackupRestoreClicked();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -108,15 +122,30 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
 
     @Override
     protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
-        ReminderList.getInstance().setCurrentReminder((ReminderItem) baseRecycleContainer.getItem());
+        ReminderList.getInstance().setCurrentReminder(((ReminderItemSummary) baseRecycleContainer.getItem()).uniqueName);
         mListener.onReminderItemClicked();
+    }
+
+    @Override
+    protected void itemMove(int fromPosition, int toPosition) {
+        ReminderList.getInstance().reorderReminderList(fromPosition, toPosition);
+    }
+
+    @Override
+    protected boolean supportsHeaders() {
+        return false;
+    }
+
+    @Override
+    protected boolean allowReording() {
+        return true;
     }
 
     @Override
     protected void afterViewCreated() {
         setFabEnable(true);
         setFabIcon(R.drawable.ic_add_white_24dp);
-        setNoDataText(getString(R.string.main_list_no_data));
+        setNoDataText(getString(R.string.no_reminders_yet));
         setFabAutoHide(false);
         setDummyItem(true);
     }
@@ -167,12 +196,13 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
      * Apply reminder items to this view
      */
     private void applyItems() {
-        ArrayList<ReminderItem> data = ReminderList.getInstance().getData();
+        ReminderList.getInstance().setReminderSummaryList();
+        ArrayList<ReminderItemSummary> data = ReminderList.getInstance().getReminderSummaryList();
         if (data.isEmpty()) {
             applyData(null);
         } else {
             ArrayList<BaseRecycleContainer> reminders = new ArrayList<>();
-            for (ReminderItem item : data) {
+            for (ReminderItemSummary item : data) {
                 reminders.add(new ReminderContainer(item));
             }
             applyData(reminders);
@@ -221,6 +251,11 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
          * Add new clicker
          */
         void onAddNewClicked();
+
+        /**
+         *
+         */
+        void onBackupRestoreClicked();
     }
 
 }

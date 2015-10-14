@@ -12,13 +12,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.colorpicker.builder.ColorPickerClickListener;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.ColorPickerRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.RingtoneRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.dialogs.colorpicker.builder.ColorPickerClickListener;
-import com.jamesmorrisstudios.utilitieslibrary.notification.NotificationContent;
+import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
@@ -63,9 +63,9 @@ public class EditReminderNotification {
         priority.setText(reminderItem.getNotificationPriority().name);
         vibrate.setText(reminderItem.getNotificationVibratePattern().name);
         if(reminderItem.isNotificationLED()) {
-            led.setText(AppUtil.getContext().getString(R.string.enabled));
+            led.setText(AppBase.getContext().getString(R.string.enabled));
         } else {
-            led.setText(AppUtil.getContext().getString(R.string.disabled));
+            led.setText(AppBase.getContext().getString(R.string.disabled));
         }
 
         ((GradientDrawable) ledColor.getBackground()).setColor(reminderItem.getNotificationLEDColor());
@@ -88,7 +88,7 @@ public class EditReminderNotification {
                 if (remind.getNotificationTone() != null) {
                     defaultUri = remind.getNotificationTone();
                 }
-                Bus.postObject(new RingtoneRequest(defaultUri, AppUtil.getContext().getResources().getString(R.string.select_notification), new RingtoneRequest.RingtoneRequestListener() {
+                Bus.postObject(new RingtoneRequest(defaultUri, AppBase.getContext().getResources().getString(R.string.select_notification), new RingtoneRequest.RingtoneRequestListener() {
                     @Override
                     public void ringtoneResponse(Uri uri, String name) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
@@ -100,7 +100,7 @@ public class EditReminderNotification {
                             remind.setNotificationToneName(name);
                         } else {
                             remind.setNotificationTone(null);
-                            remind.setNotificationToneName(AppUtil.getContext().getString(R.string.none));
+                            remind.setNotificationToneName(AppBase.getContext().getString(R.string.none));
                         }
                         sound.setText(remind.getNotificationToneName());
                     }
@@ -114,13 +114,13 @@ public class EditReminderNotification {
                 if (remind == null) {
                     return;
                 }
-                String title = AppUtil.getContext().getString(R.string.vibrate);
+                String title = AppBase.getContext().getString(R.string.vibrate);
                 final NotificationContent.NotificationVibrate[] vibrateList = NotificationContent.NotificationVibrate.values();
                 String[] items = new String[vibrateList.length];
                 for (int i = 0; i < vibrateList.length; i++) {
                     items[i] = vibrateList[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected
@@ -137,13 +137,13 @@ public class EditReminderNotification {
         notificationPriorityContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = AppUtil.getContext().getString(R.string.priority);
+                String title = AppBase.getContext().getString(R.string.priority);
                 final NotificationContent.NotificationPriority[] priorityList = NotificationContent.NotificationPriority.values();
                 String[] items = new String[priorityList.length];
                 for(int i=0; i<priorityList.length; i++) {
                     items[i] = priorityList[i].name;
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, new DialogInterface.OnClickListener() {
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Item Selected
@@ -173,7 +173,7 @@ public class EditReminderNotification {
                         }
                         remind.setNotificationLED(true);
                         remind.setNotificationLEDColor(color);
-                        led.setText(AppUtil.getContext().getString(R.string.enabled));
+                        led.setText(AppBase.getContext().getString(R.string.enabled));
                         ((GradientDrawable) ledColor.getBackground()).setColor(remind.getNotificationLEDColor());
                     }
                 }, new DialogInterface.OnClickListener() {
@@ -191,7 +191,7 @@ public class EditReminderNotification {
                         }
                         Log.v("Notification", "Disable LED");
                         remind.setNotificationLED(false);
-                        led.setText(AppUtil.getContext().getString(R.string.disabled));
+                        led.setText(AppBase.getContext().getString(R.string.disabled));
                     }
                 }));
             }

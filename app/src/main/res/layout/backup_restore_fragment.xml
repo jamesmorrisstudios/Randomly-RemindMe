@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Page 1-->
+    <LinearLayout
+        android:id="@+id/page_1"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/textDarkMain"
+            android:id="@+id/backup"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="@string/backup"
+            android:textSize="@dimen/item_size" />
+
+        <Button
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/textDarkMain"
+            android:id="@+id/restore"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="@string/restore"
+            android:textSize="@dimen/item_size" />
+
+    </LinearLayout>
+
+    <!-- Page 2 -->
+    <RelativeLayout
+        android:id="@+id/page_2"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/select_container"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <Button
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/textDarkMain"
+                android:id="@+id/select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@string/all"
+                android:textSize="@dimen/item_size" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="48dp"
+                android:background="@color/dividerDark" />
+
+            <Button
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/textDarkMain"
+                android:id="@+id/select_none"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@string/none"
+                android:textSize="@dimen/item_size" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/list_div_top"
+            android:layout_below="@+id/select_container"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/dividerDark" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_below="@+id/list_div_top"
+            android:layout_above="@+id/list_div_bottom"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <View
+            android:id="@+id/list_div_bottom"
+            android:layout_above="@+id/control_container"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/dividerDark" />
+
+        <LinearLayout
+            android:id="@+id/control_container"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <CheckBox
+                android:id="@+id/include_log"
+                android:text="@string/include_log"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:checked="true"
+                android:layout_height="56dp" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="48dp"
+                android:background="@color/dividerDark" />
+
+            <Button
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/textDarkMain"
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@string/next"
+                android:textSize="@dimen/item_size" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
+
+
+
+

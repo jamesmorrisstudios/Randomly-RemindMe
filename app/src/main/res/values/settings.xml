@@ -18,8 +18,8 @@
     <array name="settings_item_0">
         <item name="defaultValue">@bool/settings_item_0_default_value</item>
         <item name="key">@string/settings_item_0_key</item>
-        <item name="primary">@string/settings_item_0_primary</item>
-        <item name="secondary">@string/settings_item_0_secondary</item>
+        <item name="primary">@string/randremind_settings_0_primary</item>
+        <item name="secondary">@string/randremind_settings_0_secondary</item>
         <item name="restart">@bool/settings_item_0_restart</item>
     </array>
 
@@ -32,8 +32,8 @@
     <array name="settings_item_1">
         <item name="defaultValue">@bool/settings_item_1_default_value</item>
         <item name="key">@string/settings_item_1_key</item>
-        <item name="primary">@string/settings_item_1_primary</item>
-        <item name="secondary">@string/settings_item_1_secondary</item>
+        <item name="primary">@string/randremind_settings_1_primary</item>
+        <item name="secondary">@string/randremind_settings_1_secondary</item>
         <item name="restart">@bool/settings_item_1_restart</item>
     </array>
 
@@ -46,8 +46,8 @@
     <array name="settings_item_2">
         <item name="defaultValue">@bool/settings_item_2_default_value</item>
         <item name="key">@string/settings_item_2_key</item>
-        <item name="primary">@string/settings_item_2_primary</item>
-        <item name="secondary">@string/settings_item_2_secondary</item>
+        <item name="primary">@string/randremind_settings_2_primary</item>
+        <item name="secondary">@string/randremind_settings_2_secondary</item>
         <item name="restart">@bool/settings_item_2_restart</item>
     </array>
 
@@ -60,8 +60,8 @@
     <array name="settings_item_3">
         <item name="defaultValue">@bool/settings_item_3_default_value</item>
         <item name="key">@string/settings_item_3_key</item>
-        <item name="primary">@string/settings_item_3_primary</item>
-        <item name="secondary">@string/settings_item_3_secondary</item>
+        <item name="primary">@string/randremind_settings_3_primary</item>
+        <item name="secondary">@string/randremind_settings_3_secondary</item>
         <item name="restart">@bool/settings_item_3_restart</item>
     </array>
 
@@ -74,8 +74,8 @@
     <array name="settings_item_4">
         <item name="defaultValue">@integer/settings_item_4_default_value</item>
         <item name="key">@string/settings_item_4_key</item>
-        <item name="primary">@string/settings_item_4_primary</item>
-        <item name="secondary">@string/settings_item_4_secondary</item>
+        <item name="primary">@string/randremind_settings_4_primary</item>
+        <item name="secondary">@string/randremind_settings_4_secondary</item>
         <item name="restart">@bool/settings_item_4_restart</item>
         <item name="list">@array/settings_item_4_list</item>
     </array>

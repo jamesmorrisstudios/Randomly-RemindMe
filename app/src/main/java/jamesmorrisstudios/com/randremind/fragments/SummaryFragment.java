@@ -3,9 +3,11 @@ package jamesmorrisstudios.com.randremind.fragments;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,18 +15,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.FileBrowserRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.FileWriter;
+import com.jamesmorrisstudios.appbaselibrary.filewriting.WriteFileAsync;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
-import com.jamesmorrisstudios.utilitieslibrary.Bus;
-import com.jamesmorrisstudios.utilitieslibrary.Utils;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import jamesmorrisstudios.com.randremind.R;
+import jamesmorrisstudios.com.randremind.dialogHelper.ReminderLogRequest;
 import jamesmorrisstudios.com.randremind.listAdapters.SummaryAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.SummaryContainer;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
@@ -37,6 +45,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 public class SummaryFragment extends BaseRecycleListFragment {
     public static final String TAG = "SummaryFragment";
     private OnSummaryListener mListener;
+    private WriteFileAsync writeFile = null;
 
     /**
      * Required empty public constructor
@@ -53,6 +62,21 @@ public class SummaryFragment extends BaseRecycleListFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    /**
+     * On Stop
+     */
+    @Override
+    public void onStop() {
+        if(writeFile != null) {
+            try {
+                writeFile.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onStop();
     }
 
     /**
@@ -77,7 +101,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                Bus.postObject(new PromptDialogRequest(getString(R.string.delete_prompt_title), getString(R.string.delete_prompt_content), new DialogInterface.OnClickListener() {
+                Bus.postObject(new PromptDialogRequest(getString(R.string.delete_reminder_prompt_title), getString(R.string.delete_reminder_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Utils.toastShort(getString(R.string.reminder_delete));
@@ -96,7 +120,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 ReminderList.getInstance().previewCurrent();
                 break;
             case R.id.action_duplicate:
-                Bus.postObject(new PromptDialogRequest(getString(R.string.duplicate_prompt_title), getString(R.string.duplicate_prompt_content), new DialogInterface.OnClickListener() {
+                Bus.postObject(new PromptDialogRequest(getString(R.string.duplicate_reminder_prompt_title), getString(R.string.duplicate_reminder_prompt_content), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Utils.toastShort(getString(R.string.reminder_duplicate));
@@ -109,6 +133,66 @@ public class SummaryFragment extends BaseRecycleListFragment {
 
                     }
                 }));
+                break;
+            case R.id.action_export:
+
+                String title = getString(R.string.export_location);
+                String[] items = new String[] {getString(R.string.share), getString(R.string.file)};
+
+                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(which == 0) {
+                            ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                            if(remind == null) {
+                                return;
+                            }
+                            //Share
+                            final String name = remind.getTitle().replaceAll(" ", "_").replaceAll("\\W+", "")+ "_Log.csv";
+
+                            writeFile = new WriteFileAsync(name, remind.getReminderLogCsv(), FileWriter.FileLocation.CACHE, new WriteFileAsync.FileWriteListener() {
+                                @Override
+                                public void writeComplete(boolean success, Uri filePath) {
+                                    if(success && filePath != null) {
+                                        Utils.shareStream(getString(R.string.share), filePath, "text/csv");
+                                    } else {
+                                        Utils.toastShort(getString(R.string.export_failed));
+                                    }
+                                    writeFile = null;
+                                }
+                            });
+                            writeFile.execute();
+                        } else {
+                            //FIle
+                            Bus.postObject(new FileBrowserRequest(FileBrowserRequest.DirType.DIRECTORY, true, null, new FileBrowserRequest.FileBrowserRequestListener() {
+                                @Override
+                                public void path(@Nullable Uri uri) {
+                                    ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                                    if(remind == null) {
+                                        return;
+                                    }
+                                    if(uri != null) {
+                                        String path = uri.getPath();
+                                        String name = remind.getTitle().replaceAll(" ", "_").replaceAll("\\W+", "");
+                                        Log.v("FileBrowser", path);
+                                        writeFile = new WriteFileAsync(path + File.separator + name + "_Log.csv", remind.getReminderLogCsv(), FileWriter.FileLocation.PATH, new WriteFileAsync.FileWriteListener() {
+                                            @Override
+                                            public void writeComplete(boolean success, Uri filePath) {
+                                                if(success) {
+                                                    Utils.toastShort(getString(R.string.export_log));
+                                                } else {
+                                                    Utils.toastShort(getString(R.string.export_failed));
+                                                }
+                                                writeFile = null;
+                                            }
+                                        });
+                                        writeFile.execute();
+                                    }
+                                }
+                            }));
+                        }
+                    }
+                }, null));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -151,7 +235,7 @@ public class SummaryFragment extends BaseRecycleListFragment {
         applyItems();
         ReminderItem item = ReminderList.getInstance().getCurrentReminder();
         if (item != null) {
-            item.loadData(forceRefresh);
+            item.loadReminderLogData(forceRefresh);
         }
     }
 
@@ -164,7 +248,27 @@ public class SummaryFragment extends BaseRecycleListFragment {
     protected void itemClick(@NonNull BaseRecycleContainer baseRecycleContainer) {
         if(baseRecycleContainer.isHeader) {
             mListener.onEditClicked();
+        } else {
+            ReminderLogDay day = (ReminderLogDay) baseRecycleContainer.getItem();
+            if(!day.lifetime) {
+                Bus.postObject(new ReminderLogRequest(day));
+            }
         }
+    }
+
+    @Override
+    protected void itemMove(int i, int i1) {
+
+    }
+
+    @Override
+    protected boolean supportsHeaders() {
+        return true;
+    }
+
+    @Override
+    protected boolean allowReording() {
+        return false;
     }
 
     @Override
@@ -188,11 +292,13 @@ public class SummaryFragment extends BaseRecycleListFragment {
                 //Lifetime stats
                 ReminderLogDay dayLifetime = new ReminderLogDay(UtilsTime.getDateNow());
                 dayLifetime.lifetime = true;
-                dayLifetime.timesClickedLifetime = item.reminderLog.lifetimeClicked;
-                dayLifetime.timesShownLifetime = item.reminderLog.lifetimeShown;
+                dayLifetime.timesClickedLifetime = item.getReminderLog().lifetimeClicked;
+                dayLifetime.timesShownLifetime = item.getReminderLog().lifetimeShown;
+                dayLifetime.timesShownAgainLifetime = item.getReminderLog().lifetimeShownAgain;
+                dayLifetime.timesSnoozedLifetime = item.getReminderLog().lifetimeSnoozed;
                 summaries.add(new SummaryContainer(dayLifetime));
 
-                for (ReminderLogDay day : item.reminderLog.days) {
+                for (ReminderLogDay day : item.getReminderLog().days) {
                     summaries.add(new SummaryContainer(day));
                 }
 

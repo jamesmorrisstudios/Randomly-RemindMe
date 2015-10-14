@@ -38,4 +38,11 @@
         android:title="@string/duplicate"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_export"
+        android:icon="@drawable/ic_import_export_white_24dp"
+        android:orderInCategory="5"
+        android:title="@string/export_log"
+        app:showAsAction="ifRoom" />
+
 </menu>

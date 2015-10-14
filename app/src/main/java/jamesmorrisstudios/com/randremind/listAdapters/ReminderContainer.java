@@ -22,6 +22,7 @@ import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary;
 
 /**
  * Container for reminder reminder that abstracts it for use in the recyclerView
@@ -29,7 +30,7 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
  * Created by James on 3/31/2015.
  */
 public final class ReminderContainer extends BaseRecycleContainer {
-    private final ReminderItem item;
+    private final ReminderItemSummary item;
     private final BaseRecycleItem headerItem;
 
     public ReminderContainer(@NonNull BaseRecycleItem headerItem) {
@@ -38,7 +39,7 @@ public final class ReminderContainer extends BaseRecycleContainer {
         this.headerItem = headerItem;
     }
 
-    public ReminderContainer(@NonNull ReminderItem item) {
+    public ReminderContainer(@NonNull ReminderItemSummary item) {
         super(false);
         this.item = item;
         this.headerItem = null;
@@ -50,7 +51,7 @@ public final class ReminderContainer extends BaseRecycleContainer {
     }
 
     @Override
-    public ReminderItem getItem() {
+    public ReminderItemSummary getItem() {
         return item;
     }
 

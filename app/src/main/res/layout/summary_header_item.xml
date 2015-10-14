@@ -16,7 +16,7 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/reminder_card"
+    android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="1dp"
@@ -138,7 +138,7 @@
                 android:layout_toLeftOf="@+id/reminder_enabled"
                 android:orientation="horizontal">
 
-                <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+                <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
                     android:id="@+id/daySun"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -148,7 +148,7 @@
                     android:background="@color/iconDark"
                     android:clickable="false" />
 
-                <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+                <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
                     android:id="@+id/dayMon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -156,7 +156,7 @@
                     android:background="@color/iconDark"
                     android:clickable="false" />
 
-                <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+                <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
                     android:id="@+id/dayTue"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -164,7 +164,7 @@
                     android:background="@color/iconDark"
                     android:clickable="false" />
 
-                <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+                <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
                     android:id="@+id/dayWed"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -172,7 +172,7 @@
                     android:background="@color/iconDark"
                     android:clickable="false" />
 
-                <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+                <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
                     android:id="@+id/dayThu"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -180,7 +180,7 @@
                     android:background="@color/iconDark"
                     android:clickable="false" />
 
-                <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+                <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
                     android:id="@+id/dayFri"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -188,7 +188,7 @@
                     android:background="@color/iconDark"
                     android:clickable="false" />
 
-                <com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat
+                <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
                     android:id="@+id/daySat"
                     android:layout_width="20dp"
                     android:layout_height="20dp"

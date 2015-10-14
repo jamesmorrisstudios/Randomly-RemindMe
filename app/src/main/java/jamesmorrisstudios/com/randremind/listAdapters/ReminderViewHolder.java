@@ -24,14 +24,15 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
+import com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
-import com.jamesmorrisstudios.utilitieslibrary.app.AppUtil;
-import com.jamesmorrisstudios.utilitieslibrary.controls.ButtonCircleFlat;
-import com.jamesmorrisstudios.utilitieslibrary.time.UtilsTime;
+import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
 /**
@@ -110,36 +111,36 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
 
     @Override
     protected void bindItem(BaseRecycleItem baseRecycleItem, boolean expanded) {
-        final ReminderItem reminder = (ReminderItem) baseRecycleItem;
-        String title = reminder.getTitle();
+        final ReminderItemSummary reminder = (ReminderItemSummary) baseRecycleItem;
+        String title = reminder.title;
         if (title == null || title.isEmpty()) {
-            title = AppUtil.getContext().getString(R.string.title);
+            title = AppBase.getContext().getString(R.string.title);
         }
         this.title.setText(title);
-        if (reminder.isRangeTiming()) {
-            UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.getStartTime());
-            UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getEndTime());
-            dash1.setText(AppUtil.getContext().getString(R.string.dash));
+        if (reminder.rangeTiming) {
+            UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.startTime);
+            UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.endTime);
+            dash1.setText(AppBase.getContext().getString(R.string.dash));
             top1.setVisibility(View.VISIBLE);
             top2.setVisibility(View.VISIBLE);
             dash1.setVisibility(View.VISIBLE);
             dash2.setVisibility(View.INVISIBLE);
             top3.setVisibility(View.INVISIBLE);
         } else {
-            dash1.setText(AppUtil.getContext().getString(R.string.comma));
-            if(reminder.getSpecificTimeList().size() >= 1) {
-                UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.getSpecificTimeList().get(0));
+            dash1.setText(AppBase.getContext().getString(R.string.comma));
+            if(reminder.specificTimeList.size() >= 1) {
+                UtilsTime.setTime(hour1, minute1, AM1, PM1, reminder.specificTimeList.get(0));
             }
-            if(reminder.getSpecificTimeList().size() >= 2) {
-                UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getSpecificTimeList().get(1));
+            if(reminder.specificTimeList.size() >= 2) {
+                UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.specificTimeList.get(1));
                 dash1.setVisibility(View.VISIBLE);
                 top2.setVisibility(View.VISIBLE);
             } else {
                 dash1.setVisibility(View.INVISIBLE);
                 top2.setVisibility(View.INVISIBLE);
             }
-            if(reminder.getSpecificTimeList().size() >= 3) {
-                UtilsTime.setTime(hour3, minute3, AM3, PM3, reminder.getSpecificTimeList().get(2));
+            if(reminder.specificTimeList.size() >= 3) {
+                UtilsTime.setTime(hour3, minute3, AM3, PM3, reminder.specificTimeList.get(2));
                 dash2.setVisibility(View.VISIBLE);
                 top3.setVisibility(View.VISIBLE);
             } else {
@@ -148,15 +149,16 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
             }
         }
         enabled.setOnCheckedChangeListener(null);
-        enabled.setChecked(reminder.isEnabled());
+        enabled.setChecked(reminder.enabled);
         enabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ReminderList.getInstance().setEnableReminder(reminder.getUniqueName(), isChecked);
+                reminder.enabled = isChecked;
+                ReminderList.getInstance().setReminderEnable(reminder.uniqueName, isChecked);
             }
         });
-        for (int i = 0; i < reminder.getDaysToRun().length; i++) {
-            setDayOfWeek(i, reminder.getDaysToRun()[i]);
+        for (int i = 0; i < reminder.daysToRun.length; i++) {
+            setDayOfWeek(i, reminder.daysToRun[i]);
         }
     }
 
@@ -170,9 +172,9 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActive(active);
         if (active) {
-            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textLightMain));
+            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textLightMain));
         } else {
-            dayButton.getTextView().setTextColor(AppUtil.getContext().getResources().getColor(R.color.textDarkMain));
+            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textDarkMain));
         }
     }
 
