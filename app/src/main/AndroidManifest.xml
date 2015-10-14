@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2015.  James Morris Studios
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="jamesmorrisstudios.com.randremind">
+    package="jamesmorrisstudios.com.randremind" >
 
     <!-- For notifications -->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -33,40 +34,47 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        tools:replace="android:theme">
+        tools:replace="android:theme" >
 
         <activity
             android:name=".activities.MainActivity"
-            android:launchMode= "singleTask"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="application/json"/>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/json" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/json"/>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/json" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="application/json"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/json" />
             </intent-filter>
         </activity>
 
         <receiver
             android:name=".receiver.AlarmReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="jamesmorrisstudios.com.randremind.WAKEREMINDER" />
@@ -77,7 +85,7 @@
         <receiver
             android:name=".receiver.NotificationReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED" />
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT" />
@@ -87,6 +95,12 @@
                 <action android:name="jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".activities.PopupSnoozeActivity"
+            android:launchMode="singleInstance" android:excludeFromRecents="true"
+            android:taskAffinity="" android:theme="@android:style/Theme.Dialog" >
+        </activity>
 
     </application>
 

@@ -82,6 +82,10 @@ public class ReminderItemData {
     @SerializedName("alertTimes")
     ArrayList<TimeItem> alertTimes = new ArrayList<>();
 
+    //Side counter data
+    @SerializedName("notifCounter")
+    public int notifCounter = 0;
+
     //Serialized on its own usually but included when exported (and its selected to be included)
     //Must null this before a save if not exporting it
     @SerializedName("reminderLog")
@@ -126,6 +130,8 @@ public class ReminderItemData {
         //State management
         this.curMessage = 0;
         this.alertTimes = new ArrayList<>();
+        //Side counter data
+        this.notifCounter = 0;
     }
 
     /**
@@ -158,6 +164,7 @@ public class ReminderItemData {
         this.autoSnooze = reminderItemData.autoSnooze;
         this.curMessage = reminderItemData.curMessage;
         this.alertTimes = new ArrayList<>(reminderItemData.alertTimes);
+        this.notifCounter = reminderItemData.notifCounter;
     }
 
     /**
@@ -190,6 +197,7 @@ public class ReminderItemData {
         this.autoSnooze = reminderItemData.autoSnooze;
         this.curMessage = reminderItemData.curMessage;
         this.alertTimes = new ArrayList<>(reminderItemData.alertTimes);
+        this.notifCounter = reminderItemData.notifCounter;
     }
 
     public enum SnoozeOptions {

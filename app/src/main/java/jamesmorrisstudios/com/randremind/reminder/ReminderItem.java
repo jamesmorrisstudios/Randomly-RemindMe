@@ -82,6 +82,7 @@ public final class ReminderItem extends BaseRecycleItem {
     private boolean autoSnoozeDirty = false;
     private boolean curMessageDirty = false;
     private boolean alertTimesDirty = false;
+    private boolean notifCounterDirty = false;
 
     //This is always a deep copy of the reminder item data. The original is NEVER given to this
     public final void setReminderItemData(ReminderItemData reminderItemData) {
@@ -165,6 +166,9 @@ public final class ReminderItem extends BaseRecycleItem {
         if(alertTimesDirty) {
             newData.alertTimes = reminderItemData.alertTimes;
         }
+        if(notifCounterDirty) {
+            newData.notifCounter = reminderItemData.notifCounter;
+        }
     }
 
     public final boolean isAnyDirty() {
@@ -190,7 +194,8 @@ public final class ReminderItem extends BaseRecycleItem {
         snoozeDirty |
         autoSnoozeDirty |
         curMessageDirty |
-        alertTimesDirty;
+        alertTimesDirty |
+        notifCounterDirty;
     }
 
     public void clearDirty() {
@@ -217,6 +222,7 @@ public final class ReminderItem extends BaseRecycleItem {
         autoSnoozeDirty = false;
         curMessageDirty = false;
         alertTimesDirty = false;
+        notifCounterDirty = false;
     }
 
     public String getUniqueName() {
@@ -709,6 +715,16 @@ public final class ReminderItem extends BaseRecycleItem {
                 }
             }
         }
+
+        reminderItemData.notifCounter++;
+        if(reminderItemData.notifCounter > 5) {
+            reminderItemData.notifCounter = 0;
+        }
+
+        for(int i=0; i<reminderItemData.notifCounter; i++) {
+            content += " ";
+        }
+
         NotificationContent notif;
         String keySystem = AppBase.getContext().getString(R.string.pref_notification_custom);
         String keytheme = AppBase.getContext().getString(R.string.pref_notification_theme);
@@ -734,7 +750,7 @@ public final class ReminderItem extends BaseRecycleItem {
             iconSnooze = R.drawable.notif_snooze_dark;
         }
 
-        notif = new NotificationContent(theme, type, title, content, this.getNotificationTone(), IconUtil.getIconRes(reminderItemData.notificationIcon), reminderItemData.notificationAccentColor, getNotificationId());
+        notif = new NotificationContent(theme, type, title, content, this.getNotificationTone(), IconUtil.getIconRes(reminderItemData.notificationIcon), reminderItemData.notificationAccentColor, getNotificationId(), reminderItemData.notifCounter);
 
         String keyOnGoing = AppBase.getContext().getString(R.string.pref_notification_ongoing);
         notif.setOnGoing(Prefs.getBoolean(pref, keyOnGoing, false));
