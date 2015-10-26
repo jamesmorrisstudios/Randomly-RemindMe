@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/reminder_card"
     android:layout_width="match_parent"
@@ -26,12 +27,13 @@
     android:animateLayoutChanges="true"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
-    card_view:cardBackgroundColor="@color/primaryLight"
+    style="?attr/cardViewStyle"
     card_view:cardCornerRadius="4dp"
     card_view:cardUseCompatPadding="true">
 
     <!-- Primary layout container -->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dip">
@@ -55,7 +57,7 @@
             android:layout_toLeftOf="@+id/reminder_enabled"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:textColor="@color/textDarkMain"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp" />
 
         <include
@@ -75,7 +77,7 @@
             android:layout_marginRight="4dp"
             android:layout_toRightOf="@+id/reminder_time_1"
             android:text="@string/comma"
-            android:textColor="@color/textDarkSecondary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="20sp" />
 
         <include
@@ -95,7 +97,7 @@
             android:layout_marginRight="4dp"
             android:layout_toRightOf="@+id/reminder_time_2"
             android:text="@string/comma"
-            android:textColor="@color/textDarkSecondary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="20sp" />
 
         <include

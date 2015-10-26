@@ -8,7 +8,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/dividerDark" />
+        android:background="?android:attr/listDivider" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/titleText"
@@ -21,13 +21,13 @@
         android:hint="@string/title"
         android:inputType="text|textAutoCorrect|textCapSentences"
         android:singleLine="true"
-        android:textColor="@color/textDarkMain"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColorHint="@color/textDarkDisabled"
         android:textSize="@dimen/item_size" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/dividerDark" />
+        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

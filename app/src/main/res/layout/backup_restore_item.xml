@@ -16,7 +16,7 @@
         android:layout_toLeftOf="@+id/selected"
         android:gravity="center_vertical"
         android:singleLine="true"
-        android:textColor="@color/textDarkMain"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="20sp" />
 
     <CheckBox

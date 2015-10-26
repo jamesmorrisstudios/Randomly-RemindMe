@@ -18,6 +18,7 @@ package jamesmorrisstudios.com.randremind.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
@@ -36,6 +37,7 @@ import com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuild
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
+import com.jamesmorrisstudios.appbaselibrary.sound.Sounds;
 import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
@@ -45,6 +47,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;

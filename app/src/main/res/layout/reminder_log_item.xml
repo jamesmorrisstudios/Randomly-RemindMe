@@ -16,7 +16,7 @@
         android:layout_height="25dp"
         android:gravity="center_vertical|left"
         android:singleLine="true"
-        android:textColor="@color/textDarkMain"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_height="25dp"
         android:gravity="center_vertical|left"
         android:singleLine="true"
-        android:textColor="@color/textDarkMain"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="16sp" />
 
 </RelativeLayout>

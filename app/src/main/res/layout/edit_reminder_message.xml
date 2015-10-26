@@ -8,12 +8,11 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/dividerDark" />
+        android:background="?android:attr/listDivider" />
 
     <!-- order type -->
     <RelativeLayout
         android:id="@+id/orderContainer"
-        android:background="@color/primaryLight"
         android:clickable="true"
         android:focusable="true"
         android:layout_margin="8dp"
@@ -26,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ordering"
-            android:textColor="@color/textDarkMain"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="@dimen/item_size" />
 
         <TextView
@@ -34,7 +33,7 @@
             android:id="@+id/order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textDarkSecondary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="@dimen/item_small_size" />
 
     </RelativeLayout>
@@ -42,12 +41,11 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/dividerDark" />
+        android:background="?android:attr/listDivider" />
 
     <!-- Edit messages -->
     <RelativeLayout
         android:id="@+id/messageContainer"
-        android:background="@color/primaryLight"
         android:clickable="true"
         android:focusable="true"
         android:layout_margin="8dp"
@@ -60,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit_messages"
-            android:textColor="@color/textDarkMain"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="@dimen/item_size" />
 
     </RelativeLayout>
@@ -68,6 +66,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/dividerDark" />
+        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

@@ -345,6 +345,7 @@ public final class ReminderList {
         if(!hasReminders()) {
             return;
         }
+        Log.v("Reoder", "Reorder " + fromPosition + " " + toPosition);
 
        // ReminderItemSummary prev = reminderSummaryList.remove(fromPosition);
        // reminderSummaryList.add(toPosition, prev);
@@ -352,7 +353,7 @@ public final class ReminderList {
         ReminderItemData prev2 = reminderListData.reminderItemList.remove(fromPosition);
         reminderListData.reminderItemList.add(toPosition, prev2);
 
-        Log.v("Reoder", "Reorder " + fromPosition + " " + toPosition);
+
     }
 
     /**
@@ -414,11 +415,13 @@ public final class ReminderList {
      * @param uniqueName Reminder unique name
      */
     public final void setCurrentReminder(@NonNull String uniqueName) {
+        Log.v("ReminderList", "SetCurrentReminder: "+uniqueName);
         int index = 0;
         for (ReminderItemData itemInt : reminderListData.reminderItemList) {
             if (itemInt.uniqueName.equals(uniqueName)) {
                 this.selectedItemIndex = index;
                 this.selectedItem.setReminderItemData(new ReminderItemData(itemInt)); //Clone the reminder data
+                Log.v("ReminderList", "SetCurrentReminder WAS SET: " + uniqueName);
                 return;
             }
             index++;

@@ -12,7 +12,7 @@
     android:layout_marginTop="1dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
-    card_view:cardBackgroundColor="@color/primaryLight"
+    style="?attr/cardViewStyle"
     card_view:cardCornerRadius="4dp"
     card_view:cardUseCompatPadding="true">
 
@@ -28,6 +28,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/toggle_expand"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="30dp" />

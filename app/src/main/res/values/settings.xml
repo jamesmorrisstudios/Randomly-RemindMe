@@ -3,6 +3,10 @@
 
     <array name="settings_base_array">
         <!-- Override to disable base settings (immersive mode option) -->
+        <!-- Keep the language picker -->
+        <item>@array/settings_base_item_3</item>
+        <item>@array/settings_base_item_4</item>
+        <!--TODO Theme settings <item>@array/settings_base_item_5</item>-->
     </array>
 
     <!-- Override to define your settings -->
@@ -75,7 +79,7 @@
         <item name="defaultValue">@integer/settings_item_4_default_value</item>
         <item name="key">@string/settings_item_4_key</item>
         <item name="primary">@string/randremind_settings_4_primary</item>
-        <item name="secondary">@string/randremind_settings_4_secondary</item>
+        <item name="secondary">@string/BLANK</item>
         <item name="restart">@bool/settings_item_4_restart</item>
         <item name="list">@array/settings_item_4_list</item>
     </array>

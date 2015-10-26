@@ -3,5 +3,11 @@
 
     <string name="store_link" translatable="false">http://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind</string>
     <string name="store_link_all" translatable="false">http://play.google.com/store/apps/dev?id=4941635797772545432</string>
+    <string name="store_link_donation" translatable="false">http://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind.donate</string>
+
+    <!-- Show the support dev link on free google play version only -->
+    <style name="help_support_dev">
+        <item name="android:visibility">visible</item>
+    </style>
 
 </resources>

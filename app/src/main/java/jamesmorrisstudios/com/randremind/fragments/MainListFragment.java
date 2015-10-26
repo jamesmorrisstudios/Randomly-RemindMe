@@ -107,11 +107,15 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
 
     @Override
     protected void startDataLoad(boolean forceRefresh) {
-        ReminderList.getInstance().clearCurrentReminder();
-        if (!ReminderList.getInstance().isSaveInProgress()) {
-            ReminderList.getInstance().loadData(forceRefresh);
+        if(!ReminderList.getInstance().hasReminders()) {
+            ReminderList.getInstance().clearCurrentReminder();
+            if (!ReminderList.getInstance().isSaveInProgress()) {
+                ReminderList.getInstance().loadData(forceRefresh);
+            } else {
+                loadAfterSave = true;
+            }
         } else {
-            loadAfterSave = true;
+            Bus.postEnum(ReminderList.ReminderListEvent.DATA_LOAD_PASS);
         }
     }
 

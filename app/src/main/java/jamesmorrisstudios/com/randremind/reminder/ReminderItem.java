@@ -488,6 +488,18 @@ public final class ReminderItem extends BaseRecycleItem {
         return saveToFile(reminderLog, uniqueName);
     }
 
+    public static boolean logReminderDismissed(@NonNull String uniqueName, @NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime) {
+        Log.v("REMINDER ITEM", "Log Dismiss Reminder");
+        ReminderLog reminderLog = loadFromFile(uniqueName);
+        if (reminderLog == null) {
+            Log.v("REMINDER ITEM", "No save, creating new one");
+            reminderLog = new ReminderLog();
+        }
+        reminderLog.updateLog();
+        reminderLog.logDismissed(dateTime, firstDateTime);
+        return saveToFile(reminderLog, uniqueName);
+    }
+
     /**
      * Events to post
      *
@@ -717,11 +729,18 @@ public final class ReminderItem extends BaseRecycleItem {
         }
 
         reminderItemData.notifCounter++;
-        if(reminderItemData.notifCounter > 5) {
+        if(reminderItemData.notifCounter > 25) {
             reminderItemData.notifCounter = 0;
         }
 
-        for(int i=0; i<reminderItemData.notifCounter; i++) {
+        int numAfter = reminderItemData.notifCounter % 5;
+        int numBefore = (int) Math.round(Math.floor(reminderItemData.notifCounter / 5.0));
+
+        for(int i=0; i<numBefore; i++) {
+            content = " "+ content;
+        }
+
+        for(int i=0; i<numAfter; i++) {
             content += " ";
         }
 
@@ -825,11 +844,11 @@ public final class ReminderItem extends BaseRecycleItem {
 
         notif.addContentIntent(pClicked);
         notif.addDeleteIntent(pCanceled);
-        notif.addAction(new NotificationAction(iconCancel, "", pDismiss));
+        notif.addAction(new NotificationAction(iconCancel, AppBase.getContext().getString(R.string.dismiss), pDismiss));
         if(getSnooze() != ReminderItemData.SnoozeOptions.DISABLED) {
-            notif.addAction(new NotificationAction(iconSnooze, "", pSnooze));
+            notif.addAction(new NotificationAction(iconSnooze, AppBase.getContext().getString(R.string.snooze), pSnooze));
         }
-        notif.addAction(new NotificationAction(iconCheck, "", pAck));
+        notif.addAction(new NotificationAction(iconCheck, AppBase.getContext().getString(R.string.complete), pAck));
 
         return notif;
     }
@@ -903,6 +922,37 @@ public final class ReminderItem extends BaseRecycleItem {
         //Change how curMessage works
         if(reminderItemData.messageList == null) {
             reminderItemData.messageList = new ArrayList<>();
+        }
+        if(reminderItemData.title == null) {
+            reminderItemData.title = "";
+        }
+        if(reminderItemData.startTime == null) {
+            reminderItemData.startTime = new TimeItem(9, 0);
+        }
+        if(reminderItemData.endTime == null) {
+            reminderItemData.endTime = new TimeItem(20, 0);
+        }
+        if(reminderItemData.specificTimeList == null) {
+            reminderItemData.specificTimeList = new ArrayList<>();
+        }
+        if(reminderItemData.daysToRun == null) {
+            reminderItemData.daysToRun = new boolean[]{true, true, true, true, true, true, true};
+        }
+        if(reminderItemData.weeksToRun == null) {
+            reminderItemData.weeksToRun = new boolean[ReminderItemData.WeekOptions.values().length];
+            reminderItemData.weeksToRun[0] = true;
+        }
+        if(reminderItemData.snooze == null) {
+            reminderItemData.snooze = ReminderItemData.SnoozeOptions.DISABLED;
+        }
+        if(reminderItemData.autoSnooze == null) {
+            reminderItemData.autoSnooze = ReminderItemData.SnoozeOptions.DISABLED;
+        }
+        if(reminderItemData.notificationVibratePattern == null) {
+            reminderItemData.notificationVibratePattern = NotificationVibrate.DEFAULT;
+        }
+        if(reminderItemData.notificationPriority == null) {
+            reminderItemData.notificationPriority = NotificationPriority.DEFAULT;
         }
         if(reminderItemData.alertTimes == null) {
             Log.v("ReminderItem", "Updating to newest alert times system");

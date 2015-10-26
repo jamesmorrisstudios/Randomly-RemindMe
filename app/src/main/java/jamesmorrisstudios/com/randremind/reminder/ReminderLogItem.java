@@ -23,7 +23,8 @@ public class ReminderLogItem {
         SHOWN(AppBase.getContext().getString(R.string.shown)),
         CLICKED(AppBase.getContext().getString(R.string.completed)),
         SHOWN_AGAIN(AppBase.getContext().getString(R.string.shown_again)),
-        SNOOZED(AppBase.getContext().getString(R.string.snoozed));
+        SNOOZED(AppBase.getContext().getString(R.string.snoozed)),
+        DISMISSED(AppBase.getContext().getString(R.string.dismissed));
 
         public final String name;
 

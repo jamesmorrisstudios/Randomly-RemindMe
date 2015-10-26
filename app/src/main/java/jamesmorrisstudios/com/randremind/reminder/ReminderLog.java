@@ -22,11 +22,21 @@ public class ReminderLog {
     public long lifetimeSnoozed = 0;
     @SerializedName("lifetimeShownAgain")
     public long lifetimeShownAgain = 0;
+    @SerializedName("lifetimeDismissed")
+    public long lifetimeDismissed = 0;
 
     public final void updateLog() {
         for(ReminderLogDay day : days) {
             day.updateLog();
         }
+    }
+
+    public final void logDismissed(@NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime) {
+        Log.v("ReminderLog", "Log Clicked: " + dateTime.dateItem.year + " " + dateTime.dateItem.month + " " + dateTime.dateItem.dayOfMonth +
+                ", " + dateTime.timeItem.getHourInTimeFormatString() + ":" + dateTime.timeItem.getMinuteString());
+        ReminderLogDay day = getDay(firstDateTime);
+        day.addItem(ReminderLogItem.LogType.DISMISSED, dateTime);
+        lifetimeDismissed++;
     }
 
     public final void logClicked(@NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean snoozed) {

@@ -6,6 +6,10 @@
 
     <string name="tutorial_link_read" translatable="false">http://www.jamesmorrisstudios.us/randomly-remindme-howto.html</string>
 
+    <array name="current_release_notes">
+        <item name="data">@array/randremind_release_notes</item>
+    </array>
+
     <!-- TODO make this visible once the video tutorial is ready -->
     <string name="tutorial_link_watch" translatable="false">TODO</string>
     <style name="help_watch_how">
@@ -14,5 +18,9 @@
 
     <string name="edit_message" translatable="false">@string/message</string>
     <string name="pref_first_launch" translatable="false">FIRST_LAUNCH</string>
+
+    <!--<string name="version_type" translatable="false">@string/alpha</string>-->
+    <string name="version_type" translatable="false">@string/beta</string>
+    <!--<string name="version_type" translatable="false">@string/production</string>-->
 
 </resources>

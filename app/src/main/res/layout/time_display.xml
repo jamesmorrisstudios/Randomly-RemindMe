@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:textColor="@color/textDarkMain"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/time_hour"
         android:text="@string/colon"
-        android:textColor="@color/textDarkMain"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp" />
 
     <TextView
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/time_colon"
-        android:textColor="@color/textDarkMain"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp" />
 
     <LinearLayout
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pm"
-            android:textColor="@color/textDarkSecondary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="10sp" />
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/am"
-            android:textColor="@color/textDarkSecondary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="10sp" />
 
     </LinearLayout>

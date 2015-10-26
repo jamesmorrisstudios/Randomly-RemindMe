@@ -192,7 +192,10 @@ public final class NotificationReceiver extends BroadcastReceiver {
             return;
         }
         cancelSnooze(name);
-        //Do nothing?...
+        if(firstDateTime == null) {
+            firstDateTime = dateTime;
+        }
+        ReminderItem.logReminderDismissed(name, dateTime, firstDateTime);
     }
 
     private void logDismiss(@NonNull String name, int notificationId, boolean preview, @NonNull DateTimeItem dateTime, @Nullable DateTimeItem firstDateTime) {
@@ -202,6 +205,10 @@ public final class NotificationReceiver extends BroadcastReceiver {
             return;
         }
         cancelSnooze(name);
+        if(firstDateTime == null) {
+            firstDateTime = dateTime;
+        }
+        ReminderItem.logReminderDismissed(name, dateTime, firstDateTime);
     }
 
     private void logAck(@NonNull String name, int notificationId, boolean preview, @NonNull DateTimeItem dateTime, @Nullable DateTimeItem firstDateTime) {
