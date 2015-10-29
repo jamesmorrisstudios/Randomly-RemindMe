@@ -149,15 +149,6 @@ public class EditReminderRepeat {
     private void setDayOfWeek(int dayIndex, boolean active) {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActive(active);
-        TextView text = dayButton.getTextView();
-        if(text == null) {
-            return;
-        }
-        if (active) {
-            text.setTextColor(AppBase.getContext().getResources().getColor(R.color.textLightMain));
-        } else {
-            text.setTextColor(AppBase.getContext().getResources().getColor(R.color.textDarkMain));
-        }
     }
 
     /**

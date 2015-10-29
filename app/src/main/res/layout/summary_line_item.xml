@@ -54,8 +54,7 @@
             <com.jamesmorrisstudios.appbaselibrary.controls.CircleProgressDeterminate
                 android:id="@+id/percentage_image"
                 android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@color/primaryLight" />
+                android:layout_height="64dp" />
 
             <TextView
                 android:id="@+id/percentage"

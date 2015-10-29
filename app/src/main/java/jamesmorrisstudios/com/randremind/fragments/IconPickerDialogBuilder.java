@@ -28,8 +28,8 @@ public class IconPickerDialogBuilder {
     private int accentColor;
     private AlertDialog dialog;
 
-    private IconPickerDialogBuilder(@NonNull Context context) {
-        builder = new AlertDialog.Builder(context, R.style.alertDialog);
+    private IconPickerDialogBuilder(@NonNull Context context, int style) {
+        builder = new AlertDialog.Builder(context, style);
         mainView = new ScrollView(context);
         pickerContainer = new LinearLayout(context);
         pickerContainer.setOrientation(LinearLayout.VERTICAL);
@@ -38,8 +38,8 @@ public class IconPickerDialogBuilder {
         builder.setView(mainView);
     }
 
-    public static IconPickerDialogBuilder with(@NonNull Context context) {
-        return new IconPickerDialogBuilder(context);
+    public static IconPickerDialogBuilder with(@NonNull Context context, int style) {
+        return new IconPickerDialogBuilder(context, style);
     }
 
     public IconPickerDialogBuilder setTitle(@NonNull String title) {

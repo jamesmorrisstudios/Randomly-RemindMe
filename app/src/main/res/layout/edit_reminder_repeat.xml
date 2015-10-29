@@ -74,7 +74,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_margin="2dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -82,7 +81,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_margin="2dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -90,7 +88,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_margin="2dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -98,7 +95,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_margin="2dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -106,7 +102,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_margin="2dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -114,7 +109,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_margin="2dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -122,7 +116,6 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_margin="2dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
         </LinearLayout>

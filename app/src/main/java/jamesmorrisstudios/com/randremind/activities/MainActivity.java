@@ -393,7 +393,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     public void showIconPickerDialog(@NonNull IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
-        IconPickerDialogBuilder.with(this)
+        IconPickerDialogBuilder.with(this, getAlertDialogStyle())
                 .setTitle(getResources().getString(R.string.choose_icon))
                 .setAccentColor(accentColor)
                 .setOnIconPicked(iconPickerListener)

@@ -130,7 +130,7 @@ public class BackupRestoreFragment extends BaseFragment {
         restore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bus.postObject(new FileBrowserRequest(FileBrowserRequest.DirType.FILE, true, ".json", new FileBrowserRequest.FileBrowserRequestListener() {
+                Bus.postObject(new FileBrowserRequest(FileBrowserRequest.DirType.FILE, false, ".json", new FileBrowserRequest.FileBrowserRequestListener() {
                     @Override
                     public void path(@Nullable Uri uri) {
                         if(uri != null) {

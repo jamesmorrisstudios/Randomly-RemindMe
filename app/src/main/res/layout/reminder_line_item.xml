@@ -42,7 +42,7 @@
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/reminder_enabled"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="86dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
@@ -124,7 +124,6 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -132,7 +131,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -140,7 +138,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -148,7 +145,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -156,7 +152,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -164,7 +159,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
             <com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat
@@ -172,7 +166,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="4dp"
-                android:background="@color/iconDark"
                 android:clickable="false" />
 
         </LinearLayout>

@@ -171,11 +171,6 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
     private void setDayOfWeek(int dayIndex, boolean active) {
         final ButtonCircleFlat dayButton = dayButtons[dayIndex];
         dayButton.setActive(active);
-        if (active) {
-            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textLightMain));
-        } else {
-            dayButton.getTextView().setTextColor(AppBase.getContext().getResources().getColor(R.color.textDarkMain));
-        }
     }
 
 }

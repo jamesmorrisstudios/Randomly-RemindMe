@@ -6,7 +6,7 @@
         <!-- Keep the language picker -->
         <item>@array/settings_base_item_3</item>
         <item>@array/settings_base_item_4</item>
-        <!--TODO Theme settings <item>@array/settings_base_item_5</item>-->
+        <item>@array/settings_base_item_5</item>
     </array>
 
     <!-- Override to define your settings -->

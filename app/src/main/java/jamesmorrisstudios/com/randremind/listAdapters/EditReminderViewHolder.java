@@ -32,7 +32,6 @@ public class EditReminderViewHolder extends BaseRecycleViewHolder {
     }
 
     private TextView title;
-    private TintedImageView toggleExpand;
     private FrameLayout container;
 
     public EditReminderViewHolder(View view, boolean isHeader, boolean isDummyItem, cardClickListener mListener) {
@@ -48,7 +47,6 @@ public class EditReminderViewHolder extends BaseRecycleViewHolder {
     protected void initItem(View view) {
         container = (FrameLayout) view.findViewById(R.id.container);
         title = (TextView)view.findViewById(R.id.title);
-        toggleExpand = (TintedImageView) view.findViewById(R.id.toggle_expand);
     }
 
     @Override
@@ -102,27 +100,6 @@ public class EditReminderViewHolder extends BaseRecycleViewHolder {
             }
             container.addView(view);
         }
-        if(item.visible) {
-            container.setVisibility(View.VISIBLE);
-            toggleExpand.setRotation(0);
-        } else {
-            container.setVisibility(View.GONE);
-            toggleExpand.setRotation(180);
-        }
-        toggleExpand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(item.visible) {
-                    item.visible = false;
-                    container.setVisibility(View.GONE);
-                    AnimatorControl.rotationAutoStart(toggleExpand, 0, 180, 100, 0, null);
-                } else {
-                    item.visible = true;
-                    container.setVisibility(View.VISIBLE);
-                    AnimatorControl.rotationAutoStart(toggleExpand, 180, 0, 100, 0, null);
-                }
-            }
-        });
     }
 
 }
