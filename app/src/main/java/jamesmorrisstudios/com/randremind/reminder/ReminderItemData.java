@@ -201,41 +201,86 @@ public class ReminderItemData {
     }
 
     public enum SnoozeOptions {
-        DISABLED(0, AppBase.getContext().getString(R.string.disabled)),
-        MIN_1(1, "1 "+AppBase.getContext().getString(R.string.minute_singular)),
-        MIN_2(2, "2 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_3(3, "3 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_4(4, "4 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_5(5, "5 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_10(10, "10 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_15(15, "15 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_20(20, "20 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_25(25, "25 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_30(30, "30 "+AppBase.getContext().getString(R.string.minute_plural)),
-        MIN_60(60, "60 "+AppBase.getContext().getString(R.string.minute_plural));
+        DISABLED(0),
+        MIN_1(1),
+        MIN_2(2),
+        MIN_3(3),
+        MIN_4(4),
+        MIN_5(5),
+        MIN_10(10),
+        MIN_15(15),
+        MIN_20(20),
+        MIN_25(25),
+        MIN_30(30),
+        MIN_60(60);
 
-        public final String name;
         public final int minutes;
 
-        SnoozeOptions(int minutes, String name) {
+        SnoozeOptions(int minutes) {
             this.minutes = minutes;
-            this.name = name;
         }
+
+        public String getName() {
+            switch(this) {
+                case DISABLED:
+                    return AppBase.getContext().getString(R.string.disabled);
+                case MIN_1:
+                    return "1 "+AppBase.getContext().getString(R.string.minute_singular);
+                case MIN_2:
+                    return "2 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_3:
+                    return "3 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_4:
+                    return "4 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_5:
+                    return "5 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_10:
+                    return "10 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_15:
+                    return "15 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_20:
+                    return "20 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_25:
+                    return "25 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_30:
+                    return "30 "+AppBase.getContext().getString(R.string.minute_plural);
+                case MIN_60:
+                    return "60 "+AppBase.getContext().getString(R.string.minute_plural);
+                default:
+                    return AppBase.getContext().getString(R.string.disabled);
+            }
+        }
+
     }
 
     public enum WeekOptions {
-        Every(AppBase.getContext().getString(R.string.every_week)),
-        FIRST(AppBase.getContext().getString(R.string.first)),
-        SECOND(AppBase.getContext().getString(R.string.second)),
-        THIRD(AppBase.getContext().getString(R.string.third)),
-        FOURTH(AppBase.getContext().getString(R.string.fourth)),
-        FIFTH(AppBase.getContext().getString(R.string.fifth)),
-        LAST(AppBase.getContext().getString(R.string.last));
+        Every,
+        FIRST,
+        SECOND,
+        THIRD,
+        FOURTH,
+        FIFTH,
+        LAST;
 
-        public final String name;
-
-        WeekOptions(String name) {
-            this.name = name;
+        public String getName() {
+            switch(this) {
+                case Every:
+                    return AppBase.getContext().getString(R.string.every_week);
+                case FIRST:
+                    return AppBase.getContext().getString(R.string.first);
+                case SECOND:
+                    return AppBase.getContext().getString(R.string.second);
+                case THIRD:
+                    return AppBase.getContext().getString(R.string.third);
+                case FOURTH:
+                    return AppBase.getContext().getString(R.string.fourth);
+                case FIFTH:
+                    return AppBase.getContext().getString(R.string.fifth);
+                case LAST:
+                    return AppBase.getContext().getString(R.string.last);
+                default:
+                    return AppBase.getContext().getString(R.string.every_week);
+            }
         }
     }
 

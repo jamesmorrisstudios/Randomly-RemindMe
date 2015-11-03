@@ -94,7 +94,7 @@ public class ReminderLogDialog extends DialogFragment {
             text2 = (TextView) view.findViewById(R.id.text2);
 
             if (item != null) {
-                text1.setText(item.type.name);
+                text1.setText(item.type.getName());
                 text2.setText(Utils.getFormattedDateTime(UtilsTime.getTimeMillis(item.dateTime)));
             }
             return view;

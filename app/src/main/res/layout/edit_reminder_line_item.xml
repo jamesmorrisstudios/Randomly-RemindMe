@@ -28,7 +28,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="20sp"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/item_size"
             android:layout_width="wrap_content"
             android:layout_height="30dp" />
 

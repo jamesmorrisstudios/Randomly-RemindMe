@@ -636,7 +636,7 @@ public final class ReminderItem extends BaseRecycleItem {
             return true;
         }
         UtilsTime.WeekOfMonth week = UtilsTime.getWeekOfMonth(now.dateItem);
-        Log.v("ReminderItem", "Week of month: "+week.name+" is last of month: "+UtilsTime.isLastWeekOfMonth(now.dateItem));
+        Log.v("ReminderItem", "Week of month: "+week.getName()+" is last of month: "+UtilsTime.isLastWeekOfMonth(now.dateItem));
         if(reminderItemData.weeksToRun[1] && week == UtilsTime.WeekOfMonth.FIRST) {
             return true;
         }
@@ -871,7 +871,7 @@ public final class ReminderItem extends BaseRecycleItem {
                 log += prepend;
                 log += UtilsTime.getTimeMillis(item.dateTime)+",";
                 log += UtilsTime.getShortDateTimeFormatted(item.dateTime)+",";
-                log += item.type.name;
+                log += item.type.getName();
                 log += append;
             }
         }

@@ -20,16 +20,27 @@ public class ReminderLogItem {
     }
 
     public enum LogType {
-        SHOWN(AppBase.getContext().getString(R.string.shown)),
-        CLICKED(AppBase.getContext().getString(R.string.completed)),
-        SHOWN_AGAIN(AppBase.getContext().getString(R.string.shown_again)),
-        SNOOZED(AppBase.getContext().getString(R.string.snoozed)),
-        DISMISSED(AppBase.getContext().getString(R.string.dismissed));
+        SHOWN,
+        CLICKED,
+        SHOWN_AGAIN,
+        SNOOZED,
+        DISMISSED;
 
-        public final String name;
-
-        LogType(String name) {
-            this.name = name;
+        public String getName() {
+            switch(this) {
+                case SHOWN:
+                    return AppBase.getContext().getString(R.string.shown);
+                case CLICKED:
+                    return AppBase.getContext().getString(R.string.completed);
+                case SHOWN_AGAIN:
+                    return AppBase.getContext().getString(R.string.shown_again);
+                case SNOOZED:
+                    return AppBase.getContext().getString(R.string.snoozed);
+                case DISMISSED:
+                    return AppBase.getContext().getString(R.string.dismissed);
+                default:
+                    return AppBase.getContext().getString(R.string.shown);
+            }
         }
     }
 

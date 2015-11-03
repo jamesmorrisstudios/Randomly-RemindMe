@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
@@ -89,6 +91,17 @@ public class AddReminderFragment extends BaseRecycleListFragment {
             case R.id.action_help:
                 Utils.openLink(getResources().getString(com.jamesmorrisstudios.appbaselibrary.R.string.tutorial_link_read));
                 break;
+            /*
+            case R.id.action_advanced:
+                if(item.isChecked()) {
+                    Log.v("AddReminderFragment", "Check Changed to CHecked");
+                    item.setChecked(false);
+                } else {
+                    item.setChecked(true);
+                    Log.v("AddReminderFragment", "Check Changed UNCHECKED");
+                }
+                break;
+                */
         }
         return super.onOptionsItemSelected(item);
     }

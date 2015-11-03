@@ -33,8 +33,8 @@ public class EditReminderSnooze {
         if(remind == null) {
             return;
         }
-        snooze.setText(remind.getSnooze().name);
-        autoSnooze.setText(remind.getAutoSnooze().name);
+        snooze.setText(remind.getSnooze().getName());
+        autoSnooze.setText(remind.getAutoSnooze().getName());
 
         snoozeContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +42,7 @@ public class EditReminderSnooze {
                 String title = AppBase.getContext().getString(R.string.snooze);
                 String[] items = new String[ReminderItemData.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
-                    items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
+                    items[i] = ReminderItemData.SnoozeOptions.values()[i].getName();
                 }
                 Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
@@ -53,7 +53,7 @@ public class EditReminderSnooze {
                             return;
                         }
                         remind.setSnooze(ReminderItemData.SnoozeOptions.values()[which]);
-                        snooze.setText(remind.getSnooze().name);
+                        snooze.setText(remind.getSnooze().getName());
                     }
                 }, null));
             }
@@ -65,7 +65,7 @@ public class EditReminderSnooze {
                 String title = AppBase.getContext().getString(R.string.auto_snooze);
                 String[] items = new String[ReminderItemData.SnoozeOptions.values().length];
                 for (int i = 0; i < items.length; i++) {
-                    items[i] = ReminderItemData.SnoozeOptions.values()[i].name;
+                    items[i] = ReminderItemData.SnoozeOptions.values()[i].getName();
                 }
                 Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
@@ -76,7 +76,7 @@ public class EditReminderSnooze {
                             return;
                         }
                         remind.setAutoSnooze(ReminderItemData.SnoozeOptions.values()[which]);
-                        autoSnooze.setText(remind.getAutoSnooze().name);
+                        autoSnooze.setText(remind.getAutoSnooze().getName());
                     }
                 }, null));
             }

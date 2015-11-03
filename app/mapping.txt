@@ -25383,7 +25383,7 @@ com.jamesmorrisstudios.appbaselibrary.Logger$LoggerCategory -> com.jamesmorrisst
     138:138:void <init>(java.lang.String,int) -> <init>
     138:139:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.R -> com.jamesmorrisstudios.appbaselibrary.R:
-    9:2024:void <init>() -> <init>
+    9:2025:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$anim -> com.jamesmorrisstudios.appbaselibrary.R$anim:
     int abc_fade_in -> abc_fade_in
     int abc_fade_out -> abc_fade_out
@@ -25929,6 +25929,7 @@ com.jamesmorrisstudios.appbaselibrary.R$color -> com.jamesmorrisstudios.appbasel
     int textLightDivider -> textLightDivider
     int textLightMain -> textLightMain
     int textLightSecondary -> textLightSecondary
+    int textPrimary -> textPrimary
     int tintColor -> tintColor
     396:396:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$dimen -> com.jamesmorrisstudios.appbaselibrary.R$dimen:
@@ -26094,7 +26095,7 @@ com.jamesmorrisstudios.appbaselibrary.R$dimen -> com.jamesmorrisstudios.appbasel
     int notification_large_icon_height -> notification_large_icon_height
     int notification_large_icon_width -> notification_large_icon_width
     int notification_subtext_size -> notification_subtext_size
-    557:557:void <init>() -> <init>
+    558:558:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$drawable -> com.jamesmorrisstudios.appbaselibrary.R$drawable:
     int abc_ab_share_pack_mtrl_alpha -> abc_ab_share_pack_mtrl_alpha
     int abc_action_bar_item_background_material -> abc_action_bar_item_background_material
@@ -26190,7 +26191,7 @@ com.jamesmorrisstudios.appbaselibrary.R$drawable -> com.jamesmorrisstudios.appba
     int text_select_handle_left_mtrl -> text_select_handle_left_mtrl
     int text_select_handle_middle_mtrl -> text_select_handle_middle_mtrl
     int text_select_handle_right_mtrl -> text_select_handle_right_mtrl
-    721:721:void <init>() -> <init>
+    722:722:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$id -> com.jamesmorrisstudios.appbaselibrary.R$id:
     int CIRCLE -> CIRCLE
     int FLOWER -> FLOWER
@@ -26404,7 +26405,7 @@ com.jamesmorrisstudios.appbaselibrary.R$id -> com.jamesmorrisstudios.appbaselibr
     int view_offset_helper -> view_offset_helper
     int withText -> withText
     int wrap_content -> wrap_content
-    817:817:void <init>() -> <init>
+    818:818:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$integer -> com.jamesmorrisstudios.appbaselibrary.R$integer:
     int abc_config_activityDefaultDur -> abc_config_activityDefaultDur
     int abc_config_activityShortDur -> abc_config_activityShortDur
@@ -26414,7 +26415,7 @@ com.jamesmorrisstudios.appbaselibrary.R$integer -> com.jamesmorrisstudios.appbas
     int settings_base_item_3_default_value -> settings_base_item_3_default_value
     int settings_base_item_5_default_value -> settings_base_item_5_default_value
     int status_bar_notification_info_maxnum -> status_bar_notification_info_maxnum
-    1031:1031:void <init>() -> <init>
+    1032:1032:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$layout -> com.jamesmorrisstudios.appbaselibrary.R$layout:
     int abc_action_bar_title_item -> abc_action_bar_title_item
     int abc_action_bar_up_container -> abc_action_bar_up_container
@@ -26498,11 +26499,11 @@ com.jamesmorrisstudios.appbaselibrary.R$layout -> com.jamesmorrisstudios.appbase
     int simple_drop_down_item -> simple_drop_down_item
     int support_simple_spinner_dropdown_item -> support_simple_spinner_dropdown_item
     int toolbar_layout -> toolbar_layout
-    1041:1041:void <init>() -> <init>
+    1042:1042:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$menu -> com.jamesmorrisstudios.appbaselibrary.R$menu:
     int menu_main -> menu_main
     int picker_actions -> picker_actions
-    1125:1125:void <init>() -> <init>
+    1126:1126:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$string -> com.jamesmorrisstudios.appbaselibrary.R$string:
     int Arabic -> Arabic
     int BLANK -> BLANK
@@ -27035,7 +27036,7 @@ com.jamesmorrisstudios.appbaselibrary.R$string -> com.jamesmorrisstudios.appbase
     int you_won -> you_won
     int your_turn -> your_turn
     int youre_welcome -> youre_welcome
-    1129:1129:void <init>() -> <init>
+    1130:1130:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$style -> com.jamesmorrisstudios.appbaselibrary.R$style:
     int AlertDialog_AppCompat -> AlertDialog_AppCompat
     int AlertDialog_AppCompat_Light -> AlertDialog_AppCompat_Light
@@ -27397,7 +27398,7 @@ com.jamesmorrisstudios.appbaselibrary.R$style -> com.jamesmorrisstudios.appbasel
     int toolbarLight -> toolbarLight
     int toolbarPopupDark -> toolbarPopupDark
     int toolbarPopupLight -> toolbarPopupLight
-    1662:1662:void <init>() -> <init>
+    1663:1663:void <init>() -> <init>
 com.jamesmorrisstudios.appbaselibrary.R$styleable -> com.jamesmorrisstudios.appbaselibrary.R$styleable:
     int[] ActionBar -> ActionBar
     int[] ActionBarLayout -> ActionBarLayout
@@ -27866,8 +27867,8 @@ com.jamesmorrisstudios.appbaselibrary.R$styleable -> com.jamesmorrisstudios.appb
     int View_paddingEnd -> View_paddingEnd
     int View_paddingStart -> View_paddingStart
     int View_theme -> View_theme
-    2024:2024:void <init>() -> <init>
-    2025:2483:void <clinit>() -> <clinit>
+    2025:2025:void <init>() -> <init>
+    2026:2484:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.Serializer -> com.jamesmorrisstudios.appbaselibrary.Serializer:
     32:32:void <init>() -> <init>
     41:46:byte[] serializeClass(java.lang.Object) -> serializeClass
@@ -27976,7 +27977,7 @@ com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity -> c
     com.jamesmorrisstudios.appbaselibrary.dialogHelper.FileBrowserRequest fileBrowserRequest -> p
     java.lang.Object busListener -> q
     boolean clearingBackStack -> r
-    82:988:void <init>() -> <init>
+    82:989:void <init>() -> <init>
     176:180:void onCreate(android.os.Bundle) -> onCreate
     183:191:void applyTheme() -> b
     202:234:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
@@ -28024,21 +28025,21 @@ com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity -> c
     730:740:void toggleToolbarOverlay(boolean) -> b
     743:754:void createFileBrowserDialog(com.jamesmorrisstudios.appbaselibrary.dialogHelper.FileBrowserRequest) -> createFileBrowserDialog
     757:785:void createFileBrowserDialogSub() -> createFileBrowserDialogSub
-    796:804:void createTimePickerDialog(com.wdullaer.materialdatetimepicker.time.TimePickerDialog$OnTimeSetListener,int,int,boolean) -> createTimePickerDialog
-    807:813:void createPromptDialog(java.lang.String,java.lang.String,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createPromptDialog
-    816:824:void createSingleChoiceDialog(java.lang.String,java.lang.String[],boolean,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createSingleChoiceDialog
-    827:835:void createSingleChoiceRadioDialog(java.lang.String,java.lang.String[],int,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createSingleChoiceRadioDialog
-    838:846:void createMultiChoiceDialog(java.lang.String,java.lang.String[],boolean[],android.content.DialogInterface$OnMultiChoiceClickListener,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createMultiChoiceDialog
-    849:855:void createSingleChoiceIconDialog(java.lang.String,int[],com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuilder$OptionPickerListener) -> createSingleChoiceIconDialog
-    858:876:void createColorPickerDialog(int,com.jamesmorrisstudios.appbaselibrary.colorpicker.builder.ColorPickerClickListener,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createColorPickerDialog
-    879:890:void createRingtoneDialog(android.net.Uri,java.lang.String,com.jamesmorrisstudios.appbaselibrary.dialogHelper.RingtoneRequest$RingtoneRequestListener) -> createRingtoneDialog
-    893:912:void createRingtoneDialogSub() -> e
-    915:919:void showEditTextListDialog(java.util.ArrayList,com.jamesmorrisstudios.appbaselibrary.dialogs.EditTextListDialog$EditMessageListener,android.view.View$OnClickListener) -> showEditTextListDialog
-    923:945:void onRequestPermissionsResult(int,java.lang.String[],int[]) -> onRequestPermissionsResult
-    948:960:void onRequestReleaseNotesDialog() -> onRequestReleaseNotesDialog
-    963:972:void enableAutoLock() -> enableAutoLock
-    975:979:void disableAutoLock() -> disableAutoLock
-    982:985:int getAlertDialogStyle() -> getAlertDialogStyle
+    796:805:void createTimePickerDialog(com.wdullaer.materialdatetimepicker.time.TimePickerDialog$OnTimeSetListener,int,int,boolean) -> createTimePickerDialog
+    808:814:void createPromptDialog(java.lang.String,java.lang.String,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createPromptDialog
+    817:825:void createSingleChoiceDialog(java.lang.String,java.lang.String[],boolean,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createSingleChoiceDialog
+    828:836:void createSingleChoiceRadioDialog(java.lang.String,java.lang.String[],int,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createSingleChoiceRadioDialog
+    839:847:void createMultiChoiceDialog(java.lang.String,java.lang.String[],boolean[],android.content.DialogInterface$OnMultiChoiceClickListener,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createMultiChoiceDialog
+    850:856:void createSingleChoiceIconDialog(java.lang.String,int[],com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuilder$OptionPickerListener) -> createSingleChoiceIconDialog
+    859:877:void createColorPickerDialog(int,com.jamesmorrisstudios.appbaselibrary.colorpicker.builder.ColorPickerClickListener,android.content.DialogInterface$OnClickListener,android.content.DialogInterface$OnClickListener) -> createColorPickerDialog
+    880:891:void createRingtoneDialog(android.net.Uri,java.lang.String,com.jamesmorrisstudios.appbaselibrary.dialogHelper.RingtoneRequest$RingtoneRequestListener) -> createRingtoneDialog
+    894:913:void createRingtoneDialogSub() -> e
+    916:920:void showEditTextListDialog(java.util.ArrayList,com.jamesmorrisstudios.appbaselibrary.dialogs.EditTextListDialog$EditMessageListener,android.view.View$OnClickListener) -> showEditTextListDialog
+    924:946:void onRequestPermissionsResult(int,java.lang.String[],int[]) -> onRequestPermissionsResult
+    949:961:void onRequestReleaseNotesDialog() -> onRequestReleaseNotesDialog
+    964:973:void enableAutoLock() -> enableAutoLock
+    976:980:void disableAutoLock() -> disableAutoLock
+    983:986:int getAlertDialogStyle() -> getAlertDialogStyle
     82:82:android.support.v7.widget.Toolbar access$000(com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity) -> a
 com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$1 -> ars:
     com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity this$0 -> a
@@ -28065,8 +28066,8 @@ com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$3 ->
     722:723:void onAnimationEnd(android.animation.Animator) -> onAnimationEnd
 com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$4 -> arv:
     com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity this$0 -> a
-    864:864:void <init>(com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity) -> <init>
-    868:868:void onColorSelected(int) -> onColorSelected
+    865:865:void <init>(com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity) -> <init>
+    869:869:void onColorSelected(int) -> onColorSelected
 com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$5 -> arw:
     int[] $SwitchMap$com$jamesmorrisstudios$appbaselibrary$ThemeManager$AppTheme -> a
     int[] $SwitchMap$com$jamesmorrisstudios$appbaselibrary$activities$BaseLauncherNoViewActivity$AppBaseEvent -> b
@@ -28081,10 +28082,10 @@ com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppB
     com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppBaseEvent TOOLBAR_OVERLAY_ENABLE -> TOOLBAR_OVERLAY_ENABLE
     com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppBaseEvent TOOLBAR_OVERLAY_DISABLE -> TOOLBAR_OVERLAY_DISABLE
     com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppBaseEvent[] $VALUES -> a
-    988:988:com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppBaseEvent[] values() -> values
-    988:988:com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppBaseEvent valueOf(java.lang.String) -> valueOf
-    988:988:void <init>(java.lang.String,int) -> <init>
-    988:990:void <clinit>() -> <clinit>
+    989:989:com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppBaseEvent[] values() -> values
+    989:989:com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherNoViewActivity$AppBaseEvent valueOf(java.lang.String) -> valueOf
+    989:989:void <init>(java.lang.String,int) -> <init>
+    989:991:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.activities.CustomFilePickerActivity -> com.jamesmorrisstudios.appbaselibrary.activities.CustomFilePickerActivity:
     java.lang.String EXTRA_EXTENSION -> EXTRA_EXTENSION
     java.lang.String EXTRA_THEME -> EXTRA_THEME
@@ -29315,17 +29316,18 @@ com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent -> com.ja
     230:230:int getNotifCounter() -> getNotifCounter
 com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$1 -> atv:
     int[] $SwitchMap$com$jamesmorrisstudios$appbaselibrary$notification$NotificationContent$NotificationVibrate -> a
-    158:158:void <clinit>() -> <clinit>
+    int[] $SwitchMap$com$jamesmorrisstudios$appbaselibrary$notification$NotificationContent$NotificationPriority -> b
+    158:248:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority -> com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority:
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority DEFAULT -> DEFAULT
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority LOW -> LOW
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority HIGH -> HIGH
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority MAX -> MAX
-    java.lang.String name -> name
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority[] $VALUES -> a
     241:241:com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority[] values() -> values
     241:241:com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationPriority valueOf(java.lang.String) -> valueOf
-    249:251:void <init>(java.lang.String,int,java.lang.String) -> <init>
+    241:241:void <init>(java.lang.String,int) -> <init>
+    248:258:java.lang.String getName() -> getName
     241:245:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationTheme -> com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationTheme:
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationTheme DARK -> DARK
@@ -29356,12 +29358,12 @@ com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$Notificat
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate PATTERN_4 -> PATTERN_4
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate PATTERN_5 -> PATTERN_5
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate PATTERN_6 -> PATTERN_6
-    java.lang.String name -> name
     com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate[] $VALUES -> a
-    254:254:com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate[] values() -> values
-    254:254:com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate valueOf(java.lang.String) -> valueOf
-    269:271:void <init>(java.lang.String,int,java.lang.String) -> <init>
-    254:265:void <clinit>() -> <clinit>
+    263:263:com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate[] values() -> values
+    263:263:com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent$NotificationVibrate valueOf(java.lang.String) -> valueOf
+    263:263:void <init>(java.lang.String,int) -> <init>
+    277:301:java.lang.String getName() -> getName
+    263:274:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.notification.Notifier -> com.jamesmorrisstudios.appbaselibrary.notification.Notifier:
     44:44:void <init>() -> <init>
     53:138:void buildNotification(com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent) -> buildNotification
@@ -29493,7 +29495,7 @@ com.jamesmorrisstudios.appbaselibrary.time.TimeItem -> com.jamesmorrisstudios.ap
     118:118:int toMinutes() -> toMinutes
     127:131:boolean equals(java.lang.Object) -> equals
 com.jamesmorrisstudios.appbaselibrary.time.UtilsTime -> com.jamesmorrisstudios.appbaselibrary.time.UtilsTime:
-    39:566:void <init>() -> <init>
+    39:583:void <init>() -> <init>
     45:45:boolean is24HourTime() -> is24HourTime
     53:53:boolean isAM(int) -> isAM
     63:68:int getHourInTimeFormat(int) -> getHourInTimeFormat
@@ -29539,7 +29541,8 @@ com.jamesmorrisstudios.appbaselibrary.time.UtilsTime -> com.jamesmorrisstudios.a
     531:535:java.util.ArrayList cloneArrayListTime(java.util.ArrayList) -> cloneArrayListTime
 com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$1 -> aub:
     int[] $SwitchMap$com$jamesmorrisstudios$appbaselibrary$time$UtilsTime$DayOfWeek -> a
-    118:118:void <clinit>() -> <clinit>
+    int[] $SwitchMap$com$jamesmorrisstudios$appbaselibrary$time$UtilsTime$WeekOfMonth -> b
+    118:613:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek -> com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek:
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek SUNDAY -> SUNDAY
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek MONDAY -> MONDAY
@@ -29549,12 +29552,12 @@ com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek -> com.jamesmorri
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek FRIDAY -> FRIDAY
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek SATURDAY -> SATURDAY
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek AUTOMATIC -> AUTOMATIC
-    java.lang.String name -> name
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek[] $VALUES -> a
     541:541:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek[] values() -> values
     541:541:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$DayOfWeek valueOf(java.lang.String) -> valueOf
-    553:555:void <init>(java.lang.String,int,java.lang.String) -> <init>
-    558:562:int getIndex() -> getIndex
+    541:541:void <init>(java.lang.String,int) -> <init>
+    552:556:int getIndex() -> getIndex
+    560:578:java.lang.String getName() -> getName
     541:549:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth -> com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth:
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth FIRST -> FIRST
@@ -29562,14 +29565,14 @@ com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth -> com.jamesmor
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth THIRD -> THIRD
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth FOURTH -> FOURTH
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth FIFTH -> FIFTH
-    java.lang.String name -> name
     int number -> number
     com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth[] $VALUES -> a
-    566:566:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth[] values() -> values
-    566:566:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth valueOf(java.lang.String) -> valueOf
-    576:579:void <init>(java.lang.String,int,int,java.lang.String) -> <init>
-    582:594:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth getWeekOfMonth(int) -> getWeekOfMonth
-    566:571:void <clinit>() -> <clinit>
+    583:583:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth[] values() -> values
+    583:583:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth valueOf(java.lang.String) -> valueOf
+    592:594:void <init>(java.lang.String,int,int) -> <init>
+    597:609:com.jamesmorrisstudios.appbaselibrary.time.UtilsTime$WeekOfMonth getWeekOfMonth(int) -> getWeekOfMonth
+    613:625:java.lang.String getName() -> getName
+    583:588:void <clinit>() -> <clinit>
 com.jamesmorrisstudios.appbaselibrary.touchHelper.ItemTouchHelperAdapter -> com.jamesmorrisstudios.appbaselibrary.touchHelper.ItemTouchHelperAdapter:
     void onItemMove(int,int) -> onItemMove
     void onItemDismiss(int) -> onItemDismiss
@@ -32116,7 +32119,7 @@ jamesmorrisstudios.com.randremind.BuildConfig -> jamesmorrisstudios.com.randremi
     java.lang.String VERSION_NAME -> VERSION_NAME
     6:6:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R -> jamesmorrisstudios.com.randremind.R:
-    10:4208:void <init>() -> <init>
+    10:4209:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$anim -> jamesmorrisstudios.com.randremind.R$anim:
     int abc_fade_in -> abc_fade_in
     int abc_fade_out -> abc_fade_out
@@ -32486,7 +32489,7 @@ jamesmorrisstudios.com.randremind.R$attr -> jamesmorrisstudios.com.randremind.R$
     int windowMinWidthMajor -> windowMinWidthMajor
     int windowMinWidthMinor -> windowMinWidthMinor
     int windowNoTitle -> windowNoTitle
-    68:68:void <init>() -> <init>
+    70:70:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$bool -> jamesmorrisstudios.com.randremind.R$bool:
     int abc_action_bar_embed_tabs -> abc_action_bar_embed_tabs
     int abc_action_bar_embed_tabs_pre_jb -> abc_action_bar_embed_tabs_pre_jb
@@ -32519,7 +32522,7 @@ jamesmorrisstudios.com.randremind.R$bool -> jamesmorrisstudios.com.randremind.R$
     int settings_item_3_default_value -> settings_item_3_default_value
     int settings_item_3_restart -> settings_item_3_restart
     int settings_item_4_restart -> settings_item_4_restart
-    2296:2296:void <init>() -> <init>
+    2298:2298:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$color -> jamesmorrisstudios.com.randremind.R$color:
     int abc_background_cache_hint_selector_material_dark -> abc_background_cache_hint_selector_material_dark
     int abc_background_cache_hint_selector_material_light -> abc_background_cache_hint_selector_material_light
@@ -32679,8 +32682,9 @@ jamesmorrisstudios.com.randremind.R$color -> jamesmorrisstudios.com.randremind.R
     int textLightDivider -> textLightDivider
     int textLightMain -> textLightMain
     int textLightSecondary -> textLightSecondary
+    int textPrimary -> textPrimary
     int tintColor -> tintColor
-    2329:2329:void <init>() -> <init>
+    2331:2331:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$dimen -> jamesmorrisstudios.com.randremind.R$dimen:
     int abc_action_bar_content_inset_material -> abc_action_bar_content_inset_material
     int abc_action_bar_default_height_material -> abc_action_bar_default_height_material
@@ -32844,7 +32848,7 @@ jamesmorrisstudios.com.randremind.R$dimen -> jamesmorrisstudios.com.randremind.R
     int notification_large_icon_height -> notification_large_icon_height
     int notification_large_icon_width -> notification_large_icon_width
     int notification_subtext_size -> notification_subtext_size
-    2490:2490:void <init>() -> <init>
+    2493:2493:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$drawable -> jamesmorrisstudios.com.randremind.R$drawable:
     int abc_ab_share_pack_mtrl_alpha -> abc_ab_share_pack_mtrl_alpha
     int abc_action_bar_item_background_material -> abc_action_bar_item_background_material
@@ -33029,7 +33033,7 @@ jamesmorrisstudios.com.randremind.R$drawable -> jamesmorrisstudios.com.randremin
     int text_select_handle_left_mtrl -> text_select_handle_left_mtrl
     int text_select_handle_middle_mtrl -> text_select_handle_middle_mtrl
     int text_select_handle_right_mtrl -> text_select_handle_right_mtrl
-    2654:2654:void <init>() -> <init>
+    2657:2657:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$id -> jamesmorrisstudios.com.randremind.R$id:
     int CIRCLE -> CIRCLE
     int FLOWER -> FLOWER
@@ -33345,7 +33349,6 @@ jamesmorrisstudios.com.randremind.R$id -> jamesmorrisstudios.com.randremind.R$id
     int title -> title
     int titleText -> titleText
     int title_template -> title_template
-    int toggle_expand -> toggle_expand
     int toolbar -> toolbar
     int top -> top
     int topContainer -> topContainer
@@ -33360,7 +33363,7 @@ jamesmorrisstudios.com.randremind.R$id -> jamesmorrisstudios.com.randremind.R$id
     int weeksLabel -> weeksLabel
     int withText -> withText
     int wrap_content -> wrap_content
-    2839:2839:void <init>() -> <init>
+    2842:2842:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$integer -> jamesmorrisstudios.com.randremind.R$integer:
     int abc_config_activityDefaultDur -> abc_config_activityDefaultDur
     int abc_config_activityShortDur -> abc_config_activityShortDur
@@ -33371,7 +33374,7 @@ jamesmorrisstudios.com.randremind.R$integer -> jamesmorrisstudios.com.randremind
     int settings_base_item_5_default_value -> settings_base_item_5_default_value
     int settings_item_4_default_value -> settings_item_4_default_value
     int status_bar_notification_info_maxnum -> status_bar_notification_info_maxnum
-    3170:3170:void <init>() -> <init>
+    3172:3172:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$layout -> jamesmorrisstudios.com.randremind.R$layout:
     int abc_action_bar_title_item -> abc_action_bar_title_item
     int abc_action_bar_up_container -> abc_action_bar_up_container
@@ -33415,7 +33418,6 @@ jamesmorrisstudios.com.randremind.R$layout -> jamesmorrisstudios.com.randremind.
     int design_navigation_item_subheader -> design_navigation_item_subheader
     int design_navigation_menu -> design_navigation_menu
     int design_navigation_menu_item -> design_navigation_menu_item
-    int edit_reminder_alarm -> edit_reminder_alarm
     int edit_reminder_general -> edit_reminder_general
     int edit_reminder_line_item -> edit_reminder_line_item
     int edit_reminder_message -> edit_reminder_message
@@ -33476,16 +33478,16 @@ jamesmorrisstudios.com.randremind.R$layout -> jamesmorrisstudios.com.randremind.
     int time_display -> time_display
     int time_display_small -> time_display_small
     int toolbar_layout -> toolbar_layout
-    3181:3181:void <init>() -> <init>
+    3183:3183:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$menu -> jamesmorrisstudios.com.randremind.R$menu:
     int menu_add_new -> menu_add_new
     int menu_main -> menu_main
     int menu_summary -> menu_summary
     int picker_actions -> picker_actions
-    3286:3286:void <init>() -> <init>
+    3287:3287:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$mipmap -> jamesmorrisstudios.com.randremind.R$mipmap:
     int ic_launcher -> ic_launcher
-    3292:3292:void <init>() -> <init>
+    3293:3293:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$string -> jamesmorrisstudios.com.randremind.R$string:
     int Arabic -> Arabic
     int BLANK -> BLANK
@@ -34030,7 +34032,7 @@ jamesmorrisstudios.com.randremind.R$string -> jamesmorrisstudios.com.randremind.
     int you_won -> you_won
     int your_turn -> your_turn
     int youre_welcome -> youre_welcome
-    3295:3295:void <init>() -> <init>
+    3296:3296:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$style -> jamesmorrisstudios.com.randremind.R$style:
     int AlertDialog_AppCompat -> AlertDialog_AppCompat
     int AlertDialog_AppCompat_Light -> AlertDialog_AppCompat_Light
@@ -34392,7 +34394,7 @@ jamesmorrisstudios.com.randremind.R$style -> jamesmorrisstudios.com.randremind.R
     int toolbarLight -> toolbarLight
     int toolbarPopupDark -> toolbarPopupDark
     int toolbarPopupLight -> toolbarPopupLight
-    3840:3840:void <init>() -> <init>
+    3841:3841:void <init>() -> <init>
 jamesmorrisstudios.com.randremind.R$styleable -> jamesmorrisstudios.com.randremind.R$styleable:
     int[] ActionBar -> ActionBar
     int ActionBar_background -> ActionBar_background
@@ -34861,8 +34863,8 @@ jamesmorrisstudios.com.randremind.R$styleable -> jamesmorrisstudios.com.randremi
     int ViewStubCompat_android_id -> ViewStubCompat_android_id
     int ViewStubCompat_android_inflatedId -> ViewStubCompat_android_inflatedId
     int ViewStubCompat_android_layout -> ViewStubCompat_android_layout
-    4208:4208:void <init>() -> <init>
-    4271:10519:void <clinit>() -> <clinit>
+    4209:4209:void <init>() -> <init>
+    4272:10520:void <clinit>() -> <clinit>
 jamesmorrisstudios.com.randremind.activities.MainActivity -> jamesmorrisstudios.com.randremind.activities.MainActivity:
     74:74:void <init>() -> <init>
     80:87:void onCreate(android.os.Bundle) -> onCreate
@@ -35227,34 +35229,34 @@ jamesmorrisstudios.com.randremind.editReminder.EditReminderTiming$8 -> axk:
 jamesmorrisstudios.com.randremind.fragments.AddReminderFragment -> jamesmorrisstudios.com.randremind.fragments.AddReminderFragment:
     java.lang.String TAG -> TAG
     boolean saveOnBack -> a
-    34:36:void <init>() -> <init>
-    45:47:void onCreate(android.os.Bundle) -> onCreate
-    57:59:void onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater) -> onCreateOptionsMenu
-    69:93:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    98:98:com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter getAdapter(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter$OnItemClickListener) -> getAdapter
-    103:123:void startDataLoad(boolean) -> startDataLoad
-    128:128:void startMoreDataLoad() -> startMoreDataLoad
-    133:133:void itemClick(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer) -> itemClick
-    138:138:void itemMove(int,int) -> itemMove
-    142:142:boolean supportsHeaders() -> supportsHeaders
-    147:147:boolean allowReording() -> allowReording
-    151:151:int getNumberColumns() -> getNumberColumns
-    159:172:void onStop() -> onStop
-    176:178:void onBack() -> onBack
-    182:182:boolean showToolbarTitle() -> showToolbarTitle
-    188:188:void saveState(android.os.Bundle) -> saveState
-    193:193:void restoreState(android.os.Bundle) -> restoreState
-    198:198:void afterViewCreated() -> afterViewCreated
-    34:34:boolean access$002(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment,boolean) -> a
-    34:34:com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment$OnUtilListener access$100(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment) -> a
+    36:38:void <init>() -> <init>
+    47:49:void onCreate(android.os.Bundle) -> onCreate
+    59:61:void onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater) -> onCreateOptionsMenu
+    71:106:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    111:111:com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter getAdapter(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter$OnItemClickListener) -> getAdapter
+    116:136:void startDataLoad(boolean) -> startDataLoad
+    141:141:void startMoreDataLoad() -> startMoreDataLoad
+    146:146:void itemClick(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleContainer) -> itemClick
+    151:151:void itemMove(int,int) -> itemMove
+    155:155:boolean supportsHeaders() -> supportsHeaders
+    160:160:boolean allowReording() -> allowReording
+    164:164:int getNumberColumns() -> getNumberColumns
+    172:185:void onStop() -> onStop
+    189:191:void onBack() -> onBack
+    195:195:boolean showToolbarTitle() -> showToolbarTitle
+    201:201:void saveState(android.os.Bundle) -> saveState
+    206:206:void restoreState(android.os.Bundle) -> restoreState
+    211:211:void afterViewCreated() -> afterViewCreated
+    36:36:boolean access$002(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment,boolean) -> a
+    36:36:com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment$OnUtilListener access$100(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment) -> a
 jamesmorrisstudios.com.randremind.fragments.AddReminderFragment$1 -> axl:
     jamesmorrisstudios.com.randremind.fragments.AddReminderFragment this$0 -> a
-    71:71:void <init>(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment) -> <init>
-    74:78:void onClick(android.content.DialogInterface,int) -> onClick
+    73:73:void <init>(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment) -> <init>
+    76:80:void onClick(android.content.DialogInterface,int) -> onClick
 jamesmorrisstudios.com.randremind.fragments.AddReminderFragment$2 -> axm:
     jamesmorrisstudios.com.randremind.fragments.AddReminderFragment this$0 -> a
-    79:79:void <init>(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment) -> <init>
-    83:83:void onClick(android.content.DialogInterface,int) -> onClick
+    81:81:void <init>(jamesmorrisstudios.com.randremind.fragments.AddReminderFragment) -> <init>
+    85:85:void onClick(android.content.DialogInterface,int) -> onClick
 jamesmorrisstudios.com.randremind.fragments.BackupRestoreFragment -> jamesmorrisstudios.com.randremind.fragments.BackupRestoreFragment:
     java.lang.String TAG -> TAG
     android.widget.Button selectAll -> a
@@ -35579,23 +35581,15 @@ jamesmorrisstudios.com.randremind.listAdapters.EditReminderContainer -> jamesmor
     26:26:com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem getItem() -> getItem
 jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder -> jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder:
     android.widget.TextView title -> k
-    com.jamesmorrisstudios.appbaselibrary.controls.TintedImageView toggleExpand -> l
-    android.widget.FrameLayout container -> m
-    39:40:void <init>(android.view.View,boolean,boolean,com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder$cardClickListener) -> <init>
-    45:45:void initHeader(android.view.View) -> initHeader
-    49:52:void initItem(android.view.View) -> initItem
-    57:57:void bindHeader(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindHeader
-    61:126:void bindItem(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindItem
-    28:28:android.widget.FrameLayout access$000(jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder) -> a
-    28:28:com.jamesmorrisstudios.appbaselibrary.controls.TintedImageView access$100(jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder) -> b
+    android.widget.FrameLayout container -> l
+    38:39:void <init>(android.view.View,boolean,boolean,com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder$cardClickListener) -> <init>
+    44:44:void initHeader(android.view.View) -> initHeader
+    48:50:void initItem(android.view.View) -> initItem
+    55:55:void bindHeader(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindHeader
+    59:103:void bindItem(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindItem
 jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder$1 -> ayz:
-    jamesmorrisstudios.com.randremind.editReminder.EditReminderItem val$item -> a
-    jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder this$0 -> b
-    112:112:void <init>(jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder,jamesmorrisstudios.com.randremind.editReminder.EditReminderItem) -> <init>
-    115:124:void onClick(android.view.View) -> onClick
-jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder$2 -> aza:
     int[] $SwitchMap$jamesmorrisstudios$com$randremind$listAdapters$EditReminderViewHolder$EditReminderPage -> a
-    65:65:void <clinit>() -> <clinit>
+    63:63:void <clinit>() -> <clinit>
 jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder$EditReminderPage -> jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder$EditReminderPage:
     jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder$EditReminderPage GENERAL -> GENERAL
     jamesmorrisstudios.com.randremind.listAdapters.EditReminderViewHolder$EditReminderPage MESSAGE -> MESSAGE
@@ -35644,17 +35638,17 @@ jamesmorrisstudios.com.randremind.listAdapters.ReminderViewHolder -> jamesmorris
     android.view.View top2 -> C
     android.view.View top3 -> D
     com.jamesmorrisstudios.appbaselibrary.controls.ButtonCircleFlat[] dayButtons -> E
-    57:58:void <init>(android.view.View,boolean,boolean,com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder$cardClickListener) -> <init>
-    63:63:void initHeader(android.view.View) -> initHeader
-    67:105:void initItem(android.view.View) -> initItem
-    110:110:void bindHeader(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindHeader
-    114:163:void bindItem(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindItem
-    172:174:void setDayOfWeek(int,boolean) -> b
-jamesmorrisstudios.com.randremind.listAdapters.ReminderViewHolder$1 -> azb:
+    58:59:void <init>(android.view.View,boolean,boolean,com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder$cardClickListener) -> <init>
+    64:64:void initHeader(android.view.View) -> initHeader
+    68:106:void initItem(android.view.View) -> initItem
+    111:111:void bindHeader(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindHeader
+    115:164:void bindItem(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindItem
+    173:175:void setDayOfWeek(int,boolean) -> b
+jamesmorrisstudios.com.randremind.listAdapters.ReminderViewHolder$1 -> aza:
     jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary val$reminder -> a
     jamesmorrisstudios.com.randremind.listAdapters.ReminderViewHolder this$0 -> b
-    153:153:void <init>(jamesmorrisstudios.com.randremind.listAdapters.ReminderViewHolder,jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary) -> <init>
-    156:158:void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
+    154:154:void <init>(jamesmorrisstudios.com.randremind.listAdapters.ReminderViewHolder,jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary) -> <init>
+    157:159:void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
 jamesmorrisstudios.com.randremind.listAdapters.SummaryAdapter -> jamesmorrisstudios.com.randremind.listAdapters.SummaryAdapter:
     java.lang.String TAG -> TAG
     39:40:void <init>(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleAdapter$OnItemClickListener) -> <init>
@@ -35705,7 +35699,7 @@ jamesmorrisstudios.com.randremind.listAdapters.SummaryViewHolder -> jamesmorriss
     128:191:void bindHeader(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindHeader
     195:221:void bindItem(com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem,boolean) -> bindItem
     230:232:void setDayOfWeek(int,boolean) -> b
-jamesmorrisstudios.com.randremind.listAdapters.SummaryViewHolder$1 -> azc:
+jamesmorrisstudios.com.randremind.listAdapters.SummaryViewHolder$1 -> azb:
     jamesmorrisstudios.com.randremind.reminder.ReminderItem val$reminder -> a
     jamesmorrisstudios.com.randremind.listAdapters.SummaryViewHolder this$0 -> b
     182:182:void <init>(jamesmorrisstudios.com.randremind.listAdapters.SummaryViewHolder,jamesmorrisstudios.com.randremind.reminder.ReminderItem) -> <init>
@@ -35846,7 +35840,7 @@ jamesmorrisstudios.com.randremind.reminder.ReminderItem -> jamesmorrisstudios.co
     923:964:void updateVersion() -> updateVersion
     57:57:void access$000(jamesmorrisstudios.com.randremind.reminder.ReminderItem$ReminderItemEvent) -> a
     57:57:android.os.AsyncTask access$102(jamesmorrisstudios.com.randremind.reminder.ReminderItem,android.os.AsyncTask) -> a
-jamesmorrisstudios.com.randremind.reminder.ReminderItem$1 -> azd:
+jamesmorrisstudios.com.randremind.reminder.ReminderItem$1 -> azc:
     jamesmorrisstudios.com.randremind.reminder.ReminderItem this$0 -> a
     891:891:void <init>(jamesmorrisstudios.com.randremind.reminder.ReminderItem) -> <init>
     894:894:java.lang.Boolean doInBackground(java.lang.Void[]) -> a
@@ -35898,7 +35892,11 @@ jamesmorrisstudios.com.randremind.reminder.ReminderItemData -> jamesmorrisstudio
     29:135:void <init>(java.lang.String) -> <init>
     29:168:void <init>(jamesmorrisstudios.com.randremind.reminder.ReminderItemData) -> <init>
     29:201:void <init>(jamesmorrisstudios.com.randremind.reminder.ReminderItemData,java.lang.String) -> <init>
-    248:252:boolean equals(java.lang.Object) -> equals
+    293:297:boolean equals(java.lang.Object) -> equals
+jamesmorrisstudios.com.randremind.reminder.ReminderItemData$1 -> azd:
+    int[] $SwitchMap$jamesmorrisstudios$com$randremind$reminder$ReminderItemData$SnoozeOptions -> a
+    int[] $SwitchMap$jamesmorrisstudios$com$randremind$reminder$ReminderItemData$WeekOptions -> b
+    224:266:void <clinit>() -> <clinit>
 jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions -> jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions:
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions DISABLED -> DISABLED
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions MIN_1 -> MIN_1
@@ -35912,12 +35910,12 @@ jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions -> jam
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions MIN_25 -> MIN_25
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions MIN_30 -> MIN_30
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions MIN_60 -> MIN_60
-    java.lang.String name -> name
     int minutes -> minutes
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions[] $VALUES -> a
     203:203:jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions[] values() -> values
     203:203:jamesmorrisstudios.com.randremind.reminder.ReminderItemData$SnoozeOptions valueOf(java.lang.String) -> valueOf
-    220:223:void <init>(java.lang.String,int,int,java.lang.String) -> <init>
+    219:221:void <init>(java.lang.String,int,int) -> <init>
+    224:250:java.lang.String getName() -> getName
     203:215:void <clinit>() -> <clinit>
 jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions -> jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions:
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions Every -> Every
@@ -35927,12 +35925,12 @@ jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions -> james
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions FOURTH -> FOURTH
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions FIFTH -> FIFTH
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions LAST -> LAST
-    java.lang.String name -> name
     jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions[] $VALUES -> a
-    226:226:jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions[] values() -> values
-    226:226:jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions valueOf(java.lang.String) -> valueOf
-    237:239:void <init>(java.lang.String,int,java.lang.String) -> <init>
-    226:233:void <clinit>() -> <clinit>
+    256:256:jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions[] values() -> values
+    256:256:jamesmorrisstudios.com.randremind.reminder.ReminderItemData$WeekOptions valueOf(java.lang.String) -> valueOf
+    256:256:void <init>(java.lang.String,int) -> <init>
+    266:282:java.lang.String getName() -> getName
+    256:263:void <clinit>() -> <clinit>
 jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary -> jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary:
     java.lang.String uniqueName -> uniqueName
     java.lang.String title -> title
@@ -36091,17 +36089,20 @@ jamesmorrisstudios.com.randremind.reminder.ReminderLogItem -> jamesmorrisstudios
     jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType type -> type
     com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem dateTime -> dateTime
     17:20:void <init>(jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType,com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem) -> <init>
+jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$1 -> azj:
+    int[] $SwitchMap$jamesmorrisstudios$com$randremind$reminder$ReminderLogItem$LogType -> a
+    30:30:void <clinit>() -> <clinit>
 jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType -> jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType:
     jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType SHOWN -> SHOWN
     jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType CLICKED -> CLICKED
     jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType SHOWN_AGAIN -> SHOWN_AGAIN
     jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType SNOOZED -> SNOOZED
     jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType DISMISSED -> DISMISSED
-    java.lang.String name -> name
     jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType[] $VALUES -> a
     22:22:jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType[] values() -> values
     22:22:jamesmorrisstudios.com.randremind.reminder.ReminderLogItem$LogType valueOf(java.lang.String) -> valueOf
-    31:33:void <init>(java.lang.String,int,java.lang.String) -> <init>
+    22:22:void <init>(java.lang.String,int) -> <init>
+    30:42:java.lang.String getName() -> getName
     22:27:void <clinit>() -> <clinit>
 jamesmorrisstudios.com.randremind.reminder.Scheduler -> jamesmorrisstudios.com.randremind.reminder.Scheduler:
     jamesmorrisstudios.com.randremind.reminder.Scheduler instance -> a

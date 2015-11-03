@@ -60,8 +60,8 @@ public class EditReminderNotification {
             return;
         }
         sound.setText(reminderItem.getNotificationToneName());
-        priority.setText(reminderItem.getNotificationPriority().name);
-        vibrate.setText(reminderItem.getNotificationVibratePattern().name);
+        priority.setText(reminderItem.getNotificationPriority().getName());
+        vibrate.setText(reminderItem.getNotificationVibratePattern().getName());
         if(reminderItem.isNotificationLED()) {
             led.setText(AppBase.getContext().getString(R.string.enabled));
         } else {
@@ -118,7 +118,7 @@ public class EditReminderNotification {
                 final NotificationContent.NotificationVibrate[] vibrateList = NotificationContent.NotificationVibrate.values();
                 String[] items = new String[vibrateList.length];
                 for (int i = 0; i < vibrateList.length; i++) {
-                    items[i] = vibrateList[i].name;
+                    items[i] = vibrateList[i].getName();
                 }
                 Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
@@ -129,7 +129,7 @@ public class EditReminderNotification {
                             return;
                         }
                         remind.setNotificationVibratePattern(vibrateList[which]);
-                        vibrate.setText(remind.getNotificationVibratePattern().name);
+                        vibrate.setText(remind.getNotificationVibratePattern().getName());
                     }
                 }, null));
             }
@@ -141,7 +141,7 @@ public class EditReminderNotification {
                 final NotificationContent.NotificationPriority[] priorityList = NotificationContent.NotificationPriority.values();
                 String[] items = new String[priorityList.length];
                 for(int i=0; i<priorityList.length; i++) {
-                    items[i] = priorityList[i].name;
+                    items[i] = priorityList[i].getName();
                 }
                 Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
                     @Override
@@ -152,7 +152,7 @@ public class EditReminderNotification {
                             return;
                         }
                         remind.setNotificationPriority(priorityList[which]);
-                        priority.setText(remind.getNotificationPriority().name);
+                        priority.setText(remind.getNotificationPriority().getName());
                     }
                 }, null));
             }

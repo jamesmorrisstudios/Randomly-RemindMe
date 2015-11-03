@@ -79,7 +79,8 @@
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="20sp" />
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/item_size" />
 
             <include
                 android:id="@+id/reminder_time_1"

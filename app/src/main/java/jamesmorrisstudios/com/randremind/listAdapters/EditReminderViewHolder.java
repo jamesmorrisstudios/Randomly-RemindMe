@@ -6,9 +6,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.jamesmorrisstudios.appbaselibrary.animator.AnimatorControl;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
-import com.jamesmorrisstudios.appbaselibrary.controls.TintedImageView;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleItem;
 import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 
@@ -17,7 +15,7 @@ import jamesmorrisstudios.com.randremind.editReminder.EditReminderGeneral;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderItem;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderMessage;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderNotification;
-import jamesmorrisstudios.com.randremind.editReminder.EditReminderRepeat;
+import jamesmorrisstudios.com.randremind.editReminder.EditReminderCriteria;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderSnooze;
 import jamesmorrisstudios.com.randremind.editReminder.EditReminderTiming;
 
@@ -78,7 +76,7 @@ public class EditReminderViewHolder extends BaseRecycleViewHolder {
                 break;
             case REPEAT:
                 title.setText(AppBase.getContext().getString(R.string.repeat));
-                EditReminderRepeat repeat = new EditReminderRepeat(view);
+                EditReminderCriteria repeat = new EditReminderCriteria(view);
                 repeat.bindItem(item);
                 break;
             case NOTIFICATION:
