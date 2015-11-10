@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Time Start -->
+    <RelativeLayout
+        android:id="@+id/startTimeContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/startTimeLabel"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/item_size" />
+
+        <include
+            android:id="@+id/startTime"
+            android:layout_centerVertical="true"
+            layout="@layout/time_display_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="?android:attr/listDivider" />
+
+    <!-- Time End -->
+    <RelativeLayout
+        android:id="@+id/endTimeContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/endTimeLabel"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/item_size" />
+
+        <include
+            android:id="@+id/endTime"
+            android:layout_centerVertical="true"
+            layout="@layout/time_display_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="?android:attr/listDivider" />
+
+    <!-- Filter Type -->
+    <RelativeLayout
+        android:id="@+id/filterTypeContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/filterTypeLabel"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_type"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/item_size" />
+
+        <TextView
+            android:layout_below="@+id/filterTypeLabel"
+            android:id="@+id/filterType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/item_small_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:id="@+id/filterTypeNormalContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Days of week -->
+        <RelativeLayout
+            android:id="@+id/daysOfWeekContainer"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:minHeight="45dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/daysOfWeekLabel"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/days_of_week"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/item_size" />
+
+            <TextView
+                android:layout_below="@+id/daysOfWeekLabel"
+                android:id="@+id/daysOfWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/item_small_size" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:id="@+id/advancedContainer"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Days of month -->
+            <RelativeLayout
+                android:id="@+id/daysOfMonthContainer"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:minHeight="45dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/daysOfMonthLabel"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/days_of_month"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/item_size" />
+
+                <TextView
+                    android:layout_below="@+id/daysOfMonthLabel"
+                    android:id="@+id/daysOfMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="@dimen/item_small_size" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="?android:attr/listDivider" />
+
+            <!-- Weeks of month-->
+            <RelativeLayout
+                android:id="@+id/weeksOfMonthContainer"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:minHeight="45dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/weeksOfMonthLabel"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weeks_of_month"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/item_size" />
+
+                <TextView
+                    android:layout_below="@+id/weeksOfMonthLabel"
+                    android:id="@+id/weeksOfMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="@dimen/item_small_size" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="?android:attr/listDivider" />
+
+            <!-- months of year -->
+            <RelativeLayout
+                android:id="@+id/monthsOfYearContainer"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:minHeight="45dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/monthsOfYearLabel"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/months_of_year"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/item_size" />
+
+                <TextView
+                    android:layout_below="@+id/monthsOfYearLabel"
+                    android:id="@+id/monthsOfYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="@dimen/item_small_size" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="?android:attr/listDivider" />
+
+            <!-- Repeat every... -->
+            <RelativeLayout
+                android:id="@+id/repeatEveryContainer"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:minHeight="45dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/repeatEveryLabel"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/repeat_every"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/item_size" />
+
+                <TextView
+                    android:layout_below="@+id/repeatEveryLabel"
+                    android:id="@+id/repeatEvery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="@dimen/item_small_size" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="?android:attr/listDivider" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filterTypeManualContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!-- Days of year MANUAL mode -->
+        <RelativeLayout
+            android:id="@+id/daysOfYearContainer"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:minHeight="45dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/daysOfYearLabel"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/days_of_year"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/item_size" />
+
+            <TextView
+                android:layout_below="@+id/daysOfYearLabel"
+                android:id="@+id/daysOfYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/item_small_size" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="?android:attr/listDivider" />
+
+    </LinearLayout>
+
+
+    <!-- TODO GeoFence in and not in -->
+
+</LinearLayout>

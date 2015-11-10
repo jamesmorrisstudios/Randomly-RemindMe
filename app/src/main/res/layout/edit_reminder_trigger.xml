@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- trigger type -->
+    <RelativeLayout
+        android:id="@+id/triggerTypeContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/triggerTypeLabel"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trigger_type"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/item_size" />
+
+        <TextView
+            android:layout_below="@+id/triggerTypeLabel"
+            android:id="@+id/triggerType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/item_small_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:id="@+id/countPeriodContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- count -->
+        <RelativeLayout
+            android:id="@+id/countContainer"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:minHeight="45dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/countLabel"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/countSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_reminders"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/item_size" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/countSpinner"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:dropDownWidth="45dp"
+                android:gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:minWidth="45dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- period -->
+        <RelativeLayout
+            android:id="@+id/periodContainer"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:minHeight="45dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/periodLabel"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_period"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/item_size" />
+
+            <TextView
+                android:layout_below="@+id/periodLabel"
+                android:id="@+id/period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/item_small_size" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- specific -->
+    <RelativeLayout
+        android:id="@+id/specificContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/specificLabel"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/specific_times"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/item_size" />
+
+        <TextView
+            android:layout_below="@+id/specificLabel"
+            android:id="@+id/specific"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/touch_edit"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/item_small_size" />
+
+    </RelativeLayout>
+
+    <!-- Interval -->
+    <RelativeLayout
+        android:id="@+id/intervalContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/intervalLabel"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/every"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/item_size" />
+
+        <TextView
+            android:layout_below="@+id/intervalLabel"
+            android:id="@+id/interval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/item_small_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="?android:attr/listDivider" />
+
+</LinearLayout>

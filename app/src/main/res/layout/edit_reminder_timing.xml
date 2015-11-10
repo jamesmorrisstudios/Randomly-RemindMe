@@ -5,27 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- range or specific -->
+    <!-- Start Date -->
     <RelativeLayout
-        android:id="@+id/timingContainer"
+        android:id="@+id/startDateContainer"
         android:clickable="true"
         android:focusable="true"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/timingLabel"
+            android:id="@+id/startDateLabel"
             android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/timing_type"
+            android:text="@string/start_date"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="@dimen/item_size" />
 
         <TextView
-            android:layout_below="@+id/timingLabel"
-            android:id="@+id/timing"
+            android:layout_below="@+id/startDateLabel"
+            android:id="@+id/startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -38,136 +39,34 @@
         android:layout_height="0.5dp"
         android:background="?android:attr/listDivider" />
 
-    <!-- Specific group -->
-    <LinearLayout
-        android:id="@+id/specificGroupContainer"
-        android:orientation="vertical"
+    <!-- End Date -->
+    <RelativeLayout
+        android:id="@+id/endDateContainer"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
+        android:minHeight="45dp"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/timesContainer"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_margin="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
+        <TextView
+            android:id="@+id/endDateLabel"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="@dimen/item_size" />
 
-            <TextView
-                android:id="@+id/timesLabel"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/edit_times"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="@dimen/item_size" />
+        <TextView
+            android:layout_below="@+id/endDateLabel"
+            android:id="@+id/endDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/item_small_size" />
 
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <!-- Range group -->
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/rangeGroupContainer"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:id="@+id/startTimeContainer"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_margin="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
-
-            <TextView
-                android:id="@+id/startTimeLabel"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/start_time"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="@dimen/item_size" />
-
-            <include
-                android:id="@+id/clock_start"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                layout="@layout/time_display_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="?android:attr/listDivider" />
-
-        <RelativeLayout
-            android:id="@+id/endTimeContainer"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_margin="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
-
-            <TextView
-                android:id="@+id/endTimeLabel"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/end_time"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="@dimen/item_size" />
-
-            <include
-                android:id="@+id/clock_end"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                layout="@layout/time_display_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="?android:attr/listDivider" />
-
-        <RelativeLayout
-            android:id="@+id/numTimesContainer"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_margin="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
-
-            <TextView
-                android:id="@+id/numTimesLabel"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/alerts_per_day"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="@dimen/item_size" />
-
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/numTimesSpinner"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:dropDownWidth="45dp"
-                android:gravity="center_horizontal"
-                android:minWidth="45dp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

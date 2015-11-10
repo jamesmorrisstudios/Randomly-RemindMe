@@ -37,6 +37,7 @@ import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent.NotificationPriority;
 import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent.NotificationVibrate;
 import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
+import com.jamesmorrisstudios.appbaselibrary.time.DateItem;
 import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
@@ -58,18 +59,35 @@ public final class ReminderItem extends BaseRecycleItem {
     private AsyncTask<Void, Void, Boolean> taskLoad = null;
     private ReminderItemData reminderItemData = null;
 
-    //Set if any entry is dirty and was changed
+    //Title
     private boolean titleDirty = false;
+    private boolean enabledDirty = false;
+    //Messages
     private boolean messageListDirty = false;
     private boolean messageInOrderDirty = false;
-    private boolean enabledDirty = false;
+    //Timing
+    private boolean startDateDirty = false;
+    private boolean endEnableDirty = false;
+    private boolean endDateDirty = false;
+    //Criteria
     private boolean startTimeDirty = false;
     private boolean endTimeDirty = false;
+    private boolean filterTypeDirty = false;
+    private boolean daysOfWeekDirty = false;
+    private boolean daysOfMonthDirty = false;
+    private boolean weeksOfMonthDirty = false;
+    private boolean monthsOfYearDirty = false;
+    private boolean repeatCountDirty = false;
+    private boolean repeatTypeDirty = false;
+    private boolean daysOfYearDirty = false;
+    //Triggers
+    private boolean triggerModeDirty = false;
+    private boolean triggerCountDirty = false;
+    private boolean triggerPeriodDirty = false;
     private boolean specificTimeListDirty = false;
-    private boolean numberPerDayDirty = false;
-    private boolean rangeTimingDirty = false;
-    private boolean daysToRunDirty = false;
-    private boolean weeksToRunDirty = false;
+    private boolean intervalPeriodDirty = false;
+    private boolean intervalCountDirty = false;
+    //Notifications
     private boolean notificationToneDirty = false;
     private boolean notificationToneNameDirty = false;
     private boolean notificationVibratePatternDirty = false;
@@ -78,10 +96,15 @@ public final class ReminderItem extends BaseRecycleItem {
     private boolean notificationPriorityDirty = false;
     private boolean notificationIconDirty = false;
     private boolean notificationAccentColorDirty = false;
+    //Snooze
     private boolean snoozeDirty = false;
     private boolean autoSnoozeDirty = false;
+    //State management
     private boolean curMessageDirty = false;
     private boolean alertTimesDirty = false;
+    //Options specific to a reminder
+    private boolean showAdvancedDirty = false;
+    //Side counter data
     private boolean notifCounterDirty = false;
 
     //This is always a deep copy of the reminder item data. The original is NEVER given to this
@@ -95,41 +118,82 @@ public final class ReminderItem extends BaseRecycleItem {
         this.reminderItemData = null;
     }
 
-    //Copies any changed data into the given object
     public final void commitChanges(ReminderItemData newData) {
+        //General
         if(titleDirty) {
             newData.title = reminderItemData.title;
         }
+        if(enabledDirty) {
+            newData.enabled = reminderItemData.enabled;
+        }
+        //Messages
         if(messageListDirty) {
             newData.messageList = new ArrayList<>(reminderItemData.messageList);
         }
         if(messageInOrderDirty) {
             newData.messageInOrder = reminderItemData.messageInOrder;
         }
-        if(enabledDirty) {
-            newData.enabled = reminderItemData.enabled;
+        //Timing
+        if(startDateDirty) {
+            newData.startDate = new DateItem(reminderItemData.startDate);
         }
+        if(endEnableDirty) {
+            newData.endEnable = reminderItemData.endEnable;
+        }
+        if(endDateDirty) {
+            newData.endDate = new DateItem(reminderItemData.endDate);
+        }
+        //Criteria
         if(startTimeDirty) {
             newData.startTime = reminderItemData.startTime.copy();
         }
         if(endTimeDirty) {
             newData.endTime = reminderItemData.endTime.copy();
         }
+        if(filterTypeDirty) {
+            newData.filterType = reminderItemData.filterType;
+        }
+        if(daysOfWeekDirty) {
+            newData.daysOfWeek = reminderItemData.daysOfWeek.clone();
+        }
+        if(daysOfMonthDirty) {
+            newData.daysOfMonth = reminderItemData.daysOfMonth.clone();
+        }
+        if(weeksOfMonthDirty) {
+            newData.weeksOfMonth = reminderItemData.weeksOfMonth.clone();
+        }
+        if(monthsOfYearDirty) {
+            newData.monthsOfYear = reminderItemData.monthsOfYear.clone();
+        }
+        if(repeatCountDirty) {
+            newData.repeatCount = reminderItemData.repeatCount;
+        }
+        if(repeatTypeDirty) {
+            newData.repeatType = reminderItemData.repeatType;
+        }
+        if(daysOfYearDirty) {
+            newData.daysOfYear = UtilsTime.cloneArrayListDate(reminderItemData.daysOfYear);
+        }
+        //Triggers
+        if(triggerModeDirty) {
+            newData.triggerMode = reminderItemData.triggerMode;
+        }
+        if(triggerCountDirty) {
+            newData.triggerCount = reminderItemData.triggerCount;
+        }
+        if(triggerPeriodDirty) {
+            newData.triggerPeriod = reminderItemData.triggerPeriod;
+        }
         if(specificTimeListDirty) {
             newData.specificTimeList = UtilsTime.cloneArrayListTime(reminderItemData.specificTimeList);
         }
-        if(numberPerDayDirty) {
-            newData.numberPerDay = reminderItemData.numberPerDay;
+        if(intervalPeriodDirty) {
+            newData.intervalPeriod = reminderItemData.intervalPeriod;
         }
-        if(rangeTimingDirty) {
-            newData.rangeTiming = reminderItemData.rangeTiming;
+        if(intervalCountDirty) {
+            newData.intervalCount = reminderItemData.intervalCount;
         }
-        if(daysToRunDirty) {
-            newData.daysToRun = reminderItemData.daysToRun.clone();
-        }
-        if(weeksToRunDirty) {
-            newData.weeksToRun = reminderItemData.weeksToRun.clone();
-        }
+        //Notifications
         if(notificationToneDirty) {
             newData.notificationTone = reminderItemData.notificationTone;
         }
@@ -154,62 +218,111 @@ public final class ReminderItem extends BaseRecycleItem {
         if(notificationAccentColorDirty) {
             newData.notificationAccentColor = reminderItemData.notificationAccentColor;
         }
+        //Snooze
         if(snoozeDirty) {
             newData.snooze = reminderItemData.snooze;
         }
         if(autoSnoozeDirty) {
             newData.autoSnooze = reminderItemData.autoSnooze;
         }
+        //State management
         if(curMessageDirty) {
             newData.curMessage = reminderItemData.curMessage;
         }
         if(alertTimesDirty) {
-            newData.alertTimes = reminderItemData.alertTimes;
+            newData.alertTimes = new ArrayList<>(reminderItemData.alertTimes);
         }
+        //Options specific to a reminder
+        if(showAdvancedDirty) {
+            newData.showAdvanced = reminderItemData.showAdvanced;
+        }
+        //Side counter data
         if(notifCounterDirty) {
             newData.notifCounter = reminderItemData.notifCounter;
         }
     }
 
     public final boolean isAnyDirty() {
-        return titleDirty |
-        messageListDirty |
-        messageInOrderDirty |
-        enabledDirty |
-        startTimeDirty |
-        endTimeDirty |
-        specificTimeListDirty |
-        numberPerDayDirty |
-        rangeTimingDirty |
-        daysToRunDirty |
-        weeksToRunDirty |
-        notificationToneDirty |
-        notificationToneNameDirty |
-        notificationVibratePatternDirty |
-        notificationLEDDirty |
-        notificationLEDColorDirty |
-        notificationPriorityDirty |
-        notificationIconDirty |
-        notificationAccentColorDirty |
-        snoozeDirty |
-        autoSnoozeDirty |
-        curMessageDirty |
-        alertTimesDirty |
-        notifCounterDirty;
+        return
+                //Title
+                titleDirty |
+                enabledDirty |
+                //Messages
+                messageListDirty |
+                messageInOrderDirty |
+                //Timing
+                startDateDirty |
+                endEnableDirty |
+                endDateDirty |
+                //Criteria
+                startTimeDirty |
+                endTimeDirty |
+                filterTypeDirty |
+                daysOfWeekDirty |
+                daysOfMonthDirty |
+                weeksOfMonthDirty |
+                monthsOfYearDirty |
+                repeatCountDirty |
+                repeatTypeDirty |
+                daysOfYearDirty |
+                //Triggers
+                triggerModeDirty |
+                triggerCountDirty |
+                triggerPeriodDirty |
+                specificTimeListDirty |
+                intervalPeriodDirty |
+                intervalCountDirty |
+                //Notifications
+                notificationToneDirty |
+                notificationToneNameDirty |
+                notificationVibratePatternDirty |
+                notificationLEDDirty |
+                notificationLEDColorDirty |
+                notificationPriorityDirty |
+                notificationIconDirty |
+                notificationAccentColorDirty |
+                //Snooze
+                snoozeDirty |
+                autoSnoozeDirty |
+                //State management
+                curMessageDirty |
+                alertTimesDirty |
+                //Options specific to a reminder
+                showAdvancedDirty |
+                //Side counter data
+                notifCounterDirty;
     }
 
     public void clearDirty() {
+        //Title
         titleDirty = false;
+        enabledDirty = false;
+        //Messages
         messageListDirty = false;
         messageInOrderDirty = false;
-        enabledDirty = false;
+        //Timing
+        startDateDirty = false;
+        endEnableDirty = false;
+        endDateDirty = false;
+        //Criteria
         startTimeDirty = false;
         endTimeDirty = false;
+        filterTypeDirty = false;
+        daysOfWeekDirty = false;
+        daysOfMonthDirty = false;
+        weeksOfMonthDirty = false;
+        monthsOfYearDirty = false;
+        repeatCountDirty = false;
+        repeatTypeDirty = false;
+        daysOfYearDirty = false;
+        //Triggers
+        triggerModeDirty = false;
+        triggerCountDirty = false;
+        triggerPeriodDirty = false;
         specificTimeListDirty = false;
-        numberPerDayDirty = false;
-        rangeTimingDirty = false;
-        daysToRunDirty = false;
-        weeksToRunDirty = false;
+        intervalPeriodDirty = false;
+        intervalCountDirty = false;
+        //Notifications
         notificationToneDirty = false;
         notificationToneNameDirty = false;
         notificationVibratePatternDirty = false;
@@ -218,17 +331,28 @@ public final class ReminderItem extends BaseRecycleItem {
         notificationPriorityDirty = false;
         notificationIconDirty = false;
         notificationAccentColorDirty = false;
+        //Snooze
         snoozeDirty = false;
         autoSnoozeDirty = false;
+        //State management
         curMessageDirty = false;
         alertTimesDirty = false;
+        //Options specific to a reminder
+        showAdvancedDirty = false;
+        //Side counter data
         notifCounterDirty = false;
     }
 
+    //Name and Version
     public String getUniqueName() {
         return reminderItemData.uniqueName;
     }
 
+    public int getVersion() {
+        return reminderItemData.version;
+    }
+
+    //General
     public String getTitle() {
         return reminderItemData.title;
     }
@@ -251,24 +375,7 @@ public final class ReminderItem extends BaseRecycleItem {
         }
     }
 
-    public ReminderItemData.SnoozeOptions getSnooze() {
-        return reminderItemData.snooze;
-    }
-
-    public void setSnooze(@NonNull ReminderItemData.SnoozeOptions snooze) {
-        snoozeDirty = true;
-        reminderItemData.snooze = snooze;
-    }
-
-    public ReminderItemData.SnoozeOptions getAutoSnooze() {
-        return reminderItemData.autoSnooze;
-    }
-
-    public void setAutoSnooze(@NonNull ReminderItemData.SnoozeOptions autoSnooze) {
-        autoSnoozeDirty = true;
-        reminderItemData.autoSnooze = autoSnooze;
-    }
-
+    //Messages
     public ArrayList<String> getMessageList() {
         return reminderItemData.messageList;
     }
@@ -289,6 +396,37 @@ public final class ReminderItem extends BaseRecycleItem {
         }
     }
 
+    //Timing
+    public DateItem getStartDate() {
+        return reminderItemData.startDate;
+    }
+
+    public DateItem updateStartDate() {
+        startDateDirty = true;
+        return reminderItemData.startDate;
+    }
+
+    public boolean isEndEnable() {
+        return reminderItemData.endEnable;
+    }
+
+    public void setEndEnable(boolean endEnable) {
+        if(reminderItemData.endEnable != endEnable) {
+            endEnableDirty = true;
+            reminderItemData.endEnable = endEnable;
+        }
+    }
+
+    public DateItem getEndDate() {
+        return reminderItemData.endDate;
+    }
+
+    public DateItem updateEndDate() {
+        endDateDirty = true;
+        return reminderItemData.endDate;
+    }
+
+    //Criteria
     public TimeItem getStartTime() {
         return reminderItemData.startTime;
     }
@@ -307,6 +445,117 @@ public final class ReminderItem extends BaseRecycleItem {
         return reminderItemData.endTime;
     }
 
+    public ReminderItemData.FilterType getFilterType() {
+        return reminderItemData.filterType;
+    }
+
+    public void setFilterType(ReminderItemData.FilterType filterType) {
+        filterTypeDirty = true;
+        reminderItemData.filterType = filterType;
+    }
+
+    public boolean[] getDaysOfWeek() {
+        return reminderItemData.daysOfWeek;
+    }
+
+    public void setDaysOfWeek(boolean[] daysOfWeek) {
+        daysOfWeekDirty = true;
+        reminderItemData.daysOfWeek = daysOfWeek;
+    }
+
+    public boolean[] getDaysOfMonth() {
+        return reminderItemData.daysOfMonth;
+    }
+
+    public void setDaysOfMonth(boolean[] daysOfMonth) {
+        daysOfMonthDirty = true;
+        reminderItemData.daysOfMonth = daysOfMonth;
+    }
+
+    public boolean[] getWeeksOfMonth() {
+        return reminderItemData.weeksOfMonth;
+    }
+
+    public void setWeeksOfMonth(boolean[] weeksOfMonth) {
+        weeksOfMonthDirty = true;
+        reminderItemData.weeksOfMonth = weeksOfMonth;
+    }
+
+    public boolean[] getMonthsOfYear() {
+        return reminderItemData.monthsOfYear;
+    }
+
+    public void setMonthsOfYear(boolean[] monthsOfYear) {
+        monthsOfYearDirty = true;
+        reminderItemData.monthsOfYear = monthsOfYear;
+    }
+
+    public int getRepeatCount() {
+        return reminderItemData.repeatCount;
+    }
+
+    public void setRepeatCount(int repeatCount) {
+        if(reminderItemData.repeatCount != repeatCount) {
+            repeatCountDirty = true;
+            reminderItemData.repeatCount = repeatCount;
+        }
+    }
+
+    public ReminderItemData.RepeatType getRepeatType() {
+        return reminderItemData.repeatType;
+    }
+
+    public void setRepeatType(ReminderItemData.RepeatType repeatType) {
+        if(reminderItemData.repeatType != repeatType) {
+            repeatTypeDirty = true;
+            reminderItemData.repeatType = repeatType;
+        }
+    }
+
+    public ArrayList<DateItem> getDaysOfYear() {
+        return reminderItemData.daysOfYear;
+    }
+
+    public void setDaysOfYear(ArrayList<DateItem> daysOfYear) {
+        daysOfYearDirty = true;
+        reminderItemData.daysOfYear = daysOfYear;
+    }
+
+    //Triggers
+
+    public ReminderItemData.TriggerMode getTriggerMode() {
+        return reminderItemData.triggerMode;
+    }
+
+    public void setTriggerMode(ReminderItemData.TriggerMode triggerMode) {
+        if(reminderItemData.triggerMode != triggerMode) {
+            triggerModeDirty = true;
+            reminderItemData.triggerMode = triggerMode;
+        }
+    }
+
+    public int getTriggerCount() {
+        return reminderItemData.triggerCount;
+    }
+
+    public void setTriggerCount(int triggerCount) {
+        if(reminderItemData.triggerCount != triggerCount) {
+            triggerCountDirty = true;
+            reminderItemData.triggerCount = triggerCount;
+        }
+    }
+
+    public ReminderItemData.TimePeriod getTriggerPeriod() {
+        return reminderItemData.triggerPeriod;
+    }
+
+        public void setTriggerPeriod(ReminderItemData.TimePeriod triggerPeriod) {
+        if(reminderItemData.triggerPeriod != triggerPeriod) {
+            triggerPeriodDirty = true;
+            reminderItemData.triggerPeriod = triggerPeriod;
+        }
+    }
+
     public ArrayList<TimeItem> getSpecificTimeList() {
         return reminderItemData.specificTimeList;
     }
@@ -316,52 +565,29 @@ public final class ReminderItem extends BaseRecycleItem {
         reminderItemData.specificTimeList = specificTimeList;
     }
 
-    public int getNumberPerDay() {
-        return reminderItemData.numberPerDay;
+    public ReminderItemData.RepeatTypeShort getIntervalPeriod() {
+        return reminderItemData.intervalPeriod;
     }
 
-    public void setNumberPerDay(int numberPerDay) {
-        if(reminderItemData.numberPerDay != numberPerDay) {
-            numberPerDayDirty = true;
-            reminderItemData.numberPerDay = numberPerDay;
+    public void setIntervalPeriod(ReminderItemData.RepeatTypeShort intervalPeriod) {
+        if(reminderItemData.intervalPeriod != intervalPeriod) {
+            intervalPeriodDirty = true;
+            reminderItemData.intervalPeriod = intervalPeriod;
         }
     }
 
-    public boolean isRangeTiming() {
-        return reminderItemData.rangeTiming;
+    public int getIntervalCount() {
+        return reminderItemData.intervalCount;
     }
 
-    public void setRangeTiming(boolean rangeTiming) {
-        if(reminderItemData.rangeTiming != rangeTiming) {
-            rangeTimingDirty = true;
-            reminderItemData.rangeTiming = rangeTiming;
+    public void setIntervalCount(int intervalCount) {
+        if(reminderItemData.intervalCount != intervalCount) {
+            intervalCountDirty = true;
+            reminderItemData.intervalCount = intervalCount;
         }
     }
 
-    public boolean[] getDaysToRun() {
-        return reminderItemData.daysToRun;
-    }
-
-    public boolean[] updateDaysToRun() {
-        daysToRunDirty = true;
-        return reminderItemData.daysToRun;
-    }
-
-    public void setDaysToRun(boolean[] daysToRun) {
-        daysToRunDirty = true;
-        reminderItemData.daysToRun = daysToRun;
-    }
-
-    public boolean[] getWeeksToRun() {
-        return reminderItemData.weeksToRun;
-    }
-
-    public void setWeeksToRun(boolean[] weeksToRun) {
-        weeksToRunDirty = true;
-        reminderItemData.weeksToRun = weeksToRun;
-    }
-
-
+    //Notifications
     public void setNotificationTone(String notificationTone) {
         if(reminderItemData.notificationTone == null || !reminderItemData.notificationTone.equals(notificationTone)) {
             notificationToneDirty = true;
@@ -446,6 +672,26 @@ public final class ReminderItem extends BaseRecycleItem {
         }
     }
 
+    //Snooze
+    public ReminderItemData.SnoozeOptions getSnooze() {
+        return reminderItemData.snooze;
+    }
+
+    public void setSnooze(@NonNull ReminderItemData.SnoozeOptions snooze) {
+        snoozeDirty = true;
+        reminderItemData.snooze = snooze;
+    }
+
+    public ReminderItemData.SnoozeOptions getAutoSnooze() {
+        return reminderItemData.autoSnooze;
+    }
+
+    public void setAutoSnooze(@NonNull ReminderItemData.SnoozeOptions autoSnooze) {
+        autoSnoozeDirty = true;
+        reminderItemData.autoSnooze = autoSnooze;
+    }
+
+    //State management
     public int getCurMessage() {
         return reminderItemData.curMessage;
     }
@@ -454,6 +700,18 @@ public final class ReminderItem extends BaseRecycleItem {
         if(reminderItemData.curMessage != curMessage) {
             curMessageDirty = true;
             reminderItemData.curMessage = curMessage;
+        }
+    }
+
+    //Options specific to a reminder
+    public boolean isShowAdvanced() {
+        return reminderItemData.showAdvanced;
+    }
+
+    public void setShowAdvanced(boolean showAdvanced) {
+        if(reminderItemData.showAdvanced != showAdvanced) {
+            showAdvancedDirty = true;
+            reminderItemData.showAdvanced = showAdvanced;
         }
     }
 
@@ -570,7 +828,7 @@ public final class ReminderItem extends BaseRecycleItem {
         int diff = getDiffMinutes();
         int startOffset = timeToMinutes(reminderItemData.startTime);
 
-        generateEvenishSplit(diff, startOffset, 0.5f, reminderItemData.numberPerDay);
+        generateEvenishSplit(diff, startOffset, 0.5f, reminderItemData.triggerCount);
     }
 
     /**
@@ -632,27 +890,27 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     private boolean isValidWeekToRun(DateTimeItem now) {
-        if(reminderItemData.weeksToRun[0]) {
+        if(reminderItemData.weeksOfMonth[0]) {
             return true;
         }
         UtilsTime.WeekOfMonth week = UtilsTime.getWeekOfMonth(now.dateItem);
         Log.v("ReminderItem", "Week of month: "+week.getName()+" is last of month: "+UtilsTime.isLastWeekOfMonth(now.dateItem));
-        if(reminderItemData.weeksToRun[1] && week == UtilsTime.WeekOfMonth.FIRST) {
+        if(reminderItemData.weeksOfMonth[1] && week == UtilsTime.WeekOfMonth.FIRST) {
             return true;
         }
-        if(reminderItemData.weeksToRun[2] && week == UtilsTime.WeekOfMonth.SECOND) {
+        if(reminderItemData.weeksOfMonth[2] && week == UtilsTime.WeekOfMonth.SECOND) {
             return true;
         }
-        if(reminderItemData.weeksToRun[3] && week == UtilsTime.WeekOfMonth.THIRD) {
+        if(reminderItemData.weeksOfMonth[3] && week == UtilsTime.WeekOfMonth.THIRD) {
             return true;
         }
-        if(reminderItemData.weeksToRun[4] && week == UtilsTime.WeekOfMonth.FOURTH) {
+        if(reminderItemData.weeksOfMonth[4] && week == UtilsTime.WeekOfMonth.FOURTH) {
             return true;
         }
-        if(reminderItemData.weeksToRun[5] && week == UtilsTime.WeekOfMonth.FIFTH) {
+        if(reminderItemData.weeksOfMonth[5] && week == UtilsTime.WeekOfMonth.FIFTH) {
             return true;
         }
-        if(reminderItemData.weeksToRun[6] && UtilsTime.isLastWeekOfMonth(now.dateItem)) {
+        if(reminderItemData.weeksOfMonth[6] && UtilsTime.isLastWeekOfMonth(now.dateItem)) {
             return true;
         }
         return false;
@@ -662,7 +920,7 @@ public final class ReminderItem extends BaseRecycleItem {
         if (!reminderItemData.enabled) {
             return;
         }
-        if (!reminderItemData.daysToRun[UtilsTime.getCurrentDayOfWeek().getIndex()]) {
+        if (!reminderItemData.daysOfWeek[UtilsTime.getCurrentDayOfWeek().getIndex()]) {
             return;
         }
         if(!isValidWeekToRun(now)) {
@@ -919,6 +1177,10 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void updateVersion() {
+        reminderItemData.intervalCount = 30;
+        reminderItemData.intervalPeriod = ReminderItemData.RepeatTypeShort.MINUTES;
+
+
         //Change how curMessage works
         if(reminderItemData.messageList == null) {
             reminderItemData.messageList = new ArrayList<>();
@@ -934,13 +1196,6 @@ public final class ReminderItem extends BaseRecycleItem {
         }
         if(reminderItemData.specificTimeList == null) {
             reminderItemData.specificTimeList = new ArrayList<>();
-        }
-        if(reminderItemData.daysToRun == null) {
-            reminderItemData.daysToRun = new boolean[]{true, true, true, true, true, true, true};
-        }
-        if(reminderItemData.weeksToRun == null) {
-            reminderItemData.weeksToRun = new boolean[ReminderItemData.WeekOptions.values().length];
-            reminderItemData.weeksToRun[0] = true;
         }
         if(reminderItemData.snooze == null) {
             reminderItemData.snooze = ReminderItemData.SnoozeOptions.DISABLED;
@@ -960,6 +1215,36 @@ public final class ReminderItem extends BaseRecycleItem {
             updateAlertTimes();
             rescheduleNextWake(UtilsTime.getDateTimeNow());
         }
+        if(reminderItemData.numberPerDay != -1 || reminderItemData.daysToRun != null || reminderItemData.weeksToRun != null) {
+            //Create and set all the new data
+            //Timing
+            reminderItemData.startDate = UtilsTime.getDateNow();
+            reminderItemData.endEnable = false;
+            reminderItemData.endDate = UtilsTime.getDateNow();
+            //Criteria
+            reminderItemData.filterType = ReminderItemData.FilterType.NORMAL;
+            if(reminderItemData.daysToRun != null) {
+                reminderItemData.daysOfWeek = reminderItemData.daysToRun.clone();
+            }
+            reminderItemData.daysOfMonth = Utils.getFilledBoolArray(true, 31);
+            reminderItemData.weeksOfMonth = reminderItemData.weeksToRun.clone();
+            reminderItemData.weeksOfMonth[0] = true;
+            reminderItemData.monthsOfYear = Utils.getFilledBoolArray(true, 12);
+            reminderItemData.repeatCount = 1;
+            reminderItemData.repeatType = ReminderItemData.RepeatType.DAYS;
+            reminderItemData.daysOfYear = new ArrayList<>();
+            //Triggers
+            reminderItemData.triggerMode = ReminderItemData.TriggerMode.RANDOM;
+            reminderItemData.triggerCount = reminderItemData.numberPerDay;
+            reminderItemData.triggerPeriod = ReminderItemData.TimePeriod.DAY;
+            reminderItemData.intervalCount = 30;
+            reminderItemData.intervalPeriod = ReminderItemData.RepeatTypeShort.MINUTES;
+            //Clear the old data
+            reminderItemData.numberPerDay = -1;
+            reminderItemData.rangeTiming = true;
+            reminderItemData.daysToRun = null;
+            reminderItemData.weeksToRun = null;
+        }
         reminderItemData.version = ReminderItemData.CURRENT_VERSION;
     }
 
@@ -970,7 +1255,5 @@ public final class ReminderItem extends BaseRecycleItem {
         DATA_LOAD_PASS,
         DATA_LOAD_FAIL,
     }
-
-
 
 }

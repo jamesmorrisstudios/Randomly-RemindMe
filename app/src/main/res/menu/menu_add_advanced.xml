@@ -37,14 +37,13 @@
         android:orderInCategory="3"
         android:title="@string/preview"
         app:showAsAction="ifRoom" />
-<!--
+
     <item
         android:id="@+id/action_advanced"
-        android:title="Show Advanced"
+        android:title="@string/advanced_options"
         android:orderInCategory="4"
         app:actionViewClass="android.widget.CheckBox"
         android:checkable="true"
         app:showAsAction="never" />
-        -->
 
 </menu>

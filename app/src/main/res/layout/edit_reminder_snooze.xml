@@ -11,7 +11,8 @@
         android:focusable="true"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/manual_snooze_label"
@@ -43,7 +44,8 @@
         android:focusable="true"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/auto_snooze_label"

@@ -21,6 +21,12 @@
     tools:context=".MainActivity">
 
     <item
+        android:id="@+id/action_defaults"
+        android:orderInCategory="100"
+        android:title="@string/defaults"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_backup_restore"
         android:orderInCategory="100"
         android:title="@string/backup_restore"

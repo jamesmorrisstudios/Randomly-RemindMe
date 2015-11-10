@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderAdapter;
 import jamesmorrisstudios.com.randremind.listAdapters.ReminderContainer;
-import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -63,6 +62,9 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_backup_restore) {
             mListener.onBackupRestoreClicked();
+        }
+        if (item.getItemId() == R.id.action_defaults) {
+            mListener.onEditDefaultsClicked();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -260,6 +262,11 @@ public final class MainListFragment extends BaseMainRecycleListFragment {
          *
          */
         void onBackupRestoreClicked();
+
+        /**
+         *
+         */
+        void onEditDefaultsClicked();
     }
 
 }

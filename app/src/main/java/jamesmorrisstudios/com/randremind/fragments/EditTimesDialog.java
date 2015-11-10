@@ -167,14 +167,14 @@ public class EditTimesDialog extends DialogFragment {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bus.postObject(new TimePickerRequest(new TimePickerDialog.OnTimeSetListener() {
+                        Bus.postObject(new TimePickerRequest(item.hour, item.minute, item.is24Hour(), new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(RadialPickerLayout radialPickerLayout, int hour, int minute) {
                                 item.hour = hour;
                                 item.minute = minute;
                                 notifyDataSetChanged();
                             }
-                        }, item.hour, item.minute, item.is24Hour()));
+                        }));
                     }
                 });
                 delete.setOnClickListener(new View.OnClickListener() {

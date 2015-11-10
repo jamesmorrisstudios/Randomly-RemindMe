@@ -19,17 +19,18 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 /**
  * Created by James on 6/10/2015.
  */
-public class EditReminderMessage {
+public class EditReminderMessage extends BaseEditReminder {
     private View orderContainer, messageContainer;
     private TextView order;
 
     public EditReminderMessage(View parent) {
+        super(parent);
         orderContainer = parent.findViewById(R.id.orderContainer);
         messageContainer = parent.findViewById(R.id.messageContainer);
         order = (TextView) parent.findViewById(R.id.order);
     }
 
-    public final void bindItem(EditReminderItem item) {
+    public final void bindItem(EditReminderItem item, boolean showAdvanced) {
         ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
         if(reminderItem == null) {
             return;

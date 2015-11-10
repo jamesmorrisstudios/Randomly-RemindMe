@@ -15,7 +15,8 @@
         android:focusable="true"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/notificationSoundLabel"
@@ -41,39 +42,6 @@
         android:layout_height="0.5dp"
         android:background="?android:attr/listDivider" />
 
-    <!-- Priority -->
-    <RelativeLayout
-        android:id="@+id/notificationPriorityContainer"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
-
-        <TextView
-            android:id="@+id/notificationPriorityLabel"
-            android:layout_alignParentTop="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/priority"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="@dimen/item_size" />
-
-        <TextView
-            android:layout_below="@+id/notificationPriorityLabel"
-            android:id="@+id/notificationPriority"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="@dimen/item_small_size" />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="?android:attr/listDivider" />
-
     <!-- Vibrate -->
     <RelativeLayout
         android:id="@+id/notificationVibrateContainer"
@@ -81,7 +49,8 @@
         android:focusable="true"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/notificationVibrateLabel"
@@ -114,7 +83,8 @@
         android:focusable="true"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:minHeight="45dp"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/notificationLedLabel"
@@ -149,80 +119,126 @@
         android:layout_height="0.5dp"
         android:background="?android:attr/listDivider" />
 
-    <!-- Icon -->
-    <RelativeLayout
-        android:id="@+id/notificationIconContainer"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_margin="8dp"
+    <LinearLayout
+        android:id="@+id/advancedContainer"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/notificationIconLabel"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/icon"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="@dimen/item_size" />
-
+        <!-- Icon -->
         <RelativeLayout
-            android:id="@+id/notificationIconTop"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circle">
+            android:id="@+id/notificationIconContainer"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:minHeight="45dp"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/notificationIcon"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_centerInParent="true"
-                android:scaleType="fitCenter" />
+            <TextView
+                android:id="@+id/notificationIconLabel"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/notificationIconTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/icon"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/item_size" />
+
+            <RelativeLayout
+                android:id="@+id/notificationIconTop"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle">
+
+                <ImageView
+                    android:id="@+id/notificationIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_centerInParent="true"
+                    android:scaleType="fitCenter" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="?android:attr/listDivider" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="?android:attr/listDivider" />
+        <!-- Accent Color -->
+        <RelativeLayout
+            android:id="@+id/notificationAccentContainer"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:minHeight="45dp"
+            android:layout_height="wrap_content">
 
-    <!-- Accent Color -->
-    <RelativeLayout
-        android:id="@+id/notificationAccentContainer"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
+            <TextView
+                android:id="@+id/notificationAccentLabel"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accent_color"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/item_size" />
 
-        <TextView
-            android:id="@+id/notificationAccentLabel"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/accent_color"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="@dimen/item_size" />
+            <View
+                android:id="@+id/notification_accent_color"
+                android:layout_margin="8dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_led" />
+
+        </RelativeLayout>
 
         <View
-            android:id="@+id/notification_accent_color"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- Priority -->
+        <RelativeLayout
+            android:id="@+id/notificationPriorityContainer"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_margin="8dp"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/circle_led" />
+            android:layout_width="match_parent"
+            android:minHeight="45dp"
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/notificationPriorityLabel"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priority"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="@dimen/item_size" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="?android:attr/listDivider" />
+            <TextView
+                android:layout_below="@+id/notificationPriorityLabel"
+                android:id="@+id/notificationPriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/item_small_size" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="?android:attr/listDivider" />
+
+    </LinearLayout>
 
 </LinearLayout>

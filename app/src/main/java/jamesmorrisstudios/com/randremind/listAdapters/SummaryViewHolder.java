@@ -34,6 +34,7 @@ import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
+import jamesmorrisstudios.com.randremind.reminder.ReminderItemData;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 
@@ -73,7 +74,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
         message = (TextView) view.findViewById(R.id.message);
 
         //toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        //toolbar.inflateMenu(R.menu.menu_add_new);
+        //toolbar.inflateMenu(R.menu.menu_add);
 
         top1 = view.findViewById(R.id.reminder_time_1);
         hour1 = (TextView) top1.findViewById(R.id.time_hour);
@@ -137,7 +138,7 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
             title = AppBase.getContext().getString(R.string.title);
         }
         this.title.setText(title);
-        if (reminder.isRangeTiming()) {
+        if (reminder.getTriggerMode() == ReminderItemData.TriggerMode.EVEN || reminder.getTriggerMode() == ReminderItemData.TriggerMode.RANDOM || reminder.getTriggerMode() == ReminderItemData.TriggerMode.LESS_RANDOM) {
             UtilsTime.setTime(hour1, minute1, AM1, PM2, reminder.getStartTime());
             UtilsTime.setTime(hour2, minute2, AM2, PM2, reminder.getEndTime());
             dash1.setText(AppBase.getContext().getString(R.string.dash));
@@ -185,8 +186,8 @@ public final class SummaryViewHolder extends BaseRecycleViewHolder {
                 ReminderList.getInstance().setReminderEnable(reminder.getUniqueName(), isChecked);
             }
         });
-        for (int i = 0; i < reminder.getDaysToRun().length; i++) {
-            setDayOfWeek(i, reminder.getDaysToRun()[i]);
+        for (int i = 0; i < reminder.getDaysOfWeek().length; i++) {
+            setDayOfWeek(i, reminder.getDaysOfWeek()[i]);
         }
     }
 

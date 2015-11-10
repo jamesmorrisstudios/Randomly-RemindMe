@@ -13,14 +13,15 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 /**
  * Created by James on 6/10/2015.
  */
-public class EditReminderGeneral {
+public class EditReminderGeneral extends BaseEditReminder {
     private AppCompatEditText title;
 
     public EditReminderGeneral(View parent) {
+        super(parent);
         title = (AppCompatEditText) parent.findViewById(R.id.titleText);
     }
 
-    public final void bindItem(EditReminderItem item) {
+    public final void bindItem(EditReminderItem item, boolean showAdvanced) {
         ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
         if(reminderItem == null) {
             return;

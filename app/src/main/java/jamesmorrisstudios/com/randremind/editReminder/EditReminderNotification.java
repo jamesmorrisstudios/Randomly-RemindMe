@@ -13,10 +13,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.colorpicker.builder.ColorPickerClickListener;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.ColorPickerRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.RingtoneRequest;
+import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRadioRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
 import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent;
 
@@ -30,7 +32,9 @@ import jamesmorrisstudios.com.randremind.util.IconUtil;
 /**
  * Created by James on 6/10/2015.
  */
-public class EditReminderNotification {
+public class EditReminderNotification extends BaseEditReminder {
+    private View advancedContainer;
+
     private TextView sound, priority, vibrate, led;
     private View ledColor, accentColor;
     private ImageView icon;
@@ -38,6 +42,9 @@ public class EditReminderNotification {
             notificationVibrateContainer, notificationLedContainer, notificationIconContainer, notificationAccentContainer;
 
     public EditReminderNotification(View parent) {
+        super(parent);
+        advancedContainer = parent.findViewById(R.id.advancedContainer);
+
         sound = (TextView) parent.findViewById(R.id.notificationSound);
         ledColor = parent.findViewById(R.id.notification_led_color);
         icon = (ImageView) parent.findViewById(R.id.notificationIcon);
@@ -54,7 +61,8 @@ public class EditReminderNotification {
         notificationAccentContainer = (RelativeLayout) parent.findViewById(R.id.notificationAccentContainer);
     }
 
-    public final void bindItem(EditReminderItem item) {
+    @Override
+    public final void bindItem(EditReminderItem item, boolean showAdvanced) {
         final ReminderItem reminderItem = ReminderList.getInstance().getCurrentReminder();
         if(reminderItem == null) {
             return;
@@ -74,6 +82,12 @@ public class EditReminderNotification {
         icon.setImageResource(IconUtil.getIconRes(reminderItem.getNotificationIcon()));
 
         notificationListeners();
+
+        if(showAdvanced) {
+            advancedContainer.setVisibility(View.VISIBLE);
+        } else {
+            advancedContainer.setVisibility(View.GONE);
+        }
     }
 
     private void notificationListeners() {
@@ -120,18 +134,44 @@ public class EditReminderNotification {
                 for (int i = 0; i < vibrateList.length; i++) {
                     items[i] = vibrateList[i].getName();
                 }
-                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
+                int currentItem = remind.getNotificationVibratePattern().ordinal();
+                final int originalItem = remind.getNotificationVibratePattern().ordinal();
+
+                Bus.postObject(new SingleChoiceRadioRequest(title, items, currentItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Item Selected
+                        //Item picked but not confirmed
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                         if (remind == null) {
                             return;
                         }
+                        Utils.vibrateCancel();
                         remind.setNotificationVibratePattern(vibrateList[which]);
+                        Utils.vibrate(vibrateList[which].getPattern());
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Item confirmed
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        Utils.vibrateCancel();
                         vibrate.setText(remind.getNotificationVibratePattern().getName());
                     }
-                }, null));
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //on cancel. restore original
+                        ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
+                        if (remind == null) {
+                            return;
+                        }
+                        Utils.vibrateCancel();
+                        remind.setNotificationVibratePattern(vibrateList[originalItem]);
+                    }
+                }));
             }
         });
         notificationPriorityContainer.setOnClickListener(new View.OnClickListener() {

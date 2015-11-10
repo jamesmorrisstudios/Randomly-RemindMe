@@ -17,7 +17,7 @@ public class ReminderItemSummary extends BaseRecycleItem {
     public final String uniqueName;
     public final String title;
     public final boolean rangeTiming;
-    public final boolean[] daysToRun;
+    public final boolean[] daysOfWeek;
     public final ArrayList<TimeItem> specificTimeList;
     public final TimeItem startTime;
     public final TimeItem endTime;
@@ -28,7 +28,7 @@ public class ReminderItemSummary extends BaseRecycleItem {
         this.uniqueName = data.uniqueName;
         this.title = data.title;
         this.rangeTiming = data.rangeTiming;
-        this.daysToRun = data.daysToRun;
+        this.daysOfWeek = data.daysOfWeek;
         this.specificTimeList = data.specificTimeList;
         this.startTime = data.startTime;
         this.endTime = data.endTime;

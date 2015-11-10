@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -32,7 +31,6 @@ import com.jamesmorrisstudios.appbaselibrary.listAdapters.BaseRecycleViewHolder;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import jamesmorrisstudios.com.randremind.R;
-import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItemSummary;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 
@@ -158,8 +156,8 @@ public final class ReminderViewHolder extends BaseRecycleViewHolder {
                 ReminderList.getInstance().setReminderEnable(reminder.uniqueName, isChecked);
             }
         });
-        for (int i = 0; i < reminder.daysToRun.length; i++) {
-            setDayOfWeek(i, reminder.daysToRun[i]);
+        for (int i = 0; i < reminder.daysOfWeek.length; i++) {
+            setDayOfWeek(i, reminder.daysOfWeek[i]);
         }
     }
 

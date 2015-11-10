@@ -32,8 +32,8 @@ import jamesmorrisstudios.com.randremind.util.RemindUtils;
 /**
  * Created by James on 6/8/2015.
  */
-public class AddReminderFragment extends BaseRecycleListFragment {
-    public static final String TAG = "AddReminderFragment";
+public class DefaultsEditorFragment extends BaseRecycleListFragment {
+    public static final String TAG = "DefaultsEditorFragment";
     private boolean saveOnBack = true;
 
     /**
@@ -55,16 +55,7 @@ public class AddReminderFragment extends BaseRecycleListFragment {
      */
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if(RemindUtils.alwaysShowAdvanced()) {
-            inflater.inflate(R.menu.menu_add, menu);
-        } else {
-            inflater.inflate(R.menu.menu_add_advanced, menu);
-            ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-            MenuItem item = menu.findItem(R.id.action_advanced);
-            if (remind != null && item != null) {
-                item.setChecked(remind.isShowAdvanced());
-            }
-        }
+        inflater.inflate(R.menu.menu_defaults, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -79,40 +70,22 @@ public class AddReminderFragment extends BaseRecycleListFragment {
         switch (item.getItemId()) {
             case R.id.action_cancel:
                 Bus.postObject(new PromptDialogRequest(getString(R.string.cancel_reminder_prompt_title), getString(R.string.cancel_reminder_prompt_content), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ReminderList.getInstance().cancelCurrentReminderChanges();
-                                Utils.toastShort(getString(R.string.reminder_cancel));
-                                saveOnBack = false;
-                                utilListener.goBackFromFragment();
-                            }
-                        }, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Nothing on negative
-                            }
-                        }));
-                break;
-            case R.id.action_preview:
-                ReminderList.getInstance().previewCurrent();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ReminderList.getInstance().cancelCurrentReminderChanges();
+                        Utils.toastShort(getString(R.string.reminder_cancel));
+                        saveOnBack = false;
+                        utilListener.goBackFromFragment();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Nothing on negative
+                    }
+                }));
                 break;
             case R.id.action_help:
                 Utils.openLink(getResources().getString(com.jamesmorrisstudios.appbaselibrary.R.string.tutorial_link_read));
-                break;
-            case R.id.action_advanced:
-                ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
-                if (remind == null) {
-                    break;
-                }
-                if(item.isChecked()) {
-                    item.setChecked(false);
-                    remind.setShowAdvanced(false);
-                    mAdapter.notifyDataSetChanged();
-                } else {
-                    item.setChecked(true);
-                    remind.setShowAdvanced(true);
-                    mAdapter.notifyDataSetChanged();
-                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -130,18 +103,18 @@ public class AddReminderFragment extends BaseRecycleListFragment {
             return;
         }
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        View general = inflater.inflate(R.layout.edit_reminder_general, null);
-        View message = inflater.inflate(R.layout.edit_reminder_message, null);
-        View timing = inflater.inflate(R.layout.edit_reminder_timing, null);
+        //View general = inflater.inflate(R.layout.edit_reminder_general, null);
+       // View message = inflater.inflate(R.layout.edit_reminder_message, null);
+        //View timing = inflater.inflate(R.layout.edit_reminder_timing, null);
         View criteria = inflater.inflate(R.layout.edit_reminder_criteria, null);
         View trigger = inflater.inflate(R.layout.edit_reminder_trigger, null);
         View alert = inflater.inflate(R.layout.edit_reminder_notification, null);
         View snooze = inflater.inflate(R.layout.edit_reminder_snooze, null);
 
         ArrayList<BaseRecycleContainer> data = new ArrayList<>();
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.GENERAL, general)));
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.MESSAGE, message)));
-        data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.TIMING, timing)));
+        //data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.GENERAL, general)));
+        //data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.MESSAGE, message)));
+        //data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.TIMING, timing)));
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.CRITERIA, criteria)));
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.TRIGGER, trigger)));
         data.add(new EditReminderContainer(new EditReminderItem("", EditReminderViewHolder.EditReminderPage.NOTIFICATION, alert)));

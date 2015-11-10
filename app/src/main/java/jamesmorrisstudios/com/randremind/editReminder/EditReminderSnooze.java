@@ -17,18 +17,19 @@ import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 /**
  * Created by James on 8/17/2015.
  */
-public class EditReminderSnooze {
+public class EditReminderSnooze extends BaseEditReminder {
     private RelativeLayout snoozeContainer, autoSnoozeContainer;
     private TextView snooze, autoSnooze;
 
     public EditReminderSnooze(View parent) {
+        super(parent);
         snoozeContainer = (RelativeLayout) parent.findViewById(R.id.manual_snooze_container);
         autoSnoozeContainer = (RelativeLayout) parent.findViewById(R.id.auto_snooze_container);
         snooze = (TextView) parent.findViewById(R.id.manual_snooze);
         autoSnooze = (TextView) parent.findViewById(R.id.auto_snooze);
     }
 
-    public final void bindItem(EditReminderItem item) {
+    public final void bindItem(EditReminderItem item, boolean showAdvanced) {
         final ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
         if(remind == null) {
             return;
@@ -84,7 +85,5 @@ public class EditReminderSnooze {
 
 
     }
-
-
 
 }

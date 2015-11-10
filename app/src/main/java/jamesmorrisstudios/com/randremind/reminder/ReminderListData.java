@@ -17,4 +17,6 @@ public class ReminderListData {
     public DateTimeItem lastWake = null;
     @SerializedName("version")
     public String version;
+    @SerializedName("defaultReminder")
+    public ReminderItemData defaultReminder = null;
 }

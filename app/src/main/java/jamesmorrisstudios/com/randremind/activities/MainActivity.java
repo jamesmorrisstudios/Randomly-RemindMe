@@ -17,11 +17,8 @@
 package jamesmorrisstudios.com.randremind.activities;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -29,7 +26,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
-import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceIconRequest;
@@ -37,25 +33,21 @@ import com.jamesmorrisstudios.appbaselibrary.dialogs.SingleChoiceIconDialogBuild
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseFragment;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseMainFragment;
 import com.jamesmorrisstudios.appbaselibrary.preferences.Prefs;
-import com.jamesmorrisstudios.appbaselibrary.sound.Sounds;
 import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 import com.squareup.otto.Subscribe;
 
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.dialogHelper.EditTimesRequest;
-import jamesmorrisstudios.com.randremind.dialogHelper.ExportReminderLogRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.IconPickerRequest;
 import jamesmorrisstudios.com.randremind.dialogHelper.ReminderLogRequest;
 import jamesmorrisstudios.com.randremind.fragments.AddReminderFragment;
 import jamesmorrisstudios.com.randremind.fragments.BackupRestoreFragment;
+import jamesmorrisstudios.com.randremind.fragments.DefaultsEditorFragment;
 import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.fragments.IconPickerDialogBuilder;
 import jamesmorrisstudios.com.randremind.fragments.MainListFragment;
@@ -156,6 +148,11 @@ public final class MainActivity extends BaseLauncherActivity implements
         if(isFirstLaunch()) {
             promptNotificationTheme();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     /**
@@ -280,6 +277,12 @@ public final class MainActivity extends BaseLauncherActivity implements
         loadBackupRestoreFragment(null);
     }
 
+    @Override
+    public void onEditDefaultsClicked() {
+        ReminderList.getInstance().setEditDefaultsReminder();
+        loadDefaultsEditorFragment();
+    }
+
     /**
      * Edit button clicked
      */
@@ -321,6 +324,25 @@ public final class MainActivity extends BaseLauncherActivity implements
     protected final void loadAddReminderFragment() {
         AddReminderFragment fragment = getAddReminderFragment();
         loadFragment(fragment, AddReminderFragment.TAG, true);
+        getSupportFragmentManager().executePendingTransactions();
+    }
+
+    @NonNull
+    protected final DefaultsEditorFragment getDefaultsEditorFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        DefaultsEditorFragment fragment = (DefaultsEditorFragment) fragmentManager.findFragmentByTag(DefaultsEditorFragment.TAG);
+        if (fragment == null) {
+            fragment = new DefaultsEditorFragment();
+        }
+        return fragment;
+    }
+
+    /**
+     * Loads the add reminder fragment into the main view
+     */
+    protected final void loadDefaultsEditorFragment() {
+        DefaultsEditorFragment fragment = getDefaultsEditorFragment();
+        loadFragment(fragment, DefaultsEditorFragment.TAG, true);
         getSupportFragmentManager().executePendingTransactions();
     }
 
