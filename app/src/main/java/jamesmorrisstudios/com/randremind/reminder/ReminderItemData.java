@@ -5,10 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.notification.NotificationContent;
 import com.jamesmorrisstudios.appbaselibrary.time.DateItem;
+import com.jamesmorrisstudios.appbaselibrary.time.DateTimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.TimeItem;
 import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
@@ -116,7 +118,7 @@ public class ReminderItemData {
     @SerializedName("curMessage")
     public int curMessage = 0;
     @SerializedName("alertTimes")
-    public ArrayList<TimeItem> alertTimes;
+    public ArrayList<DateTimeItem> alertTimes;
     //Options specific to a reminder
     @SerializedName("showAdvanced")
     public boolean showAdvanced;
@@ -182,7 +184,7 @@ public class ReminderItemData {
         this.notificationLEDColor = Color.BLUE;
         this.notificationPriority = NotificationContent.NotificationPriority.DEFAULT;
         this.notificationIcon = IconUtil.getIndex(R.drawable.notif_1);
-        this.notificationAccentColor = AppBase.getContext().getResources().getColor(R.color.accent);
+        this.notificationAccentColor = ThemeManager.getAccentColor();
         //Snooze
         this.snooze = SnoozeOptions.DISABLED;
         this.autoSnooze = SnoozeOptions.DISABLED;
@@ -395,7 +397,7 @@ public class ReminderItemData {
     }
 
     public enum TimePeriod {
-        DAY, WEEK, MONTH, YEAR;
+        DAY, WEEK, MONTH;
 
         public String getName() {
             switch(this) {
@@ -405,8 +407,6 @@ public class ReminderItemData {
                     return AppBase.getContext().getString(R.string.week);
                 case MONTH:
                     return AppBase.getContext().getString(R.string.month);
-                case YEAR:
-                    return AppBase.getContext().getString(R.string.year);
                 default:
                     return AppBase.getContext().getString(R.string.day);
             }

@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.IconItem;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.DualSpinnerRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
@@ -25,6 +28,7 @@ import jamesmorrisstudios.com.randremind.fragments.EditTimesDialog;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItemData;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.util.RemindUtils;
 
 /**
  * Created by James on 11/3/2015.
@@ -104,22 +108,48 @@ public class EditReminderTrigger extends BaseEditReminder {
             @Override
             public void onClick(View v) {
                 String title = AppBase.getContext().getString(R.string.trigger_type);
-                String[] items = new String[ReminderItemData.TriggerMode.values().length];
-                for (int i = 0; i < items.length; i++) {
-                    items[i] = ReminderItemData.TriggerMode.values()[i].getName();
-                }
-                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                         if (remind == null) {
                             return;
                         }
-                        remind.setTriggerMode(ReminderItemData.TriggerMode.values()[which]);
+
+                        ReminderItemData.TriggerMode mode = ReminderItemData.TriggerMode.values()[which];
+                        if(mode == ReminderItemData.TriggerMode.EVEN || mode == ReminderItemData.TriggerMode.LESS_RANDOM) {
+                            if(!Utils.isPro()) {
+                                Utils.showProPopup();
+                            } else {
+                                remind.setTriggerMode(mode);
+                            }
+                        } else {
+                            remind.setTriggerMode(mode);
+                        }
                         setData();
                     }
-                }, null));
-
+                };
+                if(Utils.isPro()) {
+                    String[] items = new String[ReminderItemData.TriggerMode.values().length];
+                    for (int i = 0; i < items.length; i++) {
+                        items[i] = ReminderItemData.TriggerMode.values()[i].getName();
+                    }
+                    Bus.postObject(new SingleChoiceRequest(title, items, true, listener, null));
+                } else {
+                    IconItem[] items = new IconItem[ReminderItemData.TriggerMode.values().length];
+                    for (int i = 0; i < items.length; i++) {
+                        if(i==1 || i==2) {
+                            if(ThemeManager.getAppTheme() == ThemeManager.AppTheme.LIGHT) {
+                                items[i] = new IconItem(ReminderItemData.TriggerMode.values()[i].getName(), R.drawable.pro_icon);
+                            } else {
+                                items[i] = new IconItem(ReminderItemData.TriggerMode.values()[i].getName(), R.drawable.pro_icon_dark);
+                            }
+                        } else {
+                            items[i] = new IconItem(ReminderItemData.TriggerMode.values()[i].getName(), 0);
+                        }
+                    }
+                    Bus.postObject(new SingleChoiceRequest(title, items, true, listener, null));
+                }
             }
         });
 
@@ -247,7 +277,7 @@ public class EditReminderTrigger extends BaseEditReminder {
             perDayList.add(Integer.toString(i + 1));
         }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(parent.getContext(), R.layout.support_simple_spinner_dropdown_item, perDayList);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.simple_drop_down_item);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         countSpinner.setAdapter(spinnerArrayAdapter);
         countSpinner.setSelection(remind.getTriggerCount() - 1);
     }

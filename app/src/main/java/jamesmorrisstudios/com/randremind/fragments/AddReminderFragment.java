@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
@@ -56,9 +57,17 @@ public class AddReminderFragment extends BaseRecycleListFragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         if(RemindUtils.alwaysShowAdvanced()) {
-            inflater.inflate(R.menu.menu_add, menu);
+            if(ThemeManager.getToolbarTheme() == ThemeManager.ToolbarTheme.LIGHT_TEXT) {
+                inflater.inflate(R.menu.menu_add, menu);
+            } else {
+                inflater.inflate(R.menu.menu_add_dark, menu);
+            }
         } else {
-            inflater.inflate(R.menu.menu_add_advanced, menu);
+            if(ThemeManager.getToolbarTheme() == ThemeManager.ToolbarTheme.LIGHT_TEXT) {
+                inflater.inflate(R.menu.menu_add_advanced, menu);
+            } else {
+                inflater.inflate(R.menu.menu_add_advanced_dark, menu);
+            }
             ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
             MenuItem item = menu.findItem(R.id.action_advanced);
             if (remind != null && item != null) {

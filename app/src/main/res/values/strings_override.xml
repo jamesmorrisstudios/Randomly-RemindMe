@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Randomly RemindMe</string>
+    <string name="app_name" translatable="false">RemindMe</string>
     <string name="app_short_name" translatable="false">RemindMe</string>
-    <string name="app_package" translatable="false">jamesmorrisstudios.com.randremind</string>
 
     <string name="tutorial_link_read" translatable="false">http://www.jamesmorrisstudios.us/randomly-remindme-howto.html</string>
 
@@ -12,13 +11,13 @@
 
     <!-- TODO make this visible once the video tutorial is ready -->
     <string name="tutorial_link_watch" translatable="false">TODO</string>
-    <style name="help_watch_how">
+    <style name="help_watch">
         <item name="android:visibility">gone</item>
     </style>
 
     <string name="edit_message" translatable="false">@string/message</string>
     <string name="pref_first_launch" translatable="false">FIRST_LAUNCH</string>
 
-    <string name="version_type" translatable="false">@string/beta</string> <!-- alpha beta production -->
+    <string name="version_type" translatable="false">@string/alpha</string> <!-- alpha beta production -->
 
 </resources>

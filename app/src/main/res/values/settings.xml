@@ -14,50 +14,60 @@
         <item>@array/settings_category_notification</item>
     </array>
 
+    <array name="settings_category_display" translatable="false">
+        <item>@string/settings_category_display</item>
+        <item>@array/setting_immersive_enable</item>
+    </array>
+
     <array name="settings_category_general" translatable="false">
         <item>@string/settings_category_general</item>
-        <item>@array/settings_item_5</item>
-        <item>@array/settings_base_item_6</item>
+        <item>@array/setting_ringtone_picker_enable</item>
+        <item>@array/setting_force_advanced</item>
     </array>
 
     <array name="settings_category_locale" translatable="false">
         <item>@string/settings_category_locale</item>
-        <item>@array/settings_base_item_3</item>
-        <item>@array/settings_item_4</item>
+        <item>@array/setting_language_picker</item>
+        <item>@array/setting_first_day_of_week</item>
     </array>
 
     <array name="settings_category_theme" translatable="false">
         <item>@string/settings_category_theme</item>
-        <item>@array/settings_base_item_5</item>
-        <item>@array/settings_item_3</item>
+        <item>@array/setting_theme_picker</item>
+        <item>@array/setting_toolbar_text_color</item>
+        <item>@array/setting_primary_color</item>
+        <item>@array/setting_accent_color</item>
     </array>
 
     <array name="settings_category_notification" translatable="false">
         <item>@string/settings_category_notification</item>
-        <item>@array/settings_item_0</item>
-        <item>@array/settings_item_7</item>
-        <item>@array/settings_item_6</item>
-        <item>@array/settings_item_8</item>
-        <item>@array/settings_item_1</item>
-        <item>@array/settings_item_2</item>
+        <item>@array/setting_notification_click_action</item>
+        <item>@array/setting_notification_click_open</item>
+        <item>@array/setting_notification_swipe_away_action</item>
+        <item>@array/setting_notification_swipe_away_open</item>
+        <item>@array/setting_notification_ongoing</item>
+        <item>@array/setting_notification_custom</item>
+        <item>@array/setting_notification_theme</item>
     </array>
 
     <!-- Notification click action  -->
-    <array name="settings_item_0">
-        <item name="defaultValue">@integer/settings_item_0_default_value</item>
-        <item name="key">@string/settings_item_0_key</item>
-        <item name="primary">@string/randremind_settings_0_primary</item>
+    <array name="setting_notification_click_action">
+        <item name="defaultValue">@integer/setting_notification_click_action_default_value</item>
+        <item name="key">@string/setting_notification_click_action_key</item>
+        <item name="primary">@string/setting_notification_click_action_primary</item>
         <item name="secondary">@string/BLANK</item>
-        <item name="restart">@bool/settings_item_0_restart</item>
-        <item name="list">@array/settings_item_0_list</item>
+        <item name="restart">@bool/setting_notification_click_action_restart</item>
+        <item name="pro">@bool/setting_notification_click_action_pro</item>
+        <item name="list">@array/setting_notification_click_action_list</item>
     </array>
 
-    <bool name="settings_item_0_restart">false</bool>
-    <integer name="settings_item_0_default_value">0</integer>
-    <string name="settings_item_0_key" translatable="false">@string/pref_notification_click_action</string>
+    <bool name="setting_notification_click_action_pro">false</bool>
+    <bool name="setting_notification_click_action_restart">false</bool>
+    <integer name="setting_notification_click_action_default_value">0</integer>
+    <string name="setting_notification_click_action_key" translatable="false">@string/pref_notification_click_action</string>
     <string name="pref_notification_click_action" translatable="false">NOTIFICATION_CLICK_ACTION</string>
 
-    <string-array name="settings_item_0_list">
+    <string-array name="setting_notification_click_action_list">
         <item name="second">@string/complete</item>
         <item name="second">@string/dismiss</item>
         <item name="second">@string/snooze</item>
@@ -65,69 +75,77 @@
     </string-array>
 
     <!-- Enable to use system notification -->
-    <array name="settings_item_1">
-        <item name="defaultValue">@bool/settings_item_1_default_value</item>
-        <item name="key">@string/settings_item_1_key</item>
-        <item name="primary">@string/randremind_settings_1_primary</item>
-        <item name="secondary">@string/randremind_settings_1_secondary</item>
-        <item name="restart">@bool/settings_item_1_restart</item>
+    <array name="setting_notification_custom">
+        <item name="defaultValue">@bool/setting_notification_custom_default_value</item>
+        <item name="key">@string/setting_notification_custom_key</item>
+        <item name="primary">@string/setting_notification_custom_primary</item>
+        <item name="secondary">@string/BLANK</item>
+        <item name="restart">@bool/setting_notification_custom_restart</item>
+        <item name="pro">@bool/setting_notification_custom_pro</item>
     </array>
 
-    <bool name="settings_item_1_restart">false</bool>
-    <bool name="settings_item_1_default_value">true</bool>
-    <string name="settings_item_1_key" translatable="false">@string/pref_notification_custom</string>
+    <bool name="setting_notification_custom_pro">false</bool>
+    <bool name="setting_notification_custom_restart">false</bool>
+    <bool name="setting_notification_custom_default_value">true</bool>
+    <string name="setting_notification_custom_key" translatable="false">@string/pref_notification_custom</string>
     <string name="pref_notification_custom" translatable="false">NOTIFICATION_CUSTOM</string>
 
     <!-- Enable to make notification ongoing -->
-    <array name="settings_item_2">
-        <item name="defaultValue">@bool/settings_item_2_default_value</item>
-        <item name="key">@string/settings_item_2_key</item>
-        <item name="primary">@string/randremind_settings_2_primary</item>
-        <item name="secondary">@string/randremind_settings_2_secondary</item>
-        <item name="restart">@bool/settings_item_2_restart</item>
+    <array name="setting_notification_ongoing">
+        <item name="defaultValue">@bool/setting_notification_ongoing_default_value</item>
+        <item name="key">@string/setting_notification_ongoing_key</item>
+        <item name="primary">@string/setting_notification_ongoing_primary</item>
+        <item name="secondary">@string/setting_notification_ongoing_secondary</item>
+        <item name="restart">@bool/setting_notification_ongoing_restart</item>
+        <item name="pro">@bool/setting_notification_ongoing_pro</item>
     </array>
 
-    <bool name="settings_item_2_restart">false</bool>
-    <bool name="settings_item_2_default_value">false</bool>
-    <string name="settings_item_2_key" translatable="false">@string/pref_notification_ongoing</string>
+    <bool name="setting_notification_ongoing_pro">false</bool>
+    <bool name="setting_notification_ongoing_restart">false</bool>
+    <bool name="setting_notification_ongoing_default_value">false</bool>
+    <string name="setting_notification_ongoing_key" translatable="false">@string/pref_notification_ongoing</string>
     <string name="pref_notification_ongoing" translatable="false">NOTIFICATION_ONGOING</string>
 
     <!-- Enable to make notifications light theme -->
-    <array name="settings_item_3">
-        <item name="defaultValue">@integer/settings_item_3_default_value</item>
-        <item name="key">@string/settings_item_3_key</item>
-        <item name="primary">@string/randremind_settings_3_primary</item>
+    <array name="setting_notification_theme">
+        <item name="defaultValue">@integer/setting_notification_theme_default_value</item>
+        <item name="key">@string/setting_notification_theme_key</item>
+        <item name="primary">@string/setting_notification_theme_primary</item>
         <item name="secondary">@string/BLANK</item>
-        <item name="restart">@bool/settings_item_3_restart</item>
-        <item name="list">@array/settings_item_3_list</item>
+        <item name="restart">@bool/setting_notification_theme_restart</item>
+        <item name="pro">@bool/setting_notification_theme_pro</item>
+        <item name="list">@array/setting_notification_theme_list</item>
     </array>
 
-    <bool name="settings_item_3_restart">false</bool>
-    <integer name="settings_item_3_default_value">0</integer>
-    <string name="settings_item_3_key" translatable="false">@string/pref_notification_theme_new</string>
+    <bool name="setting_notification_theme_pro">false</bool>
+    <bool name="setting_notification_theme_restart">false</bool>
+    <integer name="setting_notification_theme_default_value">0</integer>
+    <string name="setting_notification_theme_key" translatable="false">@string/pref_notification_theme_new</string>
     <string name="pref_notification_theme_new" translatable="false">NOTIFICATION_THEME_NEW</string>
 
-    <string-array name="settings_item_3_list">
+    <string-array name="setting_notification_theme_list">
         <item name="automatic">@string/dark_text</item>
         <item name="sunday">@string/light_text</item>
     </string-array>
 
     <!-- Set the first day of the week -->
-    <array name="settings_item_4">
-        <item name="defaultValue">@integer/settings_item_4_default_value</item>
-        <item name="key">@string/settings_item_4_key</item>
-        <item name="primary">@string/randremind_settings_4_primary</item>
+    <array name="setting_first_day_of_week">
+        <item name="defaultValue">@integer/setting_first_day_of_week_default_value</item>
+        <item name="key">@string/setting_first_day_of_week_key</item>
+        <item name="primary">@string/setting_first_day_of_week_primary</item>
         <item name="secondary">@string/BLANK</item>
-        <item name="restart">@bool/settings_item_4_restart</item>
-        <item name="list">@array/settings_item_4_list</item>
+        <item name="restart">@bool/setting_first_day_of_week_restart</item>
+        <item name="pro">@bool/setting_first_day_of_week_pro</item>
+        <item name="list">@array/setting_first_day_of_week_list</item>
     </array>
 
-    <bool name="settings_item_4_restart">false</bool>
-    <integer name="settings_item_4_default_value">0</integer>
-    <string name="settings_item_4_key" translatable="false">@string/pref_notification_first_day</string>
+    <bool name="setting_first_day_of_week_pro">false</bool>
+    <bool name="setting_first_day_of_week_restart">false</bool>
+    <integer name="setting_first_day_of_week_default_value">0</integer>
+    <string name="setting_first_day_of_week_key" translatable="false">@string/pref_notification_first_day</string>
     <string name="pref_notification_first_day" translatable="false">NOTIFICATION_FIRST_DAY</string>
 
-    <string-array name="settings_item_4_list">
+    <string-array name="setting_first_day_of_week_list">
         <item name="automatic">@string/automatic</item>
         <item name="sunday">@string/day_sunday</item>
         <item name="monday">@string/day_monday</item>
@@ -139,35 +157,39 @@
     </string-array>
 
     <!-- Force advanced options -->
-    <array name="settings_item_5">
-        <item name="defaultValue">@bool/settings_item_5_default_value</item>
-        <item name="key">@string/settings_item_5_key</item>
-        <item name="primary">@string/randremind_settings_5_primary</item>
-        <item name="secondary">@string/randremind_settings_5_secondary</item>
-        <item name="restart">@bool/settings_item_5_restart</item>
+    <array name="setting_force_advanced">
+        <item name="defaultValue">@bool/setting_force_advanced_default_value</item>
+        <item name="key">@string/setting_force_advanced_key</item>
+        <item name="primary">@string/setting_force_advanced_primary</item>
+        <item name="secondary">@string/setting_force_advanced_secondary</item>
+        <item name="restart">@bool/setting_force_advanced_restart</item>
+        <item name="pro">@bool/setting_force_advanced_pro</item>
     </array>
 
-    <bool name="settings_item_5_restart">false</bool>
-    <bool name="settings_item_5_default_value">false</bool>
-    <string name="settings_item_5_key" translatable="false">@string/pref_force_advanced</string>
+    <bool name="setting_force_advanced_pro">false</bool>
+    <bool name="setting_force_advanced_restart">false</bool>
+    <bool name="setting_force_advanced_default_value">false</bool>
+    <string name="setting_force_advanced_key" translatable="false">@string/pref_force_advanced</string>
     <string name="pref_force_advanced" translatable="false">FORCE_ADVANCED</string>
 
     <!-- Notification swipe away action  -->
-    <array name="settings_item_6">
-        <item name="defaultValue">@integer/settings_item_6_default_value</item>
-        <item name="key">@string/settings_item_6_key</item>
-        <item name="primary">@string/randremind_settings_6_primary</item>
+    <array name="setting_notification_swipe_away_action">
+        <item name="defaultValue">@integer/setting_notification_swipe_away_action_default_value</item>
+        <item name="key">@string/setting_notification_swipe_away_action_key</item>
+        <item name="primary">@string/setting_notification_swipe_away_action_primary</item>
         <item name="secondary">@string/BLANK</item>
-        <item name="restart">@bool/settings_item_6_restart</item>
-        <item name="list">@array/settings_item_6_list</item>
+        <item name="restart">@bool/setting_notification_swipe_away_action_restart</item>
+        <item name="pro">@bool/setting_notification_swipe_away_action_pro</item>
+        <item name="list">@array/setting_notification_swipe_away_action_list</item>
     </array>
 
-    <bool name="settings_item_6_restart">false</bool>
-    <integer name="settings_item_6_default_value">1</integer>
-    <string name="settings_item_6_key" translatable="false">@string/pref_notification_swipe_action</string>
+    <bool name="setting_notification_swipe_away_action_pro">false</bool>
+    <bool name="setting_notification_swipe_away_action_restart">false</bool>
+    <integer name="setting_notification_swipe_away_action_default_value">1</integer>
+    <string name="setting_notification_swipe_away_action_key" translatable="false">@string/pref_notification_swipe_action</string>
     <string name="pref_notification_swipe_action" translatable="false">NOTIFICATION_SWIPE_ACTION</string>
 
-    <string-array name="settings_item_6_list">
+    <string-array name="setting_notification_swipe_away_action_list">
         <item name="second">@string/complete</item>
         <item name="second">@string/dismiss</item>
         <item name="second">@string/snooze</item>
@@ -175,31 +197,35 @@
     </string-array>
 
     <!-- notification click opens app -->
-    <array name="settings_item_7">
-        <item name="defaultValue">@bool/settings_item_7_default_value</item>
-        <item name="key">@string/settings_item_7_key</item>
-        <item name="primary">@string/randremind_settings_7_primary</item>
+    <array name="setting_notification_click_open">
+        <item name="defaultValue">@bool/setting_notification_click_open_default_value</item>
+        <item name="key">@string/setting_notification_click_open_key</item>
+        <item name="primary">@string/setting_notification_click_open_primary</item>
         <item name="secondary">@string/BLANK</item>
-        <item name="restart">@bool/settings_item_7_restart</item>
+        <item name="restart">@bool/setting_notification_click_open_restart</item>
+        <item name="pro">@bool/setting_notification_click_open_pro</item>
     </array>
 
-    <bool name="settings_item_7_restart">false</bool>
-    <bool name="settings_item_7_default_value">true</bool>
-    <string name="settings_item_7_key" translatable="false">@string/pref_notification_click_ack</string>
+    <bool name="setting_notification_click_open_pro">false</bool>
+    <bool name="setting_notification_click_open_restart">false</bool>
+    <bool name="setting_notification_click_open_default_value">true</bool>
+    <string name="setting_notification_click_open_key" translatable="false">@string/pref_notification_click_ack</string>
     <string name="pref_notification_click_ack" translatable="false">NOTIFICATION_CLICK_ACK</string>
 
     <!-- notification swipe opens app -->
-    <array name="settings_item_8">
-        <item name="defaultValue">@bool/settings_item_8_default_value</item>
-        <item name="key">@string/settings_item_8_key</item>
-        <item name="primary">@string/randremind_settings_8_primary</item>
+    <array name="setting_notification_swipe_away_open">
+        <item name="defaultValue">@bool/setting_notification_swipe_away_open_default_value</item>
+        <item name="key">@string/setting_notification_swipe_away_open_key</item>
+        <item name="primary">@string/setting_notification_swipe_away_open_primary</item>
         <item name="secondary">@string/BLANK</item>
-        <item name="restart">@bool/settings_item_8_restart</item>
+        <item name="restart">@bool/setting_notification_swipe_away_open_restart</item>
+        <item name="pro">@bool/setting_notification_swipe_away_open_pro</item>
     </array>
 
-    <bool name="settings_item_8_restart">false</bool>
-    <bool name="settings_item_8_default_value">false</bool>
-    <string name="settings_item_8_key" translatable="false">@string/pref_notification_swipe_ack</string>
+    <bool name="setting_notification_swipe_away_open_pro">false</bool>
+    <bool name="setting_notification_swipe_away_open_restart">false</bool>
+    <bool name="setting_notification_swipe_away_open_default_value">false</bool>
+    <string name="setting_notification_swipe_away_open_key" translatable="false">@string/pref_notification_swipe_ack</string>
     <string name="pref_notification_swipe_ack" translatable="false">NOTIFICATION_SWIPE_ACK</string>
 
 </resources>

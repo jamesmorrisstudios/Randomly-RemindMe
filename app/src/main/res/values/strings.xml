@@ -1,3 +1,16 @@
 <resources>
 
+    <string name="notification_clicked" translatable="false">jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED</string>
+    <string name="notification_deleted" translatable="false">jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED</string>
+    <string name="notification_dismiss" translatable="false">jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS</string>
+    <string name="notification_acknowledge" translatable="false">jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE</string>
+    <string name="notification_snooze" translatable="false">jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE</string>
+
+
+    <string name="wake_boot_completed" translatable="false">android.intent.action.BOOT_COMPLETED</string>
+    <string name="wake_midnight" translatable="false">jamesmorrisstudios.com.randremind.WAKEMIDNIGHT</string>
+    <string name="wake_reminder" translatable="false">jamesmorrisstudios.com.randremind.WAKEREMINDER</string>
+    <string name="wake_reminder_snooze" translatable="false">jamesmorrisstudios.com.randremind.WAKEREMINDER_SNOOZE</string>
+    <string name="wake_reminder_auto_snooze" translatable="false">jamesmorrisstudios.com.randremind.WAKEREMINDER_AUTOSNOOZE</string>
+
 </resources>

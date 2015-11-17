@@ -26,7 +26,7 @@
 
     <Button
         android:background="?android:attr/selectableItemBackground"
-        android:textColor="@color/textAccent"
+        android:textColor="?attr/colorAccentText"
         android:layout_above="@+id/bottom_space"
         android:layout_toLeftOf="@+id/btn_ok"
         android:id="@+id/btn_cancel"
@@ -38,7 +38,7 @@
 
     <Button
         android:background="?android:attr/selectableItemBackground"
-        android:textColor="@color/textAccent"
+        android:textColor="?attr/colorAccentText"
         android:layout_alignParentRight="true"
         android:layout_above="@+id/bottom_space"
         android:id="@+id/btn_ok"
@@ -52,6 +52,6 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/bottom_space"
         android:layout_width="match_parent"
-        android:layout_height="16dp" />
+        android:layout_height="8dp" />
 
 </RelativeLayout>

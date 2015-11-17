@@ -44,11 +44,15 @@ import com.jamesmorrisstudios.appbaselibrary.time.UtilsTime;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.receiver.NotificationReceiver;
 import jamesmorrisstudios.com.randremind.util.IconUtil;
+import jamesmorrisstudios.com.randremind.util.RemindUtils;
+import jamesmorrisstudios.com.randremind.util.SubObject;
+import jamesmorrisstudios.com.randremind.util.YearObject;
 
 /**
  * Handler that has a reminder item data object set to it to work with it
@@ -58,6 +62,7 @@ import jamesmorrisstudios.com.randremind.util.IconUtil;
 public final class ReminderItem extends BaseRecycleItem {
     private AsyncTask<Void, Void, Boolean> taskLoad = null;
     private ReminderItemData reminderItemData = null;
+    private final Random rand = new Random();
 
     //Title
     private boolean titleDirty = false;
@@ -812,11 +817,140 @@ public final class ReminderItem extends BaseRecycleItem {
         return Uri.parse(reminderItemData.notificationTone);
     }
 
+
+    //UtilTime functions
+
+    //getWeekOfYear(DateItem dateItem)
+    //getDayOfYear(DateItem dateItem)
+
+
+    private boolean isValidCriteria(DateItem dateItem) {
+        if(!isValidDateRange(dateItem)) {
+            return false;
+        }
+
+        //Check normal vs manual criteria
+        if(reminderItemData.filterType == ReminderItemData.FilterType.NORMAL) {
+            if (!isValidDaysOfWeek(dateItem) || !isValidDaysOfMonth(dateItem) || !isValidWeeksOfMonth(dateItem) || !isValidMonthsOfYear(dateItem)) {
+                return false;
+            }
+        } else {
+            if (!isValidDaysOfYear(dateItem)) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    //Gets all the days starting from the first day of the year of the startDate up through 1 year in advance of the current date
+    private ArrayList<DateItem> getCriteriaAllowedDays() {
+        ArrayList<DateItem> dates = new ArrayList<>();
+        DateItem startDate = reminderItemData.startDate;
+        DateItem currentDate = UtilsTime.getDateNow();
+        DateItem oldestDate = new DateItem(startDate); //First day of the start date's year
+        oldestDate.month = 0; //Jan
+        oldestDate.dayOfMonth = 1;
+        DateItem newestDate = new DateItem(currentDate); //Last day of the current date's year + 1 (we may cut down on this in the future)
+        newestDate.year = newestDate.year + 2;
+        newestDate.month = 11; //Dec
+        newestDate.dayOfMonth = 31;
+
+        //Still not within our starting date so just give nothing
+        if(startDate.compareTo(newestDate) >= 0) {
+            return dates;
+        }
+
+        if(reminderItemData.filterType == ReminderItemData.FilterType.MANUAL) {
+            for(DateItem dateItem : reminderItemData.daysOfYear) {
+                dates.add(new DateItem(dateItem));
+            }
+        } else {
+            //Head backwards from the start date (exclusive)
+            DateItem date = new DateItem(startDate);
+            while(date.compareTo(oldestDate) >= 0) {
+
+                if(reminderItemData.repeatType == ReminderItemData.RepeatType.DAYS) {
+                    date = UtilsTime.addDayOfYear(date, -reminderItemData.repeatCount);
+                } else if(reminderItemData.repeatType == ReminderItemData.RepeatType.WEEKS) {
+                    date = UtilsTime.addWeekOfYear(date, -reminderItemData.repeatCount);
+                } else if(reminderItemData.repeatType == ReminderItemData.RepeatType.MONTHS) {
+                    date = UtilsTime.addMonthOfYear(date, -reminderItemData.repeatCount);
+                }
+
+                if(date.compareTo(oldestDate) < 0) {
+                    break;
+                }
+
+                if(isValidCriteria(date)) {
+                    dates.add(0, new DateItem(date));
+                }
+            }
+
+            //Head from the start date forwards (inclusive)
+            date = new DateItem(startDate);
+            if(isValidCriteria(date)) {
+                dates.add(new DateItem(date));
+            }
+
+            while(date.compareTo(newestDate) <= 0) {
+
+                if(reminderItemData.repeatType == ReminderItemData.RepeatType.DAYS) {
+                    date = UtilsTime.addDayOfYear(date, reminderItemData.repeatCount);
+                } else if(reminderItemData.repeatType == ReminderItemData.RepeatType.WEEKS) {
+                    date = UtilsTime.addWeekOfYear(date, reminderItemData.repeatCount);
+                } else if(reminderItemData.repeatType == ReminderItemData.RepeatType.MONTHS) {
+                    date = UtilsTime.addMonthOfYear(date, reminderItemData.repeatCount);
+                }
+
+                if(date.compareTo(newestDate) > 0) {
+                    break;
+                }
+
+                if(isValidCriteria(date)) {
+                    dates.add(new DateItem(date));
+                }
+            }
+        }
+        return dates;
+    }
+
     /**
      * Generate new alert times given the current parameters
      */
     public final void updateAlertTimes() {
+        // Note these dates extend int the past beyond the start allowed date. We must ensure that only those permitted are scheduled
+        //We keep them for week and month scheduling time periods
+        ArrayList<DateItem> dates = getCriteriaAllowedDays();
+
+        for(DateItem date : dates) {
+            Log.v("ReminderItem", "Year: "+date.year+" Month: "+date.month+" Day: "+date.dayOfMonth+" WeekOfYear: "+UtilsTime.getWeekOfYear(date));
+        }
+
         alertTimesDirty = true;
+        switch(reminderItemData.triggerMode) {
+            case RANDOM:
+                //Day/Week/Month basis
+                setRandomAlertTimes(dates);
+                break;
+            case LESS_RANDOM:
+                //Day/Week/Month basis
+                setLessRandomAlertTimes(dates);
+                break;
+            case EVEN:
+                //Day/Week/Month basis
+                setEvenAlertTimes(dates);
+                break;
+            case SPECIFIC:
+                //This is always on a per day basis
+                setSpecificAlertTimes(dates);
+                break;
+            case INTERVAL:
+                //This is always on a per day basis
+                setIntervalAlertTimes(dates);
+                break;
+        }
+        /*
         if (!reminderItemData.rangeTiming) {
             reminderItemData.alertTimes = new ArrayList<>();
             for (TimeItem item : reminderItemData.specificTimeList) {
@@ -829,6 +963,157 @@ public final class ReminderItem extends BaseRecycleItem {
         int startOffset = timeToMinutes(reminderItemData.startTime);
 
         generateEvenishSplit(diff, startOffset, 0.5f, reminderItemData.triggerCount);
+        */
+    }
+
+    private ArrayList<YearObject> getWeeksSplit(@NonNull ArrayList<DateItem> dates) {
+        ArrayList<YearObject> years = new ArrayList<>();
+
+        YearObject year = new YearObject();
+        SubObject sub = new SubObject();
+
+        for(DateItem date : dates) {
+            //If the year is different create a new year
+            if(date.year != year.year) {
+                year = new YearObject();
+                year.year = date.year;
+                years.add(year);
+            }
+            //First check the subObject if its the same week or if we need to make a new one
+            if(sub.subNumber != UtilsTime.getWeekOfYear(date)) {
+                sub = new SubObject();
+                sub.subNumber = UtilsTime.getWeekOfYear(date);
+                year.subObject.add(sub);
+            }
+            //Add the date itself
+            sub.dates.add(date);
+            //Add the minutes for this day
+            sub.minutes += getMinutesPerDay();
+        }
+        return years;
+    }
+
+    private ArrayList<YearObject> getMonthsSplit(@NonNull ArrayList<DateItem> dates) {
+        ArrayList<YearObject> years = new ArrayList<>();
+
+        YearObject year = new YearObject();
+        SubObject sub = new SubObject();
+
+        for(DateItem date : dates) {
+            //If the year is different create a new year
+            if(date.year != year.year) {
+                year = new YearObject();
+                year.year = date.year;
+                years.add(year);
+            }
+            //First check the subObject if its the same month or if we need to make a new one
+            if(sub.subNumber != date.month) {
+                sub = new SubObject();
+                sub.subNumber = date.month;
+                year.subObject.add(sub);
+            }
+            //Add the date itself
+            sub.dates.add(date);
+            //Add the minutes for this day
+            sub.minutes += getMinutesPerDay();
+        }
+        return years;
+    }
+
+    private int getMinutesPerDay() {
+        int compare = reminderItemData.startTime.compareTo(reminderItemData.endTime);
+        if(compare == 0) {
+            return 0;
+        }
+        //range is 0 to 1439 (23:59)
+        int startMinutes = timeToMinutes(reminderItemData.startTime);
+        int endMinutes = timeToMinutes(reminderItemData.endTime);
+
+        if(compare > 0) {
+            //Start time is after end time. We run centered around midnight. non standard
+            return startMinutes + 1439 - endMinutes;
+        } else if(compare < 0) {
+            //Start time is before end time. This is normal difference work here
+            return endMinutes - startMinutes;
+        }
+        return 0;
+    }
+
+    private void setRandomAlertTimes(@NonNull ArrayList<DateItem> dates) {
+        switch(reminderItemData.triggerPeriod) {
+            case DAY:
+                //Works with the DateItem array directly. No need for more stuff
+
+
+                break;
+            case WEEK:
+                //Break each set of days into weeks and calculate for them individually
+                ArrayList<YearObject> weekSplit = getWeeksSplit(dates);
+                generateAlertTimes(weekSplit, 0.5f, reminderItemData.triggerCount);
+                Log.v("ReminderItem", "WeekSplit");
+                break;
+            case MONTH:
+                //Break each set of days into months and calculate for them individually
+                ArrayList<YearObject> monthSplit = getMonthsSplit(dates);
+                generateAlertTimes(monthSplit, 0.5f, reminderItemData.triggerCount);
+                Log.v("ReminderItem", "MonthSplit");
+                break;
+        }
+    }
+
+    private void setLessRandomAlertTimes(@NonNull ArrayList<DateItem> dates) {
+
+    }
+
+    private void setEvenAlertTimes(@NonNull ArrayList<DateItem> dates) {
+
+    }
+
+    private void setSpecificAlertTimes(@NonNull ArrayList<DateItem> dates) {
+        reminderItemData.alertTimes = new ArrayList<>();
+
+
+        //for (TimeItem item : reminderItemData.specificTimeList) {
+        //    reminderItemData.alertTimes.add(item.copy());
+        //    Log.v(reminderItemData.title, item.getHourInTimeFormatString() + ":" + item.getMinuteString());
+        //}
+    }
+
+    private void setIntervalAlertTimes(@NonNull ArrayList<DateItem> dates) {
+
+    }
+
+    private void generateAlertTimes(ArrayList<YearObject> years, float wiggle, int numberItems) {
+        for(YearObject year : years) {
+            for(SubObject sub : year.subObject) {
+                sub.alertTimes = getRandomTimes(sub.minutes, wiggle, numberItems);
+
+                //Alert times generated now map these back to their proper day and time
+                int minutesPerDay = getMinutesPerDay();
+                for(int i=0; i<sub.alertTimes.length; i++) {
+
+
+
+
+                }
+
+
+            }
+        }
+    }
+
+    private int[] getRandomTimes(int range, float wiggle, int numberItems) {
+        //Cap number of items to how many minutes we have available
+        numberItems = Math.min(range, numberItems);
+        int itemSplit = Math.round((range * 1.0f) / numberItems);
+        int[] values = new int[numberItems];
+        for (int i = 0; i < values.length; i++) {
+            values[i] = Math.round((i * 1.0f) / (numberItems) * range) + itemSplit / 2 + Math.round((itemSplit * wiggle) * (rand.nextFloat() - 0.5f));
+            if (i > 0) {
+                values[i] = Math.min(Math.max(values[i], values[i - 1] + 5), range);
+            }
+        }
+        return values;
     }
 
     /**
@@ -840,6 +1125,8 @@ public final class ReminderItem extends BaseRecycleItem {
      * @param numberItems Number of items to generate
      */
     private void generateEvenishSplit(int diff, int offset, float wiggle, int numberItems) {
+        //TODO
+        /*
         reminderItemData.alertTimes = new ArrayList<>();
         Random rand = new Random();
         int itemSplit = Math.round((diff * 1.0f) / numberItems);
@@ -854,6 +1141,7 @@ public final class ReminderItem extends BaseRecycleItem {
             reminderItemData.alertTimes.add(minutesToTimeItem(value + offset));
             Log.v(reminderItemData.title, reminderItemData.alertTimes.get(reminderItemData.alertTimes.size() - 1).getHourInTimeFormatString() + ":" + reminderItemData.alertTimes.get(reminderItemData.alertTimes.size() - 1).getMinuteString());
         }
+        */
     }
 
     public final ReminderLog getReminderLog() {
@@ -889,48 +1177,122 @@ public final class ReminderItem extends BaseRecycleItem {
         return new TimeItem(hour, minutes);
     }
 
-    private boolean isValidWeekToRun(DateTimeItem now) {
-        if(reminderItemData.weeksOfMonth[0]) {
+    private boolean isValidEnabled() {
+        return reminderItemData.enabled;
+    }
+
+    private boolean isValidDateRange(DateItem dateItem) {
+        if(dateItem.compareTo(reminderItemData.startDate) < 0) {
+            return false;
+        }
+        //Equal or after the start date. Check if going forever or not
+        if(!reminderItemData.endEnable) {
             return true;
         }
-        UtilsTime.WeekOfMonth week = UtilsTime.getWeekOfMonth(now.dateItem);
-        Log.v("ReminderItem", "Week of month: "+week.getName()+" is last of month: "+UtilsTime.isLastWeekOfMonth(now.dateItem));
-        if(reminderItemData.weeksOfMonth[1] && week == UtilsTime.WeekOfMonth.FIRST) {
-            return true;
-        }
-        if(reminderItemData.weeksOfMonth[2] && week == UtilsTime.WeekOfMonth.SECOND) {
-            return true;
-        }
-        if(reminderItemData.weeksOfMonth[3] && week == UtilsTime.WeekOfMonth.THIRD) {
-            return true;
-        }
-        if(reminderItemData.weeksOfMonth[4] && week == UtilsTime.WeekOfMonth.FOURTH) {
-            return true;
-        }
-        if(reminderItemData.weeksOfMonth[5] && week == UtilsTime.WeekOfMonth.FIFTH) {
-            return true;
-        }
-        if(reminderItemData.weeksOfMonth[6] && UtilsTime.isLastWeekOfMonth(now.dateItem)) {
+        //We are using the end date
+        if(dateItem.compareTo(reminderItemData.endDate) <= 0) {
             return true;
         }
         return false;
     }
 
+    private boolean isValidTimeRange(DateTimeItem now) {
+        //If start and end time are equal it only can fire at the specific time
+        //if(reminderItemData.startTime.equals(reminderItemData.endTime)) {
+        //    return now.timeItem.equals(reminderItemData.startTime);
+        //}
+
+
+
+
+
+        return true; //TODO
+    }
+
+    private boolean isValidDaysOfWeek(DateItem dateItem) {
+        return reminderItemData.daysOfWeek[UtilsTime.getDayOfWeek(dateItem)-1];
+    }
+
+    private boolean isValidDaysOfMonth(DateItem dateItem) {
+        return reminderItemData.daysOfMonth[dateItem.dayOfMonth-1];
+    }
+
+    private boolean isValidWeeksOfMonth(DateItem dateItem) {
+        if(reminderItemData.weeksOfMonth[0]) {
+            return true;
+        }
+        int week = UtilsTime.getDayOfWeekInMonth(dateItem);
+        Log.v("ReminderItem", "Week of month: "+week+" is last of month: "+UtilsTime.isLastDayOfFullWeekInMonth(dateItem));
+        if(reminderItemData.weeksOfMonth[1] && week == 1) {
+            return true;
+        }
+        if(reminderItemData.weeksOfMonth[2] && week == 2) {
+            return true;
+        }
+        if(reminderItemData.weeksOfMonth[3] && week == 3) {
+            return true;
+        }
+        if(reminderItemData.weeksOfMonth[4] && week == 4) {
+            return true;
+        }
+        if(reminderItemData.weeksOfMonth[5] && week == 5) {
+            return true;
+        }
+        if(reminderItemData.weeksOfMonth[6] && UtilsTime.isLastDayOfFullWeekInMonth(dateItem)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isValidMonthsOfYear(DateItem dateItem) {
+        return reminderItemData.monthsOfYear[dateItem.month];
+    }
+
+    private boolean isValidDaysOfYear(DateItem dateItem) {
+        for(DateItem date : reminderItemData.daysOfYear) {
+            if(dateItem.equals(date)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValidAlertTimes() {
+        return !reminderItemData.alertTimes.isEmpty();
+    }
+
     public final void scheduleNextWake(DateTimeItem now) {
-        if (!reminderItemData.enabled) {
+        //Make sure the reminder is enabled
+        if (!isValidEnabled()) {
             return;
         }
-        if (!reminderItemData.daysOfWeek[UtilsTime.getCurrentDayOfWeek().getIndex()]) {
+        /*
+        //Check general timing and criteria
+        if(!isValidDateRange(now) || !isValidTimeRange(now)) {
             return;
         }
-        if(!isValidWeekToRun(now)) {
+
+        //Check normal vs manual criteria
+        if(reminderItemData.filterType == ReminderItemData.FilterType.NORMAL) {
+            if (!isValidDaysOfWeek() || !isValidDaysOfMonth(now) || !isValidWeeksOfMonth(now) || !isValidMonthsOfYear(now) || !isValidRepeat(now)) {
+                return;
+            }
+        } else {
+            if (!isValidDaysOfYear(now)) {
+                return;
+            }
+        }
+        */
+
+        if(!isValidAlertTimes()) {
             return;
         }
-        if (reminderItemData.alertTimes.isEmpty()) {
-            return;
-        }
+
+
         TimeItem time = null;
-        for (TimeItem alertTime : reminderItemData.alertTimes) {
+        //TODO
+        /*
+        for (DateTimeItem alertTime : reminderItemData.alertTimes) {
             //alert time is after the current time
             if (!UtilsTime.timeBeforeOrEqual(alertTime, now.timeItem) || (now.timeItem.minute == 0 && now.timeItem.hour == 0)) {
                 if (time == null || UtilsTime.timeBefore(alertTime, time)) {
@@ -938,6 +1300,7 @@ public final class ReminderItem extends BaseRecycleItem {
                 }
             }
         }
+        */
         if (time != null) {
             Scheduler.getInstance().scheduleWake(new DateTimeItem(now.dateItem, time), reminderItemData.uniqueName);
         }
@@ -978,7 +1341,6 @@ public final class ReminderItem extends BaseRecycleItem {
                     content = reminderItemData.messageList.get(curMessage);
                     reminderItemData.curMessage = curMessage;
                 } else {
-                    Random rand = new Random();
                     int lastMessage = rand.nextInt(reminderItemData.messageList.size());
                     reminderItemData.curMessage = lastMessage;
                     content = reminderItemData.messageList.get(lastMessage);
@@ -1039,60 +1401,11 @@ public final class ReminderItem extends BaseRecycleItem {
             notif.enableLed(reminderItemData.notificationLEDColor);
         }
 
-        Intent intentClicked = new Intent(AppBase.getContext(), NotificationReceiver.class);
-        intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED");
-        intentClicked.setType(reminderItemData.uniqueName);
-        intentClicked.putExtra("NAME", reminderItemData.uniqueName);
-        intentClicked.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        intentClicked.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
-        intentClicked.putExtra("NOTIFICATION_ID", getNotificationId());
-
-        Intent intentCancel = new Intent(AppBase.getContext(), NotificationReceiver.class);
-        intentCancel.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DELETED");
-        intentCancel.setType(reminderItemData.uniqueName);
-        intentCancel.putExtra("NAME", reminderItemData.uniqueName);
-        intentCancel.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        intentCancel.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
-        intentCancel.putExtra("NOTIFICATION_ID", getNotificationId());
-
-        Intent intentDismiss = new Intent(AppBase.getContext(), NotificationReceiver.class);
-        intentDismiss.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_DISMISS");
-        intentDismiss.setType(reminderItemData.uniqueName);
-        intentDismiss.putExtra("NAME", reminderItemData.uniqueName);
-        intentDismiss.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        intentDismiss.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
-        intentDismiss.putExtra("NOTIFICATION_ID", getNotificationId());
-
-        Intent intentSnooze = new Intent(AppBase.getContext(), NotificationReceiver.class);
-        intentSnooze.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_SNOOZE");
-        intentSnooze.setType(reminderItemData.uniqueName);
-        intentSnooze.putExtra("NAME", reminderItemData.uniqueName);
-        intentSnooze.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        intentSnooze.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
-        intentSnooze.putExtra("NOTIFICATION_ID", getNotificationId());
-        intentSnooze.putExtra("SNOOZE_LENGTH", reminderItemData.snooze.minutes);
-
-        Intent intentAck = new Intent(AppBase.getContext(), NotificationReceiver.class);
-        intentAck.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_ACKNOWLEDGE");
-        intentAck.setType(reminderItemData.uniqueName);
-        intentAck.putExtra("NAME", reminderItemData.uniqueName);
-        intentAck.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
-        intentAck.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
-        intentAck.putExtra("NOTIFICATION_ID", getNotificationId());
-
-        if (preview) {
-            intentClicked.putExtra("PREVIEW", true);
-            intentCancel.putExtra("PREVIEW", true);
-            intentDismiss.putExtra("PREVIEW", true);
-            intentSnooze.putExtra("PREVIEW", true);
-            intentAck.putExtra("PREVIEW", true);
-        }
-
-        String keySummary = AppBase.getContext().getString(R.string.pref_notification_click_ack);
-
-        if (!Prefs.getBoolean(pref, keySummary, true)) {
-            intentClicked.setAction("jamesmorrisstudios.com.randremind.NOTIFICATION_CLICKED_SILENT");
-        }
+        Intent intentClicked = buildNotificationIntent(RemindUtils.NotificationUserActions.CLICKED, dateTime, firstDateTime, preview);
+        Intent intentCancel = buildNotificationIntent(RemindUtils.NotificationUserActions.DELETED, dateTime, firstDateTime, preview);
+        Intent intentDismiss = buildNotificationIntent(RemindUtils.NotificationUserActions.DISMISSED, dateTime, firstDateTime, preview);
+        Intent intentSnooze = buildNotificationIntent(RemindUtils.NotificationUserActions.SNOOZED, dateTime, firstDateTime, preview);
+        Intent intentAck = buildNotificationIntent(RemindUtils.NotificationUserActions.ACKNOWLEDGED, dateTime, firstDateTime, preview);
 
         PendingIntent pClicked = PendingIntent.getBroadcast(AppBase.getContext(), 0, intentClicked, PendingIntent.FLAG_CANCEL_CURRENT);
         PendingIntent pCanceled = PendingIntent.getBroadcast(AppBase.getContext(), 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -1109,6 +1422,21 @@ public final class ReminderItem extends BaseRecycleItem {
         notif.addAction(new NotificationAction(iconCheck, AppBase.getContext().getString(R.string.complete), pAck));
 
         return notif;
+    }
+
+    private Intent buildNotificationIntent(RemindUtils.NotificationUserActions action, @NonNull DateTimeItem dateTime, @NonNull DateTimeItem firstDateTime, boolean preview) {
+        Intent intent = new Intent(AppBase.getContext(), NotificationReceiver.class);
+        intent.setAction(action.getKey());
+        intent.setType(reminderItemData.uniqueName);
+        intent.putExtra("NAME", reminderItemData.uniqueName);
+        intent.putExtra("DATETIME", DateTimeItem.encodeToString(dateTime));
+        intent.putExtra("FIRSTDATETIME", DateTimeItem.encodeToString(firstDateTime));
+        intent.putExtra("NOTIFICATION_ID", getNotificationId());
+        intent.putExtra("SNOOZE_LENGTH", reminderItemData.snooze.minutes);
+        if(preview) {
+            intent.putExtra("PREVIEW", true);
+        }
+        return intent;
     }
 
     public final void deleteReminderLog() {
@@ -1177,10 +1505,6 @@ public final class ReminderItem extends BaseRecycleItem {
     }
 
     public final void updateVersion() {
-        reminderItemData.intervalCount = 30;
-        reminderItemData.intervalPeriod = ReminderItemData.RepeatTypeShort.MINUTES;
-
-
         //Change how curMessage works
         if(reminderItemData.messageList == null) {
             reminderItemData.messageList = new ArrayList<>();

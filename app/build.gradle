@@ -51,7 +51,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 65
-        versionName "1.4.903"
+        versionName "2.0.00"
         //Last Beta 1.4.902 63
         //Last Prod 1.4.5 64
         //Last Prod Donation 1.4.5 64

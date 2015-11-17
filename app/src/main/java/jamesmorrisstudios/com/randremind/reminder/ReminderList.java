@@ -601,6 +601,7 @@ public final class ReminderList {
     private boolean loadFromFile() {
         if (!FileWriter.doesFileExist(saveName, FileWriter.FileLocation.INTERNAL)) {
             reminderListData = new ReminderListData();
+            updateReminderListData();
             return true;
         }
         byte[] bytes = FileWriter.readFile(saveName, FileWriter.FileLocation.INTERNAL);
@@ -608,17 +609,23 @@ public final class ReminderList {
             return false;
         }
         reminderListData = Serializer.deserializeClass(bytes, ReminderListData.class);
+        updateReminderListData();
         if (reminderListData != null && reminderListData.reminderItemList != null) {
-            if(reminderListData.defaultReminder == null) {
-                reminderListData.defaultReminder = new ReminderItemData("DEFAULT_REMINDER");
-                reminderListData.defaultReminder.enabled = false;
-                reminderListData.defaultReminder.showAdvanced = true;
-            }
             updateVersion(reminderListData);
             Log.v("ReminderList", "load save pass");
             return true;
         }
         return false;
+    }
+
+    private void updateReminderListData() {
+        if (reminderListData != null) {
+            if(reminderListData.defaultReminder == null) {
+                reminderListData.defaultReminder = new ReminderItemData("DEFAULT_REMINDER");
+                reminderListData.defaultReminder.enabled = false;
+                reminderListData.defaultReminder.showAdvanced = true;
+            }
+        }
     }
 
     private void updateVersion(@NonNull ReminderListData reminders) {

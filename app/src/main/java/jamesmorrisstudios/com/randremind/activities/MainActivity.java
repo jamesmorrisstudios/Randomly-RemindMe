@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
 import com.jamesmorrisstudios.appbaselibrary.activities.BaseLauncherActivity;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceIconRequest;
@@ -56,6 +57,7 @@ import jamesmorrisstudios.com.randremind.fragments.SummaryFragment;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
 import jamesmorrisstudios.com.randremind.reminder.ReminderLogDay;
 import jamesmorrisstudios.com.randremind.reminder.Scheduler;
+import jamesmorrisstudios.com.randremind.util.RemindUtils;
 
 /**
  * Primary activity.
@@ -70,7 +72,6 @@ public final class MainActivity extends BaseLauncherActivity implements
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        processIntents();
         //Reload the main page if the reminder singleton was GC
         if (!ReminderList.getInstance().hasReminders()) {
             clearForOpen(getIntent());
@@ -79,13 +80,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);//must store the new intent unless getIntent() will return the old one
-        processIntents();
-    }
-
-    private void processIntents() {
+    protected void processIntents() {
         Intent intent = getIntent();
         if (intent == null) {
             return;
@@ -415,7 +410,7 @@ public final class MainActivity extends BaseLauncherActivity implements
     }
 
     public void showIconPickerDialog(@NonNull IconPickerDialogBuilder.IconPickerListener iconPickerListener, int accentColor) {
-        IconPickerDialogBuilder.with(this, getAlertDialogStyle())
+        IconPickerDialogBuilder.with(this, ThemeManager.getAlertDialogStyle())
                 .setTitle(getResources().getString(R.string.choose_icon))
                 .setAccentColor(accentColor)
                 .setOnIconPicked(iconPickerListener)

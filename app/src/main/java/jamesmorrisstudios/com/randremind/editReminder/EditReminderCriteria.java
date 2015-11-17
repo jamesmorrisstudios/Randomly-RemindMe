@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.IconItem;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.DualSpinnerRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.MultiChoiceRequest;
@@ -27,6 +30,7 @@ import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItemData;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.util.RemindUtils;
 
 /**
  * Created by James on 6/10/2015.
@@ -239,9 +243,7 @@ public class EditReminderCriteria extends BaseEditReminder {
             @Override
             public void onClick(View v) {
                 String title = AppBase.getContext().getString(R.string.filter_type);
-                String[] items = new String[] {AppBase.getContext().getString(R.string.normal), AppBase.getContext().getString(R.string.manual)};
-
-                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
@@ -251,11 +253,27 @@ public class EditReminderCriteria extends BaseEditReminder {
                         if (which == 0) {
                             remind.setFilterType(ReminderItemData.FilterType.NORMAL);
                         } else {
-                            remind.setFilterType(ReminderItemData.FilterType.MANUAL);
+                            if(!Utils.isPro()) {
+                                Utils.showProPopup();
+                            } else {
+                                remind.setFilterType(ReminderItemData.FilterType.MANUAL);
+                            }
                         }
                         setData();
                     }
-                }, null));
+                };
+                if(Utils.isPro()) {
+                    String[] items = new String[] {AppBase.getContext().getString(R.string.normal), AppBase.getContext().getString(R.string.manual)};
+                    Bus.postObject(new SingleChoiceRequest(title, items, true, listener, null));
+                } else {
+                    IconItem[] items;
+                    if(ThemeManager.getAppTheme() == ThemeManager.AppTheme.LIGHT) {
+                        items = new IconItem[] {new IconItem(AppBase.getContext().getString(R.string.normal), 0), new IconItem(AppBase.getContext().getString(R.string.manual), R.drawable.pro_icon)};
+                    } else {
+                        items = new IconItem[] {new IconItem(AppBase.getContext().getString(R.string.normal), 0), new IconItem(AppBase.getContext().getString(R.string.manual), R.drawable.pro_icon_dark)};
+                    }
+                    Bus.postObject(new SingleChoiceRequest(title, items, true, listener, null));
+                }
             }
         });
 
@@ -451,7 +469,7 @@ public class EditReminderCriteria extends BaseEditReminder {
                 String title = AppBase.getContext().getString(R.string.repeat_every);
 
                 List<String> firstList = new ArrayList<>();
-                for (int i = 0; i < 366; i++) {
+                for (int i = 0; i < 60; i++) {
                     firstList.add(Integer.toString(i + 1));
                 }
                 int firstSelected = remind.getRepeatCount() -1;
@@ -462,7 +480,10 @@ public class EditReminderCriteria extends BaseEditReminder {
                 }
                 int secondSelected = remind.getRepeatType().ordinal();
 
-                Bus.postObject(new DualSpinnerRequest(title, firstList, firstSelected, secondList, secondSelected, new DualSpinnerDialogBuilder.DualSpinnerListener() {
+                int[] firstRestrictions = null;
+                int[] secondRestrictions = new int[] {60, 52, 12, 1};
+
+                Bus.postObject(new DualSpinnerRequest(title, firstList, firstSelected, firstRestrictions, secondList, secondSelected, secondRestrictions, new DualSpinnerDialogBuilder.DualSpinnerListener() {
                     @Override
                     public void onSelection(int firstSelected, int secondSelected) {
                         ReminderItem remind = ReminderList.getInstance().getCurrentReminder();

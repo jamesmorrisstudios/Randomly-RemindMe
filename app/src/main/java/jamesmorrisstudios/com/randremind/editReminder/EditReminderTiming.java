@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.IconItem;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
+import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.app.AppBase;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleChoiceRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.SingleDatePickerRequest;
@@ -17,6 +20,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import jamesmorrisstudios.com.randremind.R;
 import jamesmorrisstudios.com.randremind.reminder.ReminderItem;
 import jamesmorrisstudios.com.randremind.reminder.ReminderList;
+import jamesmorrisstudios.com.randremind.util.RemindUtils;
 
 /**
  * Created by James on 6/10/2015.
@@ -82,16 +86,20 @@ public class EditReminderTiming extends BaseEditReminder {
                 }));
             }
         });
+
+
         endDateContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = AppBase.getContext().getString(R.string.end_type);
-                String[] items = new String[] {AppBase.getContext().getString(R.string.end_date), AppBase.getContext().getString(R.string.forever)};
-
-                Bus.postObject(new SingleChoiceRequest(title, items, true, new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(which == 0) { //Date picker
+                            if(!Utils.isPro()) {
+                                Utils.showProPopup();
+                                return;
+                            }
                             ReminderItem remind = ReminderList.getInstance().getCurrentReminder();
                             if (remind == null) {
                                 return;
@@ -127,7 +135,20 @@ public class EditReminderTiming extends BaseEditReminder {
                             setData();
                         }
                     }
-                }, null));
+                };
+
+                if(Utils.isPro()) {
+                    String[] items = new String[] {AppBase.getContext().getString(R.string.end_date), AppBase.getContext().getString(R.string.forever)};
+                    Bus.postObject(new SingleChoiceRequest(title, items, true, listener, null));
+                } else {
+                    IconItem[] items;
+                    if(ThemeManager.getAppTheme() == ThemeManager.AppTheme.LIGHT) {
+                        items = new IconItem[] {new IconItem(AppBase.getContext().getString(R.string.end_date), R.drawable.pro_icon), new IconItem(AppBase.getContext().getString(R.string.forever), 0)};
+                    } else {
+                        items = new IconItem[] {new IconItem(AppBase.getContext().getString(R.string.end_date), R.drawable.pro_icon_dark), new IconItem(AppBase.getContext().getString(R.string.forever), 0)};
+                    }
+                    Bus.postObject(new SingleChoiceRequest(title, items, true, listener, null));
+                }
             }
         });
     }

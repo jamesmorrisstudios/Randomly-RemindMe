@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name" translatable="false">RemindMe Pro</string>
+    <string name="app_short_name" translatable="false">RemindMe Pro</string>
+
     <string name="store_link" translatable="false">http://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind.donate</string>
+    <string name="store_link_beta" translatable="false">https://play.google.com/apps/testing/jamesmorrisstudios.com.randremind.donate</string>
     <string name="store_link_all" translatable="false">http://play.google.com/store/apps/dev?id=4941635797772545432</string>
-	<string name="store_link_donation" translatable="false"> </string>
+	<string name="store_link_pro" translatable="false"> </string>
+    <string name="pro_package_name" translatable="false">jamesmorrisstudios.com.randremind.donate</string>
 
 	<!-- Show the support dev link on free google play version only -->
-    <style name="help_support_dev">
+    <style name="upgrade_to_pro">
         <item name="android:visibility">gone</item>
     </style>
 	

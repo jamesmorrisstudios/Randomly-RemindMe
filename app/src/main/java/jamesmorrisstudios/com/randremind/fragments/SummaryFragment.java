@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.FileBrowserRequest;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
@@ -87,7 +88,11 @@ public class SummaryFragment extends BaseRecycleListFragment {
      */
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_summary, menu);
+        if(ThemeManager.getToolbarTheme() == ThemeManager.ToolbarTheme.LIGHT_TEXT) {
+            inflater.inflate(R.menu.menu_summary, menu);
+        } else {
+            inflater.inflate(R.menu.menu_summary_dark, menu);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

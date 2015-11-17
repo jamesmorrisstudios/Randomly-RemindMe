@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.jamesmorrisstudios.appbaselibrary.Bus;
+import com.jamesmorrisstudios.appbaselibrary.ThemeManager;
 import com.jamesmorrisstudios.appbaselibrary.Utils;
 import com.jamesmorrisstudios.appbaselibrary.dialogHelper.PromptDialogRequest;
 import com.jamesmorrisstudios.appbaselibrary.fragments.BaseRecycleListFragment;
@@ -55,7 +56,11 @@ public class DefaultsEditorFragment extends BaseRecycleListFragment {
      */
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_defaults, menu);
+        if(ThemeManager.getToolbarTheme() == ThemeManager.ToolbarTheme.LIGHT_TEXT) {
+            inflater.inflate(R.menu.menu_defaults, menu);
+        } else {
+            inflater.inflate(R.menu.menu_defaults_dark, menu);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
