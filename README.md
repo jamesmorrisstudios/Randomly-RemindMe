@@ -1,12 +1,6 @@
 # Randomly RemindMe
 
-Get it on Amazon http://www.amazon.com/James-Morris-Studios-Randomly-RemindMe/dp/B00XD5VXZ0
-
-Get it on Google Play https://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind
-
-Support development with the donation version https://play.google.com/store/apps/details?id=jamesmorrisstudios.com.randremind.donate
-
-Official Website http://www.jamesmorrisstudios.us/
+DISCONTINUED: This app has been discontinued and is no longer under development. Due to not keeping it up to date it is no longer available on the Play Store.
 
 Do you have trouble drinking enough water during the day? Maybe you want a reminder to step away from the computer for a bit. This app will let you set any number of custom reminders that will remind you throughout the day for just that and a whole lot more. If you only want the reminders on week days then select only those days.
 
@@ -32,11 +26,6 @@ Customize each reminder independently with these options
 This project requires https://github.com/morris-james/appbaselibrary
 
 The dependencies are available via jitpack from their github releases. Or you can use a local gradle repo for development.
-
-# Donate
-Support continued development of this and future apps and thank the developer for all his work.
-
-[Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HV5VHLU3PVGCL&lc=US&item_name=James%20Morris%20Studios&item_number=1234&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
 # License
 Copyright (c) 2015.  James Morris Studios
